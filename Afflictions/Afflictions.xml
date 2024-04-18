@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Afflictions>
+  <!--Flashed/Blinded-->
+  <Override>
+    <Affliction name="Blinded" identifier="blinded" description="MY EYES!!!" type="debuff" maxstrength="20" limbspecific="false" indicatorlimb="Head" showiconthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" healableinmedicalclinic="false">
+      <Effect minstrength="0" maxstrength="3" strengthchange="-1" MinAfflictionOverlayAlphaMultiplier="0.0" MaxAfflictionOverlayAlphaMultiplier="1.0" />
+      <Effect minstrength="3" maxstrength="20" strengthchange="-1" MinAfflictionOverlayAlphaMultiplier="1.0" MaxAfflictionOverlayAlphaMultiplier="1.0" />
+      <AfflictionOverlay texture="%ModDir%/UI/WhiteScreen.png" />
+      <icon texture="%ModDir%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
+    </Affliction>
+  </Override>
+  <!--Shocked-->
+  <Override>
+    <Affliction name="Shocked" identifier="shocked" description="Bzzzzt" type="debuff" maxstrength="20" limbspecific="false" indicatorlimb="Head" showiconthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" healableinmedicalclinic="false">
+      <Effect minstrength="0" maxstrength="20" strengthchange="-1">
+        <StatusEffect target="Character" interval="0.1" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+          <Affliction identifier="shock1" strength="100" probability="0.3" />
+          <Affliction identifier="shock2" strength="100" probability="0.3" />
+          <Affliction identifier="shock3" strength="100" probability="0.3" />
+          <Affliction identifier="shock4" strength="100" probability="0.3" />
+        </StatusEffect>
+        <StatusEffect target="Character" interval="1" duration="1.1">
+          <Conditional IsLocalPlayer="true" />
+          <Sound file="%ModDir%/Sounds/Ambient/ShockLoop.ogg" volume="5" loop="true" dontmuffle="true" />
+        </StatusEffect>
+      </Effect>
+      <icon texture="%ModDir%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="shock1" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
+      <AfflictionOverlay texture="%ModDir%/UI/Shock1.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="shock2" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
+      <AfflictionOverlay texture="%ModDir%/UI/Shock2.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="shock3" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
+      <AfflictionOverlay texture="%ModDir%/UI/Shock3.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="shock4" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
+      <AfflictionOverlay texture="%ModDir%/UI/Shock4.png" />
+    </Affliction>
+  </Override>
+  <!--Temporary Crewmember-->
+  <Affliction name="Temporary Crewmember" identifier="temporarycrew" description="Will leave your crew after 6 hours from the moment they joined." type="temporarycrew" hideiconafterdelay="true" limbspecific="false" maxstrength="21601" showiconthreshold="0" iconcolors="100,255,180,255;100,255,180,255" treatmentthreshold="100000" showicontoothersthreshold="0" showinhealthscannerthreshold="0" healableinmedicalclinic="false">
+    <Description textidentifier="afflictiondescription.temporarycrew.self" target="Self" minstrength="0" maxstrength="21601" />
+    <Description textidentifier="afflictiondescription.temporarycrew.other" target="OtherCharacter" minstrength="0" maxstrength="21601" />
+    <Effect minstrength="1" maxstrength="1" strengthchange="0">
+      <StatusEffect type="Always" target="Character" interval="1" stackable="false" multiplyafflictionsbymaxvitality="true">
+        <TriggerEvent identifier="removetempcrew" />
+        <ReduceAffliction identifier="temporarycrew" strength="100" />
+      </StatusEffect>
+    </Effect>
+    <Effect minstrength="2" maxstrength="21601" strengthchange="-1" />
+    <icon texture="%ModDir%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
+  </Affliction>
+  <!--TAKEOVER PROGRESS TRACKING-->
+  <Affliction identifier="killtracker" type="killtracker" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1" showiconthreshold="1000" treatmentthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000">
+    <Effect minstrength="0" maxstrength="1" strengthchange="0">
+      <StatusEffect type="Always" target="Character" interval="1" stackable="false">
+        <Conditional isdead="true" />
+        <!--<TriggerEvent identifier="coatakeoveroutpostprogress" />-->
+        <TriggerEvent identifier="outposttakeoverprogressevent" />
+        <!--<SpawnItem identifier="eventtrigger_killtracker" SpawnPosition="ThisInventory" SpawnIfInventoryFull="true" SpawnIfCantBeContained="true" />-->
+        <ReduceAffliction identifier="killtracker" strength="100" />
+      </StatusEffect>
+    </Effect>
+  </Affliction>
+  <!--PIRATE EXOSUIT STUN RESISTANCE-->
+  <Affliction identifier="pirateexo" type="resistance" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1" showiconthreshold="1000" treatmentthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" duration="1">
+    <Effect minstrength="0" maxstrength="1" resistancefor="stun" minresistance="0.85" maxresistance="0.85" />
+    <icon texture="Content/UI/CommandUIAtlas.png" sourcerect="768,768,128,128" color="143,111,160,255" origin="0,0" />
+  </Affliction>
+</Afflictions>

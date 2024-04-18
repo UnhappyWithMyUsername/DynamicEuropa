@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+  <!--SADASHI KIRA TALENTS-->
+  <Override>
+    <Talent identifier="stayingtipsy">
+      <Icon texture="Content/UI/TalentsIcons2.png" sheetindex="6,4" sheetelementsize="128,128" />
+      <Description tag="talentdescription.stayingtipsy" />
+      <AbilityGroupInterval interval="10.0">
+        <Abilities>
+          <CharacterAbilityApplyStatusEffects>
+            <StatusEffects>
+              <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" SetValue="true" Comparison="And">
+                <Conditional drunk="lte 35" />
+                <Conditional drunknodebuffs="lte 35" />
+                <Affliction identifier="drunk" strength="35" />
+              </StatusEffect>
+            </StatusEffects>
+          </CharacterAbilityApplyStatusEffects>
+        </Abilities>
+      </AbilityGroupInterval>
+    </Talent>
+  </Override>
+  <!--KAZUYA KUMO TALENTS-->
+  <Override>
+    <Talent identifier="forbiddenknowledge">
+      <Icon texture="Content/UI/TalentsIcons2.png" sheetindex="0,3" sheetelementsize="128,128" />
+      <Description tag="talentdescription.knowledgefrombeyond"></Description>
+      <Description tag="talentdescription.unlockrecipe">
+        <Replace tag="[itemname]" value="entityname.wrenchdementonite,entityname.crowbardementonite,entityname.screwdriverdementonite,entityname.divingknifedementonite" color="gui.orange" />
+      </Description>
+      <AddedRecipe itemidentifier="wrenchdementonite" />
+      <AddedRecipe itemidentifier="crowbardementonite" />
+      <AddedRecipe itemidentifier="screwdriverdementonite" />
+      <AddedRecipe itemidentifier="divingknifedementonite" />
+    </Talent>
+  </Override>
+  <!--TAKOVER MISSION PROGRESS TRACKING-->
+  <Override>
+    <Talent identifier="takeoverkilltracking">
+      <AbilityGroupInterval interval="5.0">
+        <Abilities>
+          <CharacterAbilityApplyStatusEffects>
+            <StatusEffects>
+              <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" SetValue="true" Comparison="And">
+                <Conditional killtracker="lt 1" />
+                <Affliction identifier="killtracker" strength="1" />
+              </StatusEffect>
+            </StatusEffects>
+          </CharacterAbilityApplyStatusEffects>
+        </Abilities>
+      </AbilityGroupInterval>
+    </Talent>
+  </Override>
+</Talents>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Item name="Electrospike" identifier="electrospike" category="Misc" interactthroughwalls="true" tags="light,ignorebyai" Scale="0.5" health="20" damagedbyexplosions="false" damagedbyprojectiles="true" ItemDamageMultiplier="0.2" damagedbymeleeweapons="true" damagedbyrepairtools="true" sonarsize="20" hideinmenus="true">
+    <Sprite texture="%ModDir%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,860,720,72" depth="0.55" />
+    <Body width="300" height="35" density="20" />
+    <LightComponent range="200" castshadows="False" drawbehindsubs="False" ison="True" lightcolor="50,240,255,150" flicker="1.0" flickerspeed="5" vulnerabletoemp="False" pickingtime="0" canbepicked="False" allowingameediting="False" msg="">
+      <Sprite texture="%ModDir%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,940,720,72" origin="0.5,0.5" alpha="0.1" />
+    </LightComponent>
+    <Projectile characterusable="false" launchimpulse="25" sticktocharacters="false" sticktoitems="false" sticktodoors="false" sticktostructures="true" friendlyfire="false" damagedoors="true">
+      <Attack structuredamage="30" itemdamage="15" targetforce="10" severlimbsprobability="0">
+        <Affliction identifier="lacerations" strength="15" />
+        <Affliction identifier="bleeding" strength="10" />
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <!-- break after 5 minutes -->
+      <StatusEffect type="Always" target="This" delay="300" stackable="false" condition="-100" />
+      <!-- break after 3s if not stuck -->
+      <StatusEffect type="OnNotContained" target="This" delay="3" condition="-100" checkconditionalalways="true">
+        <Conditional IsStuckToTarget="false" />
+      </StatusEffect>
+      <!-- remove when breaking -->
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+        <particleemitter particle="brownchunks" drawontop="true" particleamount="30" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.3" scalemax="0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" target="This" lifetime="0.5">
+        <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="0" anglemax="0" particleamount="10" velocitymin="-10" velocitymax="-100" scalemin="0.5" scalemax="1" />
+      </StatusEffect>
+    </Projectile>
+    <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="600" rangemultiplierinwalls="1">
+      <Attack targetimpulse="50">
+        <Affliction identifier="stun" strength="1" />
+        <Affliction identifier="burn" strength="5" />
+      </Attack>
+      <StatusEffect target="this" type="OnUse">
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="2000" selectionmode="random" />
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="2000" />
+        <ParticleEmitter particle="risingbubbles" anglemin="0" anglemax="360" particleamount="50" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2" />
+        <Explosion range="2000.0" camerashake="3" stun="0" force="0.0" flames="false" shockwave="false" sparks="True" underwaterbubble="false" />
+      </StatusEffect>
+    </ElectricalDischarger>
+    <ItemComponent>
+      <!-- when the component activates, apply extra load to nearby items and deactive the component -->
+      <StatusEffect type="OnUse" target="NearbyItems" targettags="junctionbox" range="800.0" setvalue="true" extraload="1000" />
+      <StatusEffect type="OnActive" target="This" IsActive="false" delay="5" />
+      <!-- trigger discharge and load -->
+      <StatusEffect type="Always" target="UseTarget,This" interval="20">
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="True" />
+        <Use />
+      </StatusEffect>
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="ElectricShock" distancemin="-150" distancemax="150" particlespersecond="2.0" particleamount="5" emitinterval="2.1" scalemin="0.1" scalemax="0.2" copyentityangle="true" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Alien Generator" identifier="aliengeneratorPA" category="Alien" Tags="alien,aliengenerator,artifactcontainer" scale="0.3">
+    <Sprite texture="Content/Items/Alien/Legacy/AlienRuin_Legacy.png" depth="0.8" sourcerect="512,0,512,573" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,50" canbeselected="false" range="800.0" IsOn="true">
+      <Sprite texture="Content/Items/Alien/Legacy/AlienRuin_Legacy.png" sourcerect="0,486,176,176" origin="0.47, 0.3" alpha="1.0" />
+    </LightComponent>
+    <ItemContainer capacity="1" maxstacksize="1" canbeselected="true" hideitems="true" itempos="264,-321" containedspritedepth="0.01" autointeractwithcontained="true">
+      <GuiFrame relativesize="0.2,0.25" anchor="Center" minsize="140,170" maxsize="280,280" style="ItemUI" />
+      <StatusEffect type="Always" target="This" Charge="-10.0" interval="0.1" />
+      <Containable items="faradayartifact">
+        <StatusEffect type="OnContaining" target="This" Charge="100.0" Voltage="10" setvalue="true" duration="0.1" stackable="false" />
+      </Containable>
+    </ItemContainer>
+    <PowerContainer capacity="50.0" canbeselected="false" maxrechargespeed="1000.0" maxoutput="10000.0" />
+    <ConnectionPanel canbeselected="true" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <!-- break the item when a shutdown signal is received -->
+      <input name="shutdown" displayname="connection.shutdown">
+        <StatusEffect type="OnUse" target="This" condition="-100" setvalue="true" />
+      </input>
+      <output name="power_out" displayname="connection.powerout" />
+      <output name="power_value_out" displayname="connection.powervalueout" />
+      <output name="charge" displayname="connection.batterychargestatusout" />
+      <output name="charge_%" displayname="connection.batterychargepercentage" />
+    </ConnectionPanel>
+  </Item>
+</Items>

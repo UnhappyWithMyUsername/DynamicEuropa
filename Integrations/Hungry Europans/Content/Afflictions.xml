@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Afflictions>
+  <!-- FOOD AFFLICTIONS -->
+  <!-- CRAWLER -->
+  <Override>
+    <Affliction name="Increased Swimming Speed (Food)" identifier="he-increasedswimmingspeedcrawler" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1">
+        <StatValue stattype="SwimmingSpeed" minvalue="0.25" maxvalue="0.25" />
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!-- MUDRAPTOR -->
+  <Override>
+    <Affliction name="Damage Resistance (Food)" identifier="he-damageresistancemudraptor" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1" resistancefor="damage" minresistance="0.10" maxresistance="0.10" />
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction name="Increased Walking Speed (Food)" identifier="he-increasedwalkingspeedmudraptor" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1">
+        <StatValue stattype="WalkingSpeed" minvalue="0.2" maxvalue="0.2" />
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!-- MOLOCH -->
+  <Override>
+    <Affliction name="Damage Resistance (Food)" identifier="he-damageresistancemoloch" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1" resistancefor="damage" minresistance="0.25" maxresistance="0.25" />
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!-- HAMMERHEAD -->
+  <Override>
+    <Affliction name="Increased Melee Damage (Food)" identifier="he-increasedmeleedamagehammerhead" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1">
+        <StatValue stattype="MeleeAttackMultiplier" minvalue="0.15" maxvalue="0.15" />
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!--Thresher-->
+  <Override>
+    <Affliction name="Decreased Oxygen Consumption (Food)" identifier="he-decreasedoxygenconsumption" type="geneticmaterialbuff" isbuff="true" limbspecific="false" indicatorlimb="Torso" hideiconafterdelay="true" showiconthreshold="0" treatmentthreshold="100" maxstrength="1800" iconcolors="150,255,150;75,255,75;0,255,0">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1" resistancefor="oxygenlow" minresistance="1.0" maxresistance="1.0">
+        <StatusEffect target="Character" usehulloxygen="false" setvalue="true" />
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!-- ENDWORM -->
+  <Override>
+    <Affliction name="Pressure Resistance (Food)" identifier="he-pressureresistance" description="Pressure be gone." type="resistance" isbuff="true" limbspecific="false" maxstrength="1800">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1" resistancefor="pressure" minresistance="1" maxresistance="1">
+        <AbilityFlag flagtype="ImmuneToPressure" />
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <!-- CLOWN JUICE -->
+  <Override>
+    <Affliction name="Clown Juice" identifier="he-clownjuice" description="You can feel the Honkmother's grace." type="clownjuice" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1800">
+      <Effect minstrength="0" maxstrength="1800" strengthchange="-1">
+        <StatusEffect tags="clown" type="Always" target="Character" HideFace="true" duration="0.5" stackable="false">
+          <Affliction identifier="clownpower" strength="1" />
+        </StatusEffect>
+      </Effect>
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="909,0,115,123" color="40,255,20,255" origin="0.5,0.5" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction name="Stuffed" identifier="he-stuffed" description="The stomach is full." type="nausea" causeofdeathdescription="Choked on vomit." selfcauseofdeathdescription="You have choked on your own vomit." showiconthreshold="35" showinhealthscannerthreshold="0" limbspecific="false" maxstrength="200" affectmachines="false" treatmentthreshold="1000" karmachangeonapplied="-0.1" damageoverlayalpha="0" healcostmultiplier="2.25" healableinmedicalclinic="false">
+      <Description textidentifier="advancedafflictiondescription.self.he-stuffed" target="Self" minstrength="40" maxstrength="60" />
+      <Description textidentifier="advancedafflictiondescription.self.he-stuffed.2" target="Self" minstrength="60" maxstrength="80" />
+      <Description textidentifier="advancedafflictiondescription.self.he-stuffed.3" target="Self" minstrength="80" maxstrength="200" />
+      <Description textidentifier="advancedafflictiondescription.others.he-stuffed" target="OtherCharacter" minstrength="60" maxstrength="80" />
+      <Description textidentifier="advancedafflictiondescription.others.he-stuffed.2" target="OtherCharacter" minstrength="60" maxstrength="80" />
+      <Description textidentifier="advancedafflictiondescription.others.he-stuffed.3" target="OtherCharacter" minstrength="80" maxstrength="200" />
+      <Effect minstrength="0" maxstrength="80" strengthchange="-0.15" />
+      <Effect minstrength="80" maxstrength="200" strengthchange="-0.15" minfacetint="230,255,230,0" maxfacetint="230,255,230,100" minbodytint="230,255,230,0" maxbodytint="230,255,230,50" minspeedmultiplier="1.0" maxspeedmultiplier="0.6" />
+      <PeriodicEffect mininterval="12" maxinterval="90" minstrength="80" maxstrength="200">
+        <StatusEffect target="Character" SpeedMultiplier="0.0" setvalue="true" duration="1.7">
+          <Conditional he-stuffed="gte 80" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="male" />
+          <Conditional he-stuffed="gte 80" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="female" />
+          <Conditional he-stuffed="gte 80" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character">
+          <Conditional he-stuffed="gte 80" />
+          <Affliction identifier="stun" strength="0.1" />
+          <Affliction identifier="organdamage" strength="0.5" />
+          <ReduceAffliction identifier="he-stuffed" strength="10" />
+          <ReduceAffliction identifier="he-increasedswimmingspeedcrawler" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemoloch" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedwalkingspeedmudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedmeleedamagehammerhead" strength="300" />
+          <ReduceAffliction identifier="he-pressureresistance" strength="300" />
+          <!--<ReduceAffliction identifier="AnyFoodAffliction" strength="100"/>-->
+        </StatusEffect>
+        <StatusEffect target="Character" targetlimbs="Head" duration="1" comparison="And">
+          <Conditional he-stuffed="gte 80" />
+          <Conditional HideFace="eq False" />
+          <ParticleEmitter particle="vomitsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="50" velocitymin="50" velocitymax="200" scalemin="0.1" scalemax="0.2" />
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="vomitsplatter" decalsize="1.25" shockwave="false" underwaterbubble="false" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <icon texture="Content/UI/CommandUIAtlas.png" sourcerect="896,896,128,128" origin="0,0" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction name="Stomach Ache" identifier="he-stomachache" description="The stomach hurts." type="nausea" causeofdeathdescription="Choked on vomit." selfcauseofdeathdescription="You have choked on your own vomit." showiconthreshold="20" showinhealthscannerthreshold="0" limbspecific="false" maxstrength="100" affectmachines="false" treatmentthreshold="1000" karmachangeonapplied="-0.1" damageoverlayalpha="0" healcostmultiplier="2.25">
+      <Description textidentifier="advancedafflictiondescription.self.he-stomachache" target="Self" minstrength="20" maxstrength="60" />
+      <Description textidentifier="advancedafflictiondescription.self.he-stomachache.2" target="Self" minstrength="60" maxstrength="100" />
+      <Description textidentifier="advancedafflictiondescription.others.he-stomachache" target="OtherCharacter" minstrength="20" maxstrength="100" />
+      <Effect minstrength="0" maxstrength="80" strengthchange="-1" minfacetint="90,255,90,0" maxfacetint="90,255,90,60" />
+      <Effect minstrength="80" maxstrength="100" strengthchange="-1" minfacetint="90,255,90,60" maxfacetint="90,255,90,100" minbodytint="230,255,230,0" maxbodytint="230,255,230,50" minspeedmultiplier="1.0" maxspeedmultiplier="0.6"></Effect>
+      <PeriodicEffect mininterval="30" maxinterval="120" minstrength="20" maxstrength="60">
+        <StatusEffect target="Character" SpeedMultiplier="0.0" setvalue="true" duration="1.7">
+          <Conditional he-stomachache="gte 20" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="male" />
+          <Conditional he-stomachache="gte 20" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="female" />
+          <Conditional he-stomachache="gte 20" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character">
+          <Conditional he-stomachache="gte 20" />
+          <Affliction identifier="stun" strength="0.1" />
+          <Affliction identifier="organdamage" strength="0.5" />
+          <ReduceAffliction identifier="he-stomachache" strength="10" />
+          <ReduceAffliction identifier="he-increasedswimmingspeedcrawler" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemoloch" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedwalkingspeedmudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedmeleedamagehammerhead" strength="300" />
+          <ReduceAffliction identifier="he-pressureresistance" strength="300" />
+          <!--<ReduceAffliction identifier="AnyFoodAffliction" strength="100"/>-->
+        </StatusEffect>
+        <StatusEffect target="Character" targetlimbs="Head" duration="1" comparison="And">
+          <Conditional he-stomachache="gte 20" />
+          <Conditional HideFace="eq False" />
+          <ParticleEmitter particle="vomitsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="50" velocitymin="50" velocitymax="200" scalemin="0.1" scalemax="0.2" />
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="vomitsplatter" decalsize="1.25" shockwave="false" underwaterbubble="false" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="10" maxinterval="60" minstrength="60" maxstrength="100">
+        <StatusEffect target="Character" SpeedMultiplier="0.0" setvalue="true" duration="1.7">
+          <Conditional he-stomachache="gte 60" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="male" />
+          <Conditional he-stomachache="gte 60" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeMale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="female" />
+          <Conditional he-stomachache="gte 60" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale1.ogg" selectionmode="Random" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale2.ogg" />
+          <Sound file="Content/Sounds/HUMAN_chokeFemale3.ogg" />
+        </StatusEffect>
+        <StatusEffect target="Character">
+          <Conditional he-stomachache="gte 60" />
+          <Affliction identifier="stun" strength="0.1" />
+          <Affliction identifier="organdamage" strength="0.5" />
+          <ReduceAffliction identifier="he-stomachache" strength="10" />
+          <ReduceAffliction identifier="he-increasedswimmingspeedcrawler" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemoloch" strength="300" />
+          <ReduceAffliction identifier="he-damageresistancemudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedwalkingspeedmudraptor" strength="300" />
+          <ReduceAffliction identifier="he-increasedmeleedamagehammerhead" strength="300" />
+          <ReduceAffliction identifier="he-pressureresistance" strength="300" />
+          <!--<ReduceAffliction identifier="AnyFoodAffliction" strength="100"/>-->
+        </StatusEffect>
+        <StatusEffect target="Character" targetlimbs="Head" duration="1" comparison="And">
+          <Conditional he-stomachache="gte 60" />
+          <Conditional HideFace="eq False" />
+          <ParticleEmitter particle="vomitsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="50" velocitymin="50" velocitymax="200" scalemin="0.1" scalemax="0.2" />
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="vomitsplatter" decalsize="1.25" shockwave="false" underwaterbubble="false" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <icon texture="Content/UI/CommandUIAtlas.png" sourcerect="896,896,128,128" origin="0,0" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova1" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay1.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova2" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay2.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova3" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay3.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova4" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay4.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova5" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlayFrameG.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova6" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-200" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay5.png" />
+    </Affliction>
+  </Override>
+  <Override>
+    <Affliction identifier="he-halucinova7" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
+      <Effect minstrength="0" maxstrength="100" strengthchange="-200" />
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlay6.png" />
+    </Affliction>
+  </Override>
+  <!-- Afflicion made with the help of @Plag | Check out Real Sonar -->
+  <Override>
+    <Affliction name="Halucinova" identifier="he-halucinova" type="halucinova" maxstrength="100" limbspecific="false" indicatorlimb="Torso" showiconthreshold="0" showinhealthscannerthreshold="0" healableinmedicalclinic="false">
+      <icon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/HE-IconsAtlas.png" sourcerect="384,128,128,128" origin="0,0" />
+      <Description textidentifier="afflictiondescription.he-halucinova.others" target="OtherCharacter" />
+      <Description textidentifier="afflictiondescription.he-halucinova.self" target="Self" />
+      <Effect minstrength="0" maxstrength="30" minscreendistort="0.0" maxscreendistort="0.3" minscreenblur="0.0" maxscreenblur="0.1" minradialdistort="0" maxradialdistort="2" minchromaticaberration="0" maxchromaticaberration="5" strengthchange="-0.5" MinAfflictionOverlayAlphaMultiplier="0" MaxAfflictionOverlayAlphaMultiplier="0.1">
+        <StatusEffect target="Character">
+          <Affliction identifier="oxygenlow" amount="1.0" probability="1" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova0.ogg" volume="2.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+      </Effect>
+      <Effect minstrength="30" maxstrength="80" minscreendistort="0.3" maxscreendistort="1.5" minscreenblur="0.1" maxscreenblur="0.5" minradialdistort="2" maxradialdistort="5" minchromaticaberration="5" maxchromaticaberration="10" strengthchange="-0.5" MinAfflictionOverlayAlphaMultiplier="0.1" MaxAfflictionOverlayAlphaMultiplier="0.9">
+        <StatusEffect target="Character">
+          <Affliction identifier="oxygenlow" amount="1.0" probability="1" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova0.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova1.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+      </Effect>
+      <Effect minstrength="80" maxstrength="100" minscreendistort="1.5" maxscreendistort="5.0" minscreenblur="0.5" maxscreenblur="1.5" minradialdistort="5" maxradialdistort="8" minchromaticaberration="10" maxchromaticaberration="15" strengthchange="-0.25" MinAfflictionOverlayAlphaMultiplier="0.9" MaxAfflictionOverlayAlphaMultiplier="1.0">
+        <StatusEffect target="Character">
+          <Affliction identifier="oxygenlow" amount="1.0" probability="1" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova0.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova1.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova2.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+        <StatusEffect target="Character" disabledeltatime="true" stackable="false">
+          <Conditional IsLocalPlayer="true" />
+          <sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Halucinova3.ogg" volume="3.0" dontmuffle="true" duckvolume="false" loop="true" />
+        </StatusEffect>
+      </Effect>
+      <PeriodicEffect mininterval="1" maxinterval="3">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 25" />
+          <Affliction identifier="he-halucinova1" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="1" maxinterval="2">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 35" />
+          <Affliction identifier="he-halucinova2" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="1" maxinterval="2">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 45" />
+          <Affliction identifier="he-halucinova3" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="1" maxinterval="2">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 55" />
+          <Affliction identifier="he-halucinova4" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="1" maxinterval="2">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 65" />
+          <Affliction identifier="he-halucinova5" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="16" maxinterval="60">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 65" />
+          <Affliction identifier="he-halucinova6" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <PeriodicEffect mininterval="30" maxinterval="120">
+        <StatusEffect target="Character">
+          <Conditional he-halucinova="gteq 65" />
+          <Affliction identifier="he-halucinova7" strength="100" />
+        </StatusEffect>
+      </PeriodicEffect>
+      <AfflictionOverlay texture="%ModDir%/Integrations/Hungry Europans/Content/UI/halucinovaOverlayBase.png" />
+    </Affliction>
+  </Override>
+</Afflictions>

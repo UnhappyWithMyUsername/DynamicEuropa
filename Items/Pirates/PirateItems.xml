@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Override>
+<Items>
+
+
+  <!-- TODO: 
+  more custom bandit items/sprites? 
+  redo bandit Suit
+  dirty bomb not PA?
+  
+  -->
+
+  <Item name="" identifier="banditclothes1" nameidentifier="banditoutfit" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="abandonedcrewcabinet" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="crewcab"/>
+    <Price baseprice="75" sold="false">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" multiplier="0.9" />
+      <Price storeidentifier="merchantresearch" />
+      <Price storeidentifier="merchantmilitary" />
+      <Price storeidentifier="merchantmine" />
+      <Price storeidentifier="merchantpirate" minavailable="1" maxavailable="6" sold="true">
+        <Reputation faction="bandits" min="0" />
+      </Price>
+    </Price>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="75" fabricationlimitmin="0" fabricationlimitmax="10" />
+    <Deconstruct time="10">
+      <Item identifier="organicfiber" />
+    </Deconstruct>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sheetindex="3,10" sheetelementsize="64,64" />
+    <Sprite name="bandit" texture="Content/Items/Jobgear/MiscJobGear.png" sourcerect="510,224,120,63" depth="0.6" origin="0.5,0.5" />
+    <Body width="100" height="50" density="15" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="Bandit Uniform 1 Torso" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Hand" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Hand" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Lower Arm" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Lower Arm" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Upper Arm" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Upper Arm" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Waist" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Thigh" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Thigh" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Leg" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Leg" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Left Shoe" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 1 Right Shoe" texture="Content/Items/Jobgear/Commoner/bandit_1.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations" damagemultiplier="0.95" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bitewounds, blunttrauma" damagemultiplier="0.9" />
+    </Wearable>
+  </Item>
+  <Item name="" identifier="banditclothes2" nameidentifier="banditoutfit" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="abandonedcrewcabinet" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="crewcab"/>
+    <Price baseprice="75" sold="false">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" multiplier="0.9" />
+      <Price storeidentifier="merchantresearch" />
+      <Price storeidentifier="merchantmilitary" />
+      <Price storeidentifier="merchantmine" />
+      <Price storeidentifier="merchantpirate" minavailable="1" maxavailable="6" sold="true">
+        <Reputation faction="bandits" min="0" />
+      </Price>
+    </Price>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="75" fabricationlimitmin="0" fabricationlimitmax="10" />
+    <Deconstruct time="10">
+      <Item identifier="organicfiber" />
+    </Deconstruct>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sheetindex="4,10" sheetelementsize="64,64" />
+    <Sprite name="bandit" texture="Content/Items/Jobgear/MiscJobGear.png" sourcerect="643,224,119,65" depth="0.6" origin="0.5,0.5" />
+    <Body width="100" height="50" density="15" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="Bandit Uniform 2 Torso" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Hand" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Hand" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Lower Arm" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Lower Arm" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Upper Arm" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Upper Arm" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Waist" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="Waist" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Thigh" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Thigh" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Leg" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Leg" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Left Shoe" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Bandit Uniform 2 Right Shoe" texture="Content/Items/Jobgear/Commoner/bandit_2.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="lacerations" damagemultiplier="0.95" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="bitewounds, blunttrauma" damagemultiplier="0.9" />
+    </Wearable>
+  </Item>
+
+  <Item name="" identifier="dirtybomb" category="Weapon" Tags="smallitem,explosive,separatists" allowasextracargo="true" maxstacksize="8" Scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="secarmcab" secondary="armcab"/>
+    <Price baseprice="240" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="1.25" minavailable="0" maxavailable="2" sold="true">
+        <Reputation faction="separatists" min="50"/>
+      </Price>
+      <Price storeidentifier="merchantcity" multiplier="1.25" minavailable="1" maxavailable="4" sold="true">
+        <Reputation faction="separatists" min="50"/>
+      </Price>
+      <Price storeidentifier="merchantmilitary" multiplier="0.9" minavailable="4" maxavailable="8" sold="true">
+        <Reputation faction="separatists" min="50"/>
+      </Price>
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmine" />
+      <Price storeidentifier="merchantpirate" multiplier="1.25" minavailable="0" maxavailable="2" sold="true">
+        <Reputation faction="bandits" min="10" />
+      </Price>
+    </Price>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="666" fabricationlimitmin="0" fabricationlimitmax="3" />
+    <Fabricate suitablefabricators="fabricator" requiredtime="20" requiresrecipe="true">
+      <RequiredSkill identifier="weapons" level="30" />
+      <RequiredItem identifier="uex" />
+      <RequiredItem identifier="uranium" />
+      <RequiredItem identifier="depletedfuel" />
+    </Fabricate>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="448,640,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/JobGear/TalentGear.png" depth="0.8" sourcerect="202,1,47,32" origin="0.5,0.5" />
+    <Body width="45" height="30" density="20" />
+    <Throwable characterusable="false" slots="Any,RightHand,LeftHand" canbecombined="true" removeoncombined="true" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="5000" />
+        <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="5000" />
+        <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="5000" />
+        <ParticleEmitter particle="fixfoam" anglemax="360" velocitymin="4000" velocitymax="4000" particlespersecond="64" colormultiplier="50,150,50" />
+        <Explosion range="250.0" ballastfloradamage="50" structuredamage="90" itemdamage="250" force="5" severlimbsprobability="0.25" debris="true" decal="explosion" decalsize="0.25">
+          <Affliction identifier="explosiondamage" strength="50" />
+          <Affliction identifier="burn" strength="5" probability="0.2" dividebylimbcount="false"/>
+          <Affliction identifier="bleeding" strength="20" probability="0.05" dividebylimbcount="false"/>
+          <Affliction identifier="stun" strength="3" />
+        </Explosion>
+        <Explosion range="1500" force="0.0" smoke="false" sparks="false" empstrength="2.5" applyfireeffects="false" ignorecover="true">
+          <Affliction identifier="emp" strength="25" multiplybymaxvitality="true" />
+        </Explosion>
+        <SpawnItem identifier="dirtybombafteremitter" spawnposition="This" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <sound file="Content/Items/Weapons/ExplosionDebris5.ogg" range="3500" />
+      </StatusEffect>
+    </Throwable>
+  </Item>
+  
+  <!-- pirate exosuit but deletes itself -->
+  <Item name="" description="" identifier="exosuitPA" category="Diving,Equipment" tags="diving,divinggear_wearableindoors,provocative,deepdiving,deepdivinglarge" scale="0.605" fireproof="true" isshootable="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" nonplayerteaminteractable="True" hideinmenus="True">
+    <Price baseprice="2473" canbespecial="false" sold="false" />
+    <Deconstruct time="30">
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="rubber" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <InventoryIcon texture="%ModDir%/Items/Pirates/Exosuit.png" sourcerect="384,384,128,128" origin="0.5,0.5" />
+    <Sprite name="Exosuit Item" texture="%ModDir%/Items/Pirates/Exosuit.png" sourcerect="2,266,203,244" depth="0.55" origin="0.5,0.5" />
+    <Body radius="100" width="250" density="15" />
+    <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select" allowusewhenworn="true">
+      <sprite name="Exosuit Helmet Wearable" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Head" hidelimb="true" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hideotherwearables="true" hidewearablesoftype="" sourcerect="0,0,1,1" origin="0.5,0.5" />
+      <sprite name="Exosuit Torso" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Torso" scale="1.2" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.8" inheritlimbdepth="true" inheritsourcerect="false" sourcerect="167,1,203,193">
+        <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false" offset="-50,-50">
+          <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+        </LightComponent>
+      </sprite>
+      <sprite name="Exosuit Right Hand" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,160,64,48" />
+      <sprite name="Exosuit Left Hand" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,160,64,48" />
+      <sprite name="Exosuit Right Upper Arm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,0,64,96" />
+      <sprite name="Exosuit Left Upper Arm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,0,64,96" />
+      <sprite name="Exosuit Right Forearm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,96,64,64" />
+      <sprite name="Exosuit Left Forearm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,96,64,64" />
+      <sprite name="Exosuit Waist" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Waist" hidelimb="true" scale="1.2" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="182,196,178,53" />
+      <sprite name="Exosuit Right Thigh" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="0,0,96,112" />
+      <sprite name="Exosuit Left Thigh" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" sourcerect="0,0,96,112" />
+      <sprite name="Exosuit Right Leg" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritlimbdepth="true" inheritsourcerect="true" />
+      <sprite name="Exosuit Left Leg" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Exosuit Left Shoe" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftFoot" sound="footstep_armor_exosuit" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+      <sprite name="Exosuit Right Shoe" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightFoot" sound="footstep_armor_exosuit" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+      <!-- removes itself if not worn-->
+      <StatusEffect type="OnNotContained" target="This" targetslot="1" Condition="2.0" interval="1" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="Contained" targetslot="0" Condition="2.0" interval="1" disabledeltatime="true">
+        <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" excludebroken="false" excludefullcondition="true" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="Contained" targetslot="1" Condition="2.0" interval="1" disabledeltatime="true">
+        <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+        <RequiredItem items="mobilebattery" targetslot="1" type="Contained" excludebroken="false" excludefullcondition="true" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="true" comparison="And">
+        <Conditional Voltage="gt 0.5" />
+        <Conditional HullOxygenPercentage="gt 30" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="true" PressureProtection="10000.0" SpeedMultiplier="0.4" PropulsionSpeedMultiplier="0.25" setvalue="true" disabledeltatime="true">
+        <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="500" loop="true" />
+        <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="500" loop="true" />
+      </StatusEffect>
+      <!-- no HMG stun and stun resistance -->
+      <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+        <Affliction identifier="recoilstabilized" amount="1" />
+        <Affliction identifier="pirateexo" amount="1" />
+      </StatusEffect>
+      <!-- slow movement -->
+      <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.7" setvalue="true" disabledeltatime="true">
+        <Conditional Voltage="gt 0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained" Condition="-0.1" interval="1" disabledeltatime="true" targetslot="1">
+        <RequiredItem items="mobilebattery" targetslot="1" type="Contained" />
+      </StatusEffect>
+      <!-- 0 movement speed when out of fuel-->
+      <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.0" setvalue="true" disabledeltatime="true">
+        <Conditional Voltage="lte 0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+        <Conditional InWater="true" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+        <Conditional IsDead="false" />
+        <RequiredItem items="weldingfueltank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+        <Conditional IsDead="false" />
+        <RequiredItem items="incendiumfueltank" targetslot="0" type="Contained" />
+        <Affliction identifier="burn" amount="3.0" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1500.0" Condition="-0.1" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1500.0" Condition="-0.1" comparison="And" targetslot="0">
+        <Conditional InWater="true" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" SpeedMultiplier="0.9" setvalue="true" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.75" damagesound="LimbArmor" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+      <sound file="Content/Items/Weapons/WEAPONS_chargeUp.ogg" type="OnWearing" range="500.0" volumeproperty="Speed" volume="0.2" loop="true" frequencymultiplier="0.5" />
+    </Wearable>
+    <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+      <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+      <SlotIcon slotindex="1" texture="Content/UI/ContainerIndicators.png" sourcerect="2,184,120,32" origin="0.5,0.5" />
+      <SubContainer capacity="1" maxstacksize="1">
+        <Containable items="oxygensource,weldingtoolfuel" />
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1">
+        <Containable items="mobilebattery">
+          <StatusEffect type="OnContaining" target="This" Voltage="1.0" setvalue="true" />
+        </Containable>
+      </SubContainer>
+    </ItemContainer>
+    <aitarget maxsightrange="1500" />
+  </Item>
+  
+  <Item name="Pirate Exosuit" description="A heavily modified exosuit. It seems some pirates are quite crafty and managed to increase the stun resistance of this exosuit and allow the user to breath hull oxygen if available." identifier="exosuitplayerPA" category="Diving,Equipment" tags="diving,divinggear_wearableindoors,provocative,deepdiving,deepdivinglarge" scale="0.605" fireproof="true" isshootable="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy">
+    <Price baseprice="2473" canbespecial="false" sold="false" />
+    <Deconstruct time="30">
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="rubber" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <!--<Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="12742" fabricationlimitmin="0" fabricationlimitmax="1" />-->
+    <Fabricate suitablefabricators="fabricator" requiredtime="180">
+      <RequiredSkill identifier="mechanical" level="55" />
+      <RequiredItem identifier="exosuit" amount="1" />
+      <RequiredItem identifier="exosuitpartsPA" amount="5" />
+      <RequiredItem identifier="blackwire" amount="3" />
+      <RequiredItem identifier="rubber" amount="3" />
+    </Fabricate>
+    <InventoryIcon texture="%ModDir%/Items/Pirates/Exosuit.png" sourcerect="384,384,128,128" origin="0.5,0.5" />
+    <Sprite name="Exosuit Item" texture="%ModDir%/Items/Pirates/Exosuit.png" sourcerect="2,266,203,244" depth="0.55" origin="0.5,0.5" />
+    <Body radius="100" width="250" density="15" />
+    <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select" allowusewhenworn="true">
+      <sprite name="Exosuit Helmet Wearable" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Head" hidelimb="true" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hideotherwearables="true" hidewearablesoftype="" sourcerect="0,0,1,1" origin="0.5,0.5" />
+      <sprite name="Exosuit Torso" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Torso" scale="1.2" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.8" inheritlimbdepth="true" inheritsourcerect="false" sourcerect="167,1,203,193">
+        <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" allowingameediting="false" offset="-50,-50">
+          <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+        </LightComponent>
+      </sprite>
+      <sprite name="Exosuit Right Hand" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,160,64,48" />
+      <sprite name="Exosuit Left Hand" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,160,64,48" />
+      <sprite name="Exosuit Right Upper Arm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,0,64,96" />
+      <sprite name="Exosuit Left Upper Arm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,0,64,96" />
+      <sprite name="Exosuit Right Forearm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,96,64,64" />
+      <sprite name="Exosuit Left Forearm" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,96,64,64" />
+      <sprite name="Exosuit Waist" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="Waist" hidelimb="true" scale="1.2" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="182,196,178,53" />
+      <sprite name="Exosuit Right Thigh" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="0,0,96,112" />
+      <sprite name="Exosuit Left Thigh" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" sourcerect="0,0,96,112" />
+      <sprite name="Exosuit Right Leg" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritlimbdepth="true" inheritsourcerect="true" />
+      <sprite name="Exosuit Left Leg" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Exosuit Left Shoe" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="LeftFoot" sound="footstep_armor_exosuit" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+      <sprite name="Exosuit Right Shoe" texture="%ModDir%/Items/Pirates/Exosuit.png" limb="RightFoot" sound="footstep_armor_exosuit" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+      <StatusEffect type="OnContained" target="Contained" targetslot="0" Condition="2.0" interval="1" disabledeltatime="true">
+        <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" excludebroken="false" excludefullcondition="true" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="Contained" targetslot="1" Condition="2.0" interval="1" disabledeltatime="true">
+        <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+        <RequiredItem items="mobilebattery" targetslot="1" type="Contained" excludebroken="false" excludefullcondition="true" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-100.0" UseHullOxygen="true" comparison="And">
+        <Conditional Voltage="gt 0.5" />
+        <Conditional HullOxygenPercentage="gt 30" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="true" PressureProtection="10000.0" SpeedMultiplier="0.4" PropulsionSpeedMultiplier="0.25" setvalue="true" disabledeltatime="true">
+        <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="500" loop="true" />
+        <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="500" loop="true" />
+      </StatusEffect>
+      <!-- no HMG stun and stun resistance -->
+      <StatusEffect type="OnWearing" target="Character" interval="0.9" disabledeltatime="true">
+        <Affliction identifier="recoilstabilized" amount="1" />
+        <Affliction identifier="pirateexo" amount="1" />
+      </StatusEffect>
+      <!-- slow movement -->
+      <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.7" setvalue="true" disabledeltatime="true">
+        <Conditional Voltage="gt 0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained" Condition="-0.1" interval="1" disabledeltatime="true" targetslot="1">
+        <RequiredItem items="mobilebattery" targetslot="1" type="Contained" />
+      </StatusEffect>
+      <!-- 0 movement speed when out of fuel-->
+      <StatusEffect type="OnWearing" target="This,Character" SpeedMultiplier="0.0" setvalue="true" disabledeltatime="true">
+        <Conditional Voltage="lte 0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+        <Conditional InWater="true" />
+        <RequiredItem items="oxygentank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+        <Conditional IsDead="false" />
+        <RequiredItem items="weldingfueltank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" targetlimbs="Torso" Oxygen="-10.0" Condition="-0.5" interval="1" disabledeltatime="true" targetslot="0">
+        <Conditional IsDead="false" />
+        <RequiredItem items="incendiumfueltank" targetslot="0" type="Contained" />
+        <Affliction identifier="burn" amount="3.0" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1500.0" Condition="-0.1" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1500.0" Condition="-0.1" comparison="And" targetslot="0">
+        <Conditional InWater="true" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Contained,Character" SpeedMultiplier="0.9" setvalue="true" comparison="And" targetslot="0">
+        <Conditional IsDead="false" />
+        <Conditional HullOxygenPercentage="lt 30" />
+        <Conditional InWater="false" />
+        <RequiredItem items="oxygenitetank" targetslot="0" type="Contained" />
+      </StatusEffect>
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.75" damagesound="LimbArmor" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="acidburn" damagemultiplier="0.1" damagesound="" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+      <sound file="Content/Items/Weapons/WEAPONS_chargeUp.ogg" type="OnWearing" range="500.0" volumeproperty="Speed" volume="0.2" loop="true" frequencymultiplier="0.5" />
+    </Wearable>
+    <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+      <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+      <SlotIcon slotindex="1" texture="Content/UI/ContainerIndicators.png" sourcerect="2,184,120,32" origin="0.5,0.5" />
+      <SubContainer capacity="1" maxstacksize="1">
+        <Containable items="oxygensource,weldingtoolfuel" />
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1">
+        <Containable items="mobilebattery">
+          <StatusEffect type="OnContaining" target="This" Voltage="1.0" setvalue="true" />
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="10">
+        <Containable items="smallitem" />
+      </SubContainer>
+    </ItemContainer>
+    <aitarget maxsightrange="1500" />
+  </Item>
+  
+  <Item name="Damaged Pirate Exosuit Parts" identifier="exosuitpartsPA" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Damaged parts from a modified pirate exosuit." Tags="mediumitem,material" scale="0.5" impactsoundtag="impact_metal_heavy">
+    <PreferredContainer primary="storagecab" secondary="engcab" />
+    <Sprite texture="%ModDir%/Items/Pirates/ExosuitParts.png" sourcerect="0,0,164,113" depth="0.6" origin="0.5,0.5" />
+    <Deconstruct time="15">
+      <Item identifier="titaniumaluminiumalloy" />
+      <Item identifier="rubber" />
+    </Deconstruct>
+    <InventoryIcon texture="%ModDir%/Items/Pirates/ExosuitParts.png" sourcerect="0,0,164,113" origin="0.5,0.5" />
+    <Price baseprice="494" canbespecial="false" sold="false" />
+    <Body width="164" radius="55" density="18" />
+    <Holdable canBeCombined="false" removeOnCombined="false" slots="RightHand+LeftHand,Any" holdangle="0" holdpos="36,-20" msg="ItemMsgPickUpSelect" />
+  </Item>
+  
+  <Item name="Makeshift Pirate Diving Suit" identifier="piratedivingsuitmakeshift" category="Diving,Equipment" tags="diving,deepdiving,divinggear_wearableindoors,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="3">
+    <Deconstruct time="1" />
+    <InventoryIcon texture="%ModDir%/Items/Pirates/PirateSuit.png" sourcerect="280,300,95,90" origin="0.5,0.5" />
+    <Sprite name="Pirate Diving Suit Item" texture="%ModDir%/Items/Pirates/PirateSuit.png" sourcerect="0,300,157,121" depth="0.55" origin="0.5,0.5" />
+    <ContainedSprite name="Respawn Diving Suit In Vertical Locker" allowedcontainertags="divingsuitcontainervertical" texture="%ModDir%/Items/Pirates/PirateSuit.png" sourcerect="181,300,70,192" depth="0.55" origin="0.5,0.5" />
+    <ContainedSprite name="Respawn Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="Content/Items/Containers/containers.png" sourcerect="118,379,77,214" depth="0.55" origin="-0.12,-0.13" />
+    <ContainedSprite name="Respawn Diving Suit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/Pirates/PirateSuit.png" sourcerect="0,493,230,63" depth="0.55" origin="0.6,0.5" />
+    <Body radius="45" width="34" density="20" />
+    <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+      <sprite name="Pirate Diving Suit Helmet Wearable" texture="%ModDir%/Items/Pirates/Piratesuit.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="true" sourcerect="280,414,103,103" origin="0.5,0.5">
+        <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true">
+          <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+          <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          <IsActive condition="gt 10.0" />
+        </LightComponent>
+        <LightComponent range="200.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="true" flicker="0.8" flickerspeed="1.0" pulsefrequency="0.1" pulseamount="0.5">
+          <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true">
+            <Conditional IsDead="false" />
+          </StatusEffect>
+          <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          <IsActive condition="lte 10.0" />
+        </LightComponent>
+      </sprite>
+      <sprite name="Respawn Diving Suit Torso" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="Torso" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Hand" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Hand" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Lower Arm" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Lower Arm" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Upper Arm" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Upper Arm" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Waist" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="Waist" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Thigh" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Thigh" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Leg" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Leg" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Left Shoe" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Respawn Diving Suit Right Shoe" texture="%ModDir%/Items/Pirates/PirateSuit.png" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+      <StatusEffect type="OnWearing" target="Character" UseHullOxygen="true" />
+      <StatusEffect type="OnWearing" target="Character" ObstructVision="true" SpeedMultiplier="0.7" PropulsionSpeedMultiplier="0.5" setvalue="true" disabledeltatime="true" />
+      <StatusEffect type="OnWearing" target="this,Character" PressureProtection="10000.0" setvalue="true" disabledeltatime="true">
+        <Conditional condition="gt 0.0" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="this,Character" OxygenAvailable="1000.0" Condition="-0.2" comparison="and">
+        <Conditional IsDead="false" />
+        <Conditional InWater="true" />
+        <Conditional condition="gt 0.0" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="this" comparison="and">
+        <Conditional condition="lt 5.0" />
+        <Conditional condition="gt 0.0" />
+        <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="this">
+        <Conditional condition="lte 0.0" />
+        <Sound file="Content/Items/WarningBeep.ogg" range="250" loop="true" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" LowPassMultiplier="0.2" setvalue="true">
+        <Sound file="Content/Items/Diving/DivingSuitLoop1.ogg" range="250" loop="true" />
+        <Sound file="Content/Items/Diving/DivingSuitLoop2.ogg" range="250" loop="true" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="this,Character">
+        <Conditional condition="lte 0.0" />
+        <Sound file="Content/Items/Diving/ITEMS_divingSuitOxygenLeakLoop.ogg" range="200" loop="true" dontmuffle="true" />
+      </StatusEffect>
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="blunttrauma,gunshotwound,bitewounds,lacerations,bleeding" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.75" damagesound="" deflectprojectiles="true" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" damagesound="LimbArmor" />
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="huskinfection" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+    </Wearable>
+    <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
+    <aitarget maxsightrange="1500" />
+  </Item>
+</Items>
+
+</Override>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+  <EventPrefabs>
+    <!-- Configuration Event - Allows the player to customize certain aspects of the mod | can only be accessed by manually triggering it with the configuration item "de_config" -->
+    <ScriptedEvent identifier="de_config">
+      <ConversationAction targettag="statuseffecttarget" text="Welcome to DynamicEuropa! Please choose your preferred playstyle:">
+        <Option text="DEFAULT - They way things were intended by the developers.">
+          <SetDataAction identifier="jobboard_always" value="false" />
+          <SetDataAction identifier="jobboard_all_options" value="false" />
+        </Option>
+        <Option text="CUSTOM - Customize your experience.">
+          <Label name="settingsmenu" />
+          <ConversationAction text="Select an option to customize it:">
+            <Option text="Job Board">
+              <EventObjectiveAction targettag="statuseffecttarget" id="- always" type="remove" ParentObjectiveId="COMMONNESS:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- sometimes" type="remove" ParentObjectiveId="COMMONNESS:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- all" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- location specific" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="MISSION SELECTION:" type="remove" ParentObjectiveId="JOB BOARD SETTINGS:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="COMMONNESS:" type="remove" ParentObjectiveId="JOB BOARD SETTINGS:" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="JOB BOARD SETTINGS:" type="remove" />
+              <WaitAction time="2" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="JOB BOARD SETTINGS:" type="add" />
+              <WaitAction time="0.1" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="COMMONNESS:" type="add" ParentObjectiveId="JOB BOARD SETTINGS:" />
+              <WaitAction time="0.1" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="MISSION SELECTION:" type="add" ParentObjectiveId="JOB BOARD SETTINGS:" />
+              <Label name="jobboardsettings" />
+              <ConversationAction text="Job Board Settings:">
+                <Option text="ALWAYS - The job board will always be available on supported locations.">
+                  <SetDataAction identifier="jobboard_always" value="true" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- sometimes" type="remove" ParentObjectiveId="COMMONNESS:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- always" type="remove" ParentObjectiveId="COMMONNESS:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- always" type="add" ParentObjectiveId="COMMONNESS:" />
+                  <WaitAction time="2" />
+                  <GoTo name="jobboardsettings" />
+                </Option>
+                <Option text="SOMETIMES - The job board will randomly become available. (Default)">
+                  <SetDataAction identifier="jobboard_always" value="false" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- always" type="remove" ParentObjectiveId="COMMONNESS:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- sometimes" type="remove" ParentObjectiveId="COMMONNESS:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- sometimes" type="add" ParentObjectiveId="COMMONNESS:" />
+                  <WaitAction time="2" />
+                  <GoTo name="jobboardsettings" />
+                </Option>
+                <Option text="ALL OPTIONS - The job board will disregard your current location type and let you choose from all available mission types.">
+                  <SetDataAction identifier="jobboard_all_options" value="true" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- location specific" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- all" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- all" type="add" ParentObjectiveId="MISSION SELECTION:" />
+                  <WaitAction time="2" />
+                  <GoTo name="jobboardsettings" />
+                </Option>
+                <Option text="LOCATION SPECIFIC - The job board will only display mission types in correlation to your current location type. (Default)">
+                  <SetDataAction identifier="jobboard_all_options" value="false" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- all" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- location specific" type="remove" ParentObjectiveId="MISSION SELECTION:" />
+                  <EventObjectiveAction targettag="statuseffecttarget" id="- location specific" type="add" ParentObjectiveId="MISSION SELECTION:" />
+                  <WaitAction time="2" />
+                  <GoTo name="jobboardsettings" />
+                </Option>
+                <Option text="- Back -">
+                  <GoTo name="settingsmenu" />
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="- CONFIRM AND EXIT -" endconversation="true">
+              <EventObjectiveAction targettag="statuseffecttarget" id="- always" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- sometimes" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- all" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="- location specific" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="JOB BOARD SETTINGS:" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="COMMONNESS:" type="remove" />
+              <EventObjectiveAction targettag="statuseffecttarget" id="MISSION SELECTION:" type="remove" />
+              <ClearTagAction tag="user" />
+              <ClearTagAction tag="statuseffecttarget" />
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+  </EventPrefabs>
+</Randomevents>

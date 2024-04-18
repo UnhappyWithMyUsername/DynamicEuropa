@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Item name="Tentacle" identifier="lithomorphtentacle" category="Weapon" maxstacksize="1" scale="0.5" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,harpoonammo" Scale="0.5" impactsoundtag="impact_metal_light" noninteractable="true" hideinmenus="true" health="5" damagedbymeleeweapons="true">
+    <Sprite texture="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="0,0,15,15" depth="0.57" origin="0.5,0.5" />
+    <Body radius="15" density="10" />
+    <Rope sourcepullforce="0" targetpullforce="100" projectilepullforce="1" maxlength="450" snaponcollision="false" spritewidth="40" tile="true" origin="0.05,0.5" targetminmass="0" lerpforces="true" snapanimduration="0.5" breakfrommiddle="false" SnapWhenNotAimed="False">
+      <Sprite texture="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="500,448,500,162" depth="0.57" origin="0.5,0.5" />
+      <!--       <EndSprite texture="Content/Map/Thalamus/thalamus.png" sourcerect="672,288,32,64" depth="0.56" origin="0.5,0.5" /> -->
+      <StatusEffect type="Always" target="This" delay="1" checkconditionalalways="true">
+        <Conditional Snapped="true" />
+        <Conditional condition="0" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="3" checkconditionalalways="true">
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="10" />
+      <StatusEffect type="OnBroken" target="This" Snapped="true">
+        <ParticleEmitter particle="bloodsplashwater" anglemin="-180" anglemax="-180" particleamount="3" velocitymin="50" velocitymax="100" scalemin="0.5" scalemax="1.0" />
+      </StatusEffect>
+    </Rope>
+    <Projectile characterusable="false" launchimpulse="7" sticktowalls="false" sticktocharacters="true" sticktoitems="false" sticktostructures="false" sticktodoors="false" sticktodeflective="false">
+      <Attack structuredamage="15" itemdamage="30" targetforce="5" severlimbsprobability="0">
+        <Affliction identifier="stun" strength="1" />
+        <Affliction identifier="blunttrauma" strength="20" />
+      </Attack>
+      <StatusEffect type="OnActive" target="UseTarget,This" checkconditionalalways="true">
+        <Conditional Snapped="false" />
+        <Affliction identifier="slow" strength="10" />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="TentacleNoDamage" identifier="lithomorphtentaclenodamage" category="Weapon" maxstacksize="1" scale="0.5" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,harpoonammo" Scale="0.5" impactsoundtag="impact_metal_light" noninteractable="true" hideinmenus="true" health="5" damagedbymeleeweapons="true" spritecolor="220,220,220,255">
+    <Sprite texture="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="0,0,15,15" depth="0.57" origin="0.5,0.5" />
+    <Body radius="15" density="10" />
+    <Rope sourcepullforce="0" targetpullforce="50" projectilepullforce="1" maxlength="500" snaponcollision="false" spritewidth="40" tile="true" origin="0.05,0.5" targetminmass="0" lerpforces="true" snapanimduration="0.5" breakfrommiddle="false" SnapWhenNotAimed="False">
+      <Sprite texture="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="500,448,500,162" depth="0.57" origin="0.5,0.5" />
+      <!--       <EndSprite texture="Content/Map/Thalamus/thalamus.png" sourcerect="672,288,32,64" depth="0.56" origin="0.5,0.5" /> -->
+      <StatusEffect type="Always" target="This" delay="1" checkconditionalalways="true">
+        <Conditional Snapped="true" />
+        <Conditional condition="0" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="3" checkconditionalalways="true">
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="10" />
+      <StatusEffect type="OnBroken" target="This" Snapped="true">
+        <ParticleEmitter particle="bloodsplashwater" anglemin="-180" anglemax="-180" particleamount="3" velocitymin="50" velocitymax="100" scalemin="0.5" scalemax="1.0" />
+      </StatusEffect>
+    </Rope>
+    <Projectile characterusable="false" launchimpulse="7" sticktowalls="false" sticktocharacters="true" sticktoitems="false" sticktostructures="false" sticktodoors="false" sticktodeflective="false" maxtargetstohit="1">
+      <Attack severlimbsprobability="0">
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="UseTarget,This" checkconditionalalways="true">
+        <Conditional Snapped="false" />
+        <Affliction identifier="slow" strength="10" />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="Tentacle test gun" identifier="lithomorphgun" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light" hideinmenus="true">
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,203,181,39" depth="0.55" origin="0.5,0.5" />
+    <Body width="180" height="30" density="25" />
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="35,-10" aimpos="45,-10" handle1="-20,-6" handle2="30,10" holdangle="-40" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon reload="1.75" launchimpulse="20.0" barrelpos="85,14" spread="1" unskilledspread="10" combatPriority="60" drawhudwhenequipped="true" crosshairscale="0.2">
+      <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+      <Sound file="Content/Items/Weapons/HarpoonGun1.ogg" type="OnUse" range="1000" />
+      <Sound file="Content/Items/Weapons/HarpoonGun2.ogg" type="OnUse" range="1000" />
+      <Sound file="Content/Items/Weapons/HarpoonGun3.ogg" type="OnUse" range="1000" />
+      <StatusEffect type="OnUse">
+        <Explosion range="150.0" force="5" shockwave="false" smoke="false" flames="false" flash="false" sparks="false" underwaterbubble="false" camerashake="6.0" />
+        <SpawnItem identifier="lithomorphtentacle" spawnposition="Thisinventory" count="1" rotationtype="Collider" rotation="0" />
+      </StatusEffect>
+      <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" canbeselected="false" characterusable="true" spawnwithid="lithomorphtentacle">
+        <Containable items="lithomorphtentacle" />
+      </ItemContainer>
+      <RequiredSkill identifier="weapons" level="30" />
+    </RangedWeapon>
+  </Item>
+  <Item name="" nameidentifier="cassiterite" identifier="lithomorphspawnercassiterite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="597,877,84,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="265,890,116,121" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="512,877,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="681,877,87,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="512,877,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="681,877,87,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="512,877,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="681,877,87,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.30" abysscommonness="10" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="5" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.65" abysscommonness="0" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="0" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Cassiterite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="chamosite" identifier="lithomorphspawnerchamosite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="341,438,86,148" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="652,642,120,121" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="256,441,86,145" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="426,438,86,148" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="256,441,86,145" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="426,438,86,148" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="256,441,86,145" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="426,438,86,148" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.40" abysscommonness="50" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="25" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.40" abysscommonness="5" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" abysscommonness="5" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.35" abysscommonness="5" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Chamosite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="cryolite" identifier="lithomorphspawnercryolite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="0,144,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="517,513,120,119" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="85,146,88,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="172,146,84,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="85,146,88,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="172,146,84,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="85,146,88,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="172,146,84,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.10" cavecommonness="0.40" abysscommonness="30" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" cavecommonness="0.50" abysscommonness="20" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="10" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.65" abysscommonness="0" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.60" abysscommonness="0" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Cryolite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="galena" identifier="lithomorphspawnergalena" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="341,877,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="135,889,114,123" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="256,877,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="426,877,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="256,877,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="426,877,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="256,877,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="426,877,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.9" cavecommonness="0.9" abysscommonness="0" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.85" cavecommonness="0.9" abysscommonness="50" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.85" cavecommonness="0.8" abysscommonness="50" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.8" cavecommonness="0.7" abysscommonness="0" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Galena" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="hydroxyapatite" identifier="lithomorphspawnerhydroxyapatite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="426,292,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="141,635,106,119" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="341,292,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="256,293,86,146" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="341,292,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="256,293,86,146" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="341,292,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="256,293,86,146" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.45" abysscommonness="25" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.55" abysscommonness="10" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="0" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.40" abysscommonness="0" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" abysscommonness="0" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Hydroxyapatite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="pyromorphite" identifier="lithomorphspawnerpyromorphite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="853,292,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="775,768,119,123" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="768,292,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="938,292,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="768,292,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="938,292,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="768,292,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="938,292,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.20" abysscommonness="5.00" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" abysscommonness="3.33" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="2.00" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" abysscommonness="0" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Pyromorphite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="sphalerite" identifier="lithomorphspawnersphalerite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="172,585,84,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="12,761,121,126" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="85,585,88,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="0,585,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="85,585,88,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="0,585,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="85,585,88,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="0,585,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.20" abysscommonness="0" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.15" cavecommonness="0.1" abysscommonness="0" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.10" cavecommonness="0" abysscommonness="0" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.05" cavecommonness="0" abysscommonness="0" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Sphalerite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="sylvite" identifier="lithomorphspawnersylvite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="256,146,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="644,511,120,119" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="342,146,84,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="426,146,87,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="342,145,84,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="425,147,87,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="343,144,84,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="426,146,87,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.10" abysscommonness="30" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.25" abysscommonness="20" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.50" abysscommonness="10" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.70" abysscommonness="5" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.75" abysscommonness="0" leveltype="hydrothermalwastes" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Sylvite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="triphylite" identifier="lithomorphspawnertriphylite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="256,0,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="123,505,120,127" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="341,0,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="426,0,86,147" offset="20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="341,0,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="426,0,86,147" offset="-20,0" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="341,0,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="426,0,86,147" offset="0,-30" randomrotation="-20,20" randomscale="1.5,2" randomoffset="30,10" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/Minerals.png" depth="0.4" sourcerect="810,893,173,131" offset="0,-40" randomrotation="-20,20" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.10" abysscommonness="10" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.40" abysscommonness="50" leveltype="europanridge" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.30" abysscommonness="10" leveltype="theaphoticplateau" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <Commonness commonness="0.3" abysscommonness="10" leveltype="thegreatsea" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph_Triphylite" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+  <Item name="" nameidentifier="titanite" identifier="lithomorphspawnertitanite" category="Material" Tags="smallitem,ore" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
+    <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ContainedSprite texture="Content/Items/Materials/MineralEnvironment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.47" sourcerect="512,730,86,147" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.3" sourcerect="396,635,118,123" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.48" sourcerect="595,730,86,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.49" sourcerect="768,292,86,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.51" sourcerect="341,292,86,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.52" sourcerect="256,877,86,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.53" sourcerect="341,0,86,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.54" sourcerect="342,146,84,147" offset="0,0" randomrotation="-20,20" randomscale="1.5,2.0" randomoffset="0,0" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.55" sourcerect="341,292,86,147" offset="-20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Items/Materials/MineralEnvironment.png" depth="0.56" sourcerect="256,293,86,146" offset="20,-30" randomrotation="-20,20" randomscale="2,2.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" offsetanim="Noise" offsetanimspeed="5.0">
+      <AnimationConditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+    </DecorativeSprite>
+    <Body radius="60" width="20" density="25" />
+    <!-- levelresource spawns this at random in levels -->
+    <LevelResource deattachduration="Infinity" randomoffsetfromwall="80">
+      <Commonness commonness="0.0" cavecommonness="100" abysscommonness="0" fixedquantity="true" clusterquantity="1" clustersize="1" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- motion sensor activates when a human is nearby and spawns the monster -->
+    <MotionSensor range="400" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.025" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" target="This" delay="3" condition="-100" disabledeltatime="true" stackable="false" checkconditionalalways="true">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="Lithomorph" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" dontmuffle="true" volume="2" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="359" scalemin="0.5" scalemax="1.5" drawontop="true" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </MotionSensor>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item>
+</Items>

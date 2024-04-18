@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+  <!-- 
+    ///BIOME DIFFICULTY VALUES\\\
+    
+    Cold Caverns: 0-15
+    Europan Ridge: 15-35
+    The Aphotic Plateau: 35-50
+    The Great Sea: 50-65
+    Hydrothermal Wastes: 65-80
+
+  -->
+  <!--OUTPOST EVENTS-->
+  <Override>
+    <EventSet identifier="otherlocationevents" leveltype="outpost" locationtype="lair,lairmudraptor,lairthresher,huskgroundsde,militaryforces" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+      <EventSet identifier="militaryforcesevents" locationtype="militaryforces">
+        <EventSet identifier="militaryforces.always" eventcount="1">
+          <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100" />
+        </EventSet>
+        <EventSet identifier="militaryforces.random">
+        </EventSet>
+      </EventSet>
+      <EventSet identifier="lairevents" locationtype="lair,lairmudraptor,lairthresher,huskgroundsde">
+        <EventSet identifier="lair.always" eventcount="1">
+          <ScriptedEvent identifier="unlockorenodeslair" commonness="100" />
+        </EventSet>
+      </EventSet>
+    </EventSet>
+    <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+      <!-- DYNAMIC EUROPA - ALWAYS TRIGGERED EVENTS -->
+      <EventSet identifier="outpostevents.dynamiceuropa.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
+        <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
+      </EventSet>
+      <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction"  allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
+        <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
+        <ScriptedEvent identifier="quartermaster" commonness="100" probability="1.0" />
+      </EventSet>
+
+      <!-- DYNAMIC EUROPA - RANDOM EVENTS -->
+      <EventSet identifier="outpostevents.dynamiceuropa.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="false">
+        <ScriptedEvent identifier="sadashikira" faction="coalition" commonness="50"/>
+      </EventSet>
+
+      <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
+      <EventSet identifier="huskoutpostevents" leveltype="outpost" locationtype="huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true"> 
+        <!-- MANAGER EVENTS (missions) with increasing difficulty, matches base eventset -->
+        <EventSet identifier="missionevents.huskoutpost.0015" minleveldifficulty="0" maxleveldifficulty="15" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.0015.general" chooserandom="true" setcount="2" allowatstart="true">    
+            <EventSet identifier="missionevents.huskoutpost.0015.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.0015.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killmonster_set1" commonness="75" />
+              <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="25" />          
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.0015.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_mainpath" commonness="50" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="50" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="25" />
+            </EventSet>
+          </EventSet>
+          <EventSet identifier="missionevents.huskoutpost.0015.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.2" />        
+          </EventSet>
+        </EventSet>
+        
+        <EventSet identifier="missionevents.huskoutpost.1525" minleveldifficulty="15" maxleveldifficulty="25" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.1525.general" chooserandom="true" setcount="2" allowatstart="true">
+            <EventSet identifier="missionevents.huskoutpost.1525.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.1525.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="75" />
+              <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.1525.general.salvage" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.1525.general.nest" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_crawlernest" commonness="75" />
+              <ScriptedEvent identifier="missionevent_mudraptornest" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.1525.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="25" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="50" />
+            </EventSet>
+          </EventSet>
+          <EventSet identifier="missionevents.huskoutpost.1525.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.5" />        
+          </EventSet>
+        </EventSet>
+
+        <EventSet identifier="missionevents.huskoutpost.2535" minleveldifficulty="25" maxleveldifficulty="35" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.2535.general" chooserandom="true" setcount="2" allowatstart="true">
+            <EventSet identifier="missionevents.huskoutpost.2535.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.2535.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.2535.general.salvage" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_salvagewreck" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.2535.general.nest" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_crawlernest" commonness="50" />
+              <ScriptedEvent identifier="missionevent_mudraptornest" commonness="25" />
+              <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="25" />
+            </EventSet>        
+            <EventSet identifier="missionevents.huskoutpost.2535.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="25" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="50" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="25" />
+            </EventSet>
+          </EventSet>
+          <EventSet identifier="missionevents.huskoutpost.2535.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_jailbreak_husk" faction="huskcult" commonness="25" probability="0.5" />
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.8" />
+            <ScriptedEvent identifier="missionevent_pirate1" commonness="50" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="50" faction="separatists" />       
+          </EventSet>
+        </EventSet>
+        
+        <EventSet identifier="missionevents.huskoutpost.3550" minleveldifficulty="35" maxleveldifficulty="50" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.3550.general" chooserandom="true" setcount="2" allowatstart="true">
+            <EventSet identifier="missionevents.huskoutpost.3550.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.3550.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.3550.general.salvage" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_salvageartifact" commonness="50" />
+              <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.3550.general.nest" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
+              <ScriptedEvent identifier="missionevent_mudraptornest" commmonness="33"/>
+              <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="33" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.3550.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="50" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.3550.general.ruin" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_scanruin" />
+            </EventSet>
+          </EventSet>
+          <EventSet identifier="missionevents.huskoutpost.3550.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_jailbreak_husk" faction="huskcult" probability="0.5" />
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.8" />
+            <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+          </EventSet>
+        </EventSet> 
+        
+        <EventSet identifier="missionevents.huskoutpost.5065" minleveldifficulty="50" maxleveldifficulty="65" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.5065.general" chooserandom="true" setcount="2" allowatstart="true">
+            <EventSet identifier="missionevents.huskoutpost.5065.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.5065.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="75" />
+              <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="50" />
+              <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.5065.general.salvage" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_salvageartifact" commonness="50" />
+              <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.5065.general.nest" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
+              <ScriptedEvent identifier="missionevent_mudraptornest_hard" commmonness="33"/>
+              <ScriptedEvent identifier="missionevent_tigerthreshernest_hard" commonness="33" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.5065.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="25" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="50" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.5065.general.ruin" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_scanruin" commonness="100" />
+              <ScriptedEvent identifier="missionevent_clearruin" commonness="100" />
+            </EventSet>
+          </EventSet>
+          <EventSet identifier="missionevents.huskoutpost.5065.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_jailbreak_husk" faction="huskcult" probability="0.5" />
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.8" />
+            <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />      
+          </EventSet>
+        </EventSet>
+        
+        <EventSet identifier="missionevents.huskoutpost.65100" minleveldifficulty="65" maxleveldifficulty="100" allowatstart="true" chooserandom="false" exhaustible="true">
+          <EventSet identifier="missionevents.huskoutpost.65100.general" chooserandom="true" setcount="2" allowatstart="true">
+            <EventSet identifier="missionevents.huskoutpost.65100.general.cargo" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="50" />
+              <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="25" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.65100.general.monster" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="75" />
+              <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="25" />
+              <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="75" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.65100.general.salvage" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_salvageartifact" commonness="50" />
+              <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.65100.general.nest" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
+              <ScriptedEvent identifier="missionevent_mudraptornest_hard" commmonness="33"/>
+              <ScriptedEvent identifier="missionevent_tigerthreshernest_hard" commonness="33" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.65100.general.mining" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="25" />
+              <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="75" />
+            </EventSet>
+            <EventSet identifier="missionevents.huskoutpost.65100.general.ruin" chooserandom="true" commonness="100" allowatstart="true">
+              <ScriptedEvent identifier="missionevent_scanruin" commonness="100" />
+              <ScriptedEvent identifier="missionevent_clearruin" commonness="100" />
+            </EventSet>
+          </EventSet>      
+          <EventSet identifier="missionevents.huskoutpost.65100.faction" chooserandom="true" eventcount="1" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_jailbreak_husk" faction="huskcult" probability="0.5" />
+            <ScriptedEvent identifier="missionevent_escort1huskcult" commonness="50" faction="huskcult" probability="0.8" />   
+            <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />          
+          </EventSet>
+        </EventSet>
+      </EventSet>
+
+      <!-- Event set for missions that have husk outposts as a destination or husks as a target-->
+      <!-- TODO add more church missions -->
+      <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+        <EventSet identifier="missionevents.husk.destination.easy" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
+          <ScriptedEvent identifier="missionevent_slimecollection" />
+        </EventSet>
+      
+        <EventSet identifier="outpostevents.husk.coalition" allowatstart="true" chooserandom="true" eventcount="1" faction="coalition">
+          <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" />
+        </EventSet>
+        
+        <EventSet identifier="outpostevents.husk.separatists" allowatstart="true" chooserandom="true" eventcount="1" faction="separatists">
+          <ScriptedEvent identifier="missionevent_huskcultinterception" />
+        </EventSet>
+      </EventSet>
+
+      <!-- Events that can happen in either Research or Husks outposts. Only used to transport a VIP between Research and Church at the moment -->  
+      <EventSet identifier="researchhuskoutpostmission" leveltype="outpost" locationtype="study,research,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+        <EventSet identifier="missionevents.researchhuskoutpostmission.easy" minleveldifficulty="20" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
+          <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="100" />
+          <!-- <ScriptedEvent identifier="missionevent_beaconspecialhusk" /> -->
+        </EventSet>
+      </EventSet>
+
+      <!-- low-difficulty random events -->
+      <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <OverrideEventCount locationtype="City" eventcount="3" />
+        <ScriptedEvent identifier="givingdirections" commonness="100" />
+        <ScriptedEvent identifier="goodsamaritan" commonness="100" />      
+        <ScriptedEvent identifier="miketheidiot1" commonness="25" />      
+        <ScriptedEvent identifier="Engineers_are_special" commonness="100" />
+        <ScriptedEvent identifier="fanclub" commonness="100" />
+        <ScriptedEvent identifier="shockjock" commonness="60" />
+        <ScriptedEvent identifier="manandhisraptor1" commonness="50" />
+        <ScriptedEvent identifier="assassinationofjacovsubra2" commonness="100" />
+        <ScriptedEvent identifier="assassinationofjacovsubra3" commonness="100" />
+        <ScriptedEvent identifier="propaganda" commonness="100" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
+        <ScriptedEvent identifier="bombscare" commonness="50" faction="coalition" />      
+        <ScriptedEvent identifier="terrorism101" commonness="50" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
+        <ScriptedEvent identifier="separatistrelations" commonness="100" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
+        <!-- events that only occur in low difficulty-->
+        <ScriptedEvent identifier="atwitsend" commonness="60" />
+      </EventSet>
+      <!-- low-difficulty clown events -->
+      <EventSet identifier="outpostevents.easy.generic.randomevents.clowns" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <ScriptedEvent identifier="clownrelations1" commonness="100" faction="clowns" probability="0.5" />
+        <ScriptedEvent identifier="infiltration" commonness="70" faction="clowns" probability="0.5" />
+        <ScriptedEvent identifier="censorship" commonness="60" faction="clowns" probability="0.5" />
+      </EventSet>
+      <!-- low-difficulty husk cult events -->
+      <EventSet identifier="outpostevents.easy.generic.randomevents.huskcult" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <ScriptedEvent identifier="huskcultist" commonness="100" faction="huskcult" probability="0.5" />
+      </EventSet>
+
+      <!-- high-difficulty random events -->
+      <EventSet identifier="outpostevent.difficult.generic.randomevents" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <OverrideEventCount locationtype="City" eventcount="3" />
+        <!-- events that can occur in both low and high difficulty, commoness reduced here to favor the more difficult ones-->
+        <ScriptedEvent identifier="givingdirections" commonness="50" />
+        <ScriptedEvent identifier="goodsamaritan" commonness="50" />     
+        <ScriptedEvent identifier="miketheidiot1" commonness="12" />     
+        <ScriptedEvent identifier="Engineers_are_special" commonness="50" />
+        <ScriptedEvent identifier="fanclub" commonness="50" />
+        <ScriptedEvent identifier="shockjock" commonness="40" />
+        <ScriptedEvent identifier="manandhisraptor1" commonness="60" />
+        <ScriptedEvent identifier="assassinationofjacovsubra2" commonness="100" />
+        <ScriptedEvent identifier="assassinationofjacovsubra3" commonness="100" />
+        <ScriptedEvent identifier="nothingtoseehere" commonness="50" faction="coalition" />
+        <ScriptedEvent identifier="propaganda" commonness="50" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
+        <ScriptedEvent identifier="bombscare" commonness="40" faction="coalition" />     
+        <ScriptedEvent identifier="terrorism101" commonness="40" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
+        <ScriptedEvent identifier="separatistrelations" commonness="50" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->      
+        <!-- events that only occur in high difficulty-->
+        <ScriptedEvent identifier="blackmarket" commonness="100" />
+        <ScriptedEvent identifier="mediator" commonness="100" />
+        <ScriptedEvent identifier="firefighting" commonness="100" />
+        <ScriptedEvent identifier="sleightofhand" commonness="100" />
+        <ScriptedEvent identifier="miketheidiot2" commonness="25" />
+        <ScriptedEvent identifier="goblincooking1" commonness="50" />
+        <ScriptedEvent identifier="soundinthevent" commonness="100" />
+        <ScriptedEvent identifier="badvibrations3" commonness="50" />
+        <ScriptedEvent identifier="stuckinthemiddle" commonness="50" faction="coalition" /> <!-- technically a separatist event, but happens in a coalition outpost -->
+        <ScriptedEvent identifier="returner" commonness="50" />
+      </EventSet>
+      <!-- high-difficulty clown events -->
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <ScriptedEvent identifier="clownrelations1" commonness="50" faction="clowns" probability="0.5" />
+        <ScriptedEvent identifier="clownbrutality" commonness="100" faction="clowns" probability="0.5" />
+        <ScriptedEvent identifier="clownrelations2" commonness="100" faction="clowns" probability="0.5" />
+      </EventSet>
+      <!-- high-difficulty husk cult events -->
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.huskcult" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <ScriptedEvent identifier="outbreak" commonness="100" faction="huskcult" probability="0.5" />
+        <ScriptedEvent identifier="huskcultist" commonness="50" faction="huskcult" probability="0.5" />
+        <ScriptedEvent identifier="huskcultambush" commonness="50" faction="huskcult" probability="0.5" />
+        <ScriptedEvent identifier="huskcultrelations" commonness="100" faction="huskcult" probability="0.5" />
+      </EventSet>
+      
+      <!-- Events specific to military outposts -->
+      <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="0.2" />
+      </EventSet>
+      <EventSet identifier="outpostevent.military.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <!-- 50% chance of getting a military-specific event (TODO: increase if/when we have more of these available?) -->
+        <ScriptedEvent identifier="bigbrother" commonness="150" probability="0.5" faction="coalition"/>
+      </EventSet>
+      
+      <!-- Pirate mission events, scale difficulty? -->
+      <EventSet identifier="outpostevent.military.missionevents.europanridge" minleveldifficulty="15" maxleveldifficulty="35" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
+      </EventSet>
+      <EventSet identifier="outpostevent.military.missionevents.aphoticplateau" minleveldifficulty="35" maxleveldifficulty="50" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="50" probability="0.5" />
+      </EventSet>
+      <EventSet identifier="outpostevent.military.missionevents.thegreatsea" minleveldifficulty="50" maxleveldifficulty="65" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.5" />
+      </EventSet>
+      <EventSet identifier="outpostevent.military.missionevents.hydrothermalwastes" minleveldifficulty="65" maxleveldifficulty="90" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.5" />
+      </EventSet>
+      
+      <!-- Events specific to research outposts -->
+      <EventSet identifier="outpostevent.research.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="research,lab,study" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardresearch" commonness="200" probability="0.2" />
+      </EventSet>
+      <EventSet identifier="outpostevent.research.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="research,lab,study" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <!-- 50% chance of getting a research-specific event (TODO: increase if/when we have more of these available?) -->
+        <ScriptedEvent identifier="crawleroutbreak" commonness="150" probability="0.5" />
+        <ScriptedEvent identifier="impromptuengineering" commonness="150" probability="0.5" />
+        <ScriptedEvent identifier="captivesouls" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="researcherescort" commonness="50" />
+        <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="tastetest" commonness="150" probability="0.5" />
+      </EventSet>
+      
+      <!-- Events specific to industrial outposts -->
+      <EventSet identifier="outpostevent.industrial.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,fusion,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="0.2" />
+      </EventSet>
+
+      <!-- Events specific to habitation outposts -->
+      <EventSet identifier="outpostevent.habitation.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="0.2" />
+      </EventSet>
+
+      <!-- Events specific to medical outposts -->
+      <EventSet identifier="outpostevent.medical.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardmedical" commonness="200" probability="0.2" />
+      </EventSet>
+
+      <!-- Events specific to construction outposts -->
+      <EventSet identifier="outpostevent.construction.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="Constructionprogress_coalition" commonness="200" probability="1" faction="coalition" />
+        <ScriptedEvent identifier="Constructionprogress_separatists" commonness="200" probability="1" faction="separatists" />
+      </EventSet>     
+
+      <!-- Events specific to survey outposts -->
+      <EventSet identifier="outpostevent.survey.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="survey" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="surveymissions" commonness="200" probability="1" />
+      </EventSet>
+      
+      <!-- Events specific to mining outposts -->
+      <EventSet identifier="outpostevent.mine.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <!-- TODO: make sure these dont spawn in the dry cave itself -->
+        <ScriptedEvent identifier="consultant" commonness="150" probability="0.5" />
+        <ScriptedEvent identifier="occupationalhazards" commonness="150" probability="0.5" />
+      </EventSet>
+      <EventSet identifier="outpostevents.mine.randomization" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="false" exhaustible="true" onceperoutpost="true">
+        <ScriptedEvent identifier="unlockorenodes" commonness="100" />
+      </EventSet>
+      <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters -->
+      <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+        <Commonness commonness="100"/>
+        <MonsterEvent characterfile="Crawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+        <MonsterEvent characterfile="Crawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+        <MonsterEvent characterfile="Crawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+      </EventSet>
+
+      <!-- Events specific to cities -->
+      <EventSet identifier="outpostevent.city.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="city" allowatstart="true" chooserandom="true" onceperoutpost="true">
+        <!-- 50% chance of getting a city-specific event (TODO: increase if/when we have more of these available?) -->
+        <ScriptedEvent identifier="captivesouls" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="hognose" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="radiationescapee" commonness="50" />
+      </EventSet>
+      
+      
+      <!-- Vanilla Mission Event sets -->
+      <EventSet identifier="missionevents.coldcaverns.start" minleveldifficulty="0" maxleveldifficulty="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" eventcount="3" chooserandom="false" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_cargoany" />
+        <ScriptedEvent identifier="missionevent_killmonster_set1" />
+        <ScriptedEvent identifier="missionevent_collectminerals_mainpath" />
+      </EventSet>
+
+      <EventSet identifier="missionevents.coldcaverns.basic" minleveldifficulty="1" maxleveldifficulty="5" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" setcount="3" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.coldcaverns.basic.cargo" chooserandom="true" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+          <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="25" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="25" faction="separatists" />
+        </EventSet>
+        <EventSet identifier="missionevents.coldcaverns.basic.monster" chooserandom="true" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+          <ScriptedEvent identifier="missionevent_killmonster_set1" commonness="75" />
+        </EventSet>
+        <EventSet identifier="missionevents.coldcaverns.basic.mining" chooserandom="true" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_collectminerals_mainpath" commonness="50" />
+          <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="50" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.coldcaverns.advanced" minleveldifficulty="5" maxleveldifficulty="15" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.coldcaverns.advanced.general" chooserandom="true" setcount="2" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.coldcaverns.advanced.general.cargo" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargoany" commonness="50" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="50" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="50" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.coldcaverns.advanced.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="20" />
+            <ScriptedEvent identifier="missionevent_killmonster_set1" commonness="40" />
+            <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="40" />
+          </EventSet>
+          <EventSet identifier="missionevents.coldcaverns.advanced.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="75" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="25" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.coldcaverns.advanced.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort1coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort1separatists" commonness="100" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.europanridge.basic" minleveldifficulty="15" maxleveldifficulty="25" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.europanridge.basic.general" chooserandom="true" setcount="3" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.europanridge.basic.general.cargo" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargoany" commonness="30" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="35" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="35" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.basic.general.swarm" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+            <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.basic.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="75" />
+            <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.basic.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="100" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.basic.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_crawlernest" commonness="75" />
+            <ScriptedEvent identifier="missionevent_mudraptornest" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.basic.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="25" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="75" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.europanridge.basic.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort1coalition,missionevent_escort2coalition,missionevent_escort3coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort1separatists,missionevent_escort2separatists,missionevent_escort3separatists" commonness="100" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.europanridge.advanced" minleveldifficulty="25" maxleveldifficulty="35" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.europanridge.advanced.general" chooserandom="true" setcount="3" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.europanridge.advanced.general.cargo" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargoany" commonness="20" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="40" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="40" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.advanced.general.swarm" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="25" />
+            <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="50" />
+            <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.advanced.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="25" />
+            <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="75" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.advanced.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_salvagewreck" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.advanced.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_crawlernest" commonness="50" />
+            <ScriptedEvent identifier="missionevent_mudraptornest" commonness="25" />
+            <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.europanridge.advanced.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set1" commonness="25" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="50" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="25" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.europanridge.advanced.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort2coalition,missionevent_escort3coalition,missionevent_escort4coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort2separatists,missionevent_escort3separatists,missionevent_escort4separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_separatists" commonness="25" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1" commonness="50" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="50" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.theaphoticplateau" minleveldifficulty="35" maxleveldifficulty="50" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.theaphoticplateau.general" chooserandom="true" setcount="3" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.theaphoticplateau.general.cargo" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargoany" commonness="10" />
+            <ScriptedEvent identifier="missionevent_cargo_difficult" commonness="20" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="35" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="13" faction="separatists" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatistsvolatile" commonness="22" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.swarm" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="50" />
+            <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="50" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="50" />
+            <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="50" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_salvageartifact" commonness="50" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
+            <ScriptedEvent identifier="missionevent_mudraptornest" commmonness="33"/>
+            <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="33" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="50" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="50" />
+          </EventSet>
+          <EventSet identifier="missionevents.theaphoticplateau.general.ruin" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_scanruin" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.theaphoticplateau.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort2coalition,missionevent_escort3coalition,missionevent_escort4coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort2separatists,missionevent_escort3separatists,missionevent_escort4separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_separatists" commonness="25" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.greatsea" minleveldifficulty="50" maxleveldifficulty="65" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.greatsea.general" chooserandom="true" setcount="3" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.greatsea.general.cargo" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargoany" commonness="5" />
+            <ScriptedEvent identifier="missionevent_cargo_difficult" commonness="25" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="35" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="13" faction="separatists" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatistsvolatile" commonness="22" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.swarm" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="50" />
+            <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="50" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="75" />
+            <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_salvageartifact" commonness="40" />
+            <ScriptedEvent identifier="missionevent_salvageartifactabyss" commonness="20" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="40" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
+            <ScriptedEvent identifier="missionevent_mudraptornest_hard" commmonness="33"/>
+            <ScriptedEvent identifier="missionevent_tigerthreshernest_hard" commonness="33" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set2" commonness="25" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="50" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="25" />
+          </EventSet>
+          <EventSet identifier="missionevents.greatsea.general.ruin" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_scanruin" commonness="100" />
+            <ScriptedEvent identifier="missionevent_clearruin" commonness="100" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.greatsea.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort2coalition,missionevent_escort3coalition,missionevent_escort4coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort2separatists,missionevent_escort3separatists,missionevent_escort4separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_separatists" commonness="25" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <EventSet identifier="missionevents.wastes" minleveldifficulty="65" maxleveldifficulty="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" exhaustible="true">
+        <EventSet identifier="missionevents.wastes.general" chooserandom="true" setcount="3" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <EventSet identifier="missionevents.wastes.general.cargo" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_cargo_difficult" commonness="30" />
+            <ScriptedEvent identifier="missionevent_cargoweaponscoalition" commonness="35" faction="coalition" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatists" commonness="13" faction="separatists" />
+            <ScriptedEvent identifier="missionevent_cargoexplosiveseparatistsvolatile" commonness="22" faction="separatists" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.swarm" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="25" />
+            <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="75" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.monster" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="25" />
+            <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="75" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_salvageartifact" commonness="40" />
+            <ScriptedEvent identifier="missionevent_salvageartifactabyss" commonness="20" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="40" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="20" />
+            <ScriptedEvent identifier="missionevent_mudraptornest" commmonness="40"/>
+            <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="40" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.mining" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_collectminerals_set3" commonness="25" />
+            <ScriptedEvent identifier="missionevent_collectminerals_set4" commonness="75" />
+          </EventSet>
+          <EventSet identifier="missionevents.wastes.general.ruin" chooserandom="true" commonness="200" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+            <ScriptedEvent identifier="missionevent_scanruin" commonness="50" />
+            <ScriptedEvent identifier="missionevent_clearruin2" commonness="150" />
+          </EventSet>
+        </EventSet>
+        <EventSet identifier="missionevents.wastes.faction" chooserandom="true" eventcount="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
+          <ScriptedEvent identifier="missionevent_escort2coalition,missionevent_escort3coalition,missionevent_escort4coalition" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_escort2separatists,missionevent_escort3separatists,missionevent_escort4separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_separatists" commonness="25" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
+          <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+        </EventSet>
+      </EventSet>
+
+      <!-- generic clown missions -->
+      <EventSet identifier="outpostevents.clowns.missionevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard,sinkingcircus" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_escort1clowns" commonness="50" faction="clowns" probability="0.8" />
+        <ScriptedEvent identifier="missionevent_clownoutbreak" commonness="50" faction="clowns" probability="0.8" />
+      </EventSet>
+
+      <!--  Faction-specific events that can only occur once. 
+        In a separate set to make these very common (when they are valid for the situation) -->
+      <EventSet identifier="outpostevents.clowns" allowatstart="true" chooserandom="true" eventcount="3" faction="clowns" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
+        <ScriptedEvent identifier="clownspecialhire1" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn1" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn2" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn3" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn4" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn5" commonness="100" />
+      </EventSet>
+      <EventSet identifier="outpostevents.separatists" allowatstart="true" chooserandom="true" eventcount="2" faction="separatists" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
+        <ScriptedEvent identifier="separatistspecialhire1" commonness="100" />
+        <ScriptedEvent identifier="separatistspecialhire2" commonness="100" />
+        <ScriptedEvent identifier="missionevent_tormsdalereport" commonness="100" />
+        <ScriptedEvent identifier="missionevent_jailbreak_sootman" commonness="10" faction="separatists" />
+      </EventSet>
+      <EventSet identifier="outpostevents.separatists.triggeralways" allowatstart="true" eventcount="1" faction="separatists" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
+        <ScriptedEvent identifier="tormsdalereport_complete" commonness="100" />
+      </EventSet>
+      <EventSet identifier="outpostevents.coalition" allowatstart="true" chooserandom="true" eventcount="1" faction="coalition" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
+        <ScriptedEvent identifier="coalitionspecialhire1" commonness="50" />
+        <ScriptedEvent identifier="coalitionspecialhire2" commonness="50" />
+      </EventSet>
+      <EventSet identifier="outpostevents.huskcult" allowatstart="true" chooserandom="true" eventcount="4" faction="huskcult" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch">
+        <ScriptedEvent identifier="huskcultspecialhire1" commonness="100" />
+        <ScriptedEvent identifier="youngcultists" commonness="100" />
+        <ScriptedEvent identifier="waytoascension1" commonness="100" />
+        <ScriptedEvent identifier="waytoascension2" commonness="100" />
+        <ScriptedEvent identifier="waytoascension3" commonness="100" />
+        <ScriptedEvent identifier="waytoascension4" commonness="100" />
+        <ScriptedEvent identifier="waytoascension5" commonness="100" />
+      </EventSet>
+    </EventSet>
+  </Override>
+  <!--PIRATE OUTPOSTS-->
+  <Override>
+    <EventSet identifier="de_pirateoutpostevents" leveltype="outpost" locationtype="pirateoutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+      <!-- ConstantEvents specific to pirate outposts -->
+      <!-- <EventSet identifier="de_outpostevents.pirate.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="false" onceperoutpost="false">
+        <ScriptedEvent identifier="piratesecurityofficer" commonness="100" />
+      </EventSet> -->
+      <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="piratemissioninformant" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="piratediversoutpost" commonness="100" probability="0.5" />
+      </EventSet>
+      <!-- MissionEvents specific to pirate outposts 
+      <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_killswarm_set1" commonness="10"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="75"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set1" commonness="10"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="75"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_salvageartifact" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_salvagewreck" commonness="60"/>
+        <ScriptedEvent identifier="missionevent_crawlernest" commonness="120"/>
+        <ScriptedEvent identifier="missionevent_mudraptornest" commonness="100"/>
+        <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="50"/>
+        <ScriptedEvent identifier="missionevent_clearruin" commonness="10"/>
+      </EventSet>
+      <EventSet identifier="outpostevents.advanced.pirate.missionevents" minleveldifficulty="35" maxleveldifficulty="50" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="75"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="50"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="50"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="30"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_salvageartifact" commonness="70"/>
+        <ScriptedEvent identifier="missionevent_salvagewreck" commonness="100"/>
+        <ScriptedEvent identifier="missionevent_mudraptornest" commonness="70"/>
+        <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="80"/>
+        <ScriptedEvent identifier="missionevent_clearruin" commonness="60"/>
+      </EventSet>
+      <EventSet identifier="outpostevents.veteran.pirate.missionevents" minleveldifficulty="50" maxleveldifficulty="100" allowatstart="true" chooserandom="true" eventcount="5" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_killswarm_set2" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set3" commonness="75"/>
+        <ScriptedEvent identifier="missionevent_killswarm_set4" commonness="50"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set2" commonness="25"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set3" commonness="75"/>
+        <ScriptedEvent identifier="missionevent_killmonster_set4" commonness="50"/>
+        <ScriptedEvent identifier="missionevent_salvageartifact" commonness="140"/>
+        <ScriptedEvent identifier="missionevent_salvagewreck" commonness="120"/>
+        <ScriptedEvent identifier="missionevent_mudraptornest" commonness="70"/>
+        <ScriptedEvent identifier="missionevent_tigerthreshernest" commonness="80"/>
+        <ScriptedEvent identifier="missionevent_clearruin" commonness="90"/>
+      </EventSet>-->
+    </EventSet>
+  </Override>
+  <!--TRANSIT EVENTS-->
+  <Override>
+    <EventSet identifier="transitevents" leveltype="LocationConnection" allowatstart="true" chooserandom="false" campaign="true" ignoreintensity="true" additive="true">
+      <!-- All Biomes -->
+      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="0" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
+        <ScriptedEvent identifier="factionstowaway" commonness="100" probability="0.1" triggercooldown="false" />
+        <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" />
+      </EventSet>
+      <EventSet identifier="DEtransitevents.commsrelay.wrecks" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" ignorecooldown="true" chooserandom="false">
+        <ScriptedEvent identifier="commsrelay_wreck" commonness="100" probability="0.25" triggercooldown="false" />
+      </EventSet>
+      <EventSet identifier="DEtransitevents.commsrelay.ruins" minleveldifficulty="0" maxleveldifficulty="100" maxintensity="0.2" chooserandom="true" perruin="true" triggereventcooldown="false" ignorecooldown="true">
+        <ScriptedEvent identifier="commsrelay_ruin" commonness="100" probability="0.25" triggercooldown="false" />
+      </EventSet>
+      <!-- Cold Caverns -->
+      <EventSet identifier="DEtransitevents.randomevents.coldcaverns" minleveldifficulty="0" maxleveldifficulty="15" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.05" triggercooldown="false" />
+        <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.05" triggercooldown="false" />
+      </EventSet>
+      <!-- Europan Ridge -->
+      <EventSet identifier="DEtransitevents.randomevents.europanridge" minleveldifficulty="15" maxleveldifficulty="35" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.05" triggercooldown="false" />
+        <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.05" triggercooldown="false" />
+      </EventSet>
+      <!-- Aphotic Plateau -->
+      <EventSet identifier="DEtransitevents.randomevents.aphoticplateau" minleveldifficulty="35" maxleveldifficulty="50" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.05" triggercooldown="false" />
+        <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.05" triggercooldown="false" />
+      </EventSet>
+      <!-- The Great Sea -->
+      <EventSet identifier="DEtransitevents.randomevents.thegreatsea" minleveldifficulty="50" maxleveldifficulty="65" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.05" triggercooldown="false" />
+        <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.05" triggercooldown="false" />
+      </EventSet>
+      <!-- Hydrothermal Wastes -->
+      <EventSet identifier="DEtransitevents.randomevents.hydrothermalwastes" minleveldifficulty="65" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.05" triggercooldown="false" />
+        <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.05" triggercooldown="false" />
+      </EventSet>
+    </EventSet>
+  </Override>
+  
+  <!-- BROKEN NOT USED literally replaces minerals in dry caves -->
+  <!-- <EventSet identifier="outpostevent.mine.randomminerals" leveltype="outpost" locationtype="mine" minleveldifficulty="0" maxleveldifficulty="80"  allowatstart="true" onceperoutpost="true">
+    <ScriptedEvent identifier="spawnrandomminerals" commonness="100" probability="1" />
+  </EventSet> -->
+  
+
+</Randomevents>

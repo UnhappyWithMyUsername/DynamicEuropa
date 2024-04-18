@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Comments: Created by UberPendragon (https://steamcommunity.com/profiles/76561197995266558)
+avoid spawning clusters of spawners, multiple creatures will harpoon eachother breaking the fight and sometimes physics. Tried making harpoons not stick to deflective (all limbs are deflective) but I can't tell what deflects and what doesnt (dive suits are supposedly deflective)
+ -->
+<Character SpeciesName="Lithomorph" Group="thalamus" Humanoid="False" HasInfo="False" CanInteract="True" Husk="False" UseHuskAppendage="False" NeedsAir="False" NeedsWater="True" IsMachine="False" CanSpeak="False" ShowHealthBar="True" UseBossHealthBar="False" Noise="300" Visibility="300" BloodDecal="" BleedParticleAir="" BleedParticleWater="" BleedParticleMultiplier="1" CanEat="False" EatingSpeed="10" UsePathFinding="True" PathFinderPriority="0.5" HideInSonar="True" HideInThermalGoggles="True" SonarDisruption="0" DistantSonarRange="0" DisableDistance="15000" SoundInterval="10" DrawLast="False">
+  <ragdolls folder="%ModDir%/Characters/Special Creatures/Lithomorph/Ragdolls/" />
+  <animations folder="%ModDir%/Characters/Special Creatures/Lithomorph/Animations/" />
+  <damageemitter Particle="shockwavesmall" AngleMin="0" AngleMax="0" ScaleMin="0.5" ScaleMax="0.5" VelocityMin="0" VelocityMax="0" EmitInterval="0" ParticlesPerSecond="0" ParticleAmount="1" HighQualityCollisionDetection="False" CopyEntityAngle="False" />
+  <gibemitter particleburstamount="1" Particle="leucogib" AngleMin="0" AngleMax="360" ScaleMin="1" ScaleMax="2" VelocityMin="-20" VelocityMax="20" EmitInterval="0.2" ParticlesPerSecond="0" ParticleAmount="0" HighQualityCollisionDetection="False" CopyEntityAngle="False" />
+  <health Vitality="150" DoesBleed="False" CrushDepth="Infinity" UseHealthWindow="False" BleedingReduction="0" BurnReduction="0" ConstantHealthRegeneration="0" HealthRegenerationWhenEating="0" StunImmunity="True" PoisonImmunity="False" PoisonVulnerability="3" EmpVulnerability="0" ApplyAfflictionColors="False">
+    <Limb name="Torso">
+      <VitalityMultiplier type="burn" multiplier="2" />
+    </Limb>
+    <Limb name="LeftHand">
+      <VitalityMultiplier identifier="gunshotwound" multiplier="0.1" />
+      <VitalityMultiplier identifier="lacerations" multiplier="0.1" />
+      <VitalityMultiplier identifier="stun" multiplier="0" />
+      <VitalityMultiplier type="burn" multiplier="0" />
+    </Limb>
+    <Limb name="RightHand">
+      <VitalityMultiplier identifier="gunshotwound" multiplier="0.1" />
+      <VitalityMultiplier identifier="lacerations" multiplier="0.1" />
+      <VitalityMultiplier identifier="stun" multiplier="0" />
+      <VitalityMultiplier type="burn" multiplier="0" />
+    </Limb>
+  </health>
+  <StatusEffect type="Always" target="This" interval="0.1" duration="0.2">
+    <Conditional isDead="eq false" />
+    <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphLoop.ogg" Range="2000" Volume="1.0" Loop="True" />
+  </StatusEffect>
+  <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphIdle1.ogg" State="Idle" Range="2000" Volume="0.75" Tags="" />
+  <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphIdle2.ogg" State="Idle" Range="2000" Volume="0.75" Tags="" />
+  <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphDamage1.ogg" State="Damage" Range="2000" Volume="1" Tags="" />
+  <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphDamage2.ogg" State="Damage" Range="2000" Volume="1" Tags="" />
+  <sound File="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphDamage3.ogg" State="Damage" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/attack1.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch1.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch4.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch5.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch6.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <ai CombatStrength="40" Sight="1" Hearing="1" AggressionHurt="100" AggressionGreed="10" FleeHealthThreshold="0" AttackWhenProvoked="True" AvoidGunfire="False" DamageThreshold="0" AvoidTime="3" MinFleeTime="20" AggressiveBoarding="False" EnforceAggressiveBehaviorForMissions="True" TargetOuterWalls="True" RandomAttack="True" CanOpenDoors="False" UsePathFindingToGetInside="False" KeepDoorsClosed="False" AvoidAbyss="True" StayInAbyss="False" PatrolFlooded="False" PatrolDry="False" StartAggression="0" MaxAggression="100" AggressionCumulation="0" WallTargetingMethod="Target">
+    <target Tag="human" State="Aggressive" Priority="100" ReactDistance="1000" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+    <target Tag="weaker" State="Aggressive" Priority="100" ReactDistance="1000" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+    <target Tag="stronger" State="Aggressive" Priority="100" ReactDistance="1000" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+  </ai>
+  <inventory accessiblebyowner="True" Slots="Any, Any, Any" AccessibleWhenAlive="False" Commonness="1">
+    <Item identifier="titanite" />
+  </inventory>
+  <StatusEffect type="OnDeath" target="This" targetlimb="Torso" duration="0.1">
+    <ParticleEmitter particle="gib" anglemin="-30" anglemax="30" particleamount="3" velocitymin="200" velocitymax="300" scalemin="0.5" scalemax="1.0" copyentityangle="true" colormultiplier="200,200,200,255" />
+    <ParticleEmitter particle="heavygib" anglemin="-30" anglemax="30" particleamount="3" velocitymin="200" velocitymax="400" scalemin="0.5" scalemax="1.0" copyentityangle="true" colormultiplier="200,200,200,255" />
+    <sound file="%ModDir%/Characters/Special Creatures/Lithomorph/LithomorphDeath1.ogg" range="3000" volume="1" />
+  </StatusEffect>
+</Character>

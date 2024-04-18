@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+<npcsets>
+  <npcset identifier="husknpcs">
+    <npc identifier="outpostmanagerhusk" commonness="1" moduleflags="adminmodule" job="captain" tags="outpostmanager" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule,adminchurch">
+      <ItemSet commonness="1">
+        <Item identifier="cultistrobeshoodless" equip="true"/>
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="SMG" equip="false">
+          <Item identifier="smgmagazine" amount="1"/>
+        </Item>
+        <Item identifier="smgmagazine" amount="1"/>        
+      </ItemSet>
+    </npc>
+
+    <!-- cultists are security -->
+    <npc identifier="huskcultistsecurity" tags="huskcultist,securitynpc" commonness="0" job="securityofficer" behavior="Patrol" healthmultiplier="1.5" spawnpointtags="husk">
+    
+      <!-- Boring regular security itemset -->
+      <ItemSet commonness="8">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="divingknife" />
+        <Item identifier="bodyarmor" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item> 
+      </ItemSet>
+      <ItemSet commonness="2">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="mudraptorshell" equip="true"/>  
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="boardingaxe" equip="false" /> 
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item> 
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="bodyarmor" equip="true"/>  
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="alienpistol" equip="false">
+          <Item identifier="alienpowercell" amount="1"/>
+        </Item>
+        <Item identifier="alienpowercell" amount="1"/>
+        <Item identifier="divingknife" /> 
+        <Item identifier="divingmask">
+          <Item identifier="oxygenitetank" />
+        </Item> 
+      </ItemSet>
+        <!-- Reenable these itemsets if AI ever learns how to use lethal/nonlethal ammo -->
+<!--       <ItemSet commonness="2">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>        
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+          <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="mudraptorshell" equip="true"/>      
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>     
+        <Item identifier="handcuffs"/>
+        <Item identifier="boardingaxe" equip="false" /> 
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+        <Item identifier="huskeggs"/>
+        <Item identifier="cyanide"/>        
+      </ItemSet>     -->    
+    </npc>
+    
+    <!-- repurposed as researcher -->
+    <npc identifier="huskcultecclesiast" tags="huskcultist,huskresearcher" commonness="0" moduleflags="researchmodule" job="assistant" behavior="StayInHull" healthmultiplier="2.0" spawnpointtags="research">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_huskresearcher"/>
+        <Item identifier="zealotrobes" equip="true"/>
+        <Item identifier="divingknifeunique" equip="false"/>
+        <Item identifier="huskeggs" equip="false"/>
+      </ItemSet>
+    </npc>
+           
+    <npc identifier="merchanthusk"  moduleflags="adminmodule" job="assistant" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule,adminchurch" campaigninteractiontype="Store" spawnpointtags="merchanthusk,husk">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="cultistrobeshoodless" equip="true"/>
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>        
+      </ItemSet>
+    </npc>
+
+<!--     <npc identifier="merchanthuskmedical"  moduleflags="medicalmodule" job="watchman" spawnpointtags="medical" healthmultiplier="3" campaigninteractiontype="Store" behavior="StayInHull" preferredoutpostmoduletypes="medical,medicalchurch">
+      <ItemSet commonness="1">
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="healthscanner" equip="true"/>        
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="calyxanide"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="huskeggsbasic"/>
+      </ItemSet>
+    </npc> -->
+
+    <npc identifier="merchanthuskengineering" job="watchman" moduleflags="engineeringmodule" spawnpointtags="engineering" healthmultiplier="3" campaigninteractiontype="Store" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="safetyharness" equip="true"/>        
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="wrench"/>
+        <Item identifier="screwdriver"/>
+      </ItemSet>
+    </npc>
+
+    <npc identifier="outposthuskdoctor" job="medicaldoctor" spawnpointtags="huskmedic" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+      <ItemSet commonness="1">
+        <Item identifier="cultistrobeshoodless" equip="true"/>
+        <Item identifier="healthscanner" equip="true"/>            
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+  </npcset>    
+    
+    <!-- MISSION -->
+    <!-- MISSION -->
+    <!-- MISSION -->
+    
+  <npcset identifier="husknpcsmission">    
+    
+    <npc identifier="huskvip" moduleflags="none" job="vip" healthmultiplier="0.8" behavior="StayInHull">
+      <ItemSet>
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="zealotrobes" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="genesplicer" equip="true">
+          <Item identifier="geneticmaterialhusk" />
+        </Item>
+      </ItemSet>
+    </npc>
+    <npc identifier="huskbodyguard" job="vipsecurityofficer" spawnpointtags="security" healthmultiplier="1" behavior="StayInHull">
+    
+      <!-- Boring regular security itemset -->
+      <ItemSet commonness="8">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="divingknife" />
+        <Item identifier="bodyarmor" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item> 
+      </ItemSet>
+      <ItemSet commonness="2">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="mudraptorshell" equip="true"/>  
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="boardingaxe" equip="false" /> 
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item> 
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="bodyarmor" equip="true"/>  
+        <Item identifier="stunbaton">
+          <Item identifier="batterycell" />
+        </Item>
+        <Item identifier="batterycell" amount="4" />
+        <Item identifier="handcuffs"/>
+        <Item identifier="alienpistol" equip="false">
+          <Item identifier="alienpowercell" amount="1"/>
+        </Item>
+        <Item identifier="alienpowercell" amount="1"/>
+        <Item identifier="divingknife" /> 
+        <Item identifier="divingmask">
+          <Item identifier="oxygenitetank" />
+        </Item> 
+      </ItemSet>
+        <!-- Reenable these itemsets if AI ever learns how to use lethal/nonlethal ammo -->
+<!--       <ItemSet commonness="2">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>        
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+          <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="mudraptorshell" equip="true"/>      
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>     
+        <Item identifier="handcuffs"/>
+        <Item identifier="boardingaxe" equip="false" /> 
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+        <Item identifier="huskeggs"/>
+        <Item identifier="cyanide"/>        
+      </ItemSet>     -->    
+    </npc>
+    
+    <npc identifier="prisonerhusk" tags="hostage,prisoner" job="assistant" moduleflags="none" faction="huskcult" behavior="Passive" AllowDraggingIndefinitely="true">
+      <ItemSet>
+        <Item identifier="cultistrobeshoodless" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="handcuffs" equip="true"/>
+      </ItemSet>
+    </npc>
+
+    <npc identifier="huskassassinationtarget" tags="husktarget" commonness="0" moduleflags="researchmodule" job="medicaldoctor" behavior="StayInHull" healthmultiplier="1" spawnpointtags="research">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_huskresearcher"/>
+        <Item identifier="zealotrobes" equip="true"/>
+        <Item identifier="divingknifeunique" equip="false"/>
+        <Item identifier="huskeggs" equip="false"/>
+      </ItemSet>
+    </npc>
+
+    <npc identifier="clownfiltrator" tags="clown,huskcultist" commonness="0" moduleflags="researchmodule" job="assistant" behavior="StayInHull" healthmultiplier="1" >
+      <Character speciesname="human" gender="male" experiencepoints="0" additionaltalentpoints="0" headspriteid="10" hairindex="10" beardindex="0" facecolor="255,255,255,255" faceattachmentindex="0" personality="joker">
+        <Talents>
+          <talent identifier="enrollintoclowncollege"/>
+          <talent identifier="skedaddle"/>
+        </Talents>
+      </Character>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="cultistrobeshoodless" equip="true"/>
+        <Item identifier="clownmask" equip="true"/>
+        <Item identifier="honkmotherianscriptures1" equip="false"/>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="beaconhusk" tags="huskcultist" job="assistant" moduleflags="none" faction="huskcult" behavior="Passive" >
+      <ItemSet>
+        <Item identifier="cultistrobeshoodless" equip="true" />
+        <Item identifier="idcard" equip="true" />
+      </ItemSet>
+    </npc>
+
+    <npc identifier="beaconhuskresearcher" tags="huskcultist,beaconhuskresearcher" job="assistant" moduleflags="none" faction="huskcult" behavior="Passive" >
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="researcherclothes" equip="true"/>
+        <Item identifier="alienblood" />
+        <Item identifier="geneticmaterial_unresearched" />
+      </ItemSet>
+    </npc>
+
+
+  </npcset>      
+
+  <npcset identifier="huskmisc">
+    <!-- misc -->
+    <!-- misc -->
+    <!-- misc -->
+
+  </npcset>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                     Combat Mission Husk NPCs                        -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <npcset identifier="combatmissionhuskcultnpcs">
+  
+    <npc identifier="huskcultcaptain" job="captain" moduleflags="none" behavior="Patrol" healthmultiplier="0.5" aimspeed="0.8" aimaccuracy="0.3">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" showpreview="false" />
+        <Item identifier="captainscap1" equip="true" />
+        <Item identifier="cultistrobeshoodless" equip="true" outfit="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+        </Item>
+        <Item identifier="captainspipe" equip="false" />
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultcaptainlord" job="captain" moduleflags="none" behavior="Patrol" healthmultiplier="1.1" aimspeed="0.8" aimaccuracy="0.7">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" showpreview="false" />
+        <Item identifier="captainscap2" equip="true" />
+        <Item identifier="cultistrobeshoodless" equip="true" outfit="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="shotgununique">
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+        </Item>
+        <Item identifier="shotgunshell" />
+        <Item identifier="shotgunshell" />
+        <Item identifier="shotgunshell" />
+        <Item identifier="shotgunshell" />
+        <Item identifier="captainspipe" equip="false" />
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultsecurityrecruit" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.55" aimspeed="0.8" aimaccuracy="0.3">
+      <ItemSet commonness="1">
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="divingknife" />
+        <Item identifier="piratebandana" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="0.5">
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="harpoongun">
+          <Item identifier="spear" />
+          <Item identifier="spear" />
+          <Item identifier="spear" />
+          <Item identifier="spear" />
+          <Item identifier="spear" />
+          <Item identifier="spear" />
+        </Item>
+        <Item identifier="divingknife" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultsecurityelite" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="1.1" aimspeed="1.0" aimaccuracy="0.8">
+      <ItemSet commonness="2">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>        
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+          <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="mudraptorshell" equip="true"/>      
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="Shotgun" equip="false">
+          <Item identifier="shotgunshell" amount="6"/>
+        </Item>
+        <Item identifier="shotgunshell" amount="12"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>     
+        <Item identifier="handcuffs"/>
+        <Item identifier="boardingaxe" equip="false" /> 
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
+        <Item identifier="cultistrobes" equip="true"/>
+        <Item identifier="bodyarmor" equip="true"/>
+        <Item identifier="divingknife" equip="false"/>
+        <Item identifier="handcuffs"/>
+        <Item identifier="syringegun" equip="false">
+          <Item identifier="chloralhydrate" amount="4"/>
+        </Item>
+        <Item identifier="huskeggs"/>
+        <Item identifier="cyanide"/>        
+      </ItemSet>        
+    </npc> 
+
+    <npc identifier="huskcultengineerrecruit" job="engineer" commonness="1" behavior="Patrol" healthmultiplier="0.4" aimspeed="0.8" aimaccuracy="0.3">
+      <ItemSet>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="wrench" equip="true" />
+        <Item identifier="screwdriver" equip="true" />
+        <Item identifier="crowbar" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="weldingtool">
+          <Item identifier="weldingfueltank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultengineerveteran" job="engineer" behavior="Patrol" healthmultiplier="0.7" aimspeed="0.8" aimaccuracy="0.3">
+      <ItemSet>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="wrench" equip="true" />
+        <Item identifier="screwdriver" equip="true" />
+        <Item identifier="crowbar" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="weldingtool">
+          <Item identifier="weldingfueltank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultmechanicrecruit" job="mechanic" healthmultiplier="0.4" aimspeed="0.6" aimaccuracy="0.3">
+      <ItemSet>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="wrench" equip="true" />
+        <Item identifier="screwdriver" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="weldingtool">
+          <Item identifier="weldingfueltank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="huskcultmechanicveteran" job="mechanic" healthmultiplier="0.7" aimspeed="0.6" aimaccuracy="0.3">
+      <ItemSet>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="wrench" equip="true" />
+        <Item identifier="screwdriver" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+        <Item identifier="weldingtool">
+          <Item identifier="weldingfueltank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+  </npcset>  
+  
+</npcsets>
+</Override>

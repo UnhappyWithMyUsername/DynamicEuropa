@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+
+<Item name="Vine Ladder" identifier="vineladder" tags="ladder" resizevertical="true" scale="0.5" allowrotatingineditor="false">
+  <Sprite texture="%Moddir%/Biomes/CaveoutpostLocations/DECaveobjects.png" depth="0.52" sourcerect="16,20,94,608"/>
+  <DecorativeSprite texture="%Moddir%/Biomes/CaveoutpostLocations/DECaveobjects.png" depth="0.51" sourcerect="16,20,94,608" origin="0.5,5.2" offset="15,5" offsetanim="Noise" offsetanimspeed="0.25">
+    <AnimationConditional IsActive="true" targetitemcomponent="Controller" />
+  </DecorativeSprite>
+  <!-- REGALIS ADD "ACTIVE" TO LADDERS PLEASE -->
+  <Controller canbeselected="true" IsSecondaryItem="true" msg="ItemMsgInteractSelect">
+    <StatusEffect type="OnActive" target="This" duration="1" stackable="false" >
+      <particleemitter particlespersecond="10" particle="fruitchunks" drawontop="true" velocitymin="100" velocitymax="300" anglemin="265" anglemax="275" copyentitangle="false" distancemin="-150" distancemax="150" scalemin="0.35" scalemax="0.6" colormultiplier="80,150,50,255" highqualitycollisiondetection="true" />
+      <!-- <Sound file="Content/Items/Engine/Enginebroken.ogg" volume="1" range="500" frequencymultiplier="0.3" loop="true" /> -->
+    </StatusEffect>
+  </Controller>
+  <Ladder canbeselected="true" msg="ItemMsgClimbSelect">
+    <BackgroundSprite texture="%Moddir%/Biomes/CaveoutpostLocations/DECaveobjects.png" depth="0.05" sourcerect="120,20,94,608" origin="0.2,0.0"/>
+  </Ladder>
+  <trigger x="5" y="0" width="84"/>
+</Item>
+
+<!-- Bioluminescent plants -->
+<Item name="Bioluminescent Cave Boulder" identifier="de-bioluminescentcaveboulder1" nameidentifier="de-bioluminescentcaveboulder1" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/BackgroundChunks.png" sourcerect="4,4,335,321" depth="0.879" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Boulder" identifier="de-bioluminescentcaveboulder2" nameidentifier="de-bioluminescentcaveboulder2" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/BackgroundChunks.png" sourcerect="345,4,328,333" depth="0.878" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Boulder" identifier="de-bioluminescentcaveboulder3" nameidentifier="de-bioluminescentcaveboulder3" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/BackgroundChunks.png" sourcerect="687,4,339,332" depth="0.877" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Boulder" identifier="de-bioluminescentcaveboulder4" nameidentifier="de-bioluminescentcaveboulder4" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/BackgroundChunks.png" sourcerect="14,335,450,341" depth="0.876" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Boulder" identifier="de-bioluminescentcaveboulder5" nameidentifier="de-bioluminescentcaveboulder5" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/BackgroundChunks.png" sourcerect="493,343,500,334" depth="0.875" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Chunk" identifier="de-bioluminescentcavechunk1" nameidentifier="de-bioluminescentcavechunk1" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="8,412,498,326" depth="0.874" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Chunk" identifier="de-bioluminescentcavechunk2" nameidentifier="de-bioluminescentcavechunk2" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="536,402,477,324" depth="0.873" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Chunk" identifier="de-bioluminescentcavechunk3" nameidentifier="de-bioluminescentcavechunk3" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="15,736,481,287" depth="0.872" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Cave Chunk" identifier="de-bioluminescentcavechunk4" nameidentifier="de-bioluminescentcavechunk4" tags="" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="524,736,482,287" depth="0.871" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+
+<Item name="Bioluminescent Plant" identifier="de-bioluminescentplant1" nameidentifier="de-bioluminescentplant1" tags="light" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="344,30,326,191" depth="0.879" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Plant" identifier="de-bioluminescentplant2" nameidentifier="de-bioluminescentplant2" tags="light" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="684,0,336,217" depth="0.878" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Plant" identifier="de-bioluminescentplant3" nameidentifier="de-bioluminescentplant3" tags="light" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="9,14,323,199" depth="0.877" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Plant" identifier="de-bioluminescentplant4" nameidentifier="de-bioluminescentplant4" tags="light" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="347,221,333,184" depth="0.876" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+<Item name="Bioluminescent Plant" identifier="de-bioluminescentplant5" nameidentifier="de-bioluminescentplant5" tags="light" allowattachitems="true" subcategory="cavedeco" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="true" noninteractable="true">
+  <Sprite texture="Content/Map/Biomes/BioluminescentCave/LevelObjects.png" sourcerect="685,215,331,183" depth="0.875" premultiplyalpha="false" origin="0.5,0.5" />
+  <LightComponent IsOn="true" range="150" lightcolor="25,25,80,250" pulseamount="0.3" pulsefrequency="0.1">
+    <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+  </LightComponent>
+</Item>
+
+</Items>

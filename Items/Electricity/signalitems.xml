@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Override>
+<Items>
+
+  <Item nameidentifier="alarmbuzzer" identifier="alarmbuzzerPA" variantof="alarmbuzzer" hideinmenus="true">
+    <Price baseprice="100" minleveldifficulty="5" sold="false" >
+    </Price>
+    <LightComponent canbeselected="false" lightcolor="255,0,0,100" alphablend="true" castshadows="false" blinkfrequency="2.6" range="20">
+      <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" sourcerect="301,963,42,57" origin="0.5,0.5" alpha="1.0" />
+      <sound file="%ModDir%/Sounds/Items/Electricity/ReactorAlarm.ogg" type="OnActive" range="1000.0" loop="true" volume="0.5" />
+      <StatusEffect type="OnContained" target="This" IsActive="false">
+        <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
+      </StatusEffect>
+    </LightComponent>
+  </Item>
+
+  <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="smallitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" spawnprobability="0.00" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+    <Deconstruct time="10">
+      <Item identifier="fpgacircuit" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="1000" fabricationlimitmin="1" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="264,0,102,138" origin="0.5,0.5" />
+    <InventoryIcon texture="%ModDir%/Items/Electricity/SpeakerInventoryIcon.png" sourcerect="0,0,88,88" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.79" sourcerect="264,0,102,138" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="10.0">
+      <IsActiveConditional targetcontaineditem="true" condition="gt 0.0"/>
+      <IsActiveConditional targetitemcomponent="LightComponent" IsActive="true" />
+    </DecorativeSprite>
+    <Body width="102" height="138" density="30" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" >
+      <RequiredItem items="wrench" type="Equipped" />
+    </Holdable>
+    <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+      <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+        <Use />
+        <!--particleemitter particle="shockwavesmall" particlespersecond="3" scalemin="0.25" scalemax="0.75" /-->
+        <Conditional targetcontaineditem="true" condition="gt 0" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" IsActive="false">
+        <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
+      </StatusEffect>
+    </LightComponent>
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
+      <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
+      <!-- uses a fuckton of different tags for mod compatibility -->
+      <Containable items="sound,music,song,cassette-playernotes" />
+    </ItemContainer>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_state" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+
+  <Item name="Outpost Music Player" description="Hidden Music Player for outpost modules" identifier="raverplayeroutpost" category="Electrical" Tags="outpostmusicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" spritecolor="255,0,0,255" noninteractable="true" hiddeningame="true">
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="264,0,102,138" origin="0.5,0.5" />
+    <InventoryIcon texture="%ModDir%/Items/Electricity/SpeakerInventoryIcon.png" sourcerect="0,0,88,88" origin="0.5,0.5" />
+    <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+      <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+        <Use />
+        <Conditional targetcontaineditem="true" condition="gt 0" />
+      </StatusEffect>
+    </LightComponent>
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="true">
+      <!-- uses a fuckton of different tags for mod compatibility -->
+      <Containable items="sound,music,song,cassette-playernotes" />
+    </ItemContainer>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_state" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+  <Item name="Decorative Speaker" description="Speaker with animation when active" identifier="decospeaker" category="Electrical" Tags="" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" nonplayerteaminteractable="true">
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="264,0,102,138" origin="0.5,0.5" />
+    <InventoryIcon texture="%ModDir%/Items/Electricity/SpeakerInventoryIcon.png" sourcerect="0,0,88,88" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.79" sourcerect="264,0,102,138" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="10.0">
+      <IsActiveConditional targetitemcomponent="LightComponent" IsActive="true" />
+    </DecorativeSprite>
+    <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+      <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+        <particleemitter particle="shockwavesmall" particlespersecond="3" scalemin="0.25" scalemax="0.75" />
+      </StatusEffect>
+    </LightComponent>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_state" displayname="connection.setstate" />
+    </ConnectionPanel>
+  </Item>
+
+  <Item name="Song: Exosuit" description="Exosuit by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_exosuit" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Exosuit.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Exosuit.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Abandon Ship" description="Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_abandonship" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Abandon Ship.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Abandon Ship.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Red Alert" description="Red Alert by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_redalert" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Red Alert.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Red Alert.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Clock Watch" description="Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_clockwatch" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Clock Watch.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Clock Watch.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Cerbera" description="Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cerbera" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_cerbera.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_cerbera.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Alien Syndicate (Re_]|M|[_ix)" description="Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod" identifier="music_aliensyndicateremix" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Alien Syndicate.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Alien Syndicate.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Seamoth" description="Seamoth by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_seamoth" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Seamoth.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Seamoth.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Cyborg" description="Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cyborg" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Cyborg.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Cyborg.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" spawnprobability="0.00" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" spawnprobability="0.00" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.02" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <Button text="140m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
+      </Button>
+      <Button text="10m Range">
+        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="0" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnActive" range="14000.0" loop="true" volume="2.5" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Conditional timeframe="1" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+        <sound file="%ModDir%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnActive" range="1000.0" loop="true" volume="2.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <!-- OUTPOST SONGS | Exclusive to outpost music players. Should not be obtainable. -->
+  <Item name="Outpost Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Outpost Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Outpost Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <sound file="%ModDir%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Outpost Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir%/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="0,0,67,58" origin="0.5,0.5" />
+    <Body width="67" height="58" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <ItemComponent>
+      <StatusEffect type="OnUse" target="This" >
+        <sound file="%ModDir%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+
+</Items>
+</Override>

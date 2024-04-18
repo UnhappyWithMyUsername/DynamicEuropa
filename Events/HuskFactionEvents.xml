@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+
+  <!--EVENT SETS-->
+
+  <EventSet identifier="huskoutpostsabotage" leveltype="outpost" locationtype="anyoutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+  
+    <EventSet identifier="missionevents.husk.general" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
+
+    </EventSet>
+    
+  </EventSet>  
+
+  <EventPrefabs>
+
+    <!-- Unused -->
+    <ScriptedEvent identifier="poisonchaliceevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:huskchalice" tag="ritualchalice" SubmarineType="Outpost" />
+      <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="huskassassinationtarget" targettag="chalicedrinker" spawnlocation="Outpost" targetmoduletags="adminchurch" />
+      <TriggerAction target1tag="player" target2tag="ritualchalice" applytotarget1="triggerer_player" applytotarget2="selectedchalice" radius="150" waitforinteraction="true" /> 
+      <ConversationAction targettag="triggerer_player" text="This must be the chalice used for rituals..." eventsprite="vent">
+        <Option text="Pull out the dose out of your pocket." endconversation="true">
+          <SpawnAction itemidentifier="calyxanide" targettag="calyxanide" targetinventory="triggerer_player" />
+        </Option>
+      </ConversationAction>
+      <Label name="waitforcompletion" />
+      <CheckItemAction targettag="ritualchalice" >
+        <Conditional TargetContainedItem="true" HasTag="chem" />
+        <Success>
+          <WaitAction time="1" />
+          <ConversationAction targettag="triggerer_player" text="The Chalice has been filled with the right dose of calyxanide: bitter for humans, and lethal for... monsters." eventsprite="Ecclesiast" />
+          <SetDataAction identifier="poisonedchalicecomplete" value="1" />
+          <WaitAction time="1" />
+          <NPCOperateItemAction npctag="chalicedrinker" targettag="ritualchalice" RequireEquip="true" Operate="true" />  
+        </Success>
+        <Failure>
+          <GoTo name="waitforcompletion" />
+        </Failure>
+      </CheckItemAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="calyxanide_alarm">
+      <!-- trigger alarm if any of the prisoners are close to security -->
+      <TriggerAction target1tag="triggerer_player" target2tag="securitynpc" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
+      <NPCFollowAction npctag="triggerer_player" targettag="triggerer_securitynpc" follow="true" />
+      <WaitAction time="3" />
+      <ConversationAction text="EventText.jailbreak_alarm.c1" eventsprite="NoticeBoard" />
+      <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
+    </ScriptedEvent>
+
+  </EventPrefabs>
+</Randomevents>

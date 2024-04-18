@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Override>
+    <Item name="" identifier="piezocrystal" category="Material" Tags="" canbepicked="false" description="" scale="0.5" sonarsize="30" health="60" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true">
+      <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
+      <Body width="500" height="500" density="25" bodytype="Static" />
+      <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true">
+        <!-- activate the light only if the item has the "nearplayer" tag -->
+        <ActiveConditional HasStatusTag="nearplayer" />
+      </LightComponent>
+      <LightComponent lightcolor="178,196,207,255" range="7000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="1.0" ison="true" drawbehindsubs="true">
+        <!-- activate the light only if the item has the "nearplayer" tag -->
+        <ActiveConditional HasStatusTag="nearplayer" />
+        <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+      </LightComponent>
+      <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="10000" rangemultiplierinwalls="1">
+        <Attack targetimpulse="50">
+          <Affliction identifier="stun" strength="2" />
+          <Affliction identifier="burn" strength="4" />
+          <Affliction identifier="shocked" strength="2" />
+        </Attack>
+        <!-- explode when the item is destroyed | applies severe damage within a 20m range and a lower amount of damage within a 50m range -->
+        <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+          <particleemitter particle="iceshards" particleamount="200" velocitymin="100" velocitymax="3000" anglemin="0" anglemax="360" scalemin="0.5" scalemax="3.0" />
+          <Explosion range="2000.0" ballastfloradamage="1000" structuredamage="600" itemdamage="1000" force="50.0" severlimbsprobability="1.5" decal="explosion" decalsize="1.0" camerashake="500" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
+            <Affliction identifier="explosiondamage" strength="600" />
+            <Affliction identifier="burn" strength="450" />
+            <Affliction identifier="stun" strength="30" />
+          </Explosion>
+          <Explosion range="5000.0" ballastfloradamage="250" structuredamage="150" itemdamage="250" force="25.0" decalsize="1.0" camerashake="500" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
+            <Affliction identifier="explosiondamage" strength="50" />
+            <Affliction identifier="burn" strength="50" />
+            <Affliction identifier="stun" strength="10" />
+            <Affliction identifier="blinded" strength="15" />
+            <Affliction identifier="shocked" strength="15" />
+          </Explosion>
+          <Sound file="%ModDir%/Sounds/Explosions/ExplosionMassive1.ogg" selectionmode="Random" volume="5" range="10000" />
+          <Sound file="%ModDir%/Sounds/Explosions/ExplosionMassive2.ogg" selectionmode="Random" volume="5" range="10000" />
+          <Sound file="%ModDir%/Sounds/Explosions/ExplosionMassive3.ogg" selectionmode="Random" volume="5" range="10000" />
+          <RemoveItem />
+        </StatusEffect>
+        <!-- trigger a random sound when the electrical discharger was triggered and cause a camera shake effect to all players within 70m -->
+        <StatusEffect type="OnUse" target="This">
+          <sound file="%ModDir%/Sounds/Explosions/Piezo_ReallyClose.ogg" range="10000" volume="3" selectionmode="random" />
+          <sound file="%ModDir%/Sounds/Explosions/Piezo_ReallyClose2.ogg" range="10000" volume="3" />
+          <sound file="%ModDir%/Sounds/Explosions/Piezo_ReallyClose3.ogg" range="10000" volume="3" />
+          <sound file="%ModDir%/Sounds/Explosions/Piezo_ReallyClose4.ogg" range="10000" volume="3" />
+          <Explosion range="7000.0" camerashake="3" stun="0" force="0.0" flames="false" shockwave="false" sparks="false" underwaterbubble="false" />
+        </StatusEffect>
+        <!-- trigger an additional random explosion sound alongside the piezo sound when the electrical discharger was triggered -->
+        <StatusEffect type="OnUse" target="This">
+          <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="10000" selectionmode="Random" />
+          <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="10000" />
+          <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="10000" />
+        </StatusEffect>
+        <!-- tag the item with "nearplayer" if a player is within 100m to activate the item | prevents the item from being processed when it's not necessary -->
+        <StatusEffect type="Always" target="This,NearbyCharacters" range="10000" tags="nearplayer" setvalue="true" interval="1.2" duration="1.3">
+          <Conditional IsPlayer="true" />
+        </StatusEffect>
+      </ElectricalDischarger>
+      <ItemComponent>
+        <!-- when the component activates, apply extra load to nearby items and deactive the component -->
+        <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="7000.0" stackable="false" extraload="500" setvalue="true" />
+        <StatusEffect type="OnActive" target="This" targetitemcomponent="ItemComponent" IsActive="false" setvalue="true">
+          <Conditional IsActive="true" targetitemcomponent="ItemComponent" />
+        </StatusEffect>
+        <!-- reactivate after one second if the item has the "nearplayer" tag -->
+        <StatusEffect type="Always" target="This" stackable="false" delay="1.0" IsActive="true" setvalue="true">
+          <Conditional HasStatusTag="nearplayer" />
+        </StatusEffect>
+        <!-- trigger the electrical discharge to hit characters after every 12 seconds if the item was activated and it had the tag "nearplayer"-->
+        <StatusEffect type="OnActive" target="This" stackable="false" delay="12.0">
+          <Conditional HasStatusTag="nearplayer" />
+          <Use />
+        </StatusEffect>
+        <!-- spawn electric particles if the item has the tag "nearplayer" -->
+        <StatusEffect type="Always" target="This">
+          <Conditional HasStatusTag="nearplayer" />
+          <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" emitinterval="2.1" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" />
+        </StatusEffect>
+      </ItemComponent>
+      <LevelResource deattachduration="Infinity">
+        <Commonness cavecommonness="0.0" abysscommonness="0.5" fixedquantity="true" clusterquantity="46" clustersize="1" leveltype="thegreatsea" isislandspecific="false" allowatstart="false" />
+        <RequiredItem items="nonexistentitem" type="Equipped" />
+      </LevelResource>
+      <aitarget minsightrange="1000" maxsightrange="10000" soundrange="10000" />
+    </Item>
+  </Override>
+  <Item name="Piezo Crystal (Wired)" identifier="piezocrystalPA" category="Material" Tags="" canbepicked="false" description="" scale="0.5" sonarsize="30" health="100" damagedbyexplosions="false" damagedbyprojectiles="false" damagedbymeleeweapons="false" damagedbyrepairtools="false">
+    <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
+    <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true">
+      <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+        <particleemitter particle="iceshards" particleamount="200" velocitymin="100" velocitymax="3000" anglemin="0" anglemax="360" scalemin="0.5" scalemax="3.0" />
+        <Explosion range="1000.0" ballastfloradamage="1000" structuredamage="600" itemdamage="1000" force="50.0" severlimbsprobability="1.5" decal="explosion" decalsize="1.0" camerashake="500" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
+          <Affliction identifier="explosiondamage" strength="600" />
+          <Affliction identifier="burn" strength="450" />
+          <Affliction identifier="stun" strength="30" />
+        </Explosion>
+        <RemoveItem />
+      </StatusEffect>
+    </LightComponent>
+    <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="1.0" ison="true" drawbehindsubs="true">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="3500" rangemultiplierinwalls="1">
+      <StatusEffect type="OnUse" target="This">
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="6000" selectionmode="random" />
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="6000" />
+        <Explosion range="7000.0" camerashake="3" stun="0" force="0.0" flames="false" shockwave="false" sparks="false" underwaterbubble="false" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This">
+        <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="6000" selectionmode="Random" />
+        <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="6000" />
+        <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="6000" />
+      </StatusEffect>
+    </ElectricalDischarger>
+    <ItemComponent>
+      <!-- when the component activates, apply extra load to nearby items and deactive the component -->
+      <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="3000.0" setvalue="true" stackable="false" extraload="600">
+        <Conditional HasTas="neq donthit" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" target="This" IsActive="false" />
+      <!-- reactivate after one second -->
+      <StatusEffect type="Always" target="This" stackable="false" delay="1.0" IsActive="true" />
+      <StatusEffect type="Always" target="This" stackable="false" delay="10.0">
+        <Use />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This">
+        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" emitinterval="2.1" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" />
+      </StatusEffect>
+    </ItemComponent>
+    <ConnectionPanel canbeselected="true" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <!-- break the item when a shutdown signal is received -->
+      <input name="activate" displayname="connection.activate">
+        <StatusEffect type="OnUse" target="This" condition="-100" setvalue="true" />
+      </input>
+      <output name="power_out" displayname="connection.powerout" />
+    </ConnectionPanel>
+  </Item>
+  
+  
+  <!-- USED BY EVENT TO SPAWN RANDOM MINERALS IN CAVE FUCK THIS -->
+  <Item name="Mineral Deposit" identifier="mineralspawner" category="Material" Tags="smallitem,ore,mineralspawner" maxstacksize="1" description="used in rock cave to spawn mineral" scale="0.5" spritecolor="255,255,255,255" damagedbyrepairtools="true" damagedbyprojectiles="true" health="50" noninteractable="true" >
+    <Upgrade gameversion="2.0.0.0" noninteractable="true" />
+    <Body radius="40" width="20" density="25" />
+    <LightComponent lightcolor="255,255,180,120" range="50" ison="true" castshadows="false" drawbehindsubs="false">
+      <IsActive noninteractable="false" />
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <Sprite texture="Content/Items/Materials/Minerals.png" depth="0.49" sourcerect="810,893,173,131" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.53" offset="20,0" randomrotation="-20,20" randomscale="0.15,0.35" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.52" offset="20,0" randomrotation="-20,20" randomscale="0.15,0.35" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.54" offset="-20,0" randomrotation="-20,20" randomscale="0.15,0.35" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.55" offset="-20,0" randomrotation="-20,20" randomscale="0.15,0.35" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+    <LevelResource deattachduration="4" >
+      <Commonness commonness="0.0" abysscommonness="0" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="1000000.0" attached="true" attachable="true" reattachable="false" />
+    <ItemComponent>
+      <StatusEffect type="OnNotContained" target="This" condition="0" setvalue="true" >
+        <Conditional IsAttached="false" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <particleemitter particleamount="20" particle="brownchunks" drawontop="true" velocitymin="100" velocitymax="300" anglemin="-120" anglemax="60" copyentitangle="false" distancemin="0" distancemax="30" scalemin="0.35" scalemax="0.6" colormultiplier="80,80,80,255"  />
+        <Sound file="Content/Sounds/Damage/Armorbreak1.ogg" selectionmode="Random" volume="1" range="500" frequencymultiplier="2" />
+        <Sound file="Content/Sounds/Damage/Armorbreak2.ogg" selectionmode="Random" volume="1" range="500" frequencymultiplier="2" />
+        <Sound file="Content/Sounds/Damage/Armorbreak4.ogg" selectionmode="Random" volume="1" range="500" frequencymultiplier="2" />
+        <SpawnItem identifier="titanite" spawnposition="This" />
+        <SpawnItem identifier="brockite" spawnposition="This" />
+        <SpawnItem identifier="thorianite" spawnposition="This" />
+        <SpawnItem identifier="amblygonite" spawnposition="This" />
+        <SpawnItem identifier="sphalerite" spawnposition="This" />
+        <SpawnItem identifier="pyromorphite" spawnposition="This" />
+        <SpawnItem identifier="quartz" spawnposition="This" />
+        <SpawnItem identifier="diamond" spawnposition="This" />
+        <SpawnItem identifier="hydroxyapatite" spawnposition="This" />
+        <SpawnItem identifier="uraniumore" spawnposition="This" />
+        <SpawnItem identifier="ilmenite" spawnposition="This" />
+        <SpawnItem identifier="stannite" spawnposition="This" />
+        <SpawnItem identifier="chalcopyrite" spawnposition="This" />
+        <SpawnItem identifier="esperite" spawnposition="This" />
+        <SpawnItem identifier="galena" spawnposition="This" />
+        <SpawnItem identifier="triphylite" spawnposition="This" />
+        <SpawnItem identifier="langbeinite" spawnposition="This" />
+        <SpawnItem identifier="chamosite" spawnposition="This" />
+        <SpawnItem identifier="ironore" spawnposition="This" />
+        <SpawnItem identifier="polyhalite" spawnposition="This" />
+        <SpawnItem identifier="graphite" spawnposition="This" />
+        <SpawnItem identifier="sylvite" spawnposition="This" />
+        <SpawnItem identifier="lazulite" spawnposition="This" />
+        <SpawnItem identifier="bornite" spawnposition="This" />
+        <SpawnItem identifier="cassiterite" spawnposition="This" />
+        <SpawnItem identifier="cryolite" spawnposition="This" />
+        <SpawnItem identifier="aragonite" spawnposition="This" />
+        <SpawnItem identifier="chrysoprase" spawnposition="This" />
+        <Remove/>
+      </StatusEffect>
+    </ItemComponent>
+    <!-- invisible inventory slot for effect items -->
+    <ItemContainer capacity="1" maxstacksize="1" canbeselected="false">
+      <Containable items="effect" />
+    </ItemContainer>
+  </Item>
+  
+</Items>

@@ -1,0 +1,876 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <!--OVERRIDES-->
+  <Override>
+    <!--DISABLE SPAWNING OF VANILLA ITEM-->
+    <EnergyDrink name="" identifier="energydrink" category="Medical,Material" maxstacksize="8" cargocontaineridentifier="chemicalcrate" description="" Tags="smallitem,chem,medical" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light">
+      <Upgrade gameversion="0.10.0.0" scale="0.5" />
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="0" spawnprobability="0.0" />
+      <PreferredContainer secondary="abandonedcrewcab" maxamount="0" spawnprobability="0.0" />
+      <PreferredContainer primary="crewcab" />
+      <Fabricate suitablefabricators="vendingmachine" requiredtime="1" requiredmoney="40" fabricationlimitmin="5" fabricationlimitmax="10" />
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="64,768,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Medical/Medicines.png" sourcerect="315,452,30,57" depth="0.6" origin="0.5,0.5" />
+      <Body width="35" height="65" density="10.2" />
+      <Holdable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="32,28" holdangle="30" aimangle="120" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="-30.0" />
+        <StatusEffect type="OnSecondaryUse" target="This,Character">
+          <Conditional Condition="lte 1" />
+          <Use />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-100.0" setvalue="true">
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="UseTarget" disabledeltatime="true">
+          <Affliction identifier="haste" amount="7.5" />
+          <Affliction identifier="nausea" amount="50.0" probability="0.25" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </EnergyDrink>
+  </Override>
+  <!--ADJUST ITEM TO APPLY EFFECTS WHILE DRINKING, GET DESTROYED ON IMPACT AND SPAWN EMPTY BOTTLE IF EMPTY-->
+  <Override>
+    <Rum name="" identifier="rum" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A strong alcoholic beverage. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Heal Damage |Increase Psychosis Resistance" Tags="smallitem,drinkitem,alcoholitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="150" sold="false">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="8">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" sold="true" multiplier="1.0" minavailable="0" maxavailable="4" />
+        <Price storeidentifier="merchantcity" sold="true" multiplier="1.3" minavailable="0" maxavailable="8" />
+      </Price>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="175" fabricationlimitmin="0" fabricationlimitmax="10" />
+      <Fabricate suitablefabricators="fabricator" requiredtime="25" requiresrecipe="true">
+        <RequiredItem identifier="ethanol" />
+        <RequiredItem identifier="raptorbane" />
+      </Fabricate>
+      <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="486,212,27,66" depth="0.6" origin="0.5,0.5" />
+      <Body width="27" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-6.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="7" />
+          <ReduceAffliction identifier="psychosis" amount="1" />
+          <ReduceAffliction identifier="hallucinating" amount="1" />
+          <ReduceAffliction identifier="he-halucinova" amount="1" />
+          <Affliction identifier="drunk" amount="3" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional huskinfection="lt 50.0" />
+          <ReduceAffliction identifier="huskinfection" amount="1" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlerum" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Rum>
+  </Override>
+  <!--END OF OVERRIDES-->
+  <Override>
+    <Rum name="Pirate Rum" identifier="he-rum" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A very strong rum enriched with uranium for extra spice. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Healing Properties |Increase Psychosis Resistance |Increase Radiation Sickness (Slightly)" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="liquorcrate" secondary="kitchen" />
+      <Price baseprice="299" sold="false">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="8">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.1" minavailable="0" maxavailable="8" />
+        <Price storeidentifier="merchantcity" multiplier="1.5" minavailable="2" maxavailable="16" />
+      </Price>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="299" fabricationlimitmin="0" fabricationlimitmax="10" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegpiraterum" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlerum" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="0,0,27,66" depth="0.6" origin="0.5,0.5" />
+      <Body width="27" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-6.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="8" />
+          <ReduceAffliction identifier="psychosis" amount="2" />
+          <ReduceAffliction identifier="nausea" amount="2" />
+          <ReduceAffliction identifier="hallucinating" amount="2" />
+          <ReduceAffliction identifier="he-halucinova" amount="2" />
+          <Affliction identifier="drunk" amount="4" />
+          <ReduceAffliction type="damage" amount="1.0" />
+          <ReduceAffliction type="burn" amount="1.0" />
+          <Affliction identifier="radiationsickness" amount="0.5" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional huskinfection="lt 90.0" />
+          <ReduceAffliction identifier="huskinfection" amount="4" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlerum" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Rum>
+  </Override>
+  <Override>
+    <Item name="Doc's Whiskey" identifier="he-whiskey" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Doctor Michael's original whiskey. Approved by Doctors europa-wide. |Alcoholic Beverage |Reduce Hallucinations |Reduce Halucinova Effects |Reduce Chem Addiction |Increase Psychosis Resistance |Slight Healing Properties" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="125" sold="true">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="16">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="3" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="3" maxavailable="9" />
+      </Price>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="125" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegwhiskey" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlewhiskey" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="54,0,27,66" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="82,0,27,66" depth="0.6" maxcondition="99" />
+      <Body width="27" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-6.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="6" />
+          <Affliction identifier="drunk" amount="2.5" />
+          <ReduceAffliction identifier="hallucinating" amount="2.0" />
+          <ReduceAffliction identifier="psychosis" amount="2.0" />
+          <ReduceAffliction identifier="nausea" amount="2" />
+          <ReduceAffliction identifier="he-halucinova" amount="2.0" />
+          <ReduceAffliction identifier="chemaddiction" amount="0.5" />
+          <ReduceAffliction type="damage" amount="0.2" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlewhiskey" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Halucinova" identifier="he-halucinova" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Keep away from &quot;Sadashi Kira&quot; at all cost! |Alcoholic Beverage |Increase Hallucinations | Slight Healing Properties" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="249" sold="false">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="6">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="2" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="0" maxavailable="4" />
+      </Price>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="249" fabricationlimitmin="0" fabricationlimitmax="3" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-keghalucinova" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlehalucinova" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="361,2,31,64" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="393,2,31,64" depth="0.6" maxcondition="99" />
+      <Body width="27" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-6.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="drunk" amount="3.0" />
+          <Affliction identifier="he-halucinova" amount="9.0" />
+          <Affliction identifier="oxygenlow" amount="1.0" />
+          <ReduceAffliction identifier="nausea" amount="2" />
+          <ReduceAffliction type="damage" amount="0.3" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlehalucinova" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <!--BEERS-->
+  <Override>
+    <Item name="Coalition Premium" identifier="he-beercoalitionpremium" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="6" sold="true">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="16">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="16" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="6" maxavailable="24" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,piratestore,cafeteria" requiredtime="3" requiredmoney="10" fabricationlimitmin="0" fabricationlimitmax="12" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegcoalitionpremium" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlebeer" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="458,1,16,65" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="476,1,16,65" depth="0.6" maxcondition="99" />
+      <Body width="17" height="63" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="3" />
+          <Affliction identifier="drunk" amount="1" />
+          <ReduceAffliction identifier="nausea" amount="1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlebeer" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Jovian Force" identifier="he-beerjovianforce" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A beer most popular amongst the Separatists. |Alcoholic Beverage |Increase Psychosis Resistance" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="6" sold="true">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="16">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="16" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="6" maxavailable="24" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,piratestore,cafeteria" requiredtime="3" requiredmoney="10" fabricationlimitmin="0" fabricationlimitmax="12" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegjovianforce" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlebeer" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="476,67,16,65" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="494,67,16,65" depth="0.6" maxcondition="99" />
+      <Body width="17" height="63" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="3" />
+          <Affliction identifier="drunk" amount="1" />
+          <ReduceAffliction identifier="nausea" amount="1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlebeer" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Liquid Ascension" identifier="he-beerliquidascension" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A popular beer amongst members of the church of husk on their way to ascension! |Alcoholic Beverage |Increase Psychosis Resistance |Increase Pressure Immunity |Oxygen Not Included |May contain traces of husk parasites" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="54" sold="true">
+        <Price storeidentifier="merchanthusk" multiplier="2.0" minavailable="0" maxavailable="16">
+          <Reputation faction="husk" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="16" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="6" maxavailable="24" sold="false" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,piratestore,cafeteria" requiredtime="3" requiredmoney="59" fabricationlimitmin="0" fabricationlimitmax="12" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegliquidascension" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlebeer" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="476,133,16,65" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="494,133,16,65" depth="0.6" maxcondition="99" />
+      <Body width="17" height="63" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="3" />
+          <Affliction identifier="drunk" amount="1" />
+          <Affliction identifier="he-pressureresistance" amount="15" />
+          <ReduceAffliction identifier="nausea" amount="1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" interval="1">
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlebeer" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Clown Juice" identifier="he-beerclownjuice" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A popular beer amongst pranksters. Praise the honkmother! |Alcoholic Beverage |Increase Psychosis Resistance" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="32" sold="true">
+        <Price storeidentifier="merchantclown" multiplier="2.0" minavailable="0" maxavailable="16">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="16" sold="false" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="6" maxavailable="24" sold="false" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,piratestore,cafeteria" requiredtime="3" requiredmoney="38" fabricationlimitmin="0" fabricationlimitmax="12" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegclownjuice" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlebeer" Amount="1" />
+      </Fabricate>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="476,199,16,65" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="494,200,16,65" depth="0.6" maxcondition="99" />
+      <Body width="17" height="63" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="psychosisresistance" amount="3" />
+          <Affliction identifier="drunk" amount="1" />
+          <Affliction identifier="he-clownjuice" amount="20" />
+          <ReduceAffliction identifier="nausea" amount="1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlebeer" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <!--old beer item converting to new coalition variant for backwards compatibility-->
+  <Override>
+    <Item name="Coalition Premium Lager Beer" identifier="he-beer" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance" Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="458,1,16,65" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="476,1,16,65" depth="0.6" maxcondition="99" />
+      <Body width="17" height="63" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="This" interval="1" disabledeltatime="true">
+          <Remove />
+          <SpawnItem identifier="he-beercoalitionpremium" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" interval="1" disabledeltatime="true">
+          <Remove />
+          <SpawnItem identifier="he-beercoalitionpremium" spawnposition="This" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <!-- NON-ALCOHOLIC -->
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-water" identifier="he-water" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes fresh." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="9" sold="true">
+        <Price storeidentifier="merchantclown" multiplier="1.2" minavailable="0" maxavailable="16">
+          <Reputation faction="clowns" min="30" />
+        </Price>
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="12" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="6" maxavailable="24" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,cafeteria" requiredtime="3" requiredmoney="14" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="243,8,21,58" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="264,8,21,58" depth="0.6" maxcondition="99" />
+      <Body width="21" height="58" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <ReduceAffliction identifier="he-stuffed" amount="0.25" />
+          <ReduceAffliction identifier="drunk" amount="0.5" />
+          <ReduceAffliction identifier="hallucinating" amount="0.1" />
+          <ReduceAffliction identifier="he-halucinova" amount="0.1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottle" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Moloch Milk" identifier="he-milk" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="A bottle of Moloch Milk. Tastes a bit funny. Don't ask how they get milk from a Moloch! May help a bit when you're shit-faced." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.02" notcampaign="true" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Price baseprice="130" sold="true">
+        <Price storeidentifier="merchantoutpost" multiplier="1.3" minavailable="0" maxavailable="6" />
+        <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="2" maxavailable="12" />
+      </Price>
+      <Fabricate suitablefabricators="vendingmachinedrinks,cafeteria" requiredtime="3" requiredmoney="139" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="201,8,21,58" depth="0.6" origin="0.5,0.5" />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="222,8,21,58" depth="0.6" maxcondition="99" />
+      <Body width="21" height="58" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0" />
+        <StatusEffect type="OnUse" target="Character">
+          <Affliction identifier="he-damageresistancemoloch" amount="4" />
+          <ReduceAffliction identifier="drunk" amount="0.1" />
+          <ReduceAffliction identifier="hallucinating" amount="0.1" />
+          <ReduceAffliction identifier="he-halucinova" amount="0.1" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottle" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Energy Drink" identifier="he-energydrink1" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing energy drink. Good for when you're absolutely shit-faced and need to sober up a bit." Tags="smallitem,drinkitem" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
+      <PreferredContainer primary="kitchen" secondary="crewcab"/>
+      <Fabricate suitablefabricators="vendingmachinedrinks,cafeteria" requiredtime="3" requiredmoney="25" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Deconstruct time="2">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="474,436,18,43" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="474,436,18,43" depth="0.6" origin="0.5,0.5" />
+      <ContainedSprite allowedcontainertags="table" texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="474,436,18,43" depth="0.525" origin="0.5,0.78"  />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="493,433,18,46" depth="0.6" maxcondition="99" />
+      <Body width="18" height="43" density="11" />
+      <Holdable canbepicked="true" canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="26,22" holdpos="30,-15" holdangle="0" handle1="0,-5" aimangle="105" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <!-- Regular drinking -->
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true" comparison="And">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
+        <StatusEffect type="OnUse" target="Character" comparison="And">
+          <ReduceAffliction identifier="drunk" amount="1.5" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="1.5" />
+          <ReduceAffliction identifier="hallucinating" amount="1.5" />
+          <Affliction identifier="haste" amount="12.0" />
+          <!--<Affliction identifier="nausea" amount="50" probability="0.001"/>-->
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush2.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush3.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush4.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush5.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush6.ogg" range="350" volume="3" selectionmode="Random" />
+          <Remove />
+          <Spawnitem identifier="he-emptycanenergy1" spawnposition="SameInventory" spawnifinventoryfull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Can of Couwola Cola" identifier="he-colacan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola. Super refreshing and good for when you're absolutely shit-faced and need to sober up a quickly. Mass-consumption may cause discomfort." Tags="smallitem,drinkitem,cola,colafuel1" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
+      <PreferredContainer primary="kitchen" secondary="crewcab"/>
+      <Fabricate suitablefabricators="vendingmachinedrinks,cafeteria" requiredtime="3" requiredmoney="29" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Deconstruct time="2">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="323,23,18,43" depth="0.6" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="323,23,18,43" origin="0.5,0.5" />
+      <ContainedSprite allowedcontainertags="table" texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="323,23,18,43" depth="0.525" origin="0.5,0.78"  />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="342,20,18,46" depth="0.6" maxcondition="99" />
+      <Body width="18" height="43" density="11" />
+      <Holdable canbepicked="true" canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="26,22" holdpos="30,-15" holdangle="0" handle1="0,-5" aimangle="105" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <!-- Regular drinking -->
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true" comparison="And">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
+        <StatusEffect type="OnUse" target="Character" comparison="And">
+          <ReduceAffliction identifier="drunk" amount="2.0" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="2.0" />
+          <Affliction identifier="haste" amount="16.0" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush2.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush3.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush4.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush5.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush6.ogg" range="350" volume="3" selectionmode="Random" />
+          <Remove />
+          <Spawnitem identifier="he-emptycancola" spawnposition="SameInventory" spawnifinventoryfull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Can of Couwola Cola Zero" identifier="he-colazerocan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola Zero. No sugar, but full flavor! Very refreshing and good for when you're absolutely shit-faced and need to sober up a quickly." Tags="smallitem,drinkitem,colazero,colafuel2" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
+      <PreferredContainer primary="kitchen" secondary="crewcab"/>
+      <Fabricate suitablefabricators="vendingmachinedrinks,cafeteria" requiredtime="3" requiredmoney="29" fabricationlimitmin="0" fabricationlimitmax="6" />
+      <Deconstruct time="2">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="304,23,18,43" depth="0.6" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="304,23,18,43" origin="0.5,0.5" />
+      <ContainedSprite allowedcontainertags="table" texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="304,23,18,43" depth="0.525" origin="0.5,0.78"  />
+      <BrokenSprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="304,20,18,46" depth="0.6" maxcondition="99" />
+      <Body width="18" height="43" density="11" />
+      <Holdable canbepicked="true" canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="26,22" holdpos="30,-15" holdangle="0" handle1="0,-5" aimangle="105" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <!-- Regular drinking -->
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true" comparison="And">
+          <Conditional Condition="equals 100" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
+        <StatusEffect type="OnUse" target="Character" comparison="And">
+          <ReduceAffliction identifier="drunk" amount="1.25" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="1.25" />
+          <Affliction identifier="haste" amount="13.0" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush2.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush3.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush4.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush5.ogg" range="350" volume="3" selectionmode="Random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush6.ogg" range="350" volume="3" selectionmode="Random" />
+          <Remove />
+          <Spawnitem identifier="he-emptycancolazero" spawnposition="SameInventory" spawnifinventoryfull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <!-- DIRTY WATER -->
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-seawater" identifier="he-seawaterrum" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes salty." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="0,140,26,66" depth="0.6" origin="0.5,0.5" />
+      <Body width="26" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="InWater" target="This" Condition="100" setvalue="True">
+          <Conditional condition="lt 100" />
+          <Sound file="Content/Sounds/Water/Splash0.ogg" range="200" volume="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0">
+          <Conditional InWater="false" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional InWater="false" />
+          <Affliction identifier="deliriuminepoisoning" amount="0.25" />
+          <Affliction identifier="he-stomachache" amount="4" />
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlerum" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-seawater" identifier="he-seawaterwhiskey" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes salty." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="27,140,27,66" depth="0.6" origin="0.5,0.5" />
+      <Body width="27" height="66" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="InWater" target="This" Condition="100" setvalue="True">
+          <Conditional condition="lt 100" />
+          <Sound file="Content/Sounds/Water/Splash0.ogg" range="200" volume="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0">
+          <Conditional InWater="false" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional InWater="false" />
+          <Affliction identifier="deliriuminepoisoning" amount="0.25" />
+          <Affliction identifier="he-stomachache" amount="4" />
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlewhiskey" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-seawater" identifier="he-seawaterhalucinova" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes salty." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="76,140,31,64" depth="0.6" origin="0.5,0.5" />
+      <Body width="31" height="64" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="InWater" target="This" Condition="100" setvalue="True">
+          <Conditional condition="lt 100" />
+          <Sound file="Content/Sounds/Water/Splash0.ogg" range="200" volume="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0">
+          <Conditional InWater="false" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional InWater="false" />
+          <Affliction identifier="deliriuminepoisoning" amount="0.25" />
+          <Affliction identifier="he-stomachache" amount="4" />
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlehalucinova" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-seawater" identifier="he-seawater" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes salty." Tags="smallitem,drinkitem" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="55,148,21,58" depth="0.6" origin="0.5,0.5" />
+      <Body width="21" height="58" density="15" />
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="InWater" target="This" Condition="100" setvalue="True">
+          <Conditional condition="lt 100" />
+          <Sound file="Content/Sounds/Water/Splash0.ogg" range="200" volume="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0">
+          <Conditional InWater="false" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional InWater="false" />
+          <Affliction identifier="deliriuminepoisoning" amount="0.25" />
+          <Affliction identifier="he-stomachache" amount="4" />
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottle" spawnposition="SameInventory" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+  <Override>
+    <Item name="Water" nameidentifier="he-water" descriptionidentifier="he-seawater" identifier="he-seawaterbeer" category="Misc,Material" maxstacksize="8" cargocontaineridentifier="metalcrate" description="Tastes salty." Tags="smallitem,drinkitem,seawater,water,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true">
+      <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0" />
+      <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0" />
+      <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0" />
+      <PreferredContainer primary="kitchen" secondary="crewcab" />
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="108,142,17,64" depth="0.6" origin="0.5,0.5" />
+      <Body width="17" height="62" density="15" />
+      <Fabricate suitablefabricators="refillstation" requiredtime="5" requiresrecipe="false" amount="1">
+        <RequiredItem identifier="he-kegseawater" UseCondition="True" MinCondition="0.05" />
+        <RequiredItem identifier="he-emptybottlebeer" amount="1" />
+      </Fabricate>
+      <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="InWater" target="This" Condition="100" setvalue="True">
+          <Conditional condition="lt 100" />
+          <Sound file="Content/Sounds/Water/Splash0.ogg" range="200" volume="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" Condition="-8.0">
+          <Conditional InWater="false" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character">
+          <Conditional InWater="false" />
+          <Affliction identifier="deliriuminepoisoning" amount="0.25" />
+          <Affliction identifier="he-stomachache" amount="4" />
+          <Affliction identifier="huskinfection" amount="1" probability="0.001" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This">
+          <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+          <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+          <SpawnItem identifier="he-emptybottlebeer" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
+</Items>

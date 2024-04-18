@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--COMMON-->
+<levelobjects>
+  <Override>
+    <watercurrent1 identifier="watercurrent1" spawnpos="MainPath" alignment="TopLeft, BottomRight" allowatstart="false" allowatend="false" minsize="0.5" maxsize="2" randomrotation="0,360" commonness="0" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="0" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0" maxcount="10000" randomoffset="0,0">
+      <overridecommonness commonness="0.5" leveltype="hydrothermalwastes" />
+      <overridecommonness commonness="0.5" leveltype="europanridge" />
+      <overridecommonness commonness="1.5" leveltype="thegreatsea" />
+      <Sound file="Content/Sounds/Water/BlackSmoker.ogg" range="7000" position="0,0" />
+      <Trigger position="0,0" radius="5000" camerashake="1" triggeredby="Submarine" networksyncing="true" force="0,1.5" forcemode="Acceleration" forcefalloff="true" forcevelocitylimit="200" forcefluctuationstrength="2.0" forcefluctuationinterval="20" globalforcedecreaseinterval="60" />
+      <Trigger position="0,0" radius="5000" camerashake="1" triggeredby="Character" networksyncing="true" force="0,25" forcemode="Acceleration" forcefalloff="true" forcevelocitylimit="300" forcefluctuationstrength="2.0" forcefluctuationinterval="20" globalforcedecreaseinterval="60" />
+    </watercurrent1>
+  </Override>
+  <!--Vents-->
+  <lavaventde identifier="lavaventDE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10000" randomoffset="0,0">
+    <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="1030,1247,440,803" origin="0.5,0.9" />
+    <Trigger randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
+      <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
+        <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" />
+      </LightSource>
+      <Trigger position="0,1500" radius="500" height="1600" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200">
+        <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="false">
+          <Affliction identifier="burn" strength="20" />
+        </Attack>
+      </Trigger>
+      <Sound file="Content/Sounds/Ambient/Thunder1.ogg" range="20000" position="0,700" />
+      <Sound file="Content/Sounds/Water/BlackSmoker.ogg" range="7000" position="0,700" />
+      <ParticleEmitter particle="volcanosmokefast" particlespersecond="10" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+      <ParticleEmitter particle="lavasplash" particlespersecond="50" position="-50,700" anglemin="70" anglemax="110" velocitymin="0" velocitymax="8000" />
+      <ParticleEmitter particle="lavachunk" particlespersecond="80" position="-50,700" anglemin="80" anglemax="100" velocitymin="1000" velocitymax="6000" />
+      <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="-50,700" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" />
+    </Trigger>
+    <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+    <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
+    <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
+    <overridecommonness commonness="0" leveltype="outpostlevel" />
+    <overridecommonness commonness="0" leveltype="endzone" />
+  </lavaventde>
+  <lavavent2de identifier="lavavent2DE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10000" randomoffset="0,0">
+    <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.9" />
+    <Trigger randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
+      <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
+        <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" />
+      </LightSource>
+      <Trigger position="0,1500" radius="500" height="1600" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200">
+        <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="false">
+          <Affliction identifier="burn" strength="20" />
+        </Attack>
+      </Trigger>
+      <Sound file="Content/Sounds/Ambient/Thunder1.ogg" range="20000" position="0,700" />
+      <Sound file="Content/Sounds/Water/BlackSmoker.ogg" range="7000" position="0,700" />
+      <ParticleEmitter particle="volcanosmokefast" particlespersecond="10" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+      <ParticleEmitter particle="lavasplash" particlespersecond="50" position="-50,700" anglemin="70" anglemax="110" velocitymin="0" velocitymax="8000" />
+      <ParticleEmitter particle="lavachunk" particlespersecond="80" position="-50,700" anglemin="80" anglemax="100" velocitymin="1000" velocitymax="6000" />
+      <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="-50,700" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" />
+    </Trigger>
+    <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+    <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
+    <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
+    <overridecommonness commonness="0" leveltype="outpostlevel" />
+    <overridecommonness commonness="0" leveltype="endzone" />
+  </lavavent2de>
+  <Override>
+    <ballastfloraspores identifier="ballastfloraspores" spawnpos="MainPath" alignment="TopLeft, BottomRight" minsize="1" maxsize="2" randomrotation="0,360" commonness="0.5" maxcount="3" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="0" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0">
+      <overridecommonness commonness="0" leveltype="coldcaverns" />
+      <overridecommonness commonness="0" leveltype="outpostlevel" />
+      <overridecommonness commonness="2" leveltype="theaphoticplateau" />
+      <overridecommonness commonness="0" leveltype="endzone" />
+      <Trigger position="0,0" radius="1500" triggeredby="Submarine" infectidentifier="ballastflora" infectionchance="0.05" />
+      <!--InnerSpores, Inner and Outer are separate because X amount of particles in a big radius tend to clamp up in center. Having Inner and Outer spreads them more evenly.-->
+      <ParticleEmitter particle="spore" particlespersecond="10" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="100" distancemax="600" />
+      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="5" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="100" distancemax="600" velocitymin="0" velocitymax="10" />
+      <!--OuterSpores-->
+      <ParticleEmitter particle="spore" particlespersecond="50" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="615" distancemax="1600" />
+      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="30" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="615" distancemax="1600" velocitymin="0" velocitymax="10" />
+    </ballastfloraspores>
+  </Override>
+</levelobjects>

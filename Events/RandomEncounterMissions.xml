@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Missions>
+  <GotoMission name="Investigate Radio Signal" identifier="gotorandomencounter" type="GoTo" difficulty="1" commonness="1" reward="1000">
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <TriggerEvent eventidentifier="getrandomencountermission" campaignonly="true" />
+    <LocationType locationtype="Lair,HuskgroundsDE,PirateOutpost" />
+    <message header="missionheader0.gotorandomencounter" text="missionmessage0.gotorandomencounter" />
+  </GotoMission>
+  <SalvageMission identifier="random_salvageartifactruins" textidentifier="random_salvageskyholderartifactruins" tags="randomencounter,randomencounter_salvage,randomencounter_salvageartifact,randomencounter_salvageartifactruins" type="Salvage" difficulty="3" commonness="50" reward="1000" achievementidentifier="artifactmission" spawntype="ruin" itemtag="alienartifact" existingItemTag="alienartifact" containertag="artifactholder" requireruin="true" maxsonarmarkerdistance="500">
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <LocationType from="Any" to="Any" />
+    <message header="missionheader0.random_salvageskyholderartifactruins" text="missionmessage0.random_salvageskyholderartifactruins" />
+  </SalvageMission>
+  <SalvageMission identifier="random_salvageartifactcave" textidentifier="random_salvagethermalartifactcave" tags="randomencounter,randomencounter_salvage,randomencounter_salvageartifact,randomencounter_salvageartifactcave" type="Salvage" difficulty="3" commonness="50" reward="1000" achievementidentifier="artifactmission" spawntype="cave" itemtag="alienartifact" existingitemtag="alienartifact" containertag="artifactholder" requireruin="true" maxsonarmarkerdistance="500">
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <LocationType from="Any" to="Any" />
+    <message header="missionheader0.random_salvagethermalartifactcave" text="missionmessage0.random_salvagethermalartifactcave" />
+  </SalvageMission>
+  <SalvageMission identifier="random_salvagewreck1" tags="randomencounter,randomencounter_salvage,randomencounter_salvagewreck" type="Salvage" difficulty="3" commonness="100" reward="1000" achievementidentifier="salvagewreckmission" spawntype="wreck" showmessagewhenpickedup="true" itemidentifier="handheldterminal" containertag="locker" requirewreck="true" maxsonarmarkerdistance="500">
+    <chooserandom>
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: cbspusbvnbhbnf.dpn/efsfmjdu/[ERR:_INSERT_PASS].htm" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_1]beweht" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_2]108 101 116 109 101 105 110" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_3]LLL SLS SL LS LLS S LSSS LLL LSLL" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_4]zorxv" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_5]s_m_l_t_d_ _i_i_i_u_e" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_6]DSPERiapa" />
+      <StatusEffect target="This" showmessage="Receiving encrypted transmission: [PASS_7]4 5 1 4 13 5 14" />
+    </chooserandom>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <LocationType from="Any" to="Any" />
+    <message header="missionheader0.random_salvagewreck1" text="missionmessage0.random_salvagewreck1" />
+  </SalvageMission>
+  <MonsterMission identifier="random_killhammerhead" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set2" type="Monster" difficulty="2" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="Hammerhead_m" min="2" max="3" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killhammerhead" text="missionmessage0.random_killhammerhead" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killhammerhead2" textidentifier="random_killhammerhead" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set3" type="Monster" difficulty="3" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="Hammerheadgold_m">
+    <monster character="Hammerhead_m" min="2" max="3" />
+    <monster character="Hammerheadgold_m" min="1" max="1" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killhammerhead" text="missionmessage0.random_killhammerhead" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killhammerhead_basic" textidentifier="random_killhammerhead" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set1" type="Monster" difficulty="2" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="Hammerhead_m" min="1" max="1" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killhammerhead_basic" text="missionmessage0.random_killhammerhead_basic" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killlargecrawler" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set1" type="Monster" difficulty="2" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="Crawler_large">
+    <monster character="crawler" min="3" max="4" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm1" text="missionmessage0.random_killlargecrawler" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmoloch" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set3" type="Monster" difficulty="3" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="Moloch_m">
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmoloch" text="missionmessage0.random_killmoloch" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmolochblack" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set4" textidentifier="random_killmoloch" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="Molochblack_m">
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmoloch" text="missionmessage0.random_killmoloch" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerbroodmother1" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set2" type="Monster" difficulty="3" commonness="50" reward="1000" maxsonarmarkerdistance="500" monsterfile="crawlerbroodmother_m">
+    <monster character="crawler" min="3" max="4" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerbroodmother1" text="missionmessage0.random_killcrawlerbroodmother1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerbroodmother2" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set3" textidentifier="random_killcrawlerbroodmother1" type="Monster" difficulty="3" commonness="50" reward="1000" maxsonarmarkerdistance="500" monsterfile="crawlerbroodmother_m">
+    <monster character="crawler" min="6" max="7" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerbroodmother1" text="missionmessage0.random_killcrawlerbroodmother1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerbroodmother3" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set4" textidentifier="random_killcrawlerbroodmother1" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="crawlerbroodmother_m">
+    <monster character="crawler" min="10" max="12" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerbroodmother1" text="missionmessage0.random_killcrawlerbroodmother1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmatriarch1" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set4" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="hammerheadmatriarch" count="1" />
+    <monster character="hammerhead" min="3" max="5" />
+    <monster character="hammerheadgold" min="1" max="2" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmatriarch1" text="missionmessage0.random_killmatriarch1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmatriarch2" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set3" type="Monster" difficulty="3" commonness="50" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="hammerheadmatriarch" count="1" />
+    <monster character="hammerhead" min="2" max="2" />
+    <monster character="hammerheadgold" min="1" max="2" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmatriarch2" text="missionmessage0.random_killmatriarch2" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killgiantspineling1" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set2" type="Monster" difficulty="3" commonness="50" reward="1000" maxsonarmarkerdistance="500" monsterfile="spineling_giant">
+    <monster character="spineling" min="2" max="3" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killgiantspineling1" text="missionmessage0.random_killgiantspineling1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killgiantspineling2" textidentifier="random_killgiantspineling1" tags="randomencounter,randomencounter_killmonster,randomencounter_killmonster_set3" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500" monsterfile="spineling_giant">
+    <monster character="spineling" min="8" max="10" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killgiantspineling1" text="missionmessage0.random_killgiantspineling1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killthresherswarm1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set4" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="tigerthresher" min="8" max="10" />
+    <monster character="bonethresher" min="2" max="3" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killthresherswarm1" text="missionmessage0.random_killthresherswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killthresherswarm2" textidentifier="random_killthresherswarm1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set3" type="Monster" difficulty="3" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="tigerthresher" min="3" max="5" />
+    <monster character="bonethresher" min="1" max="2" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killthresherswarm1" text="missionmessage0.random_killthresherswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerswarm1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set1" type="Monster" difficulty="2" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="crawler" min="5" max="8" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm1" text="missionmessage0.random_killcrawlerswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerswarm1large" name="missionname.killcrawlerswarm1large" description="missiondescription.killcrawlerswarm1large" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set1" type="Monster" difficulty="3" commonness="40" reward="1000" successmessage="missionsuccess.killcrawlerswarm1" maxsonarmarkerdistance="500">
+    <monster character="crawler" min="8" max="10" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm1" text="missionmessage0.random_killcrawlerswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerswarm1huge" name="missionname.killcrawlerswarm1huge" description="missiondescription.killcrawlerswarm1huge" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set2" type="Monster" difficulty="4" commonness="10" reward="1000" successmessage="missionsuccess.killcrawlerswarm1" maxsonarmarkerdistance="500">
+    <monster character="crawler" min="14" max="15" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm1" text="missionmessage0.random_killcrawlerswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerswarm2" name="missionname.killcrawlerswarm1large" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set2" type="Monster" difficulty="3" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="crawler" min="10" max="12" />
+    <monster character="crawlerbroodmother" min="0" max="1" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm2" text="missionmessage0.random_killcrawlerswarm2" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killcrawlerswarm2b" textidentifier="random_killcrawlerswarm2" name="missionname.killcrawlerswarm1large" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set2" type="Monster" difficulty="3" commonness="75" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="crawlerhusk" min="10" max="12" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm2" text="missionmessage0.random_killcrawlerswarm2" />
+    <LocationType from="HuskgroundsDE" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killspinelingswarm1" textidentifier="random_killcrawlerswarm1" name="missionname.killspinelingswarm1" description="missiondescription.killspinelingswarm1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set1" type="Monster" difficulty="2" commonness="40" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="Spineling" min="5" max="6" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killcrawlerswarm1" text="missionmessage0.random_killcrawlerswarm1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmudraptors1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set2" type="Monster" difficulty="3" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="mudraptor_unarmored" min="2" max="3" />
+    <monster character="mudraptor" min="1" max="2" />
+    <monster character="mudraptor_veteran" min="1" max="1" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmudraptors1" text="missionmessage0.random_killmudraptors1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmudraptors_basic" textidentifier="random_killmudraptors1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set1" type="Monster" difficulty="2" commonness="70" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="mudraptor_unarmored" min="2" max="3" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmudraptors1" text="missionmessage0.random_killmudraptors1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <MonsterMission identifier="random_killmudraptors2" textidentifier="random_killmudraptors1" tags="randomencounter,randomencounter_killmonster,randomencounter_killswarm,randomencounter_killswarm_set3" type="Monster" difficulty="4" commonness="100" reward="1000" maxsonarmarkerdistance="500">
+    <monster character="mudraptor_unarmored" min="1" max="2" />
+    <monster character="mudraptor" min="4" max="5" />
+    <monster character="mudraptor_veteran" min="1" max="2" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_killmudraptors1" text="missionmessage0.random_killmudraptors1" />
+    <LocationType from="Any" to="Any" />
+  </MonsterMission>
+  <!-- PIRATES -->
+  <PirateMission type="Pirate" identifier="random_pirate_heavy" tags="randomencounter,randomencounter_pirates" difficulty="4" commonness="20" reward="1000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8" maxsonarmarkerdistance="500">
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/U-41SPirate.sub" preferreddifficulty="20" />
+      <Submarine path="%ModDir%/EnemySubmarines/LuotiPirate.sub" preferreddifficulty="30" />
+      <Submarine path="%ModDir%/EnemySubmarines/BerthaPirate.sub" preferreddifficulty="40" />
+      <Submarine path="%ModDir%/EnemySubmarines/Winterhalter [PIRATE].sub" preferreddifficulty="40" />
+      <Submarine path="%ModDir%/EnemySubmarines/U-42CPirate.sub" preferreddifficulty="50" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="piratesecurity" minamount="4" maxamount="6" />
+      <Character typeidentifier="pirateannihilator" minamount="0" maxamount="2" />
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateengineer" minamount="1" maxamount="3" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="piratecaptain">
+        <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratesecurity">
+        <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+        <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+        <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratemechanic">
+        <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateengineer">
+        <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_pirate_heavy" text="missionmessage0.random_pirate_heavy" />
+    <message header="missionheader1.random_pirate_heavy" text="missionmessage1.random_pirate_heavy" />
+    <LocationType from="Any" to="Any" />
+  </PirateMission>
+  <PirateMission type="Pirate" identifier="random_pirate_party" tags="randomencounter,randomencounter_pirates" difficulty="4" commonness="15" reward="1000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8" maxsonarmarkerdistance="500">
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/U-41SPartyPirate.sub" preferreddifficulty="20" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="partypiratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="partypiratesecurity" minamount="3" maxamount="3" />
+      <Character typeidentifier="partypiratemechanic" minamount="1" maxamount="1" />
+      <Character typeidentifier="partypirateengineer" minamount="1" maxamount="1" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="partypiratecaptain">
+        <Character identifier="partypiratecaptain" from="partypirates" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="partypiratecaptainlord" from="partypirates" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypiratesecurity">
+        <Character identifier="partypiratesecurityrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypiratesecuritygunner" from="partypirates" preferreddifficulty="60" />
+        <Character identifier="partypiratesecuritybrute" from="partypirates" preferreddifficulty="70" />
+        <Character identifier="partypiratesecurityelite" from="partypirates" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypiratemechanic">
+        <Character identifier="partypiratemechanicrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypiratemechanicveteran" from="partypirates" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypirateengineer">
+        <Character identifier="partypirateengineerrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypirateengineerveteran" from="partypirates" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,0,256,256" color="255,255,255" />
+    <message header="missionheader0.random_pirate_party" text="missionmessage0.random_pirate_party" />
+    <message header="missionheader1.random_pirate_party" text="missionmessage1.random_pirate_party" />
+    <LocationType from="Any" to="Any" />
+  </PirateMission>
+</Missions>

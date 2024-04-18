@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Items>
+    <!-- DE Configurator -->
+    <Item name="DE-Configurator" identifier="de_configurator" Category="Hidden" description="Used to configurate some aspects of DynamicEuropa" Tags="config" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" spritecolor="255,255,255,255" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="149,371,69,93" depth="0.8" origin="0.5,0.5" />
+      <Body width="60" height="90" density="15" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <CustomInterface drawhudwhenequipped="true">
+        <GuiFrame relativesize="0.15,0.15" anchor="Center" style="ConnectionPanel" />
+        <Button text="Configure">
+          <StatusEffect type="OnUse" target="Character" evententitytag="user">
+            <TriggerEvent identifier="de_config" />
+          </StatusEffect>
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+          </StatusEffect>
+        </Button>
+        <Button text="Remove This Item">
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+    </Item>
+    <!-- Construction Materials -->
+    <Item name="Construction Material Crate" identifier="constructionmaterialcrate" tags="crate,constructionmaterials" description="A crate full of construction materials. Can be delivered to construction sites." scale="0.5" impactsoundtag="impact_metal_heavy">
+      <Sprite texture="Content/Items/Containers/containers.png" depth="0.54" sourcerect="407,376,152,89" origin="0.5,0.5" />
+      <Body width="150" height="75" density="25" />
+      <Fabricate time="15" suitablefabricators="fabricator">
+        <RequiredItem identifier="iron" amount="10"/>
+        <RequiredItem identifier="lead" amount="10"/>
+        <RequiredItem identifier="copper" amount="10"/>
+        <RequiredItem identifier="titanium" amount="10"/>
+      </Fabricate>
+      <Deconstruct time="10" requreddeconstructor="deconstructor">
+        <Item identifier="iron" amount="8" />
+        <Item identifier="lead" amount="8" />
+        <Item identifier="copper" amount="8" />
+        <Item identifier="titanium" amount="8" />
+      </Deconstruct>
+      <Holdable canbepicked="true" slots="RightHand+LeftHand" holdpos="0,-80" handle1="0,0" handle2="0,0" aimable="false" msg="ItemMsgPickUpSelect" />
+    </Item>
+    <!-- Ducky Diving Suit -->
+    <Item name="Ducky Diving Suit" identifier="duckysuit" variantof="pucs" description="A strange suit offered to you by your friend Jokster. It seems to be a custom modified PUCS suit with some swimming speed enhancements from the slipsuit." allowasextracargo="true" botpriority="1.5" hideinmenus="true">
+      <Price baseprice="950" sold="false" />
+      <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
+      <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.0" />
+      <Deconstruct time="30">
+        <Item identifier="ballisticfiber" />
+        <Item identifier="titaniumaluminiumalloy" />
+        <Item identifier="titaniumaluminiumalloy" />
+        <Item identifier="rubber" />
+        <Item identifier="rubber" />
+      </Deconstruct>
+      <Fabricate />
+      <InventoryIcon texture="%ModDir%/Items/EventItems/DuckySuit.png" sourcerect="300,400,95,90" origin="0.5,0.5" />
+      <Sprite name="Duckysuit Item" texture="%ModDir%/Items/EventItems/DuckySuit.png" sourcerect="0,256,175,123" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Duckysuit In Vertical Locker" allowedcontainertags="divingsuitcontainervertical" texture="%ModDir%/Items/EventItems/DuckySuit.png" sourcerect="176,256,88,191" depth="0.55" origin="0.5,0.5" />
+      <ContainedSprite name="Duckysuit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Items/EventItems/DuckySuit.png" sourcerect="462,0,80,207" depth="0.55" origin="-0.12,-0.13" />
+      <ContainedSprite name="Duckysuit In Horizontal Locker" allowedcontainertags="divingsuitcontainerhorizontal" texture="%ModDir%/Items/EventItems/DuckySuit.png" sourcerect="0,447,251,65" depth="0.55" origin="0.6,0.5" />
+      <Body radius="45" width="34" density="20" />
+      <Wearable>
+        <sprite name="Duckysuit Helmet Wearable" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="true" sourcerect="300,300,122,95" origin="0.4,0.4">
+          <LightComponent range="0.0" lightcolor="250,224,165,255" powerconsumption="10" IsOn="false" allowingameediting="false">
+            <StatusEffect type="OnWearing" target="This,Character" Voltage="0.0" setvalue="true">
+              <Conditional IsDead="false" />
+            </StatusEffect>
+            <LightTexture texture="Content/Lights/divinghelmetlight.png" origin="0.05, 0.5" size="1.0,1.0" />
+          </LightComponent>
+        </sprite>
+        <sprite name="Duckysuit Torso" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="Torso" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Right Hand" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Hand" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Right Upper Arm" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightArm" depthlimb="RightForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Upper Arm" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Right Lower Arm" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightForearm" depthlimb="RightArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Lower Arm" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Waist" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="Waist" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Right Thigh" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Thigh" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Right Leg" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Leg" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+        <sprite name="Duckysuit Left Shoe" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="LeftFoot" sound="footstep_divingsuit_ducky" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" inheritsourcerect="false" sourcerect="354,209,75,43" origin="0.35,0.5" />
+        <sprite name="Duckysuit Right Shoe" texture="%ModDir%/Items/EventItems/DuckySuit.png" limb="RightFoot" sound="footstep_divingsuit_ducky" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" inheritsourcerect="false" sourcerect="277,209,75,43" origin="0.35,0.5" />
+        <StatValue stattype="SwimmingSpeed" value="0.45" />
+        <StatValue stattype="WalkingSpeed" value="-0.6" />
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagesound="LimbDucky" />
+        <damagemodifier afflictiontypes="damage" armorsector="0.0,360.0" damagesound="LimbDucky" />
+      </Wearable>
+    </Item>
+    <!-- Kazuya Kumo Items -->
+    <Item name="Kumo's Radio" identifier="kazuyakumoradio" Tags="smallitem,kumoradio" category="Misc" description="A radio Kazuya Kumo gave to you with a pre-configured frequency to call in a favor from her when docked to a separatist station." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+      <PreferredContainer primary="crewcab" secondary="locker" />
+      <InventoryIcon texture="%ModDir%/Items/EventItems/Radio.png" sourcerect="0,0,61,52" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/EventItems/Radio.png" sourcerect="62,25,64,27" depth="0.55" />
+      <Body width="64" height="24" density="30" />
+      <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnUse" target="This" oneshot="true" stackable="false">
+          <TriggerEvent identifier="callkumo" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" duration="0.1">
+          <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag1" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="revolver,revolver,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel,revolverrounddepletedfuel">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag2" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="smg,smgmagazine,smgmagazine,smgmagazine,smgmagazine,smgmagazinedepletedfuel,smgmagazinedepletedfuel,smgmagazinedepletedfuel,smgmagazinedepletedfuel">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag3" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="shotgun,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell,shotgunshell">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag4" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="autoshotgun,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive,shotgunslugexplosive">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag5" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="assaultrifle,assaultriflemagazine,assaultriflemagazine,assaultriflemagazine,assaultriflemagazine,assaultriflemagazine">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag6" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="grenadelauncher,40mmgrenade,40mmgrenade,40mmgrenade,40mmgrenade,40mmgrenade,40mmgrenade,40mmgrenade,40mmgrenade">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <Item name="Duffel Bag" identifier="kumoduffelbag7" nameidentifier="duffelbag" category="Equipment" tags="mobilecontainer" fireproof="true" description="" impactsoundtag="impact_soft" scale="0.4" hideinmenus="true">
+      <Deconstruct time="5">
+        <Item identifier="ballisticfiber" mincondition="0.25" />
+        <Item identifier="organicfiber" mincondition="0.25" />
+        <Item identifier="ballisticfiber" mincondition="0.5" />
+        <Item identifier="organicfiber" mincondition="0.5" />
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
+      <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
+        <StatusEffect type="OnBroken" target="This">
+          <DropContainedItems />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" capacity="0" allowaccess="false" drawinventory="false" setvalue="true" />
+      </Holdable>
+      <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" spawnwithid="hmg,hmgmagazine,hmgmagazine,hmgmagazine,hmgmagazine">
+        <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
+      </ItemContainer>
+    </Item>
+    <!-- Pirate Armory Alarm -->
+    <Item name="Alarm Buzzer" identifier="pa-armoryalarmbuzzer" description="TRIGGERS PIRATE ARMORY EVENT WHEN ACTIVATED TO MAKE PIRATES HOSTILE" category="Electrical" Tags="smallitem,sound" maxstacksize="8" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true" noninteractable="true" hideinmenus="true">
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,127,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="221,138,42,57" origin="0.5,0.5" />
+      <Body radius="20" density="20" />
+      <Holdable selectkey="Select" pickkey="Use" slots="Any,RightHand,LeftHand" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="true">
+        <RequiredItem items="wrench" type="Equipped" />
+      </Holdable>
+      <LightComponent canbeselected="false" lightcolor="255,0,0,100" alphablend="true" castshadows="false" blinkfrequency="2.6" range="20">
+        <Sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="301,963,42,57" origin="0.5,0.5" alpha="1.0" />
+        <sound file="Content/Items/AlarmBuzzerLoop.ogg" type="OnActive" range="10000.0" loop="true" volume="0.5" />
+        <StatusEffect type="OnContained" target="This" IsActive="false">
+          <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="This" disabledeltatime="true" oneshot="true">
+          <TriggerEvent identifier="piratealarm" />
+        </StatusEffect>
+      </LightComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+      </ConnectionPanel>
+    </Item>
+    <!-- Self-destroying items to prevent errors in AbandonedOutpost missions that only have character targets -->
+    <Item name="Self-destruct Crawler Egg" identifier="selfdestructcrawleregg" hideinmenus="true" health="20" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" category="Misc" spritecolor="199,253,172,255" scale="0.5" impactsoundtag="impact_soft">
+      <Sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" depth="0.18" sourcerect="8,280,118,145" origin="0.5,0.5" />
+      <Price baseprice="200" sold="false" />
+      <Deconstruct time="10">
+        <Item identifier="alienblood" />
+        <Item identifier="sulphuricacid" />
+      </Deconstruct>
+      <!-- rectangular body to prevent the egg from rolling -->
+      <Body width="110" height="120" friction="1.0" restitution="0.01" angulardamping="1.0" density="12" />
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" showcontainedstateindicator="false" canbeselected="true">
+        <GuiFrame relativesize="0.15,0.2" anchor="Center" style="ItemUI" />
+        <StatusEffect type="OnSpawn" target="This" delay="1">
+          <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+          <particleemitter particle="mudrapeggbrownchunks" particleamount="100" velocitymin="100" velocitymax="2000" anglemin="0" anglemax="360" scalemin="0.4" scalemax="0.6" />
+          <Sound file="Content/Sounds/Damage/Gore5.ogg" range="500" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnDamaged" target="This">
+          <particleemitter particle="mudrapeggbrownchunks" particleamount="8" velocitymin="100" velocitymax="1000" anglemin="0" anglemax="360" scalemin="0.2" scalemax="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnFire" target="This" Condition="-5.0" />
+        <!-- spawn a crawler and remove the item if scale is above 0.75 -->
+        <StatusEffect type="Always" target="This" Condition="0" setvalue="true">
+          <Conditional Scale="gte 0.75" />
+          <SpawnCharacter speciesname="Crawler_hatchling" />
+          <Remove />
+        </StatusEffect>
+        <Containable items="antibloodloss1">
+          <!-- increase scale -->
+          <StatusEffect type="OnContaining" target="This" Scale="0.005" />
+          <StatusEffect type="OnContaining" target="Contained" Condition="-1" />
+        </Containable>
+      </ItemContainer>
+      <LightComponent range="5" lightcolor="255,0,0,61" powerconsumption="0" IsOn="true" castshadows="false" allowingameediting="false" pulsefrequency="1" pulseamount="0.30">
+        <sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" depth="0.025" sourcerect="300,291,98,113" origin="0.5,0.6" alpha="1.0" />
+      </LightComponent>
+      <LightComponent range="40" lightcolor="255,199,0,58" powerconsumption="0" IsOn="true" castshadows="false" allowingameediting="false">
+        <sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" depth="0.025" sourcerect="410,301,88,95" origin="0.5,0.6" alpha="1.0" />
+      </LightComponent>
+    </Item>
+    <!-- Job Board -->
+    <Item name="Job Board" identifier="de-jobboard" tags="potentialjobboard" scale="0.5" category="Decorative" noninteractable="false">
+      <sprite texture="Content/Map/Outposts/Art/HumanResourcesAssets.png" sourcerect="576,416,320,235" depth="0.78" premultiplyalpha="false" origin="0.5,0.5" />
+      <ItemComponent>
+        <!--<StatusEffect target="This" type="OnSpawn" evententitytag="potentialjobboard">
+          <TriggerEvent identifier="jobboardde"/>
+        </StatusEffect>-->
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="commsrelay" tags="commsrelay" width="50" height="50" texturescale="1.0,1.0" scale="0.5" category="Machine,Electrical" damagedbyexplosions="true" explosiondamagemultiplier="0.2">
+      <sprite texture="%ModDir%/Items/EventItems/CommsRelay.png" sourcerect="0,0,230,205" depth="0.8" premultiplyalpha="false" origin="0.5,0.5" />
+      <!--<Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="832" fabricationlimitmin="0" fabricationlimitmax="1" />-->
+      <!--
+    <Price baseprice="800" sold="false">
+      <Price storeidentifier="merchantcity" sold="false" multiplier="1.25" />
+    </Price>
+    -->
+      <LightComponent range="0.0" lightcolor="255,255,255,111" powerconsumption="0" blinkfrequency="0.5" IsOn="false" castshadows="false" allowingameediting="false">
+        <sprite texture="%ModDir%/Items/EventItems/CommsRelay.png" sourcerect="230,0,230,204" depth="0.79" origin="0.5,0.5" alpha="1.0" />
+      </LightComponent>
+      <Body radius="70" width="100" density="30" />
+      <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" aimable="true">
+        <RequiredItem items="wrench" type="Equipped" />
+      </Holdable>
+    </Item>
+    <!-- Classified Documents -->
+    <Item name="Classified Documents" identifier="documents" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+      <PreferredContainer primary="crewcab" secondary="locker" />
+      <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="409,51,62,61" origin="0.5,0.5" />
+      <sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="401,120,49,68" depth="0.8" origin="0.5,0.5" />
+      <Body width="45" height="65" density="8" />
+      <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+    </Item>
+    <Item name="SIGNAL SOURCE" identifier="broadcasterwreck" category="Misc" scale="1" hideinmenus="true">
+      <Sprite texture="Content/UI/MainIconsAtlas.png" depth="0.6" sourcerect="0,0,1,1" origin="0.5,0.5" />
+      <InventoryIcon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,0,1,1" origin="0.5,0.6" />
+      <Body radius="100" density="10" friction="100" />
+      <AiTarget sonarlabel="SIGNAL SOURCE" soundrange="1000000" sight="0" staticsight="true" />
+      <MotionSensor range="1000" target="Human" minimumvelocity="1" ignoredead="true" detectownmotion="false" canbeselected="false">
+        <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" conditionalcomparison="And">
+          <Conditional Speed="lt 0.1" />
+          <Conditional IsContained="false" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <RemoveItem />
+        </StatusEffect>
+      </MotionSensor>
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" range="0" powerconsumption="0" IsOn="true" canbeselected="false">
+        <StatusEffect type="OnActive" targettype="This" SoundRange="1000000" setvalue="true" />
+      </LightComponent>
+    </Item>
+    <!-- Signal Source for Wrecks & Ruins -->
+    <Item name="SIGNAL SOURCE" identifier="broadcasterruin" category="Misc" scale="1" hideinmenus="true">
+      <Sprite texture="Content/UI/MainIconsAtlas.png" depth="0.6" sourcerect="0,0,1,1" origin="0.5,0.5" />
+      <InventoryIcon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,0,1,1" origin="0.5,0.6" />
+      <Body radius="100" density="10" friction="100" />
+      <AiTarget sonarlabel="SIGNAL SOURCE" soundrange="1000000" sight="0" staticsight="true" />
+      <MotionSensor range="1000" target="Human" minimumvelocity="1" ignoredead="true" detectownmotion="false" canbeselected="false">
+        <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" conditionalcomparison="And">
+          <Conditional Speed="lt 0.1" />
+          <Conditional IsContained="false" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <RemoveItem />
+        </StatusEffect>
+      </MotionSensor>
+      <LightComponent LightColor="0.0,0.0,0.0,0.0" range="0" powerconsumption="0" IsOn="true" canbeselected="false">
+        <StatusEffect type="OnActive" targettype="This" SoundRange="1000000" setvalue="true" />
+      </LightComponent>
+    </Item>
+    <!-- Bartender Chair -->
+    <Item name="Bartender Chair" identifier="bartenderchair" tags="chair" description="TRIGGERS THE BARTENDER EVENT. DO NOT USE THIS IN YOUR BUILD UNLESS YOU'RE BUILDING A BAR MODULE OR SIMILAR AND YOU WANT TO TRIGGER THE EVENT THERE. NEVER USE IT IN A PLAYER SUBMARINE!" allowattachitems="true" texturescale="1.0,1.0" scale="0.5" category="Decorative" canflipy="false">
+      <sprite texture="Content/Map/Outposts/Art/MedicalColonyAssets.png" sourcerect="744,784,144,240" depth="0.55" premultiplyalpha="false" origin="0.5,0.5" />
+      <Controller UserPos="10,30" direction="Right" hidehud="false" canbeselected="true" issecondaryitem="true" drawuserbehind="true">
+        <limbposition limb="Head" position="40,15" />
+        <limbposition limb="Torso" position="55,-60" />
+        <limbposition limb="Waist" position="60,-130" />
+        <limbposition limb="RightFoot" position="100,-230" />
+        <limbposition limb="LeftFoot" position="100,-230" />
+        <limbposition limb="RightHand" position="100,-100" allowusinglimb="true" />
+        <limbposition limb="LeftHand" position="100,-100" allowusinglimb="true" />
+      </Controller>
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-bartender" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <!-- Submarine Charger Relay -->
+    <Item name="Event - Charger Relay" identifier="chargerrelay" category="Electrical" Tags="smallitem,signal,logic" maxstacksize="8" cargocontaineridentifier="metalcrate" description="TRIGGERS THE CHARGING DOCK EVENT. DO NOT USE THIS IN ANY MODULE OTHER THAN THE AIRLOCK THAT IS SUPPOSED TO NOT SUPPLY POWER UNLESS PAID FOR!" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="512,388,63,57" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="64,128,32,32" origin="0.5,0.5" canflipx="false" />
+      <RelayComponent canbeselected="true" vulnerabletoemp="false" canbeoverloaded="false">
+        <GuiFrame relativesize="0.2,0.14" minsize="450,160" anchor="Center" style="ItemUI" />
+      </RelayComponent>
+      <Body width="31" height="25" density="15" />
+      <Holdable selectkey="Select" pickkey="Use" slots="Any,RightHand,LeftHand" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="true">
+        <RequiredItem items="wrench" type="Equipped" />
+      </Holdable>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="power_in" displayname="connection.powerin" />
+        <input name="signal_in1" displayname="connection.signalinx~[num]=1" />
+        <input name="signal_in2" displayname="connection.signalinx~[num]=2" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+        <output name="power_out" displayname="connection.powerout" />
+        <output name="signal_out1" displayname="connection.signaloutx~[num]=1" />
+        <output name="signal_out2" displayname="connection.signaloutx~[num]=2" />
+        <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+        <output name="load_value_out" displayname="connection.loadvalueout" />
+        <output name="power_value_out" displayname="connection.powervalueout" />
+      </ConnectionPanel>
+    </Item>
+    <!-- OUTPOST TAKEOVER -->
+    <Item name="Triggered Event - Get Coalition Outpost Takeover Mission" identifier="eventtrigger_coalitiontakeover" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="getcoalitiontakeovermission" />
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+      <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
+    </Item>
+    <Item name="Triggered Event - Get Separatist Outpost Takeover Mission" identifier="eventtrigger_separatisttakeover" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="getseparatisttakeovermission" />
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+      <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
+    </Item>
+    <!-- start kill progress tracking -->
+    <Item name="" identifier="idcardcoalitionsoldier" category="Equipment" Tags="smallitem,identitycard,coalitionsoldierid" hideinmenus="true" cargocontaineridentifier="metalcrate">
+      <PreferredContainer primary="crewcab" />
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+      <Body width="16" height="12" density="10.05" />
+      <IdCard slots="Card,Any" msg="ItemMsgPickUpSelect" />
+      <!--Give the bot that carries the item a talent that gives an affliction that triggers an event to track the kills-->
+      <ItemComponent>
+        <StatusEffect type="OnContained" target="Character" interval="1" multiplyafflictionsbymaxvitality="true">
+          <GiveTalentInfo giverandom="false" talentidentifiers="takeoverkilltracking" />
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This" delay="1">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="idcardseparatistsoldier" category="Equipment" Tags="smallitem,identitycard,separatistsoldierid" hideinmenus="true" cargocontaineridentifier="metalcrate">
+      <PreferredContainer primary="crewcab" />
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+      <Body width="16" height="12" density="10.05" />
+      <IdCard slots="Card,Any" msg="ItemMsgPickUpSelect" />
+      <!--Give the bot that carries the item a talent that gives an affliction that triggers an event to track the kills-->
+      <ItemComponent>
+        <StatusEffect type="OnContained" target="Character" interval="1" multiplyafflictionsbymaxvitality="true">
+          <GiveTalentInfo giverandom="false" talentidentifiers="takeoverkilltracking" />
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This" delay="1">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <!-- increase kill count -->
+    <Item name="Triggered Event - Track Kills" identifier="eventtrigger_killtracker" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Holdable slots="Any">
+        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="sepoutposttakeoverprogressevent" />
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!-- PLACEABLE EVENT TRIGGERS -->
+    <!-- generic events -->
+    <Item name="Triggered Event - Bartender" identifier="eventtrigger_bartender" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-bartender" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <!-- monster events -->
+    <Item name="Triggered Event - Random" identifier="eventtrigger_random" tags="eventtrigger" description="TRIGGERS A RANDOM EVENT FROM OTHER EVENT TRIGGERS. DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-random" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Triggered Event - Mudraptors" identifier="eventtrigger_mudraptors" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-mudraptors" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Triggered Event - Crawlers" identifier="eventtrigger_crawlers" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-crawlers" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Triggered Event - Husks" identifier="eventtrigger_husk" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="de-triggerevents-husks" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <!-- special events -->
+    <Item name="Triggered Event - Multi Wreck" identifier="eventtrigger_multiwreck" tags="eventtrigger" description="PLACE IN A WRECK THAT FEATURES SHUTTLES! DO NOT PLACE MULTIPLE IN ONE WRECK! DO NOT PUT INTO SHUTTLES THAT WILL BE ATTACHED TO A WRECK!" scale="0.25" spritecolor="231,101,0,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <!-- triggered by original wreck event instead
+        <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
+          <TriggerEvent identifier="multiwreckevent"/>
+        </StatusEffect>-->
+      </ItemComponent>
+    </Item>
+    <!-- EFFECT ITEMS -->
+    <Item name="" identifier="effect_delete" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <!-- instantly remove the item when spawned -->
+        <StatusEffect type="Always" target="Parent" delay="0.1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" delay="0.1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="" identifier="effect_unlock" Category="Hidden" Tags="effect,unlock" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <!-- unlock the container, the item is contained in -->
+        <StatusEffect type="Always" target="Parent" noninteractable="false" setvalue="true" oneshot="true" />
+        <!-- remove the item when spawned -->
+        <StatusEffect type="Always" target="This" delay="1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    
+     <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
+    <Item name="Patrol spawner" nameidentifier="patrolspawner" identifier="patrolspawner" Tags="patrolspawner" scale="1.0" noninteractable="false" hideinmenus="false" category="Misc">
+      <Sprite texture="Content/Items/Tools/tools.png" sourcerect="231,102,25,54" depth="0.55" origin="0.5,0.5" />  
+      <TriggerComponent triggeredby="Submarine" force="0" radius="1000" >
+        <StatusEffect type="OnActive" target="This" oneshot="true" voltage="1" setvalue="true" >
+          <TriggerEvent identifier="militarypatrol"/>
+        </StatusEffect>
+      </TriggerComponent>
+      <LightComponent range="256" lightcolor="100,153,153,102" powerconsumption="10" IsOn="true" castshadows="false" allowingameediting="false" pulseamount="0.5" pulsefrequency="0.2"/>
+    </Item>
+  </Items>
+</Override>

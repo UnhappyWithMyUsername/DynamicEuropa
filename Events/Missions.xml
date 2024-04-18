@@ -1,0 +1,1318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Missions>
+  <!--OVERRIDES-->
+  <Override>
+    <OutpostDestroyMission identifier="huskcultspecialassassinate" type="OutpostDestroy" achievementidentifier="huskcultspecialassassinate" reward="2000" difficulty="4" commonness="0" allowretry="true" sonarlabel="target" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
+      <Reputation identifier="huskcult" amount="10" />
+      <Reputation identifier="clowns" amount="-5" />
+      <Reputation identifier="coalition" amount="-5" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
+      <LocationType identifier="City" />
+      <LocationType identifier="Outpost" />
+      <LocationType identifier="Military" />
+      <LocationType identifier="Research" />
+      <LocationType identifier="Mine" />
+      <Characters>
+        <Character identifier="coalitionspy" from="customnpcs1" teamid="FriendlyNpc" asfaraspossible="true" requirekill="true" />
+      </Characters>
+      <message text="missionsuccess.huskcultspecialassassinate" />
+      <TriggerEvent state="0" delay="5" eventidentifier="waytoascension_assassination1" campaignonly="true" />
+      <Metadata identifier="waytoascension" value="6" />
+    </OutpostDestroyMission>
+
+    <OutpostDestroyMission identifier="huskcultrescuesubra" tags="abandonedoutpost" type="AbandonedOutpost" achievementidentifier="huskcultrescuesubra" reward="0" difficulty="4" commonness="0" allowretry="true" hostageskilledmessage="subrakilled" allowothermissionsinlevel="false" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
+      <Reputation identifier="huskcult" amount="10" />
+      <Reputation identifier="clowns" amount="-8" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48" />
+      <LocationType identifier="Abandoned" />
+      <Characters>
+        <Character identifier="husk" min="5" max="10" />
+        <Character identifier="jacovsubra" from="customnpcs1" asfaraspossible="true" requirerescue="true" />
+      </Characters>
+      <TriggerEvent state="0" delay="5" eventidentifier="waytoascensionfoundsubra" campaignonly="true" />
+      <Metadata identifier="waytoascension" value="8" />
+      <message header="" text="missionsuccess.huskcultrescuesubra" />
+    </OutpostDestroyMission>
+
+
+  <!-- -5 bandit rep for doing abandoned outposts -->
+  <AbandonedOutpostMission
+    identifier="abandonedoutposthumans"
+    tags="abandonedoutpost"
+    achievementidentifier="abandonedoutpostdestroyhumans"
+    type="OutpostDestroy"
+    reward="3000"
+    difficulty="2"
+    commonness="100"
+    allowretry="true"
+    targetitem="reactor"
+    unhideentitysubcategories="abandonedhuman"
+    maxleveldifficulty="65">
+    <Reputation identifier="bandits" amount="-5" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="Abandoned" />
+    <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+    <Characters>
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="engineeringmodule"/>
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule" multiplayeronly="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" multiplayeronly="true"/>
+      <Character identifier="banditleader" from="abandonedoutpostnpcs" spawnpointtags="banditleader"/>
+    </Characters>
+
+    <TriggerEvent state="0" delay="5" eventidentifier="heartofgold" campaignonly="true"/>
+    <message header="missionheader0.abandonedoutposthumans" text="missionmessage0.abandonedoutposthumans"/>
+  </AbandonedOutpostMission>
+
+  <AbandonedOutpostMission
+    identifier="abandonedoutposthumans2"
+    textidentifier="abandonedoutposthumans"
+    tags="abandonedoutpost"
+    achievementidentifier="abandonedoutpostdestroyhumans"
+    type="OutpostDestroy"
+    reward="4000"
+    difficulty="3"
+    commonness="100"
+    allowretry="true"
+    targetitem="reactor"
+    unhideentitysubcategories="abandonedhuman"
+    minleveldifficulty="50">
+    <Reputation identifier="bandits" amount="-5" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="Abandoned" />
+    <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+    <Characters>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
+      <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="engineeringmodule"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="engineeringmodule" multiplayeronly="true"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="securitymodule" />
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="securitymodule" multiplayeronly="true"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="seccrewmodule"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" multiplayeronly="true"/>
+      <Character identifier="banditleader" from="abandonedoutpostnpcs" spawnpointtags="banditleader"/>
+    </Characters>
+
+    <TriggerEvent state="0" delay="5" eventidentifier="heartofgold" campaignonly="true"/>
+    <message header="missionheader0.abandonedoutposthumans" text="missionmessage0.abandonedoutposthumans"/>
+  </AbandonedOutpostMission>
+
+  <AbandonedOutpostMission
+    identifier="abandonedoutposthumans3"
+    textidentifier="abandonedoutposthumans"
+    tags="abandonedoutpost"
+    achievementidentifier="abandonedoutpostdestroyhumans"
+    type="OutpostDestroy"
+    reward="6000"
+    difficulty="4"
+    commonness="100"
+    allowretry="true"
+    targetitem="reactor"
+    unhideentitysubcategories="abandonedhuman"
+    minleveldifficulty="65">
+    <Reputation identifier="bandits" amount="-5" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="Abandoned" />
+    <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+    <Characters>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="engineeringmodule"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="engineeringmodule" multiplayeronly="true"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="engineeringmodule" multiplayeronly="true"/>
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="securitymodule"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="securitymodule" multiplayeronly="true" />
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="seccrewmodule"/>
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" multiplayeronly="true"/>
+      <Character identifier="banditleader_heavy" from="abandonedoutpostnpcs" spawnpointtags="banditleader"/>
+    </Characters>
+
+    <TriggerEvent state="0" delay="5" eventidentifier="heartofgold" campaignonly="true"/>
+    <message header="missionheader0.abandonedoutposthumans" text="missionmessage0.abandonedoutposthumans"/>
+  </AbandonedOutpostMission>
+
+  </Override>
+  <!--END OF OVERRIDES-->
+  
+  <!-- Lair -->
+  <CrawlerLairMission identifier="crawlerlair1" tags="lair,crawlerlair" type="OutpostDestroy" reward="2000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="30">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="Lair" />
+    <LocationTypeChange from="Lair" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Laircrawler_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler" min="4" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler_large" min="1" max="2" spawnpointtags="nest" />
+    </Characters>
+    <Items>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </CrawlerLairMission>
+  
+  <CrawlerLairMission identifier="crawlerlair2" tags="lair,crawlerlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="30" maxleveldifficulty="50">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="Lair" />
+    <LocationTypeChange from="Lair" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Laircrawler_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler" min="5" max="7" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler_large" min="2" max="3" spawnpointtags="nest" />
+    </Characters>
+    <Items>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </CrawlerLairMission>
+  
+  <CrawlerLairMission identifier="crawlerlair3" tags="lair,crawlerlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" >
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="Lair" />
+    <LocationTypeChange from="Lair" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Laircrawler_hatchling" min="3" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Laircrawler_large" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Lairbroodmother" min="0" max="1" spawnpointtags="boss" />
+    </Characters>
+    <Items>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="11" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="13" />
+      </Item>
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+      <Item identifier="crawleregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </CrawlerLairMission>
+  
+  <MudraptorLairMission identifier="mudraptorlair1" tags="lair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="15" maxleveldifficulty="40">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairMudraptor" />
+    <LocationTypeChange from="LairMudraptor" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-lairmudraptor_hatchling" min="3" max="4" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor" min="1" max="2" spawnpointtags="nest" />
+    </Characters>
+    <Items>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </MudraptorLairMission>
+
+  <MudraptorLairMission identifier="mudraptorlair2" tags="lair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="40" maxleveldifficulty="60">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairMudraptor" />
+    <LocationTypeChange from="LairMudraptor" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-lairmudraptor_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor" min="2" max="3" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor_veteran" min="0" max="1" spawnpointtags="boss" />
+    </Characters>
+    <Items>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </MudraptorLairMission>
+  
+  <MudraptorLairMission identifier="mudraptorlair3" tags="lair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="60">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairMudraptor" />
+    <LocationTypeChange from="LairMudraptor" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-lairmudraptor_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor" min="3" max="4" spawnpointtags="nest" />
+      <Character identifier="DE-lairmudraptor_veteran" min="1" max="2" spawnpointtags="boss" />
+    </Characters>
+    <Items>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="11" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="13" />
+      </Item>
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+      <Item identifier="largemudraptoregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </MudraptorLairMission>
+  
+  <ThresherLairMission identifier="thresherlair1" tags="lair,thresherlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairThresher" />
+    <LocationTypeChange from="LairThresher" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Lairtigerthresher" min="4" max="5" spawnpointtags="nest" />
+    </Characters>
+    <Items>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </ThresherLairMission>
+  
+  <ThresherLairMission identifier="thresherlair2" tags="lair,thresherlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairThresher" />
+    <LocationTypeChange from="LairThresher" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Lairtigerthresher" min="5" max="7" spawnpointtags="nest" />
+      <Character identifier="DE-Lairbonethresher" min="0" max="1" spawnpointtags="boss" />
+    </Characters>
+    <Items>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="11" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="13" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </ThresherLairMission>
+  
+  <ThresherLairMission identifier="thresherlair3" tags="lair,thresherlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="LairThresher" />
+    <LocationTypeChange from="LairThresher" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" />
+      <Character identifier="DE-Lairtigerthresher" min="4" max="5" spawnpointtags="nest" />
+      <Character identifier="DE-Lairbonethresher" min="1" max="2" spawnpointtags="boss" />
+    </Characters>
+    <Items>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="11" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest">
+        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="13" />
+      </Item>
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+      <Item identifier="tigerthresheregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </ThresherLairMission>
+  
+  
+  <!-- Husk Lair -->
+  <HuskCrawlerLairMission identifier="huskcrawlerlair" tags="husklair,huskcrawlerlair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="HuskgroundsDE" />
+    <LocationTypeChange from="HuskgroundsDE" to="Blockade" requiredduration="1" cooldownafterchange="1" />
+    <Characters>
+      <Character identifier="DE-Crawlerhusk" min="7" max="9" spawnpointtags="nest" requirekill="true" />
+      <Character identifier="DE-Crawlerhusk" min="2" max="5" spawnpointtags="nest" requirekill="true" multiplayeronly="true" />
+    </Characters>
+    <Items>
+      <Item identifier="selfdestructcrawleregg" spawnpointtags="nest" />
+    </Items>
+    <message header="missionheader0.abandonedoutpostmonsters" text="missionmessage0.abandonedoutpostmonsters" />
+  </HuskCrawlerLairMission>
+
+  <!-- Lithomorph | BROKEN
+  <MineralMission
+    identifier="pyromorphitecollectionlithomorph"
+    textIdentifier="miningmission1"
+    tags="collectminerals,collectminerals_set1,collectminerals_mainpath"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="50"
+    resourceHandoverAmount="0.25"
+    positionType="mainpath"
+    reward="1200">
+    <Items>
+      <Item identifier="lithomorphspawnerpyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+      <Item identifier="pyromorphite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="243,146,55"/>
+    <LocationType from="Outpost" to="City"/>
+    <LocationType from="Outpost" to="Outpost"/>
+    <LocationType from="Outpost" to="Military"/>
+    <LocationType from="Outpost" to="Research"/>
+    <LocationType from="Outpost" to="Mine"/>
+    <LocationType from="City" to="Mine"/>
+    <LocationType from="Military" to="Mine"/>
+    <LocationType from="Research" to="Mine"/>
+    <LocationType from="Mine" to="AnyOutpost"/>
+    <Reputation identifier="location" amount="1" />
+    <message header="missionheader0.pyromorphitecollection" text="missionmessage0.pyromorphitecollection"/>
+  </MineralMission>
+
+  <MineralMission
+    identifier="galenacollectionlithomorph"
+    textIdentifier="miningmission1"
+    tags="collectminerals,collectminerals_set1"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="2"
+    commonness="30"
+    resourceHandoverAmount="0.25"
+    reward="1600">
+    <Items>
+      <Item identifier="lithomorphspawnergalena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+      <Item identifier="galena" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="243,146,55"/>
+    <LocationType from="Outpost" to="City"/>
+    <LocationType from="Outpost" to="Outpost"/>
+    <LocationType from="Outpost" to="Military"/>
+    <LocationType from="Outpost" to="Research"/>
+    <LocationType from="Outpost" to="Mine"/>
+    <LocationType from="City" to="Mine"/>
+    <LocationType from="Military" to="Mine"/>
+    <LocationType from="Research" to="Mine"/>
+    <LocationType from="Mine" to="AnyOutpost"/>
+    <Reputation identifier="location" amount="2" />
+    <message header="missionheader0.miningmission1" text="missionmessage0.miningmission1"/>
+  </MineralMission>
+
+  <MineralMission
+    identifier="triphylitecollectionlithomorph"
+    textIdentifier="miningmission1"
+    tags="collectminerals,collectminerals_set2"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="2"
+    commonness="75"
+    resourceHandoverAmount="0.33"
+    reward="2100">
+    <Items>
+      <Item identifier="lithomorphspawnertriphylite" />
+      <Item identifier="triphylite" />
+      <Item identifier="triphylite" />
+      <Item identifier="triphylite" />
+      <Item identifier="triphylite" />
+      <Item identifier="triphylite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="243,146,55"/>
+    <LocationType from="Outpost" to="City"/>
+    <LocationType from="Outpost" to="Outpost"/>
+    <LocationType from="Outpost" to="Military"/>
+    <LocationType from="Outpost" to="Research"/>
+    <LocationType from="Outpost" to="Mine"/>
+    <LocationType from="City" to="Mine"/>
+    <LocationType from="Military" to="Mine"/>
+    <LocationType from="Research" to="Mine"/>
+    <LocationType from="Mine" to="AnyOutpost"/>
+    <Reputation identifier="location" amount="1" />
+    <message header="missionheader0.miningmission1" text="missionmessage0.miningmission1"/>
+  </MineralMission>
+
+  <MineralMission
+    identifier="ilmenitechamositecollectionlithomorph"
+    textIdentifier="miningmission2"
+    tags="collectminerals,collectminerals_set2"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="2"
+    commonness="30"
+    resourceHandoverAmount="0.25"
+    reward="2400">
+    <Items>
+      <Item identifier="ilmenite" />
+      <Item identifier="ilmenite" />
+      <Item identifier="ilmenite" />
+      <Item identifier="ilmenite" />
+      <Item identifier="lithomorphspawnerchamosite" />
+      <Item identifier="chamosite" />
+      <Item identifier="chamosite" />
+      <Item identifier="chamosite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="243,146,55"/>
+    <LocationType from="Outpost" to="City"/>
+    <LocationType from="Outpost" to="Outpost"/>
+    <LocationType from="Outpost" to="Military"/>
+    <LocationType from="Outpost" to="Research"/>
+    <LocationType from="Outpost" to="Mine"/>
+    <LocationType from="City" to="Mine"/>
+    <LocationType from="Military" to="Mine"/>
+    <LocationType from="Research" to="Mine"/>
+    <LocationType from="Mine" to="AnyOutpost"/>
+    <Reputation identifier="location" amount="1" />
+    <message header="missionheader0.miningmission2" text="missionmessage0.miningmission2"/>
+  </MineralMission>
+
+  <MineralMission
+    identifier="titanitecollectionlithomorph"
+    textIdentifier="miningmission1"
+    tags="collectminerals,collectminerals_set3"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="2"
+    commonness="50"
+    resourceHandoverAmount="0.33"
+    reward="2700">
+    <Items>
+      <Item identifier="lithomorphspawnertitanite" />
+      <Item identifier="titanite" />
+      <Item identifier="titanite" />
+      <Item identifier="titanite" />
+      <Item identifier="titanite" />
+      <Item identifier="titanite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="243,146,55"/>
+    <LocationType from="Outpost" to="City"/>
+    <LocationType from="Outpost" to="Outpost"/>
+    <LocationType from="Outpost" to="Military"/>
+    <LocationType from="Outpost" to="Research"/>
+    <LocationType from="Outpost" to="Mine"/>
+    <LocationType from="City" to="Mine"/>
+    <LocationType from="Military" to="Mine"/>
+    <LocationType from="Research" to="Mine"/>
+    <LocationType from="Mine" to="AnyOutpost"/>
+    <Reputation identifier="location" amount="1" />
+    <message header="missionheader0.titanitecollection" text="missionmessage0.titanitecollection"/>
+  </MineralMission> -->
+  <!-- Electric Spineling -->
+  <MonsterMission identifier="killelectricspineling1" tags="killmonster_thegreatsea" type="Monster" difficulty="3" commonness="33" reward="3500" maxsonarmarkerdistance="10000" sonarlabel="character.spineling" monsterfile="spineling_electric">
+    <monster character="spineling" min="4" max="8" />
+    <monster character="spineling_electric" min="1" max="1" />
+    <Reputation identifier="location" amount="2" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,768,256,256" color="214,50,48" />
+    <message header="missionheader0.spineling_electric1" text="missionmessage0.spineling_electric1" />
+  </MonsterMission>
+  <MonsterMission identifier="killelectricspineling2" tags="killmonster_thegreatsea" type="Monster" difficulty="4" commonness="33" reward="5000" maxsonarmarkerdistance="10000" sonarlabel="character.spineling" monsterfile="spineling_electric">
+    <monster character="spineling" min="4" max="5" />
+    <monster character="spineling_electric" min="2" max="2" />
+    <Reputation identifier="location" amount="2" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,768,256,256" color="214,50,48" />
+    <message header="missionheader0.spineling_electric2" text="missionmessage0.spineling_electric2" />
+  </MonsterMission>
+  <SalvageMission identifier="stealingintel" tags="stealintel" type="Salvage" difficulty="3" commonness="0" reward="3000" sonarlabel="target" spawntype="Outpost" showmessagewhenpickedup="true" itemidentifier="documents" removeitem="true" containertag="admincabinet" requirewreck="false" BlockLocationTypeChanges="true">
+    <Reputation identifier="coalition" amount="-10" />
+    <Reputation identifier="separatists" amount="10" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233" />
+    <LocationType identifier="City" />
+    <LocationType identifier="Outpost" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    <message header="missionsuccess.stealingintel" text="missionmessage0.stealingintel" />
+  </SalvageMission>
+  
+  <!-- PIRATE MISSIONS -->
+  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="20" reward="8000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="7" />
+    <Reputation identifier="separatists" amount="7" />
+		<Reputation identifier="bandits" amount="-5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="5800" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="7200" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="8400" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="8900" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="9400" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="piratesecurity" minamount="4" maxamount="6" />
+      <Character typeidentifier="pirateannihilator" minamount="0" maxamount="2" />
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateengineer" minamount="1" maxamount="3" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="piratecaptain">
+        <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratesecurity">
+        <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+        <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+        <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratemechanic">
+        <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateengineer">
+        <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
+    <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
+  </PirateMission>
+  <PirateMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="12000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="3" />
+    <Reputation identifier="separatists" amount="3" />
+    <Reputation identifier="huskcult" amount="10" />
+    <Reputation identifier="clowns" amount="-10" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="7400" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="9200" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="partypiratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="partypiratesecurity" minamount="3" maxamount="3" />
+      <Character typeidentifier="partypiratemechanic" minamount="1" maxamount="1" />
+      <Character typeidentifier="partypirateengineer" minamount="1" maxamount="1" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="partypiratecaptain">
+        <Character identifier="partypiratecaptain" from="partypirates" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="partypiratecaptainlord" from="partypirates" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypiratesecurity">
+        <Character identifier="partypiratesecurityrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypiratesecuritygunner" from="partypirates" preferreddifficulty="60" />
+        <Character identifier="partypiratesecuritybrute" from="partypirates" preferreddifficulty="70" />
+        <Character identifier="partypiratesecurityelite" from="partypirates" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypiratemechanic">
+        <Character identifier="partypiratemechanicrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypiratemechanicveteran" from="partypirates" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypirateengineer">
+        <Character identifier="partypirateengineerrecruit" from="partypirates" preferreddifficulty="40" />
+        <Character identifier="partypirateengineerveteran" from="partypirates" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,768,256,256" color="255,255,255" />
+    <message header="missionheader0.pirate_party" text="missionmessage0.pirate_party" />
+    <message header="missionheader1.pirate_party" text="missionmessage1.pirate_party" />
+  </PirateMission>
+  <!--STRANGE VESSEL MISSIONS-->
+  <PirateMission type="Pirate" identifier="pirate_piezo" tags="piratemission,strangepirate" difficulty="4" commonness="20" reward="12000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="10" />
+    <Reputation identifier="separatists" amount="10" />
+		<Reputation identifier="bandits" amount="-5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42PiezoPirate.sub" preferreddifficulty="50" alternatereward="14000" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="piratesecurity" minamount="4" maxamount="6" />
+      <Character typeidentifier="pirateannihilator" minamount="1" maxamount="2" />
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateengineer" minamount="1" maxamount="3" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="piratecaptain">
+        <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratesecurity">
+        <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+        <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+        <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="50" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratemechanic">
+        <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateengineer">
+        <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="512,768,256,256" color="255,255,255" />
+    <message header="missionheader0.pirate_piezo" text="missionmessage0.pirate_piezo" />
+    <message header="missionheader1.pirate_piezo" text="missionmessage1.pirate_piezo" />
+  </PirateMission>
+  
+  <!-- test for militaryforces, unused -->
+  <PirateMission
+    type="Pirate"
+    identifier="militarypatrol2"
+    tags="militarypatrol"
+    showinmenus="false"
+    showstartmessage="false"
+    issideobjective="true"
+    achievementidentifier="combatmissionseparatistsvscoalition"
+    difficulty="4"
+    commonness="0"
+    reward="0"
+    addedmissiondifficultyperplayer="8">
+    <Reputation identifier="separatists" amount="10" amountforopposingfaction="-10" />
+    <SubmarineTypes>
+      <Submarine path="Content/Map/EnemySubmarines/DugongPirate.sub" faction="coalition" preferreddifficulty="10" alternatereward="3200"/>
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1"/>
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
+    <message header="missionheader0.pirate1" text="missionmessage0.pirate1"/>
+    <message header="missionheader1.pirate1" text="missionmessage1.pirate1"/>
+    <LocationType from="AnyOutpost" to="MilitaryForces" />
+  </PirateMission>
+  
+  
+  <!-- COALITION CIVILIANS MISSIONS WIP -->
+  <!-- Event not working as intended
+  
+  <PirateMission type="Pirate" identifier="coalitionciv_civiliantransit1" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="-5" />
+		<Reputation identifier="bandits" amount="5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="coalition_security" minamount="2" maxamount="3" />
+      <Character typeidentifier="coalition_mechanic" minamount="1" maxamount="1" />
+      <Character typeidentifier="coalition_engineer" minamount="1" maxamount="1" />
+	  <Character typeidentifier="coalition_passenger" minamount="2" maxamount="5" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="coalitioncaptainlord" from="combatmissioncoalitionnpcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_security">
+        <Character identifier="coalitionsecurityrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionsecuritygunner" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+        <Character identifier="coalitionsecuritybrute" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+        <Character identifier="coalitionsecurityelite" from="combatmissioncoalitionnpcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_mechanic">
+        <Character identifier="coalitionmechanicrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionmechanicveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_engineer">
+        <Character identifier="coalitionengineerrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+	  <CharacterType typeidentifier="coalition_passenger">
+		<Character identifier="coalition_civilian_medic" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_assist" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_eng" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_mech" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+       </CharacterType>
+	</CharacterTypes>
+	<Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+	<message header="missionheader0.coalitionciv_civiliantransport1" text="missionmessage0.coalitionciv_civiliantransport1" />
+	<message header="missionheader1.coalitionciv_civiliantransport1" text="missionmessage1.coalitionciv_civiliantransport1" />
+	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
+  </PirateMission>
+  
+  <PirateMission type="Pirate" identifier="coalitionciv_civiliantransit2" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="-10" />
+		<Reputation identifier="bandits" amount="5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="coalition_security" minamount="4" maxamount="6" />
+      <Character typeidentifier="coalition_mechanic" minamount="1" maxamount="2" />
+      <Character typeidentifier="coalition_engineer" minamount="1" maxamount="1" />
+	  <Character typeidentifier="coalition_passenger" minamount="5" maxamount="10" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="coalitioncaptainlord" from="combatmissioncoalitionnpcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_security">
+        <Character identifier="coalitionsecurityrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionsecuritygunner" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+        <Character identifier="coalitionsecuritybrute" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+        <Character identifier="coalitionsecurityelite" from="combatmissioncoalitionnpcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_mechanic">
+        <Character identifier="coalitionmechanicrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionmechanicveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_engineer">
+        <Character identifier="coalitionengineerrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+	  <CharacterType typeidentifier="coalition_passenger">
+        <Character identifier="coalition_civilian_medic" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_assist" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_eng" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+		<Character identifier="coalition_civilian_mech" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
+    <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
+	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
+  </PirateMission>
+  -->
+  <PirateMission type="Pirate" identifier="coalition_cargo2" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="-15" />
+		<Reputation identifier="bandits" amount="5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Coalition/U-43TCoalition.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir%/EnemySubmarines/Coalition/Starwalker [COALITION].sub" preferreddifficulty="20" alternatereward="0" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="coalition_security" minamount="6" maxamount="8" />
+      <Character typeidentifier="coalition_mechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="coalition_engineer" minamount="1" maxamount="1" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="coalitioncaptainlord" from="combatmissioncoalitionnpcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_security">
+        <Character identifier="coalitionsecurityrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionsecuritygunner" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+        <Character identifier="coalitionsecuritybrute" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+        <Character identifier="coalitionsecurityelite" from="combatmissioncoalitionnpcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_mechanic">
+        <Character identifier="coalitionmechanicrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionmechanicveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_engineer">
+        <Character identifier="coalitionengineerrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <TriggerEvent state="0" delay="0" eventidentifier="cocargobroadcast" campaignonly="true" />
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
+  </PirateMission>
+  <PirateMission type="Pirate" identifier="coalition_cargotrap" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="10" reward="0" addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="-15" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Coalition/Warden Coalition.sub" preferreddifficulty="20" alternatereward="0" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="coalition_security" minamount="6" maxamount="8" />
+      <Character typeidentifier="coalition_mechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="coalition_engineer" minamount="1" maxamount="1" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="coalitioncaptainlord" from="combatmissioncoalitionnpcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_security">
+        <Character identifier="coalitionsecurityrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionsecuritygunner" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
+        <Character identifier="coalitionsecuritybrute" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+        <Character identifier="coalitionsecurityelite" from="combatmissioncoalitionnpcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_mechanic">
+        <Character identifier="coalitionmechanicrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionmechanicveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="coalition_engineer">
+        <Character identifier="coalitionengineerrecruit" from="combatmissioncoalitionnpcs" preferreddifficulty="40" />
+        <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
+  </PirateMission>
+  <OutpostDestroyMission name="Pirate Haven" identifier="destroypirateoutpost" tags="pirateoutpostmission" type="OutpostDestroy" requireCorrectLocationType="true" reward="0" difficulty="4" commonness="100" allowretry="true">
+    <Reputation identifier="coalition" amount="5" />
+    <Reputation identifier="separatists" amount="5" />
+    <Reputation identifier="bandits" amount="-15" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
+    <Characters>
+      <Character identifier="outpostmanagerpirate" from="outpostnpcspirate" moduleflags="adminmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="engineeringmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="medicalmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="dockingmodule" requirekill="true" />
+      <Character identifier="commonerpirate" from="outpostnpcspirate" moduleflags="adminmodule" requirekill="true" />
+    </Characters>
+    <TriggerEvent state="0" delay="0" eventidentifier="pirateoutpostevent" campaignonly="true" />
+    <!--<TriggerEvent state="0" delay="0" eventidentifier="piratesdoomevent" campaignonly="true" />-->
+    <LocationType identifier="PirateOutpost" />
+    <LocationTypeChange from="PirateOutpost" to="Blockade" requiredduration="0" cooldownafterchange="2" />
+    <message header="missionheader0.destroypirateoutpost" text="missionmessage0.destroypirateoutpost" />
+    <!--<CompleteCheckDataAction identifier="piratesdoomprogress" condition="eq 1"/>-->
+  </OutpostDestroyMission>
+  
+  <!-- UNFINISHED FUTURE CONTENT -->
+  <!-- ABANDONED OUTPOST MISSIONS -->
+  <!--
+	<OutpostDestroyMission
+	identifier="abandonedpirateoutpostkillcoalition"
+	tags="abandonedpirateoutpost"
+	type="OutpostDestroy"
+	reward="0"
+	difficulty="4"
+	commonness="20"
+	allowretry="true"
+	sonarlabel="target"
+	unhideentitysubcategories="abandonedhuman">
+		<Reputation identifier="coalition" amount="-15" />
+		<Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48"/>
+		<LocationType identifier="AbandonedPirate" />
+		<LocationTypeChange from="AbandonedPirate" to="NonePA" requireddurationrange="1,2" cooldownafterchange="2" />
+		<Characters>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="crewmodule" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="engineeringmodule" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule" multiplayeronly="true" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" requirekill="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" multiplayeronly="true" requirekill="true"/>
+			<Character identifier="banditleader_heavy" from="abandonedoutpostnpcs" asfaraspossible="true" requirekill="true"/>
+		</Characters>
+		<TriggerEvent state="0" delay="5" eventidentifier="heartofgold" campaignonly="true"/>
+		<message header="missionheader0.abandonedoutpostassassinate" text="missionmessage0.abandonedoutpostassassinate"/>
+	</OutpostDestroyMission>
+	
+	<OutpostDestroyMission
+    identifier="abandonedpirateoutpostrescue"
+    tags="abandonedpirateoutpost"
+    type="OutpostRescue"
+    reward="0"
+    difficulty="4"
+    commonness="20"
+    allowretry="true"
+    hostageskilledmessage="hostageskilled"
+    unhideentitysubcategories="abandonedhuman">
+		<Reputation identifier="location" amount="10" />
+		<Reputation identifier="coalition" amount="5" />
+		<Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+		<LocationType identifier="Abandoned" />
+		<LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+		<Characters>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="engineeringmodule"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="securitymodule" multiplayeronly="true"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule"/>
+			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="seccrewmodule" multiplayeronly="true"/>
+			<Character identifier="banditleader" from="abandonedoutpostnpcs" spawnpointtags="banditleader"/>
+			<Character identifier="hostage" from="abandonedoutpostnpcs" asfaraspossible="true" requirerescue="true"/>
+			<Character identifier="hostage" from="abandonedoutpostnpcs" asfaraspossible="true" requirerescue="true"/>
+			<Character identifier="hostage" from="abandonedoutpostnpcs" asfaraspossible="true" requirerescue="true" multiplayeronly="true"/>
+		</Characters>
+		<message header="missionheader0.abandonedoutpostrescue" text="missionmessage0.abandonedoutpostrescue"/>
+	</OutpostDestroyMission>
+	-->
+  <!--OUTPOST TAKEOVER-->
+  <!-- Coalition -->
+  <OutpostDestroyMission name="Coalition Station-Takeover" identifier="cotakeover_separatistoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="outpost,city,research,military,mine,colony,settlement,base,blockade,study,lab,clinic,hospital,hydroponics,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
+    <Reputation identifier="separatists" amount="-20" />
+    <Reputation identifier="coalition" amount="10" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
+    <Characters>
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+    </Characters>
+    <TriggerEvent state="0" delay="1" eventidentifier="cooutposttakeoverevent" campaignonly="true" />
+    <LocationType identifier="outpost" />
+    <LocationType identifier="city" />
+    <LocationType identifier="research" />
+    <LocationType identifier="military" />
+    <LocationType identifier="mine" />
+    <LocationType identifier="colony" />
+    <LocationType identifier="settlement" />
+    <LocationType identifier="base" />
+    <LocationType identifier="blockade" />
+    <LocationType identifier="study" />
+    <LocationType identifier="lab" />
+    <LocationType identifier="clinic" />
+    <LocationType identifier="hospital" />
+    <LocationType identifier="hydroponics" />
+    <LocationType identifier="biosphere" />
+    <LocationType identifier="factory" />
+    <LocationType identifier="shipyard" />
+    <message header="missionheader0.coalitiontakeover" text="missionmessage0.coalitiontakeover" />
+  </OutpostDestroyMission>
+  <!-- Separatists -->
+  <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="outpost,city,research,military,mine,colony,settlement,base,blockade,study,lab,clinic,hospital,hydroponics,biosphere,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
+    <Reputation identifier="coalition" amount="-20" />
+    <Reputation identifier="separatists" amount="10" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
+    <Characters>
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+      <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
+    </Characters>
+    <TriggerEvent state="0" delay="1" eventidentifier="sepoutposttakeoverevent" campaignonly="true" />
+    <LocationType identifier="outpost" />
+    <LocationType identifier="city" />
+    <LocationType identifier="research" />
+    <LocationType identifier="military" />
+    <LocationType identifier="mine" />
+    <LocationType identifier="colony" />
+    <LocationType identifier="settlement" />
+    <LocationType identifier="base" />
+    <LocationType identifier="blockade" />
+    <LocationType identifier="study" />
+    <LocationType identifier="lab" />
+    <LocationType identifier="clinic" />
+    <LocationType identifier="hospital" />
+    <LocationType identifier="hydroponics" />
+    <LocationType identifier="biosphere" />
+    <LocationType identifier="factory" />
+    <LocationType identifier="shipyard" />
+    <message header="missionheader0.separatisttakeover" text="missionmessage0.separatisttakeover" />
+  </OutpostDestroyMission>
+  
+  
+  
+  <!-- SURVEY MISSIONS -->
+  <MineralMission
+    identifier="surveymission1"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Amblygonite" />
+      <Item identifier="Amblygonite" />
+      <Item identifier="Langbeinite" />
+      <Item identifier="Langbeinite" />
+      <Item identifier="Langbeinite" />
+      <Item identifier="Langbeinite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="160,150,130"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission2"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Stannite" />
+      <Item identifier="Stannite" />
+      <Item identifier="Stannite" />
+      <Item identifier="Esperite" />
+      <Item identifier="Esperite" />
+      <Item identifier="Esperite" />
+      <Item identifier="Esperite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="90,190,130"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission3"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Cryolite" />
+      <Item identifier="Cryolite" />
+      <Item identifier="Cryolite" />
+      <Item identifier="Brockite" />
+      <Item identifier="Brockite" />
+      <Item identifier="Brockite" />
+      <Item identifier="Brockite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="90,90,130"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission4"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Pyromorphite" />
+      <Item identifier="Pyromorphite" />
+      <Item identifier="Pyromorphite" />
+      <Item identifier="Polyhalite" />
+      <Item identifier="Polyhalite" />
+      <Item identifier="Polyhalite" />
+      <Item identifier="Polyhalite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="230,100,100"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission5"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Graphite" />
+      <Item identifier="Graphite" />
+      <Item identifier="Graphite" />
+      <Item identifier="Lazulite" />
+      <Item identifier="Lazulite" />
+      <Item identifier="Lazulite" />
+      <Item identifier="Lazulite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="165,165,75"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission6"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Sphalerite" />
+      <Item identifier="Sphalerite" />
+      <Item identifier="Sphalerite" />
+      <Item identifier="Ilmenite" />
+      <Item identifier="Ilmenite" />
+      <Item identifier="Ilmenite" />
+      <Item identifier="Ilmenite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="135,125,165"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+  
+  <MineralMission
+    identifier="surveymission7"
+    textIdentifier="surveyedminerals"
+    tags="surveycollectminerals"
+    achievementidentifier="miningmission"
+    type="Mineral"
+    difficulty="1"
+    commonness="100"
+    resourceHandoverAmount="0"
+    reward="0">
+    <Items>
+      <Item identifier="Chrysoprase" />
+      <Item identifier="Chrysoprase" />
+      <Item identifier="Chrysoprase" />
+      <Item identifier="Titanite" />
+      <Item identifier="Titanite" />
+    </Items>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="135,190,70"/>
+    <LocationType from="Survey" to="AnyOutpost"/>
+    <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
+  </MineralMission>
+
+</Missions>

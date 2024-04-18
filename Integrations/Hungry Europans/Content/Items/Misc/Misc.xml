@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Items>
+    <Item hideinmenus="true" name="Toilet Flood" identifier="toiletflooditem" category="Hidden" Tags="flood" scale="0.5" impactsoundtag="impact_metal_heavy" hideconditionbar="true">
+      <sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/Toilet.png" sourcerect="0,0,1,1" depth="0.556" premultiplyalpha="false" origin="0.5,0.5" />
+      <Body radius="45" density="40" friction="0.95" />
+      <Pump maxflow="60" IsOn="true" flowpercentage="100" currpowerconsumption="0" powerconsumption="0">
+        <Sound file="Content/Sounds/Water/FlowSmall.ogg" type="OnActive" range="600" loop="true" />
+      </Pump>
+      <Holdable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,10" handle2="0,-10" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="This">
+          <Conditional condition="gte 25" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="Parent">
+          <ParticleEmitter particle="damagebubbles" particlespersecond="15" scalemin="0.5" scalemax="0.75" anglemin="60" anglemax="75" distancemin="20" distancemax="20" velocitymin="150" velocitymax="250" />
+          <ParticleEmitter particle="toiletwaterleak" anglemin="60" anglemax="75" distancemin="20" distancemax="20" velocitymin="375" velocitymax="450" particlespersecond="15" copyentityangle="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="Toilet" nameidentifier="he-toilet" identifier="he-outposttoilet" tags="toilet" description="Relief yourself or get rid of something by flushing it down." type="Controller" width="152" height="240" scale="0.5" noninteractable="false" category="Misc" pickdistance="150" isshootable="true" requireaimtosecondaryuse="true" canflipy="false" GrabWhenSelected="false">
+      <sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/Toilet.png" sourcerect="0,0,182,154" depth="0.556" premultiplyalpha="false" origin="0.46,0.6" />
+      <Controller UserPos="-20,0" direction="Left" hidehud="false" AllowSelectingWhenSelectedByBot="true" AllowSelectingWhenSelectedByOther="false" canbeselected="true" selectkey="Select" drawuserbehind="false">
+        <limbposition limb="Head" position="-5,-20" />
+        <limbposition limb="Torso" position="50,48" />
+        <limbposition limb="RightHand" position="0,-10" />
+        <limbposition limb="LeftHand" position="0,-10" />
+        <limbposition limb="Waist" position="80,20" />
+        <limbposition limb="RightThigh" position="0,-10" />
+        <limbposition limb="LeftThigh" position="0,-10" />
+      </Controller>
+      <ItemContainer selectkey="Action" capacity="0" itemsperrow="0" canbeselected="true" hideitems="true" msg="ItemMsgInteractSelect">
+        <GuiFrame relativesize="0.25,0.15" absoluteoffset="0,0.15" anchor="BottomCenter" style="ItemUI" />
+        <Containable items="none" />
+        <SubContainer capacity="5" itemsperrow="5">
+          <Containable items="smallitem,mediumitem" />
+        </SubContainer>
+      </ItemContainer>
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true">
+        <Containable items="toiletflooditem" />
+        <StatusEffect type="OnBroken" target="This">
+          <SpawnItem identifier="toiletflooditem" spawnposition="ThisInventory" count="1" spawnifinventoryfull="false" />
+        </StatusEffect>
+      </ItemContainer>
+      <CustomInterface selectkey="Select" canbeselected="true">
+        <GuiFrame style="ItemUI" absoluteoffset="0,0" anchor="BottomCenter" relativesize="0.12,0.08"/>
+        <Button text="interaction.flushtoilet">
+          <StatusEffect type="OnUse" target="Contained" disabledeltatime="true" comparison="And">
+            <Conditional HasStatusTag="neq flushing" targetcontainer="true" />
+            <Remove />
+          </StatusEffect>
+          <StatusEffect type="OnUse" target="This" condition="-4" stackable="false" comparison="And">
+            <Conditional HasStatusTag="neq flushing" />
+          </StatusEffect>
+          <StatusEffect type="OnUse" target="This" condition="0" delay="0.2" setvalue="true" stackable="false" comparison="And">
+            <Conditional HasStatusTag="neq flushing" />
+            <RequiredItem items="crowbar,mediumitem" type="Contained" />
+            <Sound file="Content/Sounds/Damage/StructureCrunch2.ogg" range="600" volume="3.0"/>
+          </StatusEffect>
+          <StatusEffect type="OnUse" target="This" condition="0" delay="0.2" setvalue="true" stackable="false" comparison="And">
+            <Conditional HasStatusTag="neq flushing" />
+            <RequiredItem items="saltbulb" type="Contained" />
+            <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" selectionmode="Random" />
+            <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="2000" selectionmode="Random" />
+            <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="2000" selectionmode="Random" />
+            <Explosion range="50.0" force="5.0" flames="false" underwaterBubble="false" sparks="false" smoke="false" shockwave="true">
+              <Affliction identifier="burn" strength="20" />
+              <Affliction identifier="stun" strength="5" />
+            </Explosion>
+          </StatusEffect>
+          <StatusEffect type="OnUse" target="This" duration="10" tags="flushing" setvalue="true" stackable="false" comparison="And">
+            <Conditional HasStatusTag="neq flushing" />
+            <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/ToiletFlush.ogg" loop="true" range="500" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="0.125" mindeteriorationdelay="120" maxdeteriorationdelay="750" mindeteriorationcondition="0" RepairThreshold="80" fixDurationHighSkill="5" fixDurationLowSkill="25" msg="ItemMsgRepairWrench" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI"/>
+        <RequiredSkill identifier="mechanical" level="55"/>
+        <RequiredItem items="wrench" type="equipped"/>
+        <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+          <Sound file="Content/Items/MechanicalRepairFail.ogg" range="1000" />
+          <Affliction identifier="lacerations" strength="5" />
+          <Affliction identifier="stun" strength="4" />
+        </StatusEffect>
+      </Repairable>
+    </Item>
+    <!-- EMPTY CANS -->
+    <Item name="Empty Can" identifier="he-emptycantonic" description="An empty aluminium can. Can be deconstructed into aluminium or thrown around." category="Misc" Tags="smallitem,emptycan" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_aluminiumcan">
+      <PreferredContainer secondary="wreckcrewcab,wreckstoragecab,wreckstorage,wreckengcab" minamount="1" maxamount="2" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer primary="storagecab" secondary="crewcab"/>
+      <Deconstruct time="1">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="432,488,22,23" depth="0.502" origin="0.5,0.5" />
+      <Body radius="8" height="15" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
+      <Throwable canbepicked="true" characterusable="true" canBeCombined="false" slots="Any,RightHand,LeftHand" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" delay="0.01">
+          <Use />
+        </StatusEffect>
+      </Throwable>
+      <Projectile characterusable="false" launchimpulse="0" impulsespread="0.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodoors="false">
+        <Attack targetimpulse="3" severlimbsprobability="0.0" itemdamage="0" structuredamage="0" structuresoundtype="StructureSlash">
+          <Affliction identifier="blunttrauma" strength="1" />
+          <Affliction identifier="stun" strength="0.2" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget">
+          <Conditional entitytype="Character" />
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="1000" />
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="1000" />
+        </StatusEffect>
+      </Projectile>
+    </Item>
+    <Item name="Empty Can" identifier="he-emptycanenergy1" description="An empty aluminium can. Can be deconstructed into aluminium or thrown around." category="Misc" Tags="smallitem,emptycan" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_aluminiumcan">
+      <PreferredContainer secondary="wreckcrewcab,wreckstoragecab,wreckstorage,wreckengcab" minamount="1" maxamount="2" spawnprobability="0.01" />
+      <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.01" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer primary="storagecab" secondary="crewcab"/>
+      <Deconstruct time="1">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="455,484,19,27" depth="0.502" origin="0.5,0.5" />
+      <Body radius="8" height="19" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
+      <Throwable canbepicked="true" characterusable="true" canBeCombined="false" slots="Any,RightHand,LeftHand" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" delay="0.01">
+          <Use />
+        </StatusEffect>
+      </Throwable>
+      <Projectile characterusable="false" launchimpulse="0" impulsespread="0.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodoors="false">
+        <Attack targetimpulse="3" severlimbsprobability="0.0" itemdamage="0" structuredamage="0" structuresoundtype="StructureSlash">
+          <Affliction identifier="blunttrauma" strength="1" />
+          <Affliction identifier="stun" strength="0.2" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget">
+          <Conditional entitytype="Character" />
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="1000" />
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="1000" />
+        </StatusEffect>
+      </Projectile>
+    </Item>
+    <Item name="Empty Can" identifier="he-emptycancola" description="An empty aluminium can. Can be deconstructed into aluminium or thrown around." category="Misc" Tags="smallitem,emptycan" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_aluminiumcan">
+      <PreferredContainer secondary="wreckcrewcab,wreckstoragecab,wreckstorage,wreckengcab" minamount="1" maxamount="3" spawnprobability="0.03" />
+      <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="3" spawnprobability="0.03" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.03" />
+      <PreferredContainer primary="storagecab" secondary="crewcab"/>
+      <Deconstruct time="1">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="494,480,17,31" depth="0.502" origin="0.5,0.5" />
+      <Body radius="8" height="23" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
+      <Throwable canbepicked="true" characterusable="true" canBeCombined="false" slots="Any,RightHand,LeftHand" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" delay="0.01">
+          <Use />
+        </StatusEffect>
+      </Throwable>
+      <Projectile characterusable="false" launchimpulse="0" impulsespread="0.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodoors="false">
+        <Attack targetimpulse="3" severlimbsprobability="0.0" itemdamage="0" structuredamage="0" structuresoundtype="StructureSlash">
+          <Affliction identifier="blunttrauma" strength="1" />
+          <Affliction identifier="stun" strength="0.2" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget">
+          <Conditional entitytype="Character" />
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="1000" />
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="1000" />
+        </StatusEffect>
+      </Projectile>
+    </Item>
+    <Item name="Empty Can" identifier="he-emptycancolazero" description="An empty aluminium can. Can be deconstructed into aluminium or thrown around." category="Misc" Tags="smallitem,emptycan" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_aluminiumcan">
+      <PreferredContainer secondary="wreckcrewcab,wreckstoragecab,wreckstorage,wreckengcab" minamount="1" maxamount="3" spawnprobability="0.03" />
+      <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="3" spawnprobability="0.03" />
+      <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.03" />
+      <PreferredContainer primary="storagecab" secondary="crewcab"/>
+      <Deconstruct time="1">
+        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      </Deconstruct>
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="475,486,18,25" depth="0.502" origin="0.5,0.5" />
+      <Body radius="8" height="17" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
+      <Throwable canbepicked="true" characterusable="true" canBeCombined="false" slots="Any,RightHand,LeftHand" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" delay="0.01">
+          <Use />
+        </StatusEffect>
+      </Throwable>
+      <Projectile characterusable="false" launchimpulse="0" impulsespread="0.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodoors="false">
+        <Attack targetimpulse="3" severlimbsprobability="0.0" itemdamage="0" structuredamage="0" structuresoundtype="StructureSlash">
+          <Affliction identifier="blunttrauma" strength="1" />
+          <Affliction identifier="stun" strength="0.2" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget">
+          <Conditional entitytype="Character" />
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="1000" />
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="1000" />
+        </StatusEffect>
+      </Projectile>
+    </Item>
+    <!-- TOYS -->
+    <!-- Punch Gun made by UberPendragon (https://steamcommunity.com/profiles/76561197995266558) -->
+    <Item name="Punch-Gun" identifier="punchgun" description="Literally throwing punches!" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/punchgun.png" sourcerect="8,65,115,82" depth="0.55" origin="0.5,0.5" />
+      <PreferredContainer primary="crewcab" secondary="storagecab"/>
+      <Body width="110" height="80" density="25" />
+      <Holdable slots="Any,RightHand+LeftHand" controlpose="False" aimpos="60,-20" handle1="-45,-15" handle2="-45,-30" msg="ItemMsgPickUpSelect" />
+      <RangedWeapon reload="3" launchimpulse="5.0" barrelpos="50,15" spread="0" drawhudwhenequipped="true" crosshairscale="0.2">
+        <!-- <Sound file="Content/Items/Weapons/HarpoonGun1.ogg" type="OnUse" range="1000" /> -->
+        <StatusEffect type="OnUse">
+          <Explosion range="150.0" force="0" shockwave="false" smoke="false" flames="false" flash="false" sparks="false" underwaterbubble="false" camerashake="3" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" delay="0.8" checkconditionalalways="true">
+          <SpawnItem identifier="punch" spawnposition="ThisInventory"/>
+        </StatusEffect>
+      </RangedWeapon>
+      <ItemContainer capacity="1" maxstacksize="1" itempos="80,15" containedspritedepths="0.55" hideitems="false" drawinventory="false" canbeselected="false" removecontaineditemsondeconstruct="true" containedstateindicatorslot="0" containedstateindicatorstyle="spear" spawnwithid="punch">
+        <Containable items="punch" />
+      </ItemContainer>
+    </Item>
+    <Item name="punch" identifier="punch" category="Weapon" maxstacksize="6" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,punch" Scale="0.5" impactsoundtag="impact_metal_light" hideinmenus="false" allowasextracargo="true" noninteractable="true">
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/punchgun.png" sourcerect="371,70,50,53" depth="0.55" origin="0.5,0.5" />
+      <Body width="50" height="50" radius="0" friction="10" density="10" />
+      <Projectile characterusable="false" launchimpulse="5.0" maxtargetstohit="1" HitOnlyCharacters="true">
+        <Attack structuredamage="1" itemdamage="1" targetforce="40" severlimbsprobability="0">
+          <Affliction identifier="blunttrauma" strength="5" />
+          <Affliction identifier="stun" strength="3" />
+          <Affliction identifier="concussion" strength="1" probability="0.1" />
+          <sound file="Content/Sounds/Impact/SoftImpact1.ogg" range="500" />
+          <sound file="Content/Sounds/Impact/SoftImpact2.ogg" range="500" />
+          <sound file="Content/Sounds/Impact/SoftImpact3.ogg" range="500" />
+        </Attack>
+        <StatusEffect type="OnUse" target="This" delay="0.8">
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This" delay="0.5">
+          <Remove />
+        </StatusEffect>
+      </Projectile>
+      <Rope sourcepullforce="1" targetpullforce="1" projectilepullforce="15" maxlength="1000" snaponcollision="false" SnapWhenNotAimed="false" spritewidth="10" tile="true" origin="0.05,0.5" snapanimduration="1">
+        <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/punchgun.png" sourcerect="132,65,230,51" depth="0.57" origin="0.5,0.5" />
+        <StatusEffect type="OnUse" target="This" delay="0.5" projectilepullforce="30" setvalue="True"/>
+      </Rope>
+    </Item>
+    <Item name="Whoopee Cushion" identifier="he-whoopeecushion" Category="Hidden" Tags="smallitem,toy" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,255" requireaimtouse="true" noninteractable="false" hideinmenus="false">
+      <Sprite texture="%ModDir%/Integrations/Hungry Europans/Content/Items/Misc/WhoopeeCushion.png" sourcerect="0,0,45,13" depth="0.55" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir%/Integrations/Hungry Europans/Content/UI/InventoryIcons.png" sourcerect="80,426,85,85" origin="0.5,0.5" />
+      <Body width="38" radius="6" density="9.5" />
+      <Deconstruct time="5" />
+      <Throwable handle1="0,0" slots="Any,RightHand,LeftHand" throwforce="4.0" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnUse" target="This" condition="-3" disabledeltatime="true" interval="0.5">
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart1.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart2.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart3.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart4.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/FartLong1.ogg" range="700" selectionmode="random" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart1.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart2.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart3.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart4.ogg" range="700" selectionmode="random" />
+          <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/FartLong1.ogg" range="700" selectionmode="random" />
+          <Remove />
+        </StatusEffect>
+      </Throwable>
+      <MotionSensor rangex="10" rangey="30" target="Human,Monster" minimumvelocity="1" detectownmotion="false" canbeselected="false">
+        <StatusEffect type="OnUse" target="This" condition="-3" disabledeltatime="true" conditionalcomparison="And" interval="0.5">
+          <Conditional Speed="lt 0.1" />
+          <Conditional IsContained="false" />
+          <Explosion range="20" force="1.0" shockwave="false" smoke="false" flames="false" flash="false" sparks="false" underwaterbubble="false">
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true" conditionalcomparison="And" multiplyafflictionsbymaxvitality="true">
+              <Conditional mass="lt 200"/>
+              <Conditional stun="lte 0"/>
+              <Affliction identifier="stun" strength="0.25" />
+              <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart1.ogg" range="700" selectionmode="random" />
+              <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart2.ogg" range="700" selectionmode="random" />
+              <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart3.ogg" range="700" selectionmode="random" />
+              <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/Fart4.ogg" range="700" selectionmode="random" />
+              <Sound file="%ModDir%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/FartLong1.ogg" range="700" selectionmode="random" />
+            </StatusEffect>
+          </Explosion>
+        </StatusEffect>
+      </MotionSensor>
+    </Item>
+  </Items>
+</Override>

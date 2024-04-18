@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Randomevents>
+    <EventPrefabs>
+    
+      <!--MANAGER MISSIONS-->
+      
+      <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125">
+        <NPCWaitAction npctag="outpostmanager" wait="true" />
+        <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+        <MissionAction missionidentifier="huskmedicalcargo" />
+        <NPCWaitAction npctag="outpostmanager" wait="false" />
+      </ScriptedEvent>
+      
+      <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125">
+        <NPCWaitAction npctag="outpostmanager" wait="true" />
+        <ConversationAction text="EventText.missionevent_huskeggsmuggling.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+        <MissionAction missionidentifier="huskeggsmuggling" />
+        <NPCWaitAction npctag="outpostmanager" wait="false" />
+      </ScriptedEvent>
+      
+      <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="50">
+        <NPCWaitAction npctag="outpostmanager" wait="true" />
+        <ConversationAction text="EventText.missionevent_escorthuskvip.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+        <MissionAction missionidentifier="escorthuskvip" />
+        <NPCWaitAction npctag="outpostmanager" wait="false" />
+      </ScriptedEvent>
+
+      <ScriptedEvent identifier="missionevent_slimecollection" commonness="50">
+        <NPCWaitAction npctag="outpostmanager" wait="true" />
+        <ConversationAction text="EventText.missionevent_slimecollection.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+        <MissionAction missionidentifier="slimecollection" />
+        <NPCWaitAction npctag="outpostmanager" wait="false" />
+      </ScriptedEvent>
+
+      <!--CONDITIONAL MISSIONS-->
+
+      <ScriptedEvent identifier="missionevent_huskcultinterception" commonness="20">
+        <!-- only get this if coalition reputation is high enough -->
+        <CheckDataAction identifier="huskinterceptionmissionnorepeat" condition="eq 0" >
+          <Failure>
+            <!-- does not spawn the event if already done -->
+          </Failure>
+          <Success>
+            <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 30">
+              <Failure>
+                <!-- needs high enough coalition rep -->
+              </Failure>
+              <Success>
+                <TagAction criteria="player" tag="player" />
+                <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="missionnpc" spawnlocation="Outpost" targetmoduletags="adminmodule" />
+                <NPCWaitAction npctag="missionnpc" wait="true" />
+                <TriggerAction target1tag="missionnpc" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true" />
+                <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="true" />
+                <ConversationAction text="EventText.missionevent_huskcultinterception.churchmakesmeds" endeventifinterrupted="false" eventsprite="Separatists">
+                <WaitAction time="5" />
+                  <Option text="EventText.missionevent.Whataboutit">
+                    <ConversationAction text="EventText.missionevent_huskcultinterception.dependentonmeds" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" >
+                      <Option text="EventText.generic.continue">
+                        <ConversationAction text="EventText.missionevent_huskcultinterception.takedowntransport" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" >
+                          <Option text="EventText.missionevent.Consideritdone" endconversation="true">
+                            <MissionAction missionidentifier="huskcultinterception" />
+                          </Option>
+                          <Option text="EventText.missionevent.Notapirate" endconversation="true">   
+                            <ReputationAction targettype="Faction" identifier="separatists" increase="-1" />
+                            <SetDataAction identifier="huskinterceptionmissionnorepeat" value="1"/> 
+                          </Option>                    
+                        </ConversationAction> 
+                      </Option>
+                    </ConversationAction>
+                  </Option>
+                </ConversationAction>
+                <NPCWaitAction npctag="outpostmanager" wait="false" />
+              </Success>
+            </CheckReputationAction>  
+          </Success>
+        </CheckDataAction>
+      </ScriptedEvent>
+      
+      <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="20">
+        <!-- only get this if husk reputation is low -->
+        <CheckReputationAction targettype="faction" identifier="huskcult" condition="lte -15">
+          <Failure>
+            <!-- do nothing if high rep -->
+          </Failure>
+          <Success>
+            <NPCWaitAction npctag="outpostmanager" wait="true" />
+            <ConversationAction text="Eventtext.missionevent_escorthuskterrorist.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+            <MissionAction missionidentifier="escorthuskterrorist" />
+            <NPCWaitAction npctag="outpostmanager" wait="false" />
+          </Success>
+        </CheckReputationAction>  
+      </ScriptedEvent>
+      
+      <ScriptedEvent identifier="missionevent_jailbreak_husk" commonness="80">
+        <CheckReputationAction targettype="faction" identifier="huskcult" condition="gte 30">
+          <Failure>
+            <!-- only get this if husk rep high -->
+          </Failure>
+          <Success>
+            <NPCWaitAction npctag="outpostmanager" wait="true" />
+            <ConversationAction text="EventText.missionevent_jailbreak_husk.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="huskinvite" dialogtype="Small">
+              <Option text="EventText.missionevent.pleasecontinue">
+                <!-- "please continue" -->
+                <ConversationAction text="EventText.missionevent_jailbreak_husk.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="huskinvite" endconversation="true" dialogtype="Small" />
+                <MissionAction missionidentifier="jailbreak_husk" locationtype="City,Military" requiredfaction="" minlocationdistance="1" />
+              </Option>
+            </ConversationAction>
+          </Success>
+        </CheckReputationAction>
+      </ScriptedEvent>
+
+      <!-- Unused. TODO: make the event more interesting -->
+      <!-- <ScriptedEvent identifier="missionevent_poisonchalice" commonness="0">
+        <CheckDataAction identifier="poisonchalicemissionnorepeat" condition="eq 0" >
+          <Failure>
+          </Failure>
+          <Success>
+            <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 30">
+              <Failure>
+              </Failure>
+              <Success>
+                <NPCWaitAction npctag="outpostmanager" wait="true" />
+                <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.majorproblem" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" >
+                  <Option text="EventText.missionevent_assassinatehuskresearcher.whatkindofproblem">
+                    <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.huskpathogen" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="JacovSubra2" endconversation="true" >
+                      <Option text="EventText.missionevent_assassinatehuskresearcher.soundsbad">
+                        <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.missionbrief" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="JacovSubra2" endconversation="true" >
+                          <Option text="EventText.missionevent_assassinatehuskresearcher.Iwilldoit" endconversation="true">
+                            <MissionAction missionidentifier="poisonchalice" locationtype="huskchurch" faction="coalition" requiredfaction="" minlocationdistance="1" />
+                          </Option>
+                          <Option text="EventText.missionevent_assassinatehuskresearcher.Noway" endconversation="true">   
+                            <ReputationAction targettype="Faction" identifier="coalition" increase="-1" />
+                            <SetDataAction identifier="poisonchalicemissionnorepeat" value="1"/> 
+                          </Option>                    
+                        </ConversationAction> 
+                      </Option>
+                    </ConversationAction>
+                  </Option>
+                </ConversationAction>
+                <NPCWaitAction npctag="outpostmanager" wait="false" />
+              </Success>
+            </CheckReputationAction>  
+          </Success>
+        </CheckDataAction>
+      </ScriptedEvent> -->
+
+      <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" commonness="20">
+        <!-- only get this if husk reputation is low -->
+        <CheckDataAction identifier="assassinatehuskresearchernorepeat" condition="eq 0" >
+          <Failure>
+            <!-- does not spawn the event if already done -->
+          </Failure>
+          <Success>
+            <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 40">
+              <Failure>
+                <!-- needs high enough coalition rep -->
+              </Failure>
+              <Success>
+                <NPCWaitAction npctag="outpostmanager" wait="true" />
+                <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" >
+                  <Option text="EventText.missionevent_assassinatehuskresearcher.whatkindofproblem">
+                    <!-- "please continue" -->
+                    <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="JacovSubra2" endconversation="true" >
+                      <Option text="EventText.missionevent_assassinatehuskresearcher.soundsbad">
+                        <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.o1.c2" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="JacovSubra2" endconversation="true" >
+                          <Option text="EventText.missionevent_assassinatehuskresearcher.Iwilldoit" endconversation="true">
+                            <MissionAction missionidentifier="assassinatehuskresearcher" locationtype="huskchurch" faction="coalition" requiredfaction="" minlocationdistance="1" />
+                          </Option>
+                          <Option text="EventText.missionevent_assassinatehuskresearcher.Noway" endconversation="true">   
+                            <ReputationAction targettype="Faction" identifier="coalition" increase="-2" />
+                            <SetDataAction identifier="assassinatehuskresearchernorepeat" value="1"/> 
+                          </Option>                    
+                        </ConversationAction> 
+                      </Option>
+                    </ConversationAction>
+                  </Option>
+                </ConversationAction>
+                <NPCWaitAction npctag="outpostmanager" wait="false" />
+              </Success>
+            </CheckReputationAction>  
+          </Success>
+        </CheckDataAction>
+      </ScriptedEvent>
+
+      <!-- Unused TODO: custom husk beacon/probe -->
+      <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+        <CheckDataAction identifier="beaconhusknorepeat" condition="true">
+          <Success>
+          </Success>
+          <Failure>
+            <NPCWaitAction npctag="huskresearcher" wait="true" />
+            <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
+            <MissionAction missionidentifier="huskbeaconmission" />
+            <SetDataAction identifier="beaconhusknorepeat" value="1"/>
+            <NPCWaitAction npctag="outpostmanager" wait="false" />
+          </Failure>
+        </CheckDataAction>
+      </ScriptedEvent> -->
+
+
+      <ScriptedEvent identifier="missionevent_hiddenandclowngerous" commonness="10">
+        <CheckDataAction identifier="findclownhuskoperativenorepeat" condition="true">
+          <Success>
+            <!-- no repeat -->
+          </Success>
+          <Failure>
+            <CheckReputationAction targettype="faction" identifier="clowns" condition="gte 10">
+              <Success>
+                <TagAction criteria="player" tag="player"/>
+                <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="clown" targettag="clownquestgiver" targetmoduletags="clownmodule" spawnlocation="Outpost" />
+                <Label name="worriedclown" />
+                <TriggerAction target1tag="clownquestgiver" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true"/>
+                <ConversationAction text="EventText.missionevent_hiddenandclowngerous.worriedclown" targettag="triggerer_player" eventsprite="infiltration2">
+                  <Option text="EventText.missionevent_hiddenandclowngerous.steppedonrake" >
+                      <ConversationAction text="EventText.missionevent_hiddenandclowngerous.helpclowns" targettag="triggerer_player" eventsprite="infiltration2">
+                        <Option text="eventtext.generic.continue" >
+                          <ConversationAction text="EventText.missionevent_hiddenandclowngerous.twodaysago" targettag="triggerer_player" eventsprite="infiltration2">
+                            <Option text="EventText.missionevent_hiddenandclowngerous.huskdontlaugh" >
+                              <Label name="husksdontlaugh" />
+                              <ConversationAction text="EventText.missionevent_hiddenandclowngerous.blasphemy" targettag="triggerer_player" eventsprite="infiltration2">
+                                <Option text="EventText.missionevent_hiddenandclowngerous.clownspies" >
+                                  <ConversationAction text="EventText.missionevent_hiddenandclowngerous.takethebikehorn" targettag="triggerer_player" eventsprite="infiltration2">
+                                    <Option text="EventText.missionevent_hiddenandclowngerous.acceptmission" endconversation="true">
+                                      <!-- get mission, set norepeat -->
+                                      <SetDataAction identifier="findclownhuskoperativenorepeat" value="true" />
+                                      <SpawnAction itemidentifier="bikehorn" targetinventory="triggerer_player" />
+                                      <MissionAction missionidentifier="gotohiddenandclowngerous" locationtype="huskchurch" unlockfurtheronmap="true"/>
+                                    </Option >
+                                  </ConversationAction>
+                                </Option >
+                              </ConversationAction>
+                            </Option >
+                            <Option text="EventText.missionevent_hiddenandclowngerous.avoidchurches" >
+                              <Goto name="husksdontlaugh" />
+                            </Option >
+                          </ConversationAction>
+                        </Option >
+                    </ConversationAction>
+                  </Option >
+                  <Option text="EventText.missionevent_hiddenandclowngerous.refusemission" endconversation="true">
+                    <Goto name="worriedclown" />
+                  </Option >
+                </ConversationAction>
+              </Success>
+              <Failure>
+                <!--Do nothing-->
+              </Failure>
+            </CheckReputationAction>
+          </Failure>
+        </CheckDataAction>
+      </ScriptedEvent>
+
+
+      <ScriptedEvent identifier="hiddenandclowngerous" commonness="10">
+        <TagAction criteria="player" tag="player"/>
+        <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
+        <TagAction criteria="itemtag:hornitem" tag="bikehorn" />
+        <SpawnAction npcsetidentifier="husknpcs" npcidentifier="huskcultistsecurity" targettag="headofsecurity" targetmoduletags="adminmodule" offset="150" />
+        <NPCWaitAction npctag="headofsecurity" wait="true" />
+        <ConversationAction text="EventText.hiddenandclowngerous.thisistheplace" targettag="player" eventsprite="infiltration2" dialogtype="Small"/>
+        <Label name="waitforhonks" />
+        <WaitAction time="1" />
+        <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" ApplyTagToLinkedHulls="honkedhull" />
+        <CountTargetsAction targettag="honkedhull" CompareToTarget="anyhull" MinPercentageRelativeToTarget="25">
+          <Success>
+            <TagAction criteria="itemidentifier:opdeco_trashcan" tag="clowntrashcan" submarinetype="outpost" chooserandom="true" />
+            <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" radius="100" />
+            <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.psstoverhere" eventsprite="Infiltration2" />
+            <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true"/>
+            <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.trashfound" eventsprite="Infiltration2" >
+              <Option text="EventText.hiddenandclowngerous.whyintrash" >
+                  <ConversationAction text="EventText.hiddenandclowngerous.hidingobivously" targettag="triggerer_player" eventsprite="infiltration2">
+                    <Option text="EventText.hiddenandclowngerous.whatdidyouexpect" >
+                      <Label name="studiedhusks" />
+                      <ConversationAction text="EventText.hiddenandclowngerous.studiedhusks" targettag="triggerer_player" eventsprite="infiltration2">
+                        <Option text="EventText.hiddenandclowngerous.timetoleave">
+                          <Label name="cantgetout" />
+                          <ConversationAction text="EventText.hiddenandclowngerous.cantgetout">
+                            <Option text="EventText.hiddenandclowngerous.gotosecurity" >
+                              <ConversationAction text="EventText.hiddenandclowngerous.timetonegociate"/>
+                              <Goto name="talktohusksecurity" />
+                            </Option >
+                          </ConversationAction>
+                        </Option >
+                        <Option text="EventText.hiddenandclowngerous.pullnose" >
+                          <Goto name="cantgetout" />
+                        </Option >
+                      </ConversationAction>
+                    </Option>
+                    <Option text="EventText.hiddenandclowngerous.unbelievable" >
+                      <Goto name="studiedhusks" />
+                    </Option >
+                </ConversationAction>
+              </Option>
+            </ConversationAction> 
+          </Success>
+          <Failure>
+            <Goto name="waitforhonks" />
+          </Failure>
+        </CountTargetsAction>
+        <!-- Talk to security. -->
+        <Label name="talktohusksecurity" />
+        <TriggerAction target1tag="player" target2tag="headofsecurity" applytotarget1="playernegociator" waitforinteraction="true" />
+        <NPCFollowAction npctag="headofsecurity" targettag="playernegociator" follow="true" />
+        <ConversationAction text="EventText.hiddenandclowngerous.sternsecurity" targettag="playernegociator" eventsprite="BombScare1">
+          <Option text="EventText.hiddenandclowngerous.heardanysqueaks" >
+            <ConversationAction text="EventText.hiddenandclowngerous.lookingforclown" targettag="playernegociator" eventsprite="infiltration2">
+              <Option text="EventText.hiddenandclowngerous.nofanofclowns" >
+                <ConversationAction text="EventText.hiddenandclowngerous.clownsnottolerated" targettag="playernegociator" eventsprite="infiltration2">
+                  <!-- tell clown to leave -->
+                  <Option text="EventText.hiddenandclowngerous.allowclowntoleave" >
+                    <ConversationAction text="EventText.hiddenandclowngerous.fineclowncanleave" endconversation="true"/>
+                    <!-- go back to the clown -->
+                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                      <Option text="EventText.hiddenandclowngerous.youcango" >
+                        <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
+                        <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
+                        <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                        <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
+                        <ReputationAction targettype="Faction" identifier="huskcult" increase="3" />
+                        <TriggerAction target1tag="clownfiltrator" target2tag="playernegociator" waitforinteraction="true"/>
+                        <ConversationAction text="EventText.hiddenandclowngerous.smellyclown" targettag="playernegociator" eventsprite="infiltration2">
+                          <Option text="EventText.hiddenandclowngerous.joinmycrew" endconversation="true">
+                            <ConversationAction text="EventText.hiddenandclowngerous.joinsthecrew" endconversation="true"/>
+                            <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="true" />
+                          </Option >
+                          <Option text="EventText.hiddenandclowngerous.laughatyourself" endconversation="true">
+                            <ConversationAction text="EventText.hiddenandclowngerous.clowngrateful" endconversation="true"/>    
+                            <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
+                          </Option >
+                        </ConversationAction>
+                      </Option >
+                    </ConversationAction>
+                  </Option >
+                  <!-- path of the pranks -->
+                  <Option text="EventText.hiddenandclowngerous.seennoclown" >
+                    <ConversationAction text="EventText.hiddenandclowngerous.dontbotherme" endconversation="true"/>
+                    <!-- go back to the clown -->
+                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                      <Option text="EventText.hiddenandclowngerous.nonegociation" >
+                        <ConversationAction text="EventText.hiddenandclowngerous.escapeplan" >
+                          <Option text="EventText.hiddenandclowngerous.whatprank" >
+                            <ConversationAction text="EventText.hiddenandclowngerous.givesgrenade" endconversation="true"/>
+                              <SpawnAction itemidentifier="stungrenade" targetinventory="triggerer_player" targettag="prankgrenade" />
+                              <WaitAction time="2" />
+                              <TagAction criteria="itemidentifier:suppliescabinet" tag="prankcabinet" submarinetype="outpost" />
+                              <HighlightAction targettag="prankcabinet" state="true" />
+                              <label name="waitforprank" />
+                              <CheckItemAction targettag="prankcabinet" itemtags="prankgrenade" >
+                                <Success>
+                                  <HighlightAction targettag="prankcabinet" state="false" />
+                                  <NPCFollowAction npctag="headofsecurity" targettag="prankgrenade" follow="true" />
+                                  <StatusEffectAction targettag="prankgrenade">
+                                    <StatusEffect duration="30" noninteractable="true" checkconditionalalways="true" setvalue="true" >
+                                      <Conditional condition="gt 0" />
+                                      <Sound file="Content/Items/Misc/AccordionLoop.ogg" range="1000" volume="2" frequencymultiplier="1.5" loop="true"/>
+                                      <ParticleEmitter particle="shockwavesmall" particlespersecond="5" scalemin="1" scalemax="2" />
+                                    </StatusEffect>
+                                  </StatusEffectAction>
+                                  <TriggerAction target1tag="headofsecurity" target2tag="prankgrenade" radius="250" />
+                                  <ConversationAction text="EventText.hiddenandclowngerous.honkit" targettag="triggerer_player" endconversation="true" dialogtype="Small"/>
+                                  <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" />
+                                  <StatusEffectAction targettag="prankgrenade">
+                                    <StatusEffect delay="1">
+                                      <Use />
+                                      <Remove />
+                                    </StatusEffect>
+                                  </StatusEffectAction>
+                                  <ReputationAction targettype="Faction" identifier="huskcult" increase="-5" />
+                                  <TagAction criteria="itemtag:navterminal" tag="navterminal" submarinetype="player" />
+                                  <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan" teamid="Team1"/>
+                                  <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
+                                  <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                                  <NPCFollowAction npctag="clownfiltrator" targettag="navterminal" follow="true" />
+                                  <ConversationAction text="EventText.hiddenandclowngerous.pathoftrickster" >
+                                    <Option text="EventText.hiddenandclowngerous.clowncanjoin" endconversation="true">
+                                      <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
+                                      <ReputationAction targettype="Faction" identifier="clowns" increase="10" />
+                                      <!-- end -->
+                                    </Option>
+                                  </ConversationAction>
+                                </Success>
+                                <Failure>
+                                  <Waitaction time="2" />
+                                  <Goto name="waitforprank" />
+                                </Failure>
+                              </CheckItemAction>
+                          </Option >
+                        </ConversationAction>
+                      </Option >
+                    </ConversationAction>
+                  </Option >
+                  <!-- sell out the clown -->
+                  <Option text="EventText.hiddenandclowngerous.snitchonclown" >
+                    <ConversationAction text="EventText.hiddenandclowngerous.luretheclown" endconversation="true"/>
+                    <!-- go back to the clown -->
+                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                      <Option text="EventText.hiddenandclowngerous.lietoclown" >
+                        <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
+                      </Option >
+                    </ConversationAction>
+                    <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
+                    <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                    <Label name="waitforhandcuffedclown" />
+                    <CombatAction combatmode="arrest" npctag="headofsecurity" enemytag="clownfiltrator" isinstigator="false" guardreaction="arrest" witnessreaction="none" />
+                    <WaitAction time="2" />
+                    <CombatAction combatmode="retreat" npctag="clownfiltrator" enemytag="headofsecurity" isinstigator="true" guardreaction="arrest" witnessreaction="none" />
+                    <CheckItemAction targettag="clownfiltrator" itemidentifiers="handcuffs" requireequipped="true" >
+                      <Success>
+                        <ConversationAction text="EventText.hiddenandclowngerous.clownarrested" targettag="triggerer_player" eventsprite="infiltration2" endconversation="true"/>
+                        <ReputationAction targettype="Faction" identifier="clowns" increase="-5" />
+                        <ReputationAction targettype="Faction" identifier="huskcult" increase="10" />
+                        <MoneyAction amount="500" />
+                      </Success>
+                      <Failure>
+                        <Waitaction time="2" />
+                        <Goto name="waitforhandcuffedclown" />
+                      </Failure>
+                    </CheckItemAction>
+                  </Option >
+                </ConversationAction>
+              </Option >
+            </ConversationAction>
+          </Option >
+        </ConversationAction>
+        
+        <Label name="end" />
+      </ScriptedEvent>
+
+    </EventPrefabs>
+  </Randomevents>
+</Override>

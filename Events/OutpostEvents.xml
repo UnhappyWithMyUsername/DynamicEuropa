@@ -1,0 +1,1683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<Override>
+<Randomevents>
+
+  <EventSprites>
+    <Sprite identifier="de_oldman" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="34,512,188,255" origin="0.5,0.5" />
+  </EventSprites>
+  
+  <EventPrefabs>
+    <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
+      <WaitAction time="10" />
+      <TagAction criteria="humanprefabidentifier:outpostmanager" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanager" tag="hrmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="reactoroperator" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="merchantmilitary" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="merchantarmory" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="outpostdoctor" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:admin" tag="admin" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:hr" tag="hr" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:reactoroperator" tag="reactoroperator" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:merchantmilitary" tag="merchantmilitary" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:merchantarmory" tag="merchantarmory" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:doctor" tag="doctor" ContinueIfNoTargetsFound="true" />
+      <NPCOperateItemAction npctag="outpostmanager" targettag="admin" ItemComponentName="Controller" operate="true" />
+      <NPCOperateItemAction npctag="hrmanager" targettag="hr" ItemComponentName="Controller" operate="true" />
+      <NPCOperateItemAction npctag="reactoroperator" targettag="reactoroperator" ItemComponentName="Controller" operate="true" />
+      <NPCOperateItemAction npctag="merchantmilitary" targettag="merchantmilitary" ItemComponentName="Controller" operate="true" />
+      <NPCOperateItemAction npctag="merchantarmory" targettag="merchantarmory" ItemComponentName="Controller" operate="true" />
+      <NPCOperateItemAction npctag="outpostdoctor" targettag="doctor" ItemComponentName="Controller" operate="true" />
+      <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="true"/>
+    </ScriptedEvent>
+    <!--     WIP construction event.
+        Make it possible to spawn different outpost types, either via RNGaction or giving different material types, or create a "in progress" construction location that turns into something random
+        add text and sprites
+        TODO: Text -->
+    <ScriptedEvent identifier="Constructionprogress_coalition" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="Hey you! We're running short on materials and the next delivery has been delayed a few days. We don't want to spend more time on this construction site than we have to... You don't happen to have 5 crates of building materials you could spare? We'll pay for them of course!" eventsprite="mines">
+        <Option text="We do. Let me go grab them for you.">
+          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="I am not sure. Let me check our cargo first.">
+          <ConversationAction targettag="triggerer_player" text="Alright! If you happen to find some, deliver them to the cargo unit over there and talk to me once you're done." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="We're not interested in selling.">
+          <ConversationAction targettag="triggerer_player" text="I see... Well if you happen to change your mind, you know where to find me." />
+          <GoTo name="loop" />
+        </Option>
+        <Option text="We're lacking the matierals.">
+          <ConversationAction targettag="triggerer_player" text="I see... Well then I guess we'll have to wait for the official delivery then. Have a nice day!" />
+          <ClearTagAction tag="triggerer_player" />
+          <ClearTagAction tag="contruction_manager" />
+          <!-- end event -->
+          <GoTo name="end" />
+        </Option>
+      </ConversationAction>
+      <Label name="loop" />
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="contruction_manager" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="Oh hey! Did you guys change your mind? We really could use those 5 crates of building materials!" eventsprite="mines">
+        <Option text="Yes, the 5 crates are on their way.">
+          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="No and we won't. Good day to you!" endconversation="true" />
+      </ConversationAction>
+      <Label name="waitingforgoods" />
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="contruction_manager" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="5">
+        <Success>
+          <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 50">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
+                <Option text="Thank you!">
+                  <ConversationAction targettag="triggerer_player" text="Oh and since you're on good terms with us, administration stated to throw the current building plans out and let you decide on what type of station we should build here. So what's it going to be, boss?" eventsprite="mines">
+                    <Option text="A Settlement">
+                      <ModifyLocationAction type="Settlement" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a settlement it is. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Military Base">
+                      <ModifyLocationAction type="Base" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a military base it shall be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Research Station">
+                      <ModifyLocationAction type="Research" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a research station it will be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Hospital">
+                      <ModifyLocationAction type="Hospital" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a settlement it's going to be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
+                <Option text="Thank you!">
+                  <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                  <MoneyAction amount="1000" />
+                  <ReputationAction targettype="Location" increase="5" />
+                  <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                  <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                  <ConversationAction targettag="triggerer_player" text="I'll be returning to work now. Safe travels to you!" />
+                  <!-- 25% chance of any outcome -->
+                  <RNGAction chance="0.50">
+                    <Success>
+                      <RNGAction chance="0.50">
+                        <Success>
+                          <ModifyLocationAction type="Settlement" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Success>
+                        <Failure>
+                          <ModifyLocationAction type="Base" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Failure>
+                      </RNGAction>
+                    </Success>
+                    <Failure>
+                      <RNGAction chance="0.50">
+                        <Success>
+                          <ModifyLocationAction type="Research" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Success>
+                        <Failure>
+                          <ModifyLocationAction type="Hospital" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Failure>
+                      </RNGAction>
+                    </Failure>
+                  </RNGAction>
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+        <Failure>
+          <ConversationAction targettag="triggerer_player" text="I'm afraid that won't be enough. Check your cargo hold and see if can find some more." eventsprite="mines">
+            <Option text="Alright, I'll go check again." endconversation="true">
+              <GoTo name="waitingforgoods" />
+            </Option>
+            <Option text="Sorry, but that's all we got">
+              <ConversationAction targettag="triggerer_player" text="In that case I recommend taking your cargo back. We'll be waiting on the official delivery then instead. But thank you for the offer. Have a nice day!" eventsprite="mines" />
+              <!-- end event -->
+              <GoTo name="end" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckItemAction>
+      <Label name="end" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="Constructionprogress_separatists" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="Hey you! We're running short on materials and the next delivery has been delayed a few days. We don't want to spend more time on this construction site than we have to... You don't happen to have 5 crates of building materials you could spare? We'll pay for them of course!" eventsprite="mines">
+        <Option text="We do. Let me go grab them for you.">
+          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="I am not sure. Let me check our cargo first.">
+          <ConversationAction targettag="triggerer_player" text="Alright! If you happen to find some, deliver them to the cargo unit over there and talk to me once you're done." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="We're not interested in selling.">
+          <ConversationAction targettag="triggerer_player" text="I see... Well if you happen to change your mind, you know where to find me." />
+          <GoTo name="loop" />
+        </Option>
+        <Option text="We're lacking the matierals.">
+          <ConversationAction targettag="triggerer_player" text="I see... Well then I guess we'll have to wait for the official delivery then. Have a nice day!" />
+          <ClearTagAction tag="triggerer_player" />
+          <ClearTagAction tag="contruction_manager" />
+          <!-- end event -->
+          <GoTo name="end" />
+        </Option>
+      </ConversationAction>
+      <Label name="loop" />
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="contruction_manager" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="Oh hey! Did you guys change your mind? We really could use those 5 crates of building materials!" eventsprite="mines">
+        <Option text="Yes, the 5 crates are on their way.">
+          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+          <GoTo name="waitingforgoods" />
+        </Option>
+        <Option text="No and we won't. Good day to you!" endconversation="true" />
+      </ConversationAction>
+      <Label name="waitingforgoods" />
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="contruction_manager" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="5">
+        <Success>
+          <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 50">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
+                <Option text="Thank you!">
+                  <ConversationAction targettag="triggerer_player" text="Oh and since you're on good terms with us, administration stated to throw the current building plans out and let you decide on what type of station we should build here. So what's it going to be, boss?" eventsprite="mines">
+                    <Option text="A Settlement">
+                      <ModifyLocationAction type="Settlement" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a settlement it is. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Military Base">
+                      <ModifyLocationAction type="Base" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a military base it shall be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Research Station">
+                      <ModifyLocationAction type="Research" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a research station it will be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                    <Option text="A Hospital">
+                      <ModifyLocationAction type="Hospital" />
+                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                      <ConversationAction text="Alright, a settlement it's going to be. I'll be returning to work now. Safe travels to you!" />
+                      <MoneyAction amount="1000" />
+                      <ReputationAction targettype="Location" increase="5" />
+                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <ClearTagAction tag="contruction_manager" />
+                      <!-- end event -->
+                      <GoTo name="end" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
+                <Option text="Thank you!">
+                  <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
+                  <MoneyAction amount="1000" />
+                  <ReputationAction targettype="Location" increase="5" />
+                  <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+                  <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
+                  <ConversationAction targettag="triggerer_player" text="I'll be returning to work now. Safe travels to you!" />
+                  <!-- 25% chance of any outcome -->
+                  <RNGAction chance="0.50">
+                    <Success>
+                      <RNGAction chance="0.50">
+                        <Success>
+                          <ModifyLocationAction type="Settlement" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Success>
+                        <Failure>
+                          <ModifyLocationAction type="Base" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Failure>
+                      </RNGAction>
+                    </Success>
+                    <Failure>
+                      <RNGAction chance="0.50">
+                        <Success>
+                          <ModifyLocationAction type="Research" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Success>
+                        <Failure>
+                          <ModifyLocationAction type="Hospital" />
+                          <!-- end event -->
+                          <GoTo name="end" />
+                        </Failure>
+                      </RNGAction>
+                    </Failure>
+                  </RNGAction>
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+        <Failure>
+          <ConversationAction targettag="triggerer_player" text="I'm afraid that won't be enough. Check your cargo hold and see if can find some more." eventsprite="mines">
+            <Option text="Alright, I'll go check again." endconversation="true">
+              <GoTo name="waitingforgoods" />
+            </Option>
+            <Option text="Sorry, but that's all we got">
+              <ConversationAction targettag="triggerer_player" text="In that case I recommend taking your cargo back. We'll be waiting on the official delivery then instead. But thank you for the offer. Have a nice day!" eventsprite="mines" />
+              <!-- end event -->
+              <GoTo name="end" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckItemAction>
+      <Label name="end" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+    </ScriptedEvent>
+
+    <!-- mineralspawner is always noninteractable (even when set to be interactable) and this event will set a random amount to be interactable -->
+    <ScriptedEvent identifier="unlockorenodes" commonness="100">
+      <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
+      <!-- 2/3 chance to delete the ore node -->
+      <!-- 1/3 chance to unlock the ore node -->
+      <StatusEffectAction targettag="orenode">
+        <StatusEffect target="This" spawnitemrandomly="true">
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
+      <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
+      <!-- 3/4 chance to delete the ore node -->
+      <!-- 1/4 chance to unlock the ore node -->
+      <StatusEffectAction targettag="orenode">
+        <StatusEffect target="This" spawnitemrandomly="true">
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="reactoroperatorsale" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <Label name="waitforinput" />
+      <TriggerAction target1tag="reactoroperator" target2tag="player" applytotarget2="ro_trig_player" waitforinteraction="true" />
+      <CheckReputationAction targettype="faction" identifier="coalition" condition="gte -20">
+        <Success>
+          <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.interact" eventsprite="engineer">
+            <Option text="eventtext.shop.engineer.option.fuelrod">
+              <CheckMoneyAction Amount="900">
+                <Success>
+                  <MoneyAction amount="-900" />
+                  <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
+                  <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
+                  <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
+                  <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.fuelrod.buy.success" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.fuelrod.buy.failure" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                  <GoTo name="waitforinput" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.shop.engineer.option.fpga">
+              <CheckMoneyAction Amount="250">
+                <Success>
+                  <MoneyAction amount="-250" />
+                  <SpawnAction itemidentifier="fpgacircuit" targetinventory="ro_trig_player" />
+                  <SpawnAction itemidentifier="fpgacircuit" targetinventory="ro_trig_player" />
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.fpga.buy.success" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.fpga.buy.failure" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                  <GoTo name="waitforinput" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.shop.engineer.option.extinguisher">
+              <CheckMoneyAction Amount="100">
+                <Success>
+                  <MoneyAction amount="-100" />
+                  <SpawnAction itemidentifier="extinguisher" targetinventory="ro_trig_player" />
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.extinguisher.buy.success" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.extinguisher.buy.failure" eventsprite="engineer" />
+                  <ClearTagAction tag="ro_trig_player" />
+                  <GoTo name="waitforinput" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.option.leave">
+              <ConversationAction text="eventtext.general.decline" targettag="ro_trig_player" />
+              <ClearTagAction tag="ro_trig_player" />
+              <GoTo name="waitforinput" />
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.unfriedly" eventsprite="group" />
+          <ClearTagAction tag="ro_trig_player" />
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="quartermaster" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="DE_outpostnpcs" npcidentifier="quartermaster" targettag="quartermaster" spawnlocation="Outpost" />
+      <Label name="waitforinput" />
+      <TriggerAction target1tag="quartermaster" target2tag="player" applytotarget2="qm_trig_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.interact" eventsprite="mechanic">
+        <Option text="eventtext.shop.quartermaster.option.weldingfuel">
+          <CheckMoneyAction Amount="1000">
+            <Success>
+              <MoneyAction amount="-1000" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
+              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.weldingfuel.buy.success" eventsprite="mechanic" />
+              <ClearTagAction tag="qm_trig_player" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.weldingfuel.buy.failure" eventsprite="mechanic" />
+              <ClearTagAction tag="qm_trig_player" />
+              <GoTo name="waitforinput" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="eventtext.shop.quartermaster.option.scrap">
+          <CheckMoneyAction Amount="1000">
+            <Success>
+              <MoneyAction amount="-1000" />
+              <SpawnAction itemidentifier="scrap" targetinventory="qm_trig_player" />
+              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.scrap.buy.success" eventsprite="mechanic" />
+              <MissionAction missiontag="salvagewreck" />
+              <ClearTagAction tag="qm_trig_player" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="mechanic" />
+              <ClearTagAction tag="qm_trig_player" />
+              <GoTo name="waitforinput" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="eventtext.option.leave">
+          <ConversationAction text="eventtext.general.decline" targettag="qm_trig_player" />
+          <ClearTagAction tag="qm_trig_player" />
+          <GoTo name="waitforinput" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    <!--COALITION SECURITY OFFICER
+    <ScriptedEvent identifier="securityofficer" commonness="100">
+      <TagAction criteria="player" tag="player"/>
+      <Label name="restart"/>
+      <TriggerAction target1tag="securitynpc" target2tag="player" applytotarget2="cso_trig_player" radius="200" allowmultipletargets="true"/>
+      <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 20">
+        <Success>
+          <TriggerAction target1tag="securitynpc" target2tag="player" applytotarget2="cso_trig_player" radius="200" waitforinteraction="true"/>
+          <NPCWaitAction npctag="securitynpc" wait="true"/>
+          <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.interact" eventsprite="security">
+            <Option text="eventtext.shop.securityofficer.option.coilgunammo">
+              <CheckMoneyAction Amount="150">
+                <Success>
+                  <MoneyAction amount="-150"/>
+                  <SpawnAction itemidentifier="coilgunammobox" targetinventory="cso_trig_player"/>
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.coilgunammo.buy.success"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.coilgunammo.buy.failure"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                  <GoTo name="restart"/>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.shop.securityofficer.option.revolverammo">
+              <CheckMoneyAction Amount="600">
+                <Success>
+                  <MoneyAction amount="-600"/>
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="revolverround" targetinventory="cso_trig_player" />
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.revolverammo.buy.success"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.revolverammo.buy.failure"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                  <GoTo name="restart"/>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.shop.securityofficer.option.smgmagazine">
+              <CheckMoneyAction Amount="400">
+                <Success>
+                  <MoneyAction amount="-400"/>
+                  <SpawnAction itemidentifier="smgmagazine" targetinventory="cso_trig_player" />
+                  <SpawnAction itemidentifier="smgmagazine" targetinventory="cso_trig_player" />
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.smgmagazine.buy.success"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.shop.securityofficer.option.smgmagazine.buy.failure"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                  <GoTo name="restart"/>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.securityofficer.option.insult">
+              <ReputationAction targettype="Faction" identifier="coalition" increase="-10"/>
+              <ConversationAction text="eventtext.securityofficer.option.insult.answer" targettag="cso_trig_player">
+                <Option text="eventtext.securityofficer.option.insult">
+                  <ReputationAction targettype="Faction" identifier="coalition" increase="-20"/>
+                  <ConversationAction text="eventtext.securityofficer.option.insult.answer.insult.answer" targettag="cso_trig_player"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                  <GoTo name="arrest"/>
+                </Option>
+                <Option text="eventtext.option.leave">
+                  <ConversationAction text="eventtext.securityofficer.option.insult.leave.answer" targettag="cso_trig_player"/>
+                  <NPCWaitAction npctag="securitynpc" wait="false"/>
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="eventtext.option.leave">
+              <ConversationAction text="eventtext.general.decline" targettag="cso_trig_player"/>
+              <NPCWaitAction npctag="securitynpc" wait="false"/>
+              <ClearTagAction tag="cso_trig_player"/>
+              <GoTo name="restart"/>
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <CheckReputationAction targettype="faction" identifier="coalition" condition="gte -60">
+            <Success>
+              <RNGAction chance="0.4">
+                <Success>
+                  <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="true"/>
+                  <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpccoalition" targettag="backup" spawnlocation="Outpost" spawnpointtype="Path"/>
+                  <CheckItemAction targettag="cso_trig_player" RequiredConditionalMatchPercentage="1">
+                    <Conditional HasTag="stolen" targetcontainedItem="true" />
+                    <Success>
+                      <ReputationAction targettype="Faction" identifier="coalition" increase="-10"/>
+                      <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="false"/>
+                      <GoTo name="arrest"/>
+                    </Success>
+                    <Failure>
+                      <ConversationAction text="eventtext.securityofficer.interact" targettag="cso_trig_player">
+                        <Option text="eventtext.securityofficer.option.rude">
+                          <ReputationAction targettype="Faction" identifier="coalition" increase="-1"/>
+                          <ConversationAction text="eventtext.securityofficer.option.rude.answer" targettag="cso_trig_player"/>
+                        </Option>
+                        <Option text="eventtext.securityofficer.option.polite">
+                          <ConversationAction text="eventtext.securityofficer.option.polite.answer" targettag="cso_trig_player"/>
+                        </Option>
+                      </ConversationAction>
+                    </Failure>
+                  </CheckItemAction>
+                  <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.interact" continueconversation="true">
+                    <Option text="eventtext.securityofficer.bribe.option.polite">
+                      <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.polite.answer">
+                        <Option text="eventtext.securityofficer.bribe.option.bribe.high">
+                          <CheckMoneyAction Amount="500">
+                            <Success>
+                              <MoneyAction amount="-500"/>
+                              <ConversationAction text="eventtext.securityofficer.bribe.option.bribe.success" targettag="cso_trig_player"/>
+                              <ReputationAction targettype="Faction" identifier="coalition" increase="1"/>
+                              <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="false"/>
+                              <ClearTagAction tag="cso_trig_player"/>
+                            </Success>
+                            <Failure>
+                              <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.bribe.failure"/>
+                              <GoTo name="arrest"/>
+                            </Failure>
+                          </CheckMoneyAction>
+                        </Option>
+                        <Option text="eventtext.securityofficer.bribe.option.bribe.medium">
+                          <RNGAction chance="0.75">
+                            <Success>
+                              <CheckMoneyAction Amount="250">
+                                <Success>
+                                  <MoneyAction amount="-250"/>
+                                  <ConversationAction text="eventtext.securityofficer.bribe.option.bribe.success" targettag="cso_trig_player"/>
+                                  <ReputationAction targettype="Faction" identifier="coalition" increase="1"/>
+                                  <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="false"/>
+                                  <ClearTagAction tag="cso_trig_player"/>
+                                </Success>
+                                <Failure>
+                                  <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.bribe.failure"/>
+                                  <GoTo name="arrest"/>
+                                </Failure>
+                              </CheckMoneyAction>
+                            </Success>
+                            <Failure>
+                              <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.bribe.rejected"/>
+                              <GoTo name="arrest"/>
+                            </Failure>
+                          </RNGAction>
+                        </Option>
+                        <Option text="eventtext.securityofficer.bribe.option.bribe.low">
+                          <RNGAction chance="0.50">
+                            <Success>
+                              <CheckMoneyAction Amount="75">
+                                <Success>
+                                  <MoneyAction amount="-75"/>
+                                  <ConversationAction text="eventtext.securityofficer.bribe.option.bribe.success" targettag="cso_trig_player"/>
+                                  <ReputationAction targettype="Faction" identifier="coalition" increase="1"/>
+                                  <NPCFollowAction npctag="securitynpc" targettag="cso_trig_player" follow="false"/>
+                                  <ClearTagAction tag="cso_trig_player"/>
+                                </Success>
+                                <Failure>
+                                  <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.bribe.failure"/>
+                                  <GoTo name="arrest"/>
+                                </Failure>
+                              </CheckMoneyAction>
+                            </Success>
+                            <Failure>
+                              <ConversationAction targettag="cso_trig_player" text="eventtext.securityofficer.bribe.option.bribe.rejected"/>
+                              <GoTo name="arrest"/>
+                            </Failure>
+                          </RNGAction>
+                        </Option>
+                        <Option text="eventtext.option.leave">
+                          <ConversationAction text="eventtext.securityofficer.bribe.option.leave.answer" targettag="cso_trig_player"/>
+                          <ClearTagAction tag="cso_trig_player"/>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                    <Option text="eventtext.securityofficer.bribe.option.rude">
+                      <ReputationAction targettype="Faction" identifier="coalition" increase="-5"/>
+                      <CombatAction combatmode="arrest" npctag="securitynpc" enemytag="cso_trig_player" witnessreaction="retreat"/>
+                      <ConversationAction text="eventtext.securityofficer.bribe.option.rude.answer" targettag="cso_trig_player"/>
+                      <ClearTagAction tag="cso_trig_player"/>
+                    </Option>
+                    <Option text="eventtext.option.leave">
+                      <ConversationAction text="eventtext.securityofficer.bribe.option.leave.answer" targettag="cso_trig_player"/>
+                      <GoTo name="arrest"/>
+                    </Option>
+                  </ConversationAction>
+                </Success>
+                <Failure>
+                  <Label name="patrol"/>
+                  <NPCWaitAction npctag="securityofficer" wait="false"/>
+                  <ClearTagAction tag="cso_trig_player"/>
+                </Failure>
+              </RNGAction>
+            </Success>
+            <Failure>
+              <Label name="arrest"/>
+              <CombatAction combatmode="arrest" npctag="securitynpc" enemytag="cso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="retreat"/>
+              <WaitAction time="60"/>
+              <GoTo name="patrol"/>
+            </Failure>
+          </CheckReputationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+    -->
+    
+    
+    <!-- Pirate Divers -->
+    <ScriptedEvent identifier="piratediversoutpost">
+        <!-- TODO: write text -->
+<!--       <CheckReputationAction targettype="faction" identifier="bandits" condition="lte 0">
+        <Success> -->
+          <!-- TODO: Add a conversation with a NPC that tries to stall you and follow you in the outpost? -->
+          <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
+          <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+          <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
+          <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
+          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+          <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" >
+            <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
+              <Label name="dialogstep2" />
+              <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+              <WaitAction time="5" />
+              <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+              <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" >
+                <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" >              
+                  <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
+                    <Label name="dialogstep3" />
+                    <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+                    <WaitAction time="5" />
+                    <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+                    <ConversationAction text="eventtext.piratediversoutpost.offersbooze" >
+                      <Option text="eventtext.piratediversoutpost.takebooze">
+                        <ConversationAction text="eventtext.piratediversoutpost.drinkup" />
+                        <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                        <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                        <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                        <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                        <!-- Go to part 2 -->
+                        <GoTo name="pirateinvaders" />
+                      </Option >
+                      <Option text="eventtext.piratediversoutpost.getthehelloff" >
+                        <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true"  >
+                        <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                          <!-- Go to part 2 -->
+                          <GoTo name="pirateinvaders" />
+                        </ConversationAction>
+                      </Option >
+                    </ConversationAction>
+                  </Option>  
+                  <Option text="eventtext.piratediversoutpost.dontcare" endconversation="true" >
+                    <GoTo name="dialogstep3" />
+                  </Option >
+                </ConversationAction>
+              </ConversationAction>  
+            </Option >
+            <Option text="eventtext.piratediversoutpost.buggeroff" endconversation="true" >
+              <GoTo name="dialogstep2" />
+            </Option >
+          </ConversationAction>
+          <!-- part 2: pirates invade -->
+          <Label name="pirateinvaders" />
+          <WaitAction time="3" />
+          <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
+          <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
+          <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
+          <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false" ContinueAutomatically="true" />
+          <WaitAction time="3" />
+          <StatusEffectAction targettag="piratediver">
+            <StatusEffect target="this" >
+              <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="sonar"/>
+          <WaitAction time="2" />
+          <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
+          <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
+          <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
+          <!-- use spoken dialogue if ever implemented -->
+          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="sonar" ContinueAutomatically="true"/>
+          <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
+          <Label name="combatrefresh" />
+          <TagAction criteria="player" tag="player" />
+          <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+          <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+          <WaitAction time="5" />
+          <GoTo name="combatrefresh" />
+<!--         </Success>
+        <Failure>
+        </Failure>
+      </CheckReputationAction> -->
+    </ScriptedEvent>
+    
+    <!-- PIRATE SECURITY OFFICER -->
+    <ScriptedEvent identifier="piratesecurityofficer" commonness="100">
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="securitynpcpirate" targettag="dockingguard" spawnlocation="Outpost" targetmoduletags="airlock" />
+      <NPCWaitAction npctag="dockingguard" wait="true" />
+      <TagAction criteria="player" tag="player" />
+      <Label name="patrol" />
+      <TriggerAction target1tag="securitynpcpirate" target2tag="player" applytotarget2="pso_trig_player" radius="500" />
+        <CheckReputationAction targettype="faction" identifier="coalition" condition="lt 20">
+          <Success>
+            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
+            <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
+            <Label name="psooptions" />
+            <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact">
+              <!-- Pay the toll, get in, + reputation -->
+              <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high">
+                <CheckMoneyAction Amount="1000">
+                  <Success>
+                    <MoneyAction amount="-1000" />
+                    <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success" targettag="pso_trig_player" />
+                    <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
+                    <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
+                      <!-- Option to pay extra to lower your coalition reputation? -->
+                      <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy">
+                        <CheckMoneyAction Amount="1000">
+                          <Success>
+                            <MoneyAction amount="-1000" />
+                            <ReputationAction targettype="Faction" identifier="coalition" increase="-5" />
+                            <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
+                            <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
+                            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                            <ClearTagAction tag="pso_trig_player" />
+                          </Success>
+                          <Failure>
+                            <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.failure" />
+                            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                            <ClearTagAction tag="pso_trig_player" />
+                          </Failure>
+                        </CheckMoneyAction>
+                      </Option>
+                      <Option text="eventtext.option.leave">
+                        <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
+                        <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                        <ClearTagAction tag="pso_trig_player" />
+                      </Option>
+                    </ConversationAction>
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.high.failure" />
+                    <GoTo name="psooptions" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <!-- Haggle (helm skill check, get in but failure locks armory) -->
+              <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.medium">
+                <CheckMoneyAction Amount="750">
+                  <Success>
+                    <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
+                      <Success>
+                        <MoneyAction amount="-750" />
+                        <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.success" targettag="pso_trig_player" />
+                        <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                        <ClearTagAction tag="pso_trig_player" />
+                      </Success>
+                      <Failure>
+                        <MoneyAction amount="-750" />
+                        <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.failure" />
+                        <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                        <ClearTagAction tag="pso_trig_player" />              
+                        <TriggerEventAction identifier="piratearmorylocked" />
+                      </Failure>
+                    </SkillCheckAction>
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
+                    <GoTo name="psooptions" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>    
+              <!-- Plead. -reputation (very low success chance), no armory. If no money, attack -->
+              <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low">
+                <CheckMoneyAction Amount="250">
+                  <Success>
+                    <SkillCheckAction requiredskill="helm" requiredlevel="100" targettag="pso_trig_player">
+                      <Success>
+                        <MoneyAction amount="-250" />
+                        <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.low.success" targettag="pso_trig_player" />
+                        <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                        <ClearTagAction tag="pso_trig_player" />
+                        <TriggerEventAction identifier="piratearmorylocked" />
+                      </Success>
+                      <Failure>
+                        <MoneyAction amount="-250" />
+                        <CheckItemAction targettag="pso_trig_player" itemtags="clothing" applytagtoitem="playerclothes">
+                          <Success>
+                            <Label name="removeclothes" />
+                            <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.undress" >
+                              <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low.UhOh" >
+                                <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.failure" fadetoblack="true" ContinueAutomatically="true" />
+                                <Waitaction time="1" />
+                                <AfflictionAction targettag="pso_trig_player" affliction="stun" strength="6" />
+                                <AfflictionAction targettag="pso_trig_player" affliction="blunttrauma" strength="3" limbtype="head" />
+                                <StatusEffectAction targettag="playerclothes">
+                                  <StatusEffect target="This" spawnedincurrentoutpost="true" allowstealing="false" setvalue="true">
+                                    <DropItem />
+                                  </StatusEffect>
+                                </StatusEffectAction>
+                                <StatusEffectAction targettag="pso_trig_player">
+                                  <StatusEffect target="This" >
+                                    <Sound file="Content/Sounds/Damage/Limbblunt4.ogg" range="800" volume="2" frequencymultiplier="1" />
+                                    <Sound file="Content/Sounds/Impact/SoftImpact1.ogg" range="800" volume="3" frequencymultiplier="1" />
+                                    <Sound file="Content/Items/Medical/Bandage2.ogg" range="800" volume="2" frequencymultiplier="0.5" />
+                                  </StatusEffect>
+                                </StatusEffectAction>
+                                <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
+                                <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                                <ClearTagAction tag="pso_trig_player" />
+                                <TriggerEventAction identifier="piratearmorylocked" />
+                              </Option>
+                            </ConversationAction>
+                          </Success>
+                          <Failure>
+                            <Goto name="removeclothes" />
+                          </Failure>
+                          </CheckItemAction >
+                      </Failure>
+                    </SkillCheckAction>
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.rejected" />
+                    <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
+                    <GoTo name="attack" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.piratesecurityofficer.toll.option.insult">
+                <ReputationAction targettype="Location" increase="-30" />
+                <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
+                <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
+                <GoTo name="attack" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- If large coalition rep -->
+            <CheckReputationAction targettype="faction" identifier="coalition" condition="lt 60">
+              <Success>
+                <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
+                <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
+                <Label name="psooptions2" />
+                <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact">
+                  <!-- Pay the toll, get in, + reputation -->
+                  <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high">
+                    <CheckMoneyAction Amount="2000">
+                      <Success>
+                        <MoneyAction amount="-2000" />
+                        <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success" targettag="pso_trig_player" />
+                        <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
+                        <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
+                        <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
+                          <!-- Option to pay extra to lower your coalition reputation? -->
+                          <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy">
+                            <CheckMoneyAction Amount="1000">
+                              <Success>
+                                <MoneyAction amount="-1000" />
+                                <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
+                                <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
+                                <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
+                                <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                                <ClearTagAction tag="pso_trig_player" />
+                              </Success>
+                              <Failure>
+                                <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.failure" />
+                                <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                                <ClearTagAction tag="pso_trig_player" />
+                              </Failure>
+                            </CheckMoneyAction>
+                          </Option>
+                          <Option text="eventtext.option.leave">
+                            <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
+                            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                            <ClearTagAction tag="pso_trig_player" />
+                          </Option>
+                        </ConversationAction>
+                      </Success>
+                      <Failure>
+                        <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.high.failure" />
+                        <GoTo name="psooptions2" />
+                      </Failure>
+                    </CheckMoneyAction>
+                  </Option>
+                  <!-- Haggle (helm skill check, get in but failure locks armory) -->
+                  <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.medium">
+                    <CheckMoneyAction Amount="1500">
+                      <Success>
+                        <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
+                          <Success>
+                            <MoneyAction amount="-1500" />
+                            <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.success" targettag="pso_trig_player" />
+                            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                            <ClearTagAction tag="pso_trig_player" />
+                          </Success>
+                          <Failure>
+                            <MoneyAction amount="-1500" />
+                            <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.failure" />
+                            <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
+                            <ClearTagAction tag="pso_trig_player" />              
+                            <TriggerEventAction identifier="piratearmorylocked" />
+                          </Failure>
+                        </SkillCheckAction>
+                      </Success>
+                      <Failure>
+                        <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
+                        <GoTo name="psooptions2" />
+                      </Failure>
+                    </CheckMoneyAction>
+                  </Option>    
+                  <Option text="eventtext.piratesecurityofficer.toll.option.insult">
+                    <ReputationAction targettype="Location" increase="-30" />
+                    <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
+                    <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
+                    <Label name="attack" />
+                    <ConversationAction text="eventtext.piratesecurityofficer.attack" targettag="pso_trig_player" />
+                    <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
+                    <WaitAction time="60" />
+                    <ClearTagAction tag="pso_trig_player" />
+                    <GoTo name="patrol" />
+                  </Option>
+                </ConversationAction>
+              </Success>
+            </CheckReputationAction>
+          </Failure>
+        </CheckReputationAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="piratearmorylocked">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:armorybutton" tag="armorybutton" SubmarineType="Outpost" ContinueIfNoTargetsFound="false"  />
+      <TagAction criteria="itemtag:armorydoor" tag="armorydoor" SubmarineType="Outpost" ContinueIfNoTargetsFound="false"  />
+      <SetDataAction identifier="armorylocked" value="1" />
+      <StatusEffectAction targettag="armorybutton">
+        <StatusEffect target="this" noninteractable="true" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="armorydoor">
+        <StatusEffect target="this" IsOpen="false" setvalue="true" />
+      </StatusEffectAction>
+      <TriggerEventAction identifier="piratearmoryalarm" />
+      <TriggerAction target1tag="player" target2tag="armorydoor" applytotarget1="triggerer_player" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.doorlocked">
+        <Option text="eventtext.piratearmorylocked.howmuch" >
+          <GoTo name="payarmoryskiptrigger" />
+          <Label name="payarmory" />
+          <TriggerAction target1tag="player" target2tag="armorydoor" applytotarget1="triggerer_player" waitforinteraction="true" />
+          <Label name="payarmoryskiptrigger" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.500mk">
+            <Option text="eventtext.piratearmorylocked.Pay">
+              <CheckMoneyAction Amount="500">
+                <Success>
+                  <MoneyAction amount="-500" />
+                  <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.dooropens" />
+                  <StatusEffectAction targettag="armorybutton" >
+                    <StatusEffect target="this" noninteractable="false" setvalue="true" />
+                  </StatusEffectAction>
+                  <SetDataAction identifier="armorylocked" value="0" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratearmorylocked.nomoney" endconversation="true" />
+                  <GoTo name="payarmory" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.piratearmorylocked.noway">
+              <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.comeback" endconversation="true" />
+              <Goto name="payarmory"/>
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="piratearmoryalarm">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:armorydoor" tag="armorydoor" SubmarineType="Outpost" />
+      <TagAction criteria="hullname:armory" tag="armory" submarinetype="Outpost" />
+      <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
+      <TriggerAction target1tag="player" target2tag="armory" applytotarget1="triggerer_player" radius="10" waitforinteraction="false" />
+      <CheckDataAction identifier="armorylocked" condition="eq 0">
+        <Success>
+          <!-- Do nothing -->
+        </Success>
+        <Failure>
+          <StatusEffectAction targettag="alarm">
+            <StatusEffect IsOn="true" target="This" setvalue="true" />
+          </StatusEffectAction>
+          <ConversationAction text="eventtext.piratearmoryalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+          <ReputationAction targettype="Location" increase="-30" />
+          <StatusEffectAction targettag="armorydoor">
+            <StatusEffect target="this" IsOpen="true" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+      
+    <ScriptedEvent identifier="piratemissioninformant" commonness="100">
+      <Label name="CheckData" />
+      <WaitAction time="2" />
+      <CheckDataAction identifier="pirateoutpostdestruction" condition="eq 1">
+        <Success>
+          <Goto name="CheckData" />
+        </Success>
+        <Failure>
+          <Goto name="Start" />
+        </Failure>
+      </CheckDataAction>
+      <Label name="Start" />
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="outpostmanagerpirate" targettag="managerpirate" spawnlocation="Outpost" spawnpointtag="pirateadmin" />
+      <Label name="waitforinput" />
+      <TriggerAction target1tag="managerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="de_oldman">
+        <Option text="eventtext.piratemissioninformant.option.buy">
+          <CheckMoneyAction Amount="1000">
+            <Success>
+              <MoneyAction amount="-1000" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="de_oldman" />
+              <MissionAction missiontag="coalitionciv" />
+              <ClearTagAction tag="pmi_trig_player" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="de_oldman" />
+              <ClearTagAction tag="pmi_trig_player" />
+              <GoTo name="waitforinput" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="eventtext.option.leave">
+          <ConversationAction text="eventtext.general.decline" targettag="pmi_trig_player" />
+          <ClearTagAction tag="pmi_trig_player" />
+          <GoTo name="waitforinput" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent.piratevscoalition" commonness="200">
+      <NPCWaitAction npctag="managerpirate" wait="true" />
+      <ConversationAction text="EventText.missionevent.piratevscoalition.c1" speakertag="managerpirate" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="piratevscoalition" />
+      <NPCWaitAction npctag="managerpirate" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent.piratevsseparatists" commonness="200">
+      <NPCWaitAction npctag="managerpirate" wait="true" />
+      <ConversationAction text="EventText.missionevent.piratevsseparatists.c1" speakertag="managerpirate" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="piratevsseparatists" />
+      <NPCWaitAction npctag="managerpirate" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent.clearlair" commonness="85">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="EventText.missionevent_lair.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="lair" />
+      <MissionAction missiontag="lair" minlocationdistance="2" unlockfurtheronmap="true" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    
+    
+    <!-- Mission Events -->
+    <ScriptedEvent identifier="missionevent_pirateany" commonness="100">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="eventtext.missionevent_piratemission1.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="piratemission" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="eventtext.missionevent_piratemission1.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="heavypirate" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent_pirateparty" commonness="100">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="eventtext.missionevent_piratemission2.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="partypirate" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent_piratestrange" commonness="100">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="eventtext.missionevent_piratemission3.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="strangepirate" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="missionevent_killmonster_thegreatsea" commonness="85">
+      <NPCWaitAction npctag="outpostmanager" wait="true" />
+      <ConversationAction text="eventtext.missionevent_killmonster_regional.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
+      <MissionAction missiontag="killmonster_thegreatsea" />
+      <NPCWaitAction npctag="outpostmanager" wait="false" />
+    </ScriptedEvent>
+    
+  
+    <!-- BROKEN NOT USED spawns minerals by replacing the mineralspawners with a random one and attaching them to wall via statuseffect -->
+    <!-- <ScriptedEvent identifier="spawnrandomminerals" commonness="100">
+      <TagAction criteria="itemidentifier:mineralspawner" tag="mineralspawnpoint" SubmarineType="Outpost" ContinueIfNoTargetsFound="false" />
+      <StatusEffectAction targettag="mineralspawnpoint">
+        <StatusEffect target="This" spawnitemrandomly="true">
+          <SpawnItem identifier="bornite" spawnposition="This" count="1" rotationtype="Target" targettag="spawnedmineral" />
+          <SpawnItem identifier="brockite" spawnposition="This" count="1" rotationtype="Target" targettag="spawnedmineral" />
+          <Remove/>
+        </StatusEffect>
+      </StatusEffectAction>
+      <StatusEffectAction targettag="spawnedmineral">
+        <StatusEffect target="this" attached="true" setvalue="true" >
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent> -->
+    
+    
+    <!--"Unlock Path blockade (generic template, versions by biome/cost below)"
+         Only used for negociating and disabling the alarm, the actual event is openblockade -->
+         
+    <ScriptedEvent identifier="unlockpathblockade" commonness="0" unlockpathevent="true">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
+        <Success>
+          <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgeneric.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgeneric.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpathgeneric.o2">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+    
+    
+    <ScriptedEvent identifier="unlockpathcoldcaverns" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="30" faction="coalition" biome="coldcaverns">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
+        <Success>
+          <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathcoldcaverns.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathcoldcaverns.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpatheuropanridge" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="40" faction="coalition" biome="europanridge">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 40">
+        <Success>
+          <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpatheuropanridge.o1">
+              <CheckMoneyAction amount="4000">
+                <Success>
+                  <MoneyAction amount="-4000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpathaphoticplateau" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="50" faction="coalition" biome="theaphoticplateau">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 50">
+        <Success>
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathaphoticplateau.o1">
+              <CheckMoneyAction amount="8000">
+                <Success>
+                  <MoneyAction amount="-8000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpathgreatsea" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="75" faction="coalition" biome="thegreatsea">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 75">
+        <Success>
+          <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgreatsea.o1">
+              <CheckMoneyAction amount="16000">
+                <Success>
+                  <MoneyAction amount="-16000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
+        <Success>
+          <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="eventtext.unlockpathcoldcavernsseparatists.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathcoldcaverns.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 40">
+        <Success>
+          <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpatheuropanridge.o1">
+              <CheckMoneyAction amount="4000">
+                <Success>
+                  <MoneyAction amount="-4000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 50">
+        <Success>
+          <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathaphoticplateau.o1">
+              <CheckMoneyAction amount="8000">
+                <Success>
+                  <MoneyAction amount="-8000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 75">
+        <Success>
+          <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
+        </Success>
+        <Failure>
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgreatsea.o1">
+              <CheckMoneyAction amount="16000">
+                <Success>
+                  <MoneyAction amount="-16000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
+                  <GoTo name="retry" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>
+    
+    
+    <!-- simple event that unlocks the path by flicking a lever -->
+    <ScriptedEvent identifier="openblockade" commonness="1" >
+      <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
+      <TutorialHighlightAction targettag="blockadeswitch" />
+      <Label name="retry"/>
+      <CheckConditionalAction targettag="blockadeswitch" targetitemcomponent="Controller" State="True" >
+        <Success>
+          <StatusEffectAction targettag="blockadeswitch">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <StatusEffectAction targettag="blockadeswitch">
+            <StatusEffect target="this" >
+              <Sound file="Content/Items/Door/Door2.ogg" range="5000" volume="3" frequencymultiplier="0.25" />
+              <Explosion range="5000.0" camerashake="2" stun="0" force="0.0" flames="false" smoke="false" flash="false" shockwave="false" sparks="false" underwaterbubble="false" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <UnlockPathAction />
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <Goto name="retry"/>
+        </Failure>
+      </CheckConditionalAction>
+    </ScriptedEvent>
+    
+    <!-- triggers alarm if it detects a player in the blockade hulls without negociating with NPC -->
+    <ScriptedEvent identifier="blockadealarm">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:commandroom" tag="blockadehull" submarinetype="Outpost" />
+      <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+      <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" waitforinteraction="false" />
+      <CheckDataAction identifier="blockadeopened" condition="eq 1">
+        <Success>
+          <!-- Do nothing -->
+        </Success>
+        <Failure>
+          <StatusEffectAction targettag="alarm">
+            <StatusEffect IsOn="true" target="This" setvalue="true" />
+          </StatusEffectAction>
+          <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+          <StatusEffectAction targettag="blockadehull">
+            <StatusEffect target="this" duration="3" >
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ReputationAction targettype="Location" increase="-25" />
+          <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    
+  </EventPrefabs>
+</Randomevents>
+</Override>
