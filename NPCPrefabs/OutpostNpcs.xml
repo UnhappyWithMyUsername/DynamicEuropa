@@ -198,6 +198,20 @@
         </Item>
       </ItemSet>
     </npc>
+    <!-- doctor is the same as vanilla, but instead of checking for a specific outpost module and then limiting that NPC to that module only, it checks for a spawnpoint tag instead to allow for custom placement -->
+    <npc identifier="de_outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="medicalofficerclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
     <npc identifier="quartermaster" job="mechanic" spawnpointtags="shop" commonness="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="headset" equip="true">
@@ -236,89 +250,6 @@
         <Item identifier="divingmask" equip="false">
           <Item identifier="oxygentank" />
         </Item>
-      </ItemSet>
-    </npc>
-    <npc identifier="tailor" job="assistant" spawnpointtags="shop" commonness="1" behavior="StayInHull">
-      <ItemSet commonness="1">
-        <Item identifier="headset" equip="true">
-          <Item identifier="batterycell" />
-        </Item>
-        <Item identifier="crewchiefclothes" equip="true" />
-        <Item identifier="idcard" equip="true" />
-        <Item identifier="stungun">
-          <Item identifier="stungundart" />
-          <Item identifier="stungundart" />
-        </Item>
-        <Item identifier="stungundart" />
-        <Item identifier="stungundart" />
-        <Item identifier="stungundart" />
-        <Item identifier="stungundart" />
-        <Item identifier="stungundart" />
-        <Item identifier="stungundart" />
-        <Item identifier="divingmask" equip="false">
-          <Item identifier="oxygentank" />
-        </Item>
-      </ItemSet>
-    </npc>
-    <npc identifier="botanist" job="medicaldoctor" spawnpointtags="research" commonness="1" healthmultiplier="0.8" behavior="StayInHull">
-      <ItemSet commonness="1">
-        <Item identifier="headset" equip="true">
-          <Item identifier="batterycell" />
-        </Item>
-        <Item identifier="greenjumpsuit" equip="true" />
-        <Item identifier="idcard" equip="true" />
-        <Item identifier="wrench" equip="false" />
-        <Item identifier="screwdriver" equip="false" />
-        <Item identifier="fertilizer" equip="true" />
-        <Item identifier="divingmask">
-          <Item identifier="oxygentank" />
-        </Item>
-        <Item identifier="toolbelt">
-          <Item identifier="weldingfueltank" />
-          <Item identifier="weldingtool">
-            <Item identifier="weldingfueltank" />
-          </Item>
-        </Item>
-      </ItemSet>
-    </npc>
-    <npc identifier="pharmacist" job="medicaldoctor" spawnpointtags="medical" commonness="1" healthmultiplier="0.8" behavior="StayInHull">
-      <ItemSet commonness="1">
-        <Item identifier="medicalofficerclothes" equip="true" />
-        <Item identifier="healthscanner" equip="true" />
-        <Item identifier="idcard" equip="true" />
-        <Item identifier="antibloodloss1" />
-        <Item identifier="antibloodloss1" />
-        <Item identifier="opium" />
-        <Item identifier="opium" />
-        <Item identifier="divingmask">
-          <Item identifier="oxygentank" />
-        </Item>
-      </ItemSet>
-    </npc>
-    <npc identifier="gunsmith" job="mechanic" spawnpointtags="shop" commonness="1" behavior="StayInHull">
-      <ItemSet commonness="1">
-        <Item identifier="headset" equip="true">
-          <Item identifier="batterycell" />
-        </Item>
-        <Item identifier="quartermasterclothes" equip="true" />
-        <Item identifier="idcard" equip="true" tags="safecard1a" />
-        <Item identifier="divingmask" equip="true">
-          <Item identifier="oxygentank" />
-        </Item>
-        <Item identifier="grenadelauncher" equip="true">
-          <Item identifier="40mmgrenade" />
-        </Item>
-        <Item identifier="revolver">
-          <Item identifier="revolverround" />
-          <Item identifier="revolverround" />
-          <Item identifier="revolverround" />
-          <Item identifier="revolverround" />
-          <Item identifier="revolverround" />
-          <Item identifier="revolverround" />
-        </Item>
-        <Item identifier="40mmgrenade" />
-        <Item identifier="40mmgrenade" />
-        <Item identifier="baseballcap" equip="true" />
       </ItemSet>
     </npc>
   </npcset>
