@@ -446,6 +446,10 @@
         <ScriptedEvent identifier="radiationescapee" commonness="50" />
       </EventSet>
       
+      <!--Always trigger when past difficulty 25, unless completed. Introduces alien ruins.-->
+      <EventSet identifier="ruinintroduction" allowatstart="true" minleveldifficulty="25">
+        <ScriptedEvent identifier="badvibrations1" />
+      </EventSet>
       
       <!-- Vanilla Mission Event sets -->
       <EventSet identifier="missionevents.coldcaverns.start" minleveldifficulty="0" maxleveldifficulty="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" eventcount="3" chooserandom="false" exhaustible="true">
@@ -510,6 +514,7 @@
           </EventSet>
           <EventSet identifier="missionevents.europanridge.basic.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_salvagewreck" commonness="100" />
+            <ScriptedEvent identifier="missionevent_salvagewreckcargo" commonness="100" />
           </EventSet>
           <EventSet identifier="missionevents.europanridge.basic.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_crawlernest" commonness="75" />
@@ -544,6 +549,8 @@
           </EventSet>
           <EventSet identifier="missionevents.europanridge.advanced.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_salvagewreck" />
+            <ScriptedEvent identifier="missionevent_salvagewreckcargo" />
+            <ScriptedEvent identifier="missionevent_salvagewreckartifact" />
           </EventSet>
           <EventSet identifier="missionevents.europanridge.advanced.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_crawlernest" commonness="50" />
@@ -585,7 +592,9 @@
           </EventSet>
           <EventSet identifier="missionevents.theaphoticplateau.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_salvageartifact" commonness="50" />
-            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="50" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckcargo" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckartifact" commonness="15" />
           </EventSet>
           <EventSet identifier="missionevents.theaphoticplateau.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
@@ -630,7 +639,9 @@
           <EventSet identifier="missionevents.greatsea.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_salvageartifact" commonness="40" />
             <ScriptedEvent identifier="missionevent_salvageartifactabyss" commonness="20" />
-            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="40" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckcargo" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckartifact" commonness="15" />
           </EventSet>
           <EventSet identifier="missionevents.greatsea.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="33" />
@@ -676,7 +687,9 @@
           <EventSet identifier="missionevents.wastes.general.salvage" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_salvageartifact" commonness="40" />
             <ScriptedEvent identifier="missionevent_salvageartifactabyss" commonness="20" />
-            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="40" />
+            <ScriptedEvent identifier="missionevent_salvagewreck" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckcargo" commonness="15" />
+            <ScriptedEvent identifier="missionevent_salvagewreckartifact" commonness="15" />
           </EventSet>
           <EventSet identifier="missionevents.wastes.general.nest" chooserandom="true" commonness="100" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true">
             <ScriptedEvent identifier="missionevent_crawlernest_hard" commonness="20" />
@@ -750,8 +763,9 @@
         <ScriptedEvent identifier="piratesecurityofficer" commonness="100" />
       </EventSet> -->
       <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="piratemissioninformant" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="piratediversoutpost" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="piratemissioninformant" commonness="40" />
+        <ScriptedEvent identifier="piratediversoutpost" commonness="40" />
+        <ScriptedEvent identifier="jobboardhabitation" commonness="20" />
       </EventSet>
       <!-- MissionEvents specific to pirate outposts 
       <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
