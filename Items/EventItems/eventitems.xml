@@ -25,19 +25,20 @@
     </Item>
     <!-- Construction Materials -->
     <Item name="Construction Material Crate" identifier="constructionmaterialcrate" tags="crate,constructionmaterials" description="A crate full of construction materials. Can be delivered to construction sites." scale="0.5" impactsoundtag="impact_metal_heavy">
-      <Sprite texture="Content/Items/Containers/containers.png" depth="0.54" sourcerect="407,376,152,89" origin="0.5,0.5" />
-      <Body width="150" height="75" density="25" />
+      <PreferredContainer primary="cargocontainer" spawnprobability="0.2" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="0,0,146,82" origin="0.5,0.5" />
+      <Body width="144" height="78" density="25" />
       <Fabricate time="15" suitablefabricators="fabricator">
-        <RequiredItem identifier="iron" amount="10"/>
-        <RequiredItem identifier="lead" amount="10"/>
-        <RequiredItem identifier="copper" amount="10"/>
-        <RequiredItem identifier="titanium" amount="10"/>
+        <RequiredItem identifier="iron" amount="6"/>
+        <RequiredItem identifier="lead" amount="6"/>
+        <RequiredItem identifier="copper" amount="6"/>
+        <RequiredItem identifier="steel" amount="6"/>
       </Fabricate>
       <Deconstruct time="10" requreddeconstructor="deconstructor">
-        <Item identifier="iron" amount="8" />
-        <Item identifier="lead" amount="8" />
-        <Item identifier="copper" amount="8" />
-        <Item identifier="titanium" amount="8" />
+        <Item identifier="iron" amount="3" />
+        <Item identifier="lead" amount="3" />
+        <Item identifier="copper" amount="3" />
+        <Item identifier="steel" amount="3" />
       </Deconstruct>
       <Holdable canbepicked="true" slots="RightHand+LeftHand" holdpos="0,-80" handle1="0,0" handle2="0,0" aimable="false" msg="ItemMsgPickUpSelect" />
     </Item>
@@ -92,8 +93,8 @@
     <!-- Kazuya Kumo Items -->
     <Item name="Kumo's Radio" identifier="kazuyakumoradio" Tags="smallitem,kumoradio" category="Misc" description="A radio Kazuya Kumo gave to you with a pre-configured frequency to call in a favor from her when docked to a separatist station." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
       <PreferredContainer primary="crewcab" secondary="locker" />
-      <InventoryIcon texture="%ModDir%/Items/EventItems/Radio.png" sourcerect="0,0,61,52" origin="0.5,0.5" />
-      <Sprite texture="%ModDir%/Items/EventItems/Radio.png" sourcerect="62,25,64,27" depth="0.55" />
+      <InventoryIcon texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
       <Body width="64" height="24" density="30" />
       <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnUse" target="This" oneshot="true" stackable="false">
@@ -111,9 +112,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -133,9 +134,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -155,9 +156,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -177,9 +178,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -199,9 +200,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -221,9 +222,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -243,9 +244,9 @@
         <Item identifier="ballisticfiber" mincondition="0.5" />
         <Item identifier="organicfiber" mincondition="0.5" />
       </Deconstruct>
-      <Sprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="1,0,202,108" origin="0.5,0.56" depth="0.56" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="204,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
-      <BrokenSprite texture="%ModDir%/Items/EventItems/DuffelBag.png" sourcerect="407,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="339,0,202,108" origin="0.5,0.56" depth="0.56" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="542,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="80" fadein="true" />
+      <BrokenSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="745,0,202,108" origin="0.5,0.56" depth="0.56" maxcondition="0" fadein="false" />
       <Body width="120" radius="45" density="20" friction="1.0" restitution="0.01" />
       <Holdable slots="RightHand,LeftHand" holdpos="0,-80" handle1="0,50" handle2="0,50" aimable="false" msg="ItemMsgPickUpSelect">
         <StatusEffect type="OnActive" targettype="This" Condition="-0.5" />
@@ -332,22 +333,6 @@
           <TriggerEvent identifier="jobboardde"/>
         </StatusEffect>-->
       </ItemComponent>
-    </Item>
-    <Item name="" identifier="commsrelay" tags="commsrelay" width="50" height="50" texturescale="1.0,1.0" scale="0.5" category="Machine,Electrical" damagedbyexplosions="true" explosiondamagemultiplier="0.2">
-      <sprite texture="%ModDir%/Items/EventItems/CommsRelay.png" sourcerect="0,0,230,205" depth="0.8" premultiplyalpha="false" origin="0.5,0.5" />
-      <!--<Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="832" fabricationlimitmin="0" fabricationlimitmax="1" />-->
-      <!--
-    <Price baseprice="800" sold="false">
-      <Price storeidentifier="merchantcity" sold="false" multiplier="1.25" />
-    </Price>
-    -->
-      <LightComponent range="0.0" lightcolor="255,255,255,111" powerconsumption="0" blinkfrequency="0.5" IsOn="false" castshadows="false" allowingameediting="false">
-        <sprite texture="%ModDir%/Items/EventItems/CommsRelay.png" sourcerect="230,0,230,204" depth="0.79" origin="0.5,0.5" alpha="1.0" />
-      </LightComponent>
-      <Body radius="70" width="100" density="30" />
-      <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" aimable="true">
-        <RequiredItem items="wrench" type="Equipped" />
-      </Holdable>
     </Item>
     <!-- Classified Documents -->
     <Item name="Classified Documents" identifier="documents" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
@@ -441,7 +426,7 @@
     </Item>
     <!-- OUTPOST TAKEOVER -->
     <Item name="Triggered Event - Get Coalition Outpost Takeover Mission" identifier="eventtrigger_coalitiontakeover" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="getcoalitiontakeovermission" />
@@ -451,7 +436,7 @@
       <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
     </Item>
     <Item name="Triggered Event - Get Separatist Outpost Takeover Mission" identifier="eventtrigger_separatisttakeover" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="getseparatisttakeovermission" />
@@ -495,7 +480,7 @@
     </Item>
     <!-- increase kill count -->
     <Item name="Triggered Event - Track Kills" identifier="eventtrigger_killtracker" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <Holdable slots="Any">
         <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="sepoutposttakeoverprogressevent" />
@@ -506,7 +491,7 @@
     <!-- PLACEABLE EVENT TRIGGERS -->
     <!-- generic events -->
     <Item name="Triggered Event - Bartender" identifier="eventtrigger_bartender" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="de-triggerevents-bartender" />
@@ -515,7 +500,7 @@
     </Item>
     <!-- monster events -->
     <Item name="Triggered Event - Random" identifier="eventtrigger_random" tags="eventtrigger" description="TRIGGERS A RANDOM EVENT FROM OTHER EVENT TRIGGERS. DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="de-triggerevents-random" />
@@ -523,7 +508,7 @@
       </ItemComponent>
     </Item>
     <Item name="Triggered Event - Mudraptors" identifier="eventtrigger_mudraptors" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="de-triggerevents-mudraptors" />
@@ -531,7 +516,7 @@
       </ItemComponent>
     </Item>
     <Item name="Triggered Event - Crawlers" identifier="eventtrigger_crawlers" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="de-triggerevents-crawlers" />
@@ -539,7 +524,7 @@
       </ItemComponent>
     </Item>
     <Item name="Triggered Event - Husks" identifier="eventtrigger_husk" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
           <TriggerEvent identifier="de-triggerevents-husks" />
@@ -548,7 +533,7 @@
     </Item>
     <!-- special events -->
     <Item name="Triggered Event - Multi Wreck" identifier="eventtrigger_multiwreck" tags="eventtrigger" description="PLACE IN A WRECK THAT FEATURES SHUTTLES! DO NOT PLACE MULTIPLE IN ONE WRECK! DO NOT PUT INTO SHUTTLES THAT WILL BE ATTACHED TO A WRECK!" scale="0.25" spritecolor="231,101,0,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/EventItems/EventTriggerIcon.png" sourcerect="0,0,234,234" depth="0.001" origin="0.5,0.5" />
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
       <ItemComponent>
         <!-- triggered by original wreck event instead
         <StatusEffect type="OnSpawn" target="This" stackable="false" disabledeltatime="true">
