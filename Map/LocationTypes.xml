@@ -178,8 +178,8 @@
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,640,128,128" color="245,105,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
       <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
-        <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair" requireddurationrange="3,10" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+        <!-- Will be infested if within 1 steps of a lair. -->
+        <Requirement requiredlocations="Lair" requireddurationrange="2,3" probability="1" requiredproximity="1" />
       </ChangeTo>
       <!-- Change to pirate outpost disabled to reduce the amount of pirate havens on the map.
       <ChangeTo type="PirateNone" probability="0.1" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE,Blockade,Military,Base,Camp" messagetag="locationchange.abandoned.changeto.piratenone">
