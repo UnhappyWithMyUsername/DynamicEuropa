@@ -324,7 +324,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </MudraptorLairMission>
   
-  <ThresherLairMission identifier="thresherlair1" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+  <ThresherLairMission identifier="thresherlair1" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="45" maxleveldifficulty="60">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -351,7 +351,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </ThresherLairMission>
   
-  <ThresherLairMission identifier="thresherlair2" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+  <ThresherLairMission identifier="thresherlair2" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="60"  maxleveldifficulty="75">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -389,7 +389,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </ThresherLairMission>
   
-  <ThresherLairMission identifier="thresherlair3" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+  <ThresherLairMission identifier="thresherlair3" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="75">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -427,7 +427,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </ThresherLairMission>
 
-  <HuskCrawlerLairMission identifier="huskcrawlerlair" textidentifier="huskcrawlerlair" tags="destroylair,husklair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true">
+  <HuskCrawlerLairMission identifier="huskcrawlerlair1" textidentifier="huskcrawlerlair" tags="destroylair,husklair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="25" maxleveldifficulty="50">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -435,7 +435,22 @@
       <Item identifier="Laircore" spawnpointtags="laircore" />
     </Items>
     <Characters>
-      <Character identifier="DE-Crawlerhusk" min="7" max="9" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Crawlerhusk" min="4" max="6" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Crawlerhusk" min="2" max="3" spawnpointtags="nest" requirekill="false" multiplayeronly="true" />
+    </Characters>
+    <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
+    <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
+  </HuskCrawlerLairMission>
+  
+  <HuskCrawlerLairMission identifier="huskcrawlerlair2" textidentifier="huskcrawlerlair" tags="destroylair,husklair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" maxleveldifficulty="100">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <LocationType identifier="Lair" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <Items>
+      <Item identifier="Laircore" spawnpointtags="laircore" />
+    </Items>
+    <Characters>
+      <Character identifier="DE-Crawlerhusk" min="6" max="9" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Crawlerhusk" min="2" max="5" spawnpointtags="nest" requirekill="false" multiplayeronly="true" />
     </Characters>
     <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
