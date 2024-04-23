@@ -73,6 +73,35 @@
         </Button>
       </CustomInterface>
     </Item>
+
+    <Item name="Lair Core" noninteractable="false" identifier="laircore" scale="1.5" category="Misc" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2000">
+      <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
+      <Body radius="50" bodytype="Static" />
+      <ItemComponent>
+        <StatusEffect type="Always" target="This" Scale="0.05" >
+          <Conditional Scale="lt 1.8" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" Scale="-0.1" duration="2" interval="2">
+          <Conditional Scale="gte 1.80" />
+        </StatusEffect>
+        <StatusEffect type="OnDamaged" target="This">
+          <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="1" distancemin="25" distancemax="100" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
+          <ParticleEmitter particle="gib" particleamount="10" scalemin="0.25" scalemax="1" distancemin="25" distancemax="50" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <ParticleEmitter particle="organeruption" particleamount="50" scalemin="1" scalemax="2" velocitymin="100" velocitymax="500" anglemin="0" anglemax="360" />
+          <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="2" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
+          <ParticleEmitter particle="gib" particleamount="10" scalemin="0.5" scalemax="2" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
+          <ParticleEmitter particle="bloodsplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1"/>
+          <ParticleEmitter particle="whitegoosplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1"/>
+          <Sound file="Content/Map/Thalamus/Sounds/CARRIER_organs2.ogg" range="1000" volume="1" />
+          <Remove/>
+        </StatusEffect>
+      </ItemComponent>
+      <TriggerComponent triggeredby="Human" force="-100" radius="130" distancebasedforce="true" />
+      <LightComponent LightColor="80,100,120,100" range="800" IsOn="true" pulseamount="0.2" pulsefrequency="0.2" offset="0,16" allowingameediting="false" />
+    </Item>
+    
     <!-- Construction Materials -->
     <Item name="Construction Material Crate" identifier="constructionmaterialcrate" tags="crate,constructionmaterials" description="A crate full of construction materials. Can be delivered to construction sites." scale="0.5" impactsoundtag="impact_metal_heavy">
       <PreferredContainer primary="cargocontainer" spawnprobability="0.2" />
