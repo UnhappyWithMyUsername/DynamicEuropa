@@ -97,7 +97,7 @@
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
         <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
+        <Requirement requiredlocations="Lair" requireddurationrange="1,3" probability="0.65" requiredproximity="1" />
       </ChangeTo>
     </None>
 
@@ -160,29 +160,11 @@
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,768,128,128" color="165,0,0,128" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <!-- Change back to None if no attackers are around -->
-      <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" disallowedproximity="1" messagetag="locationchange.UnderAttack.changeto.none" requiredduration="1" probability="1" />
-      <ChangeTo type="Lair" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
-        <!-- May be infested if within 1 steps of a crawler lair. -->
-        <Requirement requiredlocations="Lair" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+      <ChangeTo type="None" disallowedadjacentlocations="Lair" disallowedproximity="1" messagetag="locationchange.UnderAttack.changeto.none" requiredduration="1" probability="1" />
+      <!-- Change to Outerlair if lair is adjacent -->
+      <ChangeTo type="OuterLair" messagetag="locationchange.none.changeto.lair" >
+        <Requirement requiredlocations="Lair" requireddurationrange="1,3" probability="1" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="LairMudraptor" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
-        <!-- May be infested if within 1 steps of a mudraptor lair. -->
-        <Requirement requiredlocations="LairMudraptor" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="LairThresher" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
-        <!-- May be infested if within 1 steps of a thresher lair. -->
-        <Requirement requiredlocations="LairThresher" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="HuskgroundsDE" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Base">
-        <!-- May be infested if within 1 steps of a HuskgroundsDE. -->
-        <Requirement requiredlocations="HuskgroundsDE" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <!-- DISABLED TURNING INTO WASTEYARD
-      <ChangeTo type="WasteyardDE" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Base">
-        May be infested if within 1 steps of a WasteyardDE. 
-        <Requirement requiredlocations="WasteyardDE" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.05" />
-      </ChangeTo>
-      -->
       <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
         <!-- May be Blockaded if within 2 steps of a Military. -->
         <Requirement requiredlocations="MilitaryForces" requireddurationrange="1,5" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -192,12 +174,12 @@
       </ChangeTo>
     </UnderAttack>
 
-    <Abandoned identifier="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.1, 2: 0.8, 3: 0.8, 4: 0.5, 5: 0.5, 6: 0" missiontags="abandonedoutpost" hideentitysubcategories="abandonedhuman,abandonedmonster" outpostteam="None" beaconstationchance="0.25" AllowAsBiomeGate="false">
+    <Abandoned identifier="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0" missiontags="abandonedoutpost" hideentitysubcategories="abandonedhuman,abandonedmonster" outpostteam="None" beaconstationchance="0.25" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,640,128,128" color="245,105,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
       <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
-        <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" requireddurationrange="3,10" probability="0.1" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+        <!-- Will be infested if within 1 steps of a lair. -->
+        <Requirement requiredlocations="Lair" requireddurationrange="2,3" probability="1" requiredproximity="1" />
       </ChangeTo>
       <!-- Change to pirate outpost disabled to reduce the amount of pirate havens on the map.
       <ChangeTo type="PirateNone" probability="0.1" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE,Blockade,Military,Base,Camp" messagetag="locationchange.abandoned.changeto.piratenone">
@@ -680,90 +662,27 @@
     </Circus>
 
     <!-- LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS -->
-    <Lair commonnessperzone="1: 0.2, 2: 0.2, 3: 0.25, 4: 0.2, 5: 0.15, 6: 0" namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="crawlerlair" AllowAsBiomeGate="false" hasoutpost="true">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
+    
+    
+    <Lair commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0"  mincountperzone="1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 0" namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="destroylair" AllowAsBiomeGate="false" hasoutpost="true">
+      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="80,155,80,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
     </Lair>
     
-    <LairMudraptor commonnessperzone="1: 0.1, 2: 0.15, 3: 0.2, 4: 0.25, 5: 0.3, 6: 0" namefile="Content/Map/locationNames.txt" identifier="LairMudraptor" outpostteam="None" missiontags="mudraptorlair" AllowAsBiomeGate="false" hasoutpost="true">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
+    <OuterLair commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0"  mincountperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 0: 0" namefile="Content/Map/locationNames.txt" identifier="OuterLair" outpostteam="None" AllowAsBiomeGate="false" hasoutpost="false">
+      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="384,768,128,128" color="80,155,80,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-    </LairMudraptor>
-    
-    <LairThresher commonnessperzone="1: 0, 2: 0, 3: 0.1, 4: 0.2, 5: 0.5, 6: 0" namefile="Content/Map/locationNames.txt" identifier="LairThresher" outpostteam="None" missiontags="thresherlair" AllowAsBiomeGate="false" hasoutpost="true">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-    </LairThresher>
-    
-    <HuskgroundsDE commonnessperzone="1: 0, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0" namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" AllowAsBiomeGate="false" hasoutpost="true">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,896,128,128" color="145,117,230,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
+        <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
       </ChangeTo>
-    </HuskgroundsDE>
-  
-    <!-- END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION -->
-    <EndLocation identifier="EndLocation" name="eyeofeuropa" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1" showsonarmarker="false" hasoutpost="true" outpostteam="None" allowinrandomlevels="false" UsePortraitInRandomLoadingScreens="false">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" color="14,255,222,255" sourcerect="384,896,128,128" />
-      <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
-    </EndLocation>
-
-    <!-- PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES -->
-    <PirateOutpost identifier="PirateOutpost" replaceinradiation="Abandoned" namefile="%ModDir%/Map/HavenNames.txt" commonnessperzone="1: 0, 2: 0.25, 3: 0.3, 4: 0.3, 5: 0.2" disallowedadjacentlocations="PirateOutpost" missiontags="pirateoutpostmission" AllowAsBiomeGate="false" faction="bandits">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,640,128,128" color="255,148,96,255" />
-      <Portrait texture="%ModDir%/Map/LocationPortraits/PirateHaven.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="1" />
-      <Hireable identifier="engineer" commonness="3" />
-      <Hireable identifier="mechanic" commonness="3" />
-      <Hireable identifier="medicaldoctor" commonness="1" />
-      <Hireable identifier="securityofficer" commonness="8" />
-      <Hireable identifier="captain" commonness="3" />
-      <Store maxreputationmodifier="0.1" sellpricemodifier="0.25" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="2" initialbalance="11389" pricemodifierrange="5" />
-      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
-        <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.PirateOutpost.changeto.UnderAttack">
-        <Requirement requiredlocations="MilitaryForces" requireddurationrange="3,10" probability="0.25" requiredproximity="1" />
-        <Requirement requiredlocations="Camp" requireddurationrange="3,10" probability="0.25" requiredproximity="1" />
-        <Requirement requiredlocations="Base" requireddurationrange="2,5" probability="0.5" requiredproximity="1" />
-        <Requirement requiredlocations="Military" requireddurationrange="2,4" probability="0.75" requiredproximity="1" />
-      </ChangeTo>
-    </PirateOutpost>
+    </OuterLair>
+    
 
     <!-- A non-outpost level that gets placed before transforming into a pirate outpost for 1 round to get rid of previous missions that were stored at the outpost location -->
     <PirateNone identifier="PirateNone" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" hasoutpost="false" beaconstationchance="0.25" missiontags="piratehumpback,pirate1">
