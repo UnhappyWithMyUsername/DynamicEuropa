@@ -612,7 +612,6 @@
     <HuskChurch
       identifier="HuskChurch"
       replaceinradiation="Abandoned"
-      namefile="%Moddir%/Text/English/HuskchurchNames.txt"
       commonnessperzone="1: 0.15, 2: 0.3, 3: 0.4, 4: 0.5"
       mincountperzone="1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 0"
       AllowAsBiomeGate="false"
@@ -682,7 +681,35 @@
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
       </ChangeTo>
     </OuterLair>
-    
+
+    <!-- END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION -->
+    <EndLocation identifier="EndLocation" name="eyeofeuropa" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 1" showsonarmarker="false" hasoutpost="true" outpostteam="None" allowinrandomlevels="false" UsePortraitInRandomLoadingScreens="false">
+      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" color="14,255,222,255" sourcerect="384,896,128,128" />
+      <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
+    </EndLocation>
+
+    <!-- PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES -->
+    <PirateOutpost identifier="PirateOutpost" replaceinradiation="Abandoned" commonnessperzone="1: 0, 2: 0.25, 3: 0.3, 4: 0.3, 5: 0.2" disallowedadjacentlocations="PirateOutpost" missiontags="pirateoutpostmission" AllowAsBiomeGate="false" faction="bandits">
+      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,640,128,128" color="255,148,96,255" />
+      <Portrait texture="%ModDir%/Map/LocationPortraits/PirateHaven.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
+      <Hireable identifier="assistant" commonness="1" />
+      <Hireable identifier="engineer" commonness="3" />
+      <Hireable identifier="mechanic" commonness="3" />
+      <Hireable identifier="medicaldoctor" commonness="1" />
+      <Hireable identifier="securityofficer" commonness="8" />
+      <Hireable identifier="captain" commonness="3" />
+      <Store maxreputationmodifier="0.1" sellpricemodifier="0.25" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="2" initialbalance="11389" pricemodifierrange="5" />
+      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
+        <!-- May be infested if within 1 steps of a lair. -->
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+      </ChangeTo>
+      <ChangeTo type="UnderAttack" messagetag="locationchange.PirateOutpost.changeto.UnderAttack">
+        <Requirement requiredlocations="MilitaryForces" requireddurationrange="3,10" probability="0.25" requiredproximity="1" />
+        <Requirement requiredlocations="Camp" requireddurationrange="3,10" probability="0.25" requiredproximity="1" />
+        <Requirement requiredlocations="Base" requireddurationrange="2,5" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="Military" requireddurationrange="2,4" probability="0.75" requiredproximity="1" />
+      </ChangeTo>
+    </PirateOutpost>
 
     <!-- A non-outpost level that gets placed before transforming into a pirate outpost for 1 round to get rid of previous missions that were stored at the outpost location -->
     <PirateNone identifier="PirateNone" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" hasoutpost="false" beaconstationchance="0.25" missiontags="piratehumpback,pirate1">
