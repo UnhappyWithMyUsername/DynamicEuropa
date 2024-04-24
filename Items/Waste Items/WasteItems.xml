@@ -1,147 +1,143 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Items>
-  <!-- EFFECT ITEMS -->
-
-  <Item name="Acid Gases" identifier="wastesporeemitter" Scale="1" category="hidden" nonplayerteaminteractable="True" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyprojectiles="false" damagedbyrepairtools="true" spritecolor="180,230,50,255" hideconditionbar="true">
-    <Sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="274,145,95,95" depth="0.55" />
-    <Body radius="20" bodytype="kinematic"/>
-    <Holdable slots="Any" msg="ItemMsgPickUpSelect" />
-    <ItemComponent >
-      <!-- 	particle emitter -->
-      <StatusEffect type="Always" target="This" condition="-1" >
-        <ParticleEmitter particle="acidmistgrenade" particlespersecond="8" scalemin="0.15" scalemax="0.25" velocitymin="40" velocitymax="60" anglemin="-20" anglemax="200" copyentityangle="false" LifeTimeMultiplier="1" colormultiplier="255,220,0,150"/>
-        <ParticleEmitter particle="bubbles" particlespersecond="8" scalemin="1" scalemax="1.5" velocitymin="20" velocitymax="50" anglemin="0" anglemax="360" copyentityangle="false" LifeTimeMultiplier="1" />
-        <sound file="Content/Items/Alien/AlienPump.ogg" range="700.0" loop="true" volume="2" frequencymultiplier="0.25" />
-      </StatusEffect>
-      <!-- 	the actual damage emitter, 10 second lifetime, generates stun and slows  -->
-      <StatusEffect type="Always" target="This,NearbyCharacters" range="200" disabledeltatime="false">
-        <Affliction identifier="acidburn" strength="0.2" dividebylimbcount="true" />
-        <Affliction identifier="incrementalstun" strength="20" probability="0.5"/>
-        <Affliction identifier="slow" strength="2" />
-      </StatusEffect>
-      <StatusEffect type="NotInWater" target="This,Hull" oxygen="-10000.0" />
-      <StatusEffect type="OnFire" target="This" Condition="0.0" delay="0.1" Oneshot="True" IsActive="false" setvalue="true" >
-        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" />
-        <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="2000" />
-        <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="2000" />
-        <Explosion range="450.0" ballastfloradamage="100" structuredamage="20" levelwalldamage="50" itemdamage="100" force="8" flames="true" debris="true" applyFireEffects="true" decal="explosion" decalsize="0.5">
-          <Affliction identifier="burn" strength="15" />
-          <Affliction identifier="stun" strength="3" />
-        </Explosion>
-      </StatusEffect>
-      <StatusEffect type="OnBroken" target="This" delay="0.1">
-        <Remove />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-
-  <Item name="Wasteprojectile" identifier="wasteprojectile" category="Misc" tags="ignorebyai" Scale="0.5" health="10" sonarsize="20" hideinmenus="true" spritecolor="45,70,45,255">
-    <Sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="192,192,20,20" depth="0.55" />
-    <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.49" sourcerect="0,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
-    <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.48" sourcerect="32,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
-    <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.51" sourcerect="64,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
-    <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.52" sourcerect="96,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
-    <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.52" sourcerect="128,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
-    <Body radius="25" density="12" />
-    <LightComponent range="25" castshadows="False" drawbehindsubs="False" ison="True" lightcolor="45,70,45,150" vulnerabletoemp="False" />
-    <Projectile characterusable="false" launchimpulse="20" sticktocharacters="false" sticktoitems="false" sticktodoors="false" sticktostructures="true" friendlyfire="false" damagedoors="true">
-      <Attack structuredamage="50" itemdamage="15" targetforce="10" severlimbsprobability="0">
-        <Affliction identifier="acidburn" strength="15" />
-        <Affliction identifier="stun" strength="1" />
-      </Attack>
-      <!-- uses itself once to trigger projectile -->
-      <StatusEffect type="OnNotContained" target="This" Oneshot="true">
-        <Use/>
-      </StatusEffect>
-      <StatusEffect type="OnSpawn" target="This,Contained" delay="10" stackable="false" >
-        <particleemitter particle="brownchunks" drawontop="true" particleamount="10" velocitymin="30" velocitymax="50" anglemin="0" anglemax="360" scalemin="0.3" scalemax="0.5" />
-        <Remove />
-      </StatusEffect>
-      <StatusEffect type="OnActive" target="This" lifetime="0.5">
-        <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="0" anglemax="0" particleamount="10" velocitymin="-10" velocitymax="-100" scalemin="0.5" scalemax="1" />
-      </StatusEffect>
-    </Projectile>
-    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" spawnwithid="wastesporeemitter">
-    </ItemContainer>
-  </Item>
-
-
-   <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> 
-  <Herb name="Waste Antidote" identifier="larowastecure" category="Material" cargocontaineridentifier="chemicalcrate" Tags="smallitem,chem,medical,herbs" description="Experimental cure for Waste Infection. Could cause severe side effects if untrained." RequireAimToUse="True" useinhealthinterface="true" scale="0.3" impactsoundtag="impact_metal_light">
-    <PreferredContainer primary="wreckmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
-    <Price locationtype="Research" buyprice="300" />
-    <Price locationtype="Military" buyprice="600" />
-    <Price locationtype="City" buyprice="900" />
-    <Price locationtype="Outpost" buyprice="1200" />
-    <Price locationtype="Mine" buyprice="1900" />
-    <SuitableTreatment identifier="internaldamage" suitability="50" />
-    <SuitableTreatment identifier="blunttrauma" suitability="20" />
-    <SuitableTreatment identifier="lacerations" suitability="20" />
-    <SuitableTreatment identifier="bitewounds" suitability="20" />
-    <Fabricate suitablefabricators="medicalfabricator" requiredtime="160">
-      <RequiredSkill identifier="medical" level="25" />
-      <RequiredItem identifier="wasteblood" />
-      <RequiredItem identifier="stabilozine" />
-      <RequiredItem identifier="antibiotics" />
-    </Fabricate>
-    <Deconstruct time="20">
-      <Item identifier="stabilozine" copycondition="true" mincondition="0.1" />
-      <Item identifier="antibiotics" copycondition="true" mincondition="0.1" />
-    </Deconstruct>
-    <InventoryIcon texture="InventoryIconAtlas.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-    <Sprite texture="Herbs.png" sourcerect="0,0,63,115" depth="0.6" origin="0.5,0.5" />
-    <Body width="60" height="110" density="20" />
-    <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="5,0" handle1="-5,0" holdangle="10" reload="1.0">
-      <StatusEffect type="OnFailure" target="This" Condition="-100.0" disabledeltatime="true" />
-      <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
-      <RequiredSkill identifier="medical" level="70" />
-      <StatusEffect tags="medical" type="OnUse" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
-        <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-        <ReduceAffliction identifier="damage" amount="3" />
-        <ReduceAffliction identifier="burn" amount="3" />
-        <Affliction identifier="wasteresistance" amount="30" />
-      </StatusEffect>
-      <StatusEffect tags="medical" type="OnFailure" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
-        <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-        <ReduceAffliction identifier="burn" amount="2" />
-        <ReduceAffliction identifier="damage" amount="2" />
-        <Affliction identifier="organdamage" amount="40" />
-        <Affliction identifier="bleeding" amount="40" />
-        <Affliction identifier="internaldamage" amount="10" />
-        <Affliction identifier="oxygenlow" amount="9" />
-        <Affliction identifier="wasteresistance" amount="2" />
-      </StatusEffect>
-      <!-- Remove the item when fully used -->
-      <StatusEffect type="OnBroken" target="This">
-        <Remove />
-      </StatusEffect>
-    </MeleeWeapon>
-  </Herb>
-  <Item name="Waste Blood" identifier="wasteblood" category="Material" Tags="smallitem,chem,medical" canbepicked="true" description="A nasty green poison that can cause acid burns from the inside. Still haven't been classified throughly." useinhealthinterface="true" cargocontaineridentifier="chemicalcrate" scale="0.28" RequireAimToUse="True" impactsoundtag="impact_metal_light">
-    <PreferredContainer primary="storagecab" minamount="0" maxamount="1" spawnprobability="0.02" />
-    <Price baseprice="250" soldeverywhere="false">
-      <Price locationtype="research" multiplier="1.1" sold="true" />
-    </Price>
-    <InventoryIcon texture="CreatureLoot.png" sourcerect="0,0,50,101" origin="0.5,0.5" />
-    <Sprite texture="CreatureLoot.png" sourcerect="0,0,50,101" depth="0.6" origin="0.5,0.5" />
-    <Body width="50" height="100" density="11" />
-    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
-      <RequiredSkill identifier="medical" level="40" />
-      <StatusEffect type="OnSuccess" target="This" Condition="-100.0" setvalue="true" />
-      <StatusEffect type="OnFailure" target="This" Condition="-100.0" setvalue="true" />
-      <StatusEffect type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true">
-        <Reduceaffliction identifier="bloodloss" strength="2.5" />
-      </StatusEffect>
-      <StatusEffect type="OnFailure" target="UseTarget">
-        <Conditional entitytype="eq Character" />
-        <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-      </StatusEffect>
-      <!-- Remove the item when fully used -->
-      <StatusEffect type="OnBroken" target="This">
-        <Remove />
-      </StatusEffect>
-    </MeleeWeapon>
-  </Item>
-
-
-</Items>
+<Override>
+  <Items>
+    <!-- EFFECT ITEMS -->
+    <Item name="Acid Gases" identifier="wastesporeemitter" Scale="1" category="hidden" nonplayerteaminteractable="True" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyprojectiles="false" damagedbyrepairtools="true" spritecolor="180,230,50,255" hideconditionbar="true">
+      <Sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="274,145,95,95" depth="0.55" />
+      <Body radius="20" bodytype="kinematic"/>
+      <Holdable slots="Any" msg="ItemMsgPickUpSelect" />
+      <ItemComponent >
+        <!-- 	particle emitter -->
+        <StatusEffect type="Always" target="This" condition="-1" >
+          <ParticleEmitter particle="acidmistgrenade" particlespersecond="8" scalemin="0.15" scalemax="0.25" velocitymin="40" velocitymax="60" anglemin="-20" anglemax="200" copyentityangle="false" LifeTimeMultiplier="1" colormultiplier="255,220,0,150"/>
+          <ParticleEmitter particle="bubbles" particlespersecond="8" scalemin="1" scalemax="1.5" velocitymin="20" velocitymax="50" anglemin="0" anglemax="360" copyentityangle="false" LifeTimeMultiplier="1" />
+          <sound file="Content/Items/Alien/AlienPump.ogg" range="700.0" loop="true" volume="2" frequencymultiplier="0.25" />
+        </StatusEffect>
+        <!-- 	the actual damage emitter, 10 second lifetime, generates stun and slows  -->
+        <StatusEffect type="Always" target="This,NearbyCharacters" range="200" disabledeltatime="false">
+          <Affliction identifier="acidburn" strength="0.2" dividebylimbcount="true" />
+          <Affliction identifier="incrementalstun" strength="20" probability="0.5"/>
+          <Affliction identifier="slow" strength="2" />
+        </StatusEffect>
+        <StatusEffect type="NotInWater" target="This,Hull" oxygen="-10000.0" />
+        <StatusEffect type="OnFire" target="This" Condition="0.0" delay="0.1" Oneshot="True" IsActive="false" setvalue="true" >
+          <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" />
+          <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="2000" />
+          <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="2000" />
+          <Explosion range="450.0" ballastfloradamage="100" structuredamage="20" levelwalldamage="50" itemdamage="100" force="8" flames="true" debris="true" applyFireEffects="true" decal="explosion" decalsize="0.5">
+            <Affliction identifier="burn" strength="15" />
+            <Affliction identifier="stun" strength="3" />
+          </Explosion>
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" delay="0.1">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Wasteprojectile" identifier="wasteprojectile" category="Misc" tags="ignorebyai" Scale="0.5" health="10" sonarsize="20" hideinmenus="true" spritecolor="45,70,45,255">
+      <Sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="192,192,20,20" depth="0.55" />
+      <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.49" sourcerect="0,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
+      <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.48" sourcerect="32,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
+      <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.51" sourcerect="64,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
+      <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.52" sourcerect="96,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
+      <DecorativeSprite texture="Content/Particles/ParticleAtlas.png" depth="0.52" sourcerect="128,64,32,32" randomrotation="0,360" randomscale="2,3"  origin="0.5,0.5" randomgroupid="1" />
+      <Body radius="25" density="12" />
+      <LightComponent range="25" castshadows="False" drawbehindsubs="False" ison="True" lightcolor="45,70,45,150" vulnerabletoemp="False" />
+      <Projectile characterusable="false" launchimpulse="20" sticktocharacters="false" sticktoitems="false" sticktodoors="false" sticktostructures="true" friendlyfire="false" damagedoors="true">
+        <Attack structuredamage="50" itemdamage="15" targetforce="10" severlimbsprobability="0">
+          <Affliction identifier="acidburn" strength="15" />
+          <Affliction identifier="stun" strength="1" />
+        </Attack>
+        <!-- uses itself once to trigger projectile -->
+        <StatusEffect type="OnNotContained" target="This" Oneshot="true">
+          <Use/>
+        </StatusEffect>
+        <StatusEffect type="OnSpawn" target="This,Contained" delay="10" stackable="false" >
+          <particleemitter particle="brownchunks" drawontop="true" particleamount="10" velocitymin="30" velocitymax="50" anglemin="0" anglemax="360" scalemin="0.3" scalemax="0.5" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="This" lifetime="0.5">
+          <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="0" anglemax="0" particleamount="10" velocitymin="-10" velocitymax="-100" scalemin="0.5" scalemax="1" />
+        </StatusEffect>
+      </Projectile>
+      <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" spawnwithid="wastesporeemitter">
+      </ItemContainer>
+    </Item>
+    <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> 
+    <Herb name="Waste Antidote" identifier="larowastecure" category="Material" cargocontaineridentifier="chemicalcrate" Tags="smallitem,chem,medical,herbs" description="Experimental cure for Waste Infection. Could cause severe side effects if untrained." RequireAimToUse="True" useinhealthinterface="true" scale="0.3" impactsoundtag="impact_metal_light">
+      <PreferredContainer primary="wreckmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+      <Price locationtype="Research" buyprice="300" />
+      <Price locationtype="Military" buyprice="600" />
+      <Price locationtype="City" buyprice="900" />
+      <Price locationtype="Outpost" buyprice="1200" />
+      <Price locationtype="Mine" buyprice="1900" />
+      <SuitableTreatment identifier="internaldamage" suitability="50" />
+      <SuitableTreatment identifier="blunttrauma" suitability="20" />
+      <SuitableTreatment identifier="lacerations" suitability="20" />
+      <SuitableTreatment identifier="bitewounds" suitability="20" />
+      <Fabricate suitablefabricators="medicalfabricator" requiredtime="160">
+        <RequiredSkill identifier="medical" level="25" />
+        <RequiredItem identifier="wasteblood" />
+        <RequiredItem identifier="stabilozine" />
+        <RequiredItem identifier="antibiotics" />
+      </Fabricate>
+      <Deconstruct time="20">
+        <Item identifier="stabilozine" copycondition="true" mincondition="0.1" />
+        <Item identifier="antibiotics" copycondition="true" mincondition="0.1" />
+      </Deconstruct>
+      <InventoryIcon texture="InventoryIconAtlas.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+      <Sprite texture="Herbs.png" sourcerect="0,0,63,115" depth="0.6" origin="0.5,0.5" />
+      <Body width="60" height="110" density="20" />
+      <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="5,0" handle1="-5,0" holdangle="10" reload="1.0">
+        <StatusEffect type="OnFailure" target="This" Condition="-100.0" disabledeltatime="true" />
+        <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
+        <RequiredSkill identifier="medical" level="70" />
+        <StatusEffect tags="medical" type="OnUse" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+          <ReduceAffliction identifier="damage" amount="3" />
+          <ReduceAffliction identifier="burn" amount="3" />
+          <Affliction identifier="wasteresistance" amount="30" />
+        </StatusEffect>
+        <StatusEffect tags="medical" type="OnFailure" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+          <ReduceAffliction identifier="burn" amount="2" />
+          <ReduceAffliction identifier="damage" amount="2" />
+          <Affliction identifier="organdamage" amount="40" />
+          <Affliction identifier="bleeding" amount="40" />
+          <Affliction identifier="internaldamage" amount="10" />
+          <Affliction identifier="oxygenlow" amount="9" />
+          <Affliction identifier="wasteresistance" amount="2" />
+        </StatusEffect>
+        <!-- Remove the item when fully used -->
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </MeleeWeapon>
+    </Herb>
+    <Item name="Waste Blood" identifier="wasteblood" category="Material" Tags="smallitem,chem,medical" canbepicked="true" description="A nasty green poison that can cause acid burns from the inside. Still haven't been classified throughly." useinhealthinterface="true" cargocontaineridentifier="chemicalcrate" scale="0.28" RequireAimToUse="True" impactsoundtag="impact_metal_light">
+      <PreferredContainer primary="storagecab" minamount="0" maxamount="1" spawnprobability="0.02" />
+      <Price baseprice="250" soldeverywhere="false">
+        <Price locationtype="research" multiplier="1.1" sold="true" />
+      </Price>
+      <InventoryIcon texture="CreatureLoot.png" sourcerect="0,0,50,101" origin="0.5,0.5" />
+      <Sprite texture="CreatureLoot.png" sourcerect="0,0,50,101" depth="0.6" origin="0.5,0.5" />
+      <Body width="50" height="100" density="11" />
+      <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+        <RequiredSkill identifier="medical" level="40" />
+        <StatusEffect type="OnSuccess" target="This" Condition="-100.0" setvalue="true" />
+        <StatusEffect type="OnFailure" target="This" Condition="-100.0" setvalue="true" />
+        <StatusEffect type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+          <Reduceaffliction identifier="bloodloss" strength="2.5" />
+        </StatusEffect>
+        <StatusEffect type="OnFailure" target="UseTarget">
+          <Conditional entitytype="eq Character" />
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+        <!-- Remove the item when fully used -->
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </MeleeWeapon>
+    </Item>
+  </Items>
+</Override>
