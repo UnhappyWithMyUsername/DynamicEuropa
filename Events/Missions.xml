@@ -1072,7 +1072,7 @@
 	</OutpostDestroyMission>
 	-->
   <!--OUTPOST TAKEOVER-->
-  <!-- Coalition -->
+
   <OutpostDestroyMission name="Coalition Station-Takeover" identifier="cotakeover_separatistoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="outpost,city,research,military,mine,colony,settlement,base,blockade,study,lab,clinic,hospital,hydroponics,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
     <Reputation identifier="separatists" amount="-20" />
     <Reputation identifier="coalition" amount="10" />
@@ -1106,6 +1106,7 @@
       <Character identifier="soldierseparatists" from="de_separatistscombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
     </Characters>
     <TriggerEvent state="0" delay="1" eventidentifier="cooutposttakeoverevent" campaignonly="true" />
+    <TriggerEvent state="0" delay="1" eventidentifier="takeoverprogressseparatists" campaignonly="true" />
     <LocationType identifier="outpost" />
     <LocationType identifier="city" />
     <LocationType identifier="research" />
@@ -1125,7 +1126,7 @@
     <LocationType identifier="shipyard" />
     <message header="missionheader0.coalitiontakeover" text="missionmessage0.coalitiontakeover" />
   </OutpostDestroyMission>
-  <!-- Separatists -->
+
   <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="outpost,city,research,military,mine,colony,settlement,base,blockade,study,lab,clinic,hospital,hydroponics,biosphere,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
     <Reputation identifier="coalition" amount="-20" />
     <Reputation identifier="separatists" amount="10" />
@@ -1159,6 +1160,7 @@
       <Character identifier="soldiercoalition" from="de_coalitioncombat" teamid="Team2" requirekill="true" multiplayeronly="true" />
     </Characters>
     <TriggerEvent state="0" delay="1" eventidentifier="sepoutposttakeoverevent" campaignonly="true" />
+    <TriggerEvent state="0" delay="1" eventidentifier="takeoverprogressseparatists" campaignonly="true" />
     <LocationType identifier="outpost" />
     <LocationType identifier="city" />
     <LocationType identifier="research" />

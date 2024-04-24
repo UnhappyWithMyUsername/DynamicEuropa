@@ -655,6 +655,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <!-- Separatist Attackers-->
     <ScriptedEvent identifier="sepoutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -753,6 +754,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <!-- Outpost Attack Loop -->
     <ScriptedEvent identifier="takeoverattackloop">
       <SetDataAction identifier="attackloopactive" operation="Set" value="1" />
@@ -782,6 +784,51 @@
           <SetDataAction identifier="outposttakeoverprogress" operation="Add" value="-1" />
         </Failure>
       </CheckDataAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="takeoverprogresscoalition">
+      <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="separatistssoldier" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <Label name="takeoverloop" />
+      <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
+        <Success>
+          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
+          <NPCChangeTeamAction npctag="separatistssoldier" teamtag="FriendlyNPC" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="separatistssoldier" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
+        </Success>
+        <Failure>
+            <Waitaction time="1" />
+            <Goto name="takeoverloop" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="takeoverprogressseparatists">
+      <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="coalitionssoldier" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <Label name="takeoverloop" />
+      <CountTargetsAction targettag="coalitionssoldier" CompareToTarget="coalitionssoldier" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
+        <Success>
+          <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="Set" value="1" />
+          <NPCChangeTeamAction npctag="coalitionssoldier" teamtag="FriendlyNPC" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="coalitionssoldier" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
+        </Success>
+        <Failure>
+            <Waitaction time="1" />
+            <Goto name="takeoverloop" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+       
+    <ScriptedEvent identifier="lairbombspawn">
+      <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
+      <OnRoundEndAction>
+        <RemoveItemAction targettag="lairbomb" Amount="100" />
+      </OnRoundEndAction>
     </ScriptedEvent>
    
     <ScriptedEvent identifier="lairbombspawn">
