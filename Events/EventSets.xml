@@ -352,7 +352,7 @@
       
       <!-- Events specific to military outposts -->
       <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="0.2" />
+        <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />
       </EventSet>
       <EventSet identifier="outpostevent.military.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <!-- 50% chance of getting a military-specific event (TODO: increase if/when we have more of these available?) -->
@@ -396,12 +396,12 @@
       
       <!-- Events specific to industrial outposts -->
       <EventSet identifier="outpostevent.industrial.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,fusion,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="0.2" />
+        <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="1.0" />
       </EventSet>
 
       <!-- Events specific to habitation outposts -->
       <EventSet identifier="outpostevent.habitation.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="0.2" />
+        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
       </EventSet>
 
       <!-- Events specific to medical outposts -->
@@ -762,10 +762,12 @@
       <!-- <EventSet identifier="de_outpostevents.pirate.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="false" onceperoutpost="false">
         <ScriptedEvent identifier="piratesecurityofficer" commonness="100" />
       </EventSet> -->
+      <EventSet identifier="de_outpostevents.pirate.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="false" onceperoutpost="false" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
+      </EventSet>
       <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="piratemissioninformant" commonness="40" />
         <ScriptedEvent identifier="piratediversoutpost" commonness="40" />
-        <ScriptedEvent identifier="jobboardhabitation" commonness="20" />
       </EventSet>
       <!-- MissionEvents specific to pirate outposts 
       <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
