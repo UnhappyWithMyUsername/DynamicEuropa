@@ -381,7 +381,7 @@
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="896,128,128,128" color="50,255,148,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <Hireable identifier="securityofficer" commonness="1" />
-      <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,3" messagetag="locationchange.none.changeto.outpost" />
+      <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,OuterHuskLair,HuskgroundsDE,WasteyardDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,3" messagetag="locationchange.none.changeto.outpost" />
       <!--<ChangeTo type="Abandoned" requiredduration="1" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>-->
@@ -695,7 +695,7 @@
         <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
@@ -705,15 +705,15 @@
     <HuskgroundsDE commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.05, 5: 0.07, 6: 0.0" mincountperzone="1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 0: 0" namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,896,128,128" color="145,117,230,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
+      <!-- <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
-      </ChangeTo>
+      </ChangeTo> -->
     </HuskgroundsDE>
 
     <OuterHuskLair commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="OuterHuskLair" outpostteam="None" AllowAsBiomeGate="false" hasoutpost="false">
@@ -723,7 +723,7 @@
         <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
