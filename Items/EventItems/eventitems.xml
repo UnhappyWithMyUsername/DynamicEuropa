@@ -28,7 +28,6 @@
       <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="250,109,256,117" depth="0.6" premultiplyalpha="false" origin="0.5,0.5" />
       <ContainedSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="250,109,256,117" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.501" origin="0.5,0.5" />
       <Body width="254" height="115" density="10.5" />
-      <PreferredContainer primary="securecontainer" secondary="armcab" spawnprobability="0" />
       <AiTarget sightrange="1000" Soundrange="50000" />
       <LightComponent range="100.0" powerconsumption="0" lightcolor="255,195,95,111" IsOn="false" alphablend="true" blinkfrequency="0" castshadows="false" allowingameediting="false" comparison="And">
         <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="507,109,256,117" depth="0.6" premultiplyalpha="false" origin="0.5,0.5" />
@@ -57,9 +56,7 @@
         </StatusEffect>
       </LightComponent>
       <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0" disabledeltatime="true" />
-      <Holdable slots="RightHand,LeftHand" canbeselected="true" selectkey="Select" canbepicked="true" attachable="true" pickkey="Use" pickingtime="5" holdpos="0,-30" handle1="0,-30" handle2="0,0" aimable="true" aimpos="0,0" aimangle="0" msg="ItemMsgDetachWrench">
-        <RequiredItem items="wrench" type="Equipped" />
-      </Holdable>
+      <Holdable slots="RightHand,LeftHand" canbeselected="true" selectkey="Select" canbepicked="true" pickkey="Use" attachable="true" pickingtime="5" holdpos="0,-30" handle1="0,-30" aimable="true" aimpos="0,0" aimangle="0" msg="ItemMsgDetach" />
       <CustomInterface canbeselected="true" selectkey="Select" msg="ItemMsgInteractSelect" drawhudwhenequipped="false">
         <GuiFrame relativesize="0.12,0.12" style="ItemUI" anchor="Center" />
         <Button text="Arm">
