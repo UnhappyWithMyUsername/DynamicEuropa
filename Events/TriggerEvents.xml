@@ -4,6 +4,15 @@
   <EventSprites></EventSprites>
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
+    <!-- ITEM EVENTS -->
+    <ScriptedEvent identifier="nuclearbombexplosion" commonness="0">
+      <TagAction criteria="itemtag:mudraptoregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:crawleregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:tigerthresheregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <StatusEffectAction targettag="egg">
+        <StatusEffect target="This" condition="0.0" setvalue="true" />
+      </StatusEffectAction>
+    </ScriptedEvent>
     <!-- GENERIC EVENTS -->
     <!-- BARTENDER -->
     <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100">
