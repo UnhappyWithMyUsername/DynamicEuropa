@@ -543,49 +543,7 @@
       </ItemComponent>
       <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
     </Item>
-    <!-- start kill progress tracking -->
-    <Item name="" identifier="idcardcoalitionsoldier" category="Equipment" Tags="smallitem,identitycard,coalitionsoldierid" hideinmenus="true" cargocontaineridentifier="metalcrate">
-      <PreferredContainer primary="crewcab" />
-      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
-      <Body width="16" height="12" density="10.05" />
-      <IdCard slots="Card,Any" msg="ItemMsgPickUpSelect" />
-      <!--Give the bot that carries the item a talent that gives an affliction that triggers an event to track the kills-->
-      <ItemComponent>
-        <StatusEffect type="OnContained" target="Character" interval="1" multiplyafflictionsbymaxvitality="true">
-          <GiveTalentInfo giverandom="false" talentidentifiers="takeoverkilltracking" />
-        </StatusEffect>
-        <StatusEffect type="OnContained" target="This" delay="1">
-          <Remove />
-        </StatusEffect>
-      </ItemComponent>
-    </Item>
-    <Item name="" identifier="idcardseparatistsoldier" category="Equipment" Tags="smallitem,identitycard,separatistsoldierid" hideinmenus="true" cargocontaineridentifier="metalcrate">
-      <PreferredContainer primary="crewcab" />
-      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
-      <Body width="16" height="12" density="10.05" />
-      <IdCard slots="Card,Any" msg="ItemMsgPickUpSelect" />
-      <!--Give the bot that carries the item a talent that gives an affliction that triggers an event to track the kills-->
-      <ItemComponent>
-        <StatusEffect type="OnContained" target="Character" interval="1" multiplyafflictionsbymaxvitality="true">
-          <GiveTalentInfo giverandom="false" talentidentifiers="takeoverkilltracking" />
-        </StatusEffect>
-        <StatusEffect type="OnContained" target="This" delay="1">
-          <Remove />
-        </StatusEffect>
-      </ItemComponent>
-    </Item>
-    <!-- increase kill count -->
-    <Item name="Triggered Event - Track Kills" identifier="eventtrigger_killtracker" tags="eventtrigger" description="DO NOT PLACE/USE THIS! IT IS AUTOMATICALLY SPAWNED ON THE REQUIRED NPC!" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" hideinmenus="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,787,234,234" depth="0.001" origin="0.5,0.5" />
-      <Holdable slots="Any">
-        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
-          <TriggerEvent identifier="sepoutposttakeoverprogressevent" />
-          <Remove />
-        </StatusEffect>
-      </Holdable>
-    </Item>
+
     <!-- PLACEABLE EVENT TRIGGERS -->
     <!-- generic events -->
     <Item name="Triggered Event - Bartender" identifier="eventtrigger_bartender" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">

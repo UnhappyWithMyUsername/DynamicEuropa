@@ -64,18 +64,7 @@
     <Effect minstrength="2" maxstrength="21601" strengthchange="-1" />
     <icon texture="%ModDir%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
   </Affliction>
-  <!--TAKEOVER PROGRESS TRACKING-->
-  <Affliction identifier="killtracker" type="killtracker" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1" showiconthreshold="1000" treatmentthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000">
-    <Effect minstrength="0" maxstrength="1" strengthchange="0">
-      <StatusEffect type="Always" target="Character" interval="1" stackable="false">
-        <Conditional isdead="true" />
-        <!--<TriggerEvent identifier="coatakeoveroutpostprogress" />-->
-        <TriggerEvent identifier="outposttakeoverprogressevent" />
-        <!--<SpawnItem identifier="eventtrigger_killtracker" SpawnPosition="ThisInventory" SpawnIfInventoryFull="true" SpawnIfCantBeContained="true" />-->
-        <ReduceAffliction identifier="killtracker" strength="100" />
-      </StatusEffect>
-    </Effect>
-  </Affliction>
+
   <!--PIRATE EXOSUIT STUN RESISTANCE-->
   <Affliction identifier="pirateexo" type="resistance" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1" showiconthreshold="1000" treatmentthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" duration="1">
     <Effect minstrength="0" maxstrength="1" resistancefor="stun" minresistance="0.85" maxresistance="0.85" />

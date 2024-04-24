@@ -562,9 +562,6 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:subtopleft" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <SetDataAction identifier="outposttakeoverprogress" operation="set" value="12" />
-      <SetDataAction identifier="attackloopactive" operation="Set" value="0" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -595,65 +592,37 @@
       <TagAction criteria="humanprefabidentifier:researcher" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:cosoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="player" tag="attackers" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- supposed to tag items from defender inventories with "removeitem" and make them uninteractable for players | doesn't work
-      <StatusEffectAction targettag="defenders">
-        <StatusEffect type="Always" target="Contained" tags="removeitem" nonplayerteaminteractable="true" setvalue="true" disabledeltatime="true"/>
-      </StatusEffectAction>
-      <TagAction criteria="itemtag:removeitem" tag="removeitem" ContinueIfNoTargetsFound="true" />
-      -->
-      <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" />
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
-      <CheckDataAction identifier="outposttakeoverprogress" condition="eq 0">
+      <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
         <Success>
-          <!-- supposed to remove items with the "removeitem" tag | Doesn't work
-          <StatusEffectAction targettag="removeitem">
-            <StatusEffect type="Always" target="This" disabledeltatime="true">
-              <Remove />
-            </StatusEffect>
-          </StatusEffectAction>
-          -->
-          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="set" value="1" />
-          <ModifyLocationAction faction="Coalition" />
-          <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" />
+          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
-          <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
-          <ClearTagAction tag="attackers" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+          <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
+          <ModifyLocationAction faction="Separatists" />
+          <LayerAction layer="coalition" enabled="true" />
+          <LayerAction layer="separatists" enabled="false" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
           <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" />
-          <TagAction criteria="itemidentifier:dockinghatch" tag="gotoairlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-          <NPCFollowAction npctag="defenders" targettag="gotoairlock" follow="true" />
-          <ClearTagAction tag="defenders" />
-          <!--
-          <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true"/>
-          <ConversationAction text="eventtext.cotakeover.complete" dialogtype="Small" targettag="listener_player" />-->
         </Success>
         <Failure>
-          <CheckDataAction identifier="attackloopactive" condition="neq 1">
-            <Success>
-              <TriggerEventAction identifier="takeoverattackloop" />
-              <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="Retreat" />
-              <WaitAction time="4" />
-              <GoTo name="checkforcomplete" />
-            </Success>
-            <Failure>
-              <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="Retreat" />
-              <WaitAction time="4" />
-              <GoTo name="checkforcomplete" />
-            </Failure>
-          </CheckDataAction>
+          <Waitaction time="1" /><!-- 
+          <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="none" />
+          <CombatAction cooldown="0" combatmode="Offensive" npctag="defenders" enemytag="attackers" isinstigator="true" guardreaction="None" witnessreaction="none" /> -->
+          <GoTo name="checkforcomplete" />
         </Failure>
-      </CheckDataAction>
+      </CountTargetsAction>
     </ScriptedEvent>
     
     <!-- Separatist Attackers-->
@@ -661,9 +630,6 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:subtopleft" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <SetDataAction identifier="outposttakeoverprogress" operation="set" value="12" />
-      <SetDataAction identifier="attackloopactive" operation="Set" value="0" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -694,141 +660,68 @@
       <TagAction criteria="humanprefabidentifier:researcher" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:sepsoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="player" tag="attackers" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- supposed to tag items from defender inventories with "removeitem" and make them uninteractable for players | doesn't work
-      <StatusEffectAction targettag="defenders">
-        <StatusEffect type="Always" target="Contained" tags="removeitem" nonplayerteaminteractable="true" setvalue="true" disabledeltatime="true"/>
-      </StatusEffectAction>
-      <TagAction criteria="itemtag:removeitem" tag="removeitem" ContinueIfNoTargetsFound="true" />
-      -->
-      <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" />
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
-      <CheckDataAction identifier="outposttakeoverprogress" condition="eq 0">
+      <CountTargetsAction targettag="coalitionsoldier" CompareToTarget="coalitionsoldier" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
         <Success>
-          <!-- supposed to remove items with the "removeitem" tag | Doesn't work
-          <StatusEffectAction targettag="removeitem">
-            <StatusEffect type="Always" target="This" disabledeltatime="true">
-              <Remove />
-            </StatusEffect>
-          </StatusEffectAction>
-          -->
-          <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="set" value="1" />
-          <ModifyLocationAction faction="Separatists" />
-          <SetDataAction identifier="septakeoveractive" operation="Set" value="0" />
+          <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="Set" value="1" />
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
-          <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
-          <ClearTagAction tag="attackers" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+          <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
+          <ModifyLocationAction faction="Separatists" />
+          <LayerAction layer="separatists" enabled="true" />
+          <LayerAction layer="coalition" enabled="false" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
           <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" />
-          <TagAction criteria="itemidentifier:dockinghatch" tag="gotoairlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-          <NPCFollowAction npctag="defenders" targettag="gotoairlock" follow="true" />
-          <ClearTagAction tag="defenders" />
-          <!--
-          <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true"/>
-          <ConversationAction text="eventtext.takeover.complete" dialogtype="Small" targettag="listener_player" />-->
         </Success>
         <Failure>
-          <CheckDataAction identifier="attackloopactive" condition="neq 1">
-            <Success>
-              <TriggerEventAction identifier="takeoverattackloop" />
-              <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="Retreat" />
-              <WaitAction time="4" />
-              <GoTo name="checkforcomplete" />
-            </Success>
-            <Failure>
-              <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="Retreat" />
-              <WaitAction time="4" />
-              <GoTo name="checkforcomplete" />
-            </Failure>
-          </CheckDataAction>
+          <Waitaction time="1" /><!-- 
+          <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="none" />
+          <CombatAction cooldown="0" combatmode="Offensive" npctag="defenders" enemytag="attackers" isinstigator="true" guardreaction="None" witnessreaction="none" /> -->
+          <GoTo name="checkforcomplete" />
         </Failure>
-      </CheckDataAction>
+      </CountTargetsAction>
     </ScriptedEvent>
-    
-    <!-- Outpost Attack Loop -->
-    <ScriptedEvent identifier="takeoverattackloop">
-      <SetDataAction identifier="attackloopactive" operation="Set" value="1" />
-      <TagAction criteria="player" tag="attackers2" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:cosoldier" tag="attackers2" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:sepsoldier" tag="attackers2" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders2" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders2" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="attackers2" target2tag="defenders2" radius="1500" applytotarget2="triggered_defender" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <!--<CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="Retreat" />-->
-      <CombatAction cooldown="0" combatmode="Offensive" npctag="triggered_defender" enemytag="attackers2" isinstigator="false" guardreaction="None" witnessreaction="Retreat" />
-      <SetDataAction identifier="attackloopactive" operation="Set" value="0" />
-    </ScriptedEvent>
+        
     <!-- Remove Temporary Crewmembers -->
     <ScriptedEvent identifier="removetempcrew">
       <TagAction criteria="jobidentifier:cosoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
       <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
-    </ScriptedEvent>
-    <!-- Check kill progress and set mission as complete -->
-    <ScriptedEvent identifier="outposttakeoverprogressevent">
-      <CheckDataAction identifier="outposttakeoverprogress" condition="eq 0">
-        <Success>
-          <!-- do nothing -->
-        </Success>
-        <Failure>
-          <SetDataAction identifier="outposttakeoverprogress" operation="Add" value="-1" />
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>
-
-    <ScriptedEvent identifier="takeoverprogresscoalition">
-      <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="separatistssoldier" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <Label name="takeoverloop" />
-      <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
-        <!-- complete mission if >75% enemies dead  -->
-        <Conditional isdead="True"/>
-        <Success>
-          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
-          <NPCChangeTeamAction npctag="separatistssoldier" teamtag="FriendlyNPC" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="separatistssoldier" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
-        </Success>
-        <Failure>
-            <Waitaction time="1" />
-            <Goto name="takeoverloop" />
-        </Failure>
-      </CountTargetsAction>
-    </ScriptedEvent>
+    </ScriptedEvent>   
     
-    <ScriptedEvent identifier="takeoverprogressseparatists">
-      <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="coalitionssoldier" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <Label name="takeoverloop" />
-      <CountTargetsAction targettag="coalitionssoldier" CompareToTarget="coalitionssoldier" MinPercentageRelativeToTarget="75">
-        <!-- complete mission if >75% enemies dead  -->
-        <Conditional isdead="True"/>
-        <Success>
-          <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="Set" value="1" />
-          <NPCChangeTeamAction npctag="coalitionssoldier" teamtag="FriendlyNPC" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="coalitionssoldier" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
-        </Success>
-        <Failure>
-            <Waitaction time="1" />
-            <Goto name="takeoverloop" />
-        </Failure>
-      </CountTargetsAction>
-    </ScriptedEvent>
-       
+    <!-- for takeover testing purposes no touchey until it works -->
+    <ScriptedEvent identifier="takeovertestcoal">
+      <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />  
+        <!--spawn temporary crewmembers which will be removed from the crew after 6h or when completing the mission-->
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <TagAction criteria="hullname:airlock" tag="subairlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
+        <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="true" />
+        <WaitAction time="2" />
+        <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="false" />
+        <NPCChangeTeamAction npctag="tempcrew" teamtag="Team1" addtocrew="true" />
+    </ScriptedEvent> 
+          
     <ScriptedEvent identifier="lairbombspawn">
       <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
-      <OnRoundEndAction>
-        <RemoveItemAction targettag="lairbomb" Amount="100" />
-      </OnRoundEndAction>
     </ScriptedEvent>
 
   </EventPrefabs>
