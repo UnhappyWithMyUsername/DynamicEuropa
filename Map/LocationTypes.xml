@@ -38,8 +38,8 @@
     <Tutorial identifier="TutorialOutpost" replaceinradiation="Abandoned" nameidentifiers="generic,city" forceoutpostgenerationparams="tutorialoutpost" allowinrandomlevels="false" ignoregenericevents="true" AllowAsBiomeGate="false">
       <Symbol texture="Content/Map/MapAtlas.png" sourcerect="256,512,128,128" color="128,206,175,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.45" requireddurationrange="1,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -63,13 +63,13 @@
         <!-- doesnt generate a circus if another exists -->
         <Requirement function="Multiply" requiredlocations="sinkingcircus" probability="0.0" requiredproximity="100" />      
       </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
+      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack" requirediscovered="false">
         <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,WasteyardDE" requireddurationrange="1,2" probability="1" requiredproximity="1" />
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,WasteyardDE" requireddurationrange="1,2" probability="1" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="UnderHuskAttack" messagetag="locationchange.none.changeto.UnderAttack">
         <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
+        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Construction" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.outpost">
         <!-- May be settled if within 5 steps of a colony, with an increasing chance should it be within 3 or less steps -->
@@ -182,8 +182,8 @@
       <!-- Change back to None if no attackers are around -->
       <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LaitThresher" disallowedproximity="1" messagetag="locationchange.UnderAttack.changeto.none" requiredduration="1" probability="1" />
       <!-- Change to Outerlair if lair is adjacent -->
-      <ChangeTo type="OuterLair" messagetag="locationchange.none.changeto.lair" >
-        <Requirement requiredlocations="Lair,LairMudraptor,LaitThresher" requireddurationrange="1,3" probability="1" requiredproximity="1" />
+      <ChangeTo type="OuterLair" messagetag="locationchange.none.changeto.lair" requirediscovered="false" >
+        <Requirement requiredlocations="Lair,LairMudraptor,LaitThresher" requireddurationrange="1,3" probability="1" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
         <!-- May be Blockaded if within 2 steps of a Military. -->
@@ -201,7 +201,7 @@
       <ChangeTo type="None" disallowedadjacentlocations="HuskgroundsDE,OuterHuskLair" disallowedproximity="1" messagetag="locationchange.UnderAttack.changeto.none" requiredduration="1" probability="1" />
       <!-- Change to OuterHuskLair if Huskgrounds are adjacent -->
       <ChangeTo type="OuterHuskLair" messagetag="locationchange.none.changeto.lair" >
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
         <!-- May be Blockaded if within 2 steps of a Military. -->
@@ -215,13 +215,13 @@
     <Abandoned identifier="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0" missiontags="abandonedoutpost" hideentitysubcategories="abandonedhuman,abandonedmonster" outpostteam="None" beaconstationchance="0.25" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="0,640,128,128" color="245,105,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
+      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack" requirediscovered="false">
         <!-- Will be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderHuskAttack" messagetag="locationchange.none.changeto.UnderAttack">
         <!-- Will be infested if within 1 steps of a husk lair. -->
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="2,5" probability="0.1" requiredproximity="1" />
+        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="2,5" probability="0.4" requiredproximity="1" />
       </ChangeTo>
       <!-- Change to pirate outpost disabled to reduce the amount of pirate havens on the map.
       <ChangeTo type="PirateNone" probability="0.1" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE,Blockade,Military,Base,Camp" messagetag="locationchange.abandoned.changeto.piratenone">
@@ -240,8 +240,8 @@
         <!-- if near a beacon station, increase the probability -->
         <Requirement function="Add" requirebeaconstation="true" probability="0.5" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.75" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.45" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -260,8 +260,8 @@
       <ChangeTo type="Colony" disallowedadjacentlocations="Colony" probability="0.1" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.settlement.changeto.outpost">
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -287,8 +287,8 @@
       <ChangeTo type="City" disallowedadjacentlocations="City" probability="0.1" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.city">
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -312,7 +312,7 @@
       <Hireable identifier="medicaldoctor" commonness="1" />
       <Hireable identifier="securityofficer" commonness="1" />
       <Hireable identifier="captain" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
@@ -333,8 +333,8 @@
       <ChangeTo type="Base" disallowedadjacentlocations="Base" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.camp.changeto.base">
         <Requirement requiredlocations="Factory" probability="0.1" requireddurationrange="1,5" requiredproximity="5" requiredproximityforprobabilityincrease="5" proximityprobabilityincrease="0.15" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -358,8 +358,8 @@
       <ChangeTo type="Military" disallowedadjacentlocations="Military" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.base.changeto.military">
         <Requirement requiredlocations="Shipyard" probability="0.1" requireddurationrange="1,7" requiredproximity="10" requiredproximityforprobabilityincrease="10" proximityprobabilityincrease="0.15" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -383,8 +383,8 @@
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="medicaldoctor" commonness="1" />
-      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -436,8 +436,8 @@
       <ChangeTo type="Research" disallowedadjacentlocations="Research" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.study.changeto.lab">
         <Requirement requiredlocations="Clinic" probability="0.1" requireddurationrange="1,5" requiredproximity="5" requiredproximityforprobabilityincrease="5" proximityprobabilityincrease="0.15" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -459,8 +459,8 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
       <Hireable identifier="medicaldoctor" commonness="1" />
       <Hireable identifier="assistant" commonness="3" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -482,8 +482,8 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
       <Hireable identifier="assistant" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -510,8 +510,8 @@
       <ChangeTo type="Mine" disallowedadjacentlocations="Mine" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.survey.changeto.extraction">
         <Requirement requiredlocations="Factory" probability="0.1" requireddurationrange="1,5" requiredproximity="10" requiredproximityforprobabilityincrease="10" proximityprobabilityincrease="0.15" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -535,8 +535,8 @@
       <Hireable identifier="engineer" commonness="2" />
       <Hireable identifier="mechanic" commonness="2" />
       <Hireable identifier="assistant" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -560,8 +560,8 @@
       <ChangeTo type="Hospital" disallowedadjacentlocations="Hospital" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.clinic.changeto.hospital">
         <Requirement requiredlocations="Factory,Camp" probability="0.1" requireddurationrange="1,5" requiredproximity="10" requiredproximityforprobabilityincrease="10" proximityprobabilityincrease="0.15" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -583,8 +583,8 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
       <Hireable identifier="assistant" commonness="1" />
       <Hireable identifier="medicaldoctor" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -607,8 +607,8 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="assistant" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -631,8 +631,8 @@
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="assistant" commonness="1" />
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" />
+      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -659,7 +659,7 @@
       Faction="huskcult" >
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="246,640,128,128" color="58,165,121,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
+      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
@@ -684,7 +684,7 @@
       <ChangeTo type="None" messagetag="locationchange.circus.changeto.none">
         <Requirement requiredlocations="Outpost,Settlement,Colony,City" requireddurationrange="2,5" probability="0.2" requiredproximity="3"/>
       </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
+      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack" requirediscovered="false">
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requiredduration="1" probability="1" requiredproximity="1" />
       </ChangeTo>
@@ -940,7 +940,7 @@
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="256,896,128,128" color="119,208,107,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <!-- if it already exists on the map, change it to "Under Attack" after one round -->
-      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
+      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack" requirediscovered="false">
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="None,Waypoint,Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requiredduration="1" probability="1" requiredproximity="10" />
       </ChangeTo>
@@ -977,7 +977,7 @@
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
         <Requirement function="Multiply" requiredlocations="Blockade,Military,Base" probability="0" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack">
+      <ChangeTo type="UnderAttack" messagetag="locationchange.none.changeto.UnderAttack" requirediscovered="false">
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
       </ChangeTo>
