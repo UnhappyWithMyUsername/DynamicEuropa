@@ -4,329 +4,653 @@
     <!--HIRABLE NPCS-->
     <!-- Sadashi Kira -->
     <ScriptedEvent identifier="sadashikira">
-      <CheckReputationAction targettype="Faction" identifier="coalition" condition="gte 50" _npos="-5224.876,-465.18765">
-        <Success>
-          <CheckDataAction identifier="sadashihired" condition="eq true" _npos="-4708.5474,-481.6993">
-            <Failure>
-              <CheckDataAction identifier="clownmoment2" condition="eq true" _npos="-4217.782,-516.857">
-                <Failure>
-                  <CheckDataAction identifier="thirdencounter" condition="eq true" _npos="-3703.5872,-491.44748">
-                    <Failure>
-                      <TagAction ContinueIfNoTargetsFound="true" criteria="player" tag="player" _npos="-3044.8223,-482.47458" />
-                      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira" targettag="kira" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" _npos="-2489.542,-519.3637" />
-                      <CheckDataAction identifier="secondencounter" condition="eq true" _npos="-2016.4578,-496.62103">
-                        <Success>
-                          <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="-1645.5887,-299.3227" />
-                          <NPCWaitAction npctag="kira" wait="true" _npos="-1229.1029,-203.16388" />
-                          <CheckDataAction identifier="clownmoment1" condition="eq true" _npos="-949.21094,39.23462">
-                            <Success>
-                              <ConversationAction text="As you are exploring around the outpost, you seem to notice a familiar stern-looking face. However, before you could interact with the former commissar, the clowns decide to invade her privacy and you can see that she is visibly annoyed." targettag="triggereventplayer" dialogtype="Small" _npos="101.46637,374.3357" />
-                              <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="clown" targettag="clownkiranpc1" spawnlocation="Outpost" _npos="593.33954,347.2398" />
-                              <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="clown" targettag="clownkiranpc2" spawnlocation="Outpost" _npos="1006.55554,351.98065" />
-                              <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="clown" targettag="clownkiranpc3" spawnlocation="Outpost" _npos="1435.3787,388.87476" />
-                              <SpawnAction itemidentifier="toyhammer" targetinventory="clownkiranpc1" _npos="1871.3176,360.61948" />
-                              <SpawnAction itemidentifier="toyhammer" targetinventory="clownkiranpc2" _npos="2296.0457,393.7178" />
-                              <SpawnAction itemidentifier="toyhammer" targetinventory="clownkiranpc3" _npos="2738.7385,392.70648" />
-                              <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" witnessreaction="Retreat" npctag="clownkiranpc1" enemytag="kira" _npos="3184.0256,408.86377" />
-                              <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" witnessreaction="Retreat" npctag="clownkiranpc2" enemytag="kira" _npos="3588.732,398.7511" />
-                              <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" witnessreaction="Retreat" npctag="clownkiranpc3" enemytag="kira" _npos="3996.4026,402.2606" />
-                              <NPCWaitAction npctag="kira" wait="false" _npos="4387.146,437.48706" />
-                              <SetDataAction value="true" identifier="clownmoment2" _npos="4767.753,467.04596" />
-                            </Success>
-                            <Failure>
-                              <CheckDataAction identifier="cheaperprice" condition="eq true" _npos="-1049.0239,491.5525">
-                                <Success>
-                                  <Label name="secondpoke1" _npos="-490.38147,895.6559" />
-                                  <NPCWaitAction npctag="kira" wait="true" _npos="-494.18335,1046.5522" />
-                                  <ConversationAction text="You see a familiar looking officer, one that you met a while back. When you approach her, she says, &quot;Ah... We meet again. Are you here to hire me this time?&quot;" targettag="triggereventplayer" _npos="138.55408,1213.3566">
-                                    <Option text="&quot;Yes, I would like to hire you.&quot; (Price: 7,000mk)">
-                                      <CheckMoneyAction amount="7000" targettag="triggereventplayer" _npos="1024.504,1148.5864">
-                                        <Success>
-                                          <MoneyAction amount="-7000" targettag="triggereventplayer" _npos="1619.8936,1116.6338" />
-                                          <GoTo name="continue2" _npos="2275.0596,1202.9949" />
-                                        </Success>
-                                        <Failure>
-                                          <ConversationAction text="She shakes her head in disappointment. &quot;You still don't have the necessary cash on you. Look for me when you do.&quot;" targettag="triggereventplayer" _npos="1375.7925,1431.5065">
-                                            <Option text="Leave." endconversation="true">
-                                              <ClearTagAction tag="triggereventplayer" _npos="1852.8967,1482.5244" />
-                                              <NPCWaitAction npctag="kira" wait="false" _npos="2279.013,1467.3301" />
-                                              <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="2778.3672,1385.8497" />
-                                              <NPCWaitAction npctag="kira" wait="true" _npos="3201,1421.5" />
-                                              <GoTo name="secondpoke1" _npos="3654.0674,1440.9156" />
-                                            </Option>
-                                          </ConversationAction>
-                                        </Failure>
-                                      </CheckMoneyAction>
-                                    </Option>
-                                    <Option text="&quot;Hold on, I still need to think about this.&quot;" endconversation="true">
-                                      <ClearTagAction tag="triggereventplayer" _npos="901.43677,2312.9722" />
-                                      <NPCWaitAction npctag="kira" wait="false" _npos="1418.0443,2289.2148" />
-                                      <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="1996.6797,2249.6401" />
-                                      <NPCWaitAction npctag="kira" wait="true" _npos="2635.3,2381.3945" />
-                                      <GoTo name="secondpoke1" _npos="3390.8408,2299.899" />
-                                    </Option>
-                                    <Option text="&quot;I'm sorry, we do not need any more crew members.&quot;">
-                                      <Label name="nomorehire" _npos="546.3637,2685.4827" />
-                                      <ConversationAction text="&quot;Very well. Then I shall find another crew.&quot; She responds briefly as she proceeds to leave. It almost looks like she's marching upstream." targettag="triggereventplayer" _npos="1146.0414,2783.8687">
-                                        <Option text="Leave." endconversation="true" />
-                                      </ConversationAction>
-                                      <ClearTagAction tag="triggereventplayer" _npos="1672.6083,2813.908" />
-                                      <NPCWaitAction npctag="kira" wait="false" _npos="2189.8633,2919.2068" />
-                                      <SetDataAction value="true" identifier="thirdencounter" _npos="2922.8318,3001.4731" />
-                                    </Option>
-                                  </ConversationAction>
-                                </Success>
-                                <Failure>
-                                  <Label name="secondpoke2" _npos="-965.8043,1419.0706" />
-                                  <NPCWaitAction npctag="kira" wait="true" _npos="-1012.6979,1735.5288" />
-                                  <ConversationAction text="You see a familiar looking officer, one that you met a while back. When you approach her, she says, &quot;Ah... We meet again. Are you here to hire me this time?&quot;" targettag="triggereventplayer" _npos="-2784.829,2427.775">
-                                    <Option text="&quot;Yes, I would like to hire you.&quot; (Price: 7,500mk)">
-                                      <CheckMoneyAction amount="7500" targettag="triggereventplayer" _npos="-1968.683,2357.0408">
-                                        <Success>
-                                          <MoneyAction amount="-7500" targettag="triggereventplayer" _npos="-1254.7642,2335.8308" />
-                                          <GoTo name="continue2" _npos="-662.0174,2344.5183" />
-                                        </Success>
-                                        <Failure>
-                                          <ConversationAction text="She shakes her head in disappointment. &quot;You still don't have the necessary cash on you. Look for me when you do.&quot;" targettag="triggereventplayer" _npos="-1727.8895,2702.5542">
-                                            <Option text="Leave." endconversation="true">
-                                              <ClearTagAction tag="triggereventplayer" _npos="-1306.1372,2785.4426" />
-                                              <NPCWaitAction npctag="kira" wait="false" _npos="-909.2804,2788.3376" />
-                                              <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="-518.84094,2714.681" />
-                                              <NPCWaitAction npctag="kira" wait="true" _npos="-128.49487,2817.351" />
-                                              <GoTo name="secondpoke2" _npos="280.8858,3042.544" />
-                                            </Option>
-                                          </ConversationAction>
-                                        </Failure>
-                                      </CheckMoneyAction>
-                                    </Option>
-                                    <Option text="&quot;Hold on, I still need to think about this.&quot;" endconversation="true">
-                                      <ClearTagAction tag="triggereventplayer" _npos="-1719.1555,3949.3284" />
-                                      <NPCWaitAction npctag="kira" wait="false" _npos="-1102.7095,3368.6973" />
-                                      <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="-704.3944,3424.3433" />
-                                      <NPCWaitAction npctag="kira" wait="true" _npos="-14.967407,3544.8015" />
-                                      <GoTo name="secondpoke2" _npos="589.37036,3559.394" />
-                                    </Option>
-                                    <Option text="&quot;I'm sorry, we do not need any more crew members.&quot;">
-                                      <GoTo name="nomorehire" _npos="-2499.211,3464.4966" />
-                                    </Option>
-                                  </ConversationAction>
-                                </Failure>
-                              </CheckDataAction>
-                            </Failure>
-                          </CheckDataAction>
-                        </Success>
-                        <Failure>
-                          <SetDataAction value="true" identifier="secondencounter" _npos="-1269.1626,-732.7933" />
-                          <Label name="restart" _npos="-768.9547,-709.5769" />
-                          <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="-246.64319,-667.56287" />
-                          <NPCWaitAction npctag="kira" wait="true" _npos="206.90051,-683.8953" />
-                          <ConversationAction text="You see a well-dressed military officer sitting at a table with a bottle of liquor in her hand. She seems to be lost in her thoughts." targettag="triggereventplayer" _npos="693.06415,-645.909">
-                            <Option text="Approach the officer.">
-                              <ConversationAction text="She snaps out of it when she notices you approaching her. &quot;Hm? What is it?&quot; The stern officer asks in a monotone voice." targettag="triggereventplayer" _npos="1218.7474,-677.8963">
-                                <Option text="&quot;Are you a General?&quot;">
-                                  <ConversationAction text="&quot;Negative, I am... Was a Commissar on board a submarine called Sorrowful. However, I recently resigned from my position.&quot; She answers, taking a swig of her liquor." targettag="triggereventplayer" _npos="1707.0426,-1112.962">
-                                    <Option text="&quot;Commissar? As in a person in charge of the security department?&quot;">
-                                      <ConversationAction text="&quot;Affirmative.&quot; She nods her head at your question." targettag="triggereventplayer" _npos="2259.4478,-1635.3344">
-                                        <Option text="&quot;Wait, then why did you resign from your job?&quot;">
-                                          <Label name="continue1" _npos="2556.625,-1872.417" />
-                                          <NPCWaitAction npctag="kira" wait="true" _npos="2971.1516,-1899.74" />
-                                          <ConversationAction text="She pauses, before letting out a heavy sigh. &quot;I have my own reasons... Especially after what I saw in the Eye of Europa...&quot;" targettag="triggereventplayer" _npos="3384.0945,-1905.347">
-                                            <Option text="&quot;You've been to the Eye of Europa? What's in it?&quot;">
-                                              <ConversationAction text="&quot;We've been near but we did not enter it. An EMP shockwave hit our submarine and left us drifting in the abyss. I remember looking through the periscope... The glowing light and the visions it gave... It was as if death awaits for those who enters... Thankfully we managed to fix our submarine and docked onto the nearest outpost for safety.&quot;" targettag="triggereventplayer" _npos="3853.6338,-1958.0768">
-                                                <Option text="&quot;So, what's your plan now?&quot;">
-                                                  <ConversationAction text="&quot;I don't know... I didn't think that far ever since I left the crew.&quot; She answers rather honestly." targettag="triggereventplayer" _npos="4357.7754,-1979.423">
-                                                    <Option text="&quot;Why not join us? We are thinking of going to the Eye of Europa and we could use someone like you.&quot;">
-                                                      <ConversationAction text="She slams the bottle of liquor onto the table. “Did you not hear what I just said? Dammit, why is everyone so obsessed with the Eye?”" targettag="triggereventplayer" _npos="4906.3716,-2976.0024">
-                                                        <Option text="“Come on, are you not curious about what's in the Eye?”">
-                                                          <ConversationAction text="She seems to hesitate for a moment, before responding, “I am curious but is it really worth the risk?”" targettag="triggereventplayer" _npos="5477.0674,-2967.734">
-                                                            <Option text="“You never know, maybe the Eye has an ancient alien weapon that can obliterate everything in its path? Wouldn’t you want to secure the weapon to prevent idiots from using it?”">
-                                                              <ConversationAction text="She gives a cold stare at you as she ponders over your words. “Hm… If there is truly such a destructive weapon in Europa, it would certainly be terrible if it falls into the wrong hands.”" targettag="triggereventplayer" _npos="6054.1113,-3414.2659">
-                                                                <Option text="“Exactly, so why not join us and check it out yourself? With your knowledge and military expertise, we will have a higher chance of reaching it.”">
-                                                                  <ConversationAction text="She leans back onto her seat and crosses her arms, considering your offer. Eventually she comes to a decision. “Very well, I will help you guys out.”" targettag="triggereventplayer" dialogtype="Small" _npos="6774.6685,-3590.3044">
-                                                                    <Option text="“Great! Welcome on board.”">
-                                                                      <Label name="continue2" _npos="7346.0327,-3611.1816" />
-                                                                      <NPCWaitAction npctag="kira" wait="true" _npos="7350.531,-3442.1653" />
-                                                                      <ConversationAction text="“By the way, I haven’t actually introduced myself. Name's Sadashi Kira, or you can call me Sergeant Kira. I specialize in close quarter combat.” She states, pointing her thumb at the boarding axe behind her back. “If something hostile enters the submarine, I’ll be sure to split it in two. Oh and I have one request before I join, are your crew able to provide alcohol for me throughout the journey?”" targettag="triggereventplayer" _npos="7987.1533,-3605.8618">
-                                                                        <Option text="“Sure, we have alcohol on board, we can provide some for you.”">
-                                                                          <StatusEffectAction targettag="kira">
-                                                                            <StatusEffect type="Always" target="Character">
-                                                                              <GiveTalentInfo giverandom="false" talentidentifiers="stayingtipsy" />
-                                                                            </StatusEffect>
-                                                                          </StatusEffectAction>
-                                                                          <ConversationAction text="A small smile grew on her face, she muttered, “Finally, I don’t need to be sober for this shit…” Upon noticing you raising an eyebrow, she hides her smile quickly. “Ahem... I’ll report for duty once we depart from here. For now, let me finish my drink.”" targettag="triggereventplayer" dialogtype="Small" _npos="8598.951,-3754.771">
-                                                                            <Option text="Leave." endconversation="true">
-                                                                              <Label name="ending" _npos="9255.052,-3690.21" />
-                                                                              <NPCChangeTeamAction npctag="kira" teamid="Team1" addtocrew="true" _npos="9805.06,-3664.1943" />
-                                                                              <SetDataAction value="true" identifier="sadashihired" _npos="10225.827,-3648.408" />
-                                                                              <NPCWaitAction npctag="kira" wait="false" _npos="10686.008,-3622.8586" />
-                                                                            </Option>
-                                                                          </ConversationAction>
-                                                                        </Option>
-                                                                        <Option text="“Sorry Sarge, we need you sober for this one.”">
-                                                                          <ConversationAction text="She lets out a disappointing sigh as though she’s defeated. “Understood. I’ll report for duty once we depart from here. For now, just let me finish my drink.”" targettag="triggereventplayer" dialogtype="Small" _npos="8600.148,-3176.889">
-                                                                            <Option text="Leave." endconversation="true">
-                                                                              <GoTo name="ending" _npos="9256.2295,-3540.945" />
-                                                                            </Option>
-                                                                          </ConversationAction>
-                                                                        </Option>
-                                                                      </ConversationAction>
-                                                                    </Option>
-                                                                  </ConversationAction>
-                                                                </Option>
-                                                              </ConversationAction>
-                                                            </Option>
-                                                            <Option text="“Life without risk is not worth living, don’t you agree?”">
-                                                              <ConversationAction text="The officer shakes her head at your remark. “Not everyone risks their life for amusement, some would prefer to live a life in peace.”" targettag="triggereventplayer" _npos="7816.1025,-2324.8228">
-                                                                <Option text="“Okay, how about I hire you for your services?”">
-                                                                  <ConversationAction text="The officer thinks for a bit. “You can certainly hire me. Though my services come at a price… My offer is 7,500mk.”" targettag="triggereventplayer" _npos="8528.847,-2287.1611">
-                                                                    <Option text="“Alright, I’ll hire you.”">
-                                                                      <Label name="continue4" _npos="9262.409,-3034.0444" />
-                                                                      <CheckMoneyAction amount="7500" targettag="triggereventplayer" _npos="9929.395,-3076.9302">
-                                                                        <Success>
-                                                                          <MoneyAction amount="-7500" targettag="triggereventplayer" _npos="10479.529,-3305.1194" />
-                                                                          <GoTo name="continue2" _npos="10957.622,-3296.6287" />
-                                                                        </Success>
-                                                                        <Failure>
-                                                                          <ConversationAction text="She scoffs as she eyes you down, “You can’t fool me, I can see it in your eyes, you don’t have the money right now to pay me up front. Come back when you do have it.”" targettag="triggereventplayer" _npos="10458.163,-2993.227">
-                                                                            <Option text="Leave." endconversation="true">
-                                                                              <ClearTagAction tag="triggereventplayer" _npos="10935.96,-2985.4624" />
-                                                                              <NPCWaitAction npctag="kira" wait="false" _npos="11406.998,-3075.3079" />
-                                                                              <GoTo name="restart2" _npos="11864.39,-3020.63" />
-                                                                            </Option>
-                                                                          </ConversationAction>
-                                                                        </Failure>
-                                                                      </CheckMoneyAction>
-                                                                    </Option>
-                                                                    <Option text="“Hold up, I don’t have money on me. I’ll be back later.”" endconversation="true">
-                                                                      <ClearTagAction tag="triggereventplayer" _npos="9392.093,-2318.0566" />
-                                                                      <NPCWaitAction npctag="kira" wait="false" _npos="9999.34,-2356.3318" />
-                                                                      <Label name="restart2" _npos="10488.753,-2406.3547" />
-                                                                      <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="11143.658,-2538.9646" />
-                                                                      <NPCWaitAction npctag="kira" wait="true" _npos="11689.686,-2413.0752" />
-                                                                      <ConversationAction text="The officer takes another swig of her liquor, before her cold gaze locks onto you. “You’re back… Do you have the cash?”&#xD;" targettag="triggereventplayer" dialogtype="Small" _npos="12275.166,-2469.3206">
-                                                                        <Option text="&quot;Yes, I do.”">
-                                                                          <GoTo name="continue4" _npos="12997.13,-2532.483" />
-                                                                        </Option>
-                                                                        <Option text="&quot;No, not yet.&quot;" endconversation="true">
-                                                                          <ClearTagAction tag="triggereventplayer" _npos="12980.857,-2327.444" />
-                                                                          <GoTo name="restart2" _npos="12972.633,-2132.4739" />
-                                                                        </Option>
-                                                                      </ConversationAction>
-                                                                    </Option>
-                                                                    <Option text="“Could we negotiate the price?”">
-                                                                      <SkillCheckAction requiredskill="helm" requiredlevel="90" probabilitybased="false" targettag="triggereventplayer" _npos="9047.795,-1949.2823">
-                                                                        <Success>
-                                                                          <SetDataAction value="true" identifier="cheaperprice" _npos="9533.665,-1926.2322" />
-                                                                          <ConversationAction text="“You seem like a trustworthy sort… Fine... 7,000mk. That’s as low as I will offer.”&#xD;" targettag="triggereventplayer" _npos="10023.376,-1954.3514">
-                                                                            <Option text="“Alright, I’ll hire you.”">
-                                                                              <Label name="offer" _npos="10934.883,-1865.2195" />
-                                                                              <CheckMoneyAction amount="7000" targettag="triggereventplayer" _npos="11585.611,-1939.9309">
-                                                                                <Success>
-                                                                                  <MoneyAction amount="-7000" targettag="triggereventplayer" _npos="12286.4375,-1834.6729" />
-                                                                                  <GoTo name="continue2" _npos="12873.594,-1807.4761" />
-                                                                                </Success>
-                                                                                <Failure>
-                                                                                  <ConversationAction text="She scoffs as she eyes you down, “You can’t fool me, I can see it in your eyes, you don’t have the money right now to pay me up front. Come back when you do have it.”" targettag="triggereventplayer" _npos="12164.982,-1629.4115">
-                                                                                    <Option text="Leave." endconversation="true">
-                                                                                      <ClearTagAction tag="triggereventplayer" _npos="12699.291,-1596.2822" />
-                                                                                      <NPCWaitAction npctag="kira" wait="false" _npos="12715.324,-1435.0499" />
-                                                                                      <GoTo name="restart3" _npos="12715.107,-1134.5684" />
-                                                                                    </Option>
-                                                                                  </ConversationAction>
-                                                                                </Failure>
-                                                                              </CheckMoneyAction>
-                                                                            </Option>
-                                                                            <Option text="“Hold up, I don’t have money on me. I’ll be back later.”" endconversation="true">
-                                                                              <ClearTagAction tag="triggereventplayer" _npos="10545.743,-1537.3129" />
-                                                                              <NPCWaitAction npctag="kira" wait="false" _npos="10527.111,-1353.9834" />
-                                                                              <Label name="restart3" _npos="10523.726,-1057.2219" />
-                                                                              <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="10449.842,-590.62897" />
-                                                                              <NPCWaitAction npctag="kira" wait="true" _npos="11112.775,-775.4834" />
-                                                                              <ConversationAction text="The officer takes another swig of her liquor, before her cold gaze locks onto you. “You’re back… Do you have the cash?”" targettag="triggereventplayer" dialogtype="Small" _npos="11563.688,-670.54285">
-                                                                                <Option text="&quot;Yes, I do.&quot;">
-                                                                                  <GoTo name="offer" _npos="12252.459,-577.798" />
-                                                                                </Option>
-                                                                                <Option text="&quot;No, not yet.&quot;" endconversation="true">
-                                                                                  <ClearTagAction tag="triggereventplayer" _npos="12139.367,-380.18213" />
-                                                                                  <NPCWaitAction npctag="kira" wait="false" _npos="12133.004,-186.05212" />
-                                                                                  <GoTo name="restart3" _npos="12138.359,82.488525" />
-                                                                                </Option>
-                                                                              </ConversationAction>
-                                                                            </Option>
-                                                                          </ConversationAction>
-                                                                        </Success>
-                                                                        <Failure>
-                                                                          <ConversationAction text="“Negative. 7,500mk. Nothing more, nothing less.”" targettag="triggereventplayer" _npos="8609.929,-1227.4962">
-                                                                            <Option text="“Alright, I’ll hire you.”">
-                                                                              <GoTo name="continue4" _npos="9408.721,-1316.946" />
-                                                                            </Option>
-                                                                            <Option text="“Hold up, I don’t have money on me. I’ll be back later.”" endconversation="true">
-                                                                              <ClearTagAction tag="triggereventplayer" _npos="9099.895,-1031.0132" />
-                                                                              <NPCWaitAction npctag="kira" wait="false" _npos="9097.994,-818.26746" />
-                                                                              <GoTo name="restart2" _npos="9094.279,-608.78314" />
-                                                                            </Option>
-                                                                          </ConversationAction>
-                                                                        </Failure>
-                                                                      </SkillCheckAction>
-                                                                    </Option>
-                                                                  </ConversationAction>
-                                                                </Option>
-                                                              </ConversationAction>
-                                                            </Option>
-                                                          </ConversationAction>
-                                                        </Option>
-                                                      </ConversationAction>
-                                                    </Option>
-                                                    <Option text="“Well, good luck with your endeavors, I will take my leave.”">
-                                                      <ConversationAction text="The officer waves goodbye and resumes drinking her liquor. However, as soon as you leave, a clown comes to bother the former commissar with a toy hammer for some odd reason. You almost feel bad for the officer seemingly not getting any respite." targettag="triggereventplayer" _npos="4847.4546,-1690.5033">
-                                                        <Option text="Leave." endconversation="true">
-                                                          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="clown" targettag="clownkiranpc1" spawnlocation="Outpost" _npos="5462.8896,-1570.004" />
-                                                          <SpawnAction itemidentifier="toyhammer" targetinventory="clownkiranpc1" _npos="6015.855,-1472.6406" />
-                                                          <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" witnessreaction="Retreat" npctag="clownkiranpc1" enemytag="kira" _npos="6513.146,-1379.2852" />
-                                                          <NPCWaitAction npctag="kira" wait="false" _npos="7018.2563,-1301.2827" />
-                                                          <SetDataAction value="true" identifier="clownmoment1" _npos="7626.2104,-1324.3765" />
-                                                        </Option>
-                                                      </ConversationAction>
-                                                    </Option>
-                                                  </ConversationAction>
-                                                </Option>
-                                              </ConversationAction>
-                                            </Option>
-                                          </ConversationAction>
-                                        </Option>
-                                      </ConversationAction>
-                                    </Option>
-                                    <Option text="“Sorrowful? And let me guess, your captain was probably called Sorrow then. Was it because he was sad and depressed all the time?”">
-                                      <ConversationAction text="The officer’s face maintains an expressionless look as she gives you an intimidating gaze. You got a feeling she will not reply to your remark." targettag="triggereventplayer" _npos="2265.0347,-1039.9636">
-                                        <Option text="&quot;No, not funny? Anyway, why did you resign from your job?&quot;">
-                                          <GoTo name="continue1" _npos="2822.452,-1189.5704" />
-                                        </Option>
-                                      </ConversationAction>
-                                    </Option>
-                                  </ConversationAction>
-                                </Option>
-                                <Option text="&quot;Oh nothing ma'am, just passing by.&quot;">
-                                  <ConversationAction text="She acknowledges your comment and signals you to move along as she continues to drink her liquor." targettag="triggereventplayer" dialogtype="Small" _npos="1692.8962,-259.12753">
-                                    <Option text="Leave." endconversation="true">
-                                      <ClearTagAction tag="triggereventplayer" _npos="2188.643,-282.73013" />
-                                      <NPCWaitAction npctag="kira" wait="false" _npos="2188.5107,-81.44879" />
-                                      <GoTo name="restart" _npos="2190.2961,157.51257" />
-                                    </Option>
-                                  </ConversationAction>
-                                </Option>
-                              </ConversationAction>
-                            </Option>
-                          </ConversationAction>
-                        </Failure>
-                      </CheckDataAction>
-                    </Failure>
-                  </CheckDataAction>
-                </Failure>
-              </CheckDataAction>
-            </Failure>
-          </CheckDataAction>
-        </Success>
-      </CheckReputationAction>
+    <CheckReputationAction targettype="Faction" identifier="coalition" condition="gte 50" _npos="-3986.5479,-171.14197">
+      <Success>
+        <CheckDataAction identifier="kiradeath" condition="eq true" _npos="-3585.8062,-154.01935">
+          <Failure>
+            <CheckDataAction identifier="meetingkira2" condition="eq true" _npos="-3107.5552,-139.69675">
+              <Failure>
+                <CheckDataAction identifier="kiraclownmoment1" condition="eq true" _npos="-2476.4294,-115.60614">
+                  <Success>
+                    <CheckDataAction identifier="kiraclownmoment2" condition="eq true" _npos="-2482.121,-5065.2456">
+                      <Success>
+                        <TagAction criteria="player" tag="player" submarinetype="Outpost" _npos="-1948.2793,-5089.1187" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" spawnpointtype="Path" teamid="FriendlyNPC" allowduplicates="false" _npos="-1546.6134,-5105.196" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpc1" spawnlocation="Outpost" spawnpointtag="kira" teamid="FriendlyNPC" allowduplicates="true" _npos="-1089,-5102.284" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpc2" spawnlocation="Outpost" spawnpointtag="kira" teamid="FriendlyNPC" allowduplicates="true" _npos="-638.19446,-5102.284" />
+                        <NPCFollowAction npctag="clownkiranpc1" targettag="kira" follow="true" _npos="-202.42752,-5082.6743" />
+                        <NPCFollowAction npctag="clownkiranpc2" targettag="kira" follow="true" _npos="-165.68091,-4670.834" />
+                        <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="270.84955,-5142.263" />
+                        <NPCWaitAction npctag="kira" wait="true" _npos="108.28528,-5476.744" />
+                        <NPCWaitAction npctag="clownkiranpc1" wait="true" _npos="505.29688,-5496.8843" />
+                        <NPCWaitAction npctag="clownkiranpc2" wait="true" _npos="969.7435,-5488.9365" />
+                        <ConversationAction text="As you enter the room, your eyes are drawn to the weary figure before you, a military officer that you have met a while back. However, she looks different… Her uniform, once a symbol of discipline and authority, now hangs loosely from her frame, the fabric wrinkled and stained with the dust of neglect." targettag="triggereventplayer" _npos="784.9822,-5131.536">
+                          <Option text="Approach the officer.">
+                            <ConversationAction text="You notice the telltale signs of exhaustion etched into every line of her face. No matter what the clowns do around her, her eyes seem unfocused and distant as her gaze is fixed on a distant point… As if lost in a world of her own." targettag="triggereventplayer" _npos="1268.4438,-5134.103">
+                              <Option text="“Are you okay?”">
+                                <ConversationAction text="“I… I can’t take this anymore. This… This has to end.” She mumbles to herself, unaware of your presence." targettag="triggereventplayer" _npos="1811.9612,-5135.5566">
+                                  <Option text="“Hey, snap out of it!”">
+                                    <SpawnAction itemidentifier="kirashotgun" targettag="suicidalshotgun" targetinventory="kira" _npos="2388.3,-5128.1504" />
+                                    <ConversationAction text="Your words fall on deaf ears as her hands reach over for her shotgun. She pulls the gun barrel towards her head, placing it right under her chin… Her index finger on the trigger." targettag="triggereventplayer" _npos="2833.7498,-5113.72">
+                                      <Option text="“Wait, stop!”">
+                                        <StatusEffectAction targettag="suicidalshotgun" _npos="3304.9934,-5002.279">
+                                          <StatusEffect target="This" type="OnUse" _npos="4003.9004,-4226.735">
+                                            <Explosion range="150.0" force="4.5" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" _npos="4578.3423,-4266.154" />
+                                          </StatusEffect>
+                                          <StatusEffect target="This" disabledeltatime="True" _npos="4439.3774,-4495.172">
+                                            <Sound file="Content/Items/Weapons/ShotgunShot1.ogg" range="300" _npos="5057.688,-4436.386" />
+                                            <ParticleEmitter copyentityangle="true" distancemin="30" distancemax="30" particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" _npos="6064.8,-4538.0796" />
+                                          </StatusEffect>
+                                        </StatusEffectAction>
+                                        <StatusEffectAction targettag="kira" _npos="3184.7095,-4502.6694">
+                                          <StatusEffect type="OnUse" target="Character" condition="0.0" targetlimbs="Head" disabledeltatime="True" severlimbsprobability="1" _npos="3799.696,-3830.7202">
+                                            <Affliction identifier="bleeding" strength="1000.0" _npos="4571.485,-3810.6294" />
+                                            <Affliction identifier="gunshotwound" strength="10000.0" _npos="5331.9375,-3782.0186" />
+                                            <ParticleEmitter particle="bloodsplash" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1.0,1.0" _npos="5901.8823,-3830.6367" />
+                                            <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="blood" decalsize="2" shockwave="false" underwaterbubble="false" _npos="6634.959,-3893.2764" />
+                                          </StatusEffect>
+                                        </StatusEffectAction>
+                                        <ConversationAction text="The clowns halt their movement as a heavy silence descends upon the room. The officer, who was once alive, now lies motionless on the ground. Where her head once belonged, there is now only absence, replaced by a pool of crimson blood." targettag="triggereventplayer" _npos="4289.037,-5075.939">
+                                          <Option text="“Shit…”">
+                                            <ConversationAction text="The clowns stare at the lifeless corpse… Eventually, they exchange a nonchalant shrug before continuing with their merry way. It's best for you to leave the scene before anyone arrives." targettag="triggereventplayer" _npos="4838.126,-5062.5474">
+                                              <Option text="Leave." endconversation="true">
+                                                <ClearTagAction tag="triggereventplayer" _npos="5332.3516,-5024.629" />
+                                                <NPCWaitAction npctag="clownkiranpc1" wait="false" _npos="5788.256,-4992.5845" />
+                                                <NPCWaitAction npctag="clownkiranpc2" wait="false" _npos="6202.3315,-4999.672" />
+                                                <SetDataAction value="true" identifier="kiradeath" _npos="6598.3403,-5006.917" />
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                            </ConversationAction>
+                          </Option>
+                        </ConversationAction>
+                      </Success>
+                      <Failure>
+                        <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="-2474.9905,-8208.006" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira2" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" spawnpointtype="Path" teamid="FriendlyNPC" allowduplicates="false" _npos="-1293.7698,-8385.83" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpcs1" spawnlocation="Outpost" spawnpointtag="kira" teamid="FriendlyNPC" allowduplicates="true" _npos="-801.96716,-8419.078" />
+                        <SpawnAction itemidentifier="toyhammer" targetinventory="clownkiranpcs1" _npos="-372.3158,-8460.8545" />
+                        <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="148.94415,-8444.785" />
+                        <SetDataAction value="true" identifier="kiraintro2" _npos="711.5551,-8436.68" />
+                        <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" disableincombat="false" waitforinteraction="true" _npos="1203.843,-8447.895" />
+                        <NPCWaitAction npctag="kira" wait="true" _npos="1610.1869,-8383.302" />
+                        <ConversationAction text="You see a familiar officer being harassed by a clown while she is diligently patrolling the area. Despite her efforts to maintain a composed demeanor, you occasionally do notice her furrowed eyebrows." targettag="triggereventplayer" _npos="2074,-8338.5">
+                          <Option text="Approach the officer.">
+                            <ConversationAction text="Her tired eyes glances towards you when she sees you approaching." targettag="triggereventplayer" _npos="2595.5725,-8844.601">
+                              <Option text="“Why is there a clown following you?”">
+                                <ConversationAction text="“I don’t know but it has been pestering me for days now.” She replies." targettag="triggereventplayer" _npos="3191.8682,-9199.455">
+                                  <Option text="“Can’t you just arrest the clown?”">
+                                    <Label name="continue12" _npos="3599.1338,-9088.114" />
+                                    <NPCWaitAction npctag="kira" wait="true" _npos="3605.4268,-8923.408" />
+                                    <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="4089.0518,-9073.752" />
+                                    <ConversationAction text="“Negative. So far the clown has not done anything illegal other than harassing me.” She states in an exhausted tone, brushing off the clown's persistent attempts to engage her." targettag="triggereventplayer" _npos="4501.3545,-9245.463">
+                                      <Option text="Continue.">
+                                        <ConversationAction text="Slowly her weary eyes lit up with life as she says, “Wait, maybe you can help me with this…”" targettag="triggereventplayer" _npos="4976.3975,-9197.0625">
+                                          <Option text="“How can I help?”">
+                                            <ConversationAction text=" “Can you convince the security in-charge of this outpost to give a warrant to arrest this clown?”" targettag="triggereventplayer" _npos="5509.78,-9230.923">
+                                              <Option text="“Why not ask them yourself?”">
+                                                <ConversationAction text="“I have tried getting a warrant a while back but they rejected my proposal...  Since the head of security isn’t fond of my presence, someone like you might have a better chance in convincing them.” She remarks." targettag="triggereventplayer" _npos="6082.1694,-9543.741">
+                                                  <Option text="“Sure, I can give it a try.”">
+                                                    <GoTo name="continue13" _npos="6699.1357,-9508.728" />
+                                                  </Option>
+                                                  <Option text="“No, I don’t have time to deal with this.”">
+                                                    <GoTo name="continue14" _npos="6594.6094,-9305.309" />
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                              <Option text="“Sure, I can give it a try.”">
+                                                <Label name="continue13" _npos="6137.827,-8949.645" />
+                                                <NPCWaitAction npctag="kira" wait="true" _npos="6507.926,-8942.19" />
+                                                <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="6931.6294,-8927.864" />
+                                                <ConversationAction text="“Report back as soon as you can. I will be waiting nearby.”" targettag="triggereventplayer" _npos="7333.5977,-8942.277">
+                                                  <Option text="&quot;Okay.&quot;" endconversation="true">
+                                                    <NPCWaitAction npctag="kira" wait="false" _npos="7795.214,-8898.015" />
+                                                    <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="hos" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" _npos="8257.503,-8995.653" />
+                                                    <TriggerAction target1tag="hos" target2tag="triggereventplayer" waitforinteraction="true" _npos="8759.13,-8964.268" />
+                                                    <NPCWaitAction npctag="hos" wait="true" _npos="9216,-8928.5" />
+                                                    <ConversationAction text="As you approach the head of security, he grumbles, “What is it now? I’m rather busy at the moment.”" targettag="triggereventplayer" _npos="9721.081,-8962.649">
+                                                      <Option text="“Can you give a warrant of arrest to somebody in this outpost?”">
+                                                        <ConversationAction text="He snaps at your question, “Is this about the clown bothering that inspector again? Didn’t I say no to that request already?”" targettag="triggereventplayer" _npos="10305.332,-8937.644">
+                                                          <Option text="“Why did you reject the request?”">
+                                                            <ConversationAction text="“Listen, the clown has not disturbed anyone else on this station except for that bloody inspector who visited a week ago. It’s not worth wasting my time making an arrest warrant on that clown, especially when the officer will be leaving in a few days anyway.”" targettag="triggereventplayer" _npos="10980.828,-8927.92">
+                                                              <Option text="“Well, the clown has been assaulting other people recently, you just aren’t aware of it.”">
+                                                                <RNGAction chance="0.5" _npos="11682.927,-9820.937">
+                                                                  <Success>
+                                                                    <ConversationAction text="&quot;Really? Why haven't my officers informed me of this... Blast it all! Fine, take this and deliver it to the officer. She'll handle the clown's arrest herself.&quot; With that, he retrieves the warrant of arrest documents and passes them to you." targettag="triggereventplayer" _npos="12375.875,-10265.345">
+                                                                      <Option text="Take the documents and leave." endconversation="true">
+                                                                        <NPCWaitAction npctag="hos" wait="false" _npos="12865.948,-10245.56" />
+                                                                        <SetDataAction value="true" identifier="kiraarrestwarrant" _npos="13302.402,-10259.87" />
+                                                                        <Label name="continue15" _npos="13672.889,-10256.13" />
+                                                                        <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="14084.791,-10339.662" />
+                                                                        <TriggerAction target1tag="kira" target2tag="triggereventplayer" disableincombat="false" waitforinteraction="true" _npos="14515.145,-10365.855" />
+                                                                        <NPCWaitAction npctag="kira" wait="true" _npos="14923.003,-10328.697" />
+                                                                        <CheckDataAction identifier="kiraarrestwarrant" condition="eq true" _npos="15368.166,-10307.556">
+                                                                          <Success>
+                                                                            <ConversationAction text="“You’re back. Did you manage to get a warrant?” She asks." targettag="triggereventplayer" _npos="15895.641,-10645.96">
+                                                                              <Option text="“I did. Here are the papers.”">
+                                                                                <ConversationAction text="She takes the document and after reading it thoroughly, she breaks into a faint smile. “Everything looks good. Not sure how you convinced them but you saved me a lot of trouble. Here, take this.” She then hands you a few hundred mks." targettag="triggereventplayer" _npos="16459.441,-10642.83">
+                                                                                  <Option text="Take the money.">
+                                                                                    <MoneyAction amount="350" targettag="triggereventplayer" _npos="16971.06,-10625.26" />
+                                                                                    <ConversationAction text="“Thanks for your help. Now, I must return to my duties,&quot; She declares, shifting her cold gaze toward the clown as she reaches for her stun baton. Upon seeing this, the clown tries to defend itself." targettag="triggereventplayer" _npos="17456.168,-10668.894">
+                                                                                      <Option text="Leave." endconversation="true">
+                                                                                        <ClearTagAction tag="triggereventplayer" _npos="17946.852,-10610.379" />
+                                                                                        <ReputationAction increase="-2" identifier="clowns" targettype="Faction" _npos="18350.375,-10641.364" />
+                                                                                        <NPCWaitAction npctag="kira" wait="false" _npos="18770.299,-10651.216" />
+                                                                                        <CombatAction combatmode="Retreat" isinstigator="false" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="19219.678,-10683.2" />
+                                                                                        <CombatAction combatmode="Arrest" isinstigator="false" guardreaction="None" npctag="kira" enemytag="clownkiranpcs1" _npos="19731.018,-10710.373" />
+                                                                                      </Option>
+                                                                                    </ConversationAction>
+                                                                                  </Option>
+                                                                                </ConversationAction>
+                                                                              </Option>
+                                                                            </ConversationAction>
+                                                                          </Success>
+                                                                          <Failure>
+                                                                            <ConversationAction text="“You’re back. Did you manage to get a warrant?” She asks." targettag="triggereventplayer" _npos="15872.016,-10062.965">
+                                                                              <Option text="“I’m sorry, I wasn’t able to get one.”">
+                                                                                <ConversationAction text="She sighs softly, “That’s fine. I appreciate your attempt in helping me. I’ll try to address this issue with them once more.”" targettag="triggereventplayer" _npos="16473.045,-10036.889">
+                                                                                  <Option text="“Good luck.”">
+                                                                                    <ConversationAction text="She gives you a firm nod and resumes her patrol while the clown faithfully trailing her every move." targettag="triggereventplayer" _npos="17080.652,-10025.261">
+                                                                                      <Option text="Leave." endconversation="true">
+                                                                                        <ClearTagAction tag="triggereventplayer" _npos="17545.014,-9970.434" />
+                                                                                        <NPCWaitAction npctag="kira" wait="false" _npos="18034.867,-9976.594" />
+                                                                                        <SetDataAction value="true" identifier="kiraclownmoment2" _npos="18457.154,-9986.743" />
+                                                                                      </Option>
+                                                                                    </ConversationAction>
+                                                                                  </Option>
+                                                                                </ConversationAction>
+                                                                              </Option>
+                                                                            </ConversationAction>
+                                                                          </Failure>
+                                                                        </CheckDataAction>
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Success>
+                                                                  <Failure>
+                                                                    <ConversationAction text="“I have guards stationed throughout the entire station at this very moment and so far I have not received any complaints regarding the clown. So for your information, I am very much aware of what’s going on in this station. If you have nothing further to discuss, I suggest you scram and let me do my work.” He asserts." targettag="triggereventplayer" _npos="12395.652,-9674.43">
+                                                                      <Option text="Leave." endconversation="true">
+                                                                        <NPCWaitAction npctag="hos" wait="false" _npos="12978.754,-9632.498" />
+                                                                        <GoTo name="continue15" _npos="13445.321,-9634.578" />
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Failure>
+                                                                </RNGAction>
+                                                              </Option>
+                                                              <Option text="“Won’t the clown go after one of your subordinates once the officer leaves?”">
+                                                                <SkillCheckAction requiredskill="helm" requiredlevel="40" probabilitybased="false" targettag="triggereventplayer" _npos="11636.95,-8856.342">
+                                                                  <Success>
+                                                                    <ConversationAction text="He pauses his tasks, contemplating your words for a moment. &quot;You make a good point... It's hard to predict the clown’s next move. Fine, I'll provide you with the arrest warrant. Pass it on to the officer, and she'll handle the rest.&quot; With that, he retrieves the arrest warrant documents and passes them to you." targettag="triggereventplayer" _npos="12410.06,-9130.865">
+                                                                      <Option text="Take the documents and leave." endconversation="true">
+                                                                        <NPCWaitAction npctag="hos" wait="false" _npos="12947.513,-9030.566" />
+                                                                        <SetDataAction value="true" identifier="kiraarrestwarrant" _npos="13484.18,-8996.363" />
+                                                                        <GoTo name="continue15" _npos="13892.707,-8995.266" />
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Success>
+                                                                  <Failure>
+                                                                    <ConversationAction text="He dismisses the concern with a shrug. “Eh, when that happens, we’ll deal with it. Rest assured, we will arrest the clown if they harass anyone else. Now if there is nothing else you want to say, I will get back to my work.”" targettag="triggereventplayer" _npos="12419.47,-8550.295">
+                                                                      <Option text="Leave." endconversation="true">
+                                                                        <NPCWaitAction npctag="hos" wait="false" _npos="12990.819,-8471.46" />
+                                                                        <GoTo name="continue15" _npos="13382.605,-8472.683" />
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Failure>
+                                                                </SkillCheckAction>
+                                                              </Option>
+                                                              <Option text="“The clown is harassing someone in your outpost, isn’t that YOUR concern to begin with?”">
+                                                                <ConversationAction text="“What are you trying to say exactly?” The security officer glares at you." _npos="11523.497,-8111.6235">
+                                                                  <Option text="“What if news reaches the coalition that you refused to assist your colleague? It wouldn't reflect well on your name, would it?”">
+                                                                    <SkillCheckAction requiredskill="weapons" requiredlevel="40" probabilitybased="false" targettag="triggereventplayer" _npos="12091.664,-7850.897">
+                                                                      <Success>
+                                                                        <ConversationAction text="He narrows his eyes as he speaks harshly, “Fine, I get what you mean… I’ll give you the arrest warrant.” He quickly gets the documents and hands them over to you. “Now get out of my sight! I already got reports to do and soon another one will be coming.” He grumbles irritably." targettag="triggereventplayer" _npos="12658.062,-7932.921">
+                                                                          <Option text="Take the documents and leave." endconversation="true">
+                                                                            <NPCWaitAction npctag="hos" wait="false" _npos="13284.524,-7752.089" />
+                                                                            <SetDataAction value="true" identifier="kiraarrestwarrant" _npos="13795.772,-7773.0522" />
+                                                                            <GoTo name="continue15" _npos="14214.869,-7771.076" />
+                                                                          </Option>
+                                                                        </ConversationAction>
+                                                                      </Success>
+                                                                      <Failure>
+                                                                        <ConversationAction text="“Ha! You must be funny to think they would care about a small matter like this. Now if you got nothing better to say, I suggest you scram unless you want a beating from me.” He retorts." targettag="triggereventplayer" _npos="12648,-7365">
+                                                                          <Option text="Leave." endconversation="true">
+                                                                            <NPCWaitAction npctag="hos" wait="false" _npos="13330.946,-7280.491" />
+                                                                            <GoTo name="continue15" _npos="13764.64,-7272.4336" />
+                                                                          </Option>
+                                                                        </ConversationAction>
+                                                                      </Failure>
+                                                                    </SkillCheckAction>
+                                                                  </Option>
+                                                                </ConversationAction>
+                                                              </Option>
+                                                            </ConversationAction>
+                                                          </Option>
+                                                        </ConversationAction>
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                              <Option text="“No, I don’t have time to deal with this.”">
+                                                <Label name="continue14" _npos="6047.8853,-8241.217" />
+                                                <NPCWaitAction npctag="kira" wait="true" _npos="6507.5527,-8299.445" />
+                                                <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" cooldown="999" _npos="6930.761,-8254.718" />
+                                                <ConversationAction text="She lets out a sigh before responding, “Understood. I’ll find a way to handle this matter on my own. Thank you for your time.” With that, she resumes her patrol while the clown follows suit behind her." targettag="triggereventplayer" _npos="7378.151,-8284.482">
+                                                  <Option text="Leave." endconversation="true">
+                                                    <ClearTagAction tag="triggereventplayer" _npos="7836.7007,-8187.589" />
+                                                    <NPCWaitAction npctag="kira" wait="false" _npos="8319.328,-8173.439" />
+                                                    <SetDataAction value="true" identifier="kiraclownmoment2" _npos="8766.694,-8118.4424" />
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                              <Option text="“Aren’t you bothered by the clown?”">
+                                <ConversationAction text="“I am but I can’t do anything about it.” She replies." targettag="triggereventplayer" _npos="3188.822,-8672.077">
+                                  <Option text="“Can’t you just arrest the clown?”">
+                                    <GoTo name="continue12" _npos="3650.5342,-8578.607" />
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                            </ConversationAction>
+                          </Option>
+                          <Option text="Ignore them and continue your journey." endconversation="true">
+                            <ClearTagAction tag="triggereventplayer" _npos="2573.3716,-8132.8276" />
+                            <NPCWaitAction npctag="kira" wait="false" _npos="2590.4055,-7935.2544" />
+                            <SetDataAction value="true" identifier="kiraclownmoment2" _npos="2567.2158,-7654.715" />
+                          </Option>
+                        </ConversationAction>
+                      </Failure>
+                    </CheckDataAction>
+                  </Success>
+                  <Failure>
+                    <CheckDataAction identifier="meetingkira1" condition="eq true" _npos="-1746.9426,-124.134766">
+                      <Success>
+                        <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="-1175.1047,849.46265" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" spawnpointtype="Path" teamid="FriendlyNPC" requirespawnpointtag="false" allowduplicates="false" targetmoduletags="crewmodule" _npos="-682.2345,826.6079" />
+                        <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kazuyakumo" lootingisstealing="true" targettag="kumo" spawnlocation="Outpost" spawnpointtag="kira" teamid="FriendlyNPC" requirespawnpointtag="false" allowduplicates="false" _npos="-261.34442,846.14954" />
+                        <TagAction criteria="hullname:adminmodule" tag="admin" submarinetype="Outpost" _npos="145.90662,900.73267" />
+                        <AfflictionAction affliction="stun" strength="100" targettag="kira" _npos="755.32416,940.1481" />
+                        <AfflictionAction affliction="blunttrauma" strength="25" limbtype="Head" targettag="kira" _npos="1263.7322,943.043" />
+                        <GodModeAction enabled="true" targettag="kira" _npos="1726.3271,927.12775" />
+                        <GodModeAction enabled="true" targettag="kumo" />
+                        <StatusEffectAction targettag="kira" _npos="2102.6843,674.0856">
+                          <StatusEffect target="This" usehealthwindow="false" _npos="2586.1035,642.3638" />
+                        </StatusEffectAction>
+                        <NPCWaitAction npctag="kira" wait="true" _npos="2442.1545,911.8229" />
+                        <NPCFollowAction npctag="kumo" targettag="kira" follow="true" _npos="2831.0642,865.1704" />
+                        <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" radius="175" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="false" _npos="3221.594,910.2832" />
+                        <ConversationAction text="You stumble upon an aftermath scene of a fight. With a body lying down on the floor and another person standing near them." targettag="triggereventplayer" _npos="3777.265,891.2239">
+                          <Option text="Move closer.">
+                            <NPCFollowAction npctag="kumo" targettag="admin" follow="true" _npos="4242.3394,931.04846" />
+                            <ConversationAction text="The person notices your presence and quickly dashes away from the area, leaving you behind with the mess." targettag="triggereventplayer" _npos="4696.765,852.3652">
+                              <Option text="Check up on the person lying on the floor.">
+                                <StatusEffectAction targettag="kumo" _npos="5094.5317,491.21545">
+                                  <StatusEffect type="Always" target="Character" interval="1" stackable="false" _npos="5723.618,307.71252">
+                                    <RemoveCharacter _npos="6269.232,380.9961" />
+                                  </StatusEffect>
+                                </StatusEffectAction>
+                                <ConversationAction text="She is still breathing but unconscious and bruised. Not only that, you find her rather familiar… In fact, she is one of the military officers you met a while back on an outpost." targettag="triggereventplayer" _npos="5665.328,876.37695">
+                                  <Option text="Attempt to wake her up.">
+                                    <ConversationAction text="You nudge her in an attempt to wake her up but she remains unresponsive. " targettag="triggereventplayer" _npos="6265.157,868.49084">
+                                      <Option text="Attempt to wake her up again.">
+                                        <ConversationAction text="You try to shake her to wake her up but she still remains unresponsive." targettag="triggereventplayer" _npos="7034.712,90.081055">
+                                          <Option text="Slap her face to wake her up.">
+                                            <SetDataAction value="true" identifier="slapkiramoment" _npos="7830.8604,-116.83255" />
+                                            <StatusEffectAction targettag="triggereventplayer" _npos="8221.435,-70.82617">
+                                              <StatusEffect target="This" _npos="8246.766,107.04962">
+                                                <Sound file="Content/Sounds/Damage/LimbBlunt1.ogg" range="300" _npos="8254.116,303.45828" />
+                                              </StatusEffect>
+                                            </StatusEffectAction>
+                                            <ConversationAction text="You slap her as hard as you can across her face and all that does is leave a red handprint mark on her cheek. You get a feeling that she is out cold for good." targettag="triggereventplayer" _npos="8728.96,-128.37193">
+                                              <Option text="Search her body to find something to wake her up.">
+                                                <GoTo name="continue4" _npos="9410.694,-137.60693" />
+                                              </Option>
+                                              <Option text="Call for help.">
+                                                <GoTo name="continue5" _npos="9395.815,212.9621" />
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                          <Option text="Search her body to find something to wake her up.">
+                                            <GoTo name="continue4" _npos="7809.553,131.47615" />
+                                          </Option>
+                                          <Option text="Call for help.">
+                                            <GoTo name="continue5" _npos="7723.754,354.7823" />
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                      <Option text="Search her body to find something to wake her up.">
+                                        <Label name="continue4" _npos="6827.0713,950.0454" />
+                                        <ConversationAction text="You search her pockets and find a combat stimulant. You can wake her up by administering the combat stimulant to her… Or you can steal her wallet and medicine since no one is watching…" targettag="triggereventplayer" _npos="7194.9854,881.12335">
+                                          <Option text="Administer the combat stim on the officer.">
+                                            <StatusEffectAction targettag="triggereventplayer" _npos="7474.333,665.79846">
+                                              <StatusEffect target="This" _npos="7940.3477,577.7118">
+                                                <Sound file="Content\Items\Medical\Syringe.ogg" range="300" _npos="8438.019,533.23425" />
+                                              </StatusEffect>
+                                            </StatusEffectAction>
+                                            <GodModeAction enabled="false" targettag="kira" _npos="7762.75,862.4799" />
+                                            <AfflictionAction affliction="stun" strength="-50" targettag="kira" _npos="8137.035,833.8064" />
+                                            <AfflictionAction affliction="combatstimulant" strength="75" targettag="kira" _npos="8626.889,834.4685" />
+                                            <NPCWaitAction npctag="kira" wait="true" _npos="8629.994,1243.4949" />
+                                            <ConversationAction text="A few seconds pass before she jolts up to a sitting position, with her hands up as if she is ready for another fist fight. However, she scans around the room before her unfocused eyes lock onto yours." targettag="triggereventplayer" _npos="9066.522,709.72845">
+                                              <Option text="Continue.">
+                                                <ConversationAction text="“Where’s Kumo?” She questions you directly while loosening her tense posture slightly." targettag="triggereventplayer" _npos="9622.984,696.50476">
+                                                  <Option text="“Who is Kumo?”">
+                                                    <ConversationAction text="“A captain in black uniform. Did you see her?” She inquires." targettag="triggereventplayer" _npos="10132.101,255.444">
+                                                      <Option text="“Yes. She ran away the moment she saw me.”">
+                                                        <Label name="continue7" _npos="10589.51,169.6618" />
+                                                        <NPCWaitAction npctag="kira" wait="true" _npos="11015.207,156.90567" />
+                                                        <ConversationAction text="“I see… That’s unfortunate.” She sighs while rubbing her temples to ease her headache." targettag="triggereventplayer" _npos="11449.262,123.08081">
+                                                          <Option text="“What happened here?”">
+                                                            <ConversationAction text="“I was trying to arrest someone but I let my guard down… Didn't know her right arm was a bionic hand, so she managed to land a solid right hook to my jaw and knock me out.” She replies." targettag="triggereventplayer" _npos="11936.995,139.16212">
+                                                              <Option text="“Why were you trying to arrest her?”">
+                                                                <ConversationAction text="“She was one of the missing crew members from my previous crew. I was tasked with finding her but I didn't expect to see her here… What’s worse is she has sided with the separatists again.” She answers plainly." targettag="triggereventplayer" _npos="12452.692,-212.86171">
+                                                                  <Option text="“What is your plan now?”">
+                                                                    <Label name="continue8" _npos="12943.508,-209.81161" />
+                                                                    <NPCWaitAction npctag="kira" wait="true" _npos="13312.476,-191.17413" />
+                                                                    <ConversationAction text="“I have to report to the higher ups about this but for now, I need to gather my bearings. My head still hurts from the blow she dealt.” She responds calmly as she slowly gets up from the floor." targettag="triggereventplayer" _npos="13694.293,-205.32516">
+                                                                      <Option text="“Do you need some help?”">
+                                                                        <ConversationAction text="She raises her hand to stop you and responds, “I'm fine, I can handle it from here.”" targettag="triggereventplayer" _npos="14279.4795,-444.30368">
+                                                                          <Option text="“Alright, I'll leave you to it.”">
+                                                                            <Label name="continue9" _npos="14752.201,-363.72928" />
+                                                                            <ConversationAction text="She gives you a firm nod. Afterwards, she pulls out her radio and mutters something to it." targettag="triggereventplayer" _npos="15267.974,-462.17444">
+                                                                              <Option text="Leave." endconversation="true">
+                                                                                <SetDataAction value="true" identifier="meetingkira2" _npos="15919.682,-448.53745" />
+                                                                                <ReputationAction increase="2" identifier="coalition" targettype="Faction" _npos="16405.104,-430.04816" />
+                                                                                <ClearTagAction tag="triggereventplayer" _npos="16929.62,-398.5469" />
+                                                                                <NPCWaitAction npctag="kira" wait="false" _npos="17377.916,-395.62537" />
+                                                                              </Option>
+                                                                            </ConversationAction>
+                                                                          </Option>
+                                                                        </ConversationAction>
+                                                                      </Option>
+                                                                      <Option text="“Alright, I'll leave you to it.”">
+                                                                        <GoTo name="continue9" _npos="14218.685,427.8363" />
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Option>
+                                                                </ConversationAction>
+                                                              </Option>
+                                                              <Option text="“What is your plan now?”">
+                                                                <GoTo name="continue8" _npos="12441.505,422.96057" />
+                                                              </Option>
+                                                            </ConversationAction>
+                                                          </Option>
+                                                        </ConversationAction>
+                                                      </Option>
+                                                      <Option text="“No. I saw no one when I arrived.”">
+                                                        <GoTo name="continue7" _npos="10703.496,423.47223" />
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Option>
+                                                  <Option text="“A lady in black uniform?”">
+                                                    <ConversationAction text="“Affirmative.” She responds." targettag="triggereventplayer" _npos="10207.025,895.113">
+                                                      <Option text="“She ran away the moment I arrived.”">
+                                                        <GoTo name="continue7" _npos="10880.619,940.72736" />
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                          <Option text="Steal from the officer.">
+                                            <SpawnAction itemidentifier="combatstimulantsyringe" targetinventory="triggereventplayer" _npos="8133.7266,1860.7142" />
+                                            <MoneyAction amount="1200" targettag="triggereventplayer" _npos="8513.043,1924.4424" />
+                                            <SetDataAction value="true" identifier="stolenkiraitems" _npos="8948.02,1915.0062" />
+                                            <ConversationAction text="You keep the medicine and proceed to search her pockets again. Eventually, you manage to find her wallet and the money within. You quickly swipe the cash off the wallet and return the empty wallet back into her pockets." targettag="triggereventplayer" _npos="9362.166,1890.3735">
+                                              <Option text="Continue.">
+                                                <RNGAction chance="0.5" _npos="9840.939,1958.1083">
+                                                  <Success>
+                                                    <ConversationAction text="You promptly leave the room before anyone spots you." targettag="triggereventplayer" _npos="10376.483,1588.9862">
+                                                      <Option text="Leave." endconversation="true">
+                                                        <ClearTagAction tag="triggereventplayer" _npos="10902.131,1619.949" />
+                                                        <NPCWaitAction npctag="kira" wait="false" _npos="11391.484,1611.0979" />
+                                                        <SetDataAction value="true" identifier="meetingkira2" _npos="11954.379,1594.4229" />
+                                                        <WaitAction time="30" _npos="12477.574,1591.4364" />
+                                                        <GodModeAction enabled="false" targettag="kira" _npos="13052.801,1605.5546" />
+                                                        <AfflictionAction affliction="stun" strength="-100" targettag="kira" _npos="13660.134,1604.0685" />
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Success>
+                                                  <Failure>
+                                                    <ReputationAction increase="-5" identifier="coalition" targettype="Faction" _npos="10198.747,2122.2961" />
+                                                    <SetDataAction value="true" identifier="caughtstealingkira" _npos="10649.095,2234.8481" />
+                                                    <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule" allowinplayerview="false" _npos="11071.265,2206.2173" />
+                                                    <NPCFollowAction npctag="kirasecurity" targettag="triggereventplayer" follow="true" _npos="11511.075,2260.5742" />
+                                                    <ConversationAction text="However, your actions have not gone unnoticed. “Hey! What are you doing!” A security guard yells at a distance. It is best to get away before they catch up to you." targettag="triggereventplayer" _npos="11845.2295,2240.5159">
+                                                      <Option text="Time to run." endconversation="true">
+                                                        <CombatAction combatmode="Arrest" isinstigator="false" npctag="kirasecurity" enemytag="triggereventplayer" _npos="12369.765,2239.626" />
+                                                        <NPCWaitAction npctag="kira" wait="false" _npos="12909.889,2274.7578" />
+                                                        <SetDataAction value="true" identifier="meetingkira2" _npos="13475.802,2251.5217" />
+                                                        <WaitAction time="30" _npos="13907.455,2275.7246" />
+                                                        <GodModeAction enabled="false" targettag="kira" _npos="14442.535,2278.9324" />
+                                                        <AfflictionAction affliction="stun" strength="-100" targettag="kira" _npos="14954.978,2327.812" />
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Failure>
+                                                </RNGAction>
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                      <Option text="Call for help.">
+                                        <Label name="continue5" _npos="6778.1235,3002.2148" />
+                                        <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule" allowinplayerview="false" _npos="7230.6016,2977.2463" />
+                                        <NPCFollowAction npctag="kirasecurity" targettag="kira" follow="true" _npos="7696.4805,3010.319" />
+                                        <ConversationAction text="You take a radio device from the unconscious officer and call for help. It does not take long for a security officer to rush over to the scene." targettag="triggereventplayer" _npos="8210.481,3112.2922">
+                                          <Option text="Continue.">
+                                            <ConversationAction text="“What happened over here?” The security officer asks while checking on their unconscious comrade." targettag="triggereventplayer" _npos="8737.607,3220.6719">
+                                              <Option text="”Someone knocked out this officer and ran as soon as they saw me approaching.”">
+                                                <CheckDataAction identifier="slapkiramoment" condition="eq true" _npos="9420.194,3287.7585">
+                                                  <Success>
+                                                    <ConversationAction text="“Must be a strong opponent if she gets knocked out cold like that… And they even slapped her in the face. God damn.” The security remarks amusingly when they notice a reddish handprint on her cheek." targettag="triggereventplayer" _npos="9956.341,2974.1616">
+                                                      <Option text="Continue.">
+                                                        <Label name="continue10" _npos="10467.209,2974.036" />
+                                                        <NPCFollowAction npctag="kirasecurity" targettag="kira" follow="true" _npos="10870.542,3045.9753" />
+                                                        <ConversationAction text="“Anyway, I'll take over from here. Thank you for your help.” The security officer says." targettag="triggereventplayer" _npos="11292.926,3032.2332">
+                                                          <Option text="Leave." endconversation="true">
+                                                            <Label name="continue11" _npos="11760.209,3135.3962" />
+                                                            <NPCWaitAction npctag="kirasecurity" wait="true" _npos="12182.5,3094.5" />
+                                                            <ClearTagAction tag="triggereventplayer" _npos="12556.301,3132.3723" />
+                                                            <SetDataAction value="true" identifier="meetingkira2" _npos="12987.819,3161.9407" />
+                                                            <WaitAction time="20" _npos="13396.42,3178.1824" />
+                                                            <GodModeAction enabled="false" targettag="kira" _npos="13800.187,3165.6482" />
+                                                            <AfflictionAction affliction="stun" strength="-100" targettag="kira" _npos="14230.3955,3142.3179" />
+                                                            <AfflictionAction affliction="combatstimulant" strength="50" targettag="kira" _npos="14643.277,3135.753" />
+                                                            <NPCWaitAction npctag="kira" wait="false" _npos="15038.337,3144.5774" />
+                                                            <NPCFollowAction npctag="kirasecurity" targettag="kira" follow="true" _npos="15558.403,3146.7246" />
+                                                          </Option>
+                                                        </ConversationAction>
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Success>
+                                                  <Failure>
+                                                    <ConversationAction text="“Damn… Must be a strong opponent if she gets knocked out cold like that…” The security officer comments." targettag="triggereventplayer" _npos="9995.353,3527.5928">
+                                                      <Option text="Continue.">
+                                                        <GoTo name="continue10" _npos="10470.1455,3661.713" />
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Failure>
+                                                </CheckDataAction>
+                                              </Option>
+                                              <Option text="“I don't know. She was unconscious when I got here.”">
+                                                <ConversationAction text="“Okay… I guess we’ll ask the sarge when she wakes up. Anyway, you’re free to go, I’ll take over from here.” The security officer replies." targettag="triggereventplayer" _npos="9363.466,4087.9268">
+                                                  <Option text="Leave." endconversation="true">
+                                                    <GoTo name="continue11" _npos="9889.528,4158.6055" />
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                            </ConversationAction>
+                          </Option>
+                        </ConversationAction>
+                      </Success>
+                      <Failure>
+                        <CheckDataAction identifier="kiraclownmoment1" condition="eq true" _npos="-920.92896,-162.54706">
+                          <Failure>
+                            <CheckDataAction identifier="kiraintro" condition="eq true" _npos="-402.13715,-147.4704">
+                              <Failure>
+                                <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="106.45703,-164.17828" />
+                                <TagAction criteria="itemtag:chair" tag="chair" requiredmoduletag="CrewModule" _npos="513.98804,-163.10767" />
+                                <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" targetmoduletags="CrewModule" _npos="902.63354,-224.23627" />
+                                <NPCOperateItemAction npctag="kira" targettag="chair" operate="true" _npos="1313.2019,-219.17578" />
+                                <SetDataAction value="true" identifier="kiraintro" _npos="1709.3209,-299.53766" />
+                                <Label name="restart" _npos="2259.9272,-395.34943" />
+                                <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" waitforinteraction="true" _npos="2854.591,-901.3444" />
+                                <NPCWaitAction npctag="kira" wait="true" _npos="3366.1982,-862.02374" />
+                                <ConversationAction text="You see a well-dressed military officer sitting at a table with a bottle of liquor in her hand. She seems to be lost in her thoughts." targettag="triggereventplayer" _npos="3959.1787,-933.7758">
+                                  <Option text="Approach the officer.">
+                                    <ConversationAction text="She snaps out of it when she notices you approaching her. &quot;Hm? What is it?&quot; The stern officer asks in a monotone voice." targettag="triggereventplayer" _npos="4538.4565,-972.6972">
+                                      <Option text="&quot;Are you a General?&quot;">
+                                        <ConversationAction text="&quot;Negative, I am... Was a Commissar on board a submarine called Sorrowful. However, I recently resigned from my position.&quot; She answers, taking a swig of her liquor." targettag="triggereventplayer" _npos="5083.886,-1617.4618">
+                                          <Option text="&quot;Commissar? As in a person in charge of the security department?&quot;">
+                                            <ConversationAction text="&quot;Affirmative.&quot; She nods her head at your question." targettag="triggereventplayer" _npos="5694.2573,-2105.6746">
+                                              <Option text="&quot;Wait, then why did you resign from your job?&quot;">
+                                                <Label name="continue1" _npos="6207.678,-2023.6545" />
+                                                <NPCWaitAction npctag="kira" wait="true" _npos="6648.6074,-2002.7078" />
+                                                <ConversationAction text="She pauses, before letting out a heavy sigh. &quot;I have my own reasons... Especially after what I saw in the Eye of Europa...&quot;" targettag="triggereventplayer" _npos="7169.654,-2094.5437">
+                                                  <Option text="&quot;You've been to the Eye of Europa? What's in it?&quot;">
+                                                    <ConversationAction text="&quot;We've been near but we did not enter it. An EMP shockwave hit our submarine and left us drifting in the abyss. I remember looking through the periscope... The glowing light and the visions it gave... It was as if death awaits for those who enters... Thankfully we managed to fix our submarine and docked onto the nearest outpost for safety.&quot;" targettag="triggereventplayer" _npos="7846.3555,-2088.644">
+                                                      <Option text="&quot;So, what's your plan now?&quot;">
+                                                        <ConversationAction text="&quot;I don't know... I didn't think that far ever since I left the crew.&quot; She answers rather honestly." targettag="triggereventplayer" _npos="8523.13,-2078.5867">
+                                                          <Option text="&quot;Why not join us? We are planning to go to the Eye of Europa and we could use someone like you.&quot;">
+                                                            <ConversationAction text="She slams the bottle of liquor onto the table. “Did you not hear what I just said? Dammit, why is everyone so obsessed with the Eye?”" targettag="triggereventplayer" _npos="9106.281,-2400.1465">
+                                                              <Option text="“Come on, are you not curious about what's in the Eye?”">
+                                                                <ConversationAction text="She seems to hesitate for a moment, before responding, “I am curious but is it really worth the risk?”" targettag="triggereventplayer" _npos="9784.153,-2411.7417">
+                                                                  <Option text="“You never know, maybe the Eye has something that can obliterate the world? Don't you want to secure it?”">
+                                                                    <ConversationAction text="She gives you a hard stare as she replies seriously. “Hm… If there was a weapon capable of doing that, I would. However, I will not go after it with mere speculation.”" targettag="triggereventplayer" _npos="10519.649,-2918.8367">
+                                                                      <Option text="“Is there any way I can convince you to join us?”">
+                                                                        <Label name="continue2" _npos="10985.21,-2842.2163" />
+                                                                        <NPCWaitAction npctag="kira" wait="true" _npos="11442.521,-2828.0652" />
+                                                                        <ConversationAction text="She takes a swig of her drink and leans back slightly on her seat. “Negative. I have submitted my application to the HR manager, I’m sure someone from the coalition will assign me a job soon.”" targettag="triggereventplayer" _npos="11908.73,-2928.4304">
+                                                                          <Option text="“Oh well, it was nice meeting you.”">
+                                                                            <StatusEffectAction targettag="kira">
+                                                                              <StatusEffect target="This">
+                                                                                <SpawnItem identifier="kirarum" spawnposition="ThisInventory" />
+                                                                              </StatusEffect>
+                                                                            </StatusEffectAction>
+                                                                            <TagAction criteria="itemidentifier:kirarum" tag="gudrum" />
+                                                                            <ConversationAction text="&quot;Hold up, before you go.” She calls out, grabbing one of the bottles of alcohol from the table and offers it to you. “Here, take it. I'm not planning to finish all these, so it's better to give it to someone else.”" targettag="triggereventplayer" _npos="13187.245,-2926.9768">
+                                                                              <Option text="Take the drink and thank her.">
+                                                                                <StatusEffectAction targettag="gudrum" _npos="13719.618,-3076.3335">
+                                                                                  <StatusEffect target="This">
+                                                                                    <Remove />
+                                                                                  </StatusEffect>
+                                                                                </StatusEffectAction>
+                                                                                <SpawnAction itemidentifier="rum" targetinventory="triggereventplayer" _npos="14350.208,-3257.4736" />
+                                                                                <ConversationAction text="She gives you a nod and signals you to leave with her hand as she silently resumes her drinking." targettag="triggereventplayer" _npos="14752.732,-3202.7117">
+                                                                                  <Option text="Leave." endconversation="true">
+                                                                                    <Label name="continue3" _npos="15298.215,-3166.9187" />
+                                                                                    <ClearTagAction tag="triggereventplayer" _npos="15753.155,-3158.4302" />
+                                                                                    <NPCWaitAction npctag="kira" wait="false" _npos="16193.405,-3156.7166" />
+                                                                                    <SetDataAction value="true" identifier="meetingkira1" _npos="16633.586,-3144.2556" />
+                                                                                  </Option>
+                                                                                </ConversationAction>
+                                                                              </Option>
+                                                                              <Option text="Reject the drink.">
+                                                                                <StatusEffectAction targettag="gudrum" _npos="13719.618,-3076.3335">
+                                                                                  <StatusEffect target="This">
+                                                                                    <Remove />
+                                                                                  </StatusEffect>
+                                                                                </StatusEffectAction>
+                                                                                <ConversationAction text="“Hm… I guess it's not for everybody.” She mutters, placing the bottle back on the table. Before she resumes her drinking, she signals you to leave with her hand." targettag="triggereventplayer" _npos="13778.216,-2533.4043">
+                                                                                  <Option text="Leave." endconversation="true">
+                                                                                    <GoTo name="continue3" _npos="14346.599,-2483.295" />
+                                                                                  </Option>
+                                                                                </ConversationAction>
+                                                                              </Option>
+                                                                            </ConversationAction>
+                                                                          </Option>
+                                                                        </ConversationAction>
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Option>
+                                                                  <Option text="“Life without risk is not worth living, don’t you agree?”">
+                                                                    <ConversationAction text="The officer shakes her head at your remark. “Not everyone risks their life for amusement, some would prefer to live a life in peace. After all, I should know this since I risk my life every day in my line of work.”" targettag="triggereventplayer" _npos="10488.455,-2255.443">
+                                                                      <Option text="“Is there any way I can convince you to join us?”">
+                                                                        <GoTo name="continue2" _npos="10949.996,-2152.106" />
+                                                                      </Option>
+                                                                    </ConversationAction>
+                                                                  </Option>
+                                                                </ConversationAction>
+                                                              </Option>
+                                                            </ConversationAction>
+                                                          </Option>
+                                                          <Option text="“Well, good luck with your endeavors, I will take my leave.”">
+                                                            <ConversationAction text="After bidding farewell, the officer returns to her drink. Yet, just as you depart, a clown inexplicably approaches the former commissar, pestering her with a toy hammer. It's hard not to feel sympathy for the officer, who seems unable to catch a break from the constant disruptions." targettag="triggereventplayer" _npos="9041.247,-1670.4116">
+                                                              <Option text="Leave." endconversation="true">
+                                                                <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpc1" spawnlocation="Outpost" allowinplayerview="false" _npos="9566.976,-1569.8213" />
+                                                                <SpawnAction lootingisstealing="true" itemidentifier="toyhammer" targetinventory="clownkiranpc1" _npos="10009.918,-1544.2675" />
+                                                                <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpc1" enemytag="kira" cooldown="999" _npos="10448.874,-1425.3921" />
+                                                                <ClearTagAction tag="triggereventplayer" _npos="10832.752,-1365.1398" />
+                                                                <NPCWaitAction npctag="kira" wait="false" _npos="11214.999,-1318.7703" />
+                                                                <SetDataAction value="true" identifier="kiraclownmoment1" _npos="11658.025,-1270.9535" />
+                                                              </Option>
+                                                            </ConversationAction>
+                                                          </Option>
+                                                        </ConversationAction>
+                                                      </Option>
+                                                    </ConversationAction>
+                                                  </Option>
+                                                </ConversationAction>
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                          <Option text="“Let me guess, your captain was probably called Sorrow because he was sad and depressed all the time?”">
+                                            <ConversationAction text="The officer’s face maintains an expressionless look as she gives you an intimidating gaze. You got a feeling she will not reply to your remark." targettag="triggereventplayer" _npos="5728.753,-1413.0825">
+                                              <Option text="&quot;No? Not funny? Anyway, why did you resign from your job?&quot;">
+                                                <GoTo name="continue1" _npos="6212.6333,-1319.143" />
+                                              </Option>
+                                            </ConversationAction>
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                      <Option text="&quot;Oh nothing ma'am, just passing by.&quot;">
+                                        <ConversationAction text="She acknowledges your comment and signals you to move along as she continues to drink her liquor." targettag="triggereventplayer" _npos="5056.275,-556.20966">
+                                          <Option text="Leave." endconversation="true">
+                                            <ClearTagAction tag="triggereventplayer" _npos="5566.5923,-525.3527" />
+                                            <NPCWaitAction npctag="kira" wait="false" _npos="5556.886,-353.91547" />
+                                            <GoTo name="restart" _npos="5601.6304,-129.22723" />
+                                          </Option>
+                                        </ConversationAction>
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Failure>
+                            </CheckDataAction>
+                          </Failure>
+                        </CheckDataAction>
+                      </Failure>
+                    </CheckDataAction>
+                  </Failure>
+                </CheckDataAction>
+              </Failure>
+            </CheckDataAction>
+          </Failure>
+        </CheckDataAction>
+      </Success>
+    </CheckReputationAction>
     </ScriptedEvent>
     <!-- Kazuya Kumo -->
     <ScriptedEvent identifier="kazuyakumo">
