@@ -357,6 +357,19 @@
         <Containable items="weapon,gun,weaponsmith,grenade,smgammo,shotgunammo,stungunammo,harpoonammo,rifleammo,hmgammo,revolverammo,pistolammoitem,ammo,ammunition,bullet,assaultrifleammo" />
       </ItemContainer>
     </Item>
+    <!-- Sadashi Kira Items -->
+    <Item name="Kira's Shotgun" identifier="kirashotgun" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gun,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light" hideinmenus="true" nonplayerteaminteractable="true" allowasextracargo="true">
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,830,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,65,185,54" depth="0.55" origin="0.5,0.25" />
+      <Body width="180" height="30" density="25" />
+      <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="-40,-23" handle1="-20,-5" handle2="35,15" holdangle="110" msg="ItemMsgPickUpSelect" >
+        <StatusEffect type="onnotcontained" target="This" disabledeltatime="True" delay="0.2" stackable="false">
+          <SpawnItem identifier="shotgun" spawnposition="This" />
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+      <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+    </Item>
     <!-- Pirate Armory Alarm -->
     <Item name="Alarm Buzzer" identifier="pa-armoryalarmbuzzer" description="TRIGGERS PIRATE ARMORY EVENT WHEN ACTIVATED TO MAKE PIRATES HOSTILE" category="Electrical" Tags="smallitem,sound" maxstacksize="8" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true" noninteractable="true" hideinmenus="true">
       <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,127,64,64" origin="0.5,0.5" />
