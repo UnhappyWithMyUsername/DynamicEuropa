@@ -101,9 +101,10 @@
           <Affliction identifier="radiationsounds" strength="2.5" />
           <Affliction identifier="overheating" strength="0.35" />
         </StatusEffect>
-<!--         <StatusEffect type="Always" target="This" interval="1.1">
+        <!-- Explosion needed to display sonar disruption on passive sonar. Otherwise you only get sonar disruption on active sonar -->
+        <StatusEffect type="Always" target="This" interval="1.1">
           <Explosion range="6000" itemdamage="1.0" structuredamage="0.0" ballastfloradamage="0" camerashake="0" camerashakerange="0" explosiondamage="0" force="0" flames="false" smoke="false" shockwave="false" sparks="false" flash="false" underwaterbubble="false" playtinnitus="false" ignorecover="true" DistanceFalloff="false" />
-        </StatusEffect> -->
+        </StatusEffect>
         <StatusEffect type="OnBroken" target="This">
           <Remove />
         </StatusEffect>
