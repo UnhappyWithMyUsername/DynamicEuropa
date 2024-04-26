@@ -726,6 +726,20 @@
         <RemoveItemAction targettag="lairbomb" Amount="100" />
       </OnRoundEndAction>
     </ScriptedEvent>
+    
+    <!-- TODO:  remove this if you can just trigger statuseffects in the mission itself -->
+    <ScriptedEvent identifier="huskcrewsymbiosis">
+      <TagAction criteria="humanprefabidentifier:huskcultcaptain" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultcaptainlord" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultsecurityrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultsecurityelite" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultengineerrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultengineerveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultmechanicrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultmechanicveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" /> 
+      <AfflictionAction affliction="husksymbiosis" strength="100" targettag="huskcrew" />
+    </ScriptedEvent>   
+    
 
   </EventPrefabs>
 </Randomevents>
