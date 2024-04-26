@@ -69,12 +69,12 @@
       </ChangeTo>
       <ChangeTo type="UnderHuskAttack" messagetag="locationchange.none.changeto.UnderAttack">
         <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Construction" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.outpost">
         <!-- May be settled if within 5 steps of a colony, with an increasing chance should it be within 3 or less steps -->
         <Requirement function="Add" requiredlocations="City" probability="0.1" requiredproximity="5" requiredproximityforprobabilityincrease="3" proximityprobabilityincrease="0.1" />
-        <Requirement function="Add" requiredlocations="Outpost" probability="0.1" requiredproximity="3" requiredproximityforprobabilityincrease="3" proximityprobabilityincrease="0.1" />
+        <Requirement function="Add" requiredlocations="Outpost,Blockade" probability="0.1" requiredproximity="3" requiredproximityforprobabilityincrease="3" proximityprobabilityincrease="0.1" />
         <Requirement function="Add" requiredlocations="Settlement" probability="0.1" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
         <Requirement function="Add" requiredlocations="Colony" probability="0.1" requiredproximity="1" />
         <!-- if near a beacon station, increase the probability -->
@@ -117,7 +117,7 @@
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Survey" disallowedadjacentlocations="Survey,Mine" probability="0" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.survey">
-        <Requirement function="Add" requiredlocations="Camp" probability="0.1" requiredproximity="3" />
+        <Requirement function="Add" requiredlocations="Camp,Blockade" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Base" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Military" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="3" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
@@ -128,6 +128,7 @@
         <Requirement function="Add" requiredlocations="Settlement" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Outpost" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="City" probability="0.1" requiredproximity="3" />
+        <Requirement function="Add" requiredlocations="Research,Study" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="3" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
         <!-- multiply probability by 0 if next to hunting grounds-->
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
@@ -147,7 +148,7 @@
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Study" disallowedadjacentlocations="Study,Research" probability="0" disallowedproximity="2" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.study">
-        <Requirement function="Add" requiredlocations="Camp" probability="0.1" requiredproximity="3" />
+        <Requirement function="Add" requiredlocations="Camp,Blockade" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Base" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Military" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requiredlocations="Survey" probability="0.1" requiredproximity="3" />
@@ -167,7 +168,7 @@
         <Requirement function="Add" requiredlocations="Settlement" probability="0.1" requiredproximity="1" />
         <Requirement function="Add" requiredlocations="Outpost" probability="0.1" requiredproximity="1" />
         <Requirement function="Add" requiredlocations="City" probability="0.1" requiredproximity="1" />
-        <Requirement function="Add" requiredlocations="Camp" probability="0.1" requiredproximity="1" />
+        <Requirement function="Add" requiredlocations="Camp,Blockade" probability="0.1" requiredproximity="1" />
         <Requirement function="Add" requiredlocations="Base" probability="0.1" requiredproximity="1" />
         <Requirement function="Add" requiredlocations="Military" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="3" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
@@ -716,9 +717,12 @@
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
       </ChangeTo>
+      <ChangeTo type="None" probability="1" messagetag="locationchange.lair.changeto.none">
+        <Requirement function="Multiply" requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" probability="0" requiredproximity="1" />
+      </ChangeTo>
     </OuterLair>
     
-    <HuskgroundsDE commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.05, 5: 0.07, 6: 0.0" mincountperzone="1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 0: 0" namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" AllowAsBiomeGate="false">
+    <HuskgroundsDE commonnessperzone="1: 0.0, 2: 0.03, 3: 0.05, 4: 0.07, 5: 0.07, 6: 0.0" mincountperzone="1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 0: 0" namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,896,128,128" color="145,117,230,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <!-- <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
@@ -733,13 +737,13 @@
     </HuskgroundsDE>
 
     <OuterHuskLair commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="OuterHuskLair" outpostteam="None" AllowAsBiomeGate="false" hasoutpost="false">
-      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="384,768,128,128" color="145,117,230,255" />
+      <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="512,768,128,128" color="145,117,230,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requireddurationrange="1,3" probability="0.5" requiredproximity="1" />
+      <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
+        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requiredduration="1" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
