@@ -24,19 +24,35 @@
       </CustomInterface>
     </Item>
     <!-- Nuclear Bomb -->
-    <Item name="Nuclear Bomb" identifier="de_nuclearbomb" tags="mediumitem,provocative,nuclearbomb" description="A nuclear bomb, causing a massive fallout after detonation, killing everything in its path. 60 seconds until detonation when armed." scale="0.5" category="Machine" isshootable="true" canflipx="false" hideinmenus="true">
+    <Item name="Nuclear Bomb" identifier="de_nuclearbomb" tags="mediumitem,provocative,nuclearbomb" health="60" description="A nuclear bomb, causing a massive fallout after detonation, killing everything in its path. 60 seconds until detonation when armed." scale="0.5" category="Machine" isshootable="true" canflipx="false" impactsoundtag="impact_metal_heavy" hideconditionbar="true" hideinmenus="true">
       <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="250,109,256,117" depth="0.6" premultiplyalpha="false" origin="0.5,0.5" />
       <ContainedSprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="250,109,256,117" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.501" origin="0.5,0.5" />
       <Body width="254" height="115" density="10.5" />
-      <AiTarget sightrange="1000" Soundrange="50000" />
+      <AiTarget soundrange="50000" sonarlabel="entityname.lairbomb" staticsound="true" />
       <LightComponent range="100.0" powerconsumption="0" lightcolor="255,195,95,111" IsOn="false" alphablend="true" blinkfrequency="0" castshadows="false" allowingameediting="false" comparison="And">
         <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="507,109,256,117" depth="0.6" premultiplyalpha="false" origin="0.5,0.5" />
-        <StatusEffect type="OnActive" target="This" delay="1" timeframe="1" disabledeltatime="true" stackable="false" CheckConditionalAlways="true">
+        <StatusEffect type="OnActive" target="This" delay="1" condition="-1" disabledeltatime="true" stackable="false" CheckConditionalAlways="true">
           <Conditional IsOn="true" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="This" delay="1" disabledeltatime="true" blinkfrequency="1" setvalue="true" stackable="false" comparison="and" forceplaysounds="true">
+          <Conditional condition="gt 20" />
           <Sound file="Content/Items/WarningBeepSlow.ogg" volume="1.5" range="750" loop="false" frequencymultiplier="2" />
         </StatusEffect>
-        <StatusEffect type="OnActive" target="This" oneshot="true" condition="0" setvalue="true" disabledeltatime="true">
-          <Conditional timeframe="gte 60" />
+        <StatusEffect type="OnActive" target="This" delay="0.5" disabledeltatime="true" blinkfrequency="2" setvalue="true" stackable="false" comparison="and" forceplaysounds="true">
+          <Conditional condition="lte 20" />
+          <Conditional condition="gt 10" />
+          <Sound file="Content/Items/WarningBeepSlow.ogg" volume="1.5" range="750" loop="false" frequencymultiplier="2" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="This" delay="0.25" disabledeltatime="true" blinkfrequency="4" setvalue="true" stackable="false" comparison="and" forceplaysounds="true">
+          <Conditional condition="lte 10" />
+          <Conditional condition="gt 3" />
+          <Sound file="Content/Items/WarningBeepSlow.ogg" volume="1.5" range="750" loop="false" frequencymultiplier="2" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="This" delay="0.1" disabledeltatime="true" blinkfrequency="10" setvalue="true" stackable="false" forceplaysounds="true">
+          <Conditional condition="lte 3" />
+          <Sound file="Content/Items/WarningBeepSlow.ogg" volume="1.5" range="750" loop="false" frequencymultiplier="2" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" oneshot="true" condition="0" setvalue="true" disabledeltatime="true">
           <SpawnItem identifier="nuclearfalloutemitter" spawnposition="This" />
           <TriggerEvent identifier="nuclearbombexplosion" />
         </StatusEffect>
@@ -55,7 +71,6 @@
           <Remove />
         </StatusEffect>
       </LightComponent>
-      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0" disabledeltatime="true" />
       <Holdable slots="RightHand,LeftHand" canbeselected="true" selectkey="Select" canbepicked="true" pickkey="Use" attachable="true" pickingtime="5" holdpos="0,-30" handle1="0,-30" aimable="true" aimpos="0,0" aimangle="0" msg="ItemMsgDetach" />
       <CustomInterface canbeselected="true" selectkey="Select" msg="ItemMsgInteractSelect" drawhudwhenequipped="false">
         <GuiFrame relativesize="0.12,0.12" style="ItemUI" anchor="Center" />
@@ -65,7 +80,7 @@
           </StatusEffect>
         </Button>
         <Button text="Disarm">
-          <StatusEffect type="OnUse" target="This" IsOn="false" tags="inactivenuke" timeframe="0" setvalue="true" disabledeltatime="true">
+          <StatusEffect type="OnUse" target="This" IsOn="false" tags="inactivenuke" condition="60" setvalue="true" disabledeltatime="true">
             <Sound file="Content/Items/WarningBeepSlow.ogg" volume="1.5" range="750" loop="false" frequencymultiplier="3" />
           </StatusEffect>
         </Button>
