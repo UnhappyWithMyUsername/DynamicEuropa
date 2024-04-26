@@ -32,217 +32,53 @@
       <NPCOperateItemAction npctag="merchantarmory" targettag="merchantarmoryseat" ItemComponentName="Controller" operate="true" />
       <NPCOperateItemAction npctag="outpostdoctor" targettag="doctorseat" ItemComponentName="Controller" operate="true" />
     </ScriptedEvent>
-    <!--     WIP construction event.
-        Make it possible to spawn different outpost types, either via RNGaction or giving different material types, or create a "in progress" construction location that turns into something random
-        add text and sprites
-        TODO: Text -->
-    <ScriptedEvent identifier="Constructionprogress_coalition" commonness="100">
+    
+    <!-- only exists to help players figure out how to make construction crates, triggered by event below -->
+    <ScriptedEvent identifier="Constructionrecipe" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
-      <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
-      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-      <ConversationAction targettag="triggerer_player" text="Hey you! We're running short on materials and the next delivery has been delayed a few days. We don't want to spend more time on this construction site than we have to... You don't happen to have 5 crates of building materials you could spare? We'll pay for them of course!" eventsprite="mines">
-        <Option text="We do. Let me go grab them for you.">
-          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
-          <GoTo name="waitingforgoods" />
-        </Option>
-        <Option text="I am not sure. Let me check our cargo first.">
-          <ConversationAction targettag="triggerer_player" text="Alright! If you happen to find some, deliver them to the cargo unit over there and talk to me once you're done." />
-          <GoTo name="waitingforgoods" />
-        </Option>
-        <Option text="We're not interested in selling.">
-          <ConversationAction targettag="triggerer_player" text="I see... Well if you happen to change your mind, you know where to find me." />
-          <GoTo name="loop" />
-        </Option>
-        <Option text="We're lacking the matierals.">
-          <ConversationAction targettag="triggerer_player" text="I see... Well then I guess we'll have to wait for the official delivery then. Have a nice day!" />
-          <ClearTagAction tag="triggerer_player" />
-          <ClearTagAction tag="contruction_manager" />
-          <!-- end event -->
-          <GoTo name="end" />
-        </Option>
-      </ConversationAction>
-      <Label name="loop" />
-      <ClearTagAction tag="triggerer_player" />
-      <ClearTagAction tag="contruction_manager" />
-      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-      <ConversationAction targettag="triggerer_player" text="Oh hey! Did you guys change your mind? We really could use those 5 crates of building materials!" eventsprite="mines">
-        <Option text="Yes, the 5 crates are on their way.">
-          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
-          <GoTo name="waitingforgoods" />
-        </Option>
-        <Option text="No and we won't. Good day to you!" endconversation="true" />
-      </ConversationAction>
-      <Label name="waitingforgoods" />
-      <ClearTagAction tag="triggerer_player" />
-      <ClearTagAction tag="contruction_manager" />
-      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
-      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="5">
-        <Success>
-          <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 50">
-            <Success>
-              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
-                <Option text="Thank you!">
-                  <ConversationAction targettag="triggerer_player" text="Oh and since you're on good terms with us, administration stated to throw the current building plans out and let you decide on what type of station we should build here. So what's it going to be, boss?" eventsprite="mines">
-                    <Option text="A Settlement">
-                      <ModifyLocationAction type="Settlement" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a settlement it is. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
-                    </Option>
-                    <Option text="A Military Base">
-                      <ModifyLocationAction type="Base" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a military base it shall be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
-                    </Option>
-                    <Option text="A Research Station">
-                      <ModifyLocationAction type="Research" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a research station it will be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
-                    </Option>
-                    <Option text="A Hospital">
-                      <ModifyLocationAction type="Hospital" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a hospital it's going to be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
-                    </Option>
-                  </ConversationAction>
-                </Option>
-              </ConversationAction>
-            </Success>
-            <Failure>
-              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
-                <Option text="Thank you!">
-                  <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                  <MoneyAction amount="1000" />
-                  <ReputationAction targettype="Location" increase="5" />
-                  <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                  <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                  <ConversationAction targettag="triggerer_player" text="I'll be returning to work now. Safe travels to you!" />
-                  <!-- 25% chance of any outcome -->
-                  <RNGAction chance="0.50">
-                    <Success>
-                      <RNGAction chance="0.50">
-                        <Success>
-                          <ModifyLocationAction type="Settlement" />
-                          <!-- end event -->
-                          <GoTo name="end" />
-                        </Success>
-                        <Failure>
-                          <ModifyLocationAction type="Base" />
-                          <!-- end event -->
-                          <GoTo name="end" />
-                        </Failure>
-                      </RNGAction>
-                    </Success>
-                    <Failure>
-                      <RNGAction chance="0.50">
-                        <Success>
-                          <ModifyLocationAction type="Research" />
-                          <!-- end event -->
-                          <GoTo name="end" />
-                        </Success>
-                        <Failure>
-                          <ModifyLocationAction type="Hospital" />
-                          <!-- end event -->
-                          <GoTo name="end" />
-                        </Failure>
-                      </RNGAction>
-                    </Failure>
-                  </RNGAction>
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
-        </Success>
-        <Failure>
-          <ConversationAction targettag="triggerer_player" text="I'm afraid that won't be enough. Check your cargo hold and see if can find some more." eventsprite="mines">
-            <Option text="Alright, I'll go check again." endconversation="true">
-              <GoTo name="waitingforgoods" />
-            </Option>
-            <Option text="Sorry, but that's all we got">
-              <ConversationAction targettag="triggerer_player" text="In that case I recommend taking your cargo back. We'll be waiting on the official delivery then instead. But thank you for the offer. Have a nice day!" eventsprite="mines" />
-              <!-- end event -->
-              <GoTo name="end" />
-            </Option>
-          </ConversationAction>
-        </Failure>
-      </CheckItemAction>
-      <Label name="end" />
-      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerAction target1tag="constructioncargounit" target2tag="player" applytotarget2="triggerer_player"  radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.constructionrecipe.recipe" eventsprite="mines" endconversation="true" />
     </ScriptedEvent>
-    <ScriptedEvent identifier="Constructionprogress_separatists" commonness="100">
+    
+    <!-- Construction event -->
+    <ScriptedEvent identifier="Constructionprogress" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
       <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
       <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-      <ConversationAction targettag="triggerer_player" text="Hey you! We're running short on materials and the next delivery has been delayed a few days. We don't want to spend more time on this construction site than we have to... You don't happen to have 5 crates of building materials you could spare? We'll pay for them of course!" eventsprite="mines">
-        <Option text="We do. Let me go grab them for you.">
-          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+      <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.starterdialogue" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.wehavecrates">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.speaktomeagain" />
           <GoTo name="waitingforgoods" />
         </Option>
-        <Option text="I am not sure. Let me check our cargo first.">
-          <ConversationAction targettag="triggerer_player" text="Alright! If you happen to find some, deliver them to the cargo unit over there and talk to me once you're done." />
+        <Option text="eventtext.Constructionprogress.letmecheck">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.ifyoufindcrates" />
           <GoTo name="waitingforgoods" />
         </Option>
-        <Option text="We're not interested in selling.">
-          <ConversationAction targettag="triggerer_player" text="I see... Well if you happen to change your mind, you know where to find me." />
-          <GoTo name="loop" />
+        <Option text="eventtext.Constructionprogress.notinterested">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.findmeagain" />
+          <GoTo name="changemind" />
         </Option>
-        <Option text="We're lacking the matierals.">
-          <ConversationAction targettag="triggerer_player" text="I see... Well then I guess we'll have to wait for the official delivery then. Have a nice day!" />
-          <ClearTagAction tag="triggerer_player" />
-          <ClearTagAction tag="contruction_manager" />
-          <!-- end event -->
-          <GoTo name="end" />
+        <Option text="eventtext.Constructionprogress.nomaterials">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.wellwait" />
+          <GoTo name="changemind" />
         </Option>
       </ConversationAction>
-      <Label name="loop" />
+      <Label name="changemind" />
       <ClearTagAction tag="triggerer_player" />
       <ClearTagAction tag="contruction_manager" />
       <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-      <ConversationAction targettag="triggerer_player" text="Oh hey! Did you guys change your mind? We really could use those 5 crates of building materials!" eventsprite="mines">
-        <Option text="Yes, the 5 crates are on their way.">
-          <ConversationAction targettag="triggerer_player" text="Oh wonderful! Speak to me again once you're done delivering them to the cargo unit over there to collect your payment." />
+      <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.changeyourmind" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.cratescoming">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.speaktomeagain" />
           <GoTo name="waitingforgoods" />
         </Option>
-        <Option text="No and we won't. Good day to you!" endconversation="true" />
+        <Option text="eventtext.generic.ignore" endconversation="true" />
       </ConversationAction>
       <Label name="waitingforgoods" />
       <ClearTagAction tag="triggerer_player" />
@@ -251,16 +87,18 @@
       <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
       <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="5">
         <Success>
-          <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 50">
+          <StatusEffectAction targettag="constructioncargounit">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <CheckReputationAction targettype="Location" condition="gte 50">
             <Success>
-              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
-                <Option text="Thank you!">
-                  <ConversationAction targettag="triggerer_player" text="Oh and since you're on good terms with us, administration stated to throw the current building plans out and let you decide on what type of station we should build here. So what's it going to be, boss?" eventsprite="mines">
-                    <Option text="A Settlement">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+                <Option text="eventtext.Constructionprogress.thanks">
+                  <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.youdecide" eventsprite="mines">
+                    <Option text="eventtext.Constructionprogress.settlement">
                       <ModifyLocationAction type="Settlement" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a settlement it is. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
+                      <ConversationAction text="eventtext.Constructionprogress.settlementpicked" />
+                      <MoneyAction amount="2000" />
                       <ReputationAction targettype="Location" increase="5" />
                       <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
                       <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
@@ -269,11 +107,10 @@
                       <!-- end event -->
                       <GoTo name="end" />
                     </Option>
-                    <Option text="A Military Base">
+                    <Option text="eventtext.Constructionprogress.base">
                       <ModifyLocationAction type="Base" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a military base it shall be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
+                      <ConversationAction text="eventtext.Constructionprogress.basepicked" />
+                      <MoneyAction amount="2000" />
                       <ReputationAction targettype="Location" increase="5" />
                       <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
                       <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
@@ -282,11 +119,10 @@
                       <!-- end event -->
                       <GoTo name="end" />
                     </Option>
-                    <Option text="A Research Station">
+                    <Option text="eventtext.Constructionprogress.research">
                       <ModifyLocationAction type="Research" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a research station it will be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
+                      <ConversationAction text="eventtext.Constructionprogress.researchpicked" />
+                      <MoneyAction amount="2000" />
                       <ReputationAction targettype="Location" increase="5" />
                       <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
                       <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
@@ -295,11 +131,10 @@
                       <!-- end event -->
                       <GoTo name="end" />
                     </Option>
-                    <Option text="A Hospital">
+                    <Option text="eventtext.Constructionprogress.hospital">
                       <ModifyLocationAction type="Hospital" />
-                      <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                      <ConversationAction text="Alright, a settlement it's going to be. I'll be returning to work now. Safe travels to you!" />
-                      <MoneyAction amount="1000" />
+                      <ConversationAction text="eventtext.Constructionprogress.hospitalpicked" />
+                      <MoneyAction amount="2000" />
                       <ReputationAction targettype="Location" increase="5" />
                       <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
                       <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
@@ -313,14 +148,13 @@
               </ConversationAction>
             </Success>
             <Failure>
-              <ConversationAction targettag="triggerer_player" text="I see you've delivered the required amount. Here's your payment!" eventsprite="mines">
-                <Option text="Thank you!">
-                  <RemoveItemAction targettag="constructioncargounit" itemidentifier="constructionmaterialcrate" amount="5" />
-                  <MoneyAction amount="1000" />
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+                <Option text="eventtext.Constructionprogress.thanks">
+                  <MoneyAction amount="2000" />
                   <ReputationAction targettype="Location" increase="5" />
                   <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
                   <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                  <ConversationAction targettag="triggerer_player" text="I'll be returning to work now. Safe travels to you!" />
+                  <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
                   <!-- 25% chance of any outcome -->
                   <RNGAction chance="0.50">
                     <Success>
@@ -358,14 +192,13 @@
           </CheckReputationAction>
         </Success>
         <Failure>
-          <ConversationAction targettag="triggerer_player" text="I'm afraid that won't be enough. Check your cargo hold and see if can find some more." eventsprite="mines">
-            <Option text="Alright, I'll go check again." endconversation="true">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.notenough" eventsprite="mines">
+            <Option text="eventtext.Constructionprogress.checkagain" endconversation="true">
               <GoTo name="waitingforgoods" />
             </Option>
-            <Option text="Sorry, but that's all we got">
-              <ConversationAction targettag="triggerer_player" text="In that case I recommend taking your cargo back. We'll be waiting on the official delivery then instead. But thank you for the offer. Have a nice day!" eventsprite="mines" />
-              <!-- end event -->
-              <GoTo name="end" />
+            <Option text="eventtext.Constructionprogress.allwegot">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.takecargoback" eventsprite="mines" />
+              <GoTo name="changemind" />
             </Option>
           </ConversationAction>
         </Failure>
