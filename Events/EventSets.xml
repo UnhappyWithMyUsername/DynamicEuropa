@@ -31,7 +31,7 @@
       <EventSet identifier="outpostevents.dynamiceuropa.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
       </EventSet>
-      <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction"  allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
+      <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
         <ScriptedEvent identifier="quartermaster" commonness="100" probability="1.0" />
       </EventSet>
@@ -408,6 +408,9 @@
       <EventSet identifier="outpostevent.medical.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
         <ScriptedEvent identifier="jobboardmedical" commonness="200" probability="0.2" />
       </EventSet>
+      <EventSet identifier="outpostevents.dynamiceuropa.hospital" minleveldifficulty="0" maxleveldifficulty="100" locationtype="hospital" allowatstart="true" chooserandom="false" eventcount="1" onceperoutpost="false">
+        <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
+      </EventSet>
 
       <!-- Events specific to construction outposts -->
       <EventSet identifier="outpostevent.construction.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction" allowatstart="true" chooserandom="true" exhaustible="true">
@@ -723,7 +726,7 @@
 
       <!--  Faction-specific events that can only occur once. 
         In a separate set to make these very common (when they are valid for the situation) -->
-      <EventSet identifier="outpostevents.clowns" allowatstart="true" chooserandom="true" eventcount="3" faction="clowns" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <EventSet identifier="outpostevents.clowns" allowatstart="true" chooserandom="true" eventcount="3" faction="clowns" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard,sinkingcircus">
         <ScriptedEvent identifier="clownspecialhire1" commonness="100" />
         <ScriptedEvent identifier="pathofthebikehorn1" commonness="100" />
         <ScriptedEvent identifier="pathofthebikehorn2" commonness="100" />
