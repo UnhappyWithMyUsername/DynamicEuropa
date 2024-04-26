@@ -42,7 +42,7 @@
             <!-- does not spawn the event if already done -->
           </Failure>
           <Success>
-            <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 30">
+            <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 30">
               <Failure>
                 <!-- needs high enough coalition rep -->
               </Failure>
@@ -54,14 +54,14 @@
                 <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="true" />
                 <ConversationAction text="EventText.missionevent_huskcultinterception.churchmakesmeds" endeventifinterrupted="false" eventsprite="Separatists">
                 <WaitAction time="5" />
-                  <Option text="EventText.missionevent.Whataboutit">
+                  <Option text="EventText.missionevent_huskcultinterception.Whataboutit">
                     <ConversationAction text="EventText.missionevent_huskcultinterception.dependentonmeds" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" >
                       <Option text="EventText.generic.continue">
                         <ConversationAction text="EventText.missionevent_huskcultinterception.takedowntransport" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" >
-                          <Option text="EventText.missionevent.Consideritdone" endconversation="true">
+                          <Option text="EventText.missionevent_huskcultinterception.Consideritdone" endconversation="true">
                             <MissionAction missionidentifier="huskcultinterception" />
                           </Option>
-                          <Option text="EventText.missionevent.Notapirate" endconversation="true">   
+                          <Option text="EventText.missionevent_huskcultinterception.Notapirate" endconversation="true">   
                             <ReputationAction targettype="Faction" identifier="separatists" increase="-1" />
                             <SetDataAction identifier="huskinterceptionmissionnorepeat" value="1"/> 
                           </Option>                    
@@ -75,6 +75,7 @@
             </CheckReputationAction>  
           </Success>
         </CheckDataAction>
+        <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="20">
