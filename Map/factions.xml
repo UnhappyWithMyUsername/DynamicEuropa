@@ -37,7 +37,9 @@
       <Icon name="HuskCultIcon" texture="Content/UI/CampaignUIAtlas2.png" sourcerect="402,523,96,113" color="58,165,121,255"/>
       <Portrait name="HuskCultPortrait" texture="Content/UI/Server/PlaystyleRampage.png" sourcerect="0,0,1920,768" color="58,165,121,255"/>
       <IconSmall name="HuskCultIconSmall" texture="Content/UI/CampaignUIAtlas2.png" sourcerect="0,0,1,1"/>    
-      <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireablehuskcultist" minreputation="20" />
+      <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireablehuskcultist" minreputation="20" />   
+      <Hireable npcsetidentifier="husknpcs" npcidentifier="hireablehuskscientist" minreputation="50" />   
+      <Hireable npcsetidentifier="husknpcs" npcidentifier="hireablehusktemplar" minreputation="50" />
       <AutomaticMission leveltype="LocationConnection" missiontag="huskcultattack" minreputation="-100" maxreputation="-50" MaxDistanceFromFactionOutpost="3" DisallowBetweenOtherFactionOutposts="true" minprobability="0.2" maxprobability="0.01"/>    
     </Faction>
     <Faction identifier="clowns" initialreputation="-5" minreputation="-100" maxreputation="100" menuorder="3" secondarycontrolledoutpostpercentage="40" opposingfaction="">
@@ -50,9 +52,12 @@
       <Icon name="BanditIcon" texture="Content/UI/UIAtlasGeneral.png" sourcerect="402,902,89,107" color="100,75,75,255"/>
       <IconSmall name="BanditIconSmall" texture="Content/Map/MapAtlas.png" sourcerect="0,0,1,1"/>
       <Portrait name="BanditPortrait" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="0,682,852,340"/>
-      <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireableseparatistsecurityofficer" minreputation="20"/>
-      <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireableseparatistsecurityofficerveteran" minreputation="50"/>
-      <AutomaticMission leveltype="LocationConnection" missiontag="separatistattack" minreputation="-100" maxreputation="-50" MaxDistanceFromFactionOutpost="3" DisallowBetweenOtherFactionOutposts="true" minprobability="0.2" maxprobability="0.01"/>
+      <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratecaptain" minreputation="15"/>
+      <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratecaptainlord" minreputation="15"/>
+      <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratesecurityrecruit" minreputation="15"/>
+      <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratesecuritybrute" minreputation="15"/>
+      <!-- TODO: bandit subs -->
+      <!-- <AutomaticMission leveltype="LocationConnection" missiontag="banditsattack" minreputation="-20" maxreputation="-15" MaxDistanceFromFactionOutpost="10" DisallowBetweenOtherFactionOutposts="true" minprobability="0.2" maxprobability="0.01"/> -->
     </Faction>
     
   </Factions>

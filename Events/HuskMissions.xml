@@ -255,49 +255,55 @@
         <Submarine path="%ModDir%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="40" alternatereward="3200"/>
       </SubmarineTypes>
       <Characters>
-        <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1"/>
-        <Character typeidentifier="huskcultsecurity" minamount="1" maxamount="5" />
-        <Character typeidentifier="huskcultmechanic" minamount="1" maxamount="1" />
-        <Character typeidentifier="huskcultengineer" minamount="1" maxamount="1" />
+        <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1">
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+            <Affliction identifier="concussion" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultsecurity" minamount="1" maxamount="3" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultmechanic" minamount="1" maxamount="1" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultengineer" minamount="1" maxamount="1" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultvip" minamount="1" maxamount="1" >
+          <StatusEffect target="Character" disabledeltatime="true" >
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
       </Characters>
       <CharacterTypes>
         <CharacterType typeidentifier="huskcultcaptain">
-          <Character identifier="huskcultcaptain" from="combatmissionhuskcultnpcs" preferreddifficulty="50" iscommander="true" >
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
-          <Character identifier="huskcultcaptainlord" from="combatmissionhuskcultnpcs" preferreddifficulty="90" iscommander="true" >
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultcaptain" from="combatmissionhuskcultnpcs" preferreddifficulty="50" iscommander="true" />
+          <Character identifier="huskcultcaptainlord" from="combatmissionhuskcultnpcs" preferreddifficulty="90" iscommander="true" />
         </CharacterType>
         <CharacterType typeidentifier="huskcultsecurity">
           <Character identifier="huskcultsecurityrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultsecurityelite" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultsecurityelite" from="combatmissionhuskcultnpcs" preferreddifficulty="70"/>
         </CharacterType>
         <CharacterType typeidentifier="huskcultmechanic">
           <Character identifier="huskcultmechanicrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultmechanicveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultmechanicveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70" />
         </CharacterType>
         <CharacterType typeidentifier="huskcultengineer">
           <Character identifier="huskcultengineerrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultengineerveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultengineerveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70" />
+        </CharacterType>
+        <CharacterType typeidentifier="huskcultvip">
+          <Character identifier="huskvip" from="husknpcsmission" color="40,140,80" />
         </CharacterType>
       </CharacterTypes>
+      <TriggerEvent eventidentifier="huskcrewsymbiosis" state="0" delay="5" campaignonly="true"/>
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
       <message header="missionheader0.huskcultattack1" text="missionmessage0.huskcultattack1"/>
       <LocationType from="AnyOutpost" to="AnyOutpost" />
@@ -317,61 +323,55 @@
         <Submarine path="%ModDir%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="10" alternatereward="3200"/>
       </SubmarineTypes>
       <Characters>
-        <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1"/>
-        <Character typeidentifier="huskcultsecurity" minamount="1" maxamount="3" />
-        <Character typeidentifier="huskcultmechanic" minamount="1" maxamount="1" />
-        <Character typeidentifier="huskcultengineer" minamount="1" maxamount="1" />
+        <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1">
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+            <Affliction identifier="concussion" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultsecurity" minamount="1" maxamount="3" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultmechanic" minamount="1" maxamount="1" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
+        <Character typeidentifier="huskcultengineer" minamount="1" maxamount="1" >
+          <StatusEffect>
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
+          </StatusEffect>
+        </Character>
         <Character typeidentifier="huskcultvip" minamount="1" maxamount="1" >
-          <StatusEffect target="Character" delay="10">
-            <Affliction identifier="nausea" probability="1" strength="100" />
+          <StatusEffect target="Character" disabledeltatime="true" >
+            <Affliction identifier="husksymbiosis" probability="1" strength="100" />
           </StatusEffect>
         </Character>
       </Characters>
       <CharacterTypes>
         <CharacterType typeidentifier="huskcultcaptain">
-          <Character identifier="huskcultcaptain" from="combatmissionhuskcultnpcs" preferreddifficulty="50" iscommander="true" >
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
-          <Character identifier="huskcultcaptainlord" from="combatmissionhuskcultnpcs" preferreddifficulty="90" iscommander="true" >
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultcaptain" from="combatmissionhuskcultnpcs" preferreddifficulty="50" iscommander="true" />
+          <Character identifier="huskcultcaptainlord" from="combatmissionhuskcultnpcs" preferreddifficulty="90" iscommander="true" />
         </CharacterType>
         <CharacterType typeidentifier="huskcultsecurity">
           <Character identifier="huskcultsecurityrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultsecurityelite" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultsecurityelite" from="combatmissionhuskcultnpcs" preferreddifficulty="70"/>
         </CharacterType>
         <CharacterType typeidentifier="huskcultmechanic">
           <Character identifier="huskcultmechanicrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultmechanicveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultmechanicveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70" />
         </CharacterType>
         <CharacterType typeidentifier="huskcultengineer">
           <Character identifier="huskcultengineerrecruit" from="combatmissionhuskcultnpcs" preferreddifficulty="40"/>
-          <Character identifier="huskcultengineerveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character>
+          <Character identifier="huskcultengineerveteran" from="combatmissionhuskcultnpcs" preferreddifficulty="70" />
         </CharacterType>
         <CharacterType typeidentifier="huskcultvip">
-          <Character identifier="huskvip" from="husknpcsmission" color="40,140,80">
-            <StatusEffect target="Character" delay="1" disabledeltatime="true">
-              <Affliction identifier="husksymbiosis" probability="1" strength="100" />
-            </StatusEffect>
-          </Character> 
+          <Character identifier="huskvip" from="husknpcsmission" color="40,140,80" />
         </CharacterType>
       </CharacterTypes>
+      <TriggerEvent eventidentifier="huskcrewsymbiosis" state="0" delay="5" campaignonly="true"/>
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
       <message header="missionheader0.huskcultinterception" text="missionmessage0.huskcultinterception"/>
       <LocationType from="AnyOutpost" to="AnyOutpost" />

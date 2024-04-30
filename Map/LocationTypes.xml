@@ -660,6 +660,8 @@
       Faction="huskcult" >
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="246,640,128,128" color="58,165,121,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <!-- TODO: remove this hireable -->
+      <Hireable identifier="assistant" commonness="1" />
       <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="3,5" requiredproximity="1" />
       </ChangeTo>
@@ -760,12 +762,8 @@
     <PirateOutpost identifier="PirateOutpost" nameidentifiers="pirateoutpost" replaceinradiation="Abandoned" commonnessperzone="1: 0, 2: 0.25, 3: 0.3, 4: 0.3, 5: 0.2" disallowedadjacentlocations="PirateOutpost" missiontags="pirateoutpostmission" AllowAsBiomeGate="false" faction="bandits">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="128,640,128,128" color="255,148,96,255" />
       <Portrait texture="%ModDir%/Map/LocationPortraits/PirateHaven.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="1" />
-      <Hireable identifier="engineer" commonness="3" />
-      <Hireable identifier="mechanic" commonness="3" />
-      <Hireable identifier="medicaldoctor" commonness="1" />
-      <Hireable identifier="securityofficer" commonness="8" />
-      <Hireable identifier="captain" commonness="3" />
+      <!-- TODO: remove this hireable -->
+      <Hireable identifier="assistant" commonness="1"/>
       <Store maxreputationmodifier="0.1" sellpricemodifier="0.25" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="2" initialbalance="11389" pricemodifierrange="5" />
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
         <!-- May be infested if within 1 steps of a lair. -->

@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Randomevents>
-  <!-- Define flavor sprites that appear top left of the message box here, identifier is required -->
-  <EventSprites></EventSprites>
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
     <!-- Pirate Broadcast during pirate missions -->
@@ -257,7 +255,7 @@
           <TriggerAction target1tag="player" target2tag="securitynpcpirate" applytotarget1="triggerer_player" applytotarget2="triggered_npc" radius="200" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
           <NPCWaitAction NPCTag="guard" Wait="False" />
           <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="true" />
-          <ConversationAction text="eventtext.pirateoutpostevent" targettag="triggerer_player" waitforinteraction="true" dialogtype="small">
+          <ConversationAction text="eventtext.pirateoutpostevent" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" eventsprite="piratehaven">
             <Option text="eventtext.pirateoutpostevent.option.ignore">
               <ConversationAction text="eventtext.pirateoutpostevent.option.ignore.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" />
               <SetDataAction identifier="pirateoutpostdestruction" value="0" />
@@ -274,7 +272,7 @@
                   <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
                   <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
                   <Label name="psooptions" />
-                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact">
+                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven2">
                     <!-- Pay the toll, get in, + reputation -->
                     <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high">
                       <CheckMoneyAction Amount="1000">
@@ -411,7 +409,7 @@
                       <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
                       <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
                       <Label name="psooptions2" />
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact">
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven2">
                         <!-- Pay the toll, get in, + reputation -->
                         <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high">
                           <CheckMoneyAction Amount="2000">
@@ -496,7 +494,7 @@
               </CheckReputationAction>
             </Option>
             <Option text="eventtext.pirateoutpostevent.option.attack">
-              <ConversationAction text="eventtext.pirateoutpostevent.option.attack.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" />
+              <ConversationAction text="eventtext.pirateoutpostevent.option.attack.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" eventsprite="piratehaven" />
               <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="false" />
               <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
               <Label name="attackplayer" />
@@ -506,43 +504,11 @@
               <ClearTagAction tag="triggerer_player" />
               <GoTo name="attackplayer" />
             </Option>
-            <!--
-            <Option text="eventtext.pirateoutpostevent.option.attack2">
-              <ConversationAction text="eventtext.pirateoutpostevent.option.attack2.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" />
-              <StatusEffectAction targettag="player">
-                <StatusEffect target="character">
-                  <Affliction identifier="piratesdoom" amount="1" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="false" />
-              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-              <GoTo name="attackplayer"/>
-            </Option>
-            -->
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
     </ScriptedEvent>
-    
-    <ScriptedEvent identifier="piratesdoomevent">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <Label name="check" />
-      <CheckDataAction identifier="piratesdoomprogress" condition="gte 1">
-        <Success>
-          <StatusEffectAction targettag="player">
-            <StatusEffect target="character">
-              <Conditional piratesdoom="gte 1" />
-              <ReduceAffliction identifier="piratesdoom" amount="5" />
-            </StatusEffect>
-          </StatusEffectAction>
-        </Success>
-        <Failure>
-          <WaitAction time="0.5" />
-          <GoTo name="check" />
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>
-    
+        
     <ScriptedEvent identifier="piratealarm">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
@@ -726,6 +692,20 @@
         <RemoveItemAction targettag="lairbomb" Amount="100" />
       </OnRoundEndAction>
     </ScriptedEvent>
+    
+    <!-- TODO:  remove this if you can just trigger statuseffects in the mission itself -->
+    <ScriptedEvent identifier="huskcrewsymbiosis">
+      <TagAction criteria="humanprefabidentifier:huskcultcaptain" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultcaptainlord" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultsecurityrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultsecurityelite" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultengineerrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultengineerveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultmechanicrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultmechanicveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" /> 
+      <AfflictionAction affliction="husksymbiosis" strength="100" targettag="huskcrew" />
+    </ScriptedEvent>   
+    
 
   </EventPrefabs>
 </Randomevents>
