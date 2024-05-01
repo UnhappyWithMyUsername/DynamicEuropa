@@ -216,7 +216,13 @@
 
     <!-- mineralspawner is always noninteractable (even when set to be interactable) and this event will set a random amount to be interactable -->
     <ScriptedEvent identifier="unlockorenodes" commonness="100">
-      <WaitAction time="1" />
+      <WaitAction time="2" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:mineterminal" tag="mineterminal" ContinueIfNoTargetsFound="false" />
+      <TagAction criteria="itemtag:mineentrance" tag="mineentrance" ContinueIfNoTargetsFound="false" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerEventAction identifier="checkminepayment" />
+      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
       <!-- 2/3 chance to delete the ore node -->
       <!-- 1/3 chance to unlock the ore node -->
@@ -227,10 +233,66 @@
           <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
         </StatusEffect>
       </StatusEffectAction>
+      <StatusEffectAction targettag="mineterminal">
+        <StatusEffect target="This" noninteractable="false" nonplayerteaminteractable="false" setvalue="true" disabledeltatime="true" />
+      </StatusEffectAction>
+      <Label name="restart" />
+      <TriggerAction target1tag="player" target2tag="mineterminal" applytotarget1="uon_player" waitforinteraction="true" />
+      <ConversationAction targettag="uon_player" text="Authorization to access the mine: 250mk" eventsprite="mines" dialogtype="small">
+        <Option text="Pay">
+          <CheckMoneyAction targettag="uon_player" amount="250">
+            <Success>
+              <MoneyAction targettag="uon_player" amount="-250" />
+              <ConversationAction targettag="uon_player" text="Transaction received. Unlocking door..." eventsprite="mines" dialogtype="small" />
+              <StatusEffectAction targettag="mineentrance">
+                <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+              <StatusEffectAction targettag="mineterminal">
+                <StatusEffect target="This" LightColor="0,92,23,255" noninteractable="true" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+              <SetDataAction identifier="mineopened" value="1" />
+              <ClearTagAction tag="uon_player" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="uon_player" text="Transaction failed. Insufficient funds." eventsprite="mines" dialogtype="small" />
+              <ClearTagAction tag="uon_player" />
+              <GoTo name="restart" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="Leave" endconversation="true">
+          <ClearTagAction tag="uon_player" />
+          <GoTo name="restart" />
+        </Option>
+      </ConversationAction>
     </ScriptedEvent>
+
+    <ScriptedEvent identifier="checkminepayment">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:entrance" tag="entrance" submarinetype="Outpost" />
+      <TriggerAction target1tag="player" target2tag="entrance" radius="10" waitforinteraction="false" />
+      <CheckDataAction identifier="mineopened" condition="eq 1">
+        <Success>
+          <SetDataAction identifier="mineopened" value="0" />
+        </Success>
+        <Failure>
+          <StatusEffectAction targettag="alarm">
+            <StatusEffect IsOn="true" target="This" setvalue="true" />
+          </StatusEffectAction>
+          <ConversationAction text="Authorities were notified about your actions." ContinueAutomatically="true" dialogtype="small" />
+          <ReputationAction targettype="Location" increase="-5" />
+          <SetDataAction identifier="mineopened" value="0" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
     <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
-      <WaitAction time="1" />
+      <WaitAction time="2" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
+      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- 3/4 chance to delete the ore node -->
       <!-- 1/4 chance to unlock the ore node -->
       <StatusEffectAction targettag="orenode">
@@ -1264,7 +1326,7 @@
       <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" waitforinteraction="false" />
       <CheckDataAction identifier="blockadeopened" condition="eq 1">
         <Success>
-          <!-- Do nothing -->
+          <SetDataAction identifier="blockadeopened" value="0" />
         </Success>
         <Failure>
           <StatusEffectAction targettag="alarm">
@@ -1277,6 +1339,7 @@
             </StatusEffect>
           </StatusEffectAction>
           <ReputationAction targettype="Location" increase="-25" />
+          <SetDataAction identifier="blockadeopened" value="0" />
           <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
         </Failure>
       </CheckDataAction>
