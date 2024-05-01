@@ -238,12 +238,12 @@
       </StatusEffectAction>
       <Label name="restart" />
       <TriggerAction target1tag="player" target2tag="mineterminal" applytotarget1="uon_player" waitforinteraction="true" />
-      <ConversationAction targettag="uon_player" text="Authorization to access the mine: 250mk" eventsprite="mines" dialogtype="small">
-        <Option text="Pay">
+      <ConversationAction targettag="uon_player" text="eventtext.mine.terminal.interact" eventsprite="mines" dialogtype="small">
+        <Option text="EventText.mine.terminal.interact.pay">
           <CheckMoneyAction targettag="uon_player" amount="250">
             <Success>
               <MoneyAction targettag="uon_player" amount="-250" />
-              <ConversationAction targettag="uon_player" text="Transaction received. Unlocking door..." eventsprite="mines" dialogtype="small" />
+              <ConversationAction targettag="uon_player" text="EventText.mine.terminal.interact.pay.success" eventsprite="mines" dialogtype="small" />
               <StatusEffectAction targettag="mineentrance">
                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
               </StatusEffectAction>
@@ -254,13 +254,13 @@
               <ClearTagAction tag="uon_player" />
             </Success>
             <Failure>
-              <ConversationAction targettag="uon_player" text="Transaction failed. Insufficient funds." eventsprite="mines" dialogtype="small" />
+              <ConversationAction targettag="uon_player" text="EventText.mine.terminal.interact.pay.failure" eventsprite="mines" dialogtype="small" />
               <ClearTagAction tag="uon_player" />
               <GoTo name="restart" />
             </Failure>
           </CheckMoneyAction>
         </Option>
-        <Option text="Leave" endconversation="true">
+        <Option text="eventtext.option.leave" endconversation="true">
           <ClearTagAction tag="uon_player" />
           <GoTo name="restart" />
         </Option>
@@ -279,7 +279,7 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
-          <ConversationAction text="Authorities were notified about your actions." ContinueAutomatically="true" dialogtype="small" />
+          <ConversationAction text="EventText.mine.breakin" ContinueAutomatically="true" dialogtype="small" />
           <ReputationAction targettype="Location" increase="-5" />
           <SetDataAction identifier="mineopened" value="0" />
         </Failure>
