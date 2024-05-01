@@ -1148,7 +1148,11 @@
                                           <CheckDataAction identifier="kiraintro" condition="eq true" _npos="-402.13715,-147.4704">
                                             <Failure>
                                               <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="106.45703,-164.17828" />
-                                              <TagAction criteria="itemtag:chair" tag="chair" requiredmoduletag="crewmodule" _npos="513.98804,-163.10767" />
+                                              <TagAction criteria="itemtag:chair" tag="chair" requiredmoduletag="crewmodule" _npos="513.98804,-163.10767" ContinueIfNoTargetsFound="true" />
+                                              <TagAction criteria="itemidentifier:op_cafeteriachair" tag="chair" requiredmoduletag="crewmodule" ContinueIfNoTargetsFound="true" />
+                                              <StatusEffectAction targettag="chair">
+                                                <StatusEffect target="This" noninteractable="false" nonplayerteaminteractable="false" setvalue="true" />
+                                              </StatusEffectAction>
                                               <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" targetmoduletags="crewmodule" _npos="902.63354,-224.23627" />
                                               <NPCOperateItemAction npctag="kira" targettag="chair" operate="true" _npos="1313.2019,-219.17578" />
                                               <SetDataAction value="true" identifier="kiraintro" _npos="1709.3209,-299.53766" />
