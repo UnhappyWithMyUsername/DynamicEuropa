@@ -423,12 +423,12 @@
       </EventSet>
       
       <!-- Events specific to mining outposts -->
-      <EventSet identifier="outpostevent.mine.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.mine.randomevents" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" ignorecooldown="true" triggereventcooldown="false" onceperoutpost="true" eventcount="1">
         <!-- TODO: make sure these dont spawn in the dry cave itself -->
-        <ScriptedEvent identifier="consultant" commonness="150" probability="0.5" />
-        <ScriptedEvent identifier="occupationalhazards" commonness="150" probability="0.5" />
+        <ScriptedEvent identifier="consultant" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="occupationalhazards" commonness="100" probability="0.5" />
       </EventSet>
-      <EventSet identifier="outpostevent.mine.randomization" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="false" exhaustible="true" onceperoutpost="false">
+      <EventSet identifier="outpostevent.mine.randomization" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="false" ignorecooldown="true" triggereventcooldown="false" exhaustible="true" onceperoutpost="false" eventcount="1">
         <ScriptedEvent identifier="unlockorenodes" commonness="100" probability="1" />
       </EventSet>
       <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters -->
