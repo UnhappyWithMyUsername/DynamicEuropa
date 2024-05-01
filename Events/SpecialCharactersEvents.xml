@@ -42,8 +42,8 @@
                                               <NPCFollowAction npctag="nervouscivilian" targettag="admin" follow="true" _npos="7839.6763,5769.6514" />
                                               <ConversationAction text="Before she can utter another word, the two defiant civilians launch an attack on her, while the anxious civilian makes a dash to flee from the scene. &quot;Stop that individual! He's carrying a bomb!&quot; The officer shouts, attempting to alert her colleagues to the fleeing suspect." targettag="triggereventplayer" _npos="8256.479,5755.649">
                                                 <Option text="Chase after the nervous civilian." endconversation="true">
-                                                  <Label name="chaseison" _npos="8843.295,5671.0684" />
-                                                  <NPCFollowAction npctag="nervouscivilian" targettag="admin" follow="true" />
+                                                  <Label name="chaseison" _npos="8496.539,5469.6016" />
+                                                  <NPCFollowAction npctag="nervouscivilian" targettag="admin" follow="true" _npos="8825.35,5628.29" />
                                                   <CombatAction combatmode="Arrest" isinstigator="false" npctag="kira" enemytag="boldgroup" _npos="9253.927,5627.9233" />
                                                   <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" npctag="boldgroup" enemytag="kira" _npos="9635.467,5630.962" />
                                                   <AfflictionAction affliction="combatstimulant" strength="85" targettag="kira" _npos="10010.331,5629.439" />
@@ -593,22 +593,18 @@
                                                     </StatusEffect>
                                                   </StatusEffectAction>
                                                   <WaitAction time="60" _npos="11706.835,12047.308" />
-                                                  <TagAction criteria="itemidentifier:opdeco_trashcan" tag="bombtrashbin" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
-                                                  <SpawnAction itemidentifier="traitortimebomb" targettag="ticktockbomb" targetinventory="bombtrashbin" ignorebyai="true" _npos="12767.459,11951.48" />
+                                                  <TagAction criteria="itemidentifier:opdeco_trashcan" tag="bombtrashbin" submarinetype="Outpost" chooserandom="true" continueifnotargetsfound="false" _npos="12178.789,12048.229" />
+                                                  <SpawnAction itemidentifier="traitortimebomb" targettag="ticktockbomb" targetinventory="bombtrashbin" ignorebyai="true" _npos="12766.217,11953.965" />
                                                   <StatusEffectAction targettag="ticktockbomb" _npos="13225,12028.524">
-                                                    <StatusEffect target="This" condition="500" IsOn="true" setvalue="true" />
-                                                    <StatusEffect target="This" type="OnActive" duration="180" Condition="0.3" >
-                                                    </StatusEffect>
+                                                    <StatusEffect target="This" condition="500" ison="true" setvalue="true" _npos="13267.372,12251.573" />
+                                                    <StatusEffect target="This" type="OnActive" duration="180" condition="0.3" _npos="13300.004,12689.996" />
                                                   </StatusEffectAction>
-                                                  <ConversationAction text="&#xD;An urgent announcement blares over the PA system. &quot;Attention, everyone. We have reason to believe that a bomb has been planted on the station. Exercise caution and evacuate to a secure area immediately.&quot;" targettag="player" dialogtype="Small" _npos="12138.232,11989.037">
-                                                    <Option text="Oh no..." endconversation="true">
-                                                      <TriggerAction target1tag="ticktockbomb" target2tag="player" applytotarget2="bombtoucher" waitforinteraction="true" _npos="13779.6,12000.646" />
-                                                      <ConversationAction text="You found the bomb lying on the floor. There is no way to defuse it. Better find a way to get rid of it!" targettag="bombtoucher" dialogtype="Small" _npos="14199.112,12001.702">
-                                                        <Option text="Shit..." endconversation="true">
-                                                          <ClearTagAction tag="bombtoucher" _npos="14684.523,12086.429" />
-                                                          <SetDataAction value="true" identifier="kirabombmoment" _npos="15065.144,12084.655" />
-                                                        </Option>
-                                                      </ConversationAction>
+                                                  <ConversationAction text="&#xD;An urgent announcement blares over the PA system. &quot;Attention, everyone. We have reason to believe that a bomb has been planted on the station. Exercise caution and evacuate to a secure area immediately.&quot;" targettag="player" dialogtype="Small" _npos="13985.431,12026.445" />
+                                                  <TriggerAction target1tag="ticktockbomb" target2tag="player" applytotarget2="bombtoucher" waitforinteraction="true" _npos="14719.066,11985.246" />
+                                                  <ConversationAction text="You found the bomb lying on the floor. There is no way to defuse it. Better find a way to get rid of it!" targettag="bombtoucher" dialogtype="Small" _npos="15184.781,12001.702">
+                                                    <Option text="Shit..." endconversation="true">
+                                                      <ClearTagAction tag="bombtoucher" _npos="15847.306,12055.627" />
+                                                      <SetDataAction value="true" identifier="kirabombmoment" _npos="16389.637,12130.859" />
                                                     </Option>
                                                   </ConversationAction>
                                                 </Option>
@@ -781,8 +777,10 @@
                                                                                                       <ClearTagAction tag="triggereventplayer" _npos="17946.852,-10610.379" />
                                                                                                       <ReputationAction increase="-2" identifier="clowns" targettype="Faction" _npos="18350.375,-10641.364" />
                                                                                                       <NPCWaitAction npctag="kira" wait="false" _npos="18770.299,-10651.216" />
-                                                                                                      <CombatAction combatmode="Retreat" isinstigator="false" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="19219.678,-10683.2" />
+                                                                                                      <CombatAction combatmode="Retreat" isinstigator="false" witnessreaction="None" npctag="clownkiranpcs1" enemytag="kira" _npos="19219.678,-10680.517" />
                                                                                                       <CombatAction combatmode="Arrest" isinstigator="false" guardreaction="None" npctag="kira" enemytag="clownkiranpcs1" _npos="19731.018,-10710.373" />
+                                                                                                      <WaitAction time="10" _npos="20131.078,-10666.91" />
+                                                                                                      <SpawnAction itemidentifier="bananapeel" spawnpointtag="clownkiranpcs1" _npos="20543.709,-10729.9795" />
                                                                                                     </Option>
                                                                                                   </ConversationAction>
                                                                                                 </Option>
@@ -917,7 +915,7 @@
                                   <CheckDataAction identifier="meetingkira1" condition="eq true" _npos="-1746.9426,-124.134766">
                                     <Success>
                                       <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="-1175.1047,849.46265" />
-                                      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" spawnpointtype="Path" teamid="FriendlyNPC" requirespawnpointtag="false" allowduplicates="false" targetmoduletags="crewmodule,seccrewmodule" _npos="-682.2345,826.6079" />
+                                      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" spawnpointtype="Path" teamid="FriendlyNPC" requirespawnpointtag="false" allowduplicates="false" targetmoduletags="crewmodule" _npos="-682.2345,826.6079" />
                                       <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kazuyakumo" lootingisstealing="true" targettag="kumo" spawnlocation="Outpost" spawnpointtag="kira" teamid="FriendlyNPC" requirespawnpointtag="false" allowduplicates="false" _npos="-261.34442,846.14954" />
                                       <TagAction criteria="hullname:adminmodule" tag="admin" submarinetype="Outpost" _npos="145.90662,900.73267" />
                                       <AfflictionAction affliction="stun" strength="100" targettag="kira" _npos="755.32416,940.1481" />
@@ -927,7 +925,6 @@
                                       <StatusEffectAction targettag="kira" _npos="2116.718,1224.607">
                                         <StatusEffect target="This" usehealthwindow="false" _npos="2623.9976,1247.7583" />
                                       </StatusEffectAction>
-                                      <NPCWaitAction npctag="kira" wait="true" _npos="2442.1545,911.8229" />
                                       <NPCFollowAction npctag="kumo" targettag="kira" follow="true" _npos="2831.0642,865.1704" />
                                       <TriggerAction target1tag="kira" target2tag="player" applytotarget2="triggereventplayer" radius="175" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="false" _npos="3277.8325,910.27734" />
                                       <ConversationAction text="You stumble upon an aftermath scene of a fight. With a body lying down on the floor and another person standing near them." targettag="triggereventplayer" _npos="3777.265,891.2239">
@@ -1067,7 +1064,7 @@
                                                                 <Failure>
                                                                   <ReputationAction increase="-5" identifier="coalition" targettype="Faction" _npos="10198.747,2122.2961" />
                                                                   <SetDataAction value="true" identifier="caughtstealingkira" _npos="10649.095,2234.8481" />
-                                                                  <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule,seccrewmodule" allowinplayerview="false" _npos="11071.265,2206.2173" />
+                                                                  <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule" allowinplayerview="false" _npos="11071.265,2206.2173" />
                                                                   <NPCFollowAction npctag="kirasecurity" targettag="triggereventplayer" follow="true" _npos="11511.075,2260.5742" />
                                                                   <ConversationAction text="However, your actions have not gone unnoticed. “Hey! What are you doing!” A security guard yells at a distance. It is best to get away before they catch up to you." targettag="triggereventplayer" _npos="11845.2295,2240.5159">
                                                                     <Option text="Time to run." endconversation="true">
@@ -1088,7 +1085,7 @@
                                                     </Option>
                                                     <Option text="Call for help.">
                                                       <Label name="continue5" _npos="6778.1235,3002.2148" />
-                                                      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule,seccrewmodule" allowinplayerview="false" _npos="7230.6016,2977.2463" />
+                                                      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" lootingisstealing="true" targettag="kirasecurity" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="true" targetmoduletags="crewmodule" allowinplayerview="false" _npos="7230.6016,2977.2463" />
                                                       <NPCFollowAction npctag="kirasecurity" targettag="kira" follow="true" _npos="7696.4805,3010.319" />
                                                       <ConversationAction text="You take a radio device from the unconscious officer and call for help. It does not take long for a security officer to rush over to the scene." targettag="triggereventplayer" _npos="8210.481,3112.2922">
                                                         <Option text="Continue.">
@@ -1152,7 +1149,7 @@
                                             <Failure>
                                               <TagAction criteria="player" tag="player" continueifnotargetsfound="false" _npos="106.45703,-164.17828" />
                                               <TagAction criteria="itemtag:chair" tag="chair" requiredmoduletag="crewmodule" _npos="513.98804,-163.10767" />
-                                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" targetmoduletags="crewmodule,seccrewmodule" _npos="902.63354,-224.23627" />
+                                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="sadashikira1" lootingisstealing="true" targettag="kira" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" targetmoduletags="crewmodule" _npos="902.63354,-224.23627" />
                                               <NPCOperateItemAction npctag="kira" targettag="chair" operate="true" _npos="1313.2019,-219.17578" />
                                               <SetDataAction value="true" identifier="kiraintro" _npos="1709.3209,-299.53766" />
                                               <Label name="restart" _npos="2259.9272,-395.34943" />
@@ -1239,9 +1236,9 @@
                                                                         <Option text="“Well, good luck with your endeavors, I will take my leave.”">
                                                                           <ConversationAction text="After bidding farewell, the officer returns to her drink. Yet, just as you depart, a clown inexplicably approaches the former commissar, pestering her with a toy hammer. It's hard not to feel sympathy for the officer, who seems unable to catch a break from the constant disruptions." targettag="triggereventplayer" _npos="9041.247,-1670.4116">
                                                                             <Option text="Leave." endconversation="true">
-                                                                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpc1" spawnlocation="Outpost" allowinplayerview="false" _npos="9566.976,-1569.8213" />
+                                                                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="kiraclown" lootingisstealing="true" targettag="clownkiranpc1" spawnlocation="Outpost" targetmoduletags="crewmodule" allowinplayerview="false" _npos="9566.976,-1569.8213" />
                                                                               <SpawnAction lootingisstealing="true" itemidentifier="toyhammer" targetinventory="clownkiranpc1" _npos="10009.918,-1544.2675" />
-                                                                              <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" witnessreaction="None" npctag="clownkiranpc1" enemytag="kira" cooldown="999" _npos="10448.874,-1425.3921" />
+                                                                              <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="None" npctag="clownkiranpc1" enemytag="kira" cooldown="999" _npos="10448.874,-1425.3921" />
                                                                               <ClearTagAction tag="triggereventplayer" _npos="10832.752,-1365.1398" />
                                                                               <NPCWaitAction npctag="kira" wait="false" _npos="11214.999,-1318.7703" />
                                                                               <SetDataAction value="true" identifier="kiraclownmoment1" _npos="11658.025,-1270.9535" />
