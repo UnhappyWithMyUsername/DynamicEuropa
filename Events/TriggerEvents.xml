@@ -1076,8 +1076,16 @@
                     <Success>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.coalition.highrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                          <GoTo name="accepted" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                              <GoTo name="accepted" />
+                            </Option>
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                              <GoTo name="acceptednobackup" />
+                            </Option>
+                          </ConversationAction>
                         </Option>
                         <Option text="eventtext.gettakeovermission.option.decline">
                           <ConversationAction targettag="player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1088,8 +1096,16 @@
                     <Failure>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.coalition.medrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                          <GoTo name="accepted" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                              <GoTo name="accepted" />
+                            </Option>
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                              <GoTo name="acceptednobackup" />
+                            </Option>
+                          </ConversationAction>
                         </Option>
                         <Option text="eventtext.gettakeovermission.option.decline">
                           <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1102,8 +1118,16 @@
                 <Failure>
                   <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.coalition.lowrep.askingforhelp">
                     <Option text="eventtext.gettakeovermission.option.accept">
-                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                      <GoTo name="accepted" />
+                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                        <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                          <GoTo name="accepted" />
+                        </Option>
+                        <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                          <GoTo name="acceptednobackup" />
+                        </Option>
+                      </ConversationAction>
                     </Option>
                     <Option text="eventtext.gettakeovermission.option.decline">
                       <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1142,6 +1166,9 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <Label name="acceptednobackup" />
+      <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" />
+      <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
     </ScriptedEvent>
     <!--GET COALITION-OUTPOST TAKEOVER MISSION | Triggered on separatist sergeant character in OutpostNpcs.xml-->
     <ScriptedEvent identifier="getseparatisttakeovermission">
@@ -1161,8 +1188,16 @@
                     <Success>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.separatists.highrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                          <GoTo name="accepted" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                              <GoTo name="accepted" />
+                            </Option>
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                              <GoTo name="acceptednobackup" />
+                            </Option>
+                          </ConversationAction>
                         </Option>
                         <Option text="eventtext.gettakeovermission.option.decline">
                           <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1173,8 +1208,16 @@
                     <Failure>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.separatists.medrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                          <GoTo name="accepted" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                              <GoTo name="accepted" />
+                            </Option>
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                              <GoTo name="acceptednobackup" />
+                            </Option>
+                          </ConversationAction>
                         </Option>
                         <Option text="eventtext.gettakeovermission.option.decline">
                           <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1187,8 +1230,16 @@
                 <Failure>
                   <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.separatists.lowrep.askingforhelp">
                     <Option text="eventtext.gettakeovermission.option.accept">
-                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false" />
-                      <GoTo name="accepted" />
+                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" waitforinteraction="false">
+                        <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer" waitforinteraction="false" />
+                          <GoTo name="accepted" />
+                        </Option>
+                        <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer" waitforinteraction="false" />
+                          <GoTo name="acceptednobackup" />
+                        </Option>
+                      </ConversationAction>
                     </Option>
                     <Option text="eventtext.gettakeovermission.option.decline">
                       <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
@@ -1227,6 +1278,9 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <Label name="acceptednobackup" />
+      <SetDataAction identifier="septakeoveractive" operation="Set" value="1" />
+      <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
     </ScriptedEvent>
     <!--TRIGGERED VIA SIGNAL LOCATOR IF A WRECK IS FOUND TO ALERT YOU-->
     <ScriptedEvent identifier="de-triggerevents-wreck">
