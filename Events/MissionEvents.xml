@@ -573,10 +573,11 @@
         <Conditional isdead="True"/>
         <Success>
           <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
+          <ModifyLocationAction faction="Coalition" />
+          <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" />
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
-          <ModifyLocationAction faction="Separatists" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
           <LayerAction layer="coalition" enabled="true" />
           <LayerAction layer="separatists" enabled="false" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
@@ -641,10 +642,11 @@
         <Conditional isdead="True"/>
         <Success>
           <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="Set" value="1" />
+          <ModifyLocationAction faction="Separatists" />
+          <SetDataAction identifier="septakeoveractive" operation="Set" value="0" />
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="retreat" />
-          <ModifyLocationAction faction="Separatists" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
           <LayerAction layer="separatists" enabled="true" />
           <LayerAction layer="coalition" enabled="false" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
