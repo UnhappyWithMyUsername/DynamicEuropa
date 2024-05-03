@@ -293,9 +293,48 @@
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
       <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <!-- 4/5 chance to delete the ore node -->
+      <!-- 1/5 chance to unlock the ore node -->
+      <StatusEffectAction targettag="orenode">
+        <StatusEffect target="This" spawnitemrandomly="true">
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="unlockplantnodes" commonness="100">
+      <WaitAction time="2" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- 3/4 chance to delete the ore node -->
       <!-- 1/4 chance to unlock the ore node -->
-      <StatusEffectAction targettag="orenode">
+      <StatusEffectAction targettag="plantnode">
+        <StatusEffect target="This" spawnitemrandomly="true">
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="unlockplantnodeslair" commonness="100">
+      <WaitAction time="2" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <!-- 3/4 chance to delete the plant node -->
+      <!-- 1/4 chance to unlock the plant node -->
+      <StatusEffectAction targettag="plantnode">
         <StatusEffect target="This" spawnitemrandomly="true">
           <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
           <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
