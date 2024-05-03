@@ -1164,11 +1164,16 @@
             </Success>
             <Failure></Failure>
           </CheckDataAction>
+          <CheckDataAction identifier="preventtrigger" value="eq 1">
+            <Success>
+              <Label name="acceptednobackup" />
+              <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" />
+              <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
+            </Success>
+            <Failure></Failure>
+          </CheckDataAction>
         </Failure>
       </CheckDataAction>
-      <Label name="acceptednobackup" />
-      <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" />
-      <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
     </ScriptedEvent>
     <!--GET COALITION-OUTPOST TAKEOVER MISSION | Triggered on separatist sergeant character in OutpostNpcs.xml-->
     <ScriptedEvent identifier="getseparatisttakeovermission">
@@ -1276,11 +1281,16 @@
             </Success>
             <Failure></Failure>
           </CheckDataAction>
+          <CheckDataAction identifier="preventtrigger" value="eq 1">
+            <Success>
+              <Label name="acceptednobackup" />
+              <SetDataAction identifier="septakeoveractive" operation="Set" value="1" />
+              <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
+            </Success>
+            <Failure></Failure>
+          </CheckDataAction>
         </Failure>
       </CheckDataAction>
-      <Label name="acceptednobackup" />
-      <SetDataAction identifier="septakeoveractive" operation="Set" value="1" />
-      <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
     </ScriptedEvent>
     <!--TRIGGERED VIA SIGNAL LOCATOR IF A WRECK IS FOUND TO ALERT YOU-->
     <ScriptedEvent identifier="de-triggerevents-wreck">
