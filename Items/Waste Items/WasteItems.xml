@@ -64,77 +64,20 @@
       </ItemContainer>
     </Item>
     <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> <!-- UNUSED  --> 
-    <Herb name="Waste Antidote" identifier="larowastecure" category="Material" cargocontaineridentifier="chemicalcrate" Tags="smallitem,chem,medical,herbs" description="Experimental cure for Waste Infection. Could cause severe side effects if untrained." RequireAimToUse="True" useinhealthinterface="true" scale="0.3" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="wreckmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
-      <Price locationtype="Research" buyprice="300" />
-      <Price locationtype="Military" buyprice="600" />
-      <Price locationtype="City" buyprice="900" />
-      <Price locationtype="Outpost" buyprice="1200" />
-      <Price locationtype="Mine" buyprice="1900" />
-      <SuitableTreatment identifier="internaldamage" suitability="50" />
-      <SuitableTreatment identifier="blunttrauma" suitability="20" />
-      <SuitableTreatment identifier="lacerations" suitability="20" />
-      <SuitableTreatment identifier="bitewounds" suitability="20" />
-      <Fabricate suitablefabricators="medicalfabricator" requiredtime="160">
-        <RequiredSkill identifier="medical" level="25" />
-        <RequiredItem identifier="wasteblood" />
-        <RequiredItem identifier="stabilozine" />
-        <RequiredItem identifier="antibiotics" />
-      </Fabricate>
-      <Deconstruct time="20">
-        <Item identifier="stabilozine" copycondition="true" mincondition="0.1" />
-        <Item identifier="antibiotics" copycondition="true" mincondition="0.1" />
-      </Deconstruct>
-      <InventoryIcon texture="InventoryIconAtlas.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-      <Sprite texture="Herbs.png" sourcerect="0,0,63,115" depth="0.6" origin="0.5,0.5" />
+    <Herb hideinmenus="true" name="Waste Antidote" identifier="larowastecure" category="Material" cargocontaineridentifier="chemicalcrate" Tags="smallitem" description="Experimental cure for Waste Infection. Could cause severe side effects if untrained." RequireAimToUse="True" useinhealthinterface="true" scale="0.3" impactsoundtag="impact_metal_light">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.6" origin="0.5,0.5" />
       <Body width="60" height="110" density="20" />
       <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="5,0" handle1="-5,0" holdangle="10" reload="1.0">
-        <StatusEffect type="OnFailure" target="This" Condition="-100.0" disabledeltatime="true" />
-        <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
-        <RequiredSkill identifier="medical" level="70" />
-        <StatusEffect tags="medical" type="OnUse" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
-          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-          <ReduceAffliction identifier="damage" amount="3" />
-          <ReduceAffliction identifier="burn" amount="3" />
-          <Affliction identifier="wasteresistance" amount="30" />
-        </StatusEffect>
-        <StatusEffect tags="medical" type="OnFailure" target="UseTarget" multiplyafflictionsbymaxvitality="true" duration="10">
-          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-          <ReduceAffliction identifier="burn" amount="2" />
-          <ReduceAffliction identifier="damage" amount="2" />
-          <Affliction identifier="organdamage" amount="40" />
-          <Affliction identifier="bleeding" amount="40" />
-          <Affliction identifier="internaldamage" amount="10" />
-          <Affliction identifier="oxygenlow" amount="9" />
-          <Affliction identifier="wasteresistance" amount="2" />
-        </StatusEffect>
-        <!-- Remove the item when fully used -->
-        <StatusEffect type="OnBroken" target="This">
+        <StatusEffect type="Always" target="This">
           <Remove />
         </StatusEffect>
       </MeleeWeapon>
     </Herb>
-    <Item name="Waste Blood" identifier="wasteblood" category="Material" Tags="smallitem,chem,medical" canbepicked="true" description="A nasty green poison that can cause acid burns from the inside. Still haven't been classified throughly." useinhealthinterface="true" cargocontaineridentifier="chemicalcrate" scale="0.28" RequireAimToUse="True" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="storagecab" minamount="0" maxamount="1" spawnprobability="0.02" />
-      <Price baseprice="250" soldeverywhere="false">
-        <Price locationtype="research" multiplier="1.1" sold="true" />
-      </Price>
-      <InventoryIcon texture="CreatureLoot.png" sourcerect="0,0,50,101" origin="0.5,0.5" />
-      <Sprite texture="CreatureLoot.png" sourcerect="0,0,50,101" depth="0.6" origin="0.5,0.5" />
+    <Item hideinmenus="true" name="Waste Blood" identifier="wasteblood" category="Material" Tags="smallitem" canbepicked="true" description="A nasty green poison that can cause acid burns from the inside. Still haven't been classified throughly." useinhealthinterface="true" cargocontaineridentifier="chemicalcrate" scale="0.28" RequireAimToUse="True" impactsoundtag="impact_metal_light">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.6" origin="0.5,0.5" />
       <Body width="50" height="100" density="11" />
       <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
-        <RequiredSkill identifier="medical" level="40" />
-        <StatusEffect type="OnSuccess" target="This" Condition="-100.0" setvalue="true" />
-        <StatusEffect type="OnFailure" target="This" Condition="-100.0" setvalue="true" />
-        <StatusEffect type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true">
-          <Reduceaffliction identifier="bloodloss" strength="2.5" />
-        </StatusEffect>
-        <StatusEffect type="OnFailure" target="UseTarget">
-          <Conditional entitytype="eq Character" />
-          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
-        </StatusEffect>
-        <!-- Remove the item when fully used -->
-        <StatusEffect type="OnBroken" target="This">
+        <StatusEffect type="Always" target="This">
           <Remove />
         </StatusEffect>
       </MeleeWeapon>
