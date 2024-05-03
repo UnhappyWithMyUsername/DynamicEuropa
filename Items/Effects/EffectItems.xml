@@ -1,103 +1,141 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
-  <Item name="Triggered Effect - Water Leak (Large)" identifier="effect_trigger_leak_water_large" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/FlowMedium.ogg" range="1300" loop="true" />
-        <ParticleEmitter particle="leak_water_large" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="30" />
-      </StatusEffect>
-    </ItemComponent>
-    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
-    </ConnectionPanel>
-  </Item>
-  <Item name="Triggered Effect - Water Leak (Small)" identifier="effect_trigger_leak_water_small" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/FlowSmall.ogg" range="900" loop="true" />
-        <ParticleEmitter particle="leak_water_small" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="15" />
-      </StatusEffect>
-    </ItemComponent>
-    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
-    </ConnectionPanel>
-  </Item>
-  <Item name="Continuous Effect - Water Leak (Large)" identifier="effect_leak_water_large" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" color="0,150,255" />
-    <ItemComponent>
-      <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/FlowMedium.ogg" range="1300" loop="true" />
-        <ParticleEmitter particle="leak_water_large" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="30" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  <Item name="Continuous Effect - Water Leak (Small)" identifier="effect_leak_water_small" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/FlowSmall.ogg" range="900" loop="true" />
-        <ParticleEmitter particle="leak_water_small" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="15" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  <Item name="Triggered Effect - Short Circuit" identifier="effect_trigger_shortcircuit" tags="effect" scale="0.25" spritecolor="255,215,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/RewiringLoop.ogg" range="800" loop="true" />
-        <ParticleEmitter particle="shortcircuit" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
-      </StatusEffect>
-    </ItemComponent>
-    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
-    </ConnectionPanel>
-  </Item>
-  <Item name="Continuous Effect - Short Circuit" identifier="effect_shortcircuit" tags="effect" scale="0.25" spritecolor="255,215,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/RewiringLoop.ogg" range="800" loop="true" volume="0.5" />
-        <ParticleEmitter particle="shortcircuit" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  <Item name="Triggered Effect - Lava" identifier="effect_trigger_lava" tags="effect" scale="0.25" spritecolor="255,0,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/BlackSmoker.ogg" range="800" loop="true" />
-        <ParticleEmitter particle="lavamistfade" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
-      </StatusEffect>
-    </ItemComponent>
-    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
-    </ConnectionPanel>
-  </Item>
-  <Item name="Continuous Effect - Lava" identifier="effect_lava" tags="effect" scale="0.25" spritecolor="255,0,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
-    <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
-    <ItemComponent>
-      <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
-        <sound file="Content/Sounds/Water/BlackSmoker.ogg" range="800" loop="true" volume="0.5" />
-        <ParticleEmitter particle="lavamistfade" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
+  <Override>
+    <Item name="Triggered Effect - Water Leak (Large)" identifier="effect_trigger_leak_water_large" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/FlowMedium.ogg" range="1300" loop="true" />
+          <ParticleEmitter particle="leak_water_large" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="30" />
+        </StatusEffect>
+      </ItemComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+        <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+      </ConnectionPanel>
+    </Item>
+    <Item name="Triggered Effect - Water Leak (Small)" identifier="effect_trigger_leak_water_small" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/FlowSmall.ogg" range="900" loop="true" />
+          <ParticleEmitter particle="leak_water_small" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="15" />
+        </StatusEffect>
+      </ItemComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+        <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+      </ConnectionPanel>
+    </Item>
+    <Item name="Continuous Effect - Water Leak (Large)" identifier="effect_leak_water_large" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" color="0,150,255" />
+      <ItemComponent>
+        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/FlowMedium.ogg" range="1300" loop="true" />
+          <ParticleEmitter particle="leak_water_large" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="30" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Continuous Effect - Water Leak (Small)" identifier="effect_leak_water_small" tags="effect" scale="0.25" spritecolor="0,150,255,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/FlowSmall.ogg" range="900" loop="true" />
+          <ParticleEmitter particle="leak_water_small" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" particlespersecond="15" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Triggered Effect - Short Circuit" identifier="effect_trigger_shortcircuit" tags="effect" scale="0.25" spritecolor="255,215,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/RewiringLoop.ogg" range="800" loop="true" />
+          <ParticleEmitter particle="shortcircuit" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
+        </StatusEffect>
+      </ItemComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+        <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+      </ConnectionPanel>
+    </Item>
+    <Item name="Continuous Effect - Short Circuit" identifier="effect_shortcircuit" tags="effect" scale="0.25" spritecolor="255,215,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/RewiringLoop.ogg" range="800" loop="true" volume="0.5" />
+          <ParticleEmitter particle="shortcircuit" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="Triggered Effect - Lava" identifier="effect_trigger_lava" tags="effect" scale="0.25" spritecolor="255,0,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="OnActive" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/BlackSmoker.ogg" range="800" loop="true" />
+          <ParticleEmitter particle="lavamistfade" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
+        </StatusEffect>
+      </ItemComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+        <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+      </ConnectionPanel>
+    </Item>
+    <Item name="Continuous Effect - Lava" identifier="effect_lava" tags="effect" scale="0.25" spritecolor="255,0,0,255" health="100" hiddeningame="true" damagedbyrepairtools="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
+      <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" sourcerect="787,550,234,234" depth="0.001" origin="0.5,0.5" />
+      <ItemComponent>
+        <StatusEffect type="Always" target="This" stackable="false" disabledeltatime="true">
+          <sound file="Content/Sounds/Water/BlackSmoker.ogg" range="800" loop="true" volume="0.5" />
+          <ParticleEmitter particle="lavamistfade" anglemin="0" anglemax="0" velocitymin="0" velocitymax="0" particlespersecond="4" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <!-- EFFECT ITEMS -->
+    <Item name="" identifier="effect_none" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <!-- instantly remove the item when spawned -->
+        <StatusEffect type="Always" target="This" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="" identifier="effect_delete" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <!-- instantly remove the item when spawned -->
+        <StatusEffect type="Always" target="Parent" delay="0.1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" delay="0.1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="" identifier="effect_unlock" Category="Hidden" Tags="effect,unlock" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <!-- unlock the container, the item is contained in -->
+        <StatusEffect type="Always" target="Parent" noninteractable="false" setvalue="true" oneshot="true" />
+        <!-- remove the item when spawned -->
+        <StatusEffect type="Always" target="This" delay="1" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+  </Override>
 </Items>

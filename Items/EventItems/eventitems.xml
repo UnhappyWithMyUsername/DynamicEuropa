@@ -638,32 +638,6 @@
         </StatusEffect>-->
       </ItemComponent>
     </Item>
-    <!-- EFFECT ITEMS -->
-    <Item name="" identifier="effect_delete" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
-      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
-      <Body radius="1" density="10" />
-      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
-        <!-- instantly remove the item when spawned -->
-        <StatusEffect type="Always" target="Parent" delay="0.1" oneshot="true">
-          <Remove />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" delay="0.1" oneshot="true">
-          <Remove />
-        </StatusEffect>
-      </Holdable>
-    </Item>
-    <Item name="" identifier="effect_unlock" Category="Hidden" Tags="effect,unlock" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
-      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
-      <Body radius="1" density="10" />
-      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
-        <!-- unlock the container, the item is contained in -->
-        <StatusEffect type="Always" target="Parent" noninteractable="false" setvalue="true" oneshot="true" />
-        <!-- remove the item when spawned -->
-        <StatusEffect type="Always" target="This" delay="1" oneshot="true">
-          <Remove />
-        </StatusEffect>
-      </Holdable>
-    </Item>
     
      <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
     <Item name="Patrol spawner" nameidentifier="patrolspawner" identifier="patrolspawner" Tags="patrolspawner" scale="1.0" noninteractable="false" hideinmenus="false" category="Misc">
