@@ -222,7 +222,8 @@
       <TagAction criteria="itemtag:mineentrance" tag="mineentrance" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerEventAction identifier="checkminepayment" />
-      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <!-- uses triggeraction as workaround for MP bug, otherwise nothing happens -->
+      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="1000" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
       <!-- 2/3 chance to delete the ore node -->
       <!-- 1/3 chance to unlock the ore node -->
@@ -239,7 +240,7 @@
       <Label name="restart" />
       <TriggerAction target1tag="player" target2tag="mineterminal" applytotarget1="uon_player" waitforinteraction="true" />
       <ConversationAction targettag="uon_player" text="eventtext.mine.terminal.interact" eventsprite="mines" dialogtype="small">
-        <Option text="EventText.mine.terminal.interact.pay">
+        <Option text="EventText.option.pay">
           <CheckMoneyAction targettag="uon_player" amount="250">
             <Success>
               <MoneyAction targettag="uon_player" amount="-250" />
