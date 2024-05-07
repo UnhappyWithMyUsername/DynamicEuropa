@@ -714,6 +714,73 @@
 <!--     <ScriptedEvent identifier="laircrawlersoutside">
       <SpawnAction speciesname="mudraptor" amount="3" spawntype="nearmainsub" />
     </ScriptedEvent> -->
+    
+    <ScriptedEvent identifier="smugglingquest">
+      <SetDataAction identifier="smugglingcomplete" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="bot" tag="bot" submarinetype="Outpost" />
+      <TagAction criteria="itemidentifier:idcard" tag="stolenidcard" submarinetype="Outpost" ChoosePercentage="100" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="smuggler" spawnlocation="Outpost" />
+      <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
+      <ConversationAction targettag="heyyouplayer" text="Hey you. Over here." endeventifinterrupted="false" dialogtype="Small" endconversation="true" />
+      <ConversationAction targettag="player" speakertag="smuggler" text="You look like someone who travels around these parts. Can I interest you in a most lucrative opportunity?" endeventifinterrupted="false" dialogtype="Small" >
+        <Option text="Sure.">
+          <ConversationAction targettag="player" text="I've got clients all over Europa who would buy anything: supplies, medicine... And here's the good part: you won't have to buy the merchandise." endeventifinterrupted="false" dialogtype="Small" />
+          <Label name="talktonpc" />
+          <ConversationAction targettag="player" speakertag="smuggler" invokertag="talker_player" text="Grab whatever you can, as long as security's not looking around. I'll scrub the tags off any stolen item, then resell it to those guys, and they'll sell to some other folks. It's a circular economy! Are you in?" endeventifinterrupted="false" dialogtype="Small" >
+            <Option text="Fishy business is my specialty.">
+              <ConversationAction text="Good. Get me those IDs, I'll wait here" endeventifinterrupted="false" dialogtype="Small" endconversation="true"/>
+              <SpawnAction itemidentifier="traitorduffelbag" targetinventory="talker_player" targettag="stealingbag" />
+              <StatusEffectAction targettag="stealingbag" >
+                <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
+              </StatusEffectAction>      
+              <CheckItemAction targettag="bot" itemidentifiers="idcard" ApplyTagToItem="stolenidcard" />
+            </Option>
+            <Option text="No way.">            
+              <Goto name="end" />
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="Don't care">
+          <Goto name="talktonpc" />
+        </Option>
+      </ConversationAction>
+      <Label name="retry" />
+      <Waitaction time="1" />
+      <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="triggerer_player" waitforinteraction="true" />
+      <CheckItemAction targettag="triggerer_player" itemtags="stealingbag" >
+        <Success>
+          <CheckItemAction targettag="stealingbag" itemtags="stolenidcard" amount="3" >
+            <Success>
+              <SetDataAction identifier="smugglingcomplete" value="1" />
+              <StatusEffectAction targettag="stolenidcard">
+                <StatusEffect target="This" >
+                  <Remove />
+                </StatusEffect>
+              </StatusEffectAction>
+              <StatusEffectAction targettag="stealingbag">
+                <StatusEffect target="This" >
+                  <Remove />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ReputationAction increase="2" identifier="bandits" targettype="Faction" />
+              <MoneyAction amount="350" targettag="triggerer_player" />
+              <ConversationAction targettag="player" text="Perfect. I'll do my thing. Pleasure doing business. We never spoke." dialogtype="Small" endconversation="true" />
+            </Success>
+            <Failure>
+              <Goto name="nocards" />
+            </Failure>
+          </CheckItemAction>
+        </Success>
+        <Failure>
+          <Label name="nocards" />
+          <ConversationAction text="You're kidding me? Come back when you have it." targettag="player" endconversation="true" />
+          <ClearTagAction tag="triggerer_player" />
+          <Goto name="retry" />
+        </Failure>
+      </CheckItemAction>
+      <Label name="end" />
+    </ScriptedEvent>
 
   </EventPrefabs>
 </Randomevents>
