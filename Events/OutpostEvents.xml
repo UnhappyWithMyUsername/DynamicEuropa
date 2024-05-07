@@ -1390,8 +1390,10 @@
       <Waitaction time="3" />
       <SetDataAction identifier="smugglingcomplete" value="0" />
       <TagAction criteria="player" tag="player" />
+      <!-- tags the ID cards on bots -->
       <TagAction criteria="bot" tag="outpostbot" submarinetype="Outpost" />
       <TagAction criteria="itemidentifier:idcard" tag="stolenidcard" submarinetype="Outpost" ChoosePercentage="100" />
+      <CheckItemAction targettag="outpostbot" itemidentifiers="idcard" ApplyTagToItem="stolenidcard" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" />
       <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
       <ConversationAction targettag="heyyouplayer" text="Hey you. Over here." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
@@ -1399,7 +1401,7 @@
       <ConversationAction targettag="player" speakertag="smuggler" invokertag="talker_player" text="You look like someone who travels around these parts. Can I interest you in a most lucrative opportunity?" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette" >
         <Option text="Sure.">
           <ConversationAction targettag="player" text="See, there's a market for... identities. Nowadays everything is logged on your ID card. Your data, biometrics, banking account..." endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" />
-          <Option text="Continue.">
+          <Option text="eventtext.generic.continue">
           <ConversationAction targettag="player" text="Simply put, I get my hands on ID cards, scan them and make copies for the black market. I don't want to get seen, so if you can find me a bunch of fresh ID cards off this outpost, I'll pay you. Interested?" endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
             <Option text="Fishy business is my specialty.">
               <ConversationAction text="Good. Get me 3 ID cards, put them in that bag, and come to me." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Duffelbag" />
@@ -1408,14 +1410,13 @@
               <StatusEffectAction targettag="stealingbag" >
                 <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
               </StatusEffectAction> 
-              <CheckItemAction targettag="outpostbot" itemidentifiers="idcard" ApplyTagToItem="stolenidcard" />
             </Option>
-            <Option text="No way.">            
+            <Option text="eventtext.generic.refuse">            
               <Goto name="end" />
             </Option>
           </ConversationAction>
         </Option>
-        <Option text="Ignore">        
+        <Option text="eventtext.generic.ignore">        
           <ClearTagAction tag="talker_player" />
           <Goto name="talktonpc" />
         </Option>
