@@ -1392,26 +1392,28 @@
       <TagAction criteria="player" tag="player" />
       <!-- tags the ID cards on bots -->
       <TagAction criteria="bot" tag="outpostbot" submarinetype="Outpost" />
-      <TagAction criteria="itemidentifier:idcard" tag="stolenidcard" submarinetype="Outpost" ChoosePercentage="100" />
-      <CheckItemAction targettag="outpostbot" itemidentifiers="idcard" ApplyTagToItem="stolenidcard" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" />
+      <TagAction criteria="itemtag:clothing" tag="stolenclothes" submarinetype="Outpost" />
+      <CheckItemAction targettag="outpostbot" itemidentifiers="idcard" ApplyTagToItem="stolenclothes" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" targetmoduletags="adminmodule" />
       <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
       <ConversationAction targettag="heyyouplayer" text="Hey you. Over here." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
       <Label name="talktonpc" />
-      <ConversationAction targettag="player" speakertag="smuggler" invokertag="talker_player" text="You look like someone who travels around these parts. Can I interest you in a most lucrative opportunity?" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette" >
+      <ConversationAction targettag="player" speakertag="smuggler" invokertag="talker_player" text="I've heard of you. And I know you take odd jobs. Can I interest you in a most lucrative opportunity?" endeventifinterrupted="false" eventsprite="Silhouette" >
         <Option text="Sure.">
-          <ConversationAction targettag="player" text="See, there's a market for... identities. Nowadays everything is logged on your ID card. Your data, biometrics, banking account..." endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" />
-          <ConversationAction targettag="player" text="Simply put, I get my hands on ID cards, scan them and make copies for the black market. I don't want to get seen, so if you can find me a bunch of fresh ID cards off this outpost, I'll pay you. Interested?" endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
-            <Option text="Fishy business is my specialty.">
-              <ConversationAction text="Good. Get me 3 ID cards, put them in that bag, and come to me." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Duffelbag" />
-              <NPCChangeTeamAction npctag="smuggler" teamtag="Team1" />
-              <SpawnAction itemidentifier="traitorduffelbag" targetinventory="talker_player" targettag="stealingbag" />
-              <StatusEffectAction targettag="stealingbag" >
-                <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
-              </StatusEffectAction> 
-            </Option>
-            <Option text="eventtext.generic.refuse">            
-              <Goto name="end" />
+          <ConversationAction targettag="player" text="See, people come and go around these outposts, but nobody knows when and where. That's captain confidentiality." endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
+            <Option text="eventtext.generic.continue" >
+              <ConversationAction targettag="player" text="Well me and my partners came up with a little system. We plant tags in the clothes, and with a simple scanner in the airlock, we know exactly who comes and leaves. If we scan that tag in another outpost, we know that person has just moved. We then pass the information around to whoever needs it. Separatist dissidents, coalition bigwigs, juicy merchants... you name em, we find em. And I could use some help." endeventifinterrupted="false" eventsprite="JacovSubra1" >
+                <Option text="As long as you pay.">
+                  <ConversationAction text="Grab a bunch of clothes from the lockers, and bring them to me in that bag. I'll do my thing and put them right back in. I can't be seen rummaging around the crew quarters, so you're up to the job." endeventifinterrupted="false" endconversation="true" eventsprite="Duffelbag" />
+                  <SpawnAction itemidentifier="traitorduffelbag" targetinventory="talker_player" targettag="stealingbag" />
+                  <StatusEffectAction targettag="stealingbag" >
+                    <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
+                  </StatusEffectAction> 
+                </Option>
+                <Option text="eventtext.generic.refuse">            
+                  <Goto name="end" />
+                </Option>
+              </ConversationAction>
             </Option>
           </ConversationAction>
         </Option>
@@ -1426,10 +1428,10 @@
       <!-- double check: if player carries bag, and if bad has ID cards -->
       <CheckItemAction targettag="triggerer_player" itemtags="stealingbag" >
         <Success>
-          <CheckItemAction targettag="stealingbag" itemtags="stolenidcard" amount="3" >
+          <CheckItemAction targettag="stealingbag" itemtags="stolenclothes" amount="5" ApplyTagToItem="removeclothes">
             <Success>
               <SetDataAction identifier="smugglingcomplete" value="1" />
-              <StatusEffectAction targettag="stolenidcard">
+              <StatusEffectAction targettag="removeclothes">
                 <StatusEffect target="This" >
                   <Remove />
                 </StatusEffect>
@@ -1450,7 +1452,7 @@
         </Success>
         <Failure>
           <Label name="nocards" />
-          <ConversationAction text="Where are the ID cards? Come back when you have 'em." targettag="player" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction text="Not enough clothes. Come back when you got more." targettag="player" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
           <ClearTagAction tag="triggerer_player" />
           <Goto name="retry" />
         </Failure>
