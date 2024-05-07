@@ -1385,6 +1385,77 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="smugglingquest">
+      <!-- waits until other events are spawned; might not tag ID cards properly otherwise -->
+      <Waitaction time="3" />
+      <SetDataAction identifier="smugglingcomplete" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="bot" tag="bot" submarinetype="Outpost" />
+      <TagAction criteria="itemidentifier:idcard" tag="stolenidcard" submarinetype="Outpost" ChoosePercentage="100" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="smuggler" spawnlocation="Outpost" />
+      <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
+      <ConversationAction targettag="heyyouplayer" text="Hey you. Over here." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+      <Label name="talktonpc" />
+      <ConversationAction targettag="player" speakertag="smuggler" invokertag="talker_player" text="You look like someone who travels around these parts. Can I interest you in a most lucrative opportunity?" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette" >
+        <Option text="Sure.">
+          <ConversationAction targettag="player" text="See, there's a market for... identities. Nowadays everything is logged on your ID card. Your data, biometrics, banking account..." endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" />
+          <ConversationAction targettag="player" text="Simply put, I get my hands on ID cards, scan them and make copies for the black market. I don't want to get seen, so if you can find me a bunch of fresh ID cards off this outpost, I'll pay you. Interested?" endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
+            <Option text="Fishy business is my specialty.">
+              <ConversationAction text="Good. Get me 3 ID cards, put them in that bag, and come to me." endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Duffelbag" />
+              <SpawnAction itemidentifier="traitorduffelbag" targetinventory="talker_player" targettag="stealingbag" />
+              <StatusEffectAction targettag="stealingbag" >
+                <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
+              </StatusEffectAction>      
+              <CheckItemAction targettag="bot" itemidentifiers="idcard" ApplyTagToItem="stolenidcard" />
+            </Option>
+            <Option text="No way.">            
+              <Goto name="end" />
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="Ignore">        
+          <ClearTagAction tag="talker_player" />
+          <Goto name="talktonpc" />
+        </Option>
+      </ConversationAction>
+      <Label name="retry" />
+      <Waitaction time="1" />
+      <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="triggerer_player" waitforinteraction="true" />
+      <!-- double check: if player carries bag, and if bad has ID cards -->
+      <CheckItemAction targettag="triggerer_player" itemtags="stealingbag" >
+        <Success>
+          <CheckItemAction targettag="stealingbag" itemtags="stolenidcard" amount="3" >
+            <Success>
+              <SetDataAction identifier="smugglingcomplete" value="1" />
+              <StatusEffectAction targettag="stolenidcard">
+                <StatusEffect target="This" >
+                  <Remove />
+                </StatusEffect>
+              </StatusEffectAction>
+              <StatusEffectAction targettag="stealingbag">
+                <StatusEffect target="This" >
+                  <Remove />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
+              <MoneyAction amount="600" targettag="triggerer_player" />
+              <ConversationAction targettag="player" text="Perfect. I'll do my thing. Pleasure doing business. We never spoke." dialogtype="Small" endconversation="true" />
+            </Success>
+            <Failure>
+              <Goto name="nocards" />
+            </Failure>
+          </CheckItemAction>
+        </Success>
+        <Failure>
+          <Label name="nocards" />
+          <ConversationAction text="Where are the ID cards? Come back when you have 'em." targettag="player" endconversation="true" />
+          <ClearTagAction tag="triggerer_player" />
+          <Goto name="retry" />
+        </Failure>
+      </CheckItemAction>
+      <Label name="end" />
+    </ScriptedEvent>
+    
   </EventPrefabs>
 </Randomevents>
 </Override>
