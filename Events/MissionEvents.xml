@@ -222,7 +222,17 @@
     
     <ScriptedEvent identifier="pirateoutpostevent">
       <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="securitynpcpirate" targettag="dockingguard" spawnlocation="Outpost" targetmoduletags="airlock" />
+      <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
       <NPCWaitAction npctag="dockingguard" wait="true" />
+      <CheckReputationAction targettype="faction" identifier="bandits" condition="gte -12">
+        <!-- Must have over -12 pirate rep, if under pirates are hostile and event doesnt trigger -->
+        <Success>
+          <!-- continue -->
+        </Success>
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 60">
         <!-- Pirates turn hostile if too much coalition rep -->
         <Success>
@@ -250,7 +260,6 @@
         <Failure>
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="guard" SpawnPointTag="guard" />
           <NPCWaitAction NPCTag="guard" Wait="True" />
-          <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
           <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
           <TriggerAction target1tag="player" target2tag="securitynpcpirate" applytotarget1="triggerer_player" applytotarget2="triggered_npc" radius="200" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
           <NPCWaitAction NPCTag="guard" Wait="False" />
@@ -507,6 +516,7 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="end" />
     </ScriptedEvent>
         
     <ScriptedEvent identifier="piratealarm">
