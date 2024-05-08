@@ -700,9 +700,23 @@
           
     <ScriptedEvent identifier="lairbombspawn">
       <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
+      <EventObjectiveAction type="add" identifier="eventtext.destroylair.reachheart" />
+      <EventObjectiveAction type="add" identifier="eventtext.destroylair.plantbomb" />
       <OnRoundEndAction>
         <RemoveItemAction targettag="lairbomb" Amount="100" />
       </OnRoundEndAction>
+      <TriggerAction target1tag="lairbomb" target2tag="laircore" radius="500" />
+      <EventObjectiveAction type="completeandremove" identifier="eventtext.destroylair.reachheart" />
+      <Label name="checkarming" /> 
+      <WaitAction time="1" />
+      <CheckConditionalAction targettag="lairbomb" targetitemcomponent="LightComponent" IsOn="true">
+        <Success>
+          <EventObjectiveAction type="completeandremove" identifier="eventtext.destroylair.plantbomb" />
+        </Success>
+        <Failure>
+          <Goto name="checkarming" />                  
+        </Failure>
+      </CheckConditionalAction>
     </ScriptedEvent>
     
     <!-- TODO:  remove this if you can just trigger statuseffects in the mission itself -->
