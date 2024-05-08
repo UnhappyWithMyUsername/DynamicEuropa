@@ -1399,7 +1399,13 @@
           <!-- tags the ID cards on bots -->
           <TagAction criteria="bot" tag="outpostbot" submarinetype="Outpost" />
           <TagAction criteria="itemtag:clothing" tag="stolenclothes" submarinetype="Outpost" />
-          <CheckItemAction targettag="outpostbot" itemidentifiers="idcard" ApplyTagToItem="stolenclothes" />
+          <TagAction criteria="itemidentifier:crateshelf" tag="unlockcrateshelf" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+          <StatusEffectAction targettag="unlockcrateshelf" >
+            <StatusEffect target="This" noninteractable="false" setvalue="true" />
+          </StatusEffectAction>
+          <StatusEffectAction targettag="stolenclothes" >
+            <StatusEffect target="This" noninteractable="false" setvalue="true" />
+          </StatusEffectAction>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" targetmoduletags="adminmodule" />
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
@@ -1413,7 +1419,7 @@
                       <ConversationAction text="eventtext.pantytheft.grabclothes" endeventifinterrupted="false" endconversation="true" eventsprite="Duffelbag" />
                       <SpawnAction itemidentifier="traitorduffelbag" targetinventory="talker_player" targettag="stealingbag" />
                       <StatusEffectAction targettag="stealingbag" >
-                        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" />
+                        <StatusEffect target="This" delay="30" SpawnedInCurrentOutpost="true" AllowStealing="false" stackable="false" setvalue="true" />
                       </StatusEffectAction> 
                     </Option>
                     <Option text="eventtext.generic.refuse">            
