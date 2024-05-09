@@ -1372,10 +1372,8 @@
                                                                               <ConversationAction text="A traitor is a traitor… There is no point chatting with them. The captain and his commissar notice your hostility and prepare to defend themselves." targettag="triggereventplayer1" _npos="20987.666,-4824.4146">
                                                                                 <Option text="Fight." endconversation="true">
                                                                                   <NPCWaitAction npctag="smith" wait="false" _npos="21466.658,-4784.866" />
-                                                                                  <NPCChangeTeamAction npctag="smith" teamid="None" _npos="21952.82,-4824.3203" />
-                                                                                  <NPCChangeTeamAction npctag="commissar" teamid="None" _npos="22383.992,-4869.75" />
                                                                                   <Label name="attackcap1" _npos="22861.375,-5003.48" />
-                                                                                  <CombatAction combatmode="Offensive" isinstigator="false" guardreaction="retreat" witnessreaction="retreat" npctag="groupattack" enemytag="triggereventplayer1" _npos="23349.5,-5137.617" />
+                                                                                  <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="retreat" witnessreaction="retreat" npctag="groupattack" enemytag="triggereventplayer1" _npos="23349.5,-5137.617" />
                                                                                   <CheckDataAction identifier="kumokill" condition="eq 2" _npos="23748.49,-5157.394">
                                                                                     <Success>
                                                                                       <Label name="successfulcaptainkillmission" _npos="23353.533,-5453.124" />
@@ -1438,6 +1436,10 @@
                                                                                           <Conditional vitality="lt 0" />
                                                                                           <Conditional isdead="eq false" />
                                                                                           <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
+                                                                                        </StatusEffect>
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
                                                                                           <TriggerEvent identifier="kumokill" />
                                                                                         </StatusEffect>
                                                                                       </StatusEffectAction>
@@ -1446,6 +1448,10 @@
                                                                                           <Conditional vitality="lt 0" />
                                                                                           <Conditional isdead="eq false" />
                                                                                           <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
+                                                                                        </StatusEffect>
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
                                                                                           <TriggerEvent identifier="kumokill" />
                                                                                         </StatusEffect>
                                                                                       </StatusEffectAction>
@@ -1454,6 +1460,10 @@
                                                                                           <Conditional vitality="lt 0" />
                                                                                           <Conditional isdead="eq false" />
                                                                                           <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
+                                                                                        </StatusEffect>
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
                                                                                           <TriggerEvent identifier="kumodeath" />
                                                                                         </StatusEffect>
                                                                                       </StatusEffectAction>
@@ -1480,10 +1490,8 @@
                                                                                                       <ConversationAction text="You prepare yourself to murder them. The surprised party has no choice but to defend themselves." targettag="triggereventplayer1" _npos="24578.396,-4487.8076">
                                                                                                         <Option text="Fight." endconversation="true">
                                                                                                           <NPCWaitAction npctag="smith" wait="false" _npos="25078.693,-4423.7695" />
-                                                                                                          <NPCChangeTeamAction npctag="smith" teamid="None" _npos="25510.346,-4419.3105" />
-                                                                                                          <NPCChangeTeamAction npctag="commissar" teamid="None" _npos="25987.736,-4416.121" />
                                                                                                           <Label name="attackcap2" _npos="26508.574,-4419.2563" />
-                                                                                                          <CombatAction combatmode="Offensive" isinstigator="false" guardreaction="retreat" witnessreaction="retreat" npctag="groupattack" enemytag="triggereventplayer1" _npos="26901.227,-4332.8555" />
+                                                                                                          <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="retreat" witnessreaction="retreat" npctag="groupattack" enemytag="triggereventplayer1" _npos="26901.227,-4332.8555" />
                                                                                                           <CheckDataAction identifier="kumokill" condition="eq 2" _npos="27393.014,-4348.999">
                                                                                                             <Success>
                                                                                                               <GoTo name="successfulcaptainkillmission" _npos="28026.592,-4513.809" />
@@ -1495,6 +1503,10 @@
                                                                                                                   <Conditional vitality="lt 0" />
                                                                                                                   <Conditional isdead="eq false" />
                                                                                                                   <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                </StatusEffect>
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
                                                                                                                   <TriggerEvent identifier="kumokill" />
                                                                                                                 </StatusEffect>
                                                                                                               </StatusEffectAction>
@@ -1503,6 +1515,10 @@
                                                                                                                   <Conditional vitality="lt 0" />
                                                                                                                   <Conditional isdead="eq false" />
                                                                                                                   <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                </StatusEffect>
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
                                                                                                                   <TriggerEvent identifier="kumokill" />
                                                                                                                 </StatusEffect>
                                                                                                               </StatusEffectAction>
@@ -1511,6 +1527,10 @@
                                                                                                                   <Conditional vitality="lt 0" />
                                                                                                                   <Conditional isdead="eq false" />
                                                                                                                   <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                </StatusEffect>
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
                                                                                                                   <TriggerEvent identifier="kumodeath" />
                                                                                                                 </StatusEffect>
                                                                                                               </StatusEffectAction>
@@ -1556,6 +1576,7 @@
                                                                                                                               <CheckDataAction identifier="kumodead" condition="eq 1">
                                                                                                                                 <Success>
                                                                                                                                   <NPCWaitAction npctag="smith" wait="true" _npos="33434.22,-2724.4988" />
+                                                                                                                                  <NPCFollowAction npctag="commissar" targettag="smith" follow="true" abandononreset="false" />
                                                                                                                                   <TriggerAction target1tag="smith" target2tag="triggereventplayer" radius="225" disableiftargetincapacitated="true" waitforinteraction="false" _npos="34098.41,-2791.6494" />
                                                                                                                                   <ConversationAction text="“Once again, thank you for informing me about this. A shame such a potential person wasted her life for something so petty.&quot; The captain remarks." targettag="triggereventplayer" dialogtype="Small" _npos="34680.91,-2834.7522" />
                                                                                                                                   <NPCWaitAction npctag="smith" wait="false" _npos="35263.77,-2829.9856" />
@@ -1568,6 +1589,10 @@
                                                                                                                                       <Conditional vitality="lt 0" />
                                                                                                                                       <Conditional isdead="eq false" />
                                                                                                                                       <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                                    </StatusEffect>
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
                                                                                                                                       <TriggerEvent identifier="kumokill" />
                                                                                                                                     </StatusEffect>
                                                                                                                                   </StatusEffectAction>
@@ -1576,6 +1601,10 @@
                                                                                                                                       <Conditional vitality="lt 0" />
                                                                                                                                       <Conditional isdead="eq false" />
                                                                                                                                       <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                                    </StatusEffect>
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
                                                                                                                                       <TriggerEvent identifier="kumokill" />
                                                                                                                                     </StatusEffect>
                                                                                                                                   </StatusEffectAction>
@@ -1584,6 +1613,10 @@
                                                                                                                                       <Conditional vitality="lt 0" />
                                                                                                                                       <Conditional isdead="eq false" />
                                                                                                                                       <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                                    </StatusEffect>
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
                                                                                                                                       <TriggerEvent identifier="kumodeath" />
                                                                                                                                     </StatusEffect>
                                                                                                                                   </StatusEffectAction>
@@ -1711,7 +1744,7 @@
                               <CheckDataAction identifier="joksterintroduction3" condition="eq true" _npos="-417.36182,4140.3545">
                                 <Failure>
                                   <TagAction ContinueIfNoTargetsFound="true" criteria="player" tag="player" _npos="6645.4834,9772.454" />
-                                  <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="crewmodule" ignorebyai="true" _npos="7282.338,9769.622" />
+                                  <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="adminmodule" ignorebyai="true" _npos="7282.338,9769.622" />
                                   <SetDataAction value="true" identifier="joksterintroduction3" _npos="7716.2134,9842.89" />
                                   <Label name="restart1" _npos="8102.1133,9857.055" />
                                   <StatusEffectAction targettag="suscrate">
@@ -1750,7 +1783,7 @@
                                                                       <AfflictionAction affliction="paralysis" strength="100" targettag="noveva" _npos="18583.426,9690.263" />
                                                                       <AfflictionAction affliction="stun" strength="10" targettag="noveva" />
                                                                       <StatusEffectAction targettag="noveva">
-                                                                        <StatusEffect>
+                                                                        <StatusEffect target="This">
                                                                           <Sound file="Content/Sounds/Impact/SoftImpact3.ogg" range="300" />
                                                                         </StatusEffect>
                                                                       </StatusEffectAction>
@@ -1996,7 +2029,7 @@
                                   <CheckDataAction identifier="joksterintroduction2" condition="eq true" _npos="-52.710205,392.64886">
                                     <Failure>
                                       <TagAction ContinueIfNoTargetsFound="true" criteria="player" tag="player" _npos="326.19287,772.1272" />
-                                      <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="crewmodule" ignorebyai="true" _npos="751.23315,1018.5493" />
+                                      <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="adminmodule" ignorebyai="true" _npos="751.23315,1018.5493" />
                                       <SetDataAction value="true" identifier="joksterintroduction2" _npos="1218.0188,1461.7191" />
                                       <TriggerAction target1tag="suscrate" target2tag="player" applytotarget2="triggereventplayer" radius="150" waitforinteraction="true" _npos="1637.7922,1947.079" />
                                       <StatusEffectAction targettag="suscrate">
@@ -2289,7 +2322,7 @@
                                                                 </Option>
                                                                 <Option text="Honk the clown’s nose.">
                                                                   <StatusEffectAction targettag="joker">
-                                                                    <StatusEffect>
+                                                                    <StatusEffect target="This">
                                                                       <Sound file="Content/Items/Weapons/honk.ogg" range="300" />
                                                                     </StatusEffect>
                                                                   </StatusEffectAction>
@@ -2498,10 +2531,10 @@
                                                                                                                     <Option text="Continue.">
                                                                                                                       <SetDataAction value="true" identifier="joksterexplode" _npos="17717.367,7746.155" />
                                                                                                                       <StatusEffectAction targettag="joker" _npos="18216.197,7674.7188">
-                                                                                                                        <StatusEffect _npos="18094.125,8115.62">
+                                                                                                                        <StatusEffect target="This" _npos="18094.125,8115.62">
                                                                                                                           <Sound file="Content/Sounds/Damage/Implode.ogg" range="300" _npos="18445.455,8359.256" />
                                                                                                                         </StatusEffect>
-                                                                                                                        <StatusEffect _npos="18631.441,8217.508">
+                                                                                                                        <StatusEffect target="This" _npos="18631.441,8217.508">
                                                                                                                           <Explosion range="150.0" force="1000" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" _npos="19075.117,8329.039" />
                                                                                                                         </StatusEffect>
                                                                                                                         <StatusEffect target="Character" condition="0.0" disabledeltatime="True" severlimbsprobability="1" _npos="19342.953,8088.912">
@@ -2637,7 +2670,7 @@
                                   <CheckDataAction identifier="joksterintroduction1" condition="eq true" _npos="336.70908,-110.62753">
                                     <Failure>
                                       <TagAction ContinueIfNoTargetsFound="true" criteria="player" tag="player" _npos="789.4388,-90.5618" />
-                                      <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="crewmodule" ignorebyai="true" _npos="1226.4146,-80.3425" />
+                                      <SpawnAction lootingisstealing="true" itemidentifier="clowncrate" targettag="suscrate" spawnlocation="Outpost" targetmoduletags="adminmodule" ignorebyai="true" _npos="1226.4146,-80.3425" />
                                       <SetDataAction value="true" identifier="joksterintroduction1" _npos="1663.3461,-43.162598" />
                                       <Label name="restart" _npos="2059.2026,-11.870483" />
                                       <StatusEffectAction targettag="suscrate">
@@ -3068,10 +3101,10 @@
                                                                                                                                 <Option text="Continue.">
                                                                                                                                   <SetDataAction value="true" identifier="joksterexplode" _npos="21365.309,-651.1287" />
                                                                                                                                   <StatusEffectAction targettag="joker" _npos="21892.473,-599.0913">
-                                                                                                                                    <StatusEffect _npos="22084.926,-115.60596">
+                                                                                                                                    <StatusEffect target="This" _npos="22084.926,-115.60596">
                                                                                                                                       <Sound file="Content/Sounds/Damage/Implode.ogg" range="300" _npos="22498.338,126.79187" />
                                                                                                                                     </StatusEffect>
-                                                                                                                                    <StatusEffect _npos="22793.977,-99.56091">
+                                                                                                                                    <StatusEffect target="This" _npos="22793.977,-99.56091">
                                                                                                                                       <Explosion range="150.0" force="1000" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" _npos="23120.645,130.51965" />
                                                                                                                                     </StatusEffect>
                                                                                                                                     <StatusEffect target="Character" condition="0.0" disabledeltatime="True" severlimbsprobability="1" _npos="23405.14,-300.0199">
@@ -3204,7 +3237,7 @@
                                                       <ReputationAction increase="-3" identifier="clowns" targettype="Faction" _npos="8831.081,440.56464" />
                                                       <ReputationAction increase="3" targettype="Location" _npos="11284.722,399.2398" />
                                                       <StatusEffectAction targettag="joker" _npos="9003.641,832.10254">
-                                                        <StatusEffect _npos="9375.201,1045.167">
+                                                        <StatusEffect target="This" _npos="9375.201,1045.167">
                                                           <Sound file="Content/Items/Weapons/honk.ogg" range="300" _npos="9878.071,1218.5908" />
                                                         </StatusEffect>
                                                       </StatusEffectAction>
@@ -3215,7 +3248,7 @@
                                                               <ReputationAction increase="-3" identifier="clowns" targettype="Faction" _npos="10880.109,413.1777" />
                                                               <ReputationAction increase="3" targettype="Location" _npos="11284.722,399.2398" />
                                                               <StatusEffectAction targettag="joker" _npos="11100.115,729.6492">
-                                                                <StatusEffect _npos="11415.879,936.77594">
+                                                                <StatusEffect target="This" _npos="11415.879,936.77594">
                                                                   <Sound file="Content/Items/Weapons/honk.ogg" range="300" _npos="11931.669,1031.7583" />
                                                                 </StatusEffect>
                                                               </StatusEffectAction>
@@ -3224,7 +3257,7 @@
                                                                   <ReputationAction increase="-3" identifier="clowns" targettype="Faction" _npos="12534.948,93.4426" />
                                                                   <ReputationAction increase="3" targettype="Location" _npos="12982.215,107.282196" />
                                                                   <StatusEffectAction targettag="joker" _npos="12962.6,445.89673">
-                                                                    <StatusEffect _npos="13169.006,808.0728">
+                                                                    <StatusEffect target="This" _npos="13169.006,808.0728">
                                                                       <Sound file="Content/Items/Weapons/honk.ogg" range="300" _npos="13693.705,852.4129" />
                                                                     </StatusEffect>
                                                                   </StatusEffectAction>
