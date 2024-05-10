@@ -1475,6 +1475,16 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- remove lithomorphs in outpost levels, I hate it -->
+    <ScriptedEvent identifier="removelithomorphsoutpost" commonness="100">
+      <TagAction criteria="itemtag:lithomorphspawner" tag="lithomorphspawner" />
+      <StatusEffectAction targettag="lithomorphspawner">
+        <StatusEffect target="This" >
+          <Remove/>
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
   </EventPrefabs>
 </Randomevents>
 </Override>
