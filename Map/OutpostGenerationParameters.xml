@@ -86,9 +86,9 @@
       minhallwaylength="400" 
       spawncrewinsideoutpost="true">
       <modulecount flag="DockingOutpost" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <npcs>
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition"/>
@@ -98,6 +98,59 @@
         <npc from="tutorialnpcs" identifier="merchanttutorial"/>
       </npcs>
     </OutpostConfig> -->
+
+    <!-- ABANDONED STATION -->
+    <OutpostConfig
+      identifier="abandonedoutpostregular"
+      totalmodulecount="6" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="20">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="1"/>
+      <modulecount flag="AbandonedCrewModule" count="1"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
+    <OutpostConfig
+      identifier="abandonedoutpostlarge"
+      totalmodulecount="10" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="40">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="2"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="2"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
+    <OutpostConfig
+      identifier="abandonedoutposthuge"
+      totalmodulecount="14" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="60">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="3"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="3"/>
+      <modulecount flag="AbandonedSecurityModule" count="3"/>
+    </OutpostConfig>
 
     <!-- CHURCH OF HUSK -->
     <OutpostConfig identifier="huskchurch"
@@ -160,11 +213,12 @@
       totalmodulecount="4" 
       minhallwaylength="400" 
       allowedlocationtypes="Outpost" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingOutpost" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -187,13 +241,14 @@
       totalmodulecount="6" 
       minhallwaylength="400" 
       allowedlocationtypes="Settlement" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingSettlement" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaSmall" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -231,12 +286,12 @@
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingOutpost" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="SecurityModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_SecurityModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -277,15 +332,15 @@
       appendtoreachtotalmodulecount="false" 
       minhallwaylength="0" 
       allowedlocationtypes="City">
-      <modulecount flag="Airlock" count="1"/>
-      <modulecount flag="EngineeringModule" count="1"/>
-      <modulecount flag="AdminModule" count="1"/>
-      <modulecount flag="MedicalModule" count="1"/>
-      <modulecount flag="ResearchModule" count="1"/>
-      <modulecount flag="ResidentialModuleMain" count="1"/>
-      <modulecount flag="SecurityModule" count="1"/>
-      <modulecount flag="ArmoryModule" count="1"/>
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns"/>
+      <modulecount flag="DockingCity" count="1"/>
+      <modulecount flag="DE_EngineeringModuleCity" count="1"/>
+      <modulecount flag="DE_AdminModuleCity" count="1"/>
+      <modulecount flag="DE_MedicalModuleCity" count="1"/>
+      <modulecount flag="DE_ResearchModuleCity" count="1"/>
+      <modulecount flag="DE_CrewModuleCity" count="1"/>
+      <modulecount flag="DE_SecurityModuleCity" count="1"/>
+      <modulecount flag="DE_ArmoryModuleCity" count="1"/>
+      <modulecount flag="DE_ClownModuleCity" count="1" order="1" requiredfaction="clowns"/>
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -349,11 +404,12 @@
       totalmodulecount="4" 
       minhallwaylength="400" 
       allowedlocationtypes="Clinic" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingClinic" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="MedicalModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_MedicalModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -380,12 +436,12 @@
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingHospital" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="MedicalModule" count="1" />
-      <modulecount flag="CafeteriaMedium" count="1" />
-      <modulecount flag="CrewModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_MedicalModule" count="1" />
+      <modulecount flag="CafeteriaSmall" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -425,9 +481,9 @@
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingStudy" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="ResearchModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_ResearchModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -454,10 +510,10 @@
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingResearch" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="ResearchModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_ResearchModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -493,11 +549,12 @@
       totalmodulecount="4" 
       minhallwaylength="400" 
       allowedlocationtypes="Camp" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingCamp" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="SecCrewModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_SecCrewModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -525,12 +582,13 @@
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="Base" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingBase" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="SecCrewModule" count="1" />
-      <modulecount flag="SecurityModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_SecCrewModule" count="1" />
+      <modulecount flag="DE_SecurityModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -567,15 +625,16 @@
       totalmodulecount="8" 
       minhallwaylength="400" 
       allowedlocationtypes="Military" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingFortress" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="SecCrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_SecCrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="SecurityModule" count="1" />
-      <modulecount flag="ArmoryModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_SecurityModule" count="1" />
+      <modulecount flag="DE_ArmoryModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -632,13 +691,14 @@
       totalmodulecount="6" 
       minhallwaylength="400" 
       allowedlocationtypes="Blockade" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingBlockade" count="1" />
       <modulecount flag="ControlRoomBlockade" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="SecurityModule" count="1" />
-      <modulecount flag="MedicalModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_SecurityModule" count="1" />
+      <modulecount flag="DE_MedicalModule" count="1" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -677,7 +737,8 @@
       minhallwaylength="0" 
       allowedlocationtypes="MilitaryForces" 
       spawncrewinsideoutpost="false" 
-      removeunusedgaps="false">
+      removeunusedgaps="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingMilitaryForces" count="1" />
       <!--
       <modulecount flag="SubmarineMilitaryForces" count="1" />
@@ -717,7 +778,8 @@
       totalmodulecount="1" 
       minhallwaylength="0" 
       allowedlocationtypes="Survey" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingSurvey" count="1" />
     </OutpostConfig>
 
@@ -748,7 +810,8 @@
       totalmodulecount="1" 
       minhallwaylength="400" 
       allowedlocationtypes="Construction" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingConstruction" count="1" />
       <npcs>
         <!-- Coalition -->
@@ -769,14 +832,15 @@
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Factory" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingFactory" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionFactory" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -820,14 +884,15 @@
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Shipyard" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingShipyard" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
-      <modulecount flag="ProductionFactory" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="ProductionShipyard" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -871,14 +936,15 @@
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Hydroponics" 
-      spawncrewinsideoutpost="false">
+      spawncrewinsideoutpost="false"
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingHydroponics" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionHydroponics" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -1028,12 +1094,12 @@
     <!-- FOOD -->
     <OutpostConfig identifier="biosphere" replaceinradiation="abandonedoutpost" totalmodulecount="8" minhallwaylength="400" allowedlocationtypes="Biosphere" spawncrewinsideoutpost="false">
       <modulecount flag="DockingHydroponics" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionHydroponics" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -1071,12 +1137,12 @@
     
     <OutpostConfig identifier="nourishment" replaceinradiation="abandonedoutpost" totalmodulecount="8" minhallwaylength="400" allowedlocationtypes="Nourishment" spawncrewinsideoutpost="false">
       <modulecount flag="DockingHydroponics" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionHydroponics" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -1119,10 +1185,10 @@
     <!-- INDUSTRIAL -->
     <OutpostConfig identifier="fusion" replaceinradiation="abandonedoutpost" totalmodulecount="5" minhallwaylength="400" allowedlocationtypes="Fusion" spawncrewinsideoutpost="false">
       <modulecount flag="DockingFactory" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="CrewModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns"/>
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_CrewModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns"/>
       <modulecount flag="HuskModule" count="1" order="1" requiredfaction="huskcult"/>
       <npcs>
         <!-- Coalition -->
@@ -1160,12 +1226,12 @@
     <!-- MEDICAL -->
     <OutpostConfig identifier="surgery" replaceinradiation="abandonedoutpost" totalmodulecount="8" minhallwaylength="400" allowedlocationtypes="Surgery" spawncrewinsideoutpost="false">
       <modulecount flag="DockingHospital" count="1" />
-      <modulecount flag="EngineeringModule" count="1" />
-      <modulecount flag="AdminModule" count="1" />
-      <modulecount flag="MedicalModule" count="1" />
+      <modulecount flag="DE_EngineeringModule" count="1" />
+      <modulecount flag="DE_AdminModule" count="1" />
+      <modulecount flag="DE_MedicalModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
-      <modulecount flag="CrewModule" count="1" />
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_CrewModule" count="1" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -1208,12 +1274,12 @@
     <!-- MINING -->
     <OutpostConfig identifier="extraction" replaceinradiation="abandonedoutpost" totalmodulecount="8" minhallwaylength="400" allowedlocationtypes="Extraction" spawncrewinsideoutpost="false">
       <modulecount flag="Airlock" count="1"/>
-      <modulecount flag="EngineeringModule" count="1"/>
-      <modulecount flag="AdminModule" count="1"/>
-      <modulecount flag="CrewModule" count="1"/>
+      <modulecount flag="DE_EngineeringModule" count="1"/>
+      <modulecount flag="DE_AdminModule" count="1"/>
+      <modulecount flag="DE_CrewModule" count="1"/>
       <modulecount flag="MineModule" count="1"/>
-      <modulecount flag="MedicalModule" count="1"/>
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns"/>
+      <modulecount flag="DE_MedicalModule" count="1"/>
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns"/>
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -1249,12 +1315,12 @@
 
     <OutpostConfig identifier="lab" replaceinradiation="abandonedoutpost" totalmodulecount="5" minhallwaylength="400" allowedlocationtypes="Lab" spawncrewinsideoutpost="false" appendtoreachtotalmodulecount="false">
       <modulecount flag="Airlock" count="1"/>
-      <modulecount flag="EngineeringModule" count="1"/>
-      <modulecount flag="AdminModule" count="1"/>
-      <modulecount flag="CrewModule" count="1"/>
-      <modulecount flag="MedicalModule" count="1"/>
-      <modulecount flag="ResearchModule" count="1"/>
-      <modulecount flag="ClownModule" count="1" order="1" requiredfaction="clowns"/>
+      <modulecount flag="DE_EngineeringModule" count="1"/>
+      <modulecount flag="DE_AdminModule" count="1"/>
+      <modulecount flag="DE_CrewModule" count="1"/>
+      <modulecount flag="DE_MedicalModule" count="1"/>
+      <modulecount flag="DE_ResearchModule" count="1"/>
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns"/>
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
