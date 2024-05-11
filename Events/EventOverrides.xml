@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<Override>
+<Randomevents>
+  
+  <EventPrefabs>
+
+    <!-- added Base as potential location -->
+    <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="80">
+      <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 30">
+        <Failure>
+          <!-- Do nothing -->
+        </Failure>
+        <Success>
+          <NPCWaitAction npctag="outpostmanager" wait="true" />
+          <ConversationAction text="EventText.missionevent_jailbreak_coalition.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition">
+            <Option text="EventText.missionevent.pleasecontinue">
+              <!-- "please continue" -->
+              <ConversationAction text="EventText.missionevent_jailbreak_coalition.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" endconversation="true" />
+              <MissionAction missionidentifier="jailbreak_coalition" locationtype="City,Military,Base" requiredfaction="separatists" minlocationdistance="1" />
+            </Option>
+          </ConversationAction>
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+    
+    <!-- added Base as potential location -->
+    <ScriptedEvent identifier="missionevent_jailbreak_separatists" commonness="80">
+      <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 30">
+        <Failure>
+          <!-- Do nothing -->
+        </Failure>
+        <Success>
+          <NPCWaitAction npctag="outpostmanager" wait="true" />
+          <ConversationAction text="EventText.missionevent_jailbreak_separatists.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+            <Option text="EventText.missionevent.pleasecontinue">
+              <!-- "please continue" -->
+              <ConversationAction text="EventText.missionevent_jailbreak_separatists.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" />
+              <MissionAction missionidentifier="jailbreak_separatists" locationtype="City,Military,Base" requiredfaction="coalition" minlocationdistance="1" />
+            </Option>
+          </ConversationAction>
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <!-- changed viable locations for the mission -->
+    <ScriptedEvent identifier="missionevent_tormsdalereport" commonness="80">
+      <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 30">
+        <Failure>
+          <!-- Do nothing -->
+        </Failure>
+        <Success>
+          <CheckDataAction identifier="tormsdalereport" condition="eq 0">
+            <Failure>
+              <!-- do nothing -->
+            </Failure>
+            <Success>
+              <NPCWaitAction npctag="outpostmanager" wait="true" />
+              <ConversationAction text="EventText.missionevent_tormsdalereport.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+                <Option text="EventText.missionevent_tormsdalereport.whosthat">
+                  <ConversationAction text="EventText.missionevent_tormsdalereport.whospetran" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+                    <Option text="EventText.missionevent_tormsdalereport.o1.o1">
+                      <Goto name="givemission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="EventText.missionevent.pleasecontinue">
+                  <Goto name="givemission" />
+                </Option>
+              </ConversationAction>
+              <Label name="givemission" />
+              <ConversationAction text="EventText.missionevent_tormsdalereport.c1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+                <Option text="EventText.missionevent_tormsdalereport.c1.o1">
+                  <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
+                    <Option text="EventText.missionevent_tormsdalereport.c1.o1.o1">
+                      <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
+                        <Option text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1">
+                          <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
+                            <Option text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1">
+                              <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
+                                <Option text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1.o1">
+                                  <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" />
+                                  <MissionAction missionidentifier="tormsdalereport" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" requiredfaction="coalition" minlocationdistance="2" CreateLocationIfNotFound="true" />
+                                  <NPCWaitAction npctag="outpostmanager" wait="false" />
+                                  <SetDataAction identifier="tormsdalereport" value="1" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+          </CheckDataAction>
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="waytoascension3">
+      <CheckDataAction identifier="subraevent_state" condition="lt 3">
+        <Failure>
+          <!-- cannot continue the way to ascension if Subra has been assassinated (see assassinationofjacovsubra4) -->
+        </Failure>
+        <Success>
+          <CheckDataAction identifier="waytoascension" condition="eq 4">
+            <Failure>
+              <!-- do nothing -->
+            </Failure>
+            <Success>
+              <TagAction criteria="player" tag="player" />
+              <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="huskcultecclesiast" targettag="ecclesiast" spawnlocation="Outpost" targetmoduletags="huskmodule" />
+              <TriggerAction target1tag="player" target2tag="ecclesiast" applytotarget1="triggerer_player" waitforinteraction="true" />
+              <NPCFollowAction npctag="ecclesiast" targettag="triggerer_player" follow="true" />
+              <ConversationAction targettag="triggerer_player" text="EventText.waytoascension3.c1" eventsprite="Ecclesiast">
+                <Option text="EventText.waytoascension3.o1">
+                  <ConversationAction targettag="triggerer_player" text="EventText.waytoascension3.o1.c1" eventsprite="Ecclesiast">
+                    <Option text="EventText.waytoascension3.o1.o1">
+                      <GoTo name="givemission" />
+                    </Option>
+                    <Option text="EventText.waytoascension3.o1.o2">
+                      <ConversationAction targettag="triggerer_player" text="EventText.waytoascension3.o1.o2.c1" eventsprite="Ecclesiast">
+                        <Option text="EventText.waytoascension3.o1.o2.o1">
+                          <Label name="givemission" />
+                          <ConversationAction targettag="triggerer_player" text="EventText.waytoascension3.o1.o2.o1.c1" eventsprite="Ecclesiast" endconversation="true" />
+                          <MissionAction missionidentifier="huskcultspecialassassinate" minlocationdistance="2" requiredfaction="coalition" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" CreateLocationIfNotFound="true" />
+                          <SetDataAction identifier="waytoascension" value="5" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+          </CheckDataAction>
+          <NPCFollowAction npctag="ecclesiast" targettag="triggerer_player" follow="false" />
+        </Success>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+
+
+    <ScriptedEvent identifier="TESTmissioncultassassinate">
+      <MissionAction missionidentifier="huskcultspecialassassinate" minlocationdistance="2" requiredfaction="coalition" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" CreateLocationIfNotFound="true" />
+    </ScriptedEvent>
+
+  </EventPrefabs>
+</Randomevents>
+</Override>

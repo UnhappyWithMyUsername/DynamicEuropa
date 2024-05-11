@@ -4,14 +4,9 @@
   <Override>
     <OutpostDestroyMission identifier="huskcultspecialassassinate" type="OutpostDestroy" achievementidentifier="huskcultspecialassassinate" reward="2000" difficulty="4" commonness="0" allowretry="true" sonarlabel="target" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
       <Reputation identifier="huskcult" amount="10" />
-      <Reputation identifier="clowns" amount="-5" />
       <Reputation identifier="coalition" amount="-5" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
-      <LocationType identifier="City" />
-      <LocationType identifier="Outpost" />
-      <LocationType identifier="Military" />
-      <LocationType identifier="Research" />
-      <LocationType identifier="Mine" />
+      <LocationType identifier="AnyOutpost" />
       <Characters>
         <Character identifier="coalitionspy" from="customnpcs1" teamid="FriendlyNpc" asfaraspossible="true" requirekill="true" />
       </Characters>
@@ -22,7 +17,6 @@
 
     <OutpostDestroyMission identifier="huskcultrescuesubra" tags="abandonedoutpost" type="AbandonedOutpost" achievementidentifier="huskcultrescuesubra" reward="0" difficulty="4" commonness="0" allowretry="true" hostageskilledmessage="subrakilled" allowothermissionsinlevel="false" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
       <Reputation identifier="huskcult" amount="10" />
-      <Reputation identifier="clowns" amount="-8" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48" />
       <LocationType identifier="Abandoned" />
       <Characters>
@@ -34,8 +28,117 @@
       <message header="" text="missionsuccess.huskcultrescuesubra" />
     </OutpostDestroyMission>
 
+    <SalvageMission
+      identifier="tormsdalereport"
+      tags="salvage"
+      achievementidentifier="tormsdalereport"
+      type="Salvage"
+      difficulty="4"
+      commonness="0"
+      reward="0"
+      sonarlabel="target"
+      spawntype="Outpost"
+      itemidentifier="tormsdalereport"
+      removeitem="false"
+      containertag="admincabinet"
+      requirewreck="false"
+      allowretry="true"
+      BlockLocationTypeChanges="true">
+      <Reputation identifier="separatists" amount="10" />
+      <Reputation identifier="coalition" amount="-10" />
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
+      <LocationType identifier="AnyOutpost" />
+      <message header="missionsuccess.tormsdalereport" text="missionmessage0.tormsdalereport"/>
+      <TriggerEvent state="0" delay="5" eventidentifier="tormsdalereport_outpost" campaignonly="true"/>
+      <Metadata identifier="tormsdalereport" value="2"/>
+    </SalvageMission>
+    
+  <!-- Added Base -->
+  <OutpostMission
+    identifier="jailbreak_coalition"
+    name="missionname.jailbreak"
+    successmessage="missionsuccess.jailbreak"
+    failuremessage="missionfailure.jailbreak"
+    tags="jailbreak_coalition"
+    requiredlocationfaction="separatists"
+    achievementidentifier="jailbreak_coalition"
+    type="AbandonedOutpost"
+    reward="3000"
+    difficulty="3"
+    commonness="100"
+    allowretry="true"
+    hostageskilledmessage="prisonerkilled">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="City" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    <Characters>
+      <Character identifier="prisonercoalition" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
+      <Character identifier="prisonercoalition" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
+      <Character identifier="prisonercoalition" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true" multiplayeronly="true"/>
+    </Characters>
+    <TriggerEvent state="0" eventidentifier="jailbreak" />
+    <Reputation identifier="coalition" amount="5" amountforopposingfaction="-5" />
+    <message header="missionheader0.prisonerrescue" text="missionmessage0.prisonerrescue"/>
+  </OutpostMission>
+  
+  <OutpostMission
+    identifier="jailbreak_separatists"
+    name="missionname.jailbreak"
+    successmessage="missionsuccess.jailbreak"
+    failuremessage="missionfailure.jailbreak"
+    tags="jailbreak_separatists"
+    requiredlocationfaction="coalition"
+    achievementidentifier="jailbreak_separatists"
+    type="AbandonedOutpost"
+    reward="3000"
+    difficulty="3"
+    commonness="100"
+    allowretry="true"
+    hostageskilledmessage="prisonerkilled">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="City" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    <Characters>
+      <Character identifier="prisonerseparatists" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
+      <Character identifier="prisonerseparatists" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
+      <Character identifier="prisonerseparatists" from="outpostnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true" multiplayeronly="true"/>
+    </Characters>
+    <TriggerEvent state="0" eventidentifier="jailbreak" />
+    <Reputation identifier="separatists" amount="5" amountforopposingfaction="-5" />
+    <message header="missionheader0.prisonerrescue" text="missionmessage0.prisonerrescue"/>
+  </OutpostMission>
 
-    <!-- -5 bandit rep for doing abandoned outposts -->
+  <OutpostMission
+    identifier="jailbreak_sootman"
+    name="missionname.jailbreak"
+    successmessage="missionsuccess.jailbreak_singletarget"
+    failuremessage="missionfailure.jailbreak_singletarget"
+    tags="jailbreak_separatists"
+    achievementidentifier="jailbreak_sootman"
+    type="AbandonedOutpost"
+    alloworderingrescuees="false"
+    reward="3000"
+    difficulty="3"
+    commonness="0"
+    allowretry="true"
+    hostageskilledmessage="prisonerkilled"    
+    BlockLocationTypeChanges="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="City" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    <Characters>
+      <Character identifier="sootman" from="customnpcs1" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
+    </Characters>
+    <TriggerEvent state="0" eventidentifier="jailbreak_sootman" />
+    <Reputation identifier="separatists" amount="5" amountforopposingfaction="-5" />
+    <message header="missionheader0.prisonerrescue_singletarget" text="missionmessage0.prisonerrescue_singletarget"/>
+    <Metadata identifier="sootman_freed" value="true"/>
+  </OutpostMission>
+
+    <!-- -2 bandit rep for doing abandoned outposts -->
     <AbandonedOutpostMission
       identifier="abandonedoutposthumans"
       tags="abandonedoutpost"
