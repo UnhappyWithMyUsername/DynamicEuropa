@@ -42,19 +42,21 @@
       FloatingIceChunkCount="0"
       IslandCount="0"
       IceSpireCount="0"
-      AbyssIslandCount="2"
-      AbyssIslandSizeMin="4000,7000"
-      AbyssIslandSizeMax="8000,10000"
-      AbyssIslandCaveProbability="0.5"
-      AbyssResourceClustersMin="30"
-      AbyssResourceClustersMax="40"
-      SeaFloorDepth="-50000"
-      SeaFloorVariance="1000"
+      AbyssIslandCount="3"
+      AbyssIslandSizeMin="2000,3000"
+      AbyssIslandSizeMax="2000,3000"
+      AbyssIslandCaveProbability="0.3"
+      AbyssResourceClustersMin="10"
+      AbyssResourceClustersMax="20"
+      SeaFloorDepth="-10000"
+      SeaFloorVariance="500"
       MountainCountMin="2"
       MountainCountMax="3"
-      MountainHeightMin="10000"
-      MountainHeightMax="60000"
-      RuinCount="1"
+      MountainHeightMin="0"
+      MountainHeightMax="4000"
+      RuinCount="0"
+      MinRuinCount="0"
+      MaxRuinCount="1"
       MinWreckCount="0"
       MaxWreckCount="1"
       MinCorpseCount="3"
@@ -91,8 +93,7 @@
         texture="Content/Map/Biomes/DestroyedWall.png"
         premultiplyalpha="false" />
     </PlateauBasic>
-  </Override>
-  <Override>
+
     <PlateauOutpost
       identifier="plateauoutpost"
       type="Outpost"
@@ -173,85 +174,86 @@
         texture="Content/Map/Biomes/DestroyedWall.png"
         premultiplyalpha="false" />
     </PlateauOutpost>
+
+    <!--   <PlateauLair
+      identifier="plateaulair"
+      type="Outpost"
+      biomes="theaphoticplateau"
+      createholenexttoend="False"
+      createholetoabyss="False"
+      height="20000"
+      commonness="0"
+      initialdepthmin="100000"
+      initialdepthmax="200000"
+      levelobjectamount="500"
+      ambientlightcolor="10,10,0,255"
+      backgroundtexturecolor="60,60,0,255"
+      backgroundcolor="4,2,1,255"
+      wallcolor="255,255,255,255"
+      minwidth="40000"
+      maxwidth="40000"
+      voronoisiteinterval="2000,2000"
+      voronoisitevariance="800,800"
+      cellsubdivisionlength="1500"
+      cellroundingamount="0.1"
+      cellirregularity="0.3"
+      mainpathnodeintervalrange="500,500"
+      cavecount="0"
+      itemcount="0"
+      floatingicechunkcount="0"
+      seafloordepth="0"
+      seafloorvariance="1000"
+      mountaincountmin="0"
+      mountaincountmax="3"
+      mountainheightmin="1500"
+      mountainheightmax="3000"
+      ruincount="0"
+      minwreckcount="0"
+      maxwreckcount="0"
+      bottomholeprobability="0"
+      waterparticlescale="1"
+      startposition="0.3,0.2"
+      endposition="0.7,0.5"
+      forceoutpostposition="0.5,0.8"
+      mintunnelradius="5000"
+      mincorpsecount="1"
+      maxcorpsecount="5"
+      thalamusprobability="0"
+      wreckhullfloodingchance="0.5"
+      wreckfloodinghullminwaterpercentage="0.1"
+      wreckfloodinghullmaxwaterpercentage="1"
+      sidetunnelcount="0,0"
+      minsidetunnelradius="25000,25000"
+      backgroundcreatureamount="80"
+      walltexturesize="512"
+      walledgetexturewidth="1024"
+      walledgeexpandoutwardsamount="128"
+      walledgeexpandinwardsamount="128"
+      sidetunnelvariance="0.5"
+      mainpathvariance="0"
+      resourceintervalrange="19200,38400"
+      caveresourceintervalrange="9600,19200"
+      resourceclustersizerange="3,6"
+      resourcespawnchance="0.3"
+      caveresourcespawnchance="0.6"
+      islandcount="0"
+      abyssislandcount="0"
+      icespirecount="0"
+      PlayNoiseLoopInOutpostLevel="true">
+      <WaterParticles
+        texture="Content/Map/Biomes/AphoticPlateau/BackgroundParticles.png" />
+      <Wall
+        texture="Content/Map/Biomes/AphoticPlateau/LevelWall.png"
+        premultiplyalpha="false" />
+      <WallEdge
+        texture="Content/Map/Biomes/AphoticPlateau/LevelWallEdge.png" />
+      <DestructibleWall
+        texture="Content/Map/Biomes/DestructibleWall.png" />
+      <DestructibleWallEdge
+        texture="Content/Map/Biomes/DestructibleWallEdge.png" />
+      <WallDestroyed
+        texture="Content/Map/Biomes/DestroyedWall.png"
+        premultiplyalpha="false" />
+    </PlateauLair> -->
   </Override>
-  <!--   <PlateauLair
-    identifier="plateaulair"
-    type="Outpost"
-    biomes="theaphoticplateau"
-    createholenexttoend="False"
-    createholetoabyss="False"
-    height="20000"
-    commonness="0"
-    initialdepthmin="100000"
-    initialdepthmax="200000"
-    levelobjectamount="500"
-    ambientlightcolor="10,10,0,255"
-    backgroundtexturecolor="60,60,0,255"
-    backgroundcolor="4,2,1,255"
-    wallcolor="255,255,255,255"
-    minwidth="40000"
-    maxwidth="40000"
-    voronoisiteinterval="2000,2000"
-    voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.1"
-    cellirregularity="0.3"
-    mainpathnodeintervalrange="500,500"
-    cavecount="0"
-    itemcount="0"
-    floatingicechunkcount="0"
-    seafloordepth="0"
-    seafloorvariance="1000"
-    mountaincountmin="0"
-    mountaincountmax="3"
-    mountainheightmin="1500"
-    mountainheightmax="3000"
-    ruincount="0"
-    minwreckcount="0"
-    maxwreckcount="0"
-    bottomholeprobability="0"
-    waterparticlescale="1"
-    startposition="0.3,0.2"
-    endposition="0.7,0.5"
-    forceoutpostposition="0.5,0.8"
-    mintunnelradius="5000"
-    mincorpsecount="1"
-    maxcorpsecount="5"
-    thalamusprobability="0"
-    wreckhullfloodingchance="0.5"
-    wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
-    sidetunnelcount="0,0"
-    minsidetunnelradius="25000,25000"
-    backgroundcreatureamount="80"
-    walltexturesize="512"
-    walledgetexturewidth="1024"
-    walledgeexpandoutwardsamount="128"
-    walledgeexpandinwardsamount="128"
-    sidetunnelvariance="0.5"
-    mainpathvariance="0"
-    resourceintervalrange="19200,38400"
-    caveresourceintervalrange="9600,19200"
-    resourceclustersizerange="3,6"
-    resourcespawnchance="0.3"
-    caveresourcespawnchance="0.6"
-    islandcount="0"
-    abyssislandcount="0"
-    icespirecount="0"
-    PlayNoiseLoopInOutpostLevel="true">
-    <WaterParticles
-      texture="Content/Map/Biomes/AphoticPlateau/BackgroundParticles.png" />
-    <Wall
-      texture="Content/Map/Biomes/AphoticPlateau/LevelWall.png"
-      premultiplyalpha="false" />
-    <WallEdge
-      texture="Content/Map/Biomes/AphoticPlateau/LevelWallEdge.png" />
-    <DestructibleWall
-      texture="Content/Map/Biomes/DestructibleWall.png" />
-    <DestructibleWallEdge
-      texture="Content/Map/Biomes/DestructibleWallEdge.png" />
-    <WallDestroyed
-      texture="Content/Map/Biomes/DestroyedWall.png"
-      premultiplyalpha="false" />
-  </PlateauLair> -->
 </LevelGenerationParameters>
