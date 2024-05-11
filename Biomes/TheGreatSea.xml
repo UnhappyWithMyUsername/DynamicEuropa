@@ -43,12 +43,12 @@
       FloatingIceChunkCount="20"
       IslandCount="15"
       IceSpireCount="20"
-      AbyssIslandCount="5"
-      AbyssIslandSizeMin="4000,7000"
-      AbyssIslandSizeMax="8000,10000"
-      AbyssIslandCaveProbability="0.5"
-      AbyssResourceClustersMin="40"
-      AbyssResourceClustersMax="50"
+      AbyssIslandCount="12"
+      AbyssIslandSizeMin="15000,20000"
+      AbyssIslandSizeMax="5000,8000"
+      AbyssIslandCaveProbability="0.2"
+      AbyssResourceClustersMin="20"
+      AbyssResourceClustersMax="30"
       SeaFloorDepth="-1000000"
       SeaFloorVariance="1000"
       MountainCountMin="0"
@@ -98,28 +98,28 @@
     </GreatSeaBasic>
   </Override>
   <Override>
-    <GreatSeaBasic
+    <GreatSeaNarrow
       identifier="greatseanarrow"
       biomes="thegreatsea"
-      commonness="25"
+      commonness="20"
       Type="LocationConnection"
       AmbientLightColor="20,30,40,255"
       BackgroundTextureColor="8,16,20,255"
       BackgroundColor="2,4,5,255"
       WallColor="255,255,255,255"
-      StartPosition="0.01,0.4"
-      EndPosition="0.9,0.8"
+      StartPosition="0.1,0.3"
+      EndPosition="0.9,0.4"
       CreateHoleNextToEnd="True"
-      CreateHoleToAbyss="True"
+      CreateHoleToAbyss="False"
       LevelObjectAmount="2000"
       BackgroundCreatureAmount="80"
-      MinWidth="100000"
-      MaxWidth="200000"
+      MinWidth="150000"
+      MaxWidth="220000"
       Height="120000"
       InitialDepthMin="400000"
       InitialDepthMax="500000"
       MinTunnelRadius="5000"
-      SideTunnelCount="0,1"
+      SideTunnelCount="0,0"
       SideTunnelVariance="0.1"
       MinSideTunnelRadius="4000,4000"
       VoronoiSiteInterval="3000,2000"
@@ -128,7 +128,7 @@
       CellRoundingAmount="0.0"
       CellIrregularity="0.3"
       MainPathNodeIntervalRange="16000,20000"
-      MainPathVariance="0.7"
+      MainPathVariance="0.1"
       CaveCount="3"
       ItemCount="400"
       ResourceIntervalRange="19200,38400"
@@ -139,7 +139,7 @@
       FloatingIceChunkCount="10"
       IslandCount="0"
       IceSpireCount="60"
-      AbyssIslandCount="5"
+      AbyssIslandCount="0"
       AbyssIslandSizeMin="4000,7000"
       AbyssIslandSizeMax="8000,10000"
       AbyssIslandCaveProbability="0.5"
@@ -191,7 +191,92 @@
         premultiplyalpha="false" />
       <FlashSound
         file="%ModDir%/Sounds/Ambient/ThunderLarge1.ogg" />
-    </GreatSeaBasic>
+    </GreatSeaNarrow>
+  </Override>
+  <Override>
+    <GreatSeaVertical
+      identifier="greatseavertical"
+      type="LocationConnection"
+      biomes="thegreatsea"
+      commonness="20"
+      height="140000"
+      initialdepthmin="320000"
+      initialdepthmax="380000"
+      levelobjectamount="3000"
+      ambientlightcolor="4,6,8,255"
+      backgroundtexturecolor="8,16,20,255"
+      backgroundcolor="2,4,5,255"
+      wallcolor="255,255,255,255"
+      minwidth="80000"
+      maxwidth="100000"
+      voronoisiteinterval="2000,2000"
+      voronoisitevariance="800,800"
+      cellsubdivisionlength="1500"
+      cellroundingamount="0.5"
+      cellirregularity="0.1"
+      mainpathnodeintervalrange="5000,10000"
+      cavecount="1"
+      itemcount="400"
+      floatingicechunkcount="20"
+      islandcount="15"
+      seafloordepth="-45000"
+      seafloorvariance="1000"
+      mountaincountmin="0"
+      mountaincountmax="0"
+      mountainheightmin="1000"
+      mountainheightmax="5000"
+      ruincount="1"
+      minwreckcount="1"
+      maxwreckcount="1"
+      thalamusprobability="0.4"
+      bottomholeprobability="0.9"
+      waterparticlescale="1"
+      startposition="0.1,0.1"
+      endposition="0.9,0.9"
+      createholenexttoend="True"
+      mintunnelradius="6500"
+      mincorpsecount="3"
+      maxcorpsecount="6"
+      wreckhullfloodingchance="0.5"
+      wreckfloodinghullminwaterpercentage="0.1"
+      wreckfloodinghullmaxwaterpercentage="1"
+      sidetunnelcount="1,1"
+      minsidetunnelradius="2000,6000"
+      icespirecount="5"
+      walltexturesize="512"
+      walledgetexturewidth="1024"
+      walledgeexpandoutwardsamount="128"
+      walledgeexpandinwardsamount="128"
+      backgroundcreatureamount="80"
+      resourceintervalrange="19200,38400"
+      caveresourceintervalrange="9600,19200"
+      resourceclustersizerange="3,5"
+      resourcespawnchance="0.3"
+      caveresourcespawnchance="0.6"
+      AbyssResourceClustersMin="40"
+      AbyssResourceClustersMax="50">
+      <!--
+      <Background
+        texture="Content/Map/iceBackgroundFade.png" />
+      <BackgroundTop
+        texture="Content/Map/iceBackground.png"
+        premultiplyalpha="false" />
+        -->
+      <WaterParticles
+        texture="Content/Map/Biomes/TheGreatSea/BackgroundParticles.png" />
+      <Wall
+        texture="Content/Map/Biomes/TheGreatSea/LevelWall.png"
+        premultiplyalpha="false" />
+      <WallEdge
+        texture="Content/Map/Biomes/TheGreatSea/LevelWallEdge.png" />
+      <DestructibleWall
+        texture="Content/Map/Biomes/DestructibleWall.png" />
+      <DestructibleWallEdge
+        texture="Content/Map/Biomes/DestructibleWallEdge.png" />
+      <WallDestroyed
+        texture="Content/Map/Biomes/DestroyedWall.png"
+        premultiplyalpha="false" />
+    </GreatSeaVertical>
   </Override>
   <Override>
     <GreatSeaOutpost
