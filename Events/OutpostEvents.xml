@@ -1409,11 +1409,11 @@
           </StatusEffectAction>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" targetmoduletags="adminmodule" />
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
           <Label name="talktonpc" />
           <ConversationAction targettag="player" speakertag="smuggler" invokertag="triggerer_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.generic.continue">
-              <ConversationAction targettag="player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
+              <ConversationAction targettag="player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                 <Option text="eventtext.generic.continue" >
                   <ConversationAction targettag="player" text="eventtext.pantytheft.plantingtags" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                     <Option text="eventtext.pantytheft.ifitpays">
@@ -1481,73 +1481,78 @@
           <!-- does not spawn the event if already done -->
         </Failure>
         <Success>
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="vendingsecurity" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="thief" spawnlocation="Outpost" />
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="itemtag:vendingmachine" tag="targetvendingmachine" submarinetype="Outpost" />
-          <StatusEffectAction targettag="unlockcrateshelf" >
-            <StatusEffect target="This" noninteractable="false" setvalue="true" />
-          </StatusEffectAction>
-          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="thief" spawnlocation="Outpost" />
+          <WaitAction time="3" />
           <TriggerAction target1tag="player" target2tag="thief" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+          <NPCWaitAction npctag="thief" wait="false"/>
           <Label name="talktonpc" />
-          <ConversationAction targettag="player" speakertag="smuggler" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction targettag="player" speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.generic.continue">
-              <ConversationAction targettag="player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="JacovSubra1" >
+              <ConversationAction targettag="player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                 <Option text="eventtext.generic.continue" >
-                  <ConversationAction targettag="player" text="eventtext.vendingsmashing.hitemhard" endeventifinterrupted="false" eventsprite="JacovSubra1" >
+                  <ConversationAction targettag="player" text="eventtext.vendingsmashing.hitemhard" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                     <Option text="eventtext.vendingsmashing.Notsubtle">
-                      <ConversationAction text="eventtext.vendingsmashing.Ilootyourun" endeventifinterrupted="false" endconversation="true" eventsprite="Duffelbag" />
+                      <ConversationAction text="eventtext.vendingsmashing.Ilootyourun" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Terrorism1" />
                       <SpawnAction itemidentifier="crowbar" targetinventory="triggerer_player" targettag="smashingcrowbar" />
-                      <SpawnAction itemidentifier="traitorduffelbag" targetinventory="thief" targettag="stealingbag" />
+                      <SpawnAction itemidentifier="toolbelt" targetinventory="thief" targettag="stealingbag" ignorebyai="true"/>
                       <NPCFollowAction npctag="thief" targettag="triggerer_player" follow="true"/>
-                      <TriggerAction target1tag="triggerer_player" target2tag="targetvendingmachine" applytotarget2="selectvendingmachine" radius="200" />
+                      <TriggerAction target1tag="thief" target2tag="targetvendingmachine" applytotarget2="selectvendingmachine" radius="200" />                      
+                      <NPCFollowAction npctag="thief" targettag="triggerer_player" follow="false"/>
+                      <TriggerAction target1tag="triggerer_player" target2tag="selectvendingmachine" radius="200" waitforinteraction="true" />
+                      <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.readycrowbar" endeventifinterrupted="false" eventsprite="Terrorism1" endconversation="true" />
                       <Label name="foundvendingmachine" />
                       <TriggerAction target1tag="triggerer_player" target2tag="selectvendingmachine" radius="200" waitforinteraction="true" />
-                      <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.plantingtags" endeventifinterrupted="false" eventsprite="JacovSubra1" >
-                        <Option text="eventtext.vendingsmashing.smashit">
+                      <CheckItemAction targettag="triggerer_player" itemidentifiers="crowbar" RequireEquipped="true">
+                        <Failure>                     
+                          <WaitAction time="1" />   
+                          <Goto name="foundvendingmachine" />
+                        </Failure>
+                        <Success>
                           <StatusEffectAction targettag="selectvendingmachine" >
                             <StatusEffect target="this">
-                              <SpawnItem identifier="banditprop7" spawnposition="This" Offset="0,0"/>
+                              <SpawnItem identifier="banditprop6" spawnposition="This" Offset="0,10"/>
                               <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" range="500" />
-                              <ParticleEmitter particle="shrapnel" particleamount="15" velocitymin="0" velocitymax="50" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" colormultiplier="255,255,255,180" />
+                              <ParticleEmitter particle="shrapnel" particleamount="15" velocitymin="50" velocitymax="150" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" colormultiplier="255,255,255,180" />
                             </StatusEffect>
                           </StatusEffectAction>
                           <StatusEffectAction targettag="smashingcrowbar" >
                             <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true" />
-                          </StatusEffectAction>                         
-                          <NPCFollowAction npctag="thief" targettag="triggerer_player" follow="false"/>
-                          <CombatAction combatmode="arrest" npctag="security" enemytag="triggerer_player" isinstigator="false" guardreaction="arrest" witnessreaction="none" />
-                          <WaitAction time="3" />
-                          <NPCOperateItemAction npctag="terrorist" targettag="selectedvendingmachine" Operate="true" />
-                          <WaitAction time="3" />
+                          </StatusEffectAction>
+                          <ReputationAction targettype="Location" increase="-1" />                          
+                          <CombatAction combatmode="arrest" npctag="vendingsecurity" enemytag="triggerer_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
+                          <NPCOperateItemAction npctag="thief" targettag="selectvendingmachine" ItemComponentName="Fabricator" Operate="true" />
+                          <WaitAction time="1" />
                           <!-- items spawned in bag -->
-                          <SpawnAction itemidentifier="weldingfueltank" targetinventory="stealingbag" targettag="stolenitem" />
-                          <SpawnAction itemidentifier="batterycell" targetinventory="stealingbag" targettag="stolenitem" />
-                          <SpawnAction itemidentifier="ethanol" targetinventory="stealingbag" targettag="stolenitem" />
-                          <SpawnAction itemidentifier="antibiotics" targetinventory="stealingbag" targettag="stolenitem" />
+                          <SpawnAction itemidentifier="weldingfueltank" targetinventory="stealingbag" targettag="stolenitem" ignorebyai="true"/>
+                          <SpawnAction itemidentifier="batterycell" targetinventory="stealingbag" targettag="stolenitem" ignorebyai="true"/>
+                          <SpawnAction itemidentifier="ethanol" targetinventory="stealingbag" targettag="stolenitem" ignorebyai="true"/>
+                          <SpawnAction itemidentifier="antibiotics" targetinventory="stealingbag" targettag="stolenitem" ignorebyai="true"/>
                           <!-- items spawned around vending machine -->
-                          <SpawnAction itemidentifier="weldingfueltank" targetinventory="selectedvendingmachine" targettag="stolenitem" offset="50" />
-                          <SpawnAction itemidentifier="batterycell" targetinventory="selectedvendingmachine" targettag="stolenitem" offset="50" />
-                          <SpawnAction itemidentifier="ethanol" targetinventory="selectedvendingmachine" targettag="stolenitem" offset="50"/> 
-                          <SpawnAction itemidentifier="antibiotics" targetinventory="selectedvendingmachine" targettag="stolenitem" offset="50" />
+                          <WaitAction time="0.5" />
+                          <SpawnAction itemidentifier="weldingfueltank" SpawnPointTag ="selectvendingmachine" targettag="stolenitem" offset="100" />
+                          <WaitAction time="0.5" />
+                          <SpawnAction itemidentifier="batterycell" SpawnPointTag ="selectvendingmachine" targettag="stolenitem" offset="100" />
+                          <WaitAction time="0.5" />
+                          <SpawnAction itemidentifier="ethanol" SpawnPointTag ="selectvendingmachine" targettag="stolenitem" offset="100"/>
+                          <WaitAction time="0.5" /> 
+                          <SpawnAction itemidentifier="antibiotics" SpawnPointTag ="selectvendingmachine" targettag="stolenitem" offset="100" />
                           <!-- tag items as stolen -->
                           <StatusEffectAction targettag="stolenitem" >
-                            <StatusEffect>
                               <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true" />
-                            </StatusEffect>
                           </StatusEffectAction>
-                          <NPCOperateItemAction npctag="terrorist" targettag="selectedvendingmachine" Operate="false" />
+                          <NPCOperateItemAction npctag="thief" targettag="selectvendingmachine" ItemComponentName="Fabricator" Operate="false" />
                           <WaitAction time="3" />
                           <TriggerAction target1tag="triggerer_player" target2tag="thief" waitforinteraction="true" />
                           <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                           <MoneyAction amount="200" targettag="triggerer_player" />
                           <SetDataAction identifier="vendingsmashingnorepeat" value="1" />
-                          <ConversationAction targettag="player" text="eventtext.vendingsmashing.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
-                        </Option>
-                        <Option text="eventtext.vendingsmashing.notyet" >                        
-                          <Goto name="foundvendingmachine" />
-                        </Option>
-                      </ConversationAction>
+                          <ConversationAction targettag="player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                        </Success>
+                      </CheckItemAction >
                     </Option>
                     <Option text="eventtext.generic.refuse">            
                       <Goto name="end" />
@@ -1556,7 +1561,7 @@
                 </Option>
               </ConversationAction>
             </Option>
-            <Option text="eventtext.generic.ignore">        
+            <Option text="eventtext.generic.ignore" endconversation="true">        
               <ClearTagAction tag="triggerer_player" />
               <Goto name="talktonpc" />
             </Option>
