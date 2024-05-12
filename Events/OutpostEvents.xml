@@ -1393,8 +1393,8 @@
           <!-- does not spawn the event if already done -->
         </Failure>
         <Success>
-          <!-- waits until other events are spawned; might not tag ID cards properly otherwise -->
-          <Waitaction time="3" />
+          <!-- waits until other events are spawned so it can tag other npcs too -->
+          <Waitaction time="10" />
           <TagAction criteria="player" tag="player" />
           <!-- tags the ID cards on bots -->
           <TagAction criteria="bot" tag="outpostbot" submarinetype="Outpost" />
