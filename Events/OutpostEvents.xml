@@ -1485,7 +1485,8 @@
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="thief" spawnlocation="Outpost" />
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="itemtag:vendingmachine" tag="targetvendingmachine" submarinetype="Outpost" />
-          <WaitAction time="3" />
+          <!-- wait a little before triggering so you have time to leave the sub -->
+          <WaitAction time="90" />
           <TriggerAction target1tag="player" target2tag="thief" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
           <NPCWaitAction npctag="thief" wait="false"/>
