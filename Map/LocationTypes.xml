@@ -67,9 +67,9 @@
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" requireddurationrange="1,2" probability="1" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
-      <ChangeTo type="UnderHuskAttack" messagetag="locationchange.none.changeto.UnderAttack">
-        <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
+      <ChangeTo type="OuterHuskLair" disallowedadjacentlocations="OuterHuskLair" disallowedproximity="3" locationtypechangecooldown="1"  messagetag="locationchange.none.changeto.Huskswarm">
+        <!-- Needs to be within 3 steps of a lair, but not near another swarm within 3 steps -->
+        <Requirement requiredlocations="HuskgroundsDE" requireddurationrange="1,3" probability="1" requiredproximity="2" />
       </ChangeTo>
       <ChangeTo type="Construction" disallowedadjacentlocations="Lair,OuterLair,HuskgroundsDE,OuterHuskLair,LairMudraptor,LairThresher" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.outpost">
         <!-- May be settled if within 5 steps of a colony, with an increasing chance should it be within 3 or less steps -->
@@ -112,14 +112,6 @@
       </ChangeTo>
       <ChangeTo type="Outpost" disallowedadjacentlocations="Outpost,Settlement,Colony,City" probability="0" disallowedproximity="2" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.settlement">
         <Requirement function="Add" requiredlocations="Hydroponics" probability="0.1" requiredproximity="3" />
-        <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="3" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
-        <!-- multiply probability by 0 if next to hunting grounds-->
-        <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
-      </ChangeTo>
-      <ChangeTo type="Survey" disallowedadjacentlocations="Survey,Mine" probability="0" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.survey">
-        <Requirement function="Add" requiredlocations="Camp,Blockade" probability="0.1" requiredproximity="3" />
-        <Requirement function="Add" requiredlocations="Base" probability="0.1" requiredproximity="3" />
-        <Requirement function="Add" requiredlocations="Military" probability="0.1" requiredproximity="3" />
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="3" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
         <!-- multiply probability by 0 if next to hunting grounds-->
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
@@ -201,7 +193,7 @@
       <!-- Change back to None if no attackers are around -->
       <ChangeTo type="None" disallowedadjacentlocations="HuskgroundsDE,OuterHuskLair" disallowedproximity="1" messagetag="locationchange.UnderAttack.changeto.none" requiredduration="1" probability="1" />
       <!-- Change to OuterHuskLair if Huskgrounds are adjacent -->
-      <ChangeTo type="OuterHuskLair" messagetag="locationchange.none.changeto.lair" >
+      <ChangeTo type="OuterHuskLair" messagetag="locationchange.none.changeto.Huskswarm" >
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,3" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
@@ -220,9 +212,9 @@
         <!-- Will be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="UnderHuskAttack" messagetag="locationchange.none.changeto.lair">
+      <ChangeTo type="OuterHuskLair" messagetag="locationchange.none.changeto.Huskswarm">
         <!-- Will be infested if within 1 steps of a husk lair. -->
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="2,5" probability="0.4" requiredproximity="1" />
+        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <!-- Change to pirate outpost disabled to reduce the amount of pirate havens on the map.
       <ChangeTo type="PirateNone" probability="0.1" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE,Blockade,Military,Base,Camp" messagetag="locationchange.abandoned.changeto.piratenone">
@@ -680,7 +672,8 @@
       Faction="clowns">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="384,640,128,128" color="230,20,20,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <ChangeTo type="None" messagetag="locationchange.circus.changeto.none" requireddurationrange="2,3"/>
+      <ChangeTo type="None" messagetag="locationchange.circus.changeto.none" requireddurationrange="2,2" probability="1" />
+      
       <Store
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
@@ -732,15 +725,13 @@
     <OuterHuskLair commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="OuterHuskLair" outpostteam="None" AllowAsBiomeGate="false" hasoutpost="false">
       <Symbol texture="%ModDir%/Map/MapAtlasDE.png" sourcerect="512,768,128,128" color="145,117,230,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
+      <ChangeTo type="None" messagetag="locationchange.Huskswarm.changeto.none" requireddurationrange="1,2" probability="1"/>      
+<!--       <ChangeTo type="None" messagetag="locationchange.Huskswarm.changeto.none">
+        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requiredduration="1" probability="0.7" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="MilitaryForces" messagetag="locationchange.UnderAttack.changeto.militaryforces">
-        <Requirement requiredlocations="Blockade,Base,MilitaryForces" requiredduration="1" probability="1" requiredproximity="1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
+      <ChangeTo type="None" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
-      </ChangeTo>
+      </ChangeTo> -->
     </OuterHuskLair>
 
     <!-- END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION ////////// END LOCATION -->
