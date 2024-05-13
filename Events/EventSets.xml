@@ -268,17 +268,15 @@
 
       <!-- Event set for missions that have husk outposts as a destination or husks as a target-->
       <!-- TODO add more church missions -->
-      <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+      <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
         <EventSet identifier="missionevents.husk.destination.easy" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
-          <ScriptedEvent identifier="missionevent_slimecollection" probability="0.25" />
-        </EventSet>
-      
+          <ScriptedEvent identifier="missionevent_slimecollection" commonness="100" probability="0.25" />
+        </EventSet>      
         <EventSet identifier="outpostevents.husk.coalition" allowatstart="true" chooserandom="true" eventcount="1" faction="coalition">
-          <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" />
-        </EventSet>
-        
+          <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" commonness="100" />
+        </EventSet>        
         <EventSet identifier="outpostevents.husk.separatists" allowatstart="true" chooserandom="true" eventcount="1" faction="separatists">
-          <ScriptedEvent identifier="missionevent_huskcultinterception" />
+          <ScriptedEvent identifier="missionevent_huskcultinterception" commonness="100" />
         </EventSet>
       </EventSet>
 
