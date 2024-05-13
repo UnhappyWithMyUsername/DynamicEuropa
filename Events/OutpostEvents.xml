@@ -955,16 +955,13 @@
          
     <ScriptedEvent identifier="unlockpathblockade" commonness="0" unlockpathevent="true">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
           <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -975,9 +972,7 @@
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
@@ -997,16 +992,13 @@
     
     <ScriptedEvent identifier="unlockpathcoldcaverns" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="30" faction="coalition" biome="coldcaverns">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1017,9 +1009,7 @@
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
@@ -1038,16 +1028,13 @@
 
     <ScriptedEvent identifier="unlockpatheuropanridge" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="40" faction="coalition" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
           <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1058,9 +1045,7 @@
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
@@ -1079,16 +1064,13 @@
 
     <ScriptedEvent identifier="unlockpathaphoticplateau" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="50" faction="coalition" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1099,9 +1081,7 @@
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
@@ -1120,16 +1100,13 @@
 
     <ScriptedEvent identifier="unlockpathgreatsea" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="75" faction="coalition" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 75">
         <Success>
           <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1140,9 +1117,7 @@
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
@@ -1161,16 +1136,13 @@
 
     <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1181,9 +1153,7 @@
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
@@ -1202,16 +1172,13 @@
 
     <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
           <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1222,9 +1189,7 @@
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
@@ -1243,16 +1208,13 @@
 
     <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1263,9 +1225,7 @@
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
@@ -1291,9 +1251,7 @@
         <Success>
           <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <StatusEffectAction targettag="blockadebutton">
-            <StatusEffect target="this" state="true" setvalue="true" />
-          </StatusEffectAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <Label name="retry" />
@@ -1304,9 +1262,7 @@
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
-                  <StatusEffectAction targettag="blockadebutton">
-                    <StatusEffect target="this" state="true" setvalue="true" />
-                  </StatusEffectAction>
+                  <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
@@ -1321,8 +1277,15 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
-    </ScriptedEvent>
+    </ScriptedEvent>    
     
+    <!-- opens the door leading to blockade lever, triggered by events above -->
+    <ScriptedEvent identifier="opendoortoblockade" commonness="1" >    
+      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
+      <StatusEffectAction targettag="blockadebutton">
+        <StatusEffect target="this" state="true" setvalue="true" />
+      </StatusEffectAction>
+    </ScriptedEvent>
     
     <!-- simple event that unlocks the path by flicking a lever -->
     <ScriptedEvent identifier="openblockade" commonness="1" >
@@ -1353,32 +1316,39 @@
     
     <!-- triggers alarm if it detects a player in the blockade hulls without negociating with NPC -->
     <ScriptedEvent identifier="blockadealarm">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:commandroom" tag="blockadehull" submarinetype="Outpost" />
-      <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
-      <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" waitforinteraction="false" />
-      <CheckDataAction identifier="blockadeopened" condition="eq 1">
-        <Success>
-          <SetDataAction identifier="blockadeopened" value="0" />
+      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+        <Success>        
+          <!-- do not activate if takeover active -->
         </Success>
         <Failure>
-          <StatusEffectAction targettag="alarm">
-            <StatusEffect IsOn="true" target="This" setvalue="true" />
-          </StatusEffectAction>
-          <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <StatusEffectAction targettag="blockadehull">
-            <StatusEffect target="this" duration="3" >
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <ReputationAction targettype="Location" increase="-25" />
-          <SetDataAction identifier="blockadeopened" value="0" />
-          <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
+          <TagAction criteria="player" tag="player" />
+          <TagAction criteria="hullname:commandroom" tag="blockadehull" submarinetype="Outpost" />
+          <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+          <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" waitforinteraction="false" />
+          <CheckDataAction identifier="blockadeopened" condition="eq 1">
+            <Success>
+              <SetDataAction identifier="blockadeopened" value="0" />
+            </Success>
+            <Failure>
+              <StatusEffectAction targettag="alarm">
+                <StatusEffect IsOn="true" target="This" setvalue="true" />
+              </StatusEffectAction>
+              <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+              <StatusEffectAction targettag="blockadehull">
+                <StatusEffect target="this" duration="3" >
+                  <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ReputationAction targettype="Location" increase="-25" />
+              <SetDataAction identifier="blockadeopened" value="0" />
+              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
+            </Failure>
+          </CheckDataAction>
         </Failure>
-      </CheckDataAction>
+      </CheckMissionAction>
     </ScriptedEvent>
     
     
