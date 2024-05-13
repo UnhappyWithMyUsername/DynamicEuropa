@@ -1017,6 +1017,7 @@
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
   </PirateMission>
   -->
+  
   <PirateMission type="Pirate" identifier="coalition_cargo2" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="-15" />
 		<Reputation identifier="bandits" amount="5" />
@@ -1053,6 +1054,7 @@
     <TriggerEvent state="0" delay="0" eventidentifier="cocargobroadcast" campaignonly="true" />
     <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
   </PirateMission>
+  
   <PirateMission type="Pirate" identifier="coalition_cargotrap" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="10" reward="0" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="-15" />
     <SubmarineTypes>
@@ -1086,6 +1088,7 @@
     </CharacterTypes>
     <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
   </PirateMission>
+  
   <OutpostDestroyMission name="Pirate Haven" identifier="destroypirateoutpost" tags="pirateoutpostmission" type="OutpostDestroy" requireCorrectLocationType="true" reward="0" difficulty="4" commonness="100" allowretry="true">
     <Reputation identifier="coalition" amount="5" />
     <Reputation identifier="separatists" amount="5" />
@@ -1175,7 +1178,7 @@
   <!--OUTPOST TAKEOVER-->
 
   <OutpostDestroyMission name="Coalition Station-Takeover" identifier="cotakeover_separatistoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
-    <Reputation identifier="separatists" amount="-20" />
+    <Reputation identifier="separatists" amount="-200" />
     <Reputation identifier="coalition" amount="10" />
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
     <Characters>
@@ -1204,7 +1207,7 @@
   </OutpostDestroyMission>
 
   <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
-    <Reputation identifier="coalition" amount="-20" />
+    <Reputation identifier="coalition" amount="-200" />
     <Reputation identifier="separatists" amount="10" />
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
     <Characters>
@@ -1440,6 +1443,7 @@
     <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </CrawlerLairMission>
+  
   <MudraptorLairMission
     identifier="mudraptorlair"
     tags=""
@@ -1482,6 +1486,7 @@
     <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </MudraptorLairMission>
+  
   <ThresherLairMission
     identifier="thresherlair"
     tags=""
@@ -1532,6 +1537,7 @@
     <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </ThresherLairMission>
+  
   <HuskCrawlerLairMission
     identifier="huskcrawlerlair"
     tags=""
@@ -1557,7 +1563,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </HuskCrawlerLairMission>
   
-  <GotoMission
+<!--   <GotoMission
     name=""
     identifier="smuggling1"
     type="GoTo"
@@ -1575,6 +1581,6 @@
     <LocationType identifier="Mine"/>
     <CompleteCheckDataAction identifier="smugglingcomplete" condition="eq 6"/>
     <message header="Smuggling stolen items" text="You've reached your destination. Find your contact and hand over the items" />
-  </GotoMission>
+  </GotoMission> -->
   
 </Missions>
