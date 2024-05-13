@@ -857,9 +857,8 @@
       </CheckDataAction>
       <Label name="Start" />
       <TagAction criteria="player" tag="player" />
-      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="outpostmanagerpirate" targettag="managerpirate" spawnlocation="Outpost" spawnpointtag="pirateadmin" />
       <Label name="waitforinput" />
-      <TriggerAction target1tag="managerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
+      <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
       <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="de_oldman">
         <Option text="eventtext.piratemissioninformant.option.buy">
           <CheckMoneyAction Amount="1000">
@@ -883,25 +882,22 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
-    <ScriptedEvent identifier="missionevent.piratevscoalition" commonness="200">
+    
+    
+    <!-- UNUSED -->
+<!--     <ScriptedEvent identifier="missionevent.piratevscoalition" commonness="200">
       <NPCWaitAction npctag="managerpirate" wait="true" />
       <ConversationAction text="EventText.missionevent.piratevscoalition.c1" speakertag="managerpirate" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="piratevscoalition" />
       <NPCWaitAction npctag="managerpirate" wait="false" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="missionevent.piratevsseparatists" commonness="200">
+    </ScriptedEvent> -->
+    
+<!--     <ScriptedEvent identifier="missionevent.piratevsseparatists" commonness="200">
       <NPCWaitAction npctag="managerpirate" wait="true" />
       <ConversationAction text="EventText.missionevent.piratevsseparatists.c1" speakertag="managerpirate" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="piratevsseparatists" />
       <NPCWaitAction npctag="managerpirate" wait="false" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="missionevent.clearlair" commonness="85">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
-      <ConversationAction text="EventText.missionevent_lair.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
-      <MissionAction missiontag="lair" />
-      <MissionAction missiontag="lair" minlocationdistance="2" unlockfurtheronmap="true" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
-    </ScriptedEvent>
+    </ScriptedEvent> -->
     
     
     <!-- Mission Events -->
