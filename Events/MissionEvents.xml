@@ -537,45 +537,10 @@
     <ScriptedEvent identifier="cooutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:subtopleft" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:quartermaster" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:bartender" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanager" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmine" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:armsdealer" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commoner" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:researcher" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction>
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="200" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <ReputationAction targettype="Location" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
@@ -588,15 +553,13 @@
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
-          <LayerAction layer="coalition" enabled="true" />
-          <LayerAction layer="separatists" enabled="false" />
+<!--           <LayerAction layer="coalition" enabled="true" />
+          <LayerAction layer="separatists" enabled="false" /> -->
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
           <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" />
         </Success>
         <Failure>
-          <Waitaction time="1" /><!-- 
-          <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="none" />
-          <CombatAction cooldown="0" combatmode="Offensive" npctag="defenders" enemytag="attackers" isinstigator="true" guardreaction="None" witnessreaction="none" /> -->
+          <Waitaction time="1" />
           <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
@@ -606,45 +569,9 @@
     <ScriptedEvent identifier="sepoutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:subtopleft" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:quartermaster" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:bartender" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanager" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmine" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:armsdealer" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commoner" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:researcher" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction>
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="200" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="coalitionsoldier" CompareToTarget="coalitionsoldier" MinPercentageRelativeToTarget="75">
@@ -657,15 +584,13 @@
           <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
-          <LayerAction layer="separatists" enabled="true" />
-          <LayerAction layer="coalition" enabled="false" />
+<!--           <LayerAction layer="separatists" enabled="true" />
+          <LayerAction layer="coalition" enabled="false" /> -->
           <ConversationAction text="eventtext.takeover.success" dialogtype="Small" targettag="player" />
           <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" />
         </Success>
         <Failure>
-          <Waitaction time="1" /><!-- 
-          <CombatAction cooldown="0" combatmode="Offensive" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="None" witnessreaction="none" />
-          <CombatAction cooldown="0" combatmode="Offensive" npctag="defenders" enemytag="attackers" isinstigator="true" guardreaction="None" witnessreaction="none" /> -->
+          <Waitaction time="1" />
           <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
@@ -678,7 +603,7 @@
       <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
     </ScriptedEvent>   
     
-    <!-- for takeover testing purposes no touchey until it works -->
+    <!-- TODO: DELETE THIS for takeover testing purposes no touchey until it works -->
     <ScriptedEvent identifier="takeovertestcoal">
       <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />  
         <!--spawn temporary crewmembers which will be removed from the crew after 6h or when completing the mission-->
