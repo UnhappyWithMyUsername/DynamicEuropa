@@ -1572,6 +1572,8 @@
       <Label name="end" />
     </ScriptedEvent>
     
+    
+    
     <!-- remove lithomorphs in outpost levels, I hate it -->
     <ScriptedEvent identifier="removelithomorphsoutpost" commonness="100">
       <TagAction criteria="itemtag:lithomorphspawner" tag="lithomorphspawner" />
@@ -1580,6 +1582,38 @@
           <Remove/>
         </StatusEffect>
       </StatusEffectAction>
+    </ScriptedEvent>
+        
+    <ScriptedEvent identifier="circuswelcome" commonness="100">
+      <CheckDataAction identifier="circuswelcomenorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>    
+          <TagAction criteria="player" tag="player" />
+          <TagAction criteria="itemidentifier:op_clownmarquee" tag="showtimesign" submarinetype="Outpost" />
+          <TagAction criteria="itemidentifier:searchlight" tag="showtimesign" submarinetype="Outpost" />
+          <TagAction criteria="itemtag:smokeemitter" tag="smokeemitter" submarinetype="Outpost" />
+          <TriggerAction target1tag="player" target2tag="showtimesign" radius="420" />
+          <WaitAction time="2" />
+          <ReputationAction increase="3" identifier="Clowns" targettype="Faction" />
+          <StatusEffectAction targettag="showtimesign" >
+            <StatusEffect target="this" duration="5" >
+              <Sound file="Content/Items/Jobgear/Clown/ITEM_bananaSlip1.ogg" range="2000" volume="3" frequencymultiplier="0.5"  />
+              <ParticleEmitter particle="impactfirearm" particlespersecond="15" velocitymin="0" velocitymax="0" anglemin="180" anglemax="360" scalemin="0.5" scalemax="1" distancemin="50" distancemax="500" colormultiplier="255,255,255,200" lifetimemultiplier="50" />
+              <ParticleEmitter particle="whitespark" particlespersecond="30" velocitymin="100" velocitymax="200" anglemin="240" anglemax="320" scalemin="1" scalemax="2" distancemin="5" distancemax="250" colormultiplier="255,255,255,255" lifetimemultiplier="5" HighQualityCollisionDetection="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <StatusEffectAction targettag="smokeemitter" >
+            <StatusEffect target="this" duration="5" >    
+              <ParticleEmitter particle="flare" particlespersecond="5" velocitymin="0" velocitymax="100" anglemin="80" anglemax="100" scalemin="2" scalemax="4" distancemin="0" distancemax="50" colormultiplier="255,255,255,120" lifetimemultiplier="1" HighQualityCollisionDetection="false" />
+            </StatusEffect>
+          </StatusEffectAction>          
+          <WaitAction time="3" />
+          <ConversationAction targettag="player" text="eventtext.circuswelcome.foundus" dialogtype="Small" endconversation="true" eventsprite="Jestmaster" />
+          <SetDataAction identifier="circuswelcomenorepeat" value="1" />
+        </Success>  
+      </CheckDataAction >   
     </ScriptedEvent>
     
   </EventPrefabs>
