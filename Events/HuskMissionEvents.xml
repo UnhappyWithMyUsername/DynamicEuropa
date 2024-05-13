@@ -6,28 +6,24 @@
       <!--MANAGER MISSIONS-->
       
       <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
-        <NPCWaitAction npctag="outpostmanager" wait="true" />
         <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskmedicalcargo" />
         <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
-        <NPCWaitAction npctag="outpostmanager" wait="true" />
         <ConversationAction text="EventText.missionevent_huskeggsmuggling.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskeggsmuggling" />
         <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="50" requiredDestinationTypes="study,research,huskchurch">
-        <NPCWaitAction npctag="outpostmanager" wait="true" />
         <ConversationAction text="EventText.missionevent_escorthuskvip.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="escorthuskvip" />
         <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
 
       <ScriptedEvent identifier="missionevent_slimecollection" commonness="50" requiredDestinationTypes="huskchurch">
-        <NPCWaitAction npctag="outpostmanager" wait="true" />
         <ConversationAction text="EventText.missionevent_slimecollection.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="slimecollection" />
         <NPCWaitAction npctag="outpostmanager" wait="false" />
@@ -48,7 +44,6 @@
               <Success>
                 <TagAction criteria="player" tag="player" />
                 <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="missionnpc" spawnlocation="Outpost" targetmoduletags="adminmodule" />
-                <NPCWaitAction npctag="missionnpc" wait="true" />
                 <TriggerAction target1tag="missionnpc" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true" />
                 <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="true" />
                 <ConversationAction text="EventText.missionevent_huskcultinterception.churchmakesmeds" endeventifinterrupted="false" eventsprite="Separatists">
@@ -84,7 +79,6 @@
             <!-- do nothing if high rep -->
           </Failure>
           <Success>
-            <NPCWaitAction npctag="outpostmanager" wait="true" />
             <ConversationAction text="Eventtext.missionevent_escorthuskterrorist.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
             <MissionAction missionidentifier="escorthuskterrorist" />
             <NPCWaitAction npctag="outpostmanager" wait="false" />
@@ -98,7 +92,6 @@
             <!-- only get this if husk rep high -->
           </Failure>
           <Success>
-            <NPCWaitAction npctag="outpostmanager" wait="true" />
             <ConversationAction text="EventText.missionevent_jailbreak_husk.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="huskinvite" dialogtype="Small">
               <Option text="EventText.missionevent.pleasecontinue">
                 <!-- "please continue" -->
@@ -157,7 +150,6 @@
                 <!-- needs high enough coalition rep -->
               </Failure>
               <Success>
-                <NPCWaitAction npctag="outpostmanager" wait="true" />
                 <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.majorproblem" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" >
                   <Option text="EventText.missionevent_assassinatehuskresearcher.whatkindofproblem">
                     <!-- "please continue" -->
@@ -257,7 +249,6 @@
         <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
         <TagAction criteria="itemtag:hornitem" tag="bikehorn" />
         <SpawnAction npcsetidentifier="husknpcs" npcidentifier="huskcultistsecurity" targettag="headofsecurity" targetmoduletags="adminmodule" offset="150" />
-        <NPCWaitAction npctag="headofsecurity" wait="true" />
         <ConversationAction text="EventText.hiddenandclowngerous.thisistheplace" targettag="player" eventsprite="infiltration2" dialogtype="Small"/>
         <Label name="waitforhonks" />
         <WaitAction time="1" />
