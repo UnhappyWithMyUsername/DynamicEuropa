@@ -956,551 +956,371 @@
     <ScriptedEvent identifier="unlockpathblockade" commonness="0" unlockpathevent="true">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="septakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 30">
-            <Success>
-              <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathgeneric.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathgeneric.o1">
-                  <CheckMoneyAction amount="2000">
-                    <Success>
-                      <MoneyAction amount="-2000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpathgeneric.o2">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgeneric.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgeneric.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpathgeneric.o2">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
     
     
     <ScriptedEvent identifier="unlockpathcoldcaverns" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="30" faction="coalition" biome="coldcaverns">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="septakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 30">
-            <Success>
-              <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathcoldcaverns.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathcoldcaverns.o1">
-                  <CheckMoneyAction amount="2000">
-                    <Success>
-                      <MoneyAction amount="-2000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathcoldcaverns.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathcoldcaverns.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridge" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="40" faction="coalition" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="septakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 40">
-            <Success>
-              <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpatheuropanridge.o1">
-                  <CheckMoneyAction amount="4000">
-                    <Success>
-                      <MoneyAction amount="-4000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpatheuropanridge.o1">
+              <CheckMoneyAction amount="4000">
+                <Success>
+                  <MoneyAction amount="-4000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateau" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="50" faction="coalition" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="septakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 50">
-            <Success>
-              <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathaphoticplateau.o1">
-                  <CheckMoneyAction amount="8000">
-                    <Success>
-                      <MoneyAction amount="-8000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathaphoticplateau.o1">
+              <CheckMoneyAction amount="8000">
+                <Success>
+                  <MoneyAction amount="-8000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatsea" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="75" faction="coalition" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 75">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="septakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 75">
-            <Success>
-              <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathgreatsea.o1">
-                  <CheckMoneyAction amount="16000">
-                    <Success>
-                      <MoneyAction amount="-16000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgreatsea.o1">
+              <CheckMoneyAction amount="16000">
+                <Success>
+                  <MoneyAction amount="-16000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="cotakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 30">
-            <Success>
-              <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="eventtext.unlockpathcoldcavernsseparatists.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathcoldcaverns.o1">
-                  <CheckMoneyAction amount="2000">
-                    <Success>
-                      <MoneyAction amount="-2000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="eventtext.unlockpathcoldcavernsseparatists.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathcoldcaverns.o1">
+              <CheckMoneyAction amount="2000">
+                <Success>
+                  <MoneyAction amount="-2000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="cotakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 40">
-            <Success>
-              <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpatheuropanridge.o1">
-                  <CheckMoneyAction amount="4000">
-                    <Success>
-                      <MoneyAction amount="-4000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpatheuropanridge.o1">
+              <CheckMoneyAction amount="4000">
+                <Success>
+                  <MoneyAction amount="-4000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="cotakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 50">
-            <Success>
-              <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathaphoticplateau.o1">
-                  <CheckMoneyAction amount="8000">
-                    <Success>
-                      <MoneyAction amount="-8000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathaphoticplateau.o1">
+              <CheckMoneyAction amount="8000">
+                <Success>
+                  <MoneyAction amount="-8000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <CheckMissionAction MissionTag="outposttakeovermission" Type="Current">
+      <TriggerEventAction identifier="blockadealarm" />
+      <TriggerEventAction identifier="openblockade" />
+      <CheckReputationAction targettype="Location" condition="gte 75">
         <Success>
-          <TriggerEventAction identifier="openblockade" />
-          <Label name="checkstate" />
-          <CheckDataAction identifier="cotakeoveractive" condition="eq 0">
-            <Success>
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-              <!-- End -->
-            </Success>
-            <Failure>
-              <WaitAction time="3" />
-              <GoTo name="checkstate" />
-            </Failure>
-          </CheckDataAction>
+          <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
+          <SetDataAction identifier="blockadeopened" value="1" />
+          <StatusEffectAction targettag="blockadebutton">
+            <StatusEffect target="this" state="true" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
-          <TriggerEventAction identifier="blockadealarm" />
-          <TriggerEventAction identifier="openblockade" />
-          <CheckReputationAction targettype="Location" condition="gte 75">
-            <Success>
-              <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
-              <SetDataAction identifier="blockadeopened" value="1" />
-              <StatusEffectAction targettag="blockadebutton">
-                <StatusEffect target="this" state="true" setvalue="true" />
-              </StatusEffectAction>
-            </Success>
-            <Failure>
-              <Label name="retry" />
-              <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
-                <Option text="EventText.unlockpathgreatsea.o1">
-                  <CheckMoneyAction amount="16000">
-                    <Success>
-                      <MoneyAction amount="-16000" />
-                      <SetDataAction identifier="blockadeopened" value="1" />
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
-                      <StatusEffectAction targettag="blockadebutton">
-                        <StatusEffect target="this" state="true" setvalue="true" />
-                      </StatusEffectAction>
-                    </Success>
-                    <Failure>
-                      <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
-                      <GoTo name="retry" />
-                    </Failure>
-                  </CheckMoneyAction>
-                </Option>
-                <Option text="EventText.unlockpath.refusebribe">
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+          <Label name="retry" />
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+            <Option text="EventText.unlockpathgreatsea.o1">
+              <CheckMoneyAction amount="16000">
+                <Success>
+                  <MoneyAction amount="-16000" />
+                  <SetDataAction identifier="blockadeopened" value="1" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <StatusEffectAction targettag="blockadebutton">
+                    <StatusEffect target="this" state="true" setvalue="true" />
+                  </StatusEffectAction>
+                </Success>
+                <Failure>
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
                   <GoTo name="retry" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.unlockpath.refusebribe">
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <GoTo name="retry" />
+            </Option>
+          </ConversationAction>
         </Failure>
-      </CheckMissionAction>
+      </CheckReputationAction>
     </ScriptedEvent>
     
     
