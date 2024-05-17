@@ -1468,6 +1468,7 @@
           <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
           <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
           <TagAction criteria="player" tag="player" />
+          <TagAction criteria="crew" tag="crew" />
           <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
           <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
           <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
@@ -1519,25 +1520,25 @@
           <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
           <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
           <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
-          <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false" ContinueAutomatically="true" />
+          <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false"/>
           <WaitAction time="3" />
           <StatusEffectAction targettag="piratediver">
             <StatusEffect target="this" >
               <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
             </StatusEffect>
           </StatusEffectAction>
-          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="sonar"/>
+          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
           <WaitAction time="2" />
           <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
           <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
           <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
           <!-- use spoken dialogue if ever implemented -->
-          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="sonar" ContinueAutomatically="true"/>
+          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" ContinueAutomatically="true"/>
           <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
           <Label name="combatrefresh" />
           <TagAction criteria="player" tag="player" />
           <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-          <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+          <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
           <WaitAction time="5" />
           <GoTo name="combatrefresh" />
         </Success>
