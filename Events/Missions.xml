@@ -1571,6 +1571,38 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </HuskCrawlerLairMission>
   
+  
+  <OutpostMission
+    identifier="vipnapping"
+    name="missionname.vipnapping"
+    successmessage="missionsuccess.vipnapping"
+    failuremessage="missionfailure.vipnapping"
+    tags="vipnapping"
+    type="AbandonedOutpost"
+    alloworderingrescuees="false"
+    reward="3000"
+    difficulty="3"
+    commonness="0"
+    allowretry="true"
+    hostageskilledmessage="vipkilled"    
+    BlockLocationTypeChanges="true">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,512,256,256" color="214,50,48"/>
+    <LocationType identifier="colony" />
+    <LocationType identifier="city" />
+    <LocationType identifier="research" />
+    <LocationType identifier="hospital" />
+    <LocationType identifier="factory" />
+    <LocationType identifier="shipyard" />
+    <Characters>
+      <Character identifier="ransomtarget" from="customnpcs" spawnlocation="Outpost" requirerescue="true" escortidentifier="vip" color="238,130,238" teamid="FriendlyNpc"/>
+    </Characters>
+    <TriggerEvent state="0" eventidentifier="vipnappingevent" />
+    <Reputation identifier="bandits" amount="5" />
+    <Reputation identifier="location" amount="-10" />
+    <message header="missionheader0.vipnapping" text="missionmessage0.vipnapping"/>
+    <Metadata identifier="vipnappingnorepeat" value="1"/>
+  </OutpostMission>
+  
 <!--   <GotoMission
     name=""
     identifier="smuggling1"

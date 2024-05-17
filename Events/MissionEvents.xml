@@ -219,319 +219,7 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
-    
-    <ScriptedEvent identifier="pirateoutpostevent">
-      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="securitynpcpirate" targettag="dockingguard" spawnlocation="Outpost" targetmoduletags="airlock" />
-      <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
-      <NPCWaitAction npctag="dockingguard" wait="true" />
-      <CheckReputationAction targettype="faction" identifier="bandits" condition="gte -12">
-        <!-- Must have over -12 pirate rep, if under pirates are hostile and event doesnt trigger -->
-        <Success>
-          <!-- continue -->
-        </Success>
-        <Failure>
-          <Goto name="end" />
-        </Failure>
-      </CheckReputationAction>
-      <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 60">
-        <!-- Pirates turn hostile if too much coalition rep -->
-        <Success>
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="false" />
-          <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player">
-            <Option text="eventtext.option.listen">
-              <StatusEffectAction targettag="listener_player">
-                <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.2">
-                  <Sound file="%ModDir%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction text="eventtext.commsrelay.piratehaven.answer" dialogtype="Small" targettag="listener_player" />
-              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-              <GoTo name="attackplayer" />
-            </Option>
-            <Option text="eventtext.option.ignore" endconversation="true">
-              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-              <GoTo name="attackplayer" />
-            </Option>
-          </ConversationAction>
-        </Success>
-        <!-- Choose to negociate or attack -->
-        <Failure>
-          <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="guard" SpawnPointTag="guard" />
-          <NPCWaitAction NPCTag="guard" Wait="True" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="player" target2tag="securitynpcpirate" applytotarget1="triggerer_player" applytotarget2="triggered_npc" radius="200" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-          <NPCWaitAction NPCTag="guard" Wait="False" />
-          <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="true" />
-          <ConversationAction text="eventtext.pirateoutpostevent" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" eventsprite="piratehaven">
-            <Option text="eventtext.pirateoutpostevent.option.ignore">
-              <ConversationAction text="eventtext.pirateoutpostevent.option.ignore.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" />
-              <SetDataAction identifier="pirateoutpostdestruction" value="0" />
-              <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="false" />
-              <!-- Toll part, reuse triggerer_player if this is bugged -->
-              <TagAction criteria="player" tag="player" />
-              <Waitaction time="3" />
-              <ConversationAction text="eventtext.pirateoutpostevent.option.ignore.answer.response" targettag="triggerer_player" waitforinteraction="false" dialogtype="small" ContinueAutomatically="true" />
-              <ClearTagAction tag="triggerer_player" />
-              <Label name="patrol" />
-              <TriggerAction target1tag="securitynpcpirate" target2tag="player" applytotarget2="pso_trig_player" radius="500" />
-              <CheckReputationAction targettype="faction" identifier="coalition" condition="lt 20">
-                <Success>
-                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
-                  <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
-                  <Label name="psooptions" />
-                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven2">
-                    <!-- Pay the toll, get in, + reputation -->
-                    <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high">
-                      <CheckMoneyAction Amount="1000">
-                        <Success>
-                          <MoneyAction amount="-1000" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success" targettag="pso_trig_player" />
-                          <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
-                            <!-- Option to pay extra to lower your coalition reputation? -->
-                            <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy">
-                              <CheckMoneyAction Amount="1000">
-                                <Success>
-                                  <MoneyAction amount="-1000" />
-                                  <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
-                                  <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
-                                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                  <ClearTagAction tag="pso_trig_player" />
-                                </Success>
-                                <Failure>
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.failure" />
-                                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                  <ClearTagAction tag="pso_trig_player" />
-                                </Failure>
-                              </CheckMoneyAction>
-                            </Option>
-                            <Option text="eventtext.option.leave">
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                              <ClearTagAction tag="pso_trig_player" />
-                            </Option>
-                          </ConversationAction>
-                        </Success>
-                        <Failure>
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.high.failure" />
-                          <GoTo name="psooptions" />
-                        </Failure>
-                      </CheckMoneyAction>
-                    </Option>
-                    <!-- Haggle (helm skill check, get in but failure locks armory) -->
-                    <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.medium">
-                      <CheckMoneyAction Amount="750">
-                        <Success>
-                          <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
-                            <Success>
-                              <MoneyAction amount="-750" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.success" targettag="pso_trig_player" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                              <ClearTagAction tag="pso_trig_player" />
-                            </Success>
-                            <Failure>
-                              <MoneyAction amount="-750" />
-                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.failure" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                              <ClearTagAction tag="pso_trig_player" />              
-                              <TriggerEventAction identifier="piratearmorylocked" />
-                            </Failure>
-                          </SkillCheckAction>
-                        </Success>
-                        <Failure>
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
-                          <GoTo name="psooptions" />
-                        </Failure>
-                      </CheckMoneyAction>
-                    </Option>    
-                    <!-- Plead. -reputation (very low success chance), no armory. If no money, attack -->
-                    <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low">
-                      <CheckMoneyAction Amount="250">
-                        <Success>
-                          <SkillCheckAction requiredskill="helm" requiredlevel="100" targettag="pso_trig_player">
-                            <Success>
-                              <MoneyAction amount="-250" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.low.success" targettag="pso_trig_player" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                              <ClearTagAction tag="pso_trig_player" />
-                              <TriggerEventAction identifier="piratearmorylocked" />
-                            </Success>
-                            <Failure>
-                              <MoneyAction amount="-250" />
-                              <CheckItemAction targettag="pso_trig_player" itemtags="clothing" applytagtoitem="playerclothes">
-                                <Success>
-                                  <Label name="removeclothes" />
-                                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.undress" >
-                                    <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low.UhOh" >
-                                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.failure" fadetoblack="true" ContinueAutomatically="true" />
-                                      <Waitaction time="1" />
-                                      <AfflictionAction targettag="pso_trig_player" affliction="stun" strength="6" />
-                                      <AfflictionAction targettag="pso_trig_player" affliction="blunttrauma" strength="3" limbtype="head" />
-                                      <StatusEffectAction targettag="playerclothes">
-                                        <StatusEffect target="This" spawnedincurrentoutpost="true" allowstealing="false" setvalue="true">
-                                          <DropItem />
-                                        </StatusEffect>
-                                      </StatusEffectAction>
-                                      <StatusEffectAction targettag="pso_trig_player">
-                                        <StatusEffect target="This" >
-                                          <Sound file="Content/Sounds/Damage/Limbblunt4.ogg" range="800" volume="2" frequencymultiplier="1" />
-                                          <Sound file="Content/Sounds/Impact/SoftImpact1.ogg" range="800" volume="3" frequencymultiplier="1" />
-                                          <Sound file="Content/Items/Medical/Bandage2.ogg" range="800" volume="2" frequencymultiplier="0.5" />
-                                        </StatusEffect>
-                                      </StatusEffectAction>
-                                      <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-                                      <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                      <ClearTagAction tag="pso_trig_player" />
-                                      <TriggerEventAction identifier="piratearmorylocked" />
-                                    </Option>
-                                  </ConversationAction>
-                                </Success>
-                                <Failure>
-                                  <Goto name="removeclothes" />
-                                </Failure>
-                                </CheckItemAction >
-                            </Failure>
-                          </SkillCheckAction>
-                        </Success>
-                        <Failure>
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.rejected" />
-                          <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
-                          <GoTo name="attack" />
-                        </Failure>
-                      </CheckMoneyAction>
-                    </Option>
-                    <Option text="eventtext.piratesecurityofficer.toll.option.insult">
-                      <ReputationAction targettype="Location" increase="-30" />
-                      <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
-                      <GoTo name="attack" />
-                    </Option>
-                  </ConversationAction>
-                </Success>
-                <Failure>
-                  <!-- If large coalition rep -->
-                  <CheckReputationAction targettype="faction" identifier="coalition" condition="lt 60">
-                    <Success>
-                      <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="true" />
-                      <TriggerAction target1tag="dockingguard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
-                      <Label name="psooptions2" />
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven2">
-                        <!-- Pay the toll, get in, + reputation -->
-                        <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high">
-                          <CheckMoneyAction Amount="2000">
-                            <Success>
-                              <MoneyAction amount="-2000" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success" targettag="pso_trig_player" />
-                              <ReputationAction targettype="Faction" identifier="coalition" increase="-5" />
-                              <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
-                                <!-- Option to pay extra to lower your coalition reputation? -->
-                                <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy">
-                                  <CheckMoneyAction Amount="1000">
-                                    <Success>
-                                      <MoneyAction amount="-1000" />
-                                      <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
-                                      <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                                      <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
-                                      <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                      <ClearTagAction tag="pso_trig_player" />
-                                    </Success>
-                                    <Failure>
-                                      <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.failure" />
-                                      <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                      <ClearTagAction tag="pso_trig_player" />
-                                    </Failure>
-                                  </CheckMoneyAction>
-                                </Option>
-                                <Option text="eventtext.option.leave">
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
-                                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                  <ClearTagAction tag="pso_trig_player" />
-                                </Option>
-                              </ConversationAction>
-                            </Success>
-                            <Failure>
-                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.high.failure" />
-                              <GoTo name="psooptions2" />
-                            </Failure>
-                          </CheckMoneyAction>
-                        </Option>
-                        <!-- Haggle (helm skill check, get in but failure locks armory) -->
-                        <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.medium">
-                          <CheckMoneyAction Amount="1500">
-                            <Success>
-                              <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
-                                <Success>
-                                  <MoneyAction amount="-1500" />
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.success" targettag="pso_trig_player" />
-                                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                  <ClearTagAction tag="pso_trig_player" />
-                                </Success>
-                                <Failure>
-                                  <MoneyAction amount="-1500" />
-                                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.failure" />
-                                  <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
-                                  <ClearTagAction tag="pso_trig_player" />              
-                                  <TriggerEventAction identifier="piratearmorylocked" />
-                                </Failure>
-                              </SkillCheckAction>
-                            </Success>
-                            <Failure>
-                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
-                              <GoTo name="psooptions2" />
-                            </Failure>
-                          </CheckMoneyAction>
-                        </Option>    
-                        <Option text="eventtext.piratesecurityofficer.toll.option.insult">
-                          <ReputationAction targettype="Location" increase="-30" />
-                          <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
-                          <Label name="attack" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.attack" targettag="pso_trig_player" />
-                          <CombatAction combatmode="Offensive" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
-                          <WaitAction time="60" />
-                          <ClearTagAction tag="pso_trig_player" />
-                          <GoTo name="patrol" />
-                        </Option>
-                      </ConversationAction>
-                    </Success>
-                  </CheckReputationAction>
-                </Failure>
-              </CheckReputationAction>
-            </Option>
-            <Option text="eventtext.pirateoutpostevent.option.attack">
-              <ConversationAction text="eventtext.pirateoutpostevent.option.attack.answer" targettag="triggerer_player" waitforinteraction="true" dialogtype="small" eventsprite="piratehaven" />
-              <NPCFollowAction npctag="triggered_npc" targettag="triggerer_player" follow="false" />
-              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-              <Label name="attackplayer" />
-              <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="800" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-              <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-              <WaitAction time="10" />
-              <ClearTagAction tag="triggerer_player" />
-              <GoTo name="attackplayer" />
-            </Option>
-          </ConversationAction>
-        </Failure>
-      </CheckReputationAction>
-      <Label name="end" />
-    </ScriptedEvent>
         
-    <ScriptedEvent identifier="piratealarm">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="3000" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <Label name="attackplayer" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="800" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <WaitAction time="10" />
-      <ClearTagAction tag="triggerer_player" />
-      <GoTo name="attackplayer" />
-    </ScriptedEvent>
-    
     <!-- OUTPOST TAKEOVER -->
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="cooutposttakeoverevent">
@@ -672,6 +360,79 @@
         </Failure>
       </CheckConditionalAction>
     </ScriptedEvent>
+    
+    <ScriptedEvent identifier="vipnappingevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="submarinehull" submarinetype="Player" />
+      <TagAction criteria="itemtag:admincabinet" tag="admincabinet" submarinetype="Outpost" />
+      <CheckItemAction targettag="ransomtarget" itemidentifiers="idcard" ApplyTagToItem="vipidcard" />
+      <!-- allow the npc to open the sub doors and flee back to outpost -->
+      <StatusEffectAction targettag="vipidcard">
+        <StatusEffect target="this" SubmarineSpecificID="0" setvalue="true" />
+      </StatusEffectAction>
+      <NPCFollowAction npctag="ransomtarget" targettag="admincabinet" follow="true"/>
+      <TriggerAction target1tag="player" target2tag="ransomtarget" applytotarget1="foundvipplayer" radius="200" waitforinteraction="false" />
+      <ConversationAction targettag="foundvipplayer" text="eventtext.vipnapping.thatstarget" endeventifinterrupted="false" endconversation="true" dialogtype="small" eventsprite="captain" />
+      <TriggerAction target1tag="ransomtarget" target2tag="submarinehull" radius="100" />
+      <OnRoundEndAction>
+        <CheckConditionalAction targettag="ransomtarget" InPlayerSubmarine="true" IsDead="False">
+          <Success>
+            <SetDataAction identifier="vipnappingnorepeat" value="1" />
+            <NPCChangeTeamAction npctag="ransomtarget" teamtag="Team1" addtocrew="true" />
+            <TriggerEventAction identifier="escortransom" nextround="true" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="vipnappingnorepeat" value="1" />
+          </Failure>
+        </CheckConditionalAction>
+      </OnRoundEndAction>
+      <Label name="end" />
+    </ScriptedEvent>
+    
+    
+    <!-- UNUSED. More complex version of ransom, not working currently -->
+<!--     <ScriptedEvent identifier="escortransomTEST">    
+      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="ransomtarget" spawnlocation="MainSub" />
+      <OnRoundEndAction>
+        <CheckConditionalAction targettag="ransomtarget" InPlayerSubmarine="true" IsDead="False">
+          <Success>
+            <SetDataAction identifier="vipnappingnorepeat" value="1" />
+            <NPCChangeTeamAction npctag="ransomtarget" teamtag="Team1" addtocrew="true" />
+            <TriggerEventAction identifier="escortransom" nextround="true" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="vipnappingnorepeat" value="1" />
+          </Failure>
+        </CheckConditionalAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+   
+    <ScriptedEvent identifier="escortransom">
+      <TagAction criteria="jobidentifier:vip" tag="ransomtarget" />
+      <NPCChangeTeamAction npctag="ransomtarget" teamtag="Team2" removefromcrew="true" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="beaconhull" submarinetype="BeaconStation" />      
+      <EventObjectiveAction type="add" identifier="eventtext.escortransom.findbeacon" />
+      <TriggerAction target1tag="ransomtarget" target2tag="beaconhull" radius="200" waitforinteraction="false" />
+      <EventObjectiveAction type="completeandremove" identifier="eventtext.escortransom.findbeacon" />
+      <OnRoundEndAction>        
+        <CheckConditionalAction targettag="ransomtarget" InBeaconStation="true" IsDead="False">
+          <Success>               
+            <MoneyAction amount="2000" />
+            <ReputationAction increase="2" identifier="bandits" targettype="Faction" />
+          </Success>
+          <Failure>
+            <NPCChangeTeamAction npctag="ransomtarget" teamtag="Team1" addtocrew="true" />
+            <TriggerEventAction identifier="escortransom" nextround="true" />
+          </Failure>
+        </CheckConditionalAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+   
+    <ScriptedEvent identifier="missionevent_vipnappingTEST">
+      <MissionAction missiontag="vipnapping" locationtype="City,colony,research,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1"/>
+    </ScriptedEvent> -->
+
     
     <!-- TODO:  remove this when devs allow triggering statuseffects in the mission itself just like Escort missions -->
     <ScriptedEvent identifier="huskcrewsymbiosis">
