@@ -32,6 +32,10 @@
       <TagAction criteria="humanprefabidentifier:coalitionengineerveteran" tag="coalitionnpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:navterminal" tag="receiver" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:coalitioncargo" tag="coalitioncargo" ContinueIfNoTargetsFound="true" />
+      <StatusEffectAction targettag="coalitioncargo">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
       <TriggerAction target1tag="receiver" target2tag="transmitter" radius="25000" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
       <TriggerAction target1tag="player" target2tag="receiver" applytotarget1="listener_player" radius="300" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="true" allowmultipletargets="false" />
       <ConversationAction text="eventtext.cocargobroadcast.receive" targettag="listener_player" waitforinteraction="true" dialogtype="small">
@@ -86,8 +90,38 @@
           <NPCChangeTeamAction npctag="coalitionnpc" teamtag="Team2" />
           <ClearTagAction tag="listener_player" />
         </Option>
-      </ConversationAction>
+      </ConversationAction>   
+      <!-- experimental: checks if player has crate, adds 1 to crewsuspicious if seen, repeat every second. After X crewsuspicious, enemy team turns hostile again  -->
+      <Label name="checkforstolencrate" />
+      <WaitAction time="1" />
+      <CheckDataAction identifier="crewsuspicious" condition="gt 10">
+        <Success>
+          <NPCChangeTeamAction npctag="coalitionnpc" teamtag="Team2" />
+          <Goto name="end" />
+        </Success>
+        <Failure>
+          <!-- proceed -->
+        </Failure>
+      </CheckDataAction>
+      <CheckItemAction targettag="player" itemtags="coalitioncargo" RequireEquipped="true">
+        <Success>
+          <CheckVisibilityAction EntityTag="player" TargetTag="coalitionnpc" MaxDistance="500" AllowSameEntity="false">
+            <Success>
+              <SetDataAction identifier="crewsuspicious" operation="Add" value="1" />
+              <GoTo name="checkforstolencrate" />
+            </Success>
+            <Failure>
+              <GoTo name="checkforstolencrate" />
+            </Failure>
+          </CheckVisibilityAction>  
+        </Success>
+        <Failure>
+          <GoTo name="checkforstolencrate" />
+        </Failure>
+      </CheckItemAction> 
+      <Label name="end" />
     </ScriptedEvent>
+    
     <!-- Coalition Civilian Transport -->
     <ScriptedEvent identifier="cocivtransport">
       <TagAction criteria="player" tag="player" />
