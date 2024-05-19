@@ -223,7 +223,7 @@
       <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerEventAction identifier="checkminepayment" />
       <!-- uses triggeraction as workaround for MP bug, otherwise nothing happens -->
-      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="1000" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
       <!-- 2/3 chance to delete the ore node -->
       <!-- 1/3 chance to unlock the ore node -->
@@ -310,10 +310,9 @@
     <ScriptedEvent identifier="unlockplantnodes" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- 3/4 chance to delete the ore node -->
       <!-- 1/4 chance to unlock the ore node -->
       <StatusEffectAction targettag="plantnode">
