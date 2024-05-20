@@ -2,6 +2,7 @@
 <Randomevents>
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
+  
     <!-- Pirate Broadcast during pirate missions -->
     <ScriptedEvent identifier="piratemissionbroadcast">
       <TagAction criteria="humanprefabidentifier:piratecaptain" tag="transmitter" ContinueIfNoTargetsFound="true" />
@@ -16,6 +17,7 @@
       <ConversationAction text="eventtext.piratemissionbroadcast.receive" targettag="listener" waitforinteraction="false" dialogtype="small" />
       <ClearTagAction tag="listener" />
     </ScriptedEvent>
+    
     <!-- Coalition Cargo Vessel -->
     <ScriptedEvent identifier="cocargobroadcast">
       <TagAction criteria="humanprefabidentifier:coalitioncaptain" tag="transmitter" ContinueIfNoTargetsFound="true" />
