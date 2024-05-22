@@ -364,7 +364,17 @@
         <ScriptedEvent identifier="huskcultambush" commonness="50" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultrelations" commonness="100" faction="huskcult" probability="0.5" />
       </EventSet>
-      
+      <!-- Events specific to blockades -->
+      <EventSet identifier="outpostevent.blockade.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="blockade" allowatstart="true" chooserandom="false" exhaustible="false" onceperoutpost="false" eventcount="4">
+        <ScriptedEvent identifier="checkblockadestate_coldcaverns_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_europanridge_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_aphoticplateau_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_greatsea_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_coldcaverns_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_europanridge_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_aphoticplateau_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_greatsea_separatists" commonness="100" probability="1.0" faction="separatists" />
+      </EventSet>
       <!-- Events specific to military outposts -->
       <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
         <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />

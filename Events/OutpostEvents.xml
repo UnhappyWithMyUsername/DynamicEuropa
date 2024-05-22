@@ -741,6 +741,168 @@
     /////////////////// BLOCKADE EVENTS ////////////////
     /////////////////// BLOCKADE EVENTS //////////////// -->
     
+    <ScriptedEvent identifier="checkblockadestate_coldcaverns_coalition" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_coldcaverns_coalition_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_europanridge_coalition" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_europanridge_coalition_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_aphoticplateau_coalition" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_aphoticplateau_coalition_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_greatsea_coalition" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_greatsea_coalition_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="checkblockadestate_coldcaverns_separatists" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_coldcaverns_separatists_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_europanridge_separatists" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_europanridge_separatists_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_aphoticplateau_separatists" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_aphoticplateau_separatists_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="checkblockadestate_greatsea_separatists" commonness="100">
+      <WaitAction time="8" />
+      <!-- check if a blockade of this faction was unlocked previously for this biome -->
+      <CheckDataAction identifier="blockade_greatsea_separatists_unlocked" condition="true">
+        <Success>
+          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
+          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <TriggerEventAction identifier="opendoortoblockade" />
+            </Failure>
+          </CheckObjectiveAction>
+        </Success>
+        <Failure>
+          <!-- do nothing -->
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
     <!--"Unlock Path blockade (generic template, versions by biome/cost below)"
          Only used for negociating and disabling the alarm, the actual event is openblockade -->
     <ScriptedEvent identifier="unlockpathblockade" commonness="0" unlockpathevent="true">
@@ -788,6 +950,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -799,6 +962,7 @@
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -824,6 +988,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -835,6 +1000,7 @@
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -860,6 +1026,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -871,6 +1038,7 @@
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -896,6 +1064,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -907,6 +1076,7 @@
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -932,6 +1102,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -943,6 +1114,7 @@
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -968,6 +1140,7 @@
         <Success>
           <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -979,6 +1152,7 @@
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -1004,6 +1178,7 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -1015,6 +1190,7 @@
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
@@ -1041,6 +1217,7 @@
         <Success>
           <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -1052,6 +1229,7 @@
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
