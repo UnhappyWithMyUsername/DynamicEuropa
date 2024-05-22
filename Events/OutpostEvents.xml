@@ -352,9 +352,9 @@
         <Success>
           <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.interact" eventsprite="engineer">
             <Option text="eventtext.shop.engineer.option.fuelrod">
-              <CheckMoneyAction Amount="900">
+              <CheckMoneyAction targettag="ro_trig_player" Amount="900">
                 <Success>
-                  <MoneyAction amount="-900" />
+                  <MoneyAction targettag="ro_trig_player" amount="-900" />
                   <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
                   <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
                   <SpawnAction itemidentifier="fuelrod" targetinventory="ro_trig_player" />
@@ -370,9 +370,9 @@
               </CheckMoneyAction>
             </Option>
             <Option text="eventtext.shop.engineer.option.fpga">
-              <CheckMoneyAction Amount="250">
+              <CheckMoneyAction targettag="ro_trig_player" Amount="250">
                 <Success>
-                  <MoneyAction amount="-250" />
+                  <MoneyAction targettag="ro_trig_player" amount="-250" />
                   <SpawnAction itemidentifier="fpgacircuit" targetinventory="ro_trig_player" />
                   <SpawnAction itemidentifier="fpgacircuit" targetinventory="ro_trig_player" />
                   <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.fpga.buy.success" eventsprite="engineer" />
@@ -386,9 +386,9 @@
               </CheckMoneyAction>
             </Option>
             <Option text="eventtext.shop.engineer.option.extinguisher">
-              <CheckMoneyAction Amount="100">
+              <CheckMoneyAction targettag="ro_trig_player" Amount="100">
                 <Success>
-                  <MoneyAction amount="-100" />
+                  <MoneyAction targettag="ro_trig_player" amount="-100" />
                   <SpawnAction itemidentifier="extinguisher" targetinventory="ro_trig_player" />
                   <ConversationAction targettag="ro_trig_player" text="eventtext.shop.engineer.option.extinguisher.buy.success" eventsprite="engineer" />
                   <ClearTagAction tag="ro_trig_player" />
@@ -421,9 +421,9 @@
       <TriggerAction target1tag="quartermaster" target2tag="player" applytotarget2="qm_trig_player" radius="200" waitforinteraction="true" />
       <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.interact" eventsprite="mechanic">
         <Option text="eventtext.shop.quartermaster.option.weldingfuel">
-          <CheckMoneyAction Amount="1000">
+          <CheckMoneyAction targettag="qm_trig_player" Amount="1000">
             <Success>
-              <MoneyAction amount="-1000" />
+              <MoneyAction targettag="qm_trig_player" amount="-1000" />
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
@@ -443,9 +443,9 @@
           </CheckMoneyAction>
         </Option>
         <Option text="eventtext.shop.quartermaster.option.scrap">
-          <CheckMoneyAction Amount="1000">
+          <CheckMoneyAction targettag="qm_trig_player" Amount="1000">
             <Success>
-              <MoneyAction amount="-1000" />
+              <MoneyAction targettag="qm_trig_player" amount="-1000" />
               <SpawnAction itemidentifier="scrap" targetinventory="qm_trig_player" />
               <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.scrap.buy.success" eventsprite="mechanic" />
               <MissionAction missiontag="salvagewreck" />
