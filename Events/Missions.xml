@@ -757,6 +757,61 @@
   </SalvageMission>
   
   <!-- PIRATE MISSIONS -->
+  
+  <PirateMission     
+    type="Pirate"
+    identifier="pirateattack1"
+    tags="pirateattack"
+    showinmenus="false"
+    showstartmessage="false"
+    issideobjective="true"
+    difficulty="4"
+    commonness="0"
+    reward="0"
+    addedmissiondifficultyperplayer="8">
+    <Reputation identifier="coalition" amount="7" />
+    <Reputation identifier="separatists" amount="7" />
+		<Reputation identifier="bandits" amount="-5" />
+    <SubmarineTypes>
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" />
+      <Submarine path="%ModDir%/EnemySubmarines/Pirates/GunGatorPirate.sub" />
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
+      <Character typeidentifier="piratesecurity" minamount="4" maxamount="6" />
+      <Character typeidentifier="pirateannihilator" minamount="0" maxamount="2" />
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateengineer" minamount="1" maxamount="3" />
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="piratecaptain">
+        <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+        <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratesecurity">
+        <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+        <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+        <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
+      </CharacterType>
+      <CharacterType typeidentifier="piratemechanic">
+        <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="pirateengineer">
+        <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+        <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
+    <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
+  </PirateMission>
+  
   <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="8000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="7" />
     <Reputation identifier="separatists" amount="7" />
