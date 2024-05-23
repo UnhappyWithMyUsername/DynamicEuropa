@@ -1778,7 +1778,7 @@
           <Label name="payarmoryskiptrigger" />
           <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.500mk">
             <Option text="eventtext.piratearmorylocked.Pay">
-              <CheckMoneyAction Amount="500">
+              <CheckMoneyAction targettag="triggerer_player" Amount="500">
                 <Success>
                   <MoneyAction amount="-500" />
                   <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.dooropens" />
@@ -1788,13 +1788,14 @@
                   <SetDataAction identifier="armorylocked" value="0" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratearmorylocked.nomoney" endconversation="true" />
+                  <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.nomoney" endconversation="true" /><ClearTagAction tag="triggerer_player" />
                   <GoTo name="payarmory" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="eventtext.piratearmorylocked.noway">
               <ConversationAction targettag="triggerer_player" text="eventtext.piratearmorylocked.comeback" endconversation="true" />
+              <ClearTagAction tag="triggerer_player" />
               <Goto name="payarmory"/>
             </Option>
           </ConversationAction>
