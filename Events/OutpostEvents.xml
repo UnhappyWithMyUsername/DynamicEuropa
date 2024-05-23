@@ -1644,20 +1644,32 @@
       </CheckReputationAction>
       <Label name="end" />
     </ScriptedEvent>
-        
-    <ScriptedEvent identifier="piratealarm">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="3000" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <Label name="attackplayer" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="800" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <WaitAction time="10" />
-      <ClearTagAction tag="triggerer_player" />
-      <GoTo name="attackplayer" />
-    </ScriptedEvent>
     
+    <!-- triggers alarm if it detects a player in the pirate outpost without negociating with NPC -->
+    <ScriptedEvent identifier="piratehavenalarm">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" />
+      <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
+      <TriggerAction target1tag="player" target2tag="piratehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <CheckDataAction identifier="piratehavenunlocked" condition="eq 1">
+        <Success>
+          <SetDataAction identifier="piratehavenunlocked" value="0" />
+        </Success>
+        <Failure>
+          <StatusEffectAction targettag="alarm">
+            <StatusEffect IsOn="true" target="This" setvalue="true" />
+          </StatusEffectAction>
+          <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+          <StatusEffectAction targettag="piratehull">
+            <StatusEffect target="this" duration="3" >
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ReputationAction targettype="Location" increase="-30" />
+          <SetDataAction identifier="piratehavenunlocked" value="0" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
         
     <!-- Pirate Divers -->
     <ScriptedEvent identifier="piratediversoutpost">
@@ -1812,33 +1824,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
-    
-    <!-- triggers alarm if it detects a player in the pirate outpost without negociating with NPC -->
-    <ScriptedEvent identifier="piratehavenalarm">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" />
-      <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
-      <TriggerAction target1tag="player" target2tag="piratehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <CheckDataAction identifier="piratehavenunlocked" condition="eq 1">
-        <Success>
-          <SetDataAction identifier="piratehavenunlocked" value="0" />
-        </Success>
-        <Failure>
-          <StatusEffectAction targettag="alarm">
-            <StatusEffect IsOn="true" target="This" setvalue="true" />
-          </StatusEffectAction>
-          <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <StatusEffectAction targettag="piratehull">
-            <StatusEffect target="this" duration="3" >
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <ReputationAction targettype="Location" increase="-30" />
-          <SetDataAction identifier="piratehavenunlocked" value="0" />
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>
-      
+          
     <ScriptedEvent identifier="piratemissioninformant" commonness="100">
       <Label name="CheckData" />
       <WaitAction time="2" />
