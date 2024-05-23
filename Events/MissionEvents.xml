@@ -122,7 +122,34 @@
         </Failure>
       </CheckItemAction> 
       <Label name="end" />
-    </ScriptedEvent>
+    </ScriptedEvent>    
+
+    <!-- TODO test: jettison cargo -->
+    <ScriptedEvent identifier="cocargojettison">
+      <SpawnAction NPCSetIdentifier="combatmissioncoalitionnpcs" NPCIdentifier="coalitioncaptain" TeamID="FriendlyNPC" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="humanprefabidentifier:coalitioncaptain" tag="transmitter" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:coalitioncaptainlord" tag="transmitter" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:coalitioncaptain" tag="coalitioncaptain" />
+      <TagAction criteria="humanprefabidentifier:coalitioncaptainlord" tag="coalitioncaptain" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:jettisonnavterminal" tag="jettisonnavterminal" />
+      <TagAction criteria="itemtag:cargodockingport" tag="cargodockingport" />
+      <TagAction criteria="itemtag:cargohatch" tag="cargohatch" />
+      <WaitAction time="5" />
+      <NPCOperateItemAction npctag="coalitioncaptain" targettag="jettisonnavterminal" ItemComponentName="Steering" OrderOption="navigatetodestination" operate="true" />
+      <WaitAction time="5" />      
+      <ConversationAction text="Engage reverse maneuver! Jettison Cargo!" targettag="player" dialogtype="small" eventsprite="mediator"  ContinueAutomatically="true" endconversation="true"/>
+      <WaitAction time="5" />
+      <StatusEffectAction targettag="cargohatch">
+        <StatusEffect target="This" condition="0" setvalue="true"/>
+      </StatusEffectAction>
+      <StatusEffectAction targettag="cargodockingport">
+        <StatusEffect target="This" docked="false" setvalue="true"/>
+      </StatusEffectAction>
+      <Label name="end" />
+    </ScriptedEvent>    
+
+    
     
     <!-- Coalition Civilian Transport -->
     <ScriptedEvent identifier="cocivtransport">
