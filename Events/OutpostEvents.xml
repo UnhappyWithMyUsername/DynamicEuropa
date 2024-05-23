@@ -1378,31 +1378,31 @@
               <Label name="psooptions" />
               <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven2">
                 <!-- Pay the toll, get in, + reputation -->
-                <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high">
+                <Option text="eventtext.piratesecurityofficer.highrep.pay.high">
                   <CheckMoneyAction Amount="1000">
                     <Success>
                       <MoneyAction amount="-1000" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success" targettag="pso_trig_player" />
+                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success" targettag="pso_trig_player" />
                       <SetDataAction identifier="piratehavenunlocked" value="1" />
                       <StatusEffectAction targettag="pirateentrance">
                         <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                       </StatusEffectAction>
                       <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
+                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation" targettag="pso_trig_player">
                         <!-- Option to pay extra to lower your coalition reputation? -->
-                        <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy">
+                        <Option text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy">
                           <CheckMoneyAction Amount="1000">
                             <Success>
                               <MoneyAction amount="-1000" />
                               <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
                               <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
+                              <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy.success" targettag="pso_trig_player" />
                               <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                               <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
                             </Success>
                             <Failure>
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.buy.failure" />
+                              <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy.failure" />
                               <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                               <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
@@ -1410,7 +1410,7 @@
                           </CheckMoneyAction>
                         </Option>
                         <Option text="eventtext.option.leave">
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
+                          <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.declined" targettag="pso_trig_player" />
                           <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                           <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                           <ClearTagAction tag="pso_trig_player" />
@@ -1418,19 +1418,19 @@
                       </ConversationAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.high.failure" />
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.paytoll.failure" />
                       <GoTo name="psooptions" />
                     </Failure>
                   </CheckMoneyAction>
                 </Option>
                 <!-- Haggle (helm skill check, get in but failure locks armory) -->
-                <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.medium">
+                <Option text="eventtext.piratesecurityofficer.highrep.pay.medium">
                   <CheckMoneyAction Amount="750">
                     <Success>
                       <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
                         <Success>
                           <MoneyAction amount="-750" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.success" targettag="pso_trig_player" />
+                          <ConversationAction text="eventtext.piratesecurityofficer.highrep.haggle.success" targettag="pso_trig_player" />
                           <SetDataAction identifier="piratehavenunlocked" value="1" />
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
@@ -1441,7 +1441,7 @@
                         </Success>
                         <Failure>
                           <MoneyAction amount="-750" />
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.medium.failure" />
+                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.haggle.failure" />
                           <SetDataAction identifier="piratehavenunlocked" value="1" />
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
@@ -1454,19 +1454,19 @@
                       </SkillCheckAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.haggle.rejected" />
                       <GoTo name="psooptions" />
                     </Failure>
                   </CheckMoneyAction>
                 </Option>    
                 <!-- Plead. -reputation (very low success chance), no armory. If no money, attack -->
-                <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low">
+                <Option text="eventtext.piratesecurityofficer.highrep.pay.low">
                   <CheckMoneyAction Amount="250">
                     <Success>
                       <SkillCheckAction requiredskill="helm" requiredlevel="100" targettag="pso_trig_player">
                         <Success>
                           <MoneyAction amount="-250" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.low.option.pay.low.success" targettag="pso_trig_player" />
+                          <ConversationAction text="eventtext.piratesecurityofficer.highrep.plead.success" targettag="pso_trig_player" />
                           <SetDataAction identifier="piratehavenunlocked" value="1" />
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
@@ -1481,9 +1481,9 @@
                           <CheckItemAction targettag="pso_trig_player" itemtags="clothing" applytagtoitem="playerclothes">
                             <Success>
                               <Label name="removeclothes" />
-                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.undress" >
-                                <Option text="eventtext.piratesecurityofficer.toll.low.option.pay.low.UhOh" >
-                                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.failure" fadetoblack="true" ContinueAutomatically="true" />
+                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.undress" >
+                                <Option text="eventtext.piratesecurityofficer.highrep.plead.UhOh" >
+                                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.failure" fadetoblack="true" ContinueAutomatically="true" />
                                   <Waitaction time="1" />
                                   <AfflictionAction targettag="pso_trig_player" affliction="stun" strength="6" />
                                   <AfflictionAction targettag="pso_trig_player" affliction="blunttrauma" strength="3" limbtype="head" />
@@ -1519,7 +1519,7 @@
                       </SkillCheckAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.option.pay.low.rejected" />
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.rejected" />
                       <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
                       <GoTo name="attack" />
                     </Failure>
@@ -1542,32 +1542,32 @@
                   <Label name="psooptions2" />
                   <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven2">
                     <!-- Pay the toll, get in, + reputation -->
-                    <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high">
+                    <Option text="eventtext.piratesecurityofficer.lowrep.pay.high">
                       <CheckMoneyAction Amount="2000">
                         <Success>
                           <MoneyAction amount="-2000" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success" targettag="pso_trig_player" />
+                          <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success" targettag="pso_trig_player" />
                           <SetDataAction identifier="piratehavenunlocked" value="1" />
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                           </StatusEffectAction>
                           <ReputationAction targettype="Faction" identifier="coalition" increase="-5" />
                           <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                          <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation" targettag="pso_trig_player">
+                          <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation" targettag="pso_trig_player">
                             <!-- Option to pay extra to lower your coalition reputation? -->
-                            <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy">
+                            <Option text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation.buy">
                               <CheckMoneyAction Amount="1000">
                                 <Success>
                                   <MoneyAction amount="-1000" />
                                   <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
                                   <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.success" targettag="pso_trig_player" />
+                                  <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation.buy.success" targettag="pso_trig_player" />
                                   <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                                   <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                                   <ClearTagAction tag="pso_trig_player" />
                                 </Success>
                                 <Failure>
-                                  <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.buy.failure" />
+                                  <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation.buy.failure" />
                                   <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                                   <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                                   <ClearTagAction tag="pso_trig_player" />
@@ -1575,7 +1575,7 @@
                               </CheckMoneyAction>
                             </Option>
                             <Option text="eventtext.option.leave">
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.high.success.extra.reputation.declined" targettag="pso_trig_player" />
+                              <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation.declined" targettag="pso_trig_player" />
                               <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                               <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
@@ -1583,19 +1583,19 @@
                           </ConversationAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.high.failure" />
+                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.lowrep.paytoll.failure" />
                           <GoTo name="psooptions2" />
                         </Failure>
                       </CheckMoneyAction>
                     </Option>
                     <!-- Haggle (helm skill check, get in but failure locks armory) -->
-                    <Option text="eventtext.piratesecurityofficer.toll.high.option.pay.medium">
+                    <Option text="eventtext.piratesecurityofficer.lowrep.pay.medium">
                       <CheckMoneyAction Amount="1500">
                         <Success>
                           <SkillCheckAction requiredskill="helm" requiredlevel="60" targettag="pso_trig_player">
                             <Success>
                               <MoneyAction amount="-1500" />
-                              <ConversationAction text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.success" targettag="pso_trig_player" />
+                              <ConversationAction text="eventtext.piratesecurityofficer.lowrep.haggle.success" targettag="pso_trig_player" />
                               <SetDataAction identifier="piratehavenunlocked" value="1" />
                               <StatusEffectAction targettag="pirateentrance">
                                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
@@ -1606,7 +1606,7 @@
                             </Success>
                             <Failure>
                               <MoneyAction amount="-1500" />
-                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.option.pay.medium.failure" />
+                              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.lowrep.haggle.failure" />
                               <SetDataAction identifier="piratehavenunlocked" value="1" />
                               <StatusEffectAction targettag="pirateentrance">
                                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
@@ -1619,7 +1619,7 @@
                           </SkillCheckAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.pay.medium.rejected" />
+                          <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.option.haggle.rejected" />
                           <GoTo name="psooptions2" />
                         </Failure>
                       </CheckMoneyAction>
