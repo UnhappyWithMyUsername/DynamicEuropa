@@ -1526,7 +1526,7 @@
                   </CheckMoneyAction>
                 </Option>
                 <Option text="eventtext.piratesecurityofficer.toll.option.insult">
-                  <ReputationAction targettype="Location" increase="-30" />
+                  <ReputationAction targettype="Location" increase="-35" />
                   <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
                   <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
                   <GoTo name="attack" />
@@ -1625,7 +1625,7 @@
                       </CheckMoneyAction>
                     </Option>    
                     <Option text="eventtext.piratesecurityofficer.toll.option.insult">
-                      <ReputationAction targettype="Location" increase="-30" />
+                      <ReputationAction targettype="Location" increase="-35" />
                       <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" />
                       <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
                       <Label name="attack" />
@@ -1823,6 +1823,19 @@
           </StatusEffectAction>
         </Failure>
       </CheckDataAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="piratestashalarm">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="3000" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
+      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
+      <Label name="attackplayer" />
+      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="800" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
+      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
+      <WaitAction time="10" />
+      <ClearTagAction tag="triggerer_player" />
+      <GoTo name="attackplayer" />
     </ScriptedEvent>
           
     <ScriptedEvent identifier="piratemissioninformant" commonness="100">
