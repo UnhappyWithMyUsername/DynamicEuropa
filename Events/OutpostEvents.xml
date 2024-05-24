@@ -1339,6 +1339,18 @@
         <!-- Pirates turn hostile if too much coalition rep -->
         <Success>
           <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
           <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
           <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="false" />
           <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player">
@@ -1648,7 +1660,21 @@
     <!-- triggers alarm if it detects a player in the pirate outpost without negociating with NPC -->
     <ScriptedEvent identifier="piratehavenalarm">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" />
+      <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:centralaccessshaft" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:centralaccesspassage" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:crewquarters" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:electrical" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:engineering" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:medbay" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:reactorroom" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:research" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
       <TriggerAction target1tag="player" target2tag="piratehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <CheckDataAction identifier="piratehavenunlocked" condition="eq 1">
@@ -1828,6 +1854,18 @@
     
     <ScriptedEvent identifier="piratestashalarm">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
       <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
       <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="3000" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
       <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
@@ -1878,6 +1916,57 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="piratecheckforweapon">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:centralaccessshaft" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:centralaccesspassage" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:crewquarters" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:electrical" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:engineering" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:medbay" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:reactorroom" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:research" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <Label name="recheck" />
+      <ClearTagAction tag="potentialweapon" />
+      <ClearTagAction tag="equippedweapon" />
+      <CheckItemAction targettag="player" itemtags="weapon" hulltag="piratehull" applytagtoitem="equippedweapon" requireequipped="true">
+        <Success>
+          <CheckVisibilityAction entitytag="piratenpc" targettag="equippedweapon" checkfacing="true" maxdistance="1000">
+            <Success>
+              <ConversationAction text="eventtext.pirateweaponcheck.spotted" eventsprite="NoticeBoard" dialogtype="small" ContinueAutomatically="true" />
+              <StatusEffectAction targettag="piratehull">
+                <StatusEffect target="this" duration="3" >
+                  <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
+            </Success>
+            <Failure>
+              <WaitAction time="1" />
+              <GoTo name="recheck" />
+            </Failure>
+          </CheckVisibilityAction>
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <GoTo name="recheck" />
+        </Failure>
+      </CheckItemAction>
+    </ScriptedEvent>
     
     <!-- TODO: change targetmoduletags when devs change the city tags to xxxModuleCity -->
     <ScriptedEvent identifier="pantytheft">
