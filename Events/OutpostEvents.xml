@@ -1305,11 +1305,11 @@
                 <StatusEffect IsOn="true" target="This" setvalue="true" />
               </StatusEffectAction>
               <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-              <StatusEffectAction targettag="blockadehull">
+              <!-- <StatusEffectAction targettag="blockadehull">
                 <StatusEffect target="this" duration="3" >
                   <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction>
+              </StatusEffectAction> -->
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
               <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
@@ -1356,11 +1356,11 @@
           <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true" />
           <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player">
             <Option text="eventtext.option.listen">
-              <StatusEffectAction targettag="listener_player">
+              <!-- <StatusEffectAction targettag="listener_player">
                 <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.2">
                   <Sound file="%ModDir%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction>
+              </StatusEffectAction> -->
               <ConversationAction text="eventtext.commsrelay.piratehaven.answer" dialogtype="Small" targettag="listener_player" />
               <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
               <GoTo name="attack" />
@@ -1695,11 +1695,11 @@
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
           <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <StatusEffectAction targettag="piratehull">
+          <!-- <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" >
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
             </StatusEffect>
-          </StatusEffectAction>
+          </StatusEffectAction> -->
           <ReputationAction targettype="Location" increase="-30" />
           <SetDataAction identifier="piratehavenunlocked" value="0" />
         </Failure>
@@ -1957,11 +1957,11 @@
           <CheckVisibilityAction entitytag="piratenpc" targettag="equippedweapon" checkfacing="true" maxdistance="1000">
             <Success>
               <ConversationAction text="eventtext.pirateweaponcheck.spotted" eventsprite="NoticeBoard" dialogtype="small" ContinueAutomatically="true" />
-              <StatusEffectAction targettag="piratehull">
+              <!-- <StatusEffectAction targettag="piratehull">
                 <StatusEffect target="this" duration="3" >
                   <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction>
+              </StatusEffectAction> -->
               <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
             </Success>
             <Failure>
