@@ -1305,6 +1305,7 @@
                 <StatusEffect IsOn="true" target="This" setvalue="true" />
               </StatusEffectAction>
               <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+              <!-- TODO: reenable when fixed -->
               <!-- <StatusEffectAction targettag="blockadehull">
                 <StatusEffect target="this" duration="3" >
                   <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
@@ -1325,11 +1326,14 @@
     /////////////////// BANDIT EVENTS //////////////// -->
     
     <ScriptedEvent identifier="pirateoutpostevent">
-      <WaitAction time="5" />
-      <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="bot" tag="piratenpc" submarinetype="Outpost" />
+      <TagAction criteria="itemtag:pirateentrance" tag="pirateentrance" ContinueIfNoTargetsFound="false" />
+      <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <CheckReputationAction targettype="faction" identifier="bandits" condition="gte -12">
         <!-- Must have over -12 pirate rep, if under pirates are hostile and event doesnt trigger -->
         <Success>
+          <TriggerEventAction identifier="piratecheckforweapon" />
           <!-- continue -->
         </Success>
         <Failure>
@@ -1339,20 +1343,6 @@
       <CheckReputationAction targettype="faction" identifier="coalition" condition="gte 60">
         <!-- Pirates turn hostile if too much coalition rep -->
         <Success>
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
           <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true" />
           <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player">
             <Option text="eventtext.option.listen">
@@ -1376,8 +1366,6 @@
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="guard" SpawnPointTag="guard" />
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="dockingguard" SpawnPointTag="dockingguard" />
           <NPCWaitAction NPCTag="guard" Wait="True" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemtag:pirateentrance" tag="pirateentrance" ContinueIfNoTargetsFound="false" />
           <TriggerEventAction identifier="piratehavenalarm" />
           <SetDataAction identifier="pirateoutpostdestruction" value="0" /> <!-- Todo: remove this data and all its usecases in events entirely -->
           <!-- Toll part, reuse triggerer_player if this is bugged -->
@@ -1400,7 +1388,6 @@
                       <StatusEffectAction targettag="pirateentrance">
                         <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                       </StatusEffectAction>
-                      <TriggerEventAction identifier="piratecheckforweapon" />
                       <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
                       <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation" targettag="pso_trig_player">
                         <!-- Option to pay extra to lower your coalition reputation? -->
@@ -1449,7 +1436,6 @@
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                           </StatusEffectAction>
-                          <TriggerEventAction identifier="piratecheckforweapon" />
                           <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                           <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                           <ClearTagAction tag="pso_trig_player" />
@@ -1461,7 +1447,6 @@
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                           </StatusEffectAction>
-                          <TriggerEventAction identifier="piratecheckforweapon" />
                           <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                           <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                           <ClearTagAction tag="pso_trig_player" />              
@@ -1487,7 +1472,6 @@
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                           </StatusEffectAction>
-                          <TriggerEventAction identifier="piratecheckforweapon" />
                           <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                           <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                           <ClearTagAction tag="pso_trig_player" />
@@ -1520,7 +1504,6 @@
                                   <StatusEffectAction targettag="pirateentrance">
                                     <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                                   </StatusEffectAction>
-                                  <TriggerEventAction identifier="piratecheckforweapon" />
                                   <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
                                   <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                                   <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
@@ -1569,7 +1552,6 @@
                           <StatusEffectAction targettag="pirateentrance">
                             <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                           </StatusEffectAction>
-                          <TriggerEventAction identifier="piratecheckforweapon" />
                           <ReputationAction targettype="Faction" identifier="coalition" increase="-5" />
                           <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
                           <ConversationAction text="eventtext.piratesecurityofficer.lowrep.paytoll.success.extra.reputation" targettag="pso_trig_player">
@@ -1619,7 +1601,6 @@
                               <StatusEffectAction targettag="pirateentrance">
                                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                               </StatusEffectAction>
-                              <TriggerEventAction identifier="piratecheckforweapon" />
                               <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                               <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
@@ -1631,7 +1612,6 @@
                               <StatusEffectAction targettag="pirateentrance">
                                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                               </StatusEffectAction>
-                              <TriggerEventAction identifier="piratecheckforweapon" />
                               <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
                               <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />              
@@ -1695,12 +1675,13 @@
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
           <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <!-- <StatusEffectAction targettag="piratehull">
-            <StatusEffect target="this" duration="3" >
+          <!-- TODO: reenable when fixed -->
+<!--           <StatusEffectAction targettag="piratehull">
+            <StatusEffect target="this" duration="3" oneshot="true" >
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
             </StatusEffect>
           </StatusEffectAction> -->
-          <ReputationAction targettype="Location" increase="-30" />
+          <ReputationAction targettype="Location" increase="-35" />
           <SetDataAction identifier="piratehavenunlocked" value="0" />
         </Failure>
       </CheckDataAction>
@@ -1715,6 +1696,7 @@
           <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="crew" tag="crew" />
+          <WaitAction time="10" />
           <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
           <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
           <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
@@ -1853,7 +1835,7 @@
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
           <ConversationAction text="eventtext.piratearmoryalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <ReputationAction targettype="Location" increase="-30" />
+          <ReputationAction targettype="Location" increase="-35" />
           <StatusEffectAction targettag="armorydoor">
             <StatusEffect target="this" IsOpen="true" noninteractable="true" setvalue="true" />
           </StatusEffectAction>
@@ -1927,54 +1909,29 @@
     
     <ScriptedEvent identifier="piratecheckforweapon">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:centralaccessshaft" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:centralaccesspassage" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:crewquarters" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:electrical" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:engineering" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:medbay" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:reactorroom" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:research" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
       <Label name="recheck" />
-      <ClearTagAction tag="potentialweapon" />
-      <ClearTagAction tag="equippedweapon" />
-      <CheckItemAction targettag="player" itemtags="weapon" hulltag="piratehull" applytagtoitem="equippedweapon" requireequipped="true">
-        <Success>
-          <CheckVisibilityAction entitytag="piratenpc" targettag="equippedweapon" checkfacing="true" maxdistance="1000">
-            <Success>
-              <ConversationAction text="eventtext.pirateweaponcheck.spotted" eventsprite="NoticeBoard" dialogtype="small" ContinueAutomatically="true" />
-              <!-- <StatusEffectAction targettag="piratehull">
-                <StatusEffect target="this" duration="3" >
-                  <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
-                </StatusEffect>
-              </StatusEffectAction> -->
-              <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-            </Success>
-            <Failure>
-              <WaitAction time="1" />
-              <GoTo name="recheck" />
-            </Failure>
-          </CheckVisibilityAction>
+      <CheckConditionalAction targettag="deadpirate" isdead="true" >
+        <Success>        
+          <ConversationAction text="eventtext.pirateweaponcheck.spotted" eventsprite="NoticeBoard" dialogtype="small" ContinueAutomatically="true" />
+          <NPCChangeTeamAction npctag="deadpirate" teamtag="Team2" />
         </Success>
         <Failure>
           <WaitAction time="1" />
           <GoTo name="recheck" />
         </Failure>
-      </CheckItemAction>
+      </CheckConditionalAction>
     </ScriptedEvent>
     
     <!-- TODO: change targetmoduletags when devs change the city tags to xxxModuleCity -->
