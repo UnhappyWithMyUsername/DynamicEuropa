@@ -12,32 +12,32 @@
     BackgroundColor="2,4,5,255"
     WallColor="255,255,255,255"
     StartPosition="0.15,0.1"
-    EndPosition="0.84,0.9"
+    EndPosition="0.84,0.1"
     CreateHoleNextToEnd="False"
     CreateHoleToAbyss="False"
     LevelObjectAmount="500"
     BackgroundCreatureAmount="30"
     MinWidth="60000"
     MaxWidth="60000"
-    Height="60000"
+    Height="30000"
     InitialDepthMin="100000"
     InitialDepthMax="200000"
     MinTunnelRadius="6500"
-    SideTunnelCount="0,0"
-    SideTunnelVariance="0"
+    SideTunnelCount="0,1"
+    SideTunnelVariance="0.5"
     MinSideTunnelRadius="2000,6000"
     VoronoiSiteInterval="2000,2000"
     VoronoiSiteVariance="800,800"
     CellSubdivisionLength="1000"
-    CellRoundingAmount="0.1"
-    CellIrregularity="1"
+    CellRoundingAmount="0.5"
+    CellIrregularity="0"
     MainPathNodeIntervalRange="10000,22500"
     MainPathVariance="0.5"
     CaveCount="0"
     ItemCount="200"
     ResourceIntervalRange="19200,38400"
     CaveResourceIntervalRange="9600,19200"
-    ResourceClusterSizeRange="3,6"
+    ResourceClusterSizeRange="3,4"
     ResourceSpawnChance="0.3"
     CaveResourceSpawnChance="0.6"
     FloatingIceChunkCount="0"
@@ -49,7 +49,7 @@
     AbyssIslandCaveProbability="0"
     AbyssResourceClustersMin="0"
     AbyssResourceClustersMax="0"
-    SeaFloorDepth="-300000"
+    SeaFloorDepth="-200000"
     SeaFloorVariance="1000"
     MountainCountMin="2"
     MountainCountMax="3"
@@ -71,11 +71,11 @@
     WallEdgeExpandOutwardsAmount="128"
     WallEdgeExpandInwardsAmount="128">
     <!--
-  <Background
-    texture="Content/Map/LevelBackground1.png" />
-  <BackgroundTop
-    texture="Content/Map/iceBackground.png"
-    premultiplyalpha="false" />-->
+    <Background
+      texture="Content/Map/LevelBackground1.png" />
+    <BackgroundTop
+      texture="Content/Map/iceBackground.png"
+      premultiplyalpha="false" />-->
     <WaterParticles
       texture="Content/Map/Biomes/ColdCaverns/BackgroundParticles.png" />
     <Wall
@@ -134,12 +134,12 @@
     FloatingIceChunkCount="2"
     IslandCount="0"
     IceSpireCount="10"
-    AbyssIslandCount="5"
+    AbyssIslandCount="0"
     AbyssIslandSizeMin="4000,7000"
     AbyssIslandSizeMax="8000,10000"
-    AbyssIslandCaveProbability="0.5"
-    AbyssResourceClustersMin="3"
-    AbyssResourceClustersMax="5"
+    AbyssIslandCaveProbability="0"
+    AbyssResourceClustersMin="0"
+    AbyssResourceClustersMax="0"
     SeaFloorDepth="-300000"
     SeaFloorVariance="1000"
     MountainCountMin="0"
@@ -225,7 +225,7 @@
     FloatingIceChunkCount="3"
     IslandCount="0"
     IceSpireCount="20"
-    AbyssIslandCount="5"
+    AbyssIslandCount="0"
     AbyssIslandSizeMin="4000,7000"
     AbyssIslandSizeMax="8000,10000"
     AbyssIslandCaveProbability="0.5"
@@ -364,6 +364,7 @@
       texture="Content/Map/Biomes/DestroyedWall.png"
       premultiplyalpha="false" />
   </ColdCavernsMaze>
+  
   <ColdCavernsTransition
     identifier="coldcavernstransition"
     biomes="coldcaverns"
@@ -535,86 +536,87 @@
       texture="Content/Map/Biomes/DestroyedWall.png"
       premultiplyalpha="false" />
   </ColdCavernsOutpost>
-  
-  <!--   <ColdCavernsLair
-    identifier="coldcavernslair"
-    type="Outpost"
-    biomes="coldcaverns"
-    createholenexttoend="False"
-    createholetoabyss="False"
-    height="40000"
-    commonness="0"
-    initialdepthmin="100000"
-    initialdepthmax="200000"
-    levelobjectamount="500"
-    ambientlightcolor="4,6,8,255"
-    backgroundtexturecolor="8,16,20,255"
-    backgroundcolor="2,4,5,255"
-    wallcolor="255,255,255,255"
-    minwidth="40000"
-    maxwidth="40000"
-    voronoisiteinterval="2000,2000"
-    voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.1"
-    cellirregularity="0.3"
-    mainpathnodeintervalrange="500,500"
-    cavecount="0"
-    itemcount="0"
-    floatingicechunkcount="0"
-    seafloordepth="0"
-    seafloorvariance="1000"
-    mountaincountmin="0"
-    mountaincountmax="3"
-    mountainheightmin="1500"
-    mountainheightmax="3000"
-    ruincount="0"
-    minwreckcount="0"
-    maxwreckcount="0"
-    bottomholeprobability="0"
-    waterparticlescale="1"
-    startposition="0.3,0.2"
-    endposition="0.7,0.5"
-    forceoutpostposition="0.5,0.8"
-    mintunnelradius="5000"
-    mincorpsecount="1"
-    maxcorpsecount="5"
-    thalamusprobability="0"
-    wreckhullfloodingchance="0.5"
-    wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
-    sidetunnelcount="0,0"
-    minsidetunnelradius="25000,25000"
-    backgroundcreatureamount="80"
-    walltexturesize="512"
-    walledgetexturewidth="1024"
-    walledgeexpandoutwardsamount="128"
-    walledgeexpandinwardsamount="128"
-    sidetunnelvariance="0.5"
-    mainpathvariance="0"
-    resourceintervalrange="19200,38400"
-    caveresourceintervalrange="9600,19200"
-    resourceclustersizerange="3,6"
-    resourcespawnchance="0.3"
-    caveresourcespawnchance="0.6"
-    islandcount="0"
-    abyssislandcount="0"
-    icespirecount="0"
-    PlayNoiseLoopInOutpostLevel="true">
-    <WaterParticles
-      texture="Content/Map/Biomes/ColdCaverns/BackgroundParticles.png" />
-    <Wall
-      texture="Content/Map/Biomes/ColdCaverns/LevelWall.png"
-      premultiplyalpha="false" />
-    <WallEdge
-      texture="Content/Map/Biomes/ColdCaverns/LevelWallEdge.png" />
-    <DestructibleWall
-      texture="Content/Map/Biomes/DestructibleWall.png" />
-    <DestructibleWallEdge
-      texture="Content/Map/Biomes/DestructibleWallEdge.png" />
-    <WallDestroyed
-      texture="Content/Map/Biomes/DestroyedWall.png"
-      premultiplyalpha="false" />
-  </ColdCavernsLair> -->
+
+<!--   <ColdCavernsLair
+  identifier="coldcavernslair"
+  type="Outpost"
+  biomes="coldcaverns"
+  createholenexttoend="False"
+  createholetoabyss="False"
+  height="40000"
+  commonness="0"
+  initialdepthmin="100000"
+  initialdepthmax="200000"
+  levelobjectamount="500"
+  ambientlightcolor="4,6,8,255"
+  backgroundtexturecolor="8,16,20,255"
+  backgroundcolor="2,4,5,255"
+  wallcolor="255,255,255,255"
+  minwidth="40000"
+  maxwidth="40000"
+  voronoisiteinterval="2000,2000"
+  voronoisitevariance="800,800"
+  cellsubdivisionlength="1500"
+  cellroundingamount="0.1"
+  cellirregularity="0.3"
+  mainpathnodeintervalrange="500,500"
+  cavecount="0"
+  itemcount="0"
+  floatingicechunkcount="0"
+  seafloordepth="0"
+  seafloorvariance="1000"
+  mountaincountmin="0"
+  mountaincountmax="3"
+  mountainheightmin="1500"
+  mountainheightmax="3000"
+  ruincount="0"
+  minwreckcount="0"
+  maxwreckcount="0"
+  bottomholeprobability="0"
+  waterparticlescale="1"
+  startposition="0.3,0.2"
+  endposition="0.7,0.5"
+  forceoutpostposition="0.5,0.8"
+  mintunnelradius="5000"
+  mincorpsecount="1"
+  maxcorpsecount="5"
+  thalamusprobability="0"
+  wreckhullfloodingchance="0.5"
+  wreckfloodinghullminwaterpercentage="0.1"
+  wreckfloodinghullmaxwaterpercentage="1"
+  sidetunnelcount="0,0"
+  minsidetunnelradius="25000,25000"
+  backgroundcreatureamount="80"
+  walltexturesize="512"
+  walledgetexturewidth="1024"
+  walledgeexpandoutwardsamount="128"
+  walledgeexpandinwardsamount="128"
+  sidetunnelvariance="0.5"
+  mainpathvariance="0"
+  resourceintervalrange="19200,38400"
+  caveresourceintervalrange="9600,19200"
+  resourceclustersizerange="3,6"
+  resourcespawnchance="0.3"
+  caveresourcespawnchance="0.6"
+  islandcount="0"
+  abyssislandcount="0"
+  icespirecount="0"
+  PlayNoiseLoopInOutpostLevel="true">
+  <WaterParticles
+    texture="Content/Map/Biomes/ColdCaverns/BackgroundParticles.png" />
+  <Wall
+    texture="Content/Map/Biomes/ColdCaverns/LevelWall.png"
+    premultiplyalpha="false" />
+  <WallEdge
+    texture="Content/Map/Biomes/ColdCaverns/LevelWallEdge.png" />
+  <DestructibleWall
+    texture="Content/Map/Biomes/DestructibleWall.png" />
+  <DestructibleWallEdge
+    texture="Content/Map/Biomes/DestructibleWallEdge.png" />
+  <WallDestroyed
+    texture="Content/Map/Biomes/DestroyedWall.png"
+    premultiplyalpha="false" />
+</ColdCavernsLair> -->
+
 </Override>
 </LevelGenerationParameters>
