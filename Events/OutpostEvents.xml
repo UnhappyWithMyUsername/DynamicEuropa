@@ -913,6 +913,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -923,6 +927,10 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
@@ -950,6 +958,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -965,6 +977,10 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -996,6 +1012,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1011,6 +1031,10 @@
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1042,6 +1066,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1057,6 +1085,10 @@
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1088,6 +1120,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1103,6 +1139,10 @@
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1134,6 +1174,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1149,6 +1193,10 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1180,6 +1228,10 @@
         <Success>
           <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1195,6 +1247,10 @@
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1226,6 +1282,10 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1241,6 +1301,10 @@
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1273,6 +1337,10 @@
         <Success>
           <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
+          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+          <StatusEffectAction targettag="blockadedoorstatus">
+            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+          </StatusEffectAction>
           <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1288,6 +1356,10 @@
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
+                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+                  <StatusEffectAction targettag="blockadedoorstatus">
+                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
+                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1378,7 +1450,12 @@
               </StatusEffectAction> -->
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
-              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="player" isinstigator="false" witnessreaction="retreat" />
+              <Label name="tagcombatloop" />              
+              <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
+              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="triggerer_player" isinstigator="false" witnessreaction="retreat" />
+              <WaitAction time="5" />
+              <ClearTagAction tag="triggerer_player" />
+              <Goto name="tagcombatloop" />
             </Failure>
           </CheckDataAction>
         </Failure>
