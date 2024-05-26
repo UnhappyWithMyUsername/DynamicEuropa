@@ -1321,9 +1321,10 @@
     
     <!-- simple event that unlocks the path by flicking a lever -->
     <ScriptedEvent identifier="openblockade" commonness="1" >
+      <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
-      <TutorialHighlightAction targettag="blockadeswitch" />
-      <EventObjectiveAction type="add" identifier="eventtext.openblockade.gotolever" />
+      <TutorialHighlightAction targetcharacter="player" targettag="blockadeswitch" />
+      <EventObjectiveAction targettag="player" type="add" identifier="eventtext.openblockade.gotolever" />
       <Label name="retry"/>
       <CheckConditionalAction targettag="blockadeswitch" targetitemcomponent="Controller" State="True" >
         <Success>
@@ -1337,7 +1338,7 @@
             </StatusEffect>
           </StatusEffectAction>
           <UnlockPathAction />
-          <EventObjectiveAction type="completeandremove" identifier="eventtext.openblockade.gotolever" />
+          <EventObjectiveAction targettag="player" type="completeandremove" identifier="eventtext.openblockade.gotolever" />
         </Success>
         <Failure>
           <WaitAction time="1" />
