@@ -27,7 +27,7 @@
         </EventSet>
       </EventSet>
     </EventSet>
-    <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+    <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
       <!-- DYNAMIC EUROPA - ALWAYS TRIGGERED EVENTS -->
       <EventSet identifier="outpostevents.dynamiceuropa.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
@@ -364,7 +364,17 @@
         <ScriptedEvent identifier="huskcultambush" commonness="50" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultrelations" commonness="100" faction="huskcult" probability="0.5" />
       </EventSet>
-      
+      <!-- Events specific to blockades -->
+      <EventSet identifier="outpostevent.blockade.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="blockade" allowatstart="true" chooserandom="false" exhaustible="false" onceperoutpost="false" eventcount="4">
+        <ScriptedEvent identifier="checkblockadestate_coldcaverns_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_europanridge_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_aphoticplateau_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_greatsea_coalition" commonness="100" probability="1.0" faction="coalition" />
+        <ScriptedEvent identifier="checkblockadestate_coldcaverns_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_europanridge_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_aphoticplateau_separatists" commonness="100" probability="1.0" faction="separatists" />
+        <ScriptedEvent identifier="checkblockadestate_greatsea_separatists" commonness="100" probability="1.0" faction="separatists" />
+      </EventSet>
       <!-- Events specific to military outposts -->
       <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
         <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />
@@ -774,6 +784,8 @@
       </EventSet>
     </EventSet>
   </Override>
+  
+  
   <!--PIRATE OUTPOSTS-->
   <Override>
     <EventSet identifier="de_pirateoutpostevents" leveltype="outpost" locationtype="pirateoutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
@@ -783,6 +795,7 @@
       <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="piratemissioninformant" commonness="40" />
         <ScriptedEvent identifier="piratediversoutpost" commonness="40" />
+        <ScriptedEvent identifier="missionevent_vipnapping" commonness="40" probability="0.5" />
       </EventSet>
       <!-- MissionEvents specific to pirate outposts 
       <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
