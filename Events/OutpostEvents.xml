@@ -1468,11 +1468,23 @@
     /////////////////// BANDIT EVENTS //////////////// -->
     
     <ScriptedEvent identifier="pirateoutpostevent">
-      <WaitAction time="5" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="bot" tag="piratenpc" submarinetype="Outpost" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:pirateentrance" tag="pirateentrance" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
+      <WaitAction time="1" />
       <CheckReputationAction targettype="faction" identifier="bandits" condition="gte -12">
         <!-- Must have over -12 pirate rep, if under pirates are hostile and event doesnt trigger -->
         <Success>
