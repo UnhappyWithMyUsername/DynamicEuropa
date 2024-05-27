@@ -3,7 +3,7 @@
   <!-- Coalition -->
   <npcset identifier="de_coalitioncombat">
     <!-- enemy on takeover mission -->
-    <npc identifier="soldiercoalition" job="securityofficer" tags="coalitionsoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="1500">
+    <npc identifier="soldiercoalition" job="securityofficer" tags="coalitionsoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
       <ItemSet commonness="1">
         <Item identifier="securityuniform1" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -115,7 +115,7 @@
   <!-- Separatists-->
   <npcset identifier="de_separatistscombat">
     <!-- enemy on takeover mission -->
-    <npc identifier="soldierseparatists" job="securityofficer" tags="separatistssoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="1500">
+    <npc identifier="soldierseparatists" job="securityofficer" tags="separatistssoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
       <ItemSet commonness="0.5">
         <Item identifier="pirateclothes" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
@@ -238,12 +238,27 @@
   <!-- NORMAL PIRATES -->
   <npcset identifier="pirate_npcs">
     <npc identifier="piratecaptain" job="captain" tags="pirate" moduleflags="none" behavior="Patrol" healthmultiplier="0.8" SkillMultiplier="0.8" aimspeed="0.8" aimaccuracy="0.3">
-      <ItemSet commonness="1">
+      <ItemSet commonness="0.5">
         <Item identifier="idcard" equip="true" showpreview="false" />
         <Item identifier="piratecaptainhat" equip="true" />
         <Item identifier="banditclothes1" equip="true" outfit="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+        </Item>
+        <Item identifier="captainspipe" equip="false" />
+      </ItemSet>
+      <ItemSet commonness="0.5">
+        <Item identifier="idcard" equip="true" showpreview="false" />
+        <Item identifier="piratecaptainhat" equip="true" />
+        <Item identifier="banditclothes1" equip="true" outfit="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="revolverbroken" equip="false">
           <Item identifier="revolverround" />
           <Item identifier="revolverround" />
           <Item identifier="revolverround" />
@@ -298,7 +313,7 @@
       </ItemSet>
     </npc>
     <npc identifier="piratesecuritygunner" job="securityofficer" tags="pirate" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.8" aimspeed="0.8" aimaccuracy="0.6">
-      <ItemSet>
+      <ItemSet commonness="0.3">
         <Item identifier="banditclothes1" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
@@ -316,9 +331,27 @@
           <Item identifier="oxygentank" />
         </Item>
       </ItemSet>
+      <ItemSet commonness="0.7">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="revolverbroken">
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+        </Item>
+        <Item identifier="divingknife" />
+        <Item identifier="ballistichelmet2" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
     </npc>
     <npc identifier="piratesecuritybrute" job="securityofficer" tags="pirate" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.9" aimspeed="0.5" aimaccuracy="0.65">
-      <ItemSet commonness="1">
+      <ItemSet commonness="0.5">
         <Item identifier="banditclothes1" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
@@ -345,13 +378,45 @@
           <Item identifier="oxygentank" />
         </Item>
       </ItemSet>
+      <ItemSet commonness="0.5">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="shotgunbroken">
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+        </Item>
+        <Item identifier="divingknife" />
+        <Item identifier="piratebodyarmor" equip="true" />
+        <Item identifier="piratebandana" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
     </npc>
     <npc identifier="piratesecurityelite" job="securityofficer" tags="pirate" spawnpointtags="security" behavior="Patrol" healthmultiplier="1.1" aimspeed="1.0" aimaccuracy="0.8">
-      <ItemSet commonness="1">
+      <ItemSet commonness="0.5">
         <Item identifier="banditclothes2" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="smg">
+          <Item identifier="smgmagazine" />
+        </Item>
+        <Item identifier="smgmagazine" />
+        <Item identifier="smgmagazine" />
+        <Item identifier="divingknife" />
+        <Item identifier="piratebodyarmor" equip="true" />
+        <Item identifier="piratehelmet" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="banditclothes2" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="smgbroken">
           <Item identifier="smgmagazine" />
         </Item>
         <Item identifier="smgmagazine" />
@@ -390,6 +455,30 @@
           <Item identifier="smgmagazine" />
         </Item>
         <Item identifier="machinepistol" equip="true">
+          <Item identifier="smgmagazine" />
+        </Item>
+        <Item identifier="divingknife" />
+        <Item identifier="smgmagazine" />
+        <Item identifier="smgmagazine" />
+        <Item identifier="smgmagazine" />
+        <Item identifier="smgmagazine" />
+        <Item identifier="exosuitPA" equip="true">
+          <Item identifier="oxygentank" />
+          <Item identifier="fulguriumbatterycell" />
+        </Item>
+        <Item identifier="fulguriumbatterycell" />
+        <Item identifier="fulguriumbatterycell" />
+        <Item identifier="exosuitpartsPA" />
+      </ItemSet>
+      <ItemSet commonness="0.5">
+        <Item identifier="banditclothes2" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="piratehelmet" equip="true" />
+        <Item identifier="machinepistolbroken" equip="true">
+          <Item identifier="smgmagazine" />
+        </Item>
+        <Item identifier="machinepistolbroken" equip="true">
           <Item identifier="smgmagazine" />
         </Item>
         <Item identifier="divingknife" />
@@ -553,6 +642,41 @@
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="piratedivingsuitmakeshift" equip="true" />
+        <Item identifier="revolverbroken" equip="true">
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+          <Item identifier="revolverround" />
+        </Item>
+        <Item identifier="revolverround" amount="6" />
+        <Item identifier="divingknife" />
+        <Item identifier="ballistichelmet2" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="0.4">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="piratedivingsuitmakeshift" equip="true" />
+        <Item identifier="machinepistolbroken" equip="true">
+          <Item identifier="smgmagazine" />
+        </Item>
+        <Item identifier="smgmagazine" amount="2" />
+        <Item identifier="divingknife" />
+        <Item identifier="ballistichelmet2" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="0.4">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="piratedivingsuitmakeshift" equip="true" />
         <Item identifier="machinepistol" equip="true">
           <Item identifier="smgmagazine" />
         </Item>
@@ -583,7 +707,41 @@
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="piratedivingsuitmakeshift" equip="true" />
+        <Item identifier="smgbroken" equip="true">
+          <Item identifier="smgmagazine" />
+        </Item>
+        <Item identifier="smgmagazine" amount="2" />
+        <Item identifier="divingknife" />
+        <Item identifier="ballistichelmet2" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="0.3">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="piratedivingsuitmakeshift" equip="true" />
         <Item identifier="shotgun">
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+          <Item identifier="shotgunshell" />
+        </Item>
+        <Item identifier="divingknife" />
+        <Item identifier="ballistichelmet2" equip="true" />
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="0.3">
+        <Item identifier="banditclothes1" equip="true" />
+        <Item identifier="idcard" equip="true" />
+        <Item identifier="headset" equip="true" showpreview="false" />
+        <Item identifier="piratedivingsuitmakeshift" equip="true" />
+        <Item identifier="shotgunbroken">
           <Item identifier="shotgunshell" />
           <Item identifier="shotgunshell" />
           <Item identifier="shotgunshell" />
