@@ -508,10 +508,38 @@
     
     
     
-    <!-- UNUSED - will use this to spawn enemies in lairs outside if I can find a proper spawn position-->
-<!--     <ScriptedEvent identifier="laircrawlersoutside">
-      <SpawnAction speciesname="mudraptor" amount="3" spawntype="nearmainsub" />
-    </ScriptedEvent> -->    
-
+    <!-- Prototype of an event that spawns enemies outside in lair levels
+    TODO - figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
+    
+    <ScriptedEvent identifier="laircrawlersoutside">
+      <WaitAction time="5" />
+      <Label name="loop" />
+      <RNGAction chance="0.50"> 
+        <Success>
+          <CheckDataAction identifier="lairintensity" condition="neq 1">
+            <Success>
+              <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+              <SetDataAction identifier="lairintensity" operation="Set" value="1" />
+              <WaitAction time="60" />
+              <Goto name="loop" />     
+            </Success>          
+            <Failure>
+              <WaitAction time="20" />              
+              <SetDataAction identifier="lairintensity" operation="Set" value="0" />       
+              <Goto name="loop" />
+            </Failure>
+          </CheckDataAction>
+        </Success>
+        <Failure>
+          <WaitAction time="5" />
+          <Goto name="loop" />
+        </Failure>
+      </RNGAction>
+    </ScriptedEvent>    
+    
+    <ScriptedEvent identifier="laircrawlersoutside2">
+      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+    </ScriptedEvent>
+    
   </EventPrefabs>
 </Randomevents>
