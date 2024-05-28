@@ -380,7 +380,6 @@
         <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="0.2" />
       </EventSet>
       <EventSet identifier="outpostevent.military.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp" allowatstart="true" chooserandom="true" onceperoutpost="true">
-        <!-- 50% chance of getting a military-specific event (TODO: increase if/when we have more of these available?) -->
         <ScriptedEvent identifier="bigbrother" commonness="150" probability="0.5" faction="coalition"/>
       </EventSet>
       
@@ -449,7 +448,7 @@
       
       <!-- Events specific to mining outposts -->
       <EventSet identifier="outpostevent.mine.randomevents" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" ignorecooldown="true" triggereventcooldown="false" onceperoutpost="true" eventcount="1">
-        <!-- TODO: make sure these dont spawn in the dry cave itself -->
+        <!-- TODO: Adjust/override events so they match our outposts? -->
         <ScriptedEvent identifier="consultant" commonness="100" probability="0.5" />
         <ScriptedEvent identifier="occupationalhazards" commonness="100" probability="0.5" />
       </EventSet>
@@ -467,7 +466,6 @@
 
       <!-- Events specific to cities -->
       <EventSet identifier="outpostevent.city.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="city" allowatstart="true" chooserandom="true" onceperoutpost="true">
-        <!-- 50% chance of getting a city-specific event (TODO: increase if/when we have more of these available?) -->
         <ScriptedEvent identifier="captivesouls" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="hognose" commonness="50" probability="0.5" />
