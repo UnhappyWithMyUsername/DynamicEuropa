@@ -289,7 +289,7 @@
       </EventSet>
 
       <!-- low-difficulty random events -->
-      <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <OverrideEventCount locationtype="City" eventcount="3" />
         <ScriptedEvent identifier="givingdirections" commonness="100" />
         <ScriptedEvent identifier="jokster" commonness="60" />
@@ -309,18 +309,18 @@
         <ScriptedEvent identifier="atwitsend" commonness="60" />
       </EventSet>
       <!-- low-difficulty clown events -->
-      <EventSet identifier="outpostevents.easy.generic.randomevents.clowns" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevents.easy.generic.randomevents.clowns" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="clownrelations1" commonness="100" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="infiltration" commonness="70" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="censorship" commonness="60" faction="clowns" probability="0.5" />
       </EventSet>
       <!-- low-difficulty husk cult events -->
-      <EventSet identifier="outpostevents.easy.generic.randomevents.huskcult" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevents.easy.generic.randomevents.huskcult" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="huskcultist" commonness="100" faction="huskcult" probability="0.5" />
       </EventSet>
 
       <!-- high-difficulty random events -->
-      <EventSet identifier="outpostevent.difficult.generic.randomevents" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.difficult.generic.randomevents" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <OverrideEventCount locationtype="City" eventcount="3" />
         <!-- events that can occur in both low and high difficulty, commoness reduced here to favor the more difficult ones-->
         <ScriptedEvent identifier="givingdirections" commonness="50" />
@@ -352,13 +352,13 @@
         <ScriptedEvent identifier="vendingsmashing" commonness="50" />
       </EventSet>
       <!-- high-difficulty clown events -->
-      <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="clownrelations1" commonness="50" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="clownbrutality" commonness="100" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="clownrelations2" commonness="100" faction="clowns" probability="0.5" />
       </EventSet>
       <!-- high-difficulty husk cult events -->
-      <EventSet identifier="outpostevent.difficult.generic.randomevents.huskcult" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,lab,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.huskcult" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="outbreak" commonness="100" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultist" commonness="50" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultambush" commonness="50" faction="huskcult" probability="0.5" />
@@ -377,7 +377,7 @@
       </EventSet>
       <!-- Events specific to military outposts -->
       <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />
+        <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="0.2" />
       </EventSet>
       <EventSet identifier="outpostevent.military.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <!-- 50% chance of getting a military-specific event (TODO: increase if/when we have more of these available?) -->
@@ -406,27 +406,27 @@
       </EventSet>
       
       <!-- Events specific to research outposts -->
-      <EventSet identifier="outpostevent.research.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="research,lab,study" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.research.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" exhaustible="true">
         <ScriptedEvent identifier="jobboardresearch" commonness="200" probability="0.2" />
       </EventSet>
-      <EventSet identifier="outpostevent.research.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="research,lab,study" allowatstart="true" chooserandom="true" onceperoutpost="true">
-      <!-- 50% chance of getting a research-specific event (TODO: increase if/when we have more of these available?) -->
+      <EventSet identifier="outpostevent.research.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="crawleroutbreak" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="impromptuengineering" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="captivesouls" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="researcherescort" commonness="50" />
         <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="tastetest" commonness="150" probability="0.5" />
+        <ScriptedEvent identifier="psychovisions" commonness="50" probability="0.5" />
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
-      <EventSet identifier="outpostevent.industrial.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,fusion,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="1.0" />
+      <EventSet identifier="outpostevent.industrial.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="0.2" />
       </EventSet>
 
       <!-- Events specific to habitation outposts -->
       <EventSet identifier="outpostevent.habitation.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="true" exhaustible="true">
-        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
+        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="0.2" />
       </EventSet>
 
       <!-- Events specific to medical outposts -->
@@ -790,7 +790,7 @@
   <Override>
     <EventSet identifier="de_pirateoutpostevents" leveltype="outpost" locationtype="pirateoutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
       <EventSet identifier="de_outpostevents.pirate.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="false" onceperoutpost="false" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
+        <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="0.2" />
       </EventSet>
       <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="piratemissioninformant" commonness="40" />
