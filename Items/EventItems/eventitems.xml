@@ -401,6 +401,55 @@
         </StatusEffect>
       </Holdable>
     </Item>
+    <!-- Fren Seynomor Items -->
+    <Item name="Sample VAX" identifier="frentestmedicine" description="A genetically modified husk sample created by Dr. Seynomor. He claims that he &quot;perfected&quot; the formula and whoever uses it can gain the abilities of a husk without losing their mental capability. The instruction says, &quot;To use it on yourself, hold right click and then press E.&quot;" category="Misc" maxstacksize="1" Tags="smallitem" scale="0.5" impactsoundtag="impact_metal_light">
+      <PreferredContainer primary="medcab" />
+      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="769,448,64,64" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Medical/Medicines.png" sourcerect="112,69,38,70" depth="0.6" origin="0.5,0.5" />
+      <Body width="35" height="65" density="10.2" />
+      <Holdable slots="Any,RightHand,LeftHand" aimpos="25,0" aimangle="-295" handle1="0,0" holdangle="220" aimable="false" swingwhenusing="true" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnUse" target="This,Character" Condition="-100.0" setvalue="true" comparison="Or">
+          <Conditional hasspecifiertag="male" />
+          <Conditional hasspecifiertag="female" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="male" />
+          <Sound file="Content/Characters/Human/male_damage1.ogg" selectionmode="Random" />
+          <Sound file="Content/Characters/Human/male_damage2.ogg" />
+          <Sound file="Content/Characters/Human/male_damage3.ogg" />
+          <Sound file="Content/Characters/Human/male_damage4.ogg" />
+          <Sound file="Content/Characters/Human/male_damage5.ogg" />
+          <Sound file="Content/Characters/Human/male_damage6.ogg" />
+          <Sound file="Content/Characters/Human/male_damage7.ogg" />
+          <Sound file="Content/Characters/Human/male_damage8.ogg" />
+          <Sound file="Content/Characters/Human/male_damage9.ogg" />
+          <Sound file="Content/Characters/Human/male_damage10.ogg" />
+          <Sound file="Content/Characters/Human/male_damage11.ogg" />
+          <GiveTalentInfo giverandom="false" talentidentifiers="geneticalteration" />
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" comparison="And">
+          <Conditional ishuman="true" />
+          <Conditional hasspecifiertag="female" />
+          <Sound file="Content/Characters/Human/female_damage1.ogg" selectionmode="Random" />
+          <Sound file="Content/Characters/Human/female_damage2.ogg" />
+          <Sound file="Content/Characters/Human/female_damage3.ogg" />
+          <Sound file="Content/Characters/Human/female_damage4.ogg" />
+          <Sound file="Content/Characters/Human/female_damage5.ogg" />
+          <Sound file="Content/Characters/Human/female_damage6.ogg" />
+          <Sound file="Content/Characters/Human/female_damage7.ogg" />
+          <Sound file="Content/Characters/Human/female_damage8.ogg" />
+          <Sound file="Content/Characters/Human/female_damage9.ogg" />
+          <Sound file="Content/Characters/Human/female_damage10.ogg" />
+          <GiveTalentInfo giverandom="false" talentidentifiers="geneticalteration" />
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
     <!-- Pirate Armory Alarm -->
     <Item name="Alarm Buzzer" identifier="pa-armoryalarmbuzzer" description="TRIGGERS PIRATE ARMORY EVENT WHEN ACTIVATED TO MAKE PIRATES HOSTILE" category="Electrical" Tags="smallitem,sound" maxstacksize="8" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true" noninteractable="true" hideinmenus="true">
       <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,127,64,64" origin="0.5,0.5" />
