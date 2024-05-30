@@ -464,7 +464,92 @@
           <GoTo name="waitforinput" />
         </Option>
       </ConversationAction>
+    </ScriptedEvent>    
+
+    <!-- spooky research outpost event -->
+    <ScriptedEvent identifier="psychovisions" commonness="100">
+      <CheckDataAction identifier="psychovisionsnorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>        
+          <TagAction criteria="player" tag="player" />
+          <TagAction criteria="itemidentifier:op_researchterminal" tag="potentialresearchterminal" submarinetype="outpost" chooserandom="true" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="psychoresearcher" spawnpointtag="potentialresearchterminal" spawnlocation="Outpost" />     
+          <NPCFollowAction npctag="psychoresearcher" targettag="potentialresearchterminal" follow="true"/>
+          <TriggerAction target1tag="psychoresearcher" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <AfflictionAction targettag="psychoresearcher" affliction="psychosis" strength="100" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.ghosts" eventsprite="MentalBreakdown" >
+            <Option text="eventtext.psychovisions.noghosts">
+              <Goto name="skiplooptrigger" />
+              <Label name="talktomadman" />          
+              <AfflictionAction targettag="psychoresearcher" affliction="psychosis" strength="100" />
+              <TriggerAction target1tag="psychoresearcher" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+              <Label name="skiplooptrigger" />
+                <SkillCheckAction targettag="triggerer_player" requiredskill="Medical" requiredlevel="50">
+                  <Success>
+                    <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.insidemyhead" eventsprite="MentalBreakdown">
+                      <Option text="eventtext.psychovisions.psychotic">                  
+                        <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.panic" ContinueAutomatically="true" endconversation="true" eventsprite="MentalBreakdown"/>
+                        <CombatAction combatmode="Retreat" npctag="psychoresearcher" enemytag="potentialresearchterminal" isinstigator="false" witnessreaction="none" cooldown="10" />
+                      </Option>                
+                      <Option text="eventtext.psychovisions.leave" endconversation="true">
+                        <!-- ends event  -->
+                        <ClearTagAction tag="triggerer_player" />
+                      </Option>
+                    </ConversationAction>  
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.insidemyhead" eventsprite="MentalBreakdown">
+                      <Option text="eventtext.psychovisions.leave" endconversation="true">
+                        <!-- ends event  -->
+                        <ClearTagAction tag="triggerer_player" />
+                      </Option>
+                    </ConversationAction>  
+                  </Failure>
+                </SkillCheckAction>
+            </Option>
+          </ConversationAction>
+          <Label name="checkpsychosisloop" />
+          <WaitAction time="2" />
+          <TriggerAction target1tag="potentialresearchterminal" target2tag="triggerer_player" applytotarget2="psychoplayer" radius="150" waitforinteraction="false" />
+          <CheckAfflictionAction identifier="psychosis" targettag="psychoplayer" minstrength="20">
+            <Success>
+              <TriggerAction target1tag="potentialresearchterminal" target2tag="triggerer_player" applytotarget2="psychoplayer" radius="150" waitforinteraction="true" />
+              <StatusEffectAction targettag="psychoplayer">
+                <StatusEffect target="This" >            
+                  <Sound file="Content/Characters/Jove/JOVE_idle1.ogg" range="150" volume="2" frequencymultiplier="1" />
+                  <Explosion range="500" force="0" empstrength="0.5" showeffects="false" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <SetDataAction identifier="spookytext" operation="set" value="0" />
+              <Label name="spawnmoretext"/>
+              <CheckDataAction identifier="spookytext" condition="lt 15" >
+                <Success>            
+                  <SpawnAction itemidentifier="alienwritingdecalevent" targettag="alientext" spawnpointtag="potentialresearchterminal" offset="200" />
+                  <SetDataAction identifier="spookytext" operation="add" value="1" />
+                  <WaitAction time="0.1" />
+                  <Goto name="spawnmoretext" />
+                </Success>
+                <Failure>
+                  <SetDataAction identifier="psychovisionsnorepeat" operation="set" value="1" />
+                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.listenalien" eventsprite="Ancient1" />
+                    <WaitAction time="2" />              
+                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.paranoid" endconversation="true" />
+                  <GiveSkillEXPAction skill="helm" amount="5" targettag="psychoplayer" />
+                  <GiveSkillEXPAction skill="weapons" amount="2" targettag="psychoplayer" />
+                </Failure>
+              </CheckDataAction >
+            </Success>
+            <Failure>
+              <ClearTagAction tag="psychoplayer" />
+              <Goto name="checkpsychosisloop" />
+            </Failure>      
+          </CheckAfflictionAction>
+        </Success>
+      </CheckDataAction>
     </ScriptedEvent>
+    
     <!--COALITION SECURITY OFFICER
     <ScriptedEvent identifier="securityofficer" commonness="100">
       <TagAction criteria="player" tag="player"/>
@@ -2380,8 +2465,7 @@
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent> -->
-    
-    
+
     
   </EventPrefabs>
 </Randomevents>
