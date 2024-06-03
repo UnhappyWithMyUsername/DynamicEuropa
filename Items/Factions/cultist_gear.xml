@@ -86,7 +86,14 @@
       <sprite name="Cultist Torso" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="Torso" hidelimb="false" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
       <sprite name="Cultist Right Hand" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="RightHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
       <sprite name="Cultist Left Hand" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
-      <sprite name="Cultist Right Lower Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
+      <sprite name="Cultist Right Lower Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" >      
+        <LightComponent range="10.0" lightcolor="30,180,80,255" powerconsumption="10" IsOn="true" pulseamount="0.5" pulsefrequency="0.5" allowingameediting="false"> 
+          <LightTexture texture="Content/Lights/light_fluorescent_L2.png" origin="0.65,0.35" size="1.0,0.5" />
+          <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" Interval="0.1" IsOn="true" setvalue="true">
+            <RequiredItem items="antibiotics" type="Contained" />
+          </StatusEffect>
+        </LightComponent>
+      </sprite>
       <sprite name="Cultist Left Lower Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
       <sprite name="Cultist Right Upper Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
       <sprite name="Cultist Left Upper Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" />
@@ -114,9 +121,18 @@
       <StatusEffect target="Contained" type="OnContained" noninteractable="true" setvalue="true" >
         <RequiredItem items="antibiotics" type="Contained" />
         <Conditional condition="lt 100" />
-      </StatusEffect> 
+      </StatusEffect>
+      <StatusEffect type="Always" target="This,Contained" Voltage="1.0" Interval="0.1" setvalue="true">
+        <RequiredItem items="antibiotics" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character,Contained" comparison="and" playsoundonrequireditemfailure="true" >   
+        <RequiredItem items="antibiotics" type="Contained" matchonempty="true" />
+        <Conditional huskinfection="gt 75" />
+        <Conditional condition="lte 3.0" />
+        <Sound file="Content/Items/WarningBeepSlow.ogg" range="150" loop="true" frequencymultiplier="0.6"/>
+      </StatusEffect>
     </Wearable>    
-    <ItemContainer capacity="1" maxstacksize="1">
+    <ItemContainer capacity="1" maxstacksize="1" containedstateindicatorstyle="syringe">
       <SlotIcon slotindex="0" texture="Content/Items/InventoryIconAtlas.png" sourcerect="576,704,64,64" origin="0.5,0.5" />
       <Containable items="antibiotics" />
     </ItemContainer>
