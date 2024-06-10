@@ -415,7 +415,7 @@
       </CheckReputationAction>
     </ScriptedEvent>
 
-    <!-- TODO: remove this from eventset? there's welding fuel in vending machines -->
+    <!-- Unused since we have vending machines -->
     <ScriptedEvent identifier="quartermaster" commonness="100">
       <TagAction criteria="player" tag="player" />
       <SpawnAction npcsetidentifier="DE_outpostnpcs" npcidentifier="quartermaster" targettag="quartermaster" spawnlocation="Outpost" />
@@ -444,7 +444,7 @@
             </Failure>
           </CheckMoneyAction>
         </Option>
-        <Option text="eventtext.shop.quartermaster.option.scrap">
+<!--         <Option text="eventtext.shop.quartermaster.option.scrap">
           <CheckMoneyAction targettag="qm_trig_player" Amount="1000">
             <Success>
               <MoneyAction targettag="qm_trig_player" amount="-1000" />
@@ -459,7 +459,7 @@
               <GoTo name="waitforinput" />
             </Failure>
           </CheckMoneyAction>
-        </Option>
+        </Option> -->
         <Option text="eventtext.option.leave">
           <ConversationAction text="eventtext.general.decline" targettag="qm_trig_player" />
           <ClearTagAction tag="qm_trig_player" />
@@ -467,6 +467,62 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>    
+    
+    <!-- scrap dealer -->
+    <ScriptedEvent identifier="scrapdealer1" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" />
+      <Label name="waitforinput" />
+      <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="You hear a muffled voice calling out the passerbys: salvage, rare metals, I've got them all! Hey you traveller, interested into some first rate, former submarine parts?" eventsprite="mechanic">
+        <Option text="You're selling me ...scrap?">
+          <ConversationAction targettag="triggerer_player" text="One man's junk is another's treasure. You wouldn't believe what you can find patiently waiting at the bottom of the sea. Scrap could be anything: broken down engines, electronics... it could even be a boat! So, dear customer, how about helping me kick off this business?" eventsprite="mechanic" />
+          <GoTo name="skiptrigger" />
+          <Label name="scrapproposition" />
+          <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <Label name="skiptrigger" />
+          <ConversationAction targettag="triggerer_player" text="For 250 marks, all this scrap can be yours!" eventsprite="mechanic">
+            <Option text="Deal.">
+              <CheckMoneyAction targettag="triggerer_player" Amount="250">
+                <Success>
+                  <MoneyAction targettag="triggerer_player" amount="-250" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SetDataAction identifier="scrapdealerprogress" value="1" />
+                  <ConversationAction targettag="triggerer_player" text="Here you go!" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="mechanic" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="scrapproposition" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.option.leave" endconversation="true">
+              <ClearTagAction tag="triggerer_player" />
+              <GoTo name="waitforinput" />
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="eventtext.option.leave" endconversation="true">
+          <ClearTagAction tag="triggerer_player" />
+          <GoTo name="waitforinput" />
+        </Option>
+      </ConversationAction>
+      <OnRoundEndAction>
+        <CheckConditionalAction targettag="scrapdealer" IsDead="true">
+          <Success>
+            <SetDataAction identifier="scrapdealerdead" value="1" />
+          </Success>
+          <Failure>
+          </Failure>
+        </CheckConditionalAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>   
 
     <!-- spooky research outpost event -->
     <ScriptedEvent identifier="psychovisions" commonness="100">
