@@ -308,6 +308,8 @@
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <ReputationAction targettype="Location" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
@@ -319,9 +321,9 @@
           <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
           <ModifyLocationAction faction="Coalition" />
           <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" />
+          <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
-          <CombatAction combatmode="None" npctag="bot" enemytag="bot" isinstigator="false" guardreaction="none" witnessreaction="none" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
         </Success>
         <Failure>
@@ -355,6 +357,8 @@
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
@@ -365,9 +369,9 @@
           <MissionStateAction missionidentifier="septakeover_coalitionoutpost" operation="Set" value="1" />
           <ModifyLocationAction faction="Separatists" />
           <SetDataAction identifier="septakeoveractive" operation="Set" value="0" />
+          <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
-          <CombatAction combatmode="None" npctag="bot" enemytag="bot" isinstigator="false" guardreaction="none" witnessreaction="none" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="false" guardreaction="none" witnessreaction="none" />
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
         </Success>
         <Failure>
