@@ -79,4 +79,53 @@
       <output name="charge_%" displayname="connection.batterychargepercentage" />
     </ConnectionPanel>
   </Item>
+  
+  <!--Not used-->
+  <Item name="barnacle" identifier="barnacle" category="Alien" Tags="turret,alien" scale="0.5" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="50">
+    <Sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" depth="0.18" sourcerect="8,280,118,145" origin="0.5,0.5" />
+    <Body radius="50" bodytype="static" />
+    <Holdable attached="True" attachedbydefault="true" aimable="true" canbepicked="False" allowingameediting="False" />
+    <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" canbeselected="false" characterusable="true">
+      <Containable items="barnacleprojectile" />
+      <!-- when the turret is fired, it triggers this statuseffect and spawns new ammo -->
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="barnacleprojectile" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <Turret barrelpos="59,70" launchimpulse="3" Reload="3" ShotsPerBurst="1" DelayBetweenBursts="0" RetractionDurationMultiplier="1" RecoilTime="0.1" RetractionDelay="0" RotationLimits="89,91" SpringStiffnessLowSkill="2" SpringStiffnessHighSkill="50" SpringDampingLowSkill="0.5" SpringDampingHighSkill="10" RotationSpeedLowSkill="1" RotationSpeedHighSkill="8" AutoOperate="True" RandomAimAmount="1" RandomAimMinTime="1" RandomAimMaxTime="2" RandomMovement="True" AimDelay="False" TargetCharacters="True" TargetMonsters="True" TargetHumans="True" TargetSubmarines="False" TargetItems="False" FriendlyTag="crawler" MinVoltage="0" PowerConsumption="0" IsActive="True" VulnerableToEMP="False" PickingTime="0" CanBePicked="False" AllowInGameEditing="True" Msg="" >
+      <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
+      <sound file="Content/Items/Alien/AlienTurret2.ogg" range="10000" type="OnUse" />
+      <RailSprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.5" sourcerect="384,384,351,384" origin="0.5, 0.66" />
+      <BarrelSprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.6" sourcerect="735,384,175,384" origin="0.5,1.0" />
+    </Turret>
+  </Item>
+  
+  <Item name="barnacleprojectile" identifier="barnacleprojectile" category="Alien" tags="alien,alienturretammo">
+    <!-- TODO: alien projectile sprite -->
+    <Sprite texture="Content/Characters/Pets/pets.png" depth="0.7" sourcerect="265,5,43,55" origin="0.5,0.5" />
+    <Body radius="20" density="10" />
+    <Holdable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,10" handle2="0,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnActive" target="This" duration="3" condition="-50" />
+    </Holdable>
+    <Projectile characterusable="false" sticktocharacters="true" sticktodeflective="true" sticktolighttargets="true" launchrotation="90">
+      <Attack structuredamage="0" severlimbsprobability="0">
+        <Affliction identifier="concussion" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="UseTarget,This" >
+        <Affliction identifier="lacerations" strength="2" />
+      </StatusEffect>
+      <!-- reduce condition to give the bolt a 5 second lifetime -->
+      <StatusEffect type="OnNotContained" target="This" condition="-50" checkconditionalalways="true">
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+      <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+        <Explosion range="300.0" showeffects="false" force="10.0">
+          <Affliction identifier="explosiondamage" strength="15" />
+        </Explosion>
+        <Remove />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  
 </Items>
