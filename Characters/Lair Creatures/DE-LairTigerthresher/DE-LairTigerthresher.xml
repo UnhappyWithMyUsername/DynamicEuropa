@@ -1,20 +1,5 @@
-﻿<Character inherit="Tigerthresher" speciesname="DE-LairTigerthresher" pathfinderpriority="1" usepathfinding="True">
-  <ai targetinnerwalls="False" targetouterwalls="false">
-    <target tag="decoy" state="Attack" priority="100" ignoreifnotinsamesub="True" />
-    <target tag="provocative" state="Attack" priority="100" ignoreifnotinsamesub="True"/>
-    <target tag="weapon" state="Attack" priority="100" ignoreifnotinsamesub="True"/>
-    <target tag="tool" state="Aggressive" priority="50" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" ignoreifnotinsamesub="True"/>
-    <target tag="human" state="Attack" priority="60" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreifnotinsamesub="True"/>
-    <target tag="weaker" state="Attack" priority="50" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="equal" state="Attack" priority="50" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="stronger" state="Aggressive" priority="50" reactdistance="2000" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="leucocyte" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="dead" state="Eat" priority="20" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="bonethresher" state="Protect" priority="2" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" />
-    <target tag="turret" state="Attack" priority="1" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreinside="true"/>
-    <target tag="watcher" state="Protect" priority="1" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreinside="true"/>
-    <target tag="monsterfood" state="Eat" priority="1" />
-    <target tag="terminalcell" state="Idle" priority="0" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
-    <SwarmBehavior mindistfromclosest="400" maxdistfromcenter="2000" cohesion="0.5" />
+﻿<Charactervariant inherit="Tigerthresher" speciesname="DE-LairTigerthresher" speciestranslationoverride="Tigerthresher" pathfinderpriority="1" usepathfinding="True">
+  <ai PatrolFlooded="true">
   </ai>
-</Character>
+  <ragdoll CanEnterSubmarine="true" />
+</Charactervariant>
