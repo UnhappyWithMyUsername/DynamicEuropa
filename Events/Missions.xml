@@ -1664,26 +1664,23 @@
     <Metadata identifier="vipnappingnorepeat" value="1"/>
   </OutpostMission>
   
-  <SalvageMission
+  <GotoMission
+    name=""
     identifier="livecapture"
-    textidentifier="livecapture"
-    tags="livecapture"
-    type="Salvage"
+    type="GoTo"
     difficulty="3"
-    commonness="100"
+    commonness="0"
     reward="3500"
-    sonaricon="artifact"
-    itemtag="capturetargetitem"    
     successmessage="missionsuccess.livecapture"
     failuremessage="missionfailure.livecapture">
-    <Portrait texture="Content/Map/LocationPortraits/AlienRuins.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <Reputation identifier="huskcult" amount="10" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,0,256,256" color="49,93,233"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,256,256,256" color="243,146,55"/>
     <LocationType from="Any" to="Any" />
-    <message header="missionheader0.livecapture" text="missionmessage0.livecapture" />
     <message header="missionheader1.livecapture" text="missionmessage1.livecapture" />
-    <TriggerEvent state="0" delay="5" eventidentifier="spawncrawlercapture" />
-  </SalvageMission>
+    <TriggerEvent state="0" delay="0" eventidentifier="livecapturecrawler" />
+    <CompleteCheckDataAction identifier="capturedlivetarget" condition="eq 1"/>
+  </GotoMission>
+
+
   
 <!--   <GotoMission
     name=""

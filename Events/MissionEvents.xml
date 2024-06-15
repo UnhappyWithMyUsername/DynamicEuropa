@@ -542,12 +542,28 @@
     </ScriptedEvent>    
     
     <ScriptedEvent identifier="laircrawlersoutside2">
-      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="NearMainSub" offset="500" />
     </ScriptedEvent>
-    
-    <ScriptedEvent identifier="spawncrawlercapture">
-      <SpawnAction speciesname="Crawler_capture" amount="3" SpawnLocation="mainpath" offset="500" />
+   
+    <ScriptedEvent identifier="livecapturecrawler">
+      <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+      <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="1" SpawnLocation="MainPath" offset="500" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
+      <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
+      <MissionStateAction missionidentifier="livecapture" operation="set" value="1" />
+      <OnRoundEndAction>
+        <CheckConditionalAction targettag="capturetarget" InPlayerSubmarine="true" IsDead="False" LogicalOperator="And" >
+          <Success>
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
+          </Success>
+          <Failure>          
+            <MissionStateAction missionidentifier="livecapture" operation="set" value="0" />
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+          </Failure>
+        </CheckConditionalAction>
+      </OnRoundEndAction>
     </ScriptedEvent>
-    
+
   </EventPrefabs>
 </Randomevents>

@@ -693,7 +693,7 @@
   
   <Item name="alien liver" identifier="alienliver" category="Misc" tags="alien,capturetargetitem" noninteractable="false" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
-    <Body radius="150" density="10" />
+    <Body radius="50" density="10" />
     <Holdable slots="Any" >
       <StatusEffect type="Always" interval="1" target="This,Character" >
         <Conditional TargetContainer="true" IsDead="true" />
@@ -701,6 +701,8 @@
         <Remove />
       </StatusEffect>
     </Holdable>
+    <AiTarget soundrange="500000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true"/>
+
   </Item>
   
 </Override>
