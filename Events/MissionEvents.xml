@@ -551,14 +551,12 @@
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
       <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
-      <MissionStateAction missionidentifier="livecapture" operation="set" value="1" />
       <OnRoundEndAction>
-        <CheckConditionalAction targettag="capturetarget" InPlayerSubmarine="true" IsDead="False" LogicalOperator="And" >
+        <CheckConditionalAction targettag="capturetarget" IsDead="false" IsInPlayersub="true" LogicalOperator="And" >
           <Success>
             <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
           </Success>
-          <Failure>          
-            <MissionStateAction missionidentifier="livecapture" operation="set" value="0" />
+          <Failure>
             <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
           </Failure>
         </CheckConditionalAction>

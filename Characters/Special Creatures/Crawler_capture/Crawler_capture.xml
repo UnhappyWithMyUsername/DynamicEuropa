@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Charactervariant inherit="Crawler" speciesname="Crawler_capture" speciestranslationoverride="Crawler" usebosshealthbar="true">
-  <health vitality="320" poisonvulnerability="5" />
+  <health vitality="320" poisonvulnerability="5" >
+    <Limb name="Torso">
+      <VitalityMultiplier type="damage,burn" multiplier="1.0" />
+      <VitalityMultiplier type="stun" multiplier="3.0" />
+    </Limb>
+    <Limb name="Head">
+      <VitalityMultiplier type="damage,burn" multiplier="1.5" />
+      <VitalityMultiplier type="stun" multiplier="3.0" />
+    </Limb>
+    <Limb name="LeftLeg">
+      <VitalityMultiplier type="damage,burn" multiplier="0.75" />
+      <VitalityMultiplier type="stun" multiplier="3.0" />
+    </Limb>
+    <Limb name="RightLeg">
+      <VitalityMultiplier type="damage,burn" multiplier="0.75" />
+      <VitalityMultiplier type="stun" multiplier="3.0" />
+    </Limb>
+    <Limb>
+      <!--Tail-->
+      <VitalityMultiplier type="damage,burn" multiplier="0.75" />
+      <VitalityMultiplier type="stun" multiplier="3.0" />
+    </Limb>
+  </health>
   <ai combatstrength="10000" avoidgunfire="False">
   </ai>
   <ragdoll scalemultiplier="1.3" />
