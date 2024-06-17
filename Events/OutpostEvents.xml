@@ -476,7 +476,7 @@
         </Failure>
         <Success>    
           <TagAction criteria="player" tag="player" />
-          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" targetmoduletags="crewmodule"/>
           <Label name="waitforinput" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.scrapseller" eventsprite="office">
@@ -536,7 +536,7 @@
         </Failure>
         <Success>    
           <TagAction criteria="player" tag="player" />
-          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" targetmoduletags="crewmodule"/>
           <Label name="waitforinput" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.scrapseller" eventsprite="office" />
@@ -557,7 +557,7 @@
                   <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
                   <SetDataAction identifier="scrapdealerprogress" value="2" />
                   <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.scrapbought" />
-                  <MissionAction missiontag="salvagewreck" minlocationdistance="2" />
+                  <MissionAction missiontag="salvagewreck" />
                 </Success>
                 <Failure>
                   <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="office" />
