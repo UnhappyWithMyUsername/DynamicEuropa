@@ -468,39 +468,35 @@
       </ConversationAction>
     </ScriptedEvent>    
     
-    <!-- scrap dealer -->
-<!--     <ScriptedEvent identifier="scrapdealer1" commonness="100">
+
+    <!-- scrap dealer, buy scrap  -->
+    <ScriptedEvent identifier="scrapdealer1" commonness="100">
       <CheckDataAction identifier="scrapdealerprogress" condition="eq 0">
         <Failure>
         </Failure>
         <Success>    
           <TagAction criteria="player" tag="player" />
-          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" targetmoduletags="crewmodule"/>
           <Label name="waitforinput" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
-          <ConversationAction targettag="triggerer_player" text="You hear a muffled voice calling out the passerbys: salvage, rare metals, I've got them all! Hey you traveller, interested into some first rate, former submarine parts?" eventsprite="office">
-            <Option text="You're selling me ...scrap?">
-              <ConversationAction targettag="triggerer_player" text="One man's junk is another's treasure. You wouldn't believe what you can find patiently waiting at the bottom of the sea. Scrap could be anything: broken down engines, electronics... it could even be a boat! So, dear customer, how about helping me kick off this business?" eventsprite="office" />
+          <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.scrapseller" eventsprite="office">
+            <Option text="EventText.scrapdealer1.sellmescrap">
+              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.junktreasure" eventsprite="office" />
               <GoTo name="skiptrigger" />
               <Label name="scrapproposition" />
               <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
               <Label name="skiptrigger" />
-              <ConversationAction targettag="triggerer_player" text="For 250 marks, all this scrap can be yours!" eventsprite="office">
-                <Option text="Deal.">
+              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.buyscrap" eventsprite="office">
+                <Option text="EventText.scrapdealer1.deal">
                   <CheckMoneyAction targettag="triggerer_player" Amount="250">
                     <Success>
                       <MoneyAction targettag="triggerer_player" amount="-250" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                      <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                      <SpawnAction itemidentifier="scrap" amount="4" targetinventory="triggerer_player" />
                       <SetDataAction identifier="scrapdealerprogress" value="1" />
-                      <ConversationAction targettag="triggerer_player" text="Here you go!" />
+                      <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.scrapbought" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="mechanic" />
+                      <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.nomoney" eventsprite="office" />
                       <ClearTagAction tag="triggerer_player" />
                       <GoTo name="scrapproposition" />
                     </Failure>
@@ -522,42 +518,36 @@
       <OnRoundEndAction>
         <CheckConditionalAction targettag="scrapdealer" IsDead="true">
           <Success>
-            <SetDataAction identifier="scrapdealerprogress" value="4" />
+            <SetDataAction identifier="scrapdealerprogress" value="3" />
           </Success>
-          <Failure>
-          </Failure>
         </CheckConditionalAction>
       </OnRoundEndAction>
     </ScriptedEvent>
     
+    <!-- scrap dealer 2, buy scrap a gain get a salvage mission -->
     <ScriptedEvent identifier="scrapdealer2" commonness="100">
       <CheckDataAction identifier="scrapdealerprogress" condition="eq 1">
         <Failure>
         </Failure>
         <Success>    
           <TagAction criteria="player" tag="player" />
-          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="scrapdealer" targettag="scrapdealer" spawnlocation="Outpost" targetmoduletags="crewmodule"/>
           <Label name="waitforinput" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
-          <ConversationAction targettag="triggerer_player" text="You again! As you can see, I'm still in the business. Need some more of that valuable scrap?" eventsprite="office" />
+          <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.scrapseller" eventsprite="office" />
           <GoTo name="skiptrigger" />
           <Label name="scrapproposition" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <Label name="skiptrigger" />
-          <ConversationAction targettag="triggerer_player" text="For 250 marks, all this scrap can be yours!" eventsprite="office">
-            <Option text="Deal.">
+          <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.buyscrap" eventsprite="office">
+            <Option text="EventText.scrapdealer1.deal">
               <CheckMoneyAction targettag="triggerer_player" Amount="250">
                 <Success>
                   <MoneyAction targettag="triggerer_player" amount="-250" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
-                  <SpawnAction itemidentifier="scrap" targetinventory="triggerer_player" />
+                  <SpawnAction itemidentifier="scrap" amount="6" targetinventory="triggerer_player" />
                   <SetDataAction identifier="scrapdealerprogress" value="2" />
-                  <ConversationAction targettag="triggerer_player" text="Never thought any sane person would buy that junk TWICE! Since you're my best customer, let me give you a tip as a bonus: Here's a wreck I found a while ago, but it proved too tricky to loot. Maybe you can give it a shot..." />
-                  <MissionAction missiontag="salvagewreck" minlocationdistance="1" />
+                  <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.scrapbought" />
+                  <MissionAction missiontag="salvagewreck" />
                 </Success>
                 <Failure>
                   <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="office" />
@@ -574,28 +564,17 @@
         </Success> 
       </CheckDataAction>
       <OnRoundEndAction>
-        <CheckConditionalAction targettag="scrapdealer" IsDead="false">
+        <CheckConditionalAction targettag="scrapdealer" IsDead="true">
           <Success>
-            <SetDataAction identifier="scrapdealerprogress" value="4" />
+            <SetDataAction identifier="scrapdealerprogress" value="3" />
           </Success>
-          <Failure>
-          </Failure>
         </CheckConditionalAction>
       </OnRoundEndAction>
     </ScriptedEvent>
     
-    <ScriptedEvent identifier="scrapdealer3" commonness="100">
-      <CheckDataAction identifier="scrapdealerprogress" condition="eq 3">
-        <Failure>
-        </Failure>
-        <Success>    
-          <SetDataAction identifier="scrapdealerprogress" value="4" />
-        </Success> 
-      </CheckDataAction>
-    </ScriptedEvent>
-    
-    <ScriptedEvent identifier="scrapdealer4" commonness="100">
-      <CheckDataAction identifier="scrapdealerprogress" condition="eq 4">
+    <!-- scrap dealer 3, transit event, spawns the corpse of the scrap dealer -->
+    <ScriptedEvent identifier="scrapdealer3" commonness="25">
+      <CheckDataAction identifier="scrapdealerprogress" condition="eq 2">
         <Failure>
         </Failure>
         <Success>    
@@ -605,7 +584,7 @@
           <SetDataAction identifier="scrapdealerprogress" value="3" />
         </Success> 
       </CheckDataAction>
-    </ScriptedEvent> -->
+    </ScriptedEvent>
 
     <!-- spooky research outpost event -->
     <ScriptedEvent identifier="psychovisions" commonness="100">
@@ -2554,7 +2533,7 @@
           <TagAction criteria="itemtag:smokeemitter" tag="smokeemitter" submarinetype="Outpost" />
           <TriggerAction target1tag="player" target2tag="showtimesign" radius="420" />
           <WaitAction time="2" />
-          <ReputationAction increase="3" identifier="Clowns" targettype="Faction" />
+          <ReputationAction increase="5" identifier="Clowns" targettype="Faction" />
           <StatusEffectAction targettag="showtimesign" >
             <StatusEffect target="this" duration="5" >
               <Sound file="Content/Items/Jobgear/Clown/ITEM_bananaSlip1.ogg" range="2000" volume="3" frequencymultiplier="0.5"  />

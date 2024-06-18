@@ -542,8 +542,29 @@
     </ScriptedEvent>    
     
     <ScriptedEvent identifier="laircrawlersoutside2">
-      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
     </ScriptedEvent>
-    
+   
+    <ScriptedEvent identifier="capturelivecrawlerevent">
+      <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+      <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocationType="MainPath" offset="500" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
+      <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
+      <!-- jank way of making a message popup when crawler gets inside -->
+      <MissionStateAction missionidentifier="capturelivecrawler" operation="set" value="1" />
+      <OnRoundEndAction>
+          <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="1">
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+
   </EventPrefabs>
 </Randomevents>

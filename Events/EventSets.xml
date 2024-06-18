@@ -271,6 +271,7 @@
       <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
         <EventSet identifier="missionevents.husk.destination.easy" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
           <ScriptedEvent identifier="missionevent_slimecollection" commonness="100" probability="0.25" />
+          <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="50" probability="0.25" />
         </EventSet>      
         <EventSet identifier="outpostevents.husk.coalition" allowatstart="true" chooserandom="true" eventcount="1" faction="coalition">
           <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" commonness="100" />
@@ -307,6 +308,7 @@
         <ScriptedEvent identifier="separatistrelations" commonness="100" faction="coalition" /> <!-- technically a separatist event, but takes place in coalition outposts -->
         <!-- events that only occur in low difficulty-->
         <ScriptedEvent identifier="atwitsend" commonness="60" />
+        <ScriptedEvent identifier="scrapdealer1" commonness="60" />
       </EventSet>
       <!-- low-difficulty clown events -->
       <EventSet identifier="outpostevents.easy.generic.randomevents.clowns" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
@@ -350,6 +352,8 @@
         <ScriptedEvent identifier="stuckinthemiddle" commonness="50" faction="coalition" /> <!-- technically a separatist event, but happens in a coalition outpost -->
         <ScriptedEvent identifier="returner" commonness="50" />
         <ScriptedEvent identifier="vendingsmashing" commonness="50" />
+        <ScriptedEvent identifier="scrapdealer2" commonness="60" />
+      
       </EventSet>
       <!-- high-difficulty clown events -->
       <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
@@ -850,7 +854,8 @@
       <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="0" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="factionstowaway" commonness="100" probability="0.1" triggercooldown="false" />
-        <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" />
+        <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" />        
+        <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
       </EventSet>
       <EventSet identifier="DEtransitevents.commsrelay.wrecks" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" ignorecooldown="true" chooserandom="false">
         <ScriptedEvent identifier="commsrelay_wreck" commonness="100" probability="0.25" triggercooldown="false" />

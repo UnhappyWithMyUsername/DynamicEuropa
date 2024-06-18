@@ -4,16 +4,20 @@
     <Item name="" identifier="piezocrystal" category="Material" Tags="" canbepicked="false" description="" scale="0.5" sonarsize="30" health="60" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true">
       <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
       <Body width="500" height="500" density="25" bodytype="Static" />
-      <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true">
-        <!-- activate the light only if the item has the "nearplayer" tag -->
-        <ActiveConditional HasStatusTag="nearplayer" />
+      <TriggerComponent triggeredby="Submarine" radius="8000" >
+        <StatusEffect type="OnActive" target="This" Voltage="1.0" setvalue="true" >
+          <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" emitinterval="2.1" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="3000.0" setvalue="true" stackable="false" duration="1" interval="1" extraload="500" />
+      </TriggerComponent>
+      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true" >
+        <IsActive targetitemcomponent="TriggerComponent" triggeractive="true" />
       </LightComponent>
-      <LightComponent lightcolor="178,196,207,255" range="7000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="1.0" ison="true" drawbehindsubs="true">
-        <!-- activate the light only if the item has the "nearplayer" tag -->
-        <ActiveConditional HasStatusTag="nearplayer" />
+      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0.2" ison="true" drawbehindsubs="true" >
+        <IsActive targetitemcomponent="TriggerComponent" triggeractive="true" />
         <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
       </LightComponent>
-      <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="10000" rangemultiplierinwalls="1">
+      <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="6000" rangemultiplierinwalls="1">
         <Attack targetimpulse="50">
           <Affliction identifier="stun" strength="2" />
           <Affliction identifier="burn" strength="4" />
@@ -53,34 +57,14 @@
           <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="10000" />
           <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="10000" />
         </StatusEffect>
-        <!-- tag the item with "nearplayer" if a player is within 100m to activate the item | prevents the item from being processed when it's not necessary -->
-        <StatusEffect type="Always" target="This,NearbyCharacters" range="10000" tags="nearplayer" setvalue="true" interval="1.2" duration="1.3">
-          <Conditional IsPlayer="true" />
-        </StatusEffect>
-      </ElectricalDischarger>
-      <ItemComponent>
-        <!-- when the component activates, apply extra load to nearby items and deactive the component -->
-        <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="7000.0" stackable="false" extraload="500" setvalue="true" />
-        <StatusEffect type="OnActive" target="This" targetitemcomponent="ItemComponent" IsActive="false" setvalue="true">
-          <Conditional IsActive="true" targetitemcomponent="ItemComponent" />
-        </StatusEffect>
-        <!-- reactivate after one second if the item has the "nearplayer" tag -->
-        <StatusEffect type="Always" target="This" stackable="false" delay="1.0" IsActive="true" setvalue="true">
-          <Conditional HasStatusTag="nearplayer" />
-        </StatusEffect>
-        <!-- trigger the electrical discharge to hit characters after every 12 seconds if the item was activated and it had the tag "nearplayer"-->
-        <StatusEffect type="OnActive" target="This" stackable="false" delay="12.0">
-          <Conditional HasStatusTag="nearplayer" />
+        <StatusEffect type="Always" target="This" interval="10.0">
+          <Conditional voltage="gt 0" />
           <Use />
         </StatusEffect>
-        <!-- spawn electric particles if the item has the tag "nearplayer" -->
-        <StatusEffect type="Always" target="This">
-          <Conditional HasStatusTag="nearplayer" />
-          <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" emitinterval="2.1" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" />
-        </StatusEffect>
-      </ItemComponent>
+      </ElectricalDischarger>
       <LevelResource deattachduration="Infinity">
-        <Commonness cavecommonness="0.0" abysscommonness="0.5" fixedquantity="true" clusterquantity="46" clustersize="1" leveltype="thegreatsea" isislandspecific="false" allowatstart="false" />
+        <Commonness fixedquantity="true" clusterquantity="30" clustersize="1" leveltype="thegreatsea" isislandspecific="false" allowatstart="false" />
+        <Commonness fixedquantity="true" clusterquantity="10" clustersize="1" leveltype="thegreatsea" isislandspecific="true" allowatstart="false" />
         <Commonness fixedquantity="true" clusterquantity="0"  commonness="0"  leveltype="greatseaoutpost" />
         <RequiredItem items="nonexistentitem" type="Equipped" />
       </LevelResource>

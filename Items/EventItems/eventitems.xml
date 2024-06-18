@@ -738,6 +738,20 @@
         <Remove />
       </StatusEffect>
     </LightComponent>
+  </Item>  
+  
+  <Item name="alien liver" identifier="alienliver" category="Misc" tags="alien,capturetargetitem" noninteractable="false" >
+    <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
+    <Body radius="50" density="10" />
+    <Holdable slots="Any" >
+      <StatusEffect type="Always" interval="1" target="This,Character" >
+        <Conditional TargetContainer="true" IsDead="true" />
+        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" />
+        <Remove />
+      </StatusEffect>
+    </Holdable>
+    <AiTarget soundrange="5000000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true"/>
+
   </Item>
   
 </Override>
