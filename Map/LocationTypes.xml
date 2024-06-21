@@ -523,16 +523,19 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining4.png" premultiplyalpha="false" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="assistant" commonness="1" />
-      <ChangeTo type="Mine" disallowedadjacentlocations="Mine" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.survey.changeto.extraction">
-        <Requirement requiredlocations="Factory" probability="0.1" requireddurationrange="1,5" requiredproximity="10" requiredproximityforprobabilityincrease="10" proximityprobabilityincrease="0.15" />
+      <ChangeTo type="Mine" disallowedadjacentlocations="Mine" disallowedproximity="2" locationtypechangecooldown="2" messagetag="locationchange.survey.changeto.extraction">
+        <Requirement function="Add" requiredlocations="City" probability="0.75" requiredproximity="1" />
+        <Requirement function="Add" requiredlocations="Colony" probability="0.5" requiredproximity="1" />
+        <Requirement function="Add" requiredlocations="Settlement" probability="0.25" requiredproximity="1" />
+        <Requirement function="Add" requiredlocations="Outpost" probability="0.1" requiredproximity="1" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
+      <ChangeTo type="None" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
+      <ChangeTo type="None" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
+      <ChangeTo type="None" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
     </Survey>
