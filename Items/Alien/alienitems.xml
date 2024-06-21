@@ -81,59 +81,60 @@
   </Item>
   
   <!--Not used-->
-  <Item name="barnacle" identifier="barnacle" category="Alien" Tags="turret,alien" scale="0.5" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="20">
-    <Sprite texture="content/map/thalamus/thalamus.png" depth="0.55" sourcerect="800,1,192,191" origin="0.5,0.5" />
-    <BrokenSprite texture="content/map/thalamus/thalamus.png" sourcerect="800,193,192,191" depth="0.55" maxcondition="0" />
-    <Body radius="60" bodytype="static" />
-    <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" canbeselected="false" characterusable="true">
-      <Containable items="barnacleprojectile" />
-      <!-- when the turret is fired, it triggers this statuseffect and spawns new ammo -->
-      <StatusEffect type="OnUse" target="Contained">
-        <SpawnItem identifier="barnacleprojectile" spawnposition="ThisInventory" />
+  <Item name="barnacle2" identifier="barnacle2" category="Alien" Tags="turret,alien" scale="0.5" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="20">
+    <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.55" sourcerect="190,11,258,218" origin="0.5,0.5" />
+    <BrokenSprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="453,11,258,218" depth="0.55" maxcondition="0" />
+    <Body radius="120" bodytype="static" />
+    <MotionSensor rangex="25" rangey="120" detectoffset="0,-100" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="1" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" interval="0.1" target="This" condition="0" setvalue="true" comparison="And">
+        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+        <Conditional condition="gt 0" />
+        <SpawnItem identifier="barnacleprojectile" spawnposition="This" rotation="270" count="5" aimspread="60" />
       </StatusEffect>
-    </ItemContainer>
-    <Turret barrelpos="96,95" launchimpulse="3" Reload="3" ShotsPerBurst="1" DelayBetweenBursts="0" RetractionDurationMultiplier="1" RecoilTime="0.1" RetractionDelay="0" RotationLimits="85,95" SpringStiffnessLowSkill="2" SpringStiffnessHighSkill="50" SpringDampingLowSkill="0.5" SpringDampingHighSkill="10" RotationSpeedLowSkill="1" RotationSpeedHighSkill="8" AutoOperate="True" RandomAimAmount="1" RandomAimMinTime="1" RandomAimMaxTime="2" RandomMovement="True" AimDelay="False" TargetCharacters="True" TargetMonsters="True" TargetHumans="True" TargetSubmarines="False" TargetItems="False" FriendlyTag="caveenemy" MinVoltage="0" PowerConsumption="0" IsActive="True" VulnerableToEMP="False" PickingTime="0" CanBePicked="False" AllowInGameEditing="True" Msg="" >
-      <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
-      <sound file="Content/Items/Alien/AlienTurret2.ogg" range="10000" type="OnUse" />
-      <RailSprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.7" sourcerect="384,384,351,384" origin="0.5, 0.66" />
-      <BarrelSprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.8" sourcerect="735,384,175,384" origin="0.5,1.0" />
-      <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" delay="0.2" />
       <StatusEffect type="OnBroken" target="This" noninteractable="true">
         <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" drawontop="true" />
-        <Explosion range="300.0" showeffects="false" force="10.0">
+        <Explosion range="100.0" showeffects="false" force="10.0">
           <Affliction identifier="acidburn" strength="15" />
         </Explosion>
       </StatusEffect>
-    </Turret>
+    </MotionSensor>
   </Item>
   
-  <Item name="barnacleprojectile" identifier="barnacleprojectile" category="Alien" tags="alien,alienturretammo" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5" impacttolerance="0.1" >
-    <Sprite texture="Content/Characters/Pets/pets.png" depth="0.2" sourcerect="265,5,43,55" origin="0.5,0.5" />
-    <Body radius="15" density="10" />
-    <Holdable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,10" handle2="0,-10" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="OnActive" target="This" duration="3" condition="-5" />
-    </Holdable>
-    <Projectile characterusable="false" sticktocharacters="true" sticktodeflective="true" sticktolighttargets="true" launchrotation="90">
+  <Item name="barnacleprojectile" identifier="barnacleprojectile" scale="0.5" category="Alien" tags="alien" damagedbyexplosions="true" damagedbyprojectiles="false" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5" impacttolerance="0.1" isdangerous="true" >
+    <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="100,135,69,39" origin="0.5,0.5" />
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="22,15,69,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,15,82,44" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="22,79,69,35" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,75,69,39" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <InventoryIcon texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="265,5,43,55" />
+    <LightComponent range="1" color="255,255,255,255" castshadows="false">
+      <sprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="28,134,57,23" origin="0.5,0.5" />
+    </LightComponent>
+    <Body width="60" height="30" density="10" />
+    <Throwable slots="RightHand,LeftHand" holdpos="30,-15" handle1="0,0" handle2="0,0" throwforce="2.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnActive" target="This" duration="3" stackable="false" condition="-1" />
+      <StatusEffect type="OnImpact" target="This" Condition="0" setvalue="true" />
+    </Throwable>
+    <Projectile launchimpulse="1" characterusable="false" sticktocharacters="true" sticktodeflective="true" sticktolighttargets="true" impulsespread="0.3" spread="30"  launchrotation="0">
       <Attack structuredamage="0" severlimbsprobability="0">
         <Affliction identifier="concussion" strength="1" />
+        <Affliction identifier="stun" strength="0.1" probability="0.25" />
       </Attack>
       <StatusEffect type="OnActive" target="UseTarget,This" condition="-0.5" >
-        <Affliction identifier="acidburn" strength="2" />
+        <Affliction identifier="acidburn" strength="0.1" />
         <Affliction identifier="slow" strength="200" />
-        <ParticleEmitter particle="organeruption" distancemin="0" distancemax="50" particlespersecond="20.0" scalemin="0.5" scalemax="1" anglemin="250" anglemax="290" velocitymin="0" velocitymax="50" colormultiplier="80,120,30,255" drawontop="true" lifetimemultiplier="0.25" />
-        <ParticleEmitter particle="whitegoosplash" distancemin="0" distancemax="50" particlespersecond="20.0" scalemin="0.25" scalemax="0.5" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" colormultiplier="80,120,30,255" drawontop="true"/>
-      </StatusEffect>
-      <StatusEffect type="OnImpact" target="This" delay="0.1" Condition="0.0" setvalue="true" checkconditionalalways="true">
-        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+        <ParticleEmitter particle="organeruption" distancemin="0" distancemax="10" particlespersecond="5" scalemin="0.25" scalemax="0.5" anglemin="250" anglemax="290" velocitymin="0" velocitymax="50" colormultiplier="80,120,30,255" drawontop="true" lifetimemultiplier="0.25" />
+        <ParticleEmitter particle="whitegoosplash" distancemin="0" distancemax="10" particlespersecond="5" scalemin="0.25" scalemax="0.5" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" colormultiplier="80,120,30,255" drawontop="true"/>
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This">
-        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" />
-        <Explosion range="300.0" showeffects="false" force="10.0">
-          <Affliction identifier="acidburn" strength="15" />
+        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" colormultiplier="80,120,30,255" />
+        <Explosion range="100.0" showeffects="false" force="2.0">
+          <Affliction identifier="acidburn" strength="10" />
         </Explosion>
         <Remove />
       </StatusEffect>
     </Projectile>
+
   </Item>
   
 </Items>
