@@ -26,7 +26,7 @@
     </Item>
     <!-- Pre-placed in cave modules and unlocked and randomized by an event. Spawns a random mineral when mined. -->
     <Item name="Mineral Deposit" identifier="mineralspawner" category="Material" Tags="smallitem,ore,mineralspawner" maxstacksize="1" description="used in rock cave to spawn mineral" scale="0.5" spritecolor="255,255,255,255" damagedbyrepairtools="true" damagedbyprojectiles="true" health="50" noninteractable="false" >
-      <Upgrade gameversion="2.0.0.0" noninteractable="true" />
+      <Upgrade gameversion="2.0.0.0" noninteractable="false" />
       <Body radius="40" width="20" density="25" />
       <LightComponent lightcolor="255,255,180,120" range="50" ison="true" castshadows="false" drawbehindsubs="false">
         <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
@@ -84,6 +84,7 @@
     </Item>
     <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched. "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
     <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" >
+      <Upgrade gameversion="2.0.0.0" noninteractable="false" />
       <Body radius="30" width="20" density="10.5" />
       <Sprite texture="%ModDir%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
       <LightComponent lightcolor="255,255,180,120" range="50" ison="true" castshadows="false" drawbehindsubs="false">
