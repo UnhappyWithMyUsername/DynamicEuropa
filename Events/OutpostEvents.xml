@@ -282,9 +282,9 @@
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
+      <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
       <!-- 2/3 nodes are deleted -->   
-      <StatusEffectAction targettag="orenode">
+      <StatusEffectAction targettag="deleteorenode">
         <StatusEffect target="This">
           <Remove />
         </StatusEffect>
@@ -297,9 +297,9 @@
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
       <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ChoosePercentage="80"/>
+      <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" ChoosePercentage="80"/>
       <!-- 4/5 nodes are deleted -->   
-      <StatusEffectAction targettag="orenode">
+      <StatusEffectAction targettag="deleteorenode">
         <StatusEffect target="This">
           <Remove />
         </StatusEffect>
@@ -326,9 +326,9 @@
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
       <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
+      <TagAction criteria="itemidentifier:plantcluster" tag="deleteplantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
       <!-- 3/4 nodes are deleted -->
-      <StatusEffectAction targettag="plantnode">
+      <StatusEffectAction targettag="deleteplantnode">
         <StatusEffect target="This">
           <Remove />
         </StatusEffect>
@@ -340,9 +340,9 @@
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:cavepestspawner" tag="pestnest" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
+      <TagAction criteria="itemidentifier:cavepestspawner" tag="deletepestnest" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
       <!-- 3/4 nodes are deleted -->
-      <StatusEffectAction targettag="pestnest">
+      <StatusEffectAction targettag="deletepestnest">
         <StatusEffect target="This">
           <Remove />
         </StatusEffect>
