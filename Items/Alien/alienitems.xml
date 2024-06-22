@@ -80,55 +80,62 @@
     </ConnectionPanel>
   </Item>
   
-  <!--Not used-->
-  <Item name="Pest Nest" identifier="cavewormspawner" category="Alien" Tags="turret,alien" scale="0.5" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="20">
+  <Item name="Pest Nest" identifier="cavepestspawner" category="Alien" Tags="alien,pestnest" scale="0.4" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5">
     <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.55" sourcerect="190,11,258,218" origin="0.5,0.5" />
     <BrokenSprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="453,11,258,218" depth="0.55" maxcondition="0" />
     <Body radius="120" bodytype="static" />
-    <MotionSensor rangex="25" rangey="120" detectoffset="0,-100" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="1" target="Human" DetectOwnMotion="false">
+    <MotionSensor rangex="25" rangey="130" detectoffset="0,-110" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="1" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" interval="0.35" target="This" >
+        <Conditional condition="gt 0" />
+        <particleemitter particle="whitegoosplash" particleamount="2" velocitymin="200" velocitymax="300" anglemin="260" anglemax="280" scalemin="0.5" scalemax="0.75" copyentityangle="False" drawontop="true" colormultiplier="200,200,255,255" />
+      </StatusEffect>
       <StatusEffect type="Always" interval="0.1" target="This" condition="0" setvalue="true" comparison="And">
         <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
         <Conditional condition="gt 0" />
-        <SpawnItem identifier="barnacleprojectile" spawnposition="This" rotation="270" count="5" aimspread="60" />
       </StatusEffect>
+      <StatusEffect type="OnFire" target="This" condition="-1" />
       <StatusEffect type="OnBroken" target="This" noninteractable="true">
-        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" drawontop="true" />
-        <Explosion range="100.0" showeffects="false" force="10.0">
+        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="240" anglemax="300" scalemin="0.5" scalemax="1.0" copyentityangle="False" drawontop="true" colormultiplier="200,200,255,255" />
+        <SpawnItem identifier="cavepest" spawnposition="This" rotation="270" count="5" aimspread="60" />
+        <Explosion range="100.0" showeffects="false" force="5.0">
           <Affliction identifier="acidburn" strength="15" />
         </Explosion>
       </StatusEffect>
     </MotionSensor>
   </Item>
   
-  <Item name="Cave Pest" identifier="caveworm" scale="0.5" category="Alien" tags="alien" damagedbyexplosions="true" damagedbyprojectiles="false" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5" impacttolerance="0.1" isdangerous="true" >
+  <Item name="Cave Pest" identifier="cavepest" scale="0.5" category="Alien" tags="alien" damagedbyexplosions="true" damagedbyprojectiles="false" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5" impacttolerance="0.1" isdangerous="true" >
     <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="100,135,69,39" origin="0.5,0.5" />
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="22,15,69,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,15,82,44" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="22,79,69,35" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,75,69,39" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <InventoryIcon texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="265,5,43,55" />
-    <LightComponent range="1" color="255,255,255,255" castshadows="false">
-      <sprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="28,134,57,23" origin="0.5,0.5" />
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,76,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,73,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <InventoryIcon texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="22,79,69,35" />
+    <LightComponent range="1" lightcolor="40,60,70,255" castshadows="false" IsOn="true">
+      <sprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="15,117,76,41" origin="0.5,0.5" />
     </LightComponent>
-    <Body width="60" height="30" density="10" />
+    <Body width="30" height="15" density="10" />
     <Throwable slots="RightHand,LeftHand" holdpos="30,-15" handle1="0,0" handle2="0,0" throwforce="2.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
       <StatusEffect type="OnActive" target="This" duration="3" stackable="false" condition="-1" />
       <StatusEffect type="OnImpact" target="This" Condition="0" setvalue="true" />
     </Throwable>
     <Projectile launchimpulse="1" characterusable="false" sticktocharacters="true" sticktodeflective="true" sticktolighttargets="true" impulsespread="0.3" spread="30"  launchrotation="0">
       <Attack structuredamage="0" severlimbsprobability="0">
-        <Affliction identifier="concussion" strength="1" />
+        <Affliction identifier="concussion" strength="0.1" />
         <Affliction identifier="stun" strength="0.1" probability="0.25" />
       </Attack>
       <StatusEffect type="OnActive" target="UseTarget,This" condition="-0.5" >
+        <sound file="Content/Characters/Variants/Mudraptor_pet/MUDRAPTOR_petHungry1.ogg" range="250.0" loop="true" frequencymultiplier="3" selectionmode="Random"/>
+        <sound file="Content/Characters/Variants/Mudraptor_pet/MUDRAPTOR_petHungry2.ogg" range="250.0" loop="true" frequencymultiplier="3" selectionmode="Random"/>
+        <sound file="Content/Characters/Variants/Mudraptor_pet/MUDRAPTOR_petHungry3.ogg" range="250.0" loop="true" frequencymultiplier="3" selectionmode="Random"/>
         <Affliction identifier="acidburn" strength="0.1" />
         <Affliction identifier="slow" strength="200" />
         <ParticleEmitter particle="organeruption" distancemin="0" distancemax="10" particlespersecond="5" scalemin="0.25" scalemax="0.5" anglemin="250" anglemax="290" velocitymin="0" velocitymax="50" colormultiplier="80,120,30,255" drawontop="true" lifetimemultiplier="0.25" />
         <ParticleEmitter particle="whitegoosplash" distancemin="0" distancemax="10" particlespersecond="5" scalemin="0.25" scalemax="0.5" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" colormultiplier="80,120,30,255" drawontop="true"/>
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This">
-        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1.0" copyentityangle="False" colormultiplier="80,120,30,255" />
-        <Explosion range="100.0" showeffects="false" force="2.0">
+        <particleemitter particle="whitegoosplash" particleamount="20" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" copyentityangle="False" colormultiplier="100,170,150,255" />
+        <Explosion range="100.0" showeffects="false" force="1.0">
           <Affliction identifier="acidburn" strength="10" />
         </Explosion>
         <Remove />
