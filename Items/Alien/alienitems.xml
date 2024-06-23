@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
   <Item name="Electrospike" identifier="electrospike" category="Misc" interactthroughwalls="true" tags="light,ignorebyai" Scale="0.5" health="20" damagedbyexplosions="false" damagedbyprojectiles="true" ItemDamageMultiplier="0.2" damagedbymeleeweapons="true" damagedbyrepairtools="true" sonarsize="20" hideinmenus="true">
-    <Sprite texture="%ModDir%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,860,720,72" depth="0.55" />
+    <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,860,720,72" depth="0.55" />
     <Body width="300" height="35" density="20" />
     <LightComponent range="200" castshadows="False" drawbehindsubs="False" ison="True" lightcolor="50,240,255,150" flicker="1.0" flickerspeed="5" vulnerabletoemp="False" pickingtime="0" canbepicked="False" allowingameediting="False" msg="">
-      <Sprite texture="%ModDir%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,940,720,72" origin="0.5,0.5" alpha="0.1" />
+      <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/Spineling_Electric/Spineling_Electric.png" sourcerect="0,940,720,72" origin="0.5,0.5" alpha="0.1" />
     </LightComponent>
     <Projectile characterusable="false" launchimpulse="25" sticktocharacters="false" sticktoitems="false" sticktodoors="false" sticktostructures="true" friendlyfire="false" damagedoors="true">
       <Attack structuredamage="30" itemdamage="15" targetforce="10" severlimbsprobability="0">
@@ -81,16 +81,15 @@
   </Item>
   
   <Item name="Pest Nest" identifier="cavepestspawner" category="Alien" Tags="alien,pestnest" scale="0.4" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5">
-    <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.55" sourcerect="190,11,258,218" origin="0.5,0.5" />
-    <BrokenSprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="453,11,258,218" depth="0.55" maxcondition="0" />
+    <Sprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.55" sourcerect="190,11,258,218" origin="0.5,0.5" />
+    <BrokenSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" sourcerect="453,11,258,218" depth="0.55" maxcondition="0" />
     <Body radius="120" bodytype="static" />
-    <MotionSensor rangex="25" rangey="130" detectoffset="0,-110" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="1" target="Human" DetectOwnMotion="false">
-      <StatusEffect type="Always" interval="0.35" target="This" >
+    <MotionSensor rangex="25" rangey="130" detectoffset="0,-110" canbeselected="false" IgnoreDead="True" minimumvelocity="0" updateinterval="0.1" target="Human" DetectOwnMotion="false">
+      <StatusEffect type="Always" interval="4.35" target="This" >
         <Conditional condition="gt 0" />
-        <particleemitter particle="whitegoosplash" particleamount="2" velocitymin="200" velocitymax="300" anglemin="260" anglemax="280" scalemin="0.5" scalemax="0.75" copyentityangle="False" drawontop="true" colormultiplier="200,200,255,255" />
+        <particleemitter particle="whitegoosplash" particleamount="2" velocitymin="200" velocitymax="300" anglemin="260" anglemax="280" scalemin="0.5" scalemax="0.75" copyentityangle="False" drawontop="true" colormultiplier="200,200,255,150" />
       </StatusEffect>
-      <StatusEffect type="Always" interval="0.1" target="This" condition="0" setvalue="true" comparison="And">
-        <Conditional targetitemcomponent="MotionSensor" MotionDetected="eq true" />
+      <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" comparison="And">
         <Conditional condition="gt 0" />
       </StatusEffect>
       <StatusEffect type="OnFire" target="This" condition="-1" />
@@ -105,14 +104,14 @@
   </Item>
   
   <Item name="Cave Pest" identifier="cavepest" scale="0.5" category="Alien" tags="alien" damagedbyexplosions="true" damagedbyprojectiles="false" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="5" impacttolerance="0.1" isdangerous="true" >
-    <Sprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="100,135,69,39" origin="0.5,0.5" />
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,76,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <DecorativeSprite texture="%Moddir%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,73,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
-    <InventoryIcon texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="22,79,69,35" />
+    <Sprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="100,135,69,39" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,15,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="15,76,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.2" sourcerect="93,73,76,41" origin="0.5,0.5" offset="5,5" offsetanim="Noise" offsetanimspeed="3.0"  randomgroupid="1"/>
+    <InventoryIcon texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" sourcerect="22,79,69,35" />
     <LightComponent range="1" lightcolor="40,60,70,255" castshadows="false" IsOn="true">
-      <sprite texture="%Moddir%/Items/Alien/Caveworms.png" sourcerect="15,117,76,41" origin="0.5,0.5" />
+      <sprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" sourcerect="15,117,76,41" origin="0.5,0.5" />
     </LightComponent>
     <Body width="30" height="15" density="10" />
     <Throwable slots="RightHand,LeftHand" holdpos="30,-15" handle1="0,0" handle2="0,0" throwforce="2.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
