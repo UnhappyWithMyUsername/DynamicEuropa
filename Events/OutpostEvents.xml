@@ -214,37 +214,24 @@
       <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
     </ScriptedEvent>
 
-    <!-- mineralspawner is always noninteractable (even when set to be interactable) and this event will set a random amount to be interactable -->
-    <ScriptedEvent identifier="unlockorenodes" commonness="100">
+    <!-- Mine door event -->
+    <ScriptedEvent identifier="minedoorevent" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:mineterminal" tag="mineterminal" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="itemtag:mineentrance" tag="mineentrance" ContinueIfNoTargetsFound="false" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerEventAction identifier="checkminepayment" />
-      <!-- uses triggeraction as workaround for MP bug, otherwise nothing happens -->
-      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
-      <!-- 2/3 chance to delete the ore node -->
-      <!-- 1/3 chance to unlock the ore node -->
-      <StatusEffectAction targettag="orenode">
-        <StatusEffect target="This" spawnitemrandomly="true">
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-        </StatusEffect>
-      </StatusEffectAction>
       <StatusEffectAction targettag="mineterminal">
         <StatusEffect target="This" noninteractable="false" nonplayerteaminteractable="false" setvalue="true" disabledeltatime="true" />
       </StatusEffectAction>
       <Label name="restart" />
-      <TriggerAction target1tag="player" target2tag="mineterminal" applytotarget1="uon_player" waitforinteraction="true" />
-      <ConversationAction targettag="uon_player" text="eventtext.mine.terminal.interact" eventsprite="mines" dialogtype="small">
+      <TriggerAction target1tag="player" target2tag="mineterminal" applytotarget1="mde_player" waitforinteraction="true" />
+      <ConversationAction targettag="mde_player" text="eventtext.mine.terminal.interact" eventsprite="mines" dialogtype="small">
         <Option text="EventText.option.pay">
-          <CheckMoneyAction targettag="uon_player" amount="250">
+          <CheckMoneyAction targettag="mde_player" amount="250">
             <Success>
-              <MoneyAction targettag="uon_player" amount="-250" />
-              <ConversationAction targettag="uon_player" text="EventText.mine.terminal.interact.pay.success" eventsprite="mines" dialogtype="small" />
+              <MoneyAction targettag="mde_player" amount="-250" />
+              <ConversationAction targettag="mde_player" text="EventText.mine.terminal.interact.pay.success" eventsprite="mines" dialogtype="small" />
               <StatusEffectAction targettag="mineentrance">
                 <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
               </StatusEffectAction>
@@ -252,17 +239,17 @@
                 <StatusEffect target="This" LightColor="0,92,23,255" noninteractable="true" setvalue="true" disabledeltatime="true" />
               </StatusEffectAction>
               <SetDataAction identifier="mineopened" value="1" />
-              <ClearTagAction tag="uon_player" />
+              <ClearTagAction tag="mde_player" />
             </Success>
             <Failure>
-              <ConversationAction targettag="uon_player" text="EventText.mine.terminal.interact.pay.failure" eventsprite="mines" dialogtype="small" />
-              <ClearTagAction tag="uon_player" />
+              <ConversationAction targettag="mde_player" text="EventText.mine.terminal.interact.pay.failure" eventsprite="mines" dialogtype="small" />
+              <ClearTagAction tag="mde_player" />
               <GoTo name="restart" />
             </Failure>
           </CheckMoneyAction>
         </Option>
         <Option text="eventtext.option.leave" endconversation="true">
-          <ClearTagAction tag="uon_player" />
+          <ClearTagAction tag="mde_player" />
           <GoTo name="restart" />
         </Option>
       </ConversationAction>
@@ -286,60 +273,61 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
-
+    
+    <!-- Events that randomly delete cave/lair items     -->
+    <!-- TODO: get rid of that docking hatch trigger once the bug? is fixed. ugly jank -->
+    
+    <ScriptedEvent identifier="unlockorenodes" commonness="100">
+      <WaitAction time="2" />
+      <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
+      <!-- 2/3 nodes are deleted -->   
+      <StatusEffectAction targettag="deleteorenode">
+        <StatusEffect target="This">
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
     <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
       <WaitAction time="2" />
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
-      <TagAction criteria="itemidentifier:mineralspawner" tag="orenode" submarinetype="Outpost" ContinueIfNoTargetsFound="false" />
-      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <!-- 4/5 chance to delete the ore node -->
-      <!-- 1/5 chance to unlock the ore node -->
-      <StatusEffectAction targettag="orenode">
-        <StatusEffect target="This" spawnitemrandomly="true">
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+      <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" ChoosePercentage="80"/>
+      <!-- 4/5 nodes are deleted -->   
+      <StatusEffectAction targettag="deleteorenode">
+        <StatusEffect target="This">
+          <Remove />
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="unlockplantnodes" commonness="100">
       <WaitAction time="2" />
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="dockinghatchtrigger" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="player" target2tag="dockinghatchtrigger" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- 3/4 chance to delete the ore node -->
-      <!-- 1/4 chance to unlock the ore node -->
+      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
+      <!-- 3/4 nodes are deleted -->
       <StatusEffectAction targettag="plantnode">
-        <StatusEffect target="This" spawnitemrandomly="true">
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+        <StatusEffect target="This">
+          <Remove />
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockplantnodeslair" commonness="100">
       <WaitAction time="2" />
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="player" target2tag="airlock" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <!-- 3/4 chance to delete the plant node -->
-      <!-- 1/4 chance to unlock the plant node -->
-      <StatusEffectAction targettag="plantnode">
-        <StatusEffect target="This" spawnitemrandomly="true">
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_delete" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          <SpawnItem identifier="effect_unlock" spawnposition="ThisInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
+      <TagAction criteria="itemidentifier:plantcluster" tag="deleteplantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
+      <!-- 3/4 nodes are deleted -->
+      <StatusEffectAction targettag="deleteplantnode">
+        <StatusEffect target="This">
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="unlockpestnests" commonness="100">
+      <WaitAction time="2" />
+      <TagAction criteria="itemidentifier:cavepestspawner" tag="deletepestnest" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
+      <!-- 3/4 nodes are deleted -->
+      <StatusEffectAction targettag="deletepestnest">
+        <StatusEffect target="This">
+          <Remove />
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent>
@@ -1708,7 +1696,7 @@
             <Option text="eventtext.option.listen">
               <!-- <StatusEffectAction targettag="listener_player">
                 <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.2">
-                  <Sound file="%ModDir%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
+                  <Sound file="%ModDir:2532991202%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
                 </StatusEffect>
               </StatusEffectAction> -->
               <ConversationAction text="eventtext.commsrelay.piratehaven.answer" dialogtype="Small" targettag="listener_player" />
