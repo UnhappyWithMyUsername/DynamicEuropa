@@ -106,11 +106,10 @@
         <Requirement function="Multiply" requiredlocations="sinkingcircus" probability="0.0" requiredproximity="100" />      
       </ChangeTo>
       <!-- Pirates may settle here if a city is nearby, but no military or fauna threats are nearby -->
-      <ChangeTo type="PirateOutpost" probability="0" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,Blockade,Military,Base,Camp" messagetag="locationchange.none.changeto.pirateoutpost">
+      <ChangeTo type="PirateOutpost" probability="0" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,Blockade,Military,Base,Camp,PirateOutpost" messagetag="locationchange.none.changeto.pirateoutpost">
         <Requirement function="Add" requiredlocations="City" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.2" />
         <Requirement function="Multiply" requirebeaconstation="true" probability="0" requiredproximity="2" />
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
-        <Requirement function="Multiply" requiredlocations="Blockade,Military,Base" probability="0" requiredproximity="1" />
       </ChangeTo>
     </None>
 
