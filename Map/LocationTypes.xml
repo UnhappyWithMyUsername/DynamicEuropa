@@ -33,8 +33,12 @@
       sellpricemodifier = The sell price modifier applied when this balance status is active. Defaults to 1.0.
       color             = The color used on the store interface when this balance status is active. Defaults to (255,255,255,255), i.e. white.
   -->
+  
+  <!-- TODO: add IsAnyOutpost="false" to locations that arent populated like Lairs or Survey (example: viable destination for cargo mission) -->
+  
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
+    
     <Tutorial identifier="TutorialOutpost" replaceinradiation="Abandoned" nameidentifiers="generic,city" forceoutpostgenerationparams="tutorialoutpost" allowinrandomlevels="false" ignoregenericevents="true" AllowAsBiomeGate="false">
       <Symbol texture="Content/Map/MapAtlas.png" sourcerect="256,512,128,128" color="128,206,175,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
@@ -102,11 +106,10 @@
         <Requirement function="Multiply" requiredlocations="sinkingcircus" probability="0.0" requiredproximity="100" />      
       </ChangeTo>
       <!-- Pirates may settle here if a city is nearby, but no military or fauna threats are nearby -->
-      <ChangeTo type="PirateOutpost" probability="0" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,Blockade,Military,Base,Camp" messagetag="locationchange.none.changeto.pirateoutpost">
+      <ChangeTo type="PirateOutpost" probability="0" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,Blockade,Military,Base,Camp,PirateOutpost" messagetag="locationchange.none.changeto.pirateoutpost">
         <Requirement function="Add" requiredlocations="City" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.2" />
         <Requirement function="Multiply" requirebeaconstation="true" probability="0" requiredproximity="2" />
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
-        <Requirement function="Multiply" requiredlocations="Blockade,Military,Base" probability="0" requiredproximity="1" />
       </ChangeTo>
     </None>
 
@@ -214,7 +217,7 @@
       </ChangeTo>
     </UnderHuskAttack>
 
-    <Abandoned identifier="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0" missiontags="abandonedoutpost" hideentitysubcategories="abandonedhuman,abandonedmonster" outpostteam="None" beaconstationchance="0.00" AllowAsBiomeGate="false">
+    <Abandoned identifier="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0" missiontags="abandonedoutpost" hideentitysubcategories="abandonedhuman,abandonedmonster" outpostteam="None" beaconstationchance="0.00" AllowAsBiomeGate="false" replaceinradiation="None">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,640,128,128" color="245,105,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
       <ChangeTo type="OuterLair" messagetag="locationchange.none.changeto.lair" requirediscovered="false">
@@ -634,7 +637,7 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="1" />
+      <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="assistant" commonness="1" />
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />

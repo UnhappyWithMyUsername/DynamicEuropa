@@ -329,14 +329,14 @@
                   <SpawnAction itemidentifier="detonator" targetinventory="fs_trig_player" />
                   <RNGAction chance="0.5">
                     <Success>
-                      <MissionAction missionidentifier="stealingintel" locationtype="City,Outpost,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
+                      <MissionAction missionidentifier="stealingintel" locationtype="City,Colony,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
                       <ClearTagAction tag="fs_trig_player" />
                     </Success>
                     <Failure>
                       <!--TODO: MAKE SEPERATIST MISSIONS-->
                       <!--<MissionAction missiontag="separatistmission"/>-->
                       <!--Temporary give stealingintel while there is no separatist missions available-->
-                      <MissionAction missionidentifier="stealingintel" locationtype="City,Outpost,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
+                      <MissionAction missionidentifier="stealingintel" locationtype="City,Colony,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
                       <ClearTagAction tag="fs_trig_player" />
                     </Failure>
                   </RNGAction>
