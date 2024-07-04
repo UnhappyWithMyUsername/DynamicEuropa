@@ -153,6 +153,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <ScriptedEvent identifier="factionstowaway" commonness="50">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <SpawnAction itemidentifier="metalcrate" targettag="factionstowaway" spawnlocation="MainSub" spawnpointtype="cargo" ignorebyai="true" />
@@ -364,7 +365,6 @@
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhuskresearcher" targettag="dormanthusk" spawnpointtag="huskencounter1" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter2" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter3" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
-
       <!-- check if any NPC is still human -->
       <Waitaction time="10" />
       <CheckConditionalAction targettag="dormanthusk" IsHuman="true">
