@@ -243,7 +243,9 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
-    <!--Seperatist Events-->
+    
+    <!--Seperatist Events-->    
+    <!-- TODO: rework this, some of the outcomes arent working -->
     <ScriptedEvent identifier="factionseparatist" commonness="100">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -60">
@@ -354,8 +356,7 @@
 
     
     <!-- Husk Encounter -->
-    <!--     TODO: enable mission if possible, add text /> -->
-    
+    <!--     TODO: enable mission if possible, add text /> -->    
     <ScriptedEvent identifier="huskencounter">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
@@ -390,7 +391,7 @@
     </ScriptedEvent>
     
     <!-- Troubled Engine -->
-    <ScriptedEvent identifier="troubledengine">
+    <ScriptedEvent identifier="troubledengine" >
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -402,197 +403,130 @@
         </Failure>
       </RNGAction>
       <Label name="start" />
-      <TagAction criteria="itemtag:engine" tag="engine" submarinetype="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <SetDataAction identifier="EnginesOffline" value="1" />
-      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" applytotarget2="te_player1" radius="500" waitforinteraction="false" />
-      <TriggerEventAction identifier="troubledenginestatusevent" />
-      <StatusEffectAction targettag="activemonitor">
-        <StatusEffect>
-          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" />
+      <TagAction criteria="itemtag:engine" tag="activeengine" submarinetype="player" />
+      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" />
+      <TagAction criteria="player" tag="player" />
+      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" radius="2200" waitforinteraction="false" />
+      <!-- drop engine condition, for 60 seconds -->
+      <StatusEffectAction targettag="activeengine">
+        <StatusEffect target="This" condition="-30" disabledeltatime="true">
+          <Sound file="Content/Items/Door/DoorBreak1.ogg" range="500" volume="2" frequencymultiplier="0.5" />
+        </StatusEffect>
+        <StatusEffect target="This" condition="-2" duration="60" stackable="false" >        
+          <ParticleEmitter particle="weldspark" particlespersecond="10" velocitymin="100" velocitymax="300" anglemin="-90" anglemax="90" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction targettag="te_player1" text="eventtext.troubledengine.monitor" dialogtype="Small" />
+      <!-- monitor effects -->
+      <StatusEffectAction targettag="activemonitor" >
+        <StatusEffect target="this" duration="10" noninteractable="false" >
+          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" volume="0.5" loop="true" />
+          <ParticleEmitter particle="impactfirearm" particlespersecond="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="0.5" scalemax="0.5" distancemin="0" distancemax="0" colormultiplier="255,0,0,255" lifetimemultiplier="2" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="te_player1" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="te_player1" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="redalarm" />
       <Label name="restart" />
-      <TriggerAction target1tag="engine" target2tag="player" applytotarget1="activeengine" applytotarget2="te_player" radius="300" waitforinteraction="true" />
-      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine">
-        <Option text="eventtext.option.useitem.wrench">
+      <ClearTagAction tag="te_player" />
+      <TriggerAction target1tag="activeengine" target2tag="player" applytotarget2="te_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine" eventsprite="engine">
+        <Option text="eventtext.option.smack">
+          <!-- if success, cancel out the engine decay, if failure either try again or drop a scrap and wait -->
           <SkillCheckAction requiredskill="Mechanic" requiredlevel="55" targettag="te_player">
             <Success>
-              <RNGAction chance="0.4">
-                <Success>
-                  <SetDataAction identifier="EnginesOffline" value="0" />
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect duration="3.5">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                </Success>
-                <Failure>
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect condition="-6" duration="1.2">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <GoTo name="options" />
-                </Failure>
-              </RNGAction>
+              <StatusEffectAction targettag="activeengine">
+                <StatusEffect target="This" condition="2" duration="60" stackable="false" >
+                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <GiveSkillEXPAction skill="mechanical" amount="2" targettag="triggerer_player" />
+              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" eventsprite="engine"/>
             </Success>
             <Failure>
-              <RNGAction chance="0.2">
+              <RNGAction chance="0.5">
                 <Success>
-                  <SetDataAction identifier="EnginesOffline" value="0" />
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect duration="3.5">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" endconversation="true" eventsprite="engine"/>
+                  <WaitAction time="1" />
+                  <GoTo name="restart" />  
                 </Success>
                 <Failure>
+                  <AfflictionAction affliction="lacerations" strength="5" limbtype="LeftHand" targettag="te_player" />
+                  <AfflictionAction affliction="stun" strength="0.5" targettag="te_player" />
+                  <SpawnAction itemidentifier="scrap" spawnpointtag="activeengine" />
                   <StatusEffectAction targettag="activeengine">
-                    <StatusEffect condition="-6" duration="1.2">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
+                    <StatusEffect target="this" condition="-25" disabledeltatime="true">
+                      <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
+                      <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <Label name="options" />
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" continueconversation="true">
-                    <Option text="eventtext.option.useitem.wrench">
-                      <SkillCheckAction requiredskill="Mechanic" requiredlevel="55" targettag="te_player">
-                        <Success>
-                          <RNGAction chance="0.4">
-                            <Success>
-                              <SetDataAction identifier="EnginesOffline" value="0" />
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect duration="3.5">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                            </Success>
-                            <Failure>
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect condition="-6" duration="1.2">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <GoTo name="options" />
-                            </Failure>
-                          </RNGAction>
-                        </Success>
-                        <Failure>
-                          <RNGAction chance="0.2">
-                            <Success>
-                              <SetDataAction identifier="EnginesOffline" value="0" />
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect duration="3.5">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                            </Success>
-                            <Failure>
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect condition="-6" duration="1.2">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <GoTo name="options" />
-                            </Failure>
-                          </RNGAction>
-                        </Failure>
-                      </SkillCheckAction>
-                    </Option>
-                    <Option text="eventtext.option.smack">
-                      <RNGAction chance="0.5">
-                        <Success>
-                          <SetDataAction identifier="EnginesOffline" value="0" />
-                          <StatusEffectAction targettag="activeengine">
-                            <StatusEffect>
-                              <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                            </StatusEffect>
-                          </StatusEffectAction>
-                          <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                        </Success>
-                        <Failure>
-                          <StatusEffectAction targettag="activeengine">
-                            <StatusEffect condition="-65" disabledeltatime="true">
-                              <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                            </StatusEffect>
-                            <StatusEffect>
-                              <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
-                            </StatusEffect>
-                          </StatusEffectAction>
-                          <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" />
-                          <WaitAction time="20" />
-                          <SetDataAction identifier="EnginesOffline" value="0" />
-                        </Failure>
-                      </RNGAction>
-                    </Option>
-                    <Option text="eventtext.option.dontbother" endconversation="true">
-                      <GoTo name="restart" />
-                    </Option>
-                  </ConversationAction>
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="engine"/>
                 </Failure>
               </RNGAction>
             </Failure>
           </SkillCheckAction>
         </Option>
-        <Option text="eventtext.option.smack">
-          <RNGAction chance="0.5">
-            <Success>
-              <SetDataAction identifier="EnginesOffline" value="0" />
-              <StatusEffectAction targettag="activeengine">
-                <StatusEffect>
-                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-            </Success>
-            <Failure>
-              <StatusEffectAction targettag="activeengine">
-                <StatusEffect condition="-65" disabledeltatime="true">
-                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                </StatusEffect>
-                <StatusEffect>
-                  <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" />
-              <WaitAction time="20" />
-              <SetDataAction identifier="EnginesOffline" value="0" />
-            </Failure>
-          </RNGAction>
-        </Option>
         <Option text="eventtext.option.dontbother" endconversation="true">
           <GoTo name="restart" />
         </Option>
       </ConversationAction>
-      <ClearTagAction tag="te_player1" />
-      <ClearTagAction tag="te_player" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="troubledenginestatusevent">
-      <TagAction criteria="itemtag:engine" tag="engine" submarinetype="player" ContinueIfNoTargetsFound="false" />
-      <Label name="checkstatus" />
-      <CheckDataAction identifier="EnginesOffline" condition="eq 1">
+    </ScriptedEvent>    
+      
+    <!-- Reactor Malfunction -->
+    <ScriptedEvent identifier="reactormalfunction" >
+      <Label name="delay" />
+      <WaitAction time="30" />
+      <RNGAction chance="0.2">
         <Success>
-          <StatusEffectAction targettag="engine">
-            <StatusEffect isActive="false" setvalue="true" />
-          </StatusEffectAction>
-          <WaitAction time="1" />
-          <GoTo name="checkstatus" />
+          <GoTo name="start" />
         </Success>
         <Failure>
-          <StatusEffectAction targettag="engine">
-            <StatusEffect isActive="true" setvalue="true" />
-          </StatusEffectAction>
+          <GoTo name="delay" />
         </Failure>
-      </CheckDataAction>
+      </RNGAction>
+      <Label name="start" />
+      <TagAction criteria="itemtag:reactor" tag="activereactor" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" radius="2200" waitforinteraction="false" />
+      <!-- first trigger of effects, just a taste -->
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" AutoTemp="false" >
+          <ParticleEmitter particle="weldspark" particlespersecond="2" velocitymin="150" velocitymax="300" anglemin="0" anglemax="180" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- monitor effects -->
+      <StatusEffectAction targettag="activemonitor" >
+        <StatusEffect target="this" duration="10" noninteractable="false" >
+          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" volume="0.5" loop="true" />
+          <ParticleEmitter particle="impactfirearm" particlespersecond="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="0.5" scalemax="0.5" distancemin="0" distancemax="0" colormultiplier="255,0,0,255" lifetimemultiplier="2" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="rm_player" waitforinteraction="true" />
+      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="redalarm"/>
+      <Label name="restart" />
+      <ClearTagAction tag="rm_player" />
+      <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" AutoTemp="false" duration="120" stackable="false">
+          <ParticleEmitter particle="weldspark" particlespersecond="2" velocitymin="150" velocitymax="300" anglemin="0" anglemax="180" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.reactor" endconversation="true" continueautomatically="true" eventsprite="engine" />
+      <WaitAction time="120" />
+      <ClearTagAction tag="rm_player" />
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" >
+          <ParticleEmitter particle="heavysmoke" particleamount="3" velocitymin="0" velocitymax="0" anglemin="70" anglemax="110" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Door/duct2.ogg" range="500" volume="2" frequencymultiplier="0.5" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="engine" />
     </ScriptedEvent>
-    <!-- Reactor Malfunction -->
-    <ScriptedEvent identifier="reactormalfunction">
+    
+    <!-- Reactor Malfunction (old version) -->
+<!--     <ScriptedEvent identifier="reactormalfunction2">
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -809,12 +743,13 @@
           </StatusEffectAction>
         </Failure>
       </CheckDataAction>
-    </ScriptedEvent>
+    </ScriptedEvent> -->
+    
     
     <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
-    <ScriptedEvent identifier="militarypatrol">
+    <!-- <ScriptedEvent identifier="militarypatrol">
       <MissionAction missiontag="militarypatrol" />
-    </ScriptedEvent>
+    </ScriptedEvent> -->
     
   </EventPrefabs>
   
