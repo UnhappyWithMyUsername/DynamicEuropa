@@ -705,4 +705,25 @@
     <AiTarget soundrange="5000000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true"/>
   </Item>
   
+  <Item name="Suspicious package" identifier="huskbodybag" category="Misc" tags="bodybag" scale="0.6" health="100" impactsoundtag="impact_soft" flipx="true" >
+    <sprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,409,283,27" depth="0.55" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,436,283,76" depth="0.54" origin="0.5,0.5" offset="1,1" offsetanim="Circle" rotation="2" offsetanimspeed="50.0">
+      <AnimationConditional condition="lt 100" />
+    </DecorativeSprite>
+    <Body width="283" height="50" density="12" />
+    <ItemComponent >
+      <StatusEffect type="OnActive" target="This" interval="0.25">
+        <sound file="Content/Sounds/Impact/SoftImpact1.ogg" selectionmode="Random" range="500" frequencymultiplier="1.5" />
+        <sound file="Content/Sounds/Impact/SoftImpact2.ogg" selectionmode="Random" range="500" frequencymultiplier="1.5" />
+        <sound file="Content/Sounds/Impact/SoftImpact3.ogg" selectionmode="Random" range="500" frequencymultiplier="1.5" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <SpawnCharacter speciesname="humanhusk" MaximumAmount="1" AfflictionOnSpawn="stun" AfflictionStrength="1" offset="0,-10"/>
+        <Sound file="Content/Items/Medical/Bandage1.ogg" range="500" volume="2" frequencymultiplier="0.5" />
+        <particleemitter particle="brownchunks" particleamount="30" velocitymin="200" velocitymax="350" anglemin="0" anglemax="180" scalemin="0.25" scalemax="0.5" colormultiplier="150,150,150,255" distancemin="-150" distancemax="150" copyentityangle="true" />
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
 </Override>
