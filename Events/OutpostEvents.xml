@@ -1509,7 +1509,8 @@
     </ScriptedEvent>    
     
     <!-- opens the door leading to blockade lever, triggered by events above -->
-    <ScriptedEvent identifier="opendoortoblockade" commonness="1" >    
+    <ScriptedEvent identifier="opendoortoblockade" commonness="1" >
+      <TagAction criteria="itemtag:blockadedoor" submarinetype="Outpost" tag="blockadedoor" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TagAction criteria="itemtag:blockadesensor" submarinetype="Outpost" tag="blockadesensor" />
       <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
@@ -1517,7 +1518,10 @@
         <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="blockadebutton">
-        <StatusEffect target="this" state="true" setvalue="true" />
+        <StatusEffect target="this" noninteractable="true" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="blockadedoor">
+        <StatusEffect target="this" ShouldBeOpen="true" noninteractable="true" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="blockadesensor">
         <StatusEffect target="This" targetitemcomponent="MotionSensor" isActive="false"/>
