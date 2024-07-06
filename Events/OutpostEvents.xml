@@ -2215,21 +2215,21 @@
           <TriggerAction target1tag="bodybag" target2tag="player" radius="150" waitforinteraction="false"/>
           <Label name="stowawayreturn"/>
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="false"/>
-          <ConversationAction text="Heaps of trash are piled up in a single place, permeating the air with the stench of rot. You didn't think this place could get any filthier." dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
+          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
           <WaitAction time="2" />
           <StatusEffectAction targettag="bodybag">
             <StatusEffect target="This" IsActive="true" />
           </StatusEffectAction>
           <Label name="retry" />
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="bag_player" radius="120" waitforinteraction="true"/>
-          <ConversationAction text="You hear a sound coming from a suspiciously wrapped package..." dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
-            <Option text="Kick it." endconversation="true">
+          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
+            <Option text="EventText.piratebodybag.kickit" endconversation="true">
               <SetDataAction identifier="piratebodybagnorepeat" operation="set" value="1" />            
               <StatusEffectAction targettag="bodybag">
                 <StatusEffect target="This" condition="-15" duration="10" />
               </StatusEffectAction>
             </Option>
-            <Option text="Stay the hell away." endconversation="true">
+            <Option text="EventText.piratebodybag.stayaway" endconversation="true">
               <WaitAction time="3" />
               <Goto name="retry" />
             </Option>
