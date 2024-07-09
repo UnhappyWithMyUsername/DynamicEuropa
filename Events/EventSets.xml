@@ -56,8 +56,18 @@
       </EventSet>
 
       <!-- DYNAMIC EUROPA - RANDOM EVENTS -->
-      <EventSet identifier="outpostevents.dynamiceuropa.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+      <EventSet identifier="outpostevents.dynamiceuropa.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
         <ScriptedEvent identifier="sadashikira" faction="coalition" commonness="50"/>
+      </EventSet>
+
+      <EventSet identifier="outpostevents.dynamiceuropa.random1" minleveldifficulty="0" maxleveldifficulty="30" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+        <ScriptedEvent identifier="frenseynomor" commonness="30"/>
+        <ScriptedEvent identifier="jokster" commonness="30" />
+      </EventSet>
+
+      <EventSet identifier="outpostevents.dynamiceuropa.random2" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+        <ScriptedEvent identifier="frenseynomor" commonness="60"/>
+        <ScriptedEvent identifier="jokster" commonness="60" />
       </EventSet>
 
       <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
@@ -294,7 +304,6 @@
       <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,city,clinic,hospital,study,research,hydroponics,blockade,camp,base,military,factory,shipyard" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <OverrideEventCount locationtype="City" eventcount="3" />
         <ScriptedEvent identifier="givingdirections" commonness="100" />
-        <ScriptedEvent identifier="jokster" commonness="60" />
         <ScriptedEvent identifier="goodsamaritan" commonness="100" />      
         <ScriptedEvent identifier="miketheidiot1" commonness="25" />      
         <ScriptedEvent identifier="Engineers_are_special" commonness="100" />
@@ -327,7 +336,6 @@
         <OverrideEventCount locationtype="City" eventcount="3" />
         <!-- events that can occur in both low and high difficulty, commoness reduced here to favor the more difficult ones-->
         <ScriptedEvent identifier="givingdirections" commonness="50" />
-        <ScriptedEvent identifier="jokster" commonness="100" />
         <ScriptedEvent identifier="goodsamaritan" commonness="50" />     
         <ScriptedEvent identifier="miketheidiot1" commonness="12" />     
         <ScriptedEvent identifier="Engineers_are_special" commonness="50" />
