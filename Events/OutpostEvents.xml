@@ -13,6 +13,10 @@
     <Sprite identifier="sunkmarine" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="676,206,111,111" origin="0.5,0.5"/>
     <Sprite identifier="hitthelever" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1313,553,180,180" origin="0.5,0.5"/>
     <Sprite identifier="crowbarevent" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="300,506,176,176" origin="0.5,0.5"/>
+    <Sprite identifier="engine" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="778,269,228,228" origin="0.5,0.5"/>
+    <Sprite identifier="redalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="263,0,100,100" origin="0.5,0.5"/>
+    <Sprite identifier="rustcircuits" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="456,563,190,190" origin="0.5,0.5"/>
+    <Sprite identifier="rustdecal" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="746,817,240,181" origin="0.5,0.5"/>
   </EventSprites>
   
   <EventPrefabs>
@@ -1106,10 +1110,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathgeneric.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
@@ -1120,10 +1120,6 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
@@ -1151,10 +1147,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1170,10 +1162,6 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1205,10 +1193,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1224,10 +1208,6 @@
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1259,10 +1239,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1278,10 +1254,6 @@
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1313,10 +1285,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1332,10 +1300,6 @@
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1367,10 +1331,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1386,10 +1346,6 @@
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1421,10 +1377,6 @@
         <Success>
           <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1440,10 +1392,6 @@
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1475,10 +1423,6 @@
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1494,10 +1438,6 @@
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1530,10 +1470,6 @@
         <Success>
           <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
           <SetDataAction identifier="blockadeopened" value="1" />
-          <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-          <StatusEffectAction targettag="blockadedoorstatus">
-            <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-          </StatusEffectAction>
           <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
           <TriggerEventAction identifier="opendoortoblockade" />
           <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1549,10 +1485,6 @@
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
-                  <StatusEffectAction targettag="blockadedoorstatus">
-                    <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
-                  </StatusEffectAction>
                   <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
@@ -1577,11 +1509,24 @@
     </ScriptedEvent>    
     
     <!-- opens the door leading to blockade lever, triggered by events above -->
-    <ScriptedEvent identifier="opendoortoblockade" commonness="1" >    
+    <ScriptedEvent identifier="opendoortoblockade" commonness="1" >
+      <TagAction criteria="itemtag:blockadedoor" submarinetype="Outpost" tag="blockadedoor" />
       <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
-      <StatusEffectAction targettag="blockadebutton">
-        <StatusEffect target="this" state="true" setvalue="true" />
+      <TagAction criteria="itemtag:blockadesensor" submarinetype="Outpost" tag="blockadesensor" />
+      <TagAction criteria="itemtag:blockadedoorstatus" tag="blockadedoorstatus" />
+      <StatusEffectAction targettag="blockadedoorstatus">
+        <StatusEffect target="this" lightcolor="0,255,0,255" setvalue="true" />
       </StatusEffectAction>
+      <StatusEffectAction targettag="blockadebutton">
+        <StatusEffect target="this" noninteractable="true" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="blockadedoor">
+        <StatusEffect target="this" ShouldBeOpen="true" noninteractable="true" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="blockadesensor">
+        <StatusEffect target="This" targetitemcomponent="MotionSensor" isActive="false"/>
+        <StatusEffect target="This" condition="-100" setvalue="true"/>
+      </StatusEffectAction>      
     </ScriptedEvent>
     
     <!-- simple event that unlocks the path by flicking a lever -->
@@ -2037,89 +1982,96 @@
         
     <!-- Pirate Divers -->
     <ScriptedEvent identifier="piratediversoutpost">
-      <CheckReputationAction targettype="faction" identifier="bandits" condition="lt 0">
+      <CheckDataAction identifier="piratediversnorepeat" condition="eq 0" >
+        <Failure>
+        </Failure>
         <Success>
-          <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
-          <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
-          <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
-          <TagAction criteria="player" tag="player" />
-          <TagAction criteria="crew" tag="crew" />
-          <WaitAction time="10" />
-          <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
-          <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
-          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-          <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette">
-            <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
-              <Label name="dialogstep2" />
+          <CheckReputationAction targettype="faction" identifier="bandits" condition="lt 0">
+            <Success>
+              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
+              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+              <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
+              <TagAction criteria="player" tag="player" />
+              <TagAction criteria="crew" tag="crew" />
+              <WaitAction time="10" />
+              <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
+              <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
               <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-              <WaitAction time="5" />
-              <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-              <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="Silhouette"/>
-              <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="Silhouette">              
-                <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
-                  <Label name="dialogstep3" />
+              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette">
+                <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
+                  <Label name="dialogstep2" />
                   <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
                   <WaitAction time="5" />
                   <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                  <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="Silhouette">
-                    <Option text="eventtext.piratediversoutpost.takebooze">
-                      <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="Silhouette"/>
-                      <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                      <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                      <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                      <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
-                      <!-- Go to part 2 -->
-                      <GoTo name="pirateinvaders" />
-                    </Option >
-                    <Option text="eventtext.piratediversoutpost.getthehelloff" >
-                      <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="Silhouette">
-                      <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
-                        <!-- Go to part 2 -->
-                        <GoTo name="pirateinvaders" />
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="Silhouette"/>
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="Silhouette">              
+                    <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
+                      <Label name="dialogstep3" />
+                      <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+                      <WaitAction time="5" />
+                      <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="Silhouette">
+                        <Option text="eventtext.piratediversoutpost.takebooze">
+                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="Silhouette"/>
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                          <!-- Go to part 2 -->
+                          <GoTo name="pirateinvaders" />
+                        </Option >
+                        <Option text="eventtext.piratediversoutpost.getthehelloff" >
+                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="Silhouette">
+                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                            <!-- Go to part 2 -->
+                            <GoTo name="pirateinvaders" />
+                          </ConversationAction>
+                        </Option >
                       </ConversationAction>
+                    </Option>  
+                    <Option text="eventtext.piratediversoutpost.dontcare" endconversation="true" >
+                      <GoTo name="dialogstep3" />
                     </Option >
                   </ConversationAction>
-                </Option>  
-                <Option text="eventtext.piratediversoutpost.dontcare" endconversation="true" >
-                  <GoTo name="dialogstep3" />
+                </Option >
+                <Option text="eventtext.piratediversoutpost.buggeroff" endconversation="true" >
+                  <GoTo name="dialogstep2" />
                 </Option >
               </ConversationAction>
-            </Option >
-            <Option text="eventtext.piratediversoutpost.buggeroff" endconversation="true" >
-              <GoTo name="dialogstep2" />
-            </Option >
-          </ConversationAction>
-          <!-- part 2: pirates invade -->
-          <Label name="pirateinvaders" />
-          <WaitAction time="15" />
-          <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
-          <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
-          <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
-          <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false"/>
-          <WaitAction time="3" />
-          <StatusEffectAction targettag="piratediver">
-            <StatusEffect target="this" >
-              <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
-          <WaitAction time="2" />
-          <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
-          <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
-          <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
-          <!-- use spoken dialogue if ever implemented -->
-          <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" ContinueAutomatically="true"/>
-          <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
-          <Label name="combatrefresh" />
-          <TagAction criteria="player" tag="player" />
-          <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-          <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-          <WaitAction time="5" />
-          <GoTo name="combatrefresh" />
+              <!-- part 2: pirates invade -->
+              <Label name="pirateinvaders" />
+              <WaitAction time="15" />
+              <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
+              <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
+              <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
+              <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false"/>
+              <WaitAction time="3" />
+              <StatusEffectAction targettag="piratediver">
+                <StatusEffect target="this" >
+                  <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
+              <WaitAction time="2" />
+              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
+              <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
+              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
+              <!-- use spoken dialogue if ever implemented -->
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" ContinueAutomatically="true"/>
+              <SetDataAction identifier="piratediversnorepeat" operation="set" value="1" />
+              <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
+              <Label name="combatrefresh" />
+              <TagAction criteria="player" tag="player" />
+              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <WaitAction time="5" />
+              <GoTo name="combatrefresh" />
+            </Success>
+            <Failure>
+            </Failure>
+          </CheckReputationAction>
         </Success>
-        <Failure>
-        </Failure>
-      </CheckReputationAction>
+      </CheckDataAction>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="piratearmorylocked">
@@ -2254,6 +2206,40 @@
           <GoTo name="waitforinput" />
         </Option>
       </ConversationAction>
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="piratebodybag" commonness="100">
+      <CheckDataAction identifier="piratebodybagnorepeat" condition="eq 0" >
+        <Failure>
+        </Failure>
+        <Success>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction itemidentifier="huskbodybag" targettag="bodybag" spawnlocation="Outpost" spawnpointtag="husk" ignorebyai="true" />
+          <!-- use a trigger to tag a single cabinet -->
+          <TriggerAction target1tag="bodybag" target2tag="player" radius="150" waitforinteraction="false"/>
+          <Label name="stowawayreturn"/>
+          <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="false"/>
+          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
+          <WaitAction time="2" />
+          <StatusEffectAction targettag="bodybag">
+            <StatusEffect target="This" IsActive="true" />
+          </StatusEffectAction>
+          <Label name="retry" />
+          <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="bag_player" radius="120" waitforinteraction="true"/>
+          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
+            <Option text="EventText.piratebodybag.kickit" endconversation="true">
+              <SetDataAction identifier="piratebodybagnorepeat" operation="set" value="1" />            
+              <StatusEffectAction targettag="bodybag">
+                <StatusEffect target="This" condition="-15" duration="10" />
+              </StatusEffectAction>
+            </Option>
+            <Option text="EventText.piratebodybag.stayaway" endconversation="true">
+              <WaitAction time="3" />
+              <Goto name="retry" />
+            </Option>
+          </ConversationAction>
+        </Success>
+      </CheckDataAction>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="piratecheckfordead">

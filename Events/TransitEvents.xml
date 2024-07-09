@@ -152,210 +152,133 @@
           <!--End-->
         </Failure>
       </CheckDataAction>
-    </ScriptedEvent>
-    <ScriptedEvent identifier="factionstowaway" commonness="50">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <SpawnAction itemidentifier="metalcrate" targettag="factionstowaway" spawnlocation="MainSub" spawnpointtype="cargo" ignorebyai="true" />
-      <Label name="stowawayreturn" />
-      <TriggerAction target1tag="factionstowaway" target2tag="player" applytotarget2="fsa_trig_player" radius="150" waitforinteraction="true" />
-      <ConversationAction text="eventtext.stowaway1.c1" dialogtype="Regular" eventsprite="Stowaway1A" targettag="fsa_trig_player">
-        <Option text="EventText.stowaway1.o1">
-          <ConversationAction text="eventtext.stowaway1.o1.c1" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1A">
-            <Option text="EventText.stowaway1.o1.o1">
-              <ConversationAction text="EventText.stowaway1.o1.o1.c1" dialogtype="Regular" targettag="fsa_trig_player">
-                <Option text="EventText.stowaway1.o1.o1.o1">
-                  <ConversationAction text="EventText.stowaway1.o1.o1.o1.c1" dialogtype="Regular" targettag="fsa_trig_player">
-                    <Option text="EventText.stowaway1.o1.o1.o1.o1">
-                      <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -20">
-                        <Success>
-                          <SpawnAction npcsetidentifier="abandonedoutpostnpcs" npcidentifier="banditleader" targettag="seperatistbomber" spawnpointtag="factionstowaway" team="2" />
-                          <ConversationAction text="eventtext.factionstowaway.separatist" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1B" />
-                          <SpawnAction itemidentifier="volatilecompoundn" targetinventory="seperatistbomber" />
-                          <SpawnAction itemidentifier="volatilecompoundn" targetinventory="factionstowaway" />
-                          <ClearTagAction tag="fsa_trig_player" />
-                        </Success>
-                        <Failure>
-                          <CheckReputationAction targettype="faction" identifier="huskcult" condition="lte -20">
-                            <Success>
-                              <SpawnAction speciesname="Husk" targettag="cannedhusk" spawnpointtag="factionstowaway" />
-                              <SpawnAction itemidentifier="huskeggs" targetinventory="factionstowaway" />
-                              <AfflictionAction targettag="cannedhusk" affliction="stun" strength="30" />
-                              <ConversationAction text="eventtext.factionstowaway.cultist" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1B" />
-                              <ClearTagAction tag="fsa_trig_player" />
-                            </Success>
-                            <Failure>
-                              <CheckReputationAction targettype="faction" identifier="clowns" condition="lte -20">
-                                <Success>
-                                  <SpawnAction npcsetidentifier="abandonedoutpostnpcs" npcidentifier="psychoclown" targettag="psychoclown" spawnpointtag="factionstowaway" team="2" />
-                                  <StatusEffectAction targettag="psychoclown">
-                                    <StatusEffect>
-                                      <GiveTalentInfo giverandom="false" talentidentifiers="chonkyhonks,psychoclown,waterprankster,enrollintoclowncollege" />
-                                    </StatusEffect>
-                                  </StatusEffectAction>
-                                  <AfflictionAction targettag="psychoclown" affliction="psychoclown" strength="100" />
-                                  <SpawnAction itemidentifier="toyhammer" targetinventory="factionstowaway" />
-                                  <SpawnAction itemidentifier="bikehorn" targetinventory="factionstowaway" />
-                                  <ConversationAction text="eventtext.factionstowaway.clown" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1B" />
-                                  <ClearTagAction tag="fsa_trig_player" />
-                                </Success>
-                                <Failure>
-                                  <CheckReputationAction targettype="faction" identifier="coalition" condition="lte -20">
-                                    <Success>
-                                      <ConversationAction text="eventtext.factionstowaway.coalition.bad" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1B" />
-                                      <MoneyAction amount="100" />
-                                      <ClearTagAction tag="fsa_trig_player" />
-                                    </Success>
-                                    <Failure>
-                                      <ConversationAction text="eventtext.factionstowaway.coalition.good" dialogtype="Regular" targettag="fsa_trig_player" eventsprite="Stowaway1B" />
-                                      <SpawnAction itemidentifier="coalitionmedal" targetinventory="factionstowaway" />
-                                      <SpawnAction itemidentifier="cigar" targetinventory="factionstowaway" />
-                                      <SpawnAction itemidentifier="rum" targetinventory="factionstowaway" />
-                                      <ClearTagAction tag="fsa_trig_player" />
-                                    </Failure>
-                                  </CheckReputationAction>
-                                </Failure>
-                              </CheckReputationAction>
-                            </Failure>
-                          </CheckReputationAction>
-                        </Failure>
-                      </CheckReputationAction>
-                    </Option>
-                    <Option text="EventText.generic.walkaway" endconversation="true">
-                      <!--Return-->
-                      <ClearTagAction tag="fsa_trig_player" />
-                      <GoTo name="stowawayreturn" />
-                    </Option>
-                  </ConversationAction>
+    </ScriptedEvent>    
+        
+    <!-- TODO: rework this, including stealingintel -->
+<!--     <ScriptedEvent identifier="factionseparatist" commonness="100">
+      <TagAction criteria="itemtag:hidden" tag="deaddrop" ContinueIfNoTargetsFound="true" />
+      <Label name="deaddropreturn" />
+      <TriggerAction target1tag="deaddrop" target2tag="player" applytotarget1="selecteddeaddrop" applytotarget2="fs_trig_player" radius="50" waitforinteraction="true" />
+      <ConversationAction text="eventtext.factionseparatist.hiddenstash" dialogtype="Small" targettag="fs_trig_player" eventsprite="vent">
+        <Option text="eventtext.option.investigate">
+          <ConversationAction text="eventtext.factionseparatist.hiddenstash.take" targettag="fs_trig_player" />
+          <SpawnAction itemidentifier="detonator" targetinventory="fs_trig_player" />
+          <MissionAction missionidentifier="stealingintel" locationtype="City,Colony,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
+          <ClearTagAction tag="fs_trig_player" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent> -->
+
+
+   <!--Stowaway 2, reworked version of the unused vanilla event-->
+    <ScriptedEvent identifier="stowaway22" commonness="50" >
+      <!-- requires a cargo mission. note: not all cargo missions are tagged "cargo" -->
+      <CheckMissionAction missiontag="cargo" Type="Current">
+        <Success>
+          <WaitAction time="50" />
+          <CheckDataAction identifier="stowaway2_complete" condition="eq true">
+            <Success>
+              <!--Don't repeat event-->
+            </Success>
+            <Failure>
+              <TagAction criteria="player" tag="player"/>
+              <TagAction criteria="itemidentifier:steelcabinet" tag="potentialcabinet" submarinetype="player" />
+              <TagAction criteria="itemidentifier:mediumwindowedsteelcabinet" tag="potentialcabinet" submarinetype="player"/>
+              <TagAction criteria="itemidentifier:mediumsteelcabinet" tag="potentialcabinet" submarinetype="player" />
+              <!-- use a trigger to tag a single cabinet -->
+              <TriggerAction target1tag="potentialcabinet" target2tag="player" applytotarget1="triggered_cabinet" radius="150" waitforinteraction="false"/>
+              <StatusEffectAction targettag="triggered_cabinet">
+                <StatusEffect target="this" >
+                  <Sound file="Content/Items/Door/Duct2.ogg" range="800" volume="3" frequencymultiplier="0.25"  />
+                  <ParticleEmitter particle="shockwavesmall" particleamount="3" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <Label name="stowawayreturn"/>
+              <TriggerAction target1tag="triggered_cabinet" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true"/>
+              <ConversationAction text="EventText.stowaway2.c1" dialogtype="Regular" targettag="triggerer_player" eventsprite="Stowaway2">
+                <Option text="EventText.stowaway2.o1">
+                  <CheckReputationAction targettype="faction" identifier="clowns" condition="gte 20">
+                    <Success>
+                      <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="clownmessenger" targettag="messenger" spawnpointtag="triggerer_player"/>
+                      <SetDataAction identifier="stowaway2_complete" value="true"/>
+                      <StatusEffectAction targettag="triggered_cabinet">
+                        <StatusEffect target="this" >
+                          <Sound file="Content/Items/Jobgear/Clown/ITEM_bananaSlip1.ogg" range="800" volume="2" frequencymultiplier="1"  />
+                          <ParticleEmitter particle="impactfirearm" particleamount="30" velocitymin="50" velocitymax="100" anglemin="45" anglemax="135" scalemin="0.5" scalemax="1" Spread="75" distancemin="-75" distancemax="75" colormultiplier="255,255,255,255" lifetimemultiplier="5" />
+                        </StatusEffect>
+                      </StatusEffectAction>
+                      <ConversationAction text="EventText.stowaway2.o1.c1" dialogtype="Regular" targettag="triggerer_player">
+                        <Option text="EventText.stowaway2.o1.o1">
+                          <ConversationAction text="EventText.stowaway2.o1.o1.c1" dialogtype="Regular" targettag="triggerer_player"/>
+                          <TriggerEventAction identifier="stowaway2clownmission" nextround="true" />
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                      <!-- regular stowaway -->
+                      <Failure>
+                        <ConversationAction text="EventText.stowaway2.o1.c2" dialogtype="Regular" targettag="triggerer_player">
+                          <Option text="EventText.stowaway2.o1.o2">
+                            <ConversationAction text="EventText.stowaway2.o1.o2.c1" dialogtype="Regular" targettag="triggerer_player">
+                              <Option text="EventText.stowaway2.o1.o2.o1">
+                                <Label name="whatamIgoingtodo" />
+                                <ConversationAction text="EventText.stowaway2.o1.o2.o1.c1" dialogtype="Regular" targettag="triggerer_player">
+                                  <Option text="EventText.stowaway2.o1.o2.o1.o1">
+                                    <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.c1" dialogtype="Regular" targettag="triggerer_player">
+                                      <Option text="EventText.stowaway2.o1.o2.o1.o1.o2">
+                                        <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="stowaway" spawnpointtag="triggerer_player" targettag="stowaway"/>
+                                        <SetDataAction identifier="stowaway2_complete" value="true"/>
+                                        <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.o1.c1" dialogtype="Regular" targettag="triggerer_player"/>
+                                        <!-- currently triggers immediately, bug?  -->
+                                        <OnRoundEndAction>
+                                          <CheckConditionalAction targettag="Stowaway" IsDead="False">
+                                            <Success>
+                                              <ReputationAction targettype="Location" increase="3" />
+                                            </Success>
+                                            <Failure>
+                                            </Failure>
+                                          </CheckConditionalAction>
+                                        </OnRoundEndAction>
+                                      </Option>
+                                      <Option text="EventText.stowaway2.o1.o2.o1.o1.o3">
+                                        <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="stowaway" spawnpointtag="triggerer_player" targettag="stowaway"/>
+                                        <SetDataAction identifier="stowaway2_complete" value="true"/>
+                                        <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.o3.c1" dialogtype="Regular" targettag="triggerer_player"/>
+                                        <NPCChangeTeamAction npctag="stowaway" teamid="Team1" addtocrew="true" />
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                              <Option text="EventText.stowaway2.o1.o2.o2" endconversation="true">
+                                <GoTo name="stowawayreturn" />
+                              </Option>
+                            </ConversationAction>
+                          </Option>
+                          <Option text="EventText.stowaway2.o1.o2.o1">
+                            <Goto name="whatamIgoingtodo" />
+                          </Option>
+                          <Option text="EventText.stowaway2.o1.o2.o2" endconversation="true">
+                            <GoTo name="stowawayreturn" />
+                          </Option>
+                        </ConversationAction>
+                      </Failure>
+                  </CheckReputationAction>
                 </Option>
                 <Option text="EventText.generic.walkaway" endconversation="true">
-                  <!--Return-->
-                  <ClearTagAction tag="fsa_trig_player" />
                   <GoTo name="stowawayreturn" />
                 </Option>
               </ConversationAction>
-            </Option>
-          </ConversationAction>
-        </Option>
-        <Option text="EventText.generic.walkaway" endconversation="true">
-          <!--Return-->
-          <ClearTagAction tag="fsa_trig_player" />
-          <GoTo name="stowawayreturn" />
-        </Option>
-      </ConversationAction>
-    </ScriptedEvent>
-    <!--Seperatist Events-->
-    <ScriptedEvent identifier="factionseparatist" commonness="100">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -60">
-        <Success>
-          <RNGAction chance="0.25">
-            <Success>
-              <TagAction criteria="itemtag:reactor" tag="potentialmeltdown" ContinueIfNoTargetsFound="true" />
-              <StatusEffectAction targettag="potentialmeltdown">
-                <StatusEffect condition="35" setvalue="true" />
-              </StatusEffectAction>
-              <Label name="meltdownreturn" />
-              <TriggerAction target1tag="potentialmeltdown" target2tag="player" applytotarget1="meltdown" applytotarget2="fs_trig_player" radius="100" waitforinteraction="true" />
-              <ConversationAction text="eventtext.factionseparatist.meltdown" dialogtype="Regular" targettag="fs_trig_player">
-                <Option text="eventtext.factionseparatist.meltdown.option.pressure" endconversation="true">
-                  <SkillCheckAction targettag="fs_trig_player" requiredskill="electrical" requiredlevel="50">
-                    <Success>
-                      <StatusEffectAction targettag="meltdown">
-                        <StatusEffect condition="50" setvalue="false" />
-                      </StatusEffectAction>
-                      <ConversationAction text="eventtext.factionseparatist.meltdown.option.pressure.success" dialogtype="Regular" targettag="fs_trig_player" />
-                      <SpawnAction itemidentifier="detonator" targetinventory="fs_trig_player" />
-                      <ClearTagAction tag="fs_trig_player" />
-                    </Success>
-                    <Failure>
-                      <StatusEffectAction targettag="meltdown">
-                        <StatusEffect condition="1" setvalue="true" />
-                        <StatusEffect target="This">
-                          <sound file="Content/Items/Weapons/IncendiumGrenade.ogg" range="3000" />
-                          <Explosion range="500" ballastfloradamage="100" itemdamage="0" force="5" smoke="false">
-                            <Affliction identifier="burn" strength="20" />
-                            <Affliction identifier="burn" strength="25" probability="0.2" dividebylimbcount="false" />
-                            <Affliction identifier="stun" strength="3" />
-                          </Explosion>
-                          <Fire size="100.0" />
-                        </StatusEffect>
-                      </StatusEffectAction>
-                      <ConversationAction text="eventtext.factionseparatist.meltdown.option.pressure.failure" dialogtype="Regular" targettag="fs_trig_player" />
-                      <ClearTagAction tag="fs_trig_player" />
-                    </Failure>
-                  </SkillCheckAction>
-                </Option>
-                <Option text="EventText.generic.walkaway" endconversation="true">
-                  <!--Return-->
-                  <ClearTagAction tag="fs_trig_player" />
-                  <GoTo name="meltdownreturn" />
-                </Option>
-              </ConversationAction>
-            </Success>
-            <Failure>
-              <TagAction criteria="itemtag:hidden" tag="potentialIED" ContinueIfNoTargetsFound="true" />
-              <TriggerAction target1tag="potentialIED" target2tag="player" applytotarget1="IED" applytotarget2="fs_trig_player" radius="100" waitforinteraction="false" />
-              <ConversationAction text="eventtext.factionseparatist.smellofsulfur" dialogtype="Small" targettag="fs_trig_player" />
-              <SpawnAction itemidentifier="volatilecompoundn" targetinventory="IED" />
-              <ClearTagAction tag="fs_trig_player" />
             </Failure>
-          </RNGAction>
+          </CheckDataAction>
         </Success>
         <Failure>
-          <CheckReputationAction targettype="faction" identifier="separatists" condition="lte 20">
-            <Success>
-              <RNGAction chance="0.5">
-                <Success>
-                  <TagAction criteria="itemtag:deepdiving" tag="breathtaking" ContinueIfNoTargetsFound="true" />
-                  <RemoveItemAction targettag="breathtaking" itemidentifiers="oxygentank" />
-                  <SpawnAction itemidentifier="weldingfueltank" targetinventory="breathtaking" />
-                  <ClearTagAction tag="fs_trig_player" />
-                </Success>
-                <Failure>
-                  <TagAction criteria="itemtag:weldingequipment" tag="welderbomb" ContinueIfNoTargetsFound="true" />
-                  <RemoveItemAction targettag="welderbomb" itemidentifiers="weldingfueltank" />
-                  <SpawnAction itemidentifier="oxygentank" targetinventory="welderbomb" />
-                  <ClearTagAction tag="fs_trig_player" />
-                </Failure>
-              </RNGAction>
-            </Success>
-            <Failure>
-              <TagAction criteria="itemtag:hidden" tag="deaddrop" ContinueIfNoTargetsFound="true" />
-              <Label name="deaddropreturn" />
-              <TriggerAction target1tag="deaddrop" target2tag="player" applytotarget1="selecteddeaddrop" applytotarget2="fs_trig_player" radius="50" waitforinteraction="true" />
-              <ConversationAction text="eventtext.factionseparatist.hiddenstash" dialogtype="Small" targettag="fs_trig_player" eventsprite="vent">
-                <Option text="eventtext.option.investigate">
-                  <ConversationAction text="eventtext.factionseparatist.hiddenstash.take" targettag="fs_trig_player" />
-                  <SpawnAction itemidentifier="detonator" targetinventory="fs_trig_player" />
-                  <RNGAction chance="0.5">
-                    <Success>
-                      <MissionAction missionidentifier="stealingintel" locationtype="City,Colony,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
-                      <ClearTagAction tag="fs_trig_player" />
-                    </Success>
-                    <Failure>
-                      <!--TODO: MAKE SEPERATIST MISSIONS-->
-                      <!--<MissionAction missiontag="separatistmission"/>-->
-                      <!--Temporary give stealingintel while there is no separatist missions available-->
-                      <MissionAction missionidentifier="stealingintel" locationtype="City,Colony,Military,Base" requiredfaction="coalition" minlocationdistance="2" />
-                      <ClearTagAction tag="fs_trig_player" />
-                    </Failure>
-                  </RNGAction>
-                </Option>
-                <Option text="eventtext.option.ignore" endconversation="true">
-                  <ClearTagAction tag="fs_trig_player" />
-                  <GoTo name="deaddropreturn" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </CheckReputationAction>
+          <!-- End -->
         </Failure>
-      </CheckReputationAction>
+      </CheckMissionAction>
     </ScriptedEvent>
-
     
     <!-- Husk Encounter -->
-    <!--     TODO: enable mission if possible, add text /> -->
-    
+    <!--     TODO: enable mission if possible, add text /> -->    
     <ScriptedEvent identifier="huskencounter">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
@@ -363,7 +286,6 @@
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhuskresearcher" targettag="dormanthusk" spawnpointtag="huskencounter1" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter2" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter3" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
-
       <!-- check if any NPC is still human -->
       <Waitaction time="10" />
       <CheckConditionalAction targettag="dormanthusk" IsHuman="true">
@@ -390,7 +312,7 @@
     </ScriptedEvent>
     
     <!-- Troubled Engine -->
-    <ScriptedEvent identifier="troubledengine">
+    <ScriptedEvent identifier="troubledengine" >
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -402,197 +324,130 @@
         </Failure>
       </RNGAction>
       <Label name="start" />
-      <TagAction criteria="itemtag:engine" tag="engine" submarinetype="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <SetDataAction identifier="EnginesOffline" value="1" />
-      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" applytotarget2="te_player1" radius="500" waitforinteraction="false" />
-      <TriggerEventAction identifier="troubledenginestatusevent" />
-      <StatusEffectAction targettag="activemonitor">
-        <StatusEffect>
-          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" />
+      <TagAction criteria="itemtag:engine" tag="activeengine" submarinetype="player" />
+      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" />
+      <TagAction criteria="player" tag="player" />
+      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" radius="2200" waitforinteraction="false" />
+      <!-- drop engine condition, for 60 seconds -->
+      <StatusEffectAction targettag="activeengine">
+        <StatusEffect target="This" condition="-30" disabledeltatime="true">
+          <Sound file="Content/Items/Door/DoorBreak1.ogg" range="500" volume="2" frequencymultiplier="0.5" />
+        </StatusEffect>
+        <StatusEffect target="This" condition="-2" duration="60" stackable="false" >        
+          <ParticleEmitter particle="weldspark" particlespersecond="10" velocitymin="100" velocitymax="300" anglemin="-90" anglemax="90" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction targettag="te_player1" text="eventtext.troubledengine.monitor" dialogtype="Small" />
+      <!-- monitor effects -->
+      <StatusEffectAction targettag="activemonitor" >
+        <StatusEffect target="this" duration="10" noninteractable="false" >
+          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" volume="0.5" loop="true" />
+          <ParticleEmitter particle="impactfirearm" particlespersecond="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="0.5" scalemax="0.5" distancemin="0" distancemax="0" colormultiplier="255,0,0,255" lifetimemultiplier="2" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="te_player1" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="te_player1" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="redalarm" />
       <Label name="restart" />
-      <TriggerAction target1tag="engine" target2tag="player" applytotarget1="activeengine" applytotarget2="te_player" radius="300" waitforinteraction="true" />
-      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine">
-        <Option text="eventtext.option.useitem.wrench">
+      <ClearTagAction tag="te_player" />
+      <TriggerAction target1tag="activeengine" target2tag="player" applytotarget2="te_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine" eventsprite="engine">
+        <Option text="eventtext.option.smack">
+          <!-- if success, cancel out the engine decay, if failure either try again or drop a scrap and wait -->
           <SkillCheckAction requiredskill="Mechanic" requiredlevel="55" targettag="te_player">
             <Success>
-              <RNGAction chance="0.4">
-                <Success>
-                  <SetDataAction identifier="EnginesOffline" value="0" />
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect duration="3.5">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                </Success>
-                <Failure>
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect condition="-6" duration="1.2">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <GoTo name="options" />
-                </Failure>
-              </RNGAction>
+              <StatusEffectAction targettag="activeengine">
+                <StatusEffect target="This" condition="2" duration="60" stackable="false" >
+                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <GiveSkillEXPAction skill="mechanical" amount="2" targettag="triggerer_player" />
+              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" eventsprite="engine"/>
             </Success>
             <Failure>
-              <RNGAction chance="0.2">
+              <RNGAction chance="0.5">
                 <Success>
-                  <SetDataAction identifier="EnginesOffline" value="0" />
-                  <StatusEffectAction targettag="activeengine">
-                    <StatusEffect duration="3.5">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" endconversation="true" eventsprite="engine"/>
+                  <WaitAction time="1" />
+                  <GoTo name="restart" />  
                 </Success>
                 <Failure>
+                  <AfflictionAction affliction="lacerations" strength="5" limbtype="LeftHand" targettag="te_player" />
+                  <AfflictionAction affliction="stun" strength="0.5" targettag="te_player" />
+                  <SpawnAction itemidentifier="scrap" spawnpointtag="activeengine" />
                   <StatusEffectAction targettag="activeengine">
-                    <StatusEffect condition="-6" duration="1.2">
-                      <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
+                    <StatusEffect target="this" condition="-25" disabledeltatime="true">
+                      <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
+                      <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <Label name="options" />
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" continueconversation="true">
-                    <Option text="eventtext.option.useitem.wrench">
-                      <SkillCheckAction requiredskill="Mechanic" requiredlevel="55" targettag="te_player">
-                        <Success>
-                          <RNGAction chance="0.4">
-                            <Success>
-                              <SetDataAction identifier="EnginesOffline" value="0" />
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect duration="3.5">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                            </Success>
-                            <Failure>
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect condition="-6" duration="1.2">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <GoTo name="options" />
-                            </Failure>
-                          </RNGAction>
-                        </Success>
-                        <Failure>
-                          <RNGAction chance="0.2">
-                            <Success>
-                              <SetDataAction identifier="EnginesOffline" value="0" />
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect duration="3.5">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                            </Success>
-                            <Failure>
-                              <StatusEffectAction targettag="activeengine">
-                                <StatusEffect condition="-6" duration="1.2">
-                                  <Sound file="Content/Sounds/Repairloop.ogg" range="500" loop="true" />
-                                </StatusEffect>
-                              </StatusEffectAction>
-                              <GoTo name="options" />
-                            </Failure>
-                          </RNGAction>
-                        </Failure>
-                      </SkillCheckAction>
-                    </Option>
-                    <Option text="eventtext.option.smack">
-                      <RNGAction chance="0.5">
-                        <Success>
-                          <SetDataAction identifier="EnginesOffline" value="0" />
-                          <StatusEffectAction targettag="activeengine">
-                            <StatusEffect>
-                              <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                            </StatusEffect>
-                          </StatusEffectAction>
-                          <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-                        </Success>
-                        <Failure>
-                          <StatusEffectAction targettag="activeengine">
-                            <StatusEffect condition="-65" disabledeltatime="true">
-                              <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                            </StatusEffect>
-                            <StatusEffect>
-                              <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
-                            </StatusEffect>
-                          </StatusEffectAction>
-                          <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" />
-                          <WaitAction time="20" />
-                          <SetDataAction identifier="EnginesOffline" value="0" />
-                        </Failure>
-                      </RNGAction>
-                    </Option>
-                    <Option text="eventtext.option.dontbother" endconversation="true">
-                      <GoTo name="restart" />
-                    </Option>
-                  </ConversationAction>
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="engine"/>
                 </Failure>
               </RNGAction>
             </Failure>
           </SkillCheckAction>
         </Option>
-        <Option text="eventtext.option.smack">
-          <RNGAction chance="0.5">
-            <Success>
-              <SetDataAction identifier="EnginesOffline" value="0" />
-              <StatusEffectAction targettag="activeengine">
-                <StatusEffect>
-                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" />
-            </Success>
-            <Failure>
-              <StatusEffectAction targettag="activeengine">
-                <StatusEffect condition="-65" disabledeltatime="true">
-                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy2.ogg" range="500" />
-                </StatusEffect>
-                <StatusEffect>
-                  <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" />
-              <WaitAction time="20" />
-              <SetDataAction identifier="EnginesOffline" value="0" />
-            </Failure>
-          </RNGAction>
-        </Option>
         <Option text="eventtext.option.dontbother" endconversation="true">
           <GoTo name="restart" />
         </Option>
       </ConversationAction>
-      <ClearTagAction tag="te_player1" />
-      <ClearTagAction tag="te_player" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="troubledenginestatusevent">
-      <TagAction criteria="itemtag:engine" tag="engine" submarinetype="player" ContinueIfNoTargetsFound="false" />
-      <Label name="checkstatus" />
-      <CheckDataAction identifier="EnginesOffline" condition="eq 1">
+    </ScriptedEvent>    
+      
+    <!-- Reactor Malfunction -->
+    <ScriptedEvent identifier="reactormalfunction" >
+      <Label name="delay" />
+      <WaitAction time="30" />
+      <RNGAction chance="0.2">
         <Success>
-          <StatusEffectAction targettag="engine">
-            <StatusEffect isActive="false" setvalue="true" />
-          </StatusEffectAction>
-          <WaitAction time="1" />
-          <GoTo name="checkstatus" />
+          <GoTo name="start" />
         </Success>
         <Failure>
-          <StatusEffectAction targettag="engine">
-            <StatusEffect isActive="true" setvalue="true" />
-          </StatusEffectAction>
+          <GoTo name="delay" />
         </Failure>
-      </CheckDataAction>
+      </RNGAction>
+      <Label name="start" />
+      <TagAction criteria="itemtag:reactor" tag="activereactor" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" radius="2200" waitforinteraction="false" />
+      <!-- first trigger of effects, just a taste -->
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" AutoTemp="false" >
+          <ParticleEmitter particle="weldspark" particlespersecond="2" velocitymin="150" velocitymax="300" anglemin="0" anglemax="180" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- monitor effects -->
+      <StatusEffectAction targettag="activemonitor" >
+        <StatusEffect target="this" duration="10" noninteractable="false" >
+          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" volume="0.5" loop="true" />
+          <ParticleEmitter particle="impactfirearm" particlespersecond="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="0.5" scalemax="0.5" distancemin="0" distancemax="0" colormultiplier="255,0,0,255" lifetimemultiplier="2" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="rm_player" waitforinteraction="true" />
+      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="redalarm"/>
+      <Label name="restart" />
+      <ClearTagAction tag="rm_player" />
+      <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" AutoTemp="false" duration="120" stackable="false">
+          <ParticleEmitter particle="weldspark" particlespersecond="2" velocitymin="150" velocitymax="300" anglemin="0" anglemax="180" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.reactor" endconversation="true" continueautomatically="true" eventsprite="engine" />
+      <WaitAction time="120" />
+      <ClearTagAction tag="rm_player" />
+      <StatusEffectAction targettag="activereactor">
+        <StatusEffect target="This" >
+          <ParticleEmitter particle="heavysmoke" particleamount="3" velocitymin="0" velocitymax="0" anglemin="70" anglemax="110" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Door/duct2.ogg" range="500" volume="2" frequencymultiplier="0.5" loop="false" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="engine" />
     </ScriptedEvent>
-    <!-- Reactor Malfunction -->
-    <ScriptedEvent identifier="reactormalfunction">
+    
+    <!-- Reactor Malfunction (old version) -->
+<!--     <ScriptedEvent identifier="reactormalfunction2">
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -809,12 +664,13 @@
           </StatusEffectAction>
         </Failure>
       </CheckDataAction>
-    </ScriptedEvent>
+    </ScriptedEvent> -->
+    
     
     <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
-    <ScriptedEvent identifier="militarypatrol">
+    <!-- <ScriptedEvent identifier="militarypatrol">
       <MissionAction missiontag="militarypatrol" />
-    </ScriptedEvent>
+    </ScriptedEvent> -->
     
   </EventPrefabs>
   
