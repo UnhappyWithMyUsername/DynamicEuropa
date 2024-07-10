@@ -33,9 +33,7 @@
       sellpricemodifier = The sell price modifier applied when this balance status is active. Defaults to 1.0.
       color             = The color used on the store interface when this balance status is active. Defaults to (255,255,255,255), i.e. white.
   -->
-  
-  <!-- TODO: add IsAnyOutpost="false" to locations that arent populated like Lairs or Survey (example: viable destination for cargo mission) -->
-  
+    
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
     
@@ -502,6 +500,7 @@
     </Research>
   
     <!-- FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD -->
+    <!-- TODO: make this more interesting, feels like a dead location atm -->
     <Hydroponics identifier="Hydroponics" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.3, 2: 0.5, 3: 0.1, 4: 0, 5: 0, 6: 0" beaconstationchance="0.00" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,0,128,128" color="233,149,99,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
@@ -527,7 +526,7 @@
     </Hydroponics>
     
     <!-- MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING -->
-    <Survey identifier="Survey" disallowedadjacentlocations="Survey,Mine" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.0" mincountperzone="1: 1, 2: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
+    <Survey identifier="Survey" disallowedadjacentlocations="Survey,Mine" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.0" mincountperzone="1: 1, 2: 1" beaconstationchance="0.00" AllowAsBiomeGate="false" IsAnyOutpost="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,0,128,128" color="143,465,239,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining2.png" premultiplyalpha="false" />
@@ -552,7 +551,7 @@
       </ChangeTo>
     </Survey>
 
-    <Mine identifier="Mine" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
+    <Mine identifier="Mine" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false" IsAnyOutpost="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,256,128,128" color="143,465,239,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining2.png" premultiplyalpha="false" />
@@ -716,6 +715,7 @@
       pricemodifierrange="5" />
     </HuskChurch>
     
+    <!-- TODO: make this more interesting, feels like a dead location atm -->
     <Circus
       identifier="SinkingCircus"
       replaceinradiation="None"
@@ -738,7 +738,7 @@
 
     <!-- LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS -->
     
-    <Lair commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0"  mincountperzone="1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 0" namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="destroylair" AllowAsBiomeGate="false" hasoutpost="true">
+    <Lair commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0"  mincountperzone="1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 0" namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="destroylair" AllowAsBiomeGate="false" hasoutpost="true" IsAnyOutpost="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="80,155,80,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
     </Lair>
@@ -785,7 +785,7 @@
     </EndLocation>
 
     <!-- PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES -->
-    <PirateOutpost identifier="PirateOutpost" nameidentifiers="pirateoutpost" replaceinradiation="Abandoned" commonnessperzone="1: 0, 2: 0.25, 3: 0.3, 4: 0.3, 5: 0.2" disallowedadjacentlocations="PirateOutpost" missiontags="pirateoutpostmission" AllowAsBiomeGate="false" faction="bandits">
+    <PirateOutpost identifier="PirateOutpost" nameidentifiers="pirateoutpost" replaceinradiation="Abandoned" commonnessperzone="1: 0, 2: 0.25, 3: 0.3, 4: 0.3, 5: 0.2" disallowedadjacentlocations="PirateOutpost" missiontags="pirateoutpostmission" AllowAsBiomeGate="false" faction="bandits" IsAnyOutpost="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="128,640,128,128" color="255,148,96,255" />
       <Portrait texture="%ModDir:2532991202%/Map/LocationPortraits/PirateHaven.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
       <!-- TODO: remove this hireable if devs fix https://github.com/FakeFishGames/Barotrauma/discussions/13864 -->

@@ -279,7 +279,6 @@
     </ScriptedEvent>
     
     <!-- Events that randomly delete cave/lair items     -->
-    <!-- TODO: get rid of that docking hatch trigger once the bug? is fixed. ugly jank -->
     
     <ScriptedEvent identifier="unlockorenodes" commonness="100">
       <WaitAction time="2" />
@@ -1580,7 +1579,7 @@
                 <StatusEffect IsOn="true" target="This" setvalue="true" />
               </StatusEffectAction>
               <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-              <!-- TODO: reenable when fixed -->
+              <!-- TODO: reenable when infinite sound loop is fixed -->
               <!-- <StatusEffectAction targettag="blockadehull">
                 <StatusEffect target="this" duration="3" >
                   <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
@@ -2268,7 +2267,6 @@
       </CheckConditionalAction>
     </ScriptedEvent>
     
-    <!-- TODO: change targetmoduletags when devs change the city tags to xxxModuleCity -->
     <ScriptedEvent identifier="pantytheft">
       <CheckDataAction identifier="pantytheftnorepeat" condition="eq 0" >
         <Failure>
