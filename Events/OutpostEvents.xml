@@ -1462,7 +1462,6 @@
 
     <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
-      <TagAction criteria="itemtag:blockadebutton" submarinetype="Outpost" tag="blockadebutton" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckReputationAction targettype="Location" condition="gte 75">
@@ -1519,13 +1518,14 @@
       <StatusEffectAction targettag="blockadebutton">
         <StatusEffect target="this" noninteractable="true" setvalue="true" />
       </StatusEffectAction>
-      <StatusEffectAction targettag="blockadedoor">
-        <StatusEffect target="this" ShouldBeOpen="true" noninteractable="true" setvalue="true" />
-      </StatusEffectAction>
       <StatusEffectAction targettag="blockadesensor">
         <StatusEffect target="This" targetitemcomponent="MotionSensor" isActive="false"/>
         <StatusEffect target="This" condition="-100" setvalue="true"/>
-      </StatusEffectAction>      
+      </StatusEffectAction>
+      <WaitAction time="1" />
+      <StatusEffectAction targettag="blockadedoor">
+        <StatusEffect target="this" ShouldBeOpen="true" noninteractable="true" setvalue="true" />
+      </StatusEffectAction>
     </ScriptedEvent>
     
     <!-- simple event that unlocks the path by flicking a lever -->
