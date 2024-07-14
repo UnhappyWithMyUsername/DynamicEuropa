@@ -1113,23 +1113,25 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathgeneric.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathgeneric.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathgeneric.o1">
               <CheckMoneyAction amount="2000">
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgeneric.o1.c1" eventsprite="captain" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgeneric.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpathgeneric.o2">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgeneric.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgeneric.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1155,13 +1157,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathcoldcaverns.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathcoldcaverns.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathcoldcaverns.o1">
               <CheckMoneyAction amount="2000">
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathcoldcaverns.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1170,13 +1172,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathcoldcaverns.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathcoldcaverns.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathcoldcaverns.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1201,13 +1205,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpatheuropanridge.o1">
               <CheckMoneyAction amount="4000">
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1216,13 +1220,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1247,13 +1253,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathaphoticplateau.o1">
               <CheckMoneyAction amount="8000">
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathaphoticplateau.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1262,13 +1268,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1293,13 +1301,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathgreatsea.o1">
               <CheckMoneyAction amount="16000">
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_coalition_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1308,13 +1316,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
-                  <GoTo name="retry" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
+                <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1339,13 +1349,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="eventtext.unlockpathcoldcavernsseparatists.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="eventtext.unlockpathcoldcavernsseparatists.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathcoldcaverns.o1">
               <CheckMoneyAction amount="2000">
                 <Success>
                   <MoneyAction amount="-2000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="eventtext.unlockpathcoldcavernsseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_coldcaverns_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1354,13 +1364,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="eventtext.unlockpathcoldcavernsseparatists.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathcoldcavernsseparatists.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="eventtext.unlockpathcoldcavernsseparatists.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1385,13 +1397,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpatheuropanridge.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpatheuropanridge.o1">
               <CheckMoneyAction amount="4000">
                 <Success>
                   <MoneyAction amount="-4000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_europanridge_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1400,13 +1412,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpatheuropanridge.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1431,13 +1445,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathaphoticplateau.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathaphoticplateau.o1">
               <CheckMoneyAction amount="8000">
                 <Success>
                   <MoneyAction amount="-8000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="eventtext.unlockpathaphoticplateauseparatists.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_aphoticplateau_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1446,13 +1460,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathaphoticplateau.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathaphoticplateau.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
@@ -1477,13 +1493,13 @@
         </Success>
         <Failure>
           <Label name="retry" />
-          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.unlockpathgreatsea.c2" speakertag="unlockpathnpc" invokertag="unlock_player" dialogtype="Regular" eventsprite="captain">
             <Option text="EventText.unlockpathgreatsea.o1">
               <CheckMoneyAction amount="16000">
                 <Success>
                   <MoneyAction amount="-16000" />
                   <SetDataAction identifier="blockadeopened" value="1" />
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o1.c1" eventsprite="captain" />
                   <SetDataAction identifier="blockade_greatsea_separatists_unlocked" value="true" />
                   <TriggerEventAction identifier="opendoortoblockade" />
                   <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1492,13 +1508,15 @@
                   </StatusEffectAction>
                 </Success>
                 <Failure>
-                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
+                  <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o1.nomoney" eventsprite="captain" />
+                  <ClearTagAction tag="unlock_player" />
                   <GoTo name="retry" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
             <Option text="EventText.unlockpath.refusebribe">
-              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <ConversationAction speakertag="unlockpathnpc" waitforinteraction="false" targettag="unlock_player" text="EventText.unlockpathgreatsea.o2.c1" eventsprite="captain" />
+              <ClearTagAction tag="unlock_player" />
               <GoTo name="retry" />
             </Option>
           </ConversationAction>
