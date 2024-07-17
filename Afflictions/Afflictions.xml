@@ -64,12 +64,169 @@
     <Effect minstrength="2" maxstrength="21601" strengthchange="-1" />
     <icon texture="%ModDir:2532991202%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
   </Affliction>
-
-  <!--PIRATE EXOSUIT STUN RESISTANCE-->
-  <Affliction identifier="pirateexo" type="resistance" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1" showiconthreshold="1000" treatmentthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" duration="1">
-    <Effect minstrength="0" maxstrength="1" resistancefor="stun" minresistance="0.85" maxresistance="0.85" />
-    <icon texture="Content/UI/CommandUIAtlas.png" sourcerect="768,768,128,128" color="143,111,160,255" origin="0,0" />
+  
+  <!-- Disease for medivac NPC -->
+ <Affliction
+    name="Mysterious Disease"
+    identifier="mysteriousdisease"
+    description="The patient is afflicted with an unknown, contagious disease, and requires medical attention."
+    type="poison"
+    causeofdeathdescription="The patient did not survive."
+    selfcauseofdeathdescription="You did not survive."
+    limbspecific="false"
+    indicatorlimb="Torso"
+    showiconthreshold="0"
+    showinhealthscannerthreshold="0"
+    maxstrength="100"
+    affectmachines="false"
+    healcostmultiplier="0"
+    basehealcost="50"
+    iconcolors="135,175,130,255;70,85,80,255;60,90,60,255">
+    <Description
+      textidentifier="afflictionname.mysteriousdisease.self"
+      target="Self"
+      minstrength="0"
+      maxstrength="100"/>
+    <Description
+      textidentifier="afflictionname.mysteriousdisease.others"
+      target="OtherCharacter"
+      minstrength="0"
+      maxstrength="100"/>
+    <Effect minstrength="0" maxstrength="10"
+      strengthchange="10"
+      minspeedmultiplier="1.0"
+      maxspeedmultiplier="1.0"
+      tag="poisoned"
+      resistancefor="mysteriousdiseaseplayer"
+      minresistance="1"
+      maxresistance="1">
+    </Effect>
+    <Effect minstrength="10" maxstrength="100"
+      strengthchange="0.5"
+      minscreenblur="0.1"
+      maxscreenblur="1.0"
+      minfacetint="255,255,255,0"
+      maxfacetint="255,255,0,80"
+      minbodytint="255,255,255,0"
+      maxbodytint="255,255,0,60"
+      minspeedmultiplier="1.0"
+      maxspeedmultiplier="0.5"
+      tag="poisoned"
+      resistancefor="mysteriousdiseaseplayer"
+      minresistance="1"
+      maxresistance="1">
+    </Effect>
+    <!-- bad effects from letting affliction ramp up -->
+    <PeriodicEffect mininterval="10" maxinterval="30" minstrength="60" maxstrength="100">
+      <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
+        <Affliction identifier="nausea" amount="15" probability="0.25" />
+        <Affliction identifier="internaldamage" amount="3" probability="0.25" />
+        <Affliction identifier="psychosis" amount="30" probability="0.25" />
+        <Affliction identifier="stun" amount="2" probability="0.25" />
+        <ReduceAffliction identifier="mysteriousdisease" amount="30" probability="0.25" />
+      </StatusEffect>
+    </PeriodicEffect>
+    <!-- if affliction = 100, transmit disease to players  -->
+    <PeriodicEffect mininterval="5" maxinterval="10" minstrength="99" maxstrength="100">
+      <StatusEffect target="Character" SpeedMultiplier="0.1" setvalue="true" duration="1.7" />
+      <StatusEffect target="Character" comparison="and">
+        <Conditional ishuman="true" />
+        <Conditional hasspecifiertag="male"/>
+        <Sound file="Content/Characters/Human/male_damage9.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+        <Sound file="Content/Characters/Human/male_damage10.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+      </StatusEffect>
+      <StatusEffect target="Character" comparison="and">
+        <Conditional ishuman="true" />
+        <Conditional hasspecifiertag="female"/>
+        <Sound file="Content/Characters/Human/female_damage7.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+        <Sound file="Content/Characters/Human/female_damage8.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+      </StatusEffect>
+      <StatusEffect target="Character" targetlimbs="Head" duration="1">
+        <ParticleEmitter particle="bloodsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="5" velocitymin="50" velocitymax="200" scalemin="0.2" scalemax="0.35" lifetimemultiplier="0.5" distancemin="5" distancemax="10" colormultiplier="60,90,60,255" />
+        <ReduceAffliction identifier="mysteriousdisease" amount="5" />
+      </StatusEffect>
+      <StatusEffect target="Character" targetlimbs="Head" >
+        <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.25" />
+        </Explosion>
+      </StatusEffect>
+    </PeriodicEffect>
+    <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,384,128,128" color="193,162,122,255" origin="0,0"/>
   </Affliction>
+  
+ <Affliction
+    name="Sickness"
+    identifier="mysteriousdiseaseplayer"
+    description="You've caught the sickness. Try to tough it out."
+    type="poison"
+    causeofdeathdescription="The patient did not survive."
+    selfcauseofdeathdescription="You did not survive."
+    limbspecific="false"
+    indicatorlimb="Torso"
+    showiconthreshold="0"
+    showinhealthscannerthreshold="0"
+    maxstrength="10"
+    affectmachines="false"
+    healcostmultiplier="0"
+    basehealcost="50"
+    iconcolors="135,175,130,255;70,85,80,255;60,90,60,255">
+    <Description
+      textidentifier="afflictiondescription.mysteriousdiseaseplayer.self"
+      target="Self"
+      minstrength="0"
+      maxstrength="100"/>
+    <Description
+      textidentifier="afflictiondescription.mysteriousdiseaseplayer.others"
+      target="OtherCharacter"
+      minstrength="0"
+      maxstrength="100"/>
+    <Effect minstrength="0" maxstrength="10"
+      strengthchange="-0.2"
+      minscreenblur="0.1"
+      maxscreenblur="1.0"
+      minfacetint="255,255,255,0"
+      maxfacetint="255,255,120,80"
+      minbodytint="255,255,255,0"
+      maxbodytint="255,255,120,60"
+      minspeedmultiplier="1.0"
+      maxspeedmultiplier="0.5"
+      tag="poisoned">
+    </Effect>
+    <!-- bad effects from letting affliction ramp up -->
+    <PeriodicEffect mininterval="10" maxinterval="20" minstrength="2" maxstrength="10">
+      <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
+        <Affliction identifier="nausea" amount="15" probability="0.25" />
+        <Affliction identifier="internaldamage" amount="3" probability="0.25" />
+        <Affliction identifier="hallucinating" amount="15" probability="0.25" />
+      </StatusEffect>
+    </PeriodicEffect>
+    <!-- if affliction = 100, transmit disease to players  -->
+    <PeriodicEffect mininterval="5" maxinterval="12" minstrength="1" maxstrength="10">
+      <StatusEffect target="Character" SpeedMultiplier="0.1" setvalue="true" duration="1.7" />
+      <StatusEffect target="Character" comparison="and">
+        <Conditional ishuman="true" />
+        <Conditional hasspecifiertag="male"/>
+        <Sound file="Content/Characters/Human/male_damage9.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+        <Sound file="Content/Characters/Human/male_damage10.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+      </StatusEffect>
+      <StatusEffect target="Character" comparison="and">
+        <Conditional ishuman="true" />
+        <Conditional hasspecifiertag="female"/>
+        <Sound file="Content/Characters/Human/female_damage7.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+        <Sound file="Content/Characters/Human/female_damage8.ogg" selectionmode="Random" frequencymultiplier="0.75" />
+      </StatusEffect>
+      <StatusEffect target="Character" targetlimbs="Head" duration="1">
+        <ParticleEmitter particle="bloodsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="5" velocitymin="50" velocitymax="200" scalemin="0.2" scalemax="0.35" lifetimemultiplier="0.5" distancemin="5" distancemax="10" colormultiplier="60,90,60,255" />
+      </StatusEffect>
+      <StatusEffect target="Character" targetlimbs="Head">
+        <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
+          <Affliction identifier="mysteriousdiseaseplayer" amount="10" probability="0.25" />
+        </Explosion>
+      </StatusEffect>
+    </PeriodicEffect>
+    <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,384,128,128" origin="0,0"/>
+  </Affliction>
+  
   <Override>
     <!-- COMPATIBILITY AFFLICTIONS -->
     <!-- invisible afflictions for built-in Enhanced Reactors compatibility | Does nothing and removes itself if loaded above or without Enhanced Reactors -->
