@@ -83,12 +83,12 @@
     basehealcost="50"
     iconcolors="135,175,130,255;70,85,80,255;60,90,60,255">
     <Description
-      textidentifier="afflictionname.mysteriousdisease.self"
+      textidentifier="afflictiondescription.mysteriousdisease.self"
       target="Self"
       minstrength="0"
       maxstrength="100"/>
     <Description
-      textidentifier="afflictionname.mysteriousdisease.others"
+      textidentifier="afflictiondescription.mysteriousdisease.others"
       target="OtherCharacter"
       minstrength="0"
       maxstrength="100"/>
@@ -102,7 +102,7 @@
       maxresistance="1">
     </Effect>
     <Effect minstrength="10" maxstrength="100"
-      strengthchange="0.5"
+      strengthchange="0.75"
       minscreenblur="0.1"
       maxscreenblur="1.0"
       minfacetint="255,255,255,0"
@@ -117,13 +117,12 @@
       maxresistance="1">
     </Effect>
     <!-- bad effects from letting affliction ramp up -->
-    <PeriodicEffect mininterval="10" maxinterval="30" minstrength="60" maxstrength="100">
+    <PeriodicEffect mininterval="10" maxinterval="30" minstrength="40" maxstrength="100">
       <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
         <Affliction identifier="nausea" amount="15" probability="0.25" />
-        <Affliction identifier="internaldamage" amount="3" probability="0.25" />
+        <Affliction identifier="internaldamage" amount="5" probability="0.25" />
         <Affliction identifier="psychosis" amount="30" probability="0.25" />
         <Affliction identifier="stun" amount="2" probability="0.25" />
-        <ReduceAffliction identifier="mysteriousdisease" amount="30" probability="0.25" />
       </StatusEffect>
     </PeriodicEffect>
     <!-- if affliction = 100, transmit disease to players  -->
@@ -147,7 +146,7 @@
       </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Head" >
         <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
-          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.25" />
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="1" />
         </Explosion>
       </StatusEffect>
     </PeriodicEffect>
@@ -193,7 +192,7 @@
       tag="poisoned">
     </Effect>
     <!-- bad effects from letting affliction ramp up -->
-    <PeriodicEffect mininterval="10" maxinterval="20" minstrength="2" maxstrength="10">
+    <PeriodicEffect mininterval="5" maxinterval="15" minstrength="1" maxstrength="10">
       <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
         <Affliction identifier="nausea" amount="15" probability="0.25" />
         <Affliction identifier="internaldamage" amount="3" probability="0.25" />
@@ -201,7 +200,7 @@
       </StatusEffect>
     </PeriodicEffect>
     <!-- if affliction = 100, transmit disease to players  -->
-    <PeriodicEffect mininterval="5" maxinterval="12" minstrength="1" maxstrength="10">
+    <PeriodicEffect mininterval="5" maxinterval="15" minstrength="2" maxstrength="10">
       <StatusEffect target="Character" SpeedMultiplier="0.1" setvalue="true" duration="1.7" />
       <StatusEffect target="Character" comparison="and">
         <Conditional ishuman="true" />
@@ -220,7 +219,7 @@
       </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Head">
         <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
-          <Affliction identifier="mysteriousdiseaseplayer" amount="10" probability="0.25" />
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.25" />
         </Explosion>
       </StatusEffect>
     </PeriodicEffect>

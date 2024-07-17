@@ -1706,6 +1706,31 @@
     <Metadata identifier="vipnappingnorepeat" value="1"/>
   </OutpostMission>
   
+  <EscortMission
+    identifier="escortmedivac"
+    tags="escortmedivac,escort"
+    type="Escort"
+    difficulty="2"
+    commonness="100"
+    reward="1500"
+    achievementidentifier="escortmission"
+    baseescortedcharacters="1">
+    <Characters>
+      <Character from="customnpcs" identifier="sickpatient" >
+        <StatusEffect target="Character" delay="1" disabledeltatime="true">
+          <Affliction identifier="mysteriousdisease" strength="70" />
+        </StatusEffect>
+      </Character>
+    </Characters>
+    <Reputation identifier="location" amount="3" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,512,256,256" color="180,100,120" />
+    <LocationType from="AnyOutpost" to="Clinic" />
+    <LocationType from="AnyOutpost" to="Hospital" />
+    <LocationType from="AnyOutpost" to="HuskChurch" />
+    <LocationType from="AnyOutpost" to="City" />
+    <message header="missionheader0.escortmedivac" text="missionmessage0.escortmedivac"/>
+  </EscortMission>
+  
 <!--   <GotoMission
     name=""
     identifier="smuggling1"

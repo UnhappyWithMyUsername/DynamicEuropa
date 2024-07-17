@@ -349,7 +349,7 @@
       <Label name="restart" />
       <ClearTagAction tag="te_player" />
       <TriggerAction target1tag="activeengine" target2tag="player" applytotarget2="te_player" radius="300" waitforinteraction="true" />
-      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine" eventsprite="engine">
+      <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine" eventsprite="officeinside">
         <Option text="eventtext.option.smack">
           <!-- if success, cancel out the engine decay, if failure either try again or drop a scrap and wait -->
           <SkillCheckAction requiredskill="Mechanic" requiredlevel="55" targettag="te_player">
@@ -360,12 +360,12 @@
                 </StatusEffect>
               </StatusEffectAction>
               <GiveSkillEXPAction skill="mechanical" amount="2" targettag="triggerer_player" />
-              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" eventsprite="engine"/>
+              <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.success" eventsprite="officeinside"/>
             </Success>
             <Failure>
               <RNGAction chance="0.5">
                 <Success>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" endconversation="true" eventsprite="engine"/>
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.failure" endconversation="true" eventsprite="officeinside"/>
                   <WaitAction time="1" />
                   <GoTo name="restart" />  
                 </Success>
@@ -379,7 +379,7 @@
                       <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="engine"/>
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="officeinside"/>
                 </Failure>
               </RNGAction>
             </Failure>
@@ -433,7 +433,7 @@
           <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" />
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.reactor" endconversation="true" continueautomatically="true" eventsprite="engine" />
+      <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.reactor" endconversation="true" continueautomatically="true" eventsprite="officeinside" />
       <WaitAction time="120" />
       <ClearTagAction tag="rm_player" />
       <StatusEffectAction targettag="activereactor">
@@ -443,7 +443,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
-      <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="engine" />
+      <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="officeinside" />
     </ScriptedEvent>
     
     <!-- Reactor Malfunction (old version) -->
