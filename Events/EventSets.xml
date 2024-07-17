@@ -469,7 +469,7 @@
       
       <!-- Events specific to mining outposts -->
       <EventSet identifier="outpostevent.mine.randomevents" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" ignorecooldown="true" triggereventcooldown="false" onceperoutpost="true" eventcount="1">
-        <!-- TODO: Adjust/override events so they don't die in dry cave? -->
+        <!-- TODO: Adjust/override events so spawned NPCs don't die in dry cave? -->
         <ScriptedEvent identifier="consultant" commonness="100" probability="0.5" />
         <ScriptedEvent identifier="occupationalhazards" commonness="100" probability="0.5" />
       </EventSet>
@@ -480,7 +480,7 @@
         <ScriptedEvent identifier="unlockpestnests" commonness="100" probability="1" />
       </EventSet>
       
-      <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters -->
+      <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters? compatibility? -->
       <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
         <Commonness commonness="100"/>
         <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
