@@ -70,6 +70,11 @@
         <ScriptedEvent identifier="jokster" commonness="60" />
       </EventSet>
 
+      <!-- For the medivac transport, don't trigger in outposts with medical doctor -->
+      <EventSet identifier="outpostevents.dynamiceuropa.medivac" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,camp,base,military,study,research,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+        <ScriptedEvent identifier="missionevent_escortmedivac" commonness="50" probability="0.25" />
+      </EventSet>
+
       <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
       <EventSet identifier="huskoutpostevents" leveltype="outpost" locationtype="huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true"> 
         <!-- MANAGER EVENTS (missions) with increasing difficulty, matches base eventset -->
