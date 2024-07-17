@@ -288,6 +288,11 @@
     <ScriptedEvent identifier="cooutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -300,17 +305,12 @@
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <ReputationAction targettype="Location" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
@@ -337,6 +337,11 @@
     <ScriptedEvent identifier="sepoutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -349,17 +354,13 @@
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <ReputationAction targettype="Location" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="coalitionsoldier" CompareToTarget="coalitionsoldier" MinPercentageRelativeToTarget="75">
