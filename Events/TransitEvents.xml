@@ -446,13 +446,14 @@
       <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="officeinside" />
     </ScriptedEvent>
     
+    <!-- TODO: ENABLE THIS WHEN DEV FIXES LOGICALOPERATOR -->
     <!-- jams your headsets if you activate the beacon -->
-    <ScriptedEvent identifier="beaconcommsjam">
+<!--     <ScriptedEvent identifier="beaconcommsjam">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:mobileradio" tag="mobileradio" />
       <Label name="beaconactivecheck1" />
-      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" logicaloperator="And"> 
+      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" LogicalOperator="And" >
         <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
         <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
         <Success>
@@ -465,17 +466,12 @@
         </Failure>
       </CheckConditionalAction>
       <Label name="beaconactivecheck2" />
-      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" logicaloperator="And"> 
+      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" LogicalOperator="And" >
         <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
         <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
         <Success>
           <StatusEffectAction targettag="mobileradio">
-            <StatusEffect target="This" JamTimer="1.5" setvalue="true" >
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="2.5" selectionmode="Random" />
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="3.0" selectionmode="Random" />
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="3.5" selectionmode="Random" />
-              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="4.0" selectionmode="Random" />
-            </StatusEffect>
+            <StatusEffect target="This" JamTimer="1.5" setvalue="true" forceplaysounds="true" />
           </StatusEffectAction>
           <WaitAction time="1" />
           <Goto name="beaconactivecheck2" /> 
@@ -485,8 +481,7 @@
           <Goto name="beaconactivecheck2" /> 
         </Failure>
       </CheckConditionalAction>
-    </ScriptedEvent>
-    
+    </ScriptedEvent> -->
     
     <!-- Reactor Malfunction (old version) -->
 <!--     <ScriptedEvent identifier="reactormalfunction2">
