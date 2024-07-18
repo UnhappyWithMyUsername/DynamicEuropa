@@ -446,6 +446,48 @@
       <ConversationAction targettag="rm_player" text="Seems like the reactor is functional again." continueautomatically="true" endconversation="true" eventsprite="officeinside" />
     </ScriptedEvent>
     
+    <!-- jams your headsets if you activate the beacon -->
+    <ScriptedEvent identifier="beaconcommsjam">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:mobileradio" tag="mobileradio" />
+      <Label name="beaconactivecheck1" />
+      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" logicaloperator="And"> 
+        <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
+        <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
+        <Success>
+          <ConversationAction text="You hear scrambled noises coming from your headset. The beacon signal is active, but it's malfunctioning and jamming communications." dialogtype="Small" targettag="player" eventsprite="rustcircuits" endconversation="true" continueautomatically="true" />
+          <Goto name="beaconactivecheck2" /> 
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <Goto name="beaconactivecheck1" /> 
+        </Failure>
+      </CheckConditionalAction>
+      <Label name="beaconactivecheck2" />
+      <CheckConditionalAction targettag="beaconmonitor" targetitemcomponent="Sonar" logicaloperator="And"> 
+        <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
+        <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
+        <Success>
+          <StatusEffectAction targettag="mobileradio">
+            <StatusEffect target="This" JamTimer="1.5" setvalue="true" >
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="2.5" selectionmode="Random" />
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="3.0" selectionmode="Random" />
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="3.5" selectionmode="Random" />
+              <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="5" loop="false" frequencymultiplier="4.0" selectionmode="Random" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <WaitAction time="1" />
+          <Goto name="beaconactivecheck2" /> 
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <Goto name="beaconactivecheck2" /> 
+        </Failure>
+      </CheckConditionalAction>
+    </ScriptedEvent>
+    
+    
     <!-- Reactor Malfunction (old version) -->
 <!--     <ScriptedEvent identifier="reactormalfunction2">
       <Label name="delay" />
@@ -719,6 +761,7 @@
       </EventSet>
     </EventSet>
   </EventSet>
+
       
 <!--   UNUSED - can't match an eventset to a specific mission (to spawn the right creatures) unless we have different locations for each lair
   also mainpath/nearmainsub/abyss spawns arent great -->
