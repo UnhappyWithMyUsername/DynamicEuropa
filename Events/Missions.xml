@@ -1731,6 +1731,49 @@
     <message header="missionheader0.escortmedivac" text="missionmessage0.escortmedivac"/>
   </EscortMission>
   
+  <SalvageMission
+    identifier="retrieveindustrialwaste"
+    name="missionname.retrieveindustrialwaste"
+    description="missiondescription.retrieveindustrialwaste"
+    successmessage="missionsuccess.retrieveindustrialwaste"
+    failuremessage="missionfailure.retrieveindustrialwaste"
+    tags="salvageindustrial"
+    type="Salvage"
+    difficulty="3"
+    commonness="100"
+    reward="2000"
+    requireddeliveryamount="0.80"
+    PartiallyRetrievedMessage="missionmessage.retrieveindustrialwaste.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.retrieveindustrialwaste.allretrieved">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <target
+      spawntype="mainpath"
+      itemidentifier="radioactivewaste"
+      sonarlabel="missionsonarlabel.retrieveindustrialwaste"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="RetrievedToSub"
+      hidelabelafterretrieved="false"
+      minamount="5" maxamount="7">
+    </target>
+    <LocationType from="AnyOutpost" to="AnyOutpost" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
+  </SalvageMission>
 
+  <AbandonedOutpostMission
+    identifier="industrialsabotage"
+    tags="industrialsabotage"
+    type="OutpostDestroy"
+    reward="1000"
+    difficulty="2"
+    commonness="100"
+    allowretry="true"
+    targetitem="fabricator"
+    maxleveldifficulty="65">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="Factory" />
+    <TriggerEvent state="0" delay="5" eventidentifier="industrialsabotageevent" campaignonly="true"/>
+    <message header="missionheader0.sabotage" text="missionmessage0.sabotage"/>
+  </AbandonedOutpostMission>
 
 </Missions>

@@ -575,5 +575,58 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <ScriptedEvent identifier="finddocuments" commonness="50">
+      <TagAction criteria="player" tag="player" />
+      
+      <TagAction criteria="itemidentifier:mediumsteelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
+      <TagAction criteria="itemidentifier:steelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
+      
+      <StatusEffectAction targettag="potentialcabinet">
+        <StatusEffect target="This" spritecolor="255,0,255,255" setvalue="true" />
+      </StatusEffectAction>
+      
+      <Label name="finddocuments1" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet1" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents1" targetinventory="documentcabinet1" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents1" applytotarget1="documents1finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents1finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments2" />
+      </ConversationAction>
+      
+      <Label name="finddocuments2" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet2" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents2" targetinventory="documentcabinet2" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents2" applytotarget1="documents2finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents2finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments3" />
+      </ConversationAction>
+      
+      <Label name="finddocuments3" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet3" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents3" targetinventory="documentcabinet3" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents3" applytotarget1="documents3finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents3finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments4" />
+      </ConversationAction>
+      
+      <Label name="finddocuments4" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet4" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="classifieddocuments" targettag="documents4" targetinventory="documentcabinet4" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents4" applytotarget1="documents4finder" waitforinteraction="true" />
+      <ConversationAction text="Those are the documents." targettag="documents4finder" eventsprite="BombScare2">
+        <Option text="Back to the ship." endconversation="true"/> 
+        <Goto name="finddocuments4" />       
+      </ConversationAction>
+
+    </ScriptedEvent>
+    
   </EventPrefabs>
 </Randomevents>

@@ -2559,6 +2559,23 @@
         </Success>
       </CheckDataAction>  
     </ScriptedEvent>    
+    
+    <ScriptedEvent identifier="missionevent_retrieveindustrialwaste" commonness="100">
+      <CheckDataAction identifier="retrieveindustrialwastenorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success> 
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="wasteguy" spawnlocation="Outpost" />
+          <ConversationAction text="eventtext.missionevent_retrieveindustrialwaste" speakertag="wasteguy" endeventifinterrupted="false" dialogtype="Small" >
+            <Option text="eventtext.missionevent_retrieveindustrialwaste.yuck" endconversation="true" />
+          </ConversationAction>
+          <MissionAction missionidentifier="retrieveindustrialwaste" />
+          <SetDataAction identifier="escortmedivacnorepeat" value="1" />
+        </Success>  
+      </CheckDataAction>
+    </ScriptedEvent>
+    
 
     <!-- ////////////// OTHER EVENTS ///////////// -->
     

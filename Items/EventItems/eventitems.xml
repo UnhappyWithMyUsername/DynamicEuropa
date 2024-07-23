@@ -782,6 +782,68 @@
       </StatusEffect>
     </ItemComponent>
   </Item>
+  
+  <Item name="Radioactive Waste" identifier="radioactivewaste" tags="radioactive" category="Misc" Scale="0.5" sonarsize="30" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,269,144,85" depth="0.8" origin="0.5,0.5" />
+    <Body width="144" height="78" density="25" friction="0.8" />
+    <Holdable canbepicked="true" slots="RightHand+LeftHand" holdpos="0,-30" handle1="0,-30" handle2="72,0" aimable="false" msg="ItemMsgPickUpSelect" >
+      <StatusEffect type="Always" target="NearbyCharacters" range="250" interval="1" disabledeltatime="true">
+        <Affliction identifier="radiationsickness" strength="1" />
+      </StatusEffect>
 
+    <StatusEffect type="InWater" target="This" interval="5" >
+        <SpawnItem identifier="radioactivewastebubble" spawnposition="This" />
+      </StatusEffect>
+    </Holdable>
+    <LightComponent LightColor="30,100,120,50" range="300" IsOn="true" pulseamount="0.2" pulsefrequency="0.2" offset="0,0" allowingameediting="false">
+      <IsActiveConditional InPlayerSubmarine="false" />
+    </LightComponent> 
+    <LightComponent LightColor="30,100,120,255" range="50" IsOn="true" pulseamount="0.2" pulsefrequency="0.2" offset="0,0" allowingameediting="false">
+      <sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,363,144,85" origin="0.5,0.5" />
+    </LightComponent>          
+    <AiTarget Soundrange="5000" sonardisruption="0.85" />
+  </Item>
+  
+  <Item name="Radioactive bubble" identifier="radioactivewastebubble" tags="radioactive" category="Misc" Scale="0.5" noninteractable="true" sonarsize="5"  health="10" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.8" origin="0.5,0.5" />
+    <Body radius="10" density="2.5" />
+    <Itemcomponent>
+      <StatusEffect type="Always" target="This,NearbyCharacters" range="250" interval="1" condition="-1" disabledeltatime="true">
+        <Affliction identifier="radiationsickness" strength="1" />
+        <ParticleEmitter particle="risingbubbles" anglemin="270" anglemax="270" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+      </StatusEffect>
+      <StatusEffect type="NotInWater" target="This" condition="0" setvalue="true"/>
+      <StatusEffect type="OnBroken" target="This" >
+        <Remove />
+      </StatusEffect>
+    </Itemcomponent>
+    <LightComponent LightColor="30,100,120,120" range="300" IsOn="true" pulseamount="0.2" pulsefrequency="0.2" offset="0,0" allowingameediting="false"/>
+    <AiTarget Soundrange="5000" sonardisruption="0.1" />
+  </Item>
+
+  <Item name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="764,109,51,70" depth="0.8" origin="0.5,0.5" />
+    <Body width="45" height="65" density="8" />
+    <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+    <Deconstruct time="10" chooserandom="true">
+      <Item identifier="sabotageeffect" />
+    </Deconstruct>
+  </Item>
+
+  <Item name="sabotageeffect" identifier="sabotageeffect" tags="" category="Misc" Scale="0.5" sonarsize="20" noninteractable="true">
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
+    <ElectricalDischarger Range="50" duration="0.25" outdoorsonly="true" powerconsumption="0" Ison="True" RangeMultiplierInWalls="20000">
+      <Affliction identifier="stun" strength="8" />
+      <Affliction identifier="burn" strength="10" />
+      <StatusEffect target="This" type="Always" interval="1">
+        <ParticleEmitter particle="electricshock" anglemin="0" anglemax="360" particleamount="1" scalemin="0.25" scalemax="0.35" lifetime="2" />
+        <Explosion range="100" force="10" empstrength="10" applyfireeffects="true" flames="true"/>
+        <Sound file="Content/Items/MechanicalRepairFail.ogg" range="1000" frequencymultiplier="0.75" />
+			  <Fire size="10.0" />
+        <Use/>
+        <Remove/>
+      </StatusEffect>
+    </ElectricalDischarger>
+  </Item>
 </Items>  
 </Override>
