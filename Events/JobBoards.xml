@@ -16,6 +16,10 @@
               <TagAction criteria="player" tag="player" />
               <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
               <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+              <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+              <StatusEffectAction targettag="potentialjobboard">
+                <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
               <Label name="waitforinput" />
               <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
               <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -133,7 +137,11 @@
                     </Option>
                   </ConversationAction>
                 </Success>
-                <Failure></Failure>
+                <Failure>
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
+                </Failure>
               </CheckDataAction>
             </Failure>
           </CheckMissionAction>
@@ -169,6 +177,10 @@
                   <TagAction criteria="player" tag="player" />
                   <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+                  <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
                   <Label name="waitforinput" />
                   <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
                   <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -311,7 +323,11 @@
                         </Option>
                       </ConversationAction>
                     </Success>
-                    <Failure></Failure>
+                    <Failure>
+                      <StatusEffectAction targettag="potentialjobboard">
+                        <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                      </StatusEffectAction>
+                    </Failure>
                   </CheckDataAction>
                 </Failure>
               </CheckMissionAction>
@@ -363,6 +379,10 @@
                   <TagAction criteria="player" tag="player" />
                   <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+                  <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
                   <Label name="waitforinput" />
                   <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
                   <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -506,6 +526,9 @@
                       </ConversationAction>
                     </Success>
                     <Failure>
+                      <StatusEffectAction targettag="potentialjobboard">
+                        <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                      </StatusEffectAction>
                       <!-- End -->
                     </Failure>
                   </CheckDataAction>
@@ -559,6 +582,10 @@
                   <TagAction criteria="player" tag="player" />
                   <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+                  <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
                   <Label name="waitforinput" />
                   <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
                   <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -701,7 +728,11 @@
                         </Option>
                       </ConversationAction>
                     </Success>
-                    <Failure></Failure>
+                    <Failure>
+                      <StatusEffectAction targettag="potentialjobboard">
+                        <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                      </StatusEffectAction>
+                    </Failure>
                   </CheckDataAction>
                 </Failure>
               </CheckMissionAction>
@@ -753,6 +784,10 @@
                   <TagAction criteria="player" tag="player" />
                   <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+                  <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
                   <Label name="waitforinput" />
                   <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
                   <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -835,7 +870,11 @@
                         </Option>
                       </ConversationAction>
                     </Success>
-                    <Failure></Failure>
+                    <Failure>
+                      <StatusEffectAction targettag="potentialjobboard">
+                        <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                      </StatusEffectAction>
+                    </Failure>
                   </CheckDataAction>
                 </Failure>
               </CheckMissionAction>
@@ -890,6 +929,10 @@
                   <SetDataAction identifier="jobboardpicked2" operation="set" value="0" />
                   <SetDataAction identifier="jobboardpicked3" operation="set" value="0" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
+                  <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" range="500" />
+                  <StatusEffectAction targettag="potentialjobboard">
+                    <StatusEffect target="This" noninteractable="false" setvalue="true" disabledeltatime="true" />
+                  </StatusEffectAction>
                   <Label name="waitforinput" />
                   <!-- The condition of CheckDataAction defines the amount of missions you can get from the job board -->
                   <CheckDataAction identifier="jobboardempty" condition="lt 1">
@@ -1048,7 +1091,11 @@
                             </Failure>
                           </CheckDataAction>
                         </Success>
-                        <Failure></Failure>
+                        <Failure>
+                          <StatusEffectAction targettag="potentialjobboard">
+                            <StatusEffect target="This" noninteractable="true" setvalue="true" disabledeltatime="true" />
+                          </StatusEffectAction>
+                        </Failure>
                       </CheckDataAction>
                     </Failure>
                   </CheckDataAction>
