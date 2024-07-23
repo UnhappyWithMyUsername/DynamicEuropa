@@ -428,7 +428,7 @@
     </Holdable>
   </Item>
   <!-- Fren Seynomor Items -->
-  <Item name="Sample VAX" identifier="frentestmedicine" description="A genetically modified husk sample created by Dr. Seynomor. He claims that he &quot;perfected&quot; the formula and whoever uses it can gain the abilities of a husk without losing their mental capability. The instruction says, &quot;To use it on yourself, hold right click and then press E.&quot;" category="Misc" maxstacksize="1" Tags="smallitem" scale="0.5" impactsoundtag="impact_metal_light">
+  <Item hideinmenus="true" name="Sample VAX" identifier="frentestmedicine" description="A genetically modified husk sample created by Dr. Seynomor. He claims that he &quot;perfected&quot; the formula and whoever uses it can gain the abilities of a husk without losing their mental capability. The instruction says, &quot;To use it on yourself, hold right click and then press E.&quot;" category="Misc" maxstacksize="1" Tags="smallitem" scale="0.5" impactsoundtag="impact_metal_light">
     <PreferredContainer primary="medcab" />
     <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="769,448,64,64" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Medical/Medicines.png" sourcerect="112,69,38,70" depth="0.6" origin="0.5,0.5" />
@@ -615,7 +615,8 @@
     </ItemComponent>
   </Item>
   <!-- Submarine Charger Relay -->
-  <Item name="Event - Charger Relay" identifier="chargerrelay" category="Electrical" Tags="smallitem,signal,logic" maxstacksize="8" cargocontaineridentifier="metalcrate" description="TRIGGERS THE CHARGING DOCK EVENT. DO NOT USE THIS IN ANY MODULE OTHER THAN THE AIRLOCK THAT IS SUPPOSED TO NOT SUPPLY POWER UNLESS PAID FOR!" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
+  <!-- TODO: Make event to pay to power your submarine from the station | used for small stations -->
+  <Item hideinmenus="true" name="Event - Charger Relay" identifier="chargerrelay" category="Electrical" Tags="smallitem,signal,logic" maxstacksize="8" cargocontaineridentifier="metalcrate" description="TRIGGERS THE CHARGING DOCK EVENT. DO NOT USE THIS IN ANY MODULE OTHER THAN THE AIRLOCK THAT IS SUPPOSED TO NOT SUPPLY POWER UNLESS PAID FOR!" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
     <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="512,388,63,57" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="64,128,32,32" origin="0.5,0.5" canflipx="false" />
     <RelayComponent canbeselected="true" vulnerabletoemp="false" canbeoverloaded="false">
@@ -740,7 +741,7 @@
   </Item>  
   
   <!-- only used for locating crawlers -->
-  <Item name="Alien liver" identifier="monsterlocatoritem" category="Misc" tags="alien,capturetargetitem" noninteractable="false" >
+  <Item hideinmenus="true" name="Alien liver" identifier="monsterlocatoritem" category="Misc" tags="alien,capturetargetitem" noninteractable="false" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
     <Body radius="50" density="10" />
     <Holdable slots="Any" >
@@ -753,7 +754,7 @@
     <AiTarget soundrange="5000000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true"/>
   </Item>
   
-  <Item name="Suspicious package" identifier="huskbodybag" category="Misc" tags="bodybag" scale="0.6" health="100" impactsoundtag="impact_soft" flipx="true" >
+  <Item hideinmenus="true" name="Suspicious package" identifier="huskbodybag" category="Misc" tags="bodybag" scale="0.6" health="100" impactsoundtag="impact_soft" flipx="true" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,409,283,27" depth="0.55" origin="0.5,0.5" />
     <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,436,283,76" depth="0.54" origin="0.5,0.5" offset="5,12" offsetanim="noise" rotation="2" offsetanimspeed="50.0">
       <AnimationConditional condition="lt 100" />
@@ -783,7 +784,7 @@
     </ItemComponent>
   </Item>
   
-  <Item name="Radioactive Waste" identifier="radioactivewaste" tags="radioactive" category="Misc" Scale="0.5" sonarsize="30" >
+  <Item hideinmenus="true" name="Radioactive Waste" identifier="radioactivewaste" tags="radioactive" category="Misc" Scale="0.5" sonarsize="30" >
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,269,144,85" depth="0.65" origin="0.5,0.5" />
     <Body width="144" height="78" density="25" friction="0.8" />
     <Holdable canbepicked="true" slots="RightHand+LeftHand" holdpos="0,-30" handle1="0,-30" handle2="72,0" aimable="false" msg="ItemMsgPickUpSelect" >
@@ -804,7 +805,7 @@
     <AiTarget Soundrange="2000" sonardisruption="0.2" />
   </Item>
   
-  <Item name="Radioactive bubble" identifier="radioactivewastebubble" tags="radioactive" category="Misc" Scale="0.5" noninteractable="true" sonarsize="5"  health="10" >
+  <Item hideinmenus="true" name="Radioactive bubble" identifier="radioactivewastebubble" tags="radioactive" category="Misc" Scale="0.5" noninteractable="true" sonarsize="5"  health="10" >
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.66" origin="0.5,0.5" />
     <Body radius="10" density="2.5" />
     <Itemcomponent>
@@ -821,7 +822,7 @@
     <AiTarget Soundrange="5000" sonardisruption="0.1" />
   </Item>
 
-  <Item name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
+  <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="764,109,51,70" depth="0.8" origin="0.5,0.5" />
     <Body width="45" height="65" density="8" />
     <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
@@ -830,7 +831,7 @@
     </Deconstruct>
   </Item>
 
-  <Item name="sabotageeffect" identifier="sabotageeffect" tags="" category="Misc" Scale="0.5" sonarsize="20" noninteractable="true">
+  <Item hideinmenus="true" name="sabotageeffect" identifier="sabotageeffect" tags="" category="Misc" Scale="0.5" sonarsize="20" noninteractable="true">
     <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
     <ElectricalDischarger Range="50" duration="0.25" outdoorsonly="true" powerconsumption="0" Ison="True" RangeMultiplierInWalls="20000">
       <Affliction identifier="stun" strength="8" />
