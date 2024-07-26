@@ -2327,19 +2327,20 @@
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
           <Label name="talktonpc" />
-          <ConversationAction targettag="player" speakertag="smuggler" invokertag="triggerer_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="smuggler" invokertag="panty_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.generic.continue">
-              <ConversationAction targettag="player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" eventsprite="JacovSubra1" >
+              <ConversationAction targettag="panty_player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                 <Option text="eventtext.generic.continue" >
-                  <ConversationAction targettag="player" text="eventtext.pantytheft.plantingtags" endeventifinterrupted="false" eventsprite="JacovSubra1" >
+                  <ConversationAction targettag="panty_player" text="eventtext.pantytheft.plantingtags" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                     <Option text="eventtext.pantytheft.ifitpays">
                       <ConversationAction text="eventtext.pantytheft.grabclothes" endeventifinterrupted="false" endconversation="true" eventsprite="Duffelbag" />
-                      <SpawnAction itemidentifier="traitorduffelbag" targetinventory="triggerer_player" targettag="stealingbag" />
+                      <SpawnAction itemidentifier="traitorduffelbag" targetinventory="panty_player" targettag="stealingbag" />
                       <StatusEffectAction targettag="stealingbag" >
                         <StatusEffect target="This" delay="30" SpawnedInCurrentOutpost="true" AllowStealing="false" stackable="false" setvalue="true" />
                       </StatusEffectAction> 
                     </Option>
-                    <Option text="eventtext.generic.refuse" endconversation="true">            
+                    <Option text="eventtext.generic.refuse" endconversation="true">        
+                      <ClearTagAction tag="panty_player" />
                       <Goto name="end" />
                     </Option>
                   </ConversationAction>
@@ -2347,15 +2348,16 @@
               </ConversationAction>
             </Option>
             <Option text="eventtext.generic.ignore" endconversation="true">        
-              <ClearTagAction tag="triggerer_player" />
+              <ClearTagAction tag="panty_player" />
+              <WaitAction time="1" />
               <Goto name="talktonpc" />
             </Option>
           </ConversationAction>
           <Label name="retry" />
           <Waitaction time="1" />
-          <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="triggerer_player" waitforinteraction="true" />
+          <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="deliverer_player" waitforinteraction="true" />
           <!-- double check: if player carries bag, and if bad has ID cards -->
-          <CheckItemAction targettag="triggerer_player" itemtags="stealingbag" >
+          <CheckItemAction targettag="deliverer_player" itemtags="stealingbag" >
             <Success>
               <CheckItemAction targettag="stealingbag" itemtags="stolenclothes" amount="5" ApplyTagToItem="removeclothes">
                 <Success>
@@ -2370,19 +2372,19 @@
                     </StatusEffect>
                   </StatusEffectAction>
                   <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
-                  <MoneyAction amount="500" targettag="triggerer_player" />
+                  <MoneyAction amount="500" targettag="deliverer_player" />
                   <SetDataAction identifier="pantytheftnorepeat" value="1" />
-                  <ConversationAction targettag="player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                  <ConversationAction targettag="deliverer_player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
                 </Success>
                 <Failure>
-                  <Goto name="noclothess" />
+                  <Goto name="noclothes" />
                 </Failure>
               </CheckItemAction>
             </Success>
             <Failure>
-              <Label name="noclothess" />
-              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="player" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
-              <ClearTagAction tag="triggerer_player" />
+              <Label name="noclothes" />
+              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="deliverer_player" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+              <ClearTagAction tag="deliverer_player" />
               <Goto name="retry" />
             </Failure>
           </CheckItemAction>
@@ -2407,11 +2409,11 @@
           <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
           <NPCWaitAction npctag="thief" wait="false"/>
           <Label name="talktonpc" />
-          <ConversationAction targettag="player" speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.generic.continue">
-              <ConversationAction targettag="player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
+              <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                 <Option text="eventtext.generic.continue" >
-                  <ConversationAction targettag="player" text="eventtext.vendingsmashing.hitemhard" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
+                  <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.hitemhard" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                     <Option text="eventtext.vendingsmashing.Notsubtle">
                       <ConversationAction text="eventtext.vendingsmashing.Ilootyourun" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Terrorism1" />
                       <SpawnAction itemidentifier="crowbar" targetinventory="triggerer_player" targettag="smashingcrowbar" />
@@ -2424,7 +2426,7 @@
                       <Label name="foundvendingmachine" />
                       <TriggerAction target1tag="triggerer_player" target2tag="selectvendingmachine" radius="200" waitforinteraction="true" />
                       <CheckItemAction targettag="triggerer_player" itemidentifiers="crowbar" RequireEquipped="true">
-                        <Failure>                     
+                        <Failure>
                           <WaitAction time="1" />   
                           <Goto name="foundvendingmachine" />
                         </Failure>
@@ -2467,7 +2469,7 @@
                           <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                           <MoneyAction amount="200" targettag="triggerer_player" />
                           <SetDataAction identifier="vendingsmashingnorepeat" value="1" />
-                          <ConversationAction targettag="player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                          <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
                         </Success>
                       </CheckItemAction >
                     </Option>
@@ -2499,11 +2501,11 @@
           <TriggerAction target1tag="player" target2tag="kidnapper" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.missionevent_vipnapping.listen" endeventifinterrupted="false" endconversation="true" dialogtype="Small" eventsprite="Silhouette" />
           <Label name="talktonpc" />
-          <ConversationAction targettag="player" speakertag="kidnapper" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="kidnapper" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.missionevent_vipnapping.whatabout">
-              <ConversationAction targettag="player" text="eventtext.missionevent_vipnapping.ransomplan" endeventifinterrupted="false" eventsprite="Silhouette" >
+              <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.ransomplan" endeventifinterrupted="false" eventsprite="Silhouette" >
                 <Option text="eventtext.generic.continue" >
-                  <ConversationAction targettag="player" text="eventtext.missionevent_vipnapping.briefing" endeventifinterrupted="false" eventsprite="ventinside" >
+                  <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.briefing" endeventifinterrupted="false" eventsprite="ventinside" >
                     <Option text="eventtext.missionevent_vipnapping.Imin">
                       <ConversationAction text="eventtext.missionevent_vipnapping.hereslocation" endeventifinterrupted="false" endconversation="true" eventsprite="HeartOfGold" />
                       <MissionAction missiontag="vipnapping" locationtype="City,colony,research,hospital,factory,shipyard" minlocationdistance="1"/>
