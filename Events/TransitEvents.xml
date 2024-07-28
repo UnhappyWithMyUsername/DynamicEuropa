@@ -37,38 +37,28 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <WaitAction time="30" />
       <TriggerAction target1tag="wreck" target2tag="player" radius="500000" waitforinteraction="false" />
-      <Label name="checkeventstate" />
-      <CheckDataAction identifier="commsrelay_triggered" condition="neq 1">
-        <Success>
-          <SetDataAction identifier="commsrelay_triggered" operation="Set" value="1" />
-        <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-        <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
-        <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crw_trig_player" radius="100" waitforinteraction="true" />
-          <ConversationAction text="eventtext.commsrelay.wreck" dialogtype="Small" targettag="crw_trig_player" eventsprite="sonar">
-            <Option text="eventtext.option.investigate">
-              <StatusEffectAction targettag="crw_trig_player">
-                <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-                  <Sound file="%ModDir:2532991202%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction text="eventtext.commsrelay.wreck.answer" dialogtype="Small" targettag="crw_trig_player" />
-              <SpawnAction itemidentifier="broadcasterwreck" spawnlocation="wreck" />
-              <ClearTagAction tag="crw_trig_player" />
-              <SetDataAction identifier="commsrelay_multiwreck_triggered" operation="Set" value="0" />
-            </Option>
-            <Option text="eventtext.option.ignore">
-              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crw_trig_player" />
-              <ClearTagAction tag="crw_trig_player" />
-              <SetDataAction identifier="commsrelay_multiwreck_triggered" operation="Set" value="0" />
-            </Option>
-          </ConversationAction>
-        </Success>
-        <Failure>
-          <WaitAction time="5" />
-          <GoTo name="checkeventstate" />
-        </Failure>
-      </CheckDataAction>
+      <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
+      <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crw_trig_player" radius="100" waitforinteraction="true" />
+      <ConversationAction text="eventtext.commsrelay.wreck" dialogtype="Small" targettag="crw_trig_player" eventsprite="sonar">
+        <Option text="eventtext.option.investigate">
+          <StatusEffectAction targettag="crw_trig_player">
+            <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
+              <Sound file="%ModDir:2532991202%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ConversationAction text="eventtext.commsrelay.wreck.answer" dialogtype="Small" targettag="crw_trig_player" />
+          <SpawnAction itemidentifier="broadcasterwreck" spawnlocation="wreck" />
+          <ClearTagAction tag="crw_trig_player" />
+          <SetDataAction identifier="commsrelay_multiwreck_triggered" operation="Set" value="0" />
+        </Option>
+        <Option text="eventtext.option.ignore">
+          <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crw_trig_player" />
+          <ClearTagAction tag="crw_trig_player" />
+          <SetDataAction identifier="commsrelay_multiwreck_triggered" operation="Set" value="0" />
+        </Option>
+      </ConversationAction>
     </ScriptedEvent>
     <!--TRIGGERED BY PREVIOUS WRECK EVENT IF CUSTOM WRECK WITH SHUTTLES ARE LOADED
       CURRENTLY DOESN'T WORK
@@ -111,49 +101,29 @@
     <!--TRIGGERED AT A RUIN TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_ruin" commonness="100">
       <WaitAction time="60" />
-      <CheckDataAction identifier="commsrelay_ruin_triggered" condition="neq 1">
-        <Success>
-          <Label name="checkeventstate" />
-          <CheckDataAction identifier="commsrelay_wreck_triggered" condition="neq 1">
-            <Success>
-              <SetDataAction identifier="commsrelay_ruin_triggered" operation="Set" value="1" />
-              <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-              <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-              <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
-              <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
-              <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crr_trig_player" radius="100" waitforinteraction="true" />
-              <ConversationAction text="eventtext.commsrelay.ruin" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar">
-                <Option text="eventtext.option.investigate">
-                  <StatusEffectAction targettag="crr_trig_player">
-                    <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-                      <!--<Affliction identifier="broadcastruin" amount="10"/>-->
-                      <Sound file="%ModDir:2532991202%/Sounds/Events/AlienBroadcast.ogg" volume="1" loop="true" />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <ConversationAction text="eventtext.commsrelay.ruin.answer" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar" />
-                  <SpawnAction itemidentifier="broadcasterruin" spawnlocation="ruin" />
-                  <ClearTagAction tag="crr_trig_player" />
-                  <SetDataAction identifier="commsrelay_ruin_triggered" operation="Set" value="0" />
-                </Option>
-                <Option text="eventtext.option.ignore">
-                  <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar" />
-                  <ClearTagAction tag="crr_trig_player" />
-                  <SetDataAction identifier="commsrelay_ruin_triggered" operation="Set" value="0" />
-                </Option>
-              </ConversationAction>
-            </Success>
-            <Failure>
-              <WaitAction time="5" />
-              <GoTo name="checkeventstate" />
-            </Failure>
-          </CheckDataAction>
-        </Success>
-        <Failure>
-          <!--End-->
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>    
-        
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
+      <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crr_trig_player" radius="100" waitforinteraction="true" />
+      <ConversationAction text="eventtext.commsrelay.ruin" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar">
+        <Option text="eventtext.option.investigate">
+          <StatusEffectAction targettag="crr_trig_player">
+            <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
+              <!--<Affliction identifier="broadcastruin" amount="10"/>-->
+              <Sound file="%ModDir:2532991202%/Sounds/Events/AlienBroadcast.ogg" volume="1" loop="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ConversationAction text="eventtext.commsrelay.ruin.answer" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar" />
+          <SpawnAction itemidentifier="broadcasterruin" spawnlocation="ruin" />
+          <ClearTagAction tag="crr_trig_player" />
+        </Option>
+        <Option text="eventtext.option.ignore">
+          <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar" />
+          <ClearTagAction tag="crr_trig_player" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>        
     <!-- TODO: rework this, including stealingintel -->
 <!--     <ScriptedEvent identifier="factionseparatist" commonness="100">
       <TagAction criteria="itemtag:hidden" tag="deaddrop" ContinueIfNoTargetsFound="true" />
