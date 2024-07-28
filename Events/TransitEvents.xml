@@ -4,7 +4,10 @@
   <EventPrefabs>  
     
     <!--commsrelay EVENTS-->
-    <ScriptedEvent identifier="commsrelay_randomencounter" commonness="100">
+    <!-- UNUSED. 
+    TODO: Rework by adding a custom logbook item that rarely spawns in wrecks, upon reading trigger an unknown monster mission
+          Change tags of randomencounter missions  to match logbook description -->
+    <!-- <ScriptedEvent identifier="commsrelay_randomencounter" commonness="100">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
@@ -25,15 +28,11 @@
           <ClearTagAction tag="cre_trig_player" />
         </Option>
       </ConversationAction>
-    </ScriptedEvent>
+    </ScriptedEvent> -->
+    
     <!--TRIGGERED AT A WRECK TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_wreck">
-      <TagAction criteria="hullname:Airlock" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:Command room" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:Amidships" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:Mid aft side" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:Mid fore side" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:Reactor room" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <WaitAction time="30" />
       <TriggerAction target1tag="wreck" target2tag="player" radius="500000" waitforinteraction="false" />
@@ -60,47 +59,12 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
-    <!--TRIGGERED BY PREVIOUS WRECK EVENT IF CUSTOM WRECK WITH SHUTTLES ARE LOADED
-      CURRENTLY DOESN'T WORK
-    <ScriptedEvent identifier="multiwreckevent" commonness="100">
-      <Label name="checkeventstate" />
-      <CheckDataAction identifier="commsrelay_ruin_triggered" condition="neq 1">
-        <Success>
-          <SetDataAction identifier="commsrelay_multiwreck_triggered" operation="Set" value="1" />
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
-          <TagAction criteria="itemidentifier:eventtrigger_multiwreck" tag="multiwreck" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="multiwreck" target2tag="player" applytotarget1="multiwrecktrigger" radius="1000000" waitforinteraction="false" allowmultipletargets="false"/>
-          <TriggerAction target1tag="multiwrecktrigger" target2tag="player" radius="1000000" waitforinteraction="false" allowmultipletargets="false"/>
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crw_trig_player" radius="100" waitforinteraction="true"/>
-          <ConversationAction text="eventtext.commsrelay.wreck" dialogtype="Small" targettag="crw_trig_player">
-            <Option text="eventtext.option.investigate">
-              <StatusEffectAction targettag="crw_trig_player">
-                <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-                  <Sound file="%ModDir:2532991202%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction text="eventtext.commsrelay.wreck.answer" dialogtype="Small" targettag="crw_trig_player"/>
-              <SpawnAction itemidentifier="broadcasterwreck" spawnlocation="wreck" />
-              <ClearTagAction tag="crw_trig_player"/>
-            </Option>
-            <Option text="eventtext.option.ignore">
-              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crw_trig_player"/>
-              <ClearTagAction tag="crw_trig_player"/>
-            </Option>
-          </ConversationAction>
-        </Success>
-        <Failure>
-          <WaitAction time="5" />
-          <GoTo name="checkeventstate" />
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>-->
+
     <!--TRIGGERED AT A RUIN TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_ruin" commonness="100">
-      <WaitAction time="60" />
+      <TagAction criteria="hull" tag="ruin" submarinetype="ruin" ContinueIfNoTargetsFound="true" />
+      <WaitAction time="30" />
+      <TriggerAction target1tag="ruin" target2tag="player" radius="500000" waitforinteraction="false" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
