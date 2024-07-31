@@ -22,17 +22,13 @@
     dailyspecialscount        = The number of daily specials for merchants at this location type. Defaults to 1.
     requestedgoodscount       = The number of requested goods for merchants at this location type. Defaults to 1.
     maxreputationmodifier     = The maximum effect reputation can have on store prices. Defaults to 0.1.
-    sellpricemodifier         = Used to determine the selling price from the base price of an item. Defaults to 0.8.
+    sellpricemodifier         = Used to determine the selling price from the base price of an item. Defaults to 0.3.
     dailyspecialpricemodifier = Change in buying price of daily specials. Defaults to 0.5.
-    requestgoodpricemodifier  = Change in selling price of requested goods. Defaults to 1.5.
+    requestgoodpricemodifier  = Change in selling price of requested goods. Defaults to 2.
     initialbalance            = Initial balance of the store. Defaults to 5000.
     pricemodifierrange        = The range of randomized price modifier. Randomized for each store individually. Defaults to 5. Note: value is direct percentage, i.e. 5 = 5%. 
-    
-    BalanceStatus:
-      percentage        = If the store's current balance is below this percentage of the initial balance, this balance status will be active. Defaults to 1.0.
-      sellpricemodifier = The sell price modifier applied when this balance status is active. Defaults to 1.0.
-      color             = The color used on the store interface when this balance status is active. Defaults to (255,255,255,255), i.e. white.
   -->
+
     
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
@@ -252,6 +248,12 @@
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
+      <Store
+        initialbalance="1000"
+        pricemodifierrange="5"
+        sellpricemodifier="0.3"
+        dailyspecialscount="0"
+        requestedgoodscount="0" />
     </Outpost>
 
     <Settlement identifier="Settlement" replaceinradiation="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.2, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -273,13 +275,13 @@
         <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>      
       <Store
+        initialbalance="2000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
         requestedgoodscount="2"
-        requestgoodpricemodifier="2"
-        initialbalance="2000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Settlement>
 
     <Colony identifier="Colony" replaceinradiation="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.3, 2: 0.2, 3: 0.1, 4: 0, 5: 0, 6: 0"  beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -303,13 +305,13 @@
         <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
         requestedgoodscount="3"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Colony>
 
     <City identifier="City" replaceinradiation="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.3, 2: 0.1, 3: 0, 4: 0, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -328,14 +330,14 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <Store
-        maxreputationmodifier="0.1"
-        sellpricemodifier="0.3"
-        dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
         initialbalance="6000"
         pricemodifierrange="5"
+        maxreputationmodifier="0.1"
+        sellpricemodifier="0.3"
         dailyspecialscount="3"
-        requestedgoodscount="3" />
+        dailyspecialpricemodifier="0.5"
+        requestedgoodscount="3"
+        requestgoodpricemodifier="2" />
     </City>
 
     <!-- MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY ////////// MILITARY -->
@@ -356,12 +358,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="1500"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="1500"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Camp>
 
     <Base identifier="Base" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -383,12 +385,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Base>
 
     <Military identifier="Military" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.3, 3: 0.1, 4: 0.1, 5: 0, 6: 0" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -410,13 +412,13 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="5000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
         requestedgoodscount="3"
-        initialbalance="5000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Military>
 
     <MilitaryForces identifier="MilitaryForces" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0" AllowAsBiomeGate="false" beaconstationchance="0.00" hasoutpost="true">
@@ -425,12 +427,12 @@
       <Hireable identifier="securityofficer" commonness="1" />
       <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,OuterHuskLair,HuskgroundsDE,WasteyardDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,2" messagetag="locationchange.militaryforces.changeto.None" />
       <Store
+        initialbalance="1000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="1000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </MilitaryForces>
 
     <Blockade identifier="Blockade" replaceinradiation="Blockade" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0" hideentitysubcategories="abandonedhuman,abandonedmonster" beaconstationchance="0.00" AllowAsBiomeGate="true">
@@ -438,12 +440,12 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <Hireable identifier="securityofficer" commonness="1" />
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Blockade>
 
     <!-- RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH ////////// RESEARCH -->
@@ -466,12 +468,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="1500"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="1500"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Study>
 
     <Research identifier="Research" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0, 4: 0, 5: 0, 6: 0" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -491,12 +493,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Research>
   
     <!-- FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD -->
@@ -517,12 +519,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Hydroponics>
     
     <!-- MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING -->
@@ -571,12 +573,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Mine>
   
     <!-- MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL ////////// MEDICAL -->
@@ -598,12 +600,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="1500"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="1500"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Clinic>
 
     <Hospital identifier="Hospital" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.3, 3: 0.5, 4: 0, 5: 0, 6: 0"  beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -623,12 +625,12 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
+        initialbalance="3000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="3000"
-        pricemodifierrange="5" />
+        requestgoodpricemodifier="2" />
     </Hospital>
 
     <!-- INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL ////////// INDUSTRIAL -->
@@ -648,15 +650,16 @@
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
+      <!-- Normal "sell" price is set very low, but requested goods are 0.8 (vs 0.6 for other outposts) -->
       <Store
-        maxreputationmodifier="0.1"
-        sellpricemodifier="0.1"
-        dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
         initialbalance="5000"
         pricemodifierrange="5"
+        maxreputationmodifier="0.1"
+        sellpricemodifier="0.01"
         dailyspecialscount="0"
-        requestedgoodscount="10" />
+        dailyspecialpricemodifier="0.5"
+        requestedgoodscount="10"
+        requestgoodpricemodifier="80" />
     </Factory>
 
     <Shipyard identifier="Shipyard" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.3, 2: 0.3, 3: 0.3, 4: 0.1, 5: 0, 6: 0" mincountperzone="1: 1" beaconstationchance="0.00" AllowAsBiomeGate="false">
@@ -677,14 +680,14 @@
         <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
       </ChangeTo>
       <Store
-        maxreputationmodifier="0.1"
-        sellpricemodifier="0.1"
-        dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="0.5"
         initialbalance="5000"
         pricemodifierrange="5"
+        maxreputationmodifier="0.1"
+        sellpricemodifier="0.1"
         dailyspecialscount="0"
-        requestedgoodscount="0" />
+        dailyspecialpricemodifier="0.5"
+        requestedgoodscount="0"
+        requestgoodpricemodifier="0.5" />
     </Shipyard>
 
     <!-- FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION ////////// FACTION -->
@@ -728,13 +731,13 @@
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
       <ChangeTo type="None" messagetag="locationchange.circus.changeto.none" requireddurationrange="1,2" probability="1" />      
       <Store
+        initialbalance="5000"
+        pricemodifierrange="5"
         maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="5000"
-        dailyspecialscount="10"
-        pricemodifierrange="5" />
+        requestedgoodscount="0"
+        dailyspecialscount="10" />
     </Circus>
 
     <!-- LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS -->
@@ -791,7 +794,6 @@
       <Portrait texture="%ModDir:2532991202%/Map/LocationPortraits/PirateHaven.png" sourcerect="0,0,2160,1080" premultiplyalpha="false" />
       <!-- TODO: remove this hireable if devs fix https://github.com/FakeFishGames/Barotrauma/discussions/13864 -->
       <Hireable identifier="assistant" commonness="1"/>
-      <Store maxreputationmodifier="0.1" sellpricemodifier="0.25" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="2" initialbalance="11389" pricemodifierrange="5" />
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -803,12 +805,14 @@
         <Requirement requiredlocations="Military" requireddurationrange="2,4" probability="0.75" requiredproximity="1" />
       </ChangeTo>
       <Store
-        maxreputationmodifier="0"
+        initialbalance="6000"
+        pricemodifierrange="5"
+        maxreputationmodifier="0.1"
         sellpricemodifier="0.3"
+        dailyspecialscount="3"
         dailyspecialpricemodifier="0.5"
-        requestgoodpricemodifier="2"
-        initialbalance="5000"
-        pricemodifierrange="50" />
+        requestedgoodscount="5"
+        requestgoodpricemodifier="2" />
     </PirateOutpost>
 
     <!-- A non-outpost level that gets placed before transforming into a pirate outpost for 1 round to get rid of previous missions that were stored at the outpost location -->
@@ -821,93 +825,9 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
+ 
   
     <!--\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/-->
-    <Surgery identifier="Surgery" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="256,256,128,128" color="255,83,121,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="3" />
-      <Hireable identifier="medicaldoctor" commonness="2" />
-      <Store dailyspecialscount="10" requestedgoodscount="2" maxreputationmodifier="0.2" sellpricemodifier="0.8" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="1.5" initialbalance="10000" pricemodifierrange="10">
-        <BalanceStatus percentage="1.0" sellpricemodifier="1.0" color="255,255,255,255" />
-        <BalanceStatus percentage="0.5" sellpricemodifier="0.75" color="255,165,0,255" />
-        <BalanceStatus percentage="0.25" sellpricemodifier="0.2" color="255,0,0,255" />
-      </Store>
-    </Surgery>
-
-    <Extraction identifier="Extraction" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,128,128,128" color="143,465,239,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="1" />
-      <Hireable identifier="mechanic" commonness="1" />
-      <Hireable identifier="assistant" commonness="1" />
-      <Store dailyspecialscount="5" requestedgoodscount="1" maxreputationmodifier="0.2" sellpricemodifier="0.8" dailyspecialpricemodifier="0.5" requestgoodpricemodifier="1.5" initialbalance="500" pricemodifierrange="10">
-        <BalanceStatus percentage="1.0" sellpricemodifier="1.0" color="255,255,255,255" />
-        <BalanceStatus percentage="0.5" sellpricemodifier="0.75" color="255,165,0,255" />
-        <BalanceStatus percentage="0.25" sellpricemodifier="0.2" color="255,0,0,255" />
-      </Store>
-    </Extraction>
-
-    <Biosphere identifier="Biosphere" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,128,128,128" color="233,149,99,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="1" />
-      <Hireable identifier="mechanic" commonness="1" />
-      <Hireable identifier="assistant" commonness="2" />
-    </Biosphere>
-
-    <Nourishment identifier="Nourishment" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,256,128,128" color="233,149,99,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="1" />
-      <Hireable identifier="mechanic" commonness="1" />
-      <Hireable identifier="medicaldoctor" commonness="1" />
-      <Hireable identifier="assistant" commonness="3" />
-    </Nourishment>
-
-    <Research identifier="Research" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="768,256,128,128" color="180,83,255,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="2" />
-      <Hireable identifier="medicaldoctor" commonness="2" />
-      <Hireable identifier="assistant" commonness="3" />
-      <Store dailyspecialscount="1" requestedgoodscount="15" maxreputationmodifier="0.1" sellpricemodifier="0.5" dailyspecialpricemodifier="0.3" requestgoodpricemodifier="2.0" initialbalance="25000" pricemodifierrange="10">
-        <BalanceStatus percentage="1.0" sellpricemodifier="1.0" color="255,255,255,255" />
-        <BalanceStatus percentage="0.5" sellpricemodifier="0.75" color="255,165,0,255" />
-        <BalanceStatus percentage="0.25" sellpricemodifier="0.2" color="255,0,0,255" />
-      </Store>
-    </Research>
-    
-    <Fusion identifier="Fusion" replaceinradiation="Abandoned" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="512,384,128,128" color="255,237,105,255" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Hireable identifier="engineer" commonness="3" />
-      <Hireable identifier="mechanic" commonness="1" />
-      <Hireable identifier="assistant" commonness="1" />
-      <Store dailyspecialscount="15" requestedgoodscount="1" maxreputationmodifier="0.2" sellpricemodifier="0.5" dailyspecialpricemodifier="0.2" requestgoodpricemodifier="1.2" initialbalance="5000" pricemodifierrange="10">
-        <BalanceStatus percentage="1.0" sellpricemodifier="1.0" color="255,255,255,255" />
-        <BalanceStatus percentage="0.5" sellpricemodifier="0.75" color="255,165,0,255" />
-        <BalanceStatus percentage="0.25" sellpricemodifier="0.2" color="255,0,0,255" />
-      </Store>
-    </Fusion>
-
-    <WasteyardDE commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" namefile="Content/Map/alienNames.txt" identifier="WasteyardDE" outpostteam="None" AllowAsBiomeGate="false">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="256,896,128,128" color="119,208,107,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-    </WasteyardDE>
-    
-    <Waypoint identifier="Waypoint" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0" hasoutpost="false" beaconstationchance="1">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="256,768,128,128" color="128,206,175,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-    </Waypoint>
     
     <LairMudraptor commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="LairMudraptor" outpostteam="None" missiontags="mudraptorlair" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
