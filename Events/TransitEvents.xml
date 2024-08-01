@@ -32,7 +32,7 @@
     
     <!--TRIGGERED AT A WRECK TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_wreck">
-      <TagAction criteria="hull" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <WaitAction time="30" />
       <TriggerAction target1tag="wreck" target2tag="player" radius="500000" waitforinteraction="false" />
@@ -62,7 +62,7 @@
 
     <!--TRIGGERED AT A RUIN TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_ruin" commonness="100">
-      <TagAction criteria="hull" tag="ruin" submarinetype="ruin" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="ruin" submarinetype="ruin" ContinueIfNoTargetsFound="false" />
       <WaitAction time="30" />
       <TriggerAction target1tag="ruin" target2tag="player" radius="500000" waitforinteraction="false" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
