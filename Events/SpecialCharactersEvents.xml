@@ -1453,35 +1453,44 @@
                                                                                       </ConversationAction>
                                                                                     </Success>
                                                                                     <Failure>
-                                                                                      <WaitAction time="10" _npos="24278.482,-5174.412" />
-                                                                                      <StatusEffectAction targettag="smith" _npos="24728.76,-5200.8384">
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="25070.098,-5046.2583">
-                                                                                          <Conditional vitality="lt 0" _npos="25651.604,-5041.6025" />
+                                                                                      <WaitAction time="10" />
+                                                                                      <StatusEffectAction targettag="smith">
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional vitality="lt 0" />
+                                                                                          <Conditional isdead="eq false" />
+                                                                                          <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
                                                                                         </StatusEffect>
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="25453.312,-5291.611">
-                                                                                          <Conditional isdead="eq true" _npos="25874.857,-5283.8184" />
-                                                                                          <TriggerEvent identifier="kumokill" _npos="26302.555,-5205.7407" />
-                                                                                        </StatusEffect>
-                                                                                      </StatusEffectAction>
-                                                                                      <StatusEffectAction targettag="commissar" _npos="25106.514,-5664.743">
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="25606.193,-5642.121">
-                                                                                          <Conditional vitality="lt 0" _npos="26321.676,-5575.746" />
-                                                                                        </StatusEffect>
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="26772.406,-5723.574">
-                                                                                          <Conditional isdead="eq true" _npos="27256.713,-5683.5103" />
-                                                                                          <TriggerEvent identifier="kumokill" _npos="27674.709,-5681.834" />
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
+                                                                                          <TriggerEvent identifier="kumokill" />
                                                                                         </StatusEffect>
                                                                                       </StatusEffectAction>
-                                                                                      <StatusEffectAction targettag="kumo" _npos="25588.959,-6061.673">
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="26022.83,-5929.891">
-                                                                                          <Conditional vitality="lt 0" _npos="26440.078,-5850.728" />
+                                                                                      <StatusEffectAction targettag="commissar">
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional vitality="lt 0" />
+                                                                                          <Conditional isdead="eq false" />
+                                                                                          <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
                                                                                         </StatusEffect>
-                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="26575.203,-6088.7676">
-                                                                                          <Conditional isdead="eq true" _npos="26941.92,-6121.363" />
-                                                                                          <TriggerEvent identifier="kumodeath" _npos="27314.574,-6121.2983" />
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
+                                                                                          <TriggerEvent identifier="kumokill" />
                                                                                         </StatusEffect>
                                                                                       </StatusEffectAction>
-                                                                                      <GoTo name="attackcap1" _npos="26051.205,-6227.237" />
+                                                                                      <StatusEffectAction targettag="kumo">
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional vitality="lt 0" />
+                                                                                          <Conditional isdead="eq false" />
+                                                                                          <Affliction identifier="bloodloss" amount="1000" />
+                                                                                          <Affliction identifier="organdamage" amount="1000" />
+                                                                                        </StatusEffect>
+                                                                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                          <Conditional isdead="eq true" />
+                                                                                          <TriggerEvent identifier="kumodeath" />
+                                                                                        </StatusEffect>
+                                                                                      </StatusEffectAction>
+                                                                                      <GoTo name="attackcap1" />
                                                                                     </Failure>
                                                                                   </CheckDataAction>
                                                                                 </Option>
@@ -1511,35 +1520,44 @@
                                                                                                               <GoTo name="successfulcaptainkillmission" _npos="28026.592,-4513.809" />
                                                                                                             </Success>
                                                                                                             <Failure>
-                                                                                                              <WaitAction time="10" _npos="27892.557,-4210.0273" />
-                                                                                                              <StatusEffectAction targettag="smith" _npos="28374.13,-4216.7236">
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="28800.584,-3943.1082">
-                                                                                                                  <Conditional vitality="lt 0" _npos="29319.342,-3905.6133" />
+                                                                                                              <WaitAction time="10" />
+                                                                                                              <StatusEffectAction targettag="smith">
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional vitality="lt 0" />
+                                                                                                                  <Conditional isdead="eq false" />
+                                                                                                                  <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
                                                                                                                 </StatusEffect>
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="29372.361,-4204.2734">
-                                                                                                                  <Conditional isdead="eq true" _npos="29809.887,-4173.521" />
-                                                                                                                  <TriggerEvent identifier="kumokill" _npos="30228.664,-4157.7754" />
-                                                                                                                </StatusEffect>
-                                                                                                              </StatusEffectAction>
-                                                                                                              <StatusEffectAction targettag="commissar" _npos="28859.848,-4914.385">
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="29269.148,-4740.359">
-                                                                                                                  <Conditional vitality="lt 0" _npos="29794.16,-4702.1353" />
-                                                                                                                </StatusEffect>
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="29759.691,-5002.769">
-                                                                                                                  <Conditional isdead="eq true" _npos="30222.209,-4971.7773" />
-                                                                                                                  <TriggerEvent identifier="kumokill" _npos="30727.902,-4978.8184" />
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
+                                                                                                                  <TriggerEvent identifier="kumokill" />
                                                                                                                 </StatusEffect>
                                                                                                               </StatusEffectAction>
-                                                                                                              <StatusEffectAction targettag="kumo" _npos="29172.166,-5729.9604">
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="29672,-5600.994">
-                                                                                                                  <Conditional vitality="lt 0" _npos="30441.348,-5651.4277" />
+                                                                                                              <StatusEffectAction targettag="commissar">
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional vitality="lt 0" />
+                                                                                                                  <Conditional isdead="eq false" />
+                                                                                                                  <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
                                                                                                                 </StatusEffect>
-                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="30339.996,-5968.9917">
-                                                                                                                  <Conditional isdead="eq true" _npos="30905.941,-5936.5796" />
-                                                                                                                  <TriggerEvent identifier="kumodeath" _npos="31578.887,-5922.8037" />
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
+                                                                                                                  <TriggerEvent identifier="kumokill" />
                                                                                                                 </StatusEffect>
                                                                                                               </StatusEffectAction>
-                                                                                                              <GoTo name="attackcap2" _npos="29739.992,-6002.9873" />
+                                                                                                              <StatusEffectAction targettag="kumo">
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional vitality="lt 0" />
+                                                                                                                  <Conditional isdead="eq false" />
+                                                                                                                  <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                  <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                </StatusEffect>
+                                                                                                                <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                  <Conditional isdead="eq true" />
+                                                                                                                  <TriggerEvent identifier="kumodeath" />
+                                                                                                                </StatusEffect>
+                                                                                                              </StatusEffectAction>
+                                                                                                              <GoTo name="attackcap2" />
                                                                                                             </Failure>
                                                                                                           </CheckDataAction>
                                                                                                         </Option>
@@ -1588,35 +1606,44 @@
                                                                                                                                   <ClearTagAction tag="kumotriggerplayer" _npos="36451.02,-2710.7" />
                                                                                                                                 </Success>
                                                                                                                                 <Failure>
-                                                                                                                                  <WaitAction time="6" _npos="33535.137,-1945.5774" />
-                                                                                                                                  <StatusEffectAction targettag="smith" _npos="34065.145,-1951.5779">
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="34545.832,-1355.85">
-                                                                                                                                      <Conditional vitality="lt 0" _npos="35188.848,-1162.174" />
+                                                                                                                                  <WaitAction time="6" />
+                                                                                                                                  <StatusEffectAction targettag="smith">
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional vitality="lt 0" />
+                                                                                                                                      <Conditional isdead="eq false" />
+                                                                                                                                      <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
                                                                                                                                     </StatusEffect>
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="35145.043,-1424.2087">
-                                                                                                                                      <Conditional isdead="eq true" _npos="35621.43,-1399.3079" />
-                                                                                                                                      <TriggerEvent identifier="kumokill" _npos="36193.37,-1373.4019" />
-                                                                                                                                    </StatusEffect>
-                                                                                                                                  </StatusEffectAction>
-                                                                                                                                  <StatusEffectAction targettag="commissar" _npos="34599.254,-1935.7874">
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="35152.46,-1810.0002">
-                                                                                                                                      <Conditional vitality="lt 0" _npos="35694.55,-1729.2114" />
-                                                                                                                                    </StatusEffect>
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="36158.723,-1888.726">
-                                                                                                                                      <Conditional isdead="eq true" _npos="36595.42,-1835.8965" />
-                                                                                                                                      <TriggerEvent identifier="kumokill" _npos="36974.41,-1839.1926" />
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
+                                                                                                                                      <TriggerEvent identifier="kumokill" />
                                                                                                                                     </StatusEffect>
                                                                                                                                   </StatusEffectAction>
-                                                                                                                                  <StatusEffectAction targettag="kumo" _npos="35228.13,-2111.793">
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="36174.188,-2222.5247">
-                                                                                                                                      <Conditional vitality="lt 0" _npos="36675.395,-2194.6567" />
+                                                                                                                                  <StatusEffectAction targettag="commissar">
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional vitality="lt 0" />
+                                                                                                                                      <Conditional isdead="eq false" />
+                                                                                                                                      <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
                                                                                                                                     </StatusEffect>
-                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="36668.93,-2480.4895">
-                                                                                                                                      <Conditional isdead="eq true" _npos="37097.613,-2454.3772" />
-                                                                                                                                      <TriggerEvent identifier="kumodeath" _npos="37574.55,-2433.817" />
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
+                                                                                                                                      <TriggerEvent identifier="kumokill" />
                                                                                                                                     </StatusEffect>
                                                                                                                                   </StatusEffectAction>
-                                                                                                                                  <GoTo name="kumofight" _npos="35833.53,-2366.5823" />
+                                                                                                                                  <StatusEffectAction targettag="kumo">
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional vitality="lt 0" />
+                                                                                                                                      <Conditional isdead="eq false" />
+                                                                                                                                      <Affliction identifier="bloodloss" amount="1000" />
+                                                                                                                                      <Affliction identifier="organdamage" amount="1000" />
+                                                                                                                                    </StatusEffect>
+                                                                                                                                    <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                                                                                                                      <Conditional isdead="eq true" />
+                                                                                                                                      <TriggerEvent identifier="kumodeath" />
+                                                                                                                                    </StatusEffect>
+                                                                                                                                  </StatusEffectAction>
+                                                                                                                                  <GoTo name="kumofight" />
                                                                                                                                 </Failure>
                                                                                                                               </CheckDataAction>
                                                                                                                             </Failure>
