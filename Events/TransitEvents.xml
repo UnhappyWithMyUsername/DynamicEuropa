@@ -63,9 +63,9 @@
     <!--TRIGGERED AT A RUIN TO ALERT YOU-->
     <ScriptedEvent identifier="commsrelay_ruin" commonness="100">
       <TagAction criteria="hull" tag="ruin" submarinetype="ruin" ContinueIfNoTargetsFound="false" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <WaitAction time="30" />
       <TriggerAction target1tag="ruin" target2tag="player" radius="500000" waitforinteraction="false" />
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" Submarinetype="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="commsrelay" SubmarineType="BeaconStation" ContinueIfNoTargetsFound="true"  />
