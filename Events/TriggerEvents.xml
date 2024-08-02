@@ -1181,14 +1181,14 @@
       <Label name="restart" />
       <CheckDataAction identifier="septakeoveractive" value="eq 1">
         <Success>
-          <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="We still have to take over the last station your crew was sent to before we can plan an attack on the next one." />
+          <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.general.isactive" />
         </Success>
         <Failure>
-          <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 0">
+          <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 30">
             <Success>
-              <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 10">
+              <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 40">
                 <Success>
-                  <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 20">
+                  <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 50">
                     <Success>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.separatists.highrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
