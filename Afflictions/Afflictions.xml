@@ -191,16 +191,13 @@
       maxspeedmultiplier="0.5"
       tag="poisoned">
     </Effect>
-    <!-- bad effects from letting affliction ramp up -->
+    <!-- bad effects, cough and transmit the affliction. may cure itself if lucky intervals  -->
     <PeriodicEffect mininterval="5" maxinterval="15" minstrength="1" maxstrength="10">
       <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
-        <Affliction identifier="nausea" amount="15" probability="0.25" />
-        <Affliction identifier="internaldamage" amount="3" probability="0.25" />
-        <Affliction identifier="hallucinating" amount="15" probability="0.25" />
+        <Affliction identifier="nausea" amount="15" probability="0.35" />
+        <Affliction identifier="internaldamage" amount="3" probability="0.35" />
+        <Affliction identifier="hallucinating" amount="25" probability="0.25" />
       </StatusEffect>
-    </PeriodicEffect>
-    <!-- if affliction = 100, transmit disease to players  -->
-    <PeriodicEffect mininterval="5" maxinterval="15" minstrength="2" maxstrength="10">
       <StatusEffect target="Character" SpeedMultiplier="0.1" setvalue="true" duration="1.7" />
       <StatusEffect target="Character" comparison="and">
         <Conditional ishuman="true" />
@@ -219,7 +216,8 @@
       </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Head">
         <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
-          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.25" />
+          <!-- probability for explosions is actually rolled for each limb hit (human has 15)! here roughly 37% assuming it hits all 15 -->
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.03" />
         </Explosion>
       </StatusEffect>
     </PeriodicEffect>
