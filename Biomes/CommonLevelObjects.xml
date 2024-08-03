@@ -50,19 +50,4 @@
     <overridecommonness commonness="0" leveltype="outpostlevel" />
     <overridecommonness commonness="0" leveltype="endzone" />
   </lavavent2de>
-  <Override>
-    <ballastfloraspores identifier="ballastfloraspores" spawnpos="MainPath" alignment="TopLeft, BottomRight" minsize="1" maxsize="2" randomrotation="0,360" commonness="0.5" maxcount="3" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="0" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0">
-      <overridecommonness commonness="0" leveltype="coldcaverns" />
-      <overridecommonness commonness="0" leveltype="outpostlevel" />
-      <overridecommonness commonness="2" leveltype="theaphoticplateau" />
-      <overridecommonness commonness="0" leveltype="endzone" />
-      <Trigger position="0,0" radius="1500" triggeredby="Submarine" infectidentifier="ballastflora" infectionchance="0.05" />
-      <!--InnerSpores, Inner and Outer are separate because X amount of particles in a big radius tend to clamp up in center. Having Inner and Outer spreads them more evenly.-->
-      <ParticleEmitter particle="spore" particlespersecond="10" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="100" distancemax="600" />
-      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="5" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="100" distancemax="600" velocitymin="0" velocitymax="10" />
-      <!--OuterSpores-->
-      <ParticleEmitter particle="spore" particlespersecond="50" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="615" distancemax="1600" />
-      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="30" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="615" distancemax="1600" velocitymin="0" velocitymax="10" />
-    </ballastfloraspores>
-  </Override>
 </levelobjects>
