@@ -145,8 +145,8 @@
         <ReduceAffliction identifier="mysteriousdisease" amount="5" />
       </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Head" >
-        <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
-          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="1" />
+        <Explosion range="150.0" DistanceFalloff="false" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="1" dividebylimbcount="false"/>
         </Explosion>
       </StatusEffect>
     </PeriodicEffect>
@@ -195,7 +195,7 @@
     <PeriodicEffect mininterval="5" maxinterval="15" minstrength="1" maxstrength="10">
       <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
         <Affliction identifier="nausea" amount="15" probability="0.35" />
-        <Affliction identifier="internaldamage" amount="3" probability="0.35" />
+        <Affliction identifier="internaldamage" amount="5" probability="0.35" />
         <Affliction identifier="hallucinating" amount="25" probability="0.25" />
       </StatusEffect>
       <StatusEffect target="Character" SpeedMultiplier="0.1" setvalue="true" duration="1.7" />
@@ -215,9 +215,9 @@
         <ParticleEmitter particle="bloodsplash" copyentityangle="true" anglemin="-10" anglemax="10" particlespersecond="5" velocitymin="50" velocitymax="200" scalemin="0.2" scalemax="0.35" lifetimemultiplier="0.5" distancemin="5" distancemax="10" colormultiplier="60,90,60,255" />
       </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Head">
-        <Explosion range="150.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
+        <Explosion range="150.0" DistanceFalloff="false" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="" decalsize="1.25" showeffects="false">
           <!-- probability for explosions is actually rolled for each limb hit (human has 15)! here roughly 37% assuming it hits all 15 -->
-          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.03" />
+          <Affliction identifier="mysteriousdiseaseplayer" amount="100" probability="0.03" dividebylimbcount="false" />
         </Explosion>
       </StatusEffect>
     </PeriodicEffect>
