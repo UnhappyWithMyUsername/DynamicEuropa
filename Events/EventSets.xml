@@ -74,6 +74,11 @@
       <EventSet identifier="outpostevents.dynamiceuropa.medivac" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,camp,base,military,study,research,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
         <ScriptedEvent identifier="missionevent_escortmedivac" commonness="50" probability="0.25" />
       </EventSet>
+      
+      <!-- For the industrial incident transport, don't trigger in industrial outposts -->
+      <EventSet identifier="outpostevents.dynamiceuropa.industrialincident" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,base,military,study,research,clinic,hospital,hydroponics" allowatstart="true" chooserandom="false" onceperoutpost="true">
+        <ScriptedEvent identifier="missionevent_industrialincident" commonness="50" probability="0.25" />
+      </EventSet>
 
       <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
       <EventSet identifier="huskoutpostevents" leveltype="outpost" locationtype="huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true"> 
