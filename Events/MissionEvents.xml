@@ -603,7 +603,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <!-- <StatusEffectAction targettag="ventthis">
-        <StatusEffect target="This" duration="9999" targetitemcomponent="vent" OxygenFlow="200" setvalue="true" />
+        <StatusEffect target="This" duration="9999" targetitemcomponent="vent" OxygenFlow="50000" setvalue="true" />
       </StatusEffectAction> -->
       <StatusEffectAction targettag="removethis">
         <StatusEffect target="This" >
@@ -634,11 +634,18 @@
     <ScriptedEvent identifier="ventloop" commonness="50">
       <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <Label name="ventloop" />
-      <StatusEffectAction targettag="ventthis">
-        <StatusEffect target="This" OxygenFlow="200" setvalue="true" />
-      </StatusEffectAction>
-      <Waitaction time="1" />
-      <!-- <GoTo name="ventloop" /> -->
+      <CheckDataAction identifier="outpostfixed" condition="neq 1">
+        <Success>
+          <StatusEffectAction targettag="ventthis">
+            <StatusEffect target="This" duration="2" OxygenFlow="50000" setvalue="true" />
+          </StatusEffectAction>
+          <Waitaction time="1" />
+          <GoTo name="ventloop" />
+        </Success>
+        <Failure>
+          <!-- end loop -->
+        </Failure>
+      </CheckDataAction>
     </ScriptedEvent>
 
     <!-- UNUSED. TODO: rework -->
