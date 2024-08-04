@@ -1780,6 +1780,21 @@
     <message header="missionheader0.salvagekillmoloch" text="missionmessage0.salvagekillmoloch"/>
   </MonsterMission>
 
+  <GotoMission
+    name=""
+    identifier="industrialincident"
+    type="GoTo"
+    difficulty="2"
+    commonness="0"
+    reward="2000"
+    BlockLocationTypeChanges="true">
+    <TriggerEvent state="1" delay="5" eventidentifier="industrialincidentevent" campaignonly="true"/>
+    <LocationType identifier="Factory"/>
+    <LocationType identifier="Shipyard"/>
+    <CompleteCheckDataAction identifier="outpostfixed" condition="eq 1"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="230,230,50"/>
+  </GotoMission>
+
   <!-- UNUSED. TODO: rework -->
   <!-- <AbandonedOutpostMission
     identifier="industrialsabotage"
