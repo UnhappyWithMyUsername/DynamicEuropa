@@ -1780,12 +1780,14 @@
     <message header="missionheader0.salvagekillmoloch" text="missionmessage0.salvagekillmoloch"/>
   </MonsterMission>
 
+  <!-- turns out for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
   <GotoMission
     name=""
     identifier="industrialincident"
     type="GoTo"
     difficulty="2"
     commonness="0"
+    maxprogressstate="2" 
     reward="2000"
     BlockLocationTypeChanges="true">
     <TriggerEvent state="1" delay="5" eventidentifier="industrialincidentevent" campaignonly="true"/>

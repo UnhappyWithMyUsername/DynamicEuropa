@@ -576,13 +576,14 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="industrialincidentevent" commonness="50">
+    
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:junctionbox" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
       <TagAction criteria="itemtag:fabricator" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:deconstructor" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:reactor" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:oxygengenerator" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" /> -->
+      <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:breakthis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:damagethis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:repairthis" tag="burnthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="50" />
@@ -610,47 +611,30 @@
           <Remove />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- separate event to keep the vents running for fires -->
-      <TriggerEventAction identifier="ventloop" />      
       <!-- check for all damaged items repaired -->
       <Waitaction time="1" />
       <Label name="checkforrepaired" />
       <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
         <Conditional condition="gte 90" />
-        <Success>
-          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
-          <SetDataAction identifier="outpostfixed" operation="Set" value="1" />
-          <ReputationAction targettype="Location" increase="3" />
-          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
-        </Success>
         <Failure>
-          <Waitaction time="1" />
-          <GoTo name="checkforrepaired" />
-        </Failure>
-      </CountTargetsAction>      
-    </ScriptedEvent>
-
-    <!-- only used to keep the fire going -->
-    <ScriptedEvent identifier="ventloop" commonness="50">
-      <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
-      <Label name="ventloop" />
-      <CheckDataAction identifier="outpostfixed" condition="neq 1">
-        <Success>
+          <!-- keep the vents going for the fire -->
           <StatusEffectAction targettag="ventthis">
             <StatusEffect target="This" duration="2" OxygenFlow="50000" setvalue="true" />
           </StatusEffectAction>
           <Waitaction time="1" />
-          <GoTo name="ventloop" />
-        </Success>
-        <Failure>
-          <!-- end loop -->
+          <GoTo name="checkforrepaired" />
         </Failure>
-      </CheckDataAction>
+        <Success>
+          <SetDataAction identifier="outpostfixed" operation="set" value="1" />
+          <ReputationAction targettype="Location" increase="3" />
+          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+        </Success>
+      </CountTargetsAction>      
     </ScriptedEvent>
 
     <!-- UNUSED. TODO: rework -->
     <ScriptedEvent identifier="finddocuments" commonness="50">
-      <TagAction criteria="player" tag="player" />      
+      <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:mediumsteelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
       <TagAction criteria="itemidentifier:steelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
       
