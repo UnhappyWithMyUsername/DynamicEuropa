@@ -5,6 +5,7 @@
   <!--                               Outpost NPCs                                -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <npcset identifier="DE_outpostnpcs">
+  
     <npc identifier="sergeantcoalition" job="captain" tags="cosergeant" spawnpointtags="admin" healthmultiplier="3" behavior="StayInHull">
       <ItemSet>
         <Item identifier="securityuniform2" equip="true" />
@@ -55,6 +56,7 @@
         <Item identifier="eventtrigger_coalitiontakeover" />
       </ItemSet>
     </npc>
+    
     <npc identifier="sergeantseparatists" job="captain" tags="sepsergeant" spawnpointtags="admin" healthmultiplier="3" behavior="StayInHull">
       <ItemSet>
         <Item identifier="pirateclothes" equip="true" />
@@ -104,6 +106,7 @@
         <Item identifier="eventtrigger_separatisttakeover" />
       </ItemSet>
     </npc>
+    
     <!-- doctor is the same as vanilla, but instead of checking for a specific outpost module and then limiting that NPC to that module only, it checks for a spawnpoint tag instead to allow for custom placement -->
     <npc identifier="de_outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -118,6 +121,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="quartermaster" job="mechanic" spawnpointtags="shop" commonness="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="headset" equip="true">
@@ -140,6 +144,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="bartender" job="assistant" spawnpointtags="bar" commonness="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="researcherclothes" equip="true" />
@@ -158,12 +163,29 @@
         </Item>
       </ItemSet>
     </npc>
+
+    <!-- merchant NPC that only buys items but doesnt sell any, used in outposts without shops? -->
+    <npc identifier="merchantsellonly" job="watchman" spawnpointtags="shop" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="crewchiefclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="revolver">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
   </npcset>
   
   
   <!-- PIRATES -->
   
   <npcset identifier="outpostnpcspirate">
+  
     <npc identifier="outpostmanagerpirate" job="captain" tags="managerpirate,outpostmanagerpirate,piratenpc" faction="bandits" spawnpointtags="pirateadmin" healthmultiplier="0.5" behavior="Passive" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="0.5">
         <Item identifier="idcard" equip="true" tags="id_pirateadmin" />
@@ -214,6 +236,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="hrmanagerpirate" job="watchman" spawnpointtags="hrpirate" tags="hrmanagerpirate,piratenpc" faction="bandits" healthmultiplier="0.3" campaigninteractiontype="Crew" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="banditclothes1" equip="true" />
@@ -246,6 +269,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="repairnpcpirate" job="mechanic" commonness="1" spawnpointtags="pirateengineering" tags="repairnpcpirate,piratenpc" faction="bandits" healthmultiplier="0.4" behavior="Passive">
       <ItemSet commonness="0.7">
         <Item identifier="baseballcap" equip="true" />
@@ -320,6 +344,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="reactoroperatorpirate" job="engineer" commonness="1" spawnpointtags="pirateengineering" tags="reactoroperatorpirate,piratenpc" faction="bandits" healthmultiplier="0.4" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
       <ItemSet commonness="0.7">
         <Item identifier="banditclothes1" equip="true" />
@@ -350,6 +375,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="subupgradenpcpirate" job="mechanic" commonness="1" spawnpointtags="pirateupgrades" tags="subupgradenpcpirate,piratenpc" faction="bandits" healthmultiplier="0.45" campaigninteractiontype="Upgrade" behavior="StayInHull">
       <ItemSet commonness="0.7">
         <Item identifier="toolbelt" equip="true">
@@ -392,6 +418,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <npc identifier="subsalesnpcpirate" job="mechanic" commonness="1" spawnpointtags="piratesubsales" tags="subsalesnpcpirate,piratenpc" faction="bandits" healthmultiplier="0.25" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
       <ItemSet commonness="0.7">
         <Item identifier="toolbelt" equip="true">
@@ -432,6 +459,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
     <!--
     <npc identifier="merchantpirate" job="watchman" spawnpointtags="pirateshop" healthmultiplier="3" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -752,6 +780,7 @@
         </Item>
       </ItemSet>
     </npc>
+    
   </npcset>
   
   <!-- overrides bandits -->

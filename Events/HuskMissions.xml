@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Missions>
   <Override>
-    <OutpostMission
+<!--     <OutpostMission
       identifier="poisonchalice"
       name="missionname.poisonchalice"
       successmessage="missionsuccess.poisonchalicewin"
@@ -20,9 +20,9 @@
       <message header="missionheader0.assassinatehuskresearcher" text="Put Calyx in the Cup"/>
       <Reputation identifier="coalition" amount="15" />    
       <Reputation identifier="huskcult" amount="-10" amountforopposingfaction="10" />
-      <CompleteCheckDataAction identifier="poisonedchalicecomplete" condition="eq 1"/>       
+      <CompleteCheckDataAction identifier="poisonedchalicecomplete" condition="eq 1"/>
       <Metadata identifier="poisonchalicemissionnorepeat" value="1"/>
-    </OutpostMission>
+    </OutpostMission> -->
 
     <!-- Husk specific missions -->
 
@@ -171,8 +171,7 @@
         <Character identifier="prisonerhusk" from="husknpcsmission" spawnpointtags="jail" spawnpointtype="corpse" requirerescue="true"/>
       </Characters>
       <TriggerEvent state="0" eventidentifier="jailbreak" />
-      <Reputation identifier="huskcult" amount="5" />
-      <Reputation identifier="location" amount="-5" />     
+      <Reputation identifier="huskcult" amount="5" />  
       <message header="missionheader0.prisonerrescue" text="missionmessage0.prisonerrescue"/>
     </OutpostMission>
 
@@ -244,7 +243,7 @@
       addedmissiondifficultyperplayer="8">
       <Reputation identifier="huskchurch" amount="-5"/>
       <SubmarineTypes>
-        <Submarine path="%ModDir%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="40" alternatereward="3200"/>
+        <Submarine path="%ModDir:2532991202%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="40" alternatereward="3200"/>
       </SubmarineTypes>
       <Characters>
         <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1">
@@ -312,7 +311,7 @@
       <Reputation identifier="separatists" amount="15" amountforopposingfaction="-5" />
       <Reputation identifier="huskchurch" amount="-15" />
       <SubmarineTypes>
-        <Submarine path="%ModDir%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="10" alternatereward="3200"/>
+        <Submarine path="%ModDir:2532991202%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="10" alternatereward="3200"/>
       </SubmarineTypes>
       <Characters>
         <Character typeidentifier="huskcultcaptain" minamount="1" maxamount="1">
@@ -371,7 +370,7 @@
     </PirateMission> 
 
 
-    <!-- TODO: enable this + create mission event if devs ever allow  specifying custom beacons in missions -->
+    <!-- Unused. TODO: enable this + create mission event if devs ever allow  specifying custom beacons in missions -->
   <!--   <BeaconMission
       identifier="huskbeaconmission"
       textidentifier="beaconmission"
@@ -383,16 +382,37 @@
       sideobjective="false">
       <Reputation identifier="huskchurch" amount="5" />
       <SubmarineTypes>
-        <Submarine path="%ModDir%/Beacons/BeaconHusk.sub" faction="huskcult" />
+        <Submarine path="%ModDir:2532991202%/Beacons/BeaconHusk.sub" faction="huskcult" />
       </SubmarineTypes>
       <TriggerEvent state="1" delay="5" eventidentifier="huskencounter" campaignonly="true"/>
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
       <message text="Husked beacon" />
       <Metadata identifier="huskbeacon_active" value="true"/>
     </BeaconMission> -->
+  
+    <!-- TODO: remind the devs the mainpath is bugged -->
+    <GotoMission    
+      identifier="capturelivecrawler"
+      name="missionname.livecapture"
+      description="missiondescription.livecapture"
+      tags="capturemission"
+      type="GoTo"
+      difficulty="3"
+      commonness="0"
+      reward="3500"
+      successmessage="missionsuccess.livecapture"
+      failuremessage="missionfailure.livecapture">
+      <Reputation identifier="huskcult" amount="5" />
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,768,256,256" color="60,120,90"/>
+      <LocationType from="Anyoutpost" to="Huskchurch"/>
+      <message header="missionheader0.livecapture" text="missionmessage0.livecapture" />
+      <TriggerEvent state="0" delay="0" eventidentifier="capturelivecrawlerevent" />
+      <CompleteCheckDataAction identifier="capturedlivetarget" condition="eq 1"/>      
+      <Metadata identifier="capturelivecrawlernorepeat" value="1"/>
+    </GotoMission>
 
     <!-- CLOWNS -->
-
+    
     <GotoMission
       name=""
       identifier="gotohiddenandclowngerous"

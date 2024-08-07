@@ -11,7 +11,7 @@
       <TriggerAction target1tag="player" target2tag="transmitter" applytotarget1="listener" radius="25000" disableincombat="false" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
       <StatusEffectAction targettag="listener">
         <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.2">
-          <Sound file="%ModDir%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
+          <Sound file="%ModDir:2532991202%/Sounds/Events/PirateBroadcast.ogg" volume="1" loop="true" />
         </StatusEffect>
       </StatusEffectAction>
       <ConversationAction text="eventtext.piratemissionbroadcast.receive" targettag="listener" waitforinteraction="false" dialogtype="small" />
@@ -45,7 +45,7 @@
           <NPCChangeTeamAction npctag="coalitionnpc" teamtag="FriendlyNPC" />
           <StatusEffectAction targettag="listener_player">
             <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.2">
-              <Sound file="%ModDir%/Sounds/Events/CoalitionBroadcast.ogg" volume="1" loop="true" />
+              <Sound file="%ModDir:2532991202%/Sounds/Events/CoalitionBroadcast.ogg" volume="1" loop="true" />
             </StatusEffect>
           </StatusEffectAction>
           <ConversationAction text="eventtext.cocargobroadcast.receive.accept.answer" targettag="listener_player" dialogtype="small">
@@ -282,7 +282,7 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
-    
+          
     <ScriptedEvent identifier="lairbombspawn">
       <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
       <EventObjectiveAction type="add" identifier="eventtext.destroylair.reachheart" />
@@ -418,7 +418,132 @@
     </ScriptedEvent>    
     
     <ScriptedEvent identifier="laircrawlersoutside2">
-      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
+    </ScriptedEvent>
+   
+    <ScriptedEvent identifier="capturelivecrawlerevent">
+      <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+      <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocationType="MainPath" offset="500" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
+      <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
+      <!-- jank way of making a message popup when crawler gets inside -->
+      <MissionStateAction missionidentifier="capturelivecrawler" operation="set" value="1" />
+      <OnRoundEndAction>
+          <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="1">
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="industrialincidentevent" commonness="50">
+    
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:junctionbox" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
+      <TagAction criteria="itemtag:fabricator" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:deconstructor" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:reactor" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="eventtag:breakthis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="eventtag:damagethis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="eventtag:repairthis" tag="burnthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="50" />
+      <TagAction criteria="itemtag:fireextinguisher" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:mechanicalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:electricalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      
+      <!-- keep O2 gen running, destroy JBs/Decon/Fabricator, damage O2 generator and reactor, start fires, remove extinguishers and repair tools -->
+      <StatusEffectAction targettag="breakthis">
+        <StatusEffect target="This" condition="0" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="damagethis">
+        <StatusEffect target="This" condition="20" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="burnthis">
+        <StatusEffect target="This" >
+          <Fire size="50" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- <StatusEffectAction targettag="ventthis">
+        <StatusEffect target="This" duration="9999" targetitemcomponent="vent" OxygenFlow="50000" setvalue="true" />
+      </StatusEffectAction> -->
+      <StatusEffectAction targettag="removethis">
+        <StatusEffect target="This" >
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- check for all damaged items repaired -->
+      <Waitaction time="1" />
+      <Label name="checkforrepaired" />
+      <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
+        <Conditional condition="gte 90" />
+        <Failure>
+          <!-- keep the vents going for the fire -->
+          <StatusEffectAction targettag="ventthis">
+            <StatusEffect target="This" duration="2" OxygenFlow="50000" setvalue="true" />
+          </StatusEffectAction>
+          <Waitaction time="1" />
+          <GoTo name="checkforrepaired" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="outpostfixed" operation="set" value="1" />
+          <ReputationAction targettype="Location" increase="3" />
+          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+        </Success>
+      </CountTargetsAction>      
+    </ScriptedEvent>
+
+    <!-- UNUSED. TODO: rework -->
+    <ScriptedEvent identifier="finddocuments" commonness="50">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:mediumsteelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
+      <TagAction criteria="itemidentifier:steelcabinet" tag="potentialcabinet" SubmarineType="Outpost" ContinueIfNoTargetsFound="true"  />
+      
+      <StatusEffectAction targettag="potentialcabinet">
+        <StatusEffect target="This" spritecolor="255,0,255,255" setvalue="true" />
+      </StatusEffectAction>      
+      <Label name="finddocuments1" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet1" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents1" targetinventory="documentcabinet1" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents1" applytotarget1="documents1finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents1finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments2" />
+      </ConversationAction>      
+      <Label name="finddocuments2" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet2" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents2" targetinventory="documentcabinet2" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents2" applytotarget1="documents2finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents2finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments3" />
+      </ConversationAction>      
+      <Label name="finddocuments3" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet3" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="documents" targettag="documents3" targetinventory="documentcabinet3" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents3" applytotarget1="documents3finder" waitforinteraction="true" />
+      <ConversationAction text="You've found documents, but nothing interesting." targettag="documents3finder" eventsprite="BombScare2">
+        <Option text="Search elsewhere." endconversation="true"/> 
+        <Goto name="finddocuments4" />
+      </ConversationAction>      
+      <Label name="finddocuments4" />
+      <TagAction criteria="eventtag:potentialcabinet" tag="documentcabinet4" SubmarineType="Outpost" chooserandom="true" ContinueIfNoTargetsFound="false"  />
+      <SpawnAction itemidentifier="classifieddocuments" targettag="documents4" targetinventory="documentcabinet4" ignorebyai="true" />
+      <!-- must pick up bomb to proceed -->
+      <TriggerAction target1tag="player" target2tag="documents4" applytotarget1="documents4finder" waitforinteraction="true" />
+      <ConversationAction text="Those are the documents." targettag="documents4finder" eventsprite="BombScare2">
+        <Option text="Back to the ship." endconversation="true"/> 
+        <Goto name="finddocuments4" />       
+      </ConversationAction>
     </ScriptedEvent>
     
   </EventPrefabs>

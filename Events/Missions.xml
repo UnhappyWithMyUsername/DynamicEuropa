@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Missions>
   <!--OVERRIDES-->
+  <!--OVERRIDES-->
+  <!--OVERRIDES-->
   <Override>
     <OutpostDestroyMission identifier="huskcultspecialassassinate" type="OutpostDestroy" achievementidentifier="huskcultspecialassassinate" reward="2000" difficulty="4" commonness="0" allowretry="true" sonarlabel="target" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
       <Reputation identifier="huskcult" amount="10" />
@@ -154,7 +156,7 @@
       <Reputation identifier="bandits" amount="-2" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
       <LocationType identifier="Abandoned" />
-      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="1" />
       <Characters>
         <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
         <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
@@ -186,7 +188,7 @@
       <Reputation identifier="bandits" amount="-2" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
       <LocationType identifier="Abandoned" />
-      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="1" />
       <Characters>
         <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
         <Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
@@ -219,7 +221,7 @@
       <Reputation identifier="bandits" amount="-2" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
       <LocationType identifier="Abandoned" />
-      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+      <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="1" />
       <Characters>
         <Character identifier="bandit_elite" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
         <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" moduleflags="researchmodule" multiplayeronly="true"/>
@@ -238,6 +240,8 @@
     </AbandonedOutpostMission>
 
   </Override>
+  <!--END OF OVERRIDES-->
+  <!--END OF OVERRIDES-->
   <!--END OF OVERRIDES-->
   
     <!-- Lair -->
@@ -266,7 +270,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </CrawlerLairMission>
   
-  <CrawlerLairMission identifier="crawlerlair2" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="30" maxleveldifficulty="50">
+  <CrawlerLairMission identifier="crawlerlair2" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="30" maxleveldifficulty="50">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -295,7 +299,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </CrawlerLairMission>
   
-  <CrawlerLairMission identifier="crawlerlair3" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" >
+  <CrawlerLairMission identifier="crawlerlair3" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="3000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" >
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -303,7 +307,7 @@
       <Character identifier="DE-Laircrawler_hatchling" min="3" max="5" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Laircrawler" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Laircrawler_large" min="4" max="6" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Lairbroodmother" min="0" max="1" spawnpointtags="boss" />
+      <Character identifier="DE-Lairbroodmother" min="1" max="1" spawnpointtags="boss" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -335,7 +339,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </CrawlerLairMission>
   
-  <MudraptorLairMission identifier="mudraptorlair1" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="15" maxleveldifficulty="40">
+  <MudraptorLairMission identifier="mudraptorlair1" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="15" maxleveldifficulty="40">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -360,7 +364,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </MudraptorLairMission>
 
-  <MudraptorLairMission identifier="mudraptorlair2" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="40" maxleveldifficulty="60">
+  <MudraptorLairMission identifier="mudraptorlair2" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="40" maxleveldifficulty="60">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -427,7 +431,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </MudraptorLairMission>
   
-  <ThresherLairMission identifier="thresherlair1" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="45" maxleveldifficulty="60">
+  <ThresherLairMission identifier="thresherlair1" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="45" maxleveldifficulty="60">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="Lair" />
     <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
@@ -530,7 +534,7 @@
     <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
   </ThresherLairMission>
 
-  <HuskCrawlerLairMission identifier="huskcrawlerlair1" textidentifier="huskcrawlerlair" tags="husklair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="50">
+  <HuskCrawlerLairMission identifier="huskcrawlerlair1" textidentifier="huskcrawlerlair" tags="husklair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="50">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
     <LocationType identifier="HuskgroundsDE" />
     <LocationTypeChange from="HuskgroundsDE" to="MilitaryForces" requiredduration="1" cooldownafterchange="1" />
@@ -737,7 +741,7 @@
     <message header="missionheader0.spineling_electric1" text="missionmessage0.spineling_electric1" />
   </MonsterMission>
   
-  <MonsterMission identifier="killelectricspineling2" tags="killmonster_thegreatsea" type="Monster" difficulty="4" commonness="33" reward="5000" maxsonarmarkerdistance="10000" sonarlabel="character.spineling" monsterfile="spineling_electric">
+  <MonsterMission identifier="killelectricspineling2" tags="killmonster_thegreatsea" type="Monster" difficulty="4" commonness="33" reward="4500" maxsonarmarkerdistance="10000" sonarlabel="character.spineling" monsterfile="spineling_electric">
     <monster character="spineling" min="4" max="5" />
     <monster character="spineling_electric" min="2" max="2" />
     <Reputation identifier="location" amount="2" />
@@ -750,14 +754,56 @@
     <Reputation identifier="separatists" amount="10" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233" />
     <LocationType identifier="City" />
-    <LocationType identifier="Outpost" />
+    <LocationType identifier="Colony" />
     <LocationType identifier="Military" />
     <LocationType identifier="Base" />
-    <message header="missionsuccess.stealingintel" text="missionmessage0.stealingintel" />
+    
+    <!-- Unused. TODO: reenable multiple documents if ever fixed -->
+<!--     <target
+      spawntype="Outpost"
+      itemidentifier="documents"
+      containertag="locker"
+      sonarlabel="documents1"
+      requireretrieval="PickedUp"
+      allowcontinuebeforeretrieved="false"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target> 
+    <message header="" text="wrong documents"/>
+    
+    <target
+      spawntype="Outpost"
+      itemidentifier="documents"
+      containertag="locker"
+      sonarlabel="documents2"
+      requireretrieval="PickedUp"
+      allowcontinuebeforeretrieved="false"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target> 
+    <message header="" text="wrong documents"/>
+    
+    <target
+      spawntype="Outpost"
+      itemidentifier="classifieddocuments"
+      containertag="locker"
+      sonarlabel="documents3"
+      requireretrieval="RetrievedToSub"
+      allowcontinuebeforeretrieved="true">
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target>   -->
+    
+    <message header="missionsuccess.stealingintel" text="missionmessage0.stealingintel" />    
   </SalvageMission>
   
   <!-- PIRATE MISSIONS -->  
-  <!-- TODO: change the wall health on submarines if devs ever add hull upgrades for the poor pirates -->
+  <!-- TODO: change the wall health on submarines back to normal if devs ever add hull upgrades for the poor pirates -->
   
   <PirateMission     
     type="Pirate"
@@ -774,9 +820,9 @@
     <Reputation identifier="separatists" amount="7" />
 		<Reputation identifier="bandits" amount="-5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/GunGatorPirate.sub" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
@@ -808,22 +854,22 @@
         <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
       </CharacterType>
     </CharacterTypes>
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
   </PirateMission>
   
-  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="8000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="7" />
     <Reputation identifier="separatists" amount="7" />
 		<Reputation identifier="bandits" amount="-5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="3000" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="3500" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="3500" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="4500" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="5000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="3000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="3500" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="3500" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="4500" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="5000" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
@@ -856,19 +902,19 @@
       </CharacterType>
     </CharacterTypes>
     <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
   </PirateMission>
   
-  <PirateMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="7000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+  <PirateMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="3" />
     <Reputation identifier="separatists" amount="3" />
-    <Reputation identifier="huskcult" amount="10" />
-    <Reputation identifier="clowns" amount="-10" />
+    <Reputation identifier="huskcult" amount="3" />
+    <Reputation identifier="clowns" amount="-5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="5000" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="6800" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="5000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="5000" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="partypiratecaptain" minamount="1" maxamount="1" />
@@ -897,18 +943,18 @@
       </CharacterType>
     </CharacterTypes>
     <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,768,256,256" color="255,255,255" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,768,256,256" color="255,255,255" />
     <message header="missionheader0.pirate_party" text="missionmessage0.pirate_party" />
     <message header="missionheader1.pirate_party" text="missionmessage1.pirate_party" />
   </PirateMission>
   
   <!--STRANGE VESSEL MISSIONS-->
-  <PirateMission type="Pirate" identifier="pirate_piezo" tags="piratemission,strangepirate" difficulty="4" commonness="20" reward="7000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+  <PirateMission type="Pirate" identifier="pirate_piezo" tags="piratemission,strangepirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="10" />
     <Reputation identifier="separatists" amount="10" />
 		<Reputation identifier="bandits" amount="-5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42PiezoPirate.sub" preferreddifficulty="50" alternatereward="10000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42PiezoPirate.sub" preferreddifficulty="50" alternatereward="5000" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
@@ -941,13 +987,13 @@
       </CharacterType>
     </CharacterTypes>
     <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="512,768,256,256" color="255,255,255" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="512,768,256,256" color="255,255,255" />
     <message header="missionheader0.pirate_piezo" text="missionmessage0.pirate_piezo" />
     <message header="missionheader1.pirate_piezo" text="missionmessage1.pirate_piezo" />
   </PirateMission>
   
   <!-- test for militaryforces, unused -->
-  <PirateMission
+  <!-- <PirateMission
     type="Pirate"
     identifier="militarypatrol2"
     tags="militarypatrol"
@@ -975,7 +1021,7 @@
     <message header="missionheader0.pirate1" text="missionmessage0.pirate1"/>
     <message header="missionheader1.pirate1" text="missionmessage1.pirate1"/>
     <LocationType from="AnyOutpost" to="MilitaryForces" />
-  </PirateMission>
+  </PirateMission> -->
   
   
   <!-- COALITION CIVILIANS MISSIONS WIP -->
@@ -985,11 +1031,11 @@
     <Reputation identifier="coalition" amount="-5" />
 		<Reputation identifier="bandits" amount="5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
@@ -1024,7 +1070,7 @@
 		<Character identifier="coalition_civilian_mech" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
        </CharacterType>
 	</CharacterTypes>
-	<Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+	<Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
 	<message header="missionheader0.coalitionciv_civiliantransport1" text="missionmessage0.coalitionciv_civiliantransport1" />
 	<message header="missionheader1.coalitionciv_civiliantransport1" text="missionmessage1.coalitionciv_civiliantransport1" />
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
@@ -1034,11 +1080,11 @@
     <Reputation identifier="coalition" amount="-10" />
 		<Reputation identifier="bandits" amount="5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="0" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
@@ -1073,7 +1119,7 @@
 		<Character identifier="coalition_civilian_mech" from="combatmissioncoalitionnpcs" preferreddifficulty="60" />
       </CharacterType>
     </CharacterTypes>
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
@@ -1084,8 +1130,8 @@
     <Reputation identifier="coalition" amount="-15" />
 		<Reputation identifier="bandits" amount="5" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Coalition/U-42Coalition.sub" preferreddifficulty="20" alternatereward="0" />
-      <Submarine path="%ModDir%/EnemySubmarines/Coalition/Starwalker [COALITION].sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/U-42Coalition.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/Starwalker [COALITION].sub" preferreddifficulty="20" alternatereward="0" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
@@ -1114,13 +1160,13 @@
       </CharacterType>
     </CharacterTypes>
     <TriggerEvent state="0" delay="0" eventidentifier="cocargobroadcast" campaignonly="true" />
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
   </PirateMission>
   
   <PirateMission type="Pirate" identifier="coalition_cargotrap" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="10" reward="0" addedmissiondifficultyperplayer="8">
     <Reputation identifier="coalition" amount="-15" />
     <SubmarineTypes>
-      <Submarine path="%ModDir%/EnemySubmarines/Coalition/Warden Coalition.sub" preferreddifficulty="20" alternatereward="0" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/Warden Coalition.sub" preferreddifficulty="20" alternatereward="0" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1" />
@@ -1148,7 +1194,7 @@
         <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
       </CharacterType>
     </CharacterTypes>
-    <Icon texture="%ModDir%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
+    <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
   </PirateMission>
   
   <OutpostDestroyMission name="Pirate Haven" identifier="destroypirateoutpost" tags="pirateoutpostmission" type="OutpostDestroy" requireCorrectLocationType="true" reward="0" difficulty="4" commonness="100" allowretry="true">
@@ -1220,7 +1266,7 @@
 		<Reputation identifier="coalition" amount="5" />
 		<Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
 		<LocationType identifier="Abandoned" />
-		<LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+		<LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="1" />
 		<Characters>
 			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="crewmodule"/>
 			<Character identifier="bandit" from="abandonedoutpostnpcs" moduleflags="researchmodule"/>
@@ -1239,7 +1285,7 @@
 	-->
   <!--OUTPOST TAKEOVER-->
 
-  <OutpostDestroyMission name="Coalition Station-Takeover" identifier="cotakeover_separatistoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
+  <OutpostDestroyMission name="Coalition Station-Takeover" identifier="cotakeover_separatistoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5000" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
     <Reputation identifier="separatists" amount="-200" />
     <Reputation identifier="coalition" amount="10" />
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
@@ -1272,7 +1318,7 @@
     <message header="missionheader0.coalitiontakeover" text="missionmessage0.coalitiontakeover" />
   </OutpostDestroyMission>
 
-  <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5500" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
+  <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5000" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
     <Reputation identifier="coalition" amount="-200" />
     <Reputation identifier="separatists" amount="10" />
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
@@ -1664,24 +1710,108 @@
     <Metadata identifier="vipnappingnorepeat" value="1"/>
   </OutpostMission>
   
-<!--   <GotoMission
+  <EscortMission
+    identifier="escortmedivac"
+    tags="escortmedivac,escort"
+    type="Escort"
+    difficulty="2"
+    commonness="100"
+    reward="2000"
+    achievementidentifier="escortmission"
+    baseescortedcharacters="1">
+    <Characters>
+      <Character from="customnpcs" identifier="sickpatient" >
+        <StatusEffect target="Character" delay="1" disabledeltatime="true">
+          <Affliction identifier="mysteriousdisease" strength="70" />
+        </StatusEffect>
+      </Character>
+    </Characters>
+    <Reputation identifier="location" amount="3" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,512,256,256" color="180,100,120" />
+    <LocationType from="AnyOutpost" to="Clinic" />
+    <LocationType from="AnyOutpost" to="Hospital" />
+    <LocationType from="AnyOutpost" to="City" />
+    <LocationType from="AnyOutpost" to="HuskChurch" />
+    <message header="missionheader0.escortmedivac" text="missionmessage0.escortmedivac"/>
+  </EscortMission>
+  
+  <SalvageMission
+    identifier="retrieveindustrialwaste"
+    name="missionname.retrieveindustrialwaste"
+    description="missiondescription.retrieveindustrialwaste"
+    successmessage="missionsuccess.retrieveindustrialwaste"
+    failuremessage="missionfailure.retrieveindustrialwaste"
+    tags="salvageindustrial"
+    type="Salvage"
+    difficulty="3"
+    commonness="100"
+    reward="2000"
+    requireddeliveryamount="0.80"
+    PartiallyRetrievedMessage="missionmessage.retrieveindustrialwaste.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.retrieveindustrialwaste.allretrieved">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <target
+      spawntype="mainpath"
+      itemidentifier="radioactivewaste"
+      sonarlabel="missionsonarlabel.retrieveindustrialwaste"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="RetrievedToSub"
+      hidelabelafterretrieved="false"
+      minamount="5" maxamount="7">
+    </target>
+    <LocationType from="AnyOutpost" to="AnyOutpost" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
+  </SalvageMission>
+
+  <MonsterMission
+    identifier="salvagekillmoloch"
+    textidentifier="salvagekillmoloch"
+    tags="salvageartifact"
+    type="Monster"
+    difficulty="3"
+    commonness="20"
+    reward="3500"
+    sonarlabel="missionsonarlabel.salvagekillmoloch"
+    maxsonarmarkerdistance="10000"
+    monsterfile="Molochblack">
+    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,0,256,256" color="49,93,233"/>
+    <message header="missionheader0.salvagekillmoloch" text="missionmessage0.salvagekillmoloch"/>
+  </MonsterMission>
+
+  <!-- turns out for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
+  <GotoMission
     name=""
-    identifier="smuggling1"
+    identifier="industrialincident"
     type="GoTo"
     difficulty="2"
     commonness="0"
-    reward="500" 
+    maxprogressstate="2" 
+    reward="2000"
     BlockLocationTypeChanges="true">
-    <Reputation identifier="bandits" amount="5" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,256,256,256" color="243,146,55"/>
-    <TriggerEvent state="1" delay="5" eventidentifier="smugglingdelivery" campaignonly="true"/>
-    <LocationType identifier="City"/>
-    <LocationType identifier="Outpost"/>
-    <LocationType identifier="Military"/>
-    <LocationType identifier="Research"/>
-    <LocationType identifier="Mine"/>
-    <CompleteCheckDataAction identifier="smugglingcomplete" condition="eq 6"/>
-    <message header="Smuggling stolen items" text="You've reached your destination. Find your contact and hand over the items" />
-  </GotoMission> -->
-  
+    <TriggerEvent state="1" delay="5" eventidentifier="industrialincidentevent" campaignonly="true"/>
+    <LocationType identifier="Factory"/>
+    <LocationType identifier="Shipyard"/>
+    <CompleteCheckDataAction identifier="outpostfixed" condition="eq 1"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="230,230,50"/>
+  </GotoMission>
+
+  <!-- UNUSED. TODO: rework -->
+  <!-- <AbandonedOutpostMission
+    identifier="industrialsabotage"
+    tags="industrialsabotage"
+    type="OutpostDestroy"
+    reward="1000"
+    difficulty="2"
+    commonness="100"
+    allowretry="true"
+    targetitem="fabricator"
+    maxleveldifficulty="65">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="214,50,48"/>
+    <LocationType identifier="Factory" />
+    <TriggerEvent state="0" delay="5" eventidentifier="industrialsabotageevent" campaignonly="true"/>
+    <message header="missionheader0.sabotage" text="missionmessage0.sabotage"/>
+  </AbandonedOutpostMission> -->
+
 </Missions>

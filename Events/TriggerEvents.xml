@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Randomevents>
 
-  <!-- TODO: clean up this file and move some events to other files -->
+  <!-- TODO: move all the mission-triggered events in this file ? (and move missionevent_mission stuff in missionevents.xml)-->
 
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
@@ -1070,11 +1070,11 @@
           <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.general.isactive" />
         </Success>
         <Failure>
-          <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 30">
+          <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 40">
             <Success>
-              <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 40">
+              <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 50">
                 <Success>
-                  <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 50">
+                  <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 60">
                     <Success>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.coalition.highrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
@@ -1090,7 +1090,7 @@
                           </ConversationAction>
                         </Option>
                         <Option text="eventtext.gettakeovermission.option.decline">
-                          <ConversationAction targettag="player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" waitforinteraction="false" />
                           <GoTo name="restart" />
                         </Option>
                       </ConversationAction>
@@ -1181,14 +1181,14 @@
       <Label name="restart" />
       <CheckDataAction identifier="septakeoveractive" value="eq 1">
         <Success>
-          <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="We still have to take over the last station your crew was sent to before we can plan an attack on the next one." />
+          <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.general.isactive" />
         </Success>
         <Failure>
-          <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 0">
+          <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 40">
             <Success>
-              <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 10">
+              <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 50">
                 <Success>
-                  <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 20">
+                  <CheckReputationAction TargetType="Faction" identifier="separatists" condition="gte 60">
                     <Success>
                       <ConversationAction speakertag="sergeant" invokertag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.separatists.highrep.askingforhelp">
                         <Option text="eventtext.gettakeovermission.option.accept">
@@ -1306,7 +1306,7 @@
             <Option text="eventtext.option.investigate">
               <StatusEffectAction targettag="crw_trig_player">
                 <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-                  <Sound file="%ModDir%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
+                  <Sound file="%ModDir:2532991202%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
                 </StatusEffect>
               </StatusEffectAction>
               <ConversationAction text="eventtext.commsrelay.wreck.answer" dialogtype="Small" targettag="crw_trig_player" />
@@ -1436,7 +1436,7 @@
                                 <Option text="“I’ll take the revolvers.”">
                                   <SpawnAction lootingisstealing="false" itemidentifier="kumoduffelbag1" spawnlocation="Outpost" spawnpointtag="admin" ignorebyai="true" _npos="11020.067,-8108.5303" />
                                   <Label name="maincourse" _npos="11590.944,-8062.6562" />
-                                  <ConversationAction text="“Good choice. Onwards to the main course… We have an assault rifle made by the Separatists with each magazine containing 20 rounds, good for raiding outposts as long as you can handle the weapon. If you want something robust, an auto shotgun pack with explosive slugs might be up to your taste. Or maybe you want something impactful? Like a grenade launcher with 40mm grenades?”" targettag="triggereventplayer" _npos="12575.319,-7468.994">
+                                  <ConversationAction text="“Good choice. Onwards to the main course… We have an assault rifle made by the Separatists with each magazine containing 30 rounds, good for raiding outposts as long as you can handle the weapon. If you want something robust, an auto shotgun pack with explosive slugs might be up to your taste. Or maybe you want something impactful? Like a grenade launcher with 40mm grenades?”" targettag="triggereventplayer" _npos="12575.319,-7468.994">
                                     <Option text="“I’ll take the assault rifle.”">
                                       <Label name="playerassaultrifle" _npos="13353.39,-8559.463" />
                                       <SpawnAction lootingisstealing="false" itemidentifier="kumoduffelbag5" spawnlocation="Outpost" spawnpointtag="admin" ignorebyai="true" _npos="13832.502,-8635.993" />

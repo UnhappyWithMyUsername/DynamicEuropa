@@ -132,6 +132,11 @@
         <Conditional condition="lte 3.0" />
         <Sound file="Content/Items/WarningBeepSlow.ogg" range="150" loop="true" frequencymultiplier="0.6"/>
       </StatusEffect>
+      <StatusEffect type="OnWearing" target="Character" >   
+        <RequiredItem items="antibiotics" type="Contained" requireempty="true" />
+        <Conditional huskinfection="gt 75" />
+        <Sound file="Content/Items/WarningBeepSlow.ogg" range="150" loop="true" frequencymultiplier="0.6"/>
+      </StatusEffect>
     </ItemContainer>
   </Item>
   
