@@ -3,59 +3,23 @@
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
     <!-- OUTPOST TAKEOVER -->
-    <ScriptedEvent identifier="cooutposttakeoverevent">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
-      <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
-      <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <!-- tag and remove outpost manager (mission giver NPC) since they will not move at all and if the player positions themselves inside of them, the player becomes invincible to enemy AI -->
-      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <!-- tag and remove watchman (unlock path NPC) since the doors to control room will open automatically -->
-      <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <WaitAction time="1" />
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction>
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <ReputationAction targettype="Location" increase="-200" />
-      <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
-      <Label name="checkforcomplete" />
-      <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
-        <!-- complete mission if >75% enemies dead  -->
-        <Conditional isdead="True"/>
-        <Success>
-          <MissionStateAction missionidentifier="cotakeover_separatistoutpost" operation="Set" value="1" />
-          <ModifyLocationAction faction="Coalition" />
-          <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" />
-          <NPCChangeTeamAction npctag="defenders" teamtag="FriendlyNPC" />
-          <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
-          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
-          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
-        </Success>
-        <Failure>
-          <Waitaction time="1" />
-          <GoTo name="checkforcomplete" />
-        </Failure>
-      </CountTargetsAction>
-    </ScriptedEvent>
-    
-    <!-- OUTPOST TAKEOVER MISSION -->
+    <!-- TODO: Change takeover to "liberate outpost" when tagging by team becomes possible and replace the removenpc SE with the following one: -->
+    <!--
+    <StatusEffectAction targettag="removenpc" >
+      <StatusEffect target="this" >
+        <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
+      </StatusEffect>
+    </StatusEffectAction>
+    -->
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="cooutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -68,18 +32,13 @@
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <ReputationAction targettype="Location" increase="-200" />
+      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="separatistssoldier" CompareToTarget="separatistssoldier" MinPercentageRelativeToTarget="75">
@@ -105,6 +64,11 @@
     <ScriptedEvent identifier="sepoutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -117,17 +81,13 @@
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <WaitAction time="1" />
       <StatusEffectAction targettag="removenpc">
         <StatusEffect type="Always" target="Character" interval="1" stackable="false">
           <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
-      <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
       <ConversationAction text="eventtext.takeover.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="coalitionsoldier" CompareToTarget="coalitionsoldier" MinPercentageRelativeToTarget="75">
@@ -154,10 +114,275 @@
       <TagAction criteria="jobidentifier:cosoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
       <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
-    </ScriptedEvent>   
+    </ScriptedEvent>
+
+    <!-- ////////// MANUALLY TRIGGERED TAKEOVERS \\\\\\\\\\ -->
+    <!-- Coalition Attackers-->
+    <ScriptedEvent identifier="manualcooutposttakeoverevent">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <!-- <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" /> -->
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" /> -->
+      <!-- VANILLA NPCs -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanager" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmine" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:armsdealer" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchman" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commoner" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:researcher" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:miner" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:clown" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantclown" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultist" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultecclesiast" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthusk" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <!-- DE specific NPCs -->
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:de_outpostdoctor" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:quartermaster" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:bartender" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="sepnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <WaitAction time="1" />
+      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
+      <ConversationAction text="eventtext.takeover.manual.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+      <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
+      <Label name="checkforcomplete" />
+      <CountTargetsAction targettag="sepnpc" CompareToTarget="sepnpc" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
+        <Success>
+          <ModifyLocationAction faction="Coalition" />
+          <!-- Disabled to not allow getting a new official takeover mission when completing a manually triggered one -->
+          <!-- <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" /> -->
+          <NPCChangeTeamAction npctag="sepnpc" teamtag="FriendlyNPC" />
+          <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
+          <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="sepnpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
+          <CheckReputationAction targettype="faction" identifier="coalition" condition="lte -80">
+            <Success>
+              <ReputationAction targettype="Faction" identifier="coalition" increase="50" />
+            </Success>
+            <Failure>
+              <ReputationAction targettype="Faction" identifier="coalition" increase="10" />
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkforcomplete" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+
+    <!-- Separatist Attackers-->
+    <ScriptedEvent identifier="manualsepoutposttakeoverevent">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <!-- <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" /> -->
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" /> -->
+      <!-- VANILLA NPCs -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanager" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmine" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:armsdealer" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchman" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commoner" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:researcher" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:miner" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:clown" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantclown" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultist" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultecclesiast" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthusk" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <!-- DE specific NPCs -->
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:de_outpostdoctor" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:quartermaster" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:bartender" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="conpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <WaitAction time="1" />
+      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
+      <ConversationAction text="eventtext.takeover.manual.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
+      <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
+      <Label name="checkforcomplete" />
+      <CountTargetsAction targettag="conpc" CompareToTarget="conpc" MinPercentageRelativeToTarget="75">
+        <!-- complete mission if >75% enemies dead  -->
+        <Conditional isdead="True"/>
+        <Success>
+          <ModifyLocationAction faction="Separatists" />
+          <!-- Disabled to not allow getting a new official takeover mission when completing a manually triggered one -->
+          <!-- <SetDataAction identifier="septakeoveractive" operation="Set" value="0" /> -->
+          <NPCChangeTeamAction npctag="conpc" teamtag="FriendlyNPC" />
+          <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
+          <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
+          <CombatAction combatmode="Arrest" npctag="attackers" enemytag="conpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
+          <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -80">
+            <Success>
+              <ReputationAction targettype="Faction" identifier="separatists" increase="50" />
+            </Success>
+            <Failure>
+              <ReputationAction targettype="Faction" identifier="separatists" increase="10" />
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkforcomplete" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+
+    <!-- ////////// OUTPOST DESTRUCTION \\\\\\\\\\ -->
+    <!-- Turns a station into an abandoned station -->
+    <ScriptedEvent identifier="outpostdestruction">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:reactor" tag="targetreactor" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <!-- VANILLA NPCs -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanager" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmine" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:armsdealer" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchman" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commoner" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:researcher" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:miner" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:clown" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantclown" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultecclesiast" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthusk" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <!-- DE specific NPCs -->
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:de_outpostdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:quartermaster" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:bartender" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:gateinformant" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerhusk" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultistsecurity" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthuskengineering" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outposthuskdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hireablehuskscientist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hireablehusktemplar" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <!-- <TagAction criteria="humanprefabidentifier:___" tag="targetnpc" ContinueIfNoTargetsFound="true" /> -->
+      <WaitAction time="1" />
+      <Label name="checkforcomplete" />
+      <CountTargetsAction targettag="targetreactor" CompareToTarget="targetreactor" MinPercentageRelativeToTarget="1">
+        <!-- complete mission if at least 1 reactor is destroyed -->
+        <Conditional condition="eq 0"/>
+        <Success>
+          <ModifyLocationAction faction="bandits" type="abandoned" />
+          <ConversationAction text="eventtext.outpostdestruction.success" dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
+          <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+            <Success>
+              <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+            </Success>
+            <Failure>
+              <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+        <Failure>
+          <CountTargetsAction targettag="targetnpc" CompareToTarget="targetnpc" MinPercentageRelativeToTarget="90">
+            <!-- complete mission if >90% enemies dead  -->
+            <Conditional isdead="True"/>
+            <Success>
+              <ModifyLocationAction faction="bandits" type="abandoned" />
+              <ConversationAction text="eventtext.outpostdestruction.success" dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
+              <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+                <Success>
+                  <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                </Success>
+                <Failure>
+                  <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                </Failure>
+              </CheckReputationAction>
+            </Success>
+            <Failure>
+              <Waitaction time="1" />
+              <GoTo name="checkforcomplete" />
+            </Failure>
+          </CountTargetsAction>
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
     
     <!-- TODO: DELETE THIS for takeover testing purposes no touchey until it works -->
-    <ScriptedEvent identifier="takeovertestcoal">
+    <!-- <ScriptedEvent identifier="takeovertestcoal">
       <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />  
         <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
         <WaitAction time="1" />
@@ -173,6 +398,6 @@
         <WaitAction time="2" />
         <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="false" />
         <NPCChangeTeamAction npctag="tempcrew" teamtag="Team1" addtocrew="true" />
-    </ScriptedEvent> 
+    </ScriptedEvent> --> 
   </EventPrefabs>
 </Randomevents>
