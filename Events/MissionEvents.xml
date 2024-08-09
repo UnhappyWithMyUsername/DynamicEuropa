@@ -576,22 +576,22 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="industrialincidentevent" commonness="50">
-    
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:junctionbox" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
       <TagAction criteria="itemtag:fabricator" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:deconstructor" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:reactor" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:oxygengenerator" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:wire" tag="lockthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:breakthis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:damagethis" tag="repairthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="eventtag:repairthis" tag="burnthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="50" />
       <TagAction criteria="itemtag:fireextinguisher" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:mechanicalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:electricalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
-      
-      <!-- keep O2 gen running, destroy JBs/Decon/Fabricator, damage O2 generator and reactor, start fires, remove extinguishers and repair tools -->
+      <!-- keep O2 gen running, destroy JBs/Decon/Fabricator, damage O2 generator and reactor, start fires, lock wires, remove extinguishers and repair tools -->
       <StatusEffectAction targettag="breakthis">
         <StatusEffect target="This" condition="0" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
       </StatusEffectAction>
@@ -603,9 +603,9 @@
           <Fire size="50" />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- <StatusEffectAction targettag="ventthis">
-        <StatusEffect target="This" duration="9999" targetitemcomponent="vent" OxygenFlow="50000" setvalue="true" />
-      </StatusEffectAction> -->
+      <StatusEffectAction targettag="lockthis">
+        <StatusEffect target="This" NonInteractable="true" setvalue="true" />
+      </StatusEffectAction>
       <StatusEffectAction targettag="removethis">
         <StatusEffect target="This" >
           <Remove />
@@ -619,8 +619,10 @@
         <Failure>
           <!-- keep the vents going for the fire -->
           <StatusEffectAction targettag="ventthis">
-            <StatusEffect target="This" duration="2" OxygenFlow="50000" setvalue="true" />
+            <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
+            <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
           </StatusEffectAction>
+          
           <Waitaction time="1" />
           <GoTo name="checkforrepaired" />
         </Failure>
@@ -629,9 +631,9 @@
           <ReputationAction targettype="Location" increase="3" />
           <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
         </Success>
-      </CountTargetsAction>      
+      </CountTargetsAction>
     </ScriptedEvent>
-
+    
     <!-- UNUSED. TODO: rework -->
     <ScriptedEvent identifier="finddocuments" commonness="50">
       <TagAction criteria="player" tag="player" />
