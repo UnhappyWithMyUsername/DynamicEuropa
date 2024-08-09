@@ -59,7 +59,7 @@
         </Failure>
       </CountTargetsAction>
     </ScriptedEvent>
-    
+
     <!-- Separatist Attackers-->
     <ScriptedEvent identifier="sepoutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -108,7 +108,7 @@
         </Failure>
       </CountTargetsAction>
     </ScriptedEvent>
-        
+
     <!-- Remove Temporary Crewmembers -->
     <ScriptedEvent identifier="removetempcrew">
       <TagAction criteria="jobidentifier:cosoldier" tag="tempcrew" ContinueIfNoTargetsFound="true" />
@@ -117,6 +117,71 @@
     </ScriptedEvent>
 
     <!-- ////////// MANUALLY TRIGGERED TAKEOVERS \\\\\\\\\\ -->
+    <ScriptedEvent identifier="startmanualtakeover">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="coalitionstation" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="separatiststation" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="banditstation" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerhusk" tag="churchstation" ContinueIfNoTargetsFound="true" />
+      <CheckConditionalAction targettag="coalitionstation">
+        <Conditional isDead="true" />
+        <Success>
+          <CheckConditionalAction targettag="separatiststation">
+            <Conditional isDead="true" />
+            <Success>
+              <CheckConditionalAction targettag="banditstation">
+                <Conditional isDead="true" />
+                <Success>
+                  <CheckConditionalAction targettag="churchstation">
+                    <Conditional isDead="true" />
+                    <Success>
+                      <ConversationAction text="According to the tracker you're not even at a station! Don't waste our time!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                    </Success>
+                    <Failure>
+                      <ConversationAction text="You're at a station of the church of husk. We have no intend on interferring with them. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                    </Failure>
+                  </CheckConditionalAction>
+                </Success>
+                <Failure>
+                  <ConversationAction text="You're at a pirate station. We are not interested in their station. Do whatever, but we will not claim the station!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                </Failure>
+              </CheckConditionalAction>
+            </Success>
+            <Failure>
+              <ConversationAction text="You're calling the coalition over the military frequency..." dialogtype="Small" targettag="player" eventsprite="coalition">
+                <Option text="We'd like to take over a station for you..." endconversation="true">
+                  <!-- <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -60">
+                    <Success> -->
+                      <TriggerEventAction identifier="manualcooutposttakeoverevent" />
+                    <!-- </Success>
+                    <Failure>
+                      <ConversationAction text="We're currently lacking the capacity to manage that station. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                    </Failure>
+                  </CheckReputationAction> -->
+                </Option>
+                <Option text="Nevermind" endconversation="true" />
+              </ConversationAction>
+            </Failure>
+          </CheckConditionalAction>
+        </Success>
+        <Failure>
+          <ConversationAction text="You're calling the separatists over the military frequency..." dialogtype="Small" targettag="player" eventsprite="separatists">
+            <Option text="We'd like to take over a station for you..." endconversation="true">
+              <!-- <CheckReputationAction targettype="faction" identifier="separatists" condition="lt -60">
+                <Success> -->
+                  <TriggerEventAction identifier="manualsepoutposttakeoverevent" />
+                <!-- </Success>
+                <Failure>
+                  <ConversationAction text="We're currently lacking the capacity to manage that station. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                </Failure>
+              </CheckReputationAction> -->
+            </Option>
+            <Option text="Nevermind" endconversation="true" />
+          </ConversationAction>
+        </Failure>
+      </CheckConditionalAction>
+    </ScriptedEvent>
+
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="manualcooutposttakeoverevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -342,27 +407,15 @@
       <WaitAction time="1" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="targetreactor" CompareToTarget="targetreactor" MinPercentageRelativeToTarget="1">
-        <!-- complete mission if at least 1 reactor is destroyed -->
+        <!-- succeed if at least 1 reactor is destroyed -->
         <Conditional condition="eq 0"/>
         <Success>
-          <ModifyLocationAction faction="bandits" type="abandoned" />
-          <ConversationAction text="eventtext.outpostdestruction.success" dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
-          <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
-            <Success>
-              <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
-            </Success>
-            <Failure>
-              <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
-            </Failure>
-          </CheckReputationAction>
-        </Success>
-        <Failure>
           <CountTargetsAction targettag="targetnpc" CompareToTarget="targetnpc" MinPercentageRelativeToTarget="90">
-            <!-- complete mission if >90% enemies dead  -->
+            <!-- succeed if >90% enemies dead  -->
             <Conditional isdead="True"/>
             <Success>
               <ModifyLocationAction faction="bandits" type="abandoned" />
-              <ConversationAction text="eventtext.outpostdestruction.success" dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
+              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
               <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
                 <Success>
                   <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
@@ -377,6 +430,106 @@
               <GoTo name="checkforcomplete" />
             </Failure>
           </CountTargetsAction>
+        </Success>
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkforcomplete" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+    <!-- Turns a station into an empty location -->
+    <ScriptedEvent identifier="outpostdestructionnostation">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:reactor" tag="targetreactor" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <!-- VANILLA NPCs -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanager" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperator" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpc" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpc" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmine" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantresearch" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmilitary" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantengineering" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:armsdealer" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:cargomissiongiver" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:salvagemissiongiver" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchman" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commoner" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:researcher" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:miner" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:clown" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantclown" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultecclesiast" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthusk" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <!-- DE specific NPCs -->
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:de_outpostdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:quartermaster" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:bartender" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:gateinformant" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerhusk" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:huskcultistsecurity" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchanthuskengineering" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outposthuskdoctor" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hireablehuskscientist" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hireablehusktemplar" tag="targetnpc" ContinueIfNoTargetsFound="true" />
+      <!-- <TagAction criteria="humanprefabidentifier:___" tag="targetnpc" ContinueIfNoTargetsFound="true" /> -->
+      <WaitAction time="1" />
+      <Label name="checkforcomplete" />
+      <CountTargetsAction targettag="targetreactor" CompareToTarget="targetreactor" MinPercentageRelativeToTarget="1">
+        <!-- succeed if at least 1 reactor is destroyed -->
+        <Conditional condition="eq 0"/>
+        <Success>
+          <CountTargetsAction targettag="targetnpc" CompareToTarget="targetnpc" MinPercentageRelativeToTarget="90">
+            <!-- succeed if >90% enemies dead  -->
+            <Conditional isdead="True"/>
+            <Success>
+              <ModifyLocationAction faction="bandits" type="abandoned" />
+              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
+              <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+                <Success>
+                  <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                </Success>
+                <Failure>
+                  <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                </Failure>
+              </CheckReputationAction>
+            </Success>
+            <Failure>
+              <Waitaction time="1" />
+              <GoTo name="checkforcomplete" />
+            </Failure>
+          </CountTargetsAction>
+        </Success>
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
     </ScriptedEvent>
