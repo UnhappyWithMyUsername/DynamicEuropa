@@ -416,7 +416,7 @@
             <Success>
               <ReputationAction targettype="Location" increase="-75" />
               <ModifyLocationAction type="abandoned" />
-              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
+              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
               <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
                 <Success>
                   <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
@@ -444,7 +444,7 @@
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:reactor" tag="targetreactor" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="targethull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- VANILLA NPCs -->
       <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="targetnpc" ContinueIfNoTargetsFound="true" />
@@ -503,24 +503,24 @@
       <!-- <TagAction criteria="humanprefabidentifier:___" tag="targetnpc" ContinueIfNoTargetsFound="true" /> -->
       <WaitAction time="1" />
       <Label name="checkforcomplete" />
-      <CountTargetsAction targettag="targetreactor" CompareToTarget="targetreactor" MinPercentageRelativeToTarget="1">
-        <!-- succeed if at least 1 reactor is destroyed -->
-        <Conditional condition="eq 0"/>
+      <CountTargetsAction targettag="targethull" CompareToTarget="targethull" MinPercentageRelativeToTarget="50">
+        <!-- succeed if at 50% of the hulls are at least 50% flooded -->
+        <Conditional waterpercentage="gte 50"/>
         <Success>
           <CountTargetsAction targettag="targetnpc" CompareToTarget="targetnpc" MinPercentageRelativeToTarget="90">
             <!-- succeed if >90% enemies dead  -->
             <Conditional isdead="True"/>
             <Success>
-              <ModifyLocationAction faction="bandits" type="abandoned" />
-              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="brokenterminal" />
-              <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+              <ModifyLocationAction type="none" />
+              <ConversationAction text="This place now lies in ruins..." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
+              <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
                 <Success>
                   <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
                 </Success>
                 <Failure>
                   <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
                 </Failure>
-              </CheckReputationAction>
+              </CheckReputationAction> -->
             </Success>
             <Failure>
               <Waitaction time="1" />
