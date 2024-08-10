@@ -289,12 +289,12 @@
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="sepnpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
-          <CheckReputationAction targettype="faction" identifier="coalition" condition="lte -80">
+          <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -70">
             <Success>
-              <ReputationAction targettype="Faction" identifier="coalition" increase="50" />
+              <ReputationAction targettype="Faction" identifier="coalition" increase="25" />
             </Success>
             <Failure>
-              <ReputationAction targettype="Faction" identifier="coalition" increase="10" />
+              <ReputationAction targettype="Faction" identifier="coalition" increase="7" />
             </Failure>
           </CheckReputationAction>
         </Success>
@@ -365,12 +365,12 @@
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="conpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
-          <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -80">
+          <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -70">
             <Success>
-              <ReputationAction targettype="Faction" identifier="separatists" increase="50" />
+              <ReputationAction targettype="Faction" identifier="separatists" increase="25" />
             </Success>
             <Failure>
-              <ReputationAction targettype="Faction" identifier="separatists" increase="10" />
+              <ReputationAction targettype="Faction" identifier="separatists" increase="7" />
             </Failure>
           </CheckReputationAction>
         </Success>
