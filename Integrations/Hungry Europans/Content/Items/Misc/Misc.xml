@@ -92,8 +92,10 @@
       <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.01" />
       <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.01" />
       <PreferredContainer primary="storagecab" secondary="crewcab"/>
-      <Deconstruct time="1">
-        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      <Deconstruct time="1" chooserandom="true">
+        <Item identifier="aluminium" amount="1"/>
+        <Item identifier="aluminium" amount="0"/>
+        <Item identifier="aluminium" amount="0"/>
       </Deconstruct>
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="432,488,22,23" depth="0.502" origin="0.5,0.5" />
       <Body radius="8" height="15" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
@@ -119,8 +121,10 @@
       <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.01" />
       <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.01" />
       <PreferredContainer primary="storagecab" secondary="crewcab"/>
-      <Deconstruct time="1">
-        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      <Deconstruct time="1" chooserandom="true">
+        <Item identifier="aluminium" amount="1"/>
+        <Item identifier="aluminium" amount="0"/>
+        <Item identifier="aluminium" amount="0"/>
       </Deconstruct>
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="455,484,19,27" depth="0.502" origin="0.5,0.5" />
       <Body radius="8" height="19" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
@@ -146,8 +150,10 @@
       <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="3" spawnprobability="0.03" />
       <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.03" />
       <PreferredContainer primary="storagecab" secondary="crewcab"/>
-      <Deconstruct time="1">
-        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      <Deconstruct time="1" chooserandom="true">
+        <Item identifier="aluminium" amount="1"/>
+        <Item identifier="aluminium" amount="0"/>
+        <Item identifier="aluminium" amount="0"/>
       </Deconstruct>
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="494,480,17,31" depth="0.502" origin="0.5,0.5" />
       <Body radius="8" height="23" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
@@ -173,8 +179,10 @@
       <PreferredContainer secondary="abandonedcrewcab,abandonedengcab,abandonedstoragecab" minamount="1" maxamount="3" spawnprobability="0.03" />
       <PreferredContainer secondary="crewcab" amount="1" spawnprobability="0.03" />
       <PreferredContainer primary="storagecab" secondary="crewcab"/>
-      <Deconstruct time="1">
-        <Item identifier="aluminium" amount="1" outcondition="0.5"/>
+      <Deconstruct time="1" chooserandom="true">
+        <Item identifier="aluminium" amount="1"/>
+        <Item identifier="aluminium" amount="0"/>
+        <Item identifier="aluminium" amount="0"/>
       </Deconstruct>
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="475,486,18,25" depth="0.502" origin="0.5,0.5" />
       <Body radius="8" height="17" density="13" friction="1.0" restitution="0.15" angulardamping="1.0" />
@@ -204,7 +212,7 @@
       <Holdable slots="Any,RightHand+LeftHand" controlpose="False" aimpos="60,-20" handle1="-45,-15" handle2="-45,-30" msg="ItemMsgPickUpSelect" />
       <RangedWeapon reload="3" launchimpulse="5.0" barrelpos="50,15" spread="0" drawhudwhenequipped="true" crosshairscale="0.2">
         <!-- <Sound file="Content/Items/Weapons/HarpoonGun1.ogg" type="OnUse" range="1000" /> -->
-        <StatusEffect type="OnUse">
+        <StatusEffect type="OnUse" target="This">
           <Explosion range="150.0" force="0" shockwave="false" smoke="false" flames="false" flash="false" sparks="false" underwaterbubble="false" camerashake="3" />
         </StatusEffect>
         <StatusEffect type="OnUse" target="This" delay="0.8" checkconditionalalways="true">
