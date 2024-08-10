@@ -13,6 +13,8 @@
     -->
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="cooutposttakeoverevent">
+      <SetDataAction identifier="takeoverinprogress" value="true" />
+      <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -52,6 +54,26 @@
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
+          <CheckDataAction identifier="completedtakeoverpreviously" condition="true">
+            <Success>
+              <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
+            </Success>
+            <Failure>
+              <SpawnAction itemidentifier="metalcrate" spawnlocation="MainSub" targettag="takeoverreward" targetmoduletags="airlock" ignorebyai="true" />
+              <StatusEffectAction targettag="takeoverreward">
+                <StatusEffect target="This" allowaccess="false" setvalue="true" />
+              </StatusEffectAction>
+              <ConversationAction text="eventtext.takeover.success.reward" dialogtype="Mission" targettag="player" eventsprite="Infiltration1" />
+              <TriggerAction target1tag="player" target2tag="takeoverreward" applytotarget1="interactplayer" radius="500" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="true" allowmultipletargets="true" />
+              <SpawnAction itemidentifier="militaryradio" targetinventory="interactplayer" />
+              <StatusEffectAction targettag="takeoverreward">
+                <StatusEffect target="This" allowaccess="true" setvalue="true" />
+              </StatusEffectAction>
+              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="letter" />
+              <SetDataAction identifier="completedtakeoverpreviously" operation="Set" value="true" />
+              <ClearTagAction tag="interactplayer" />
+            </Failure>
+          </CheckDataAction>
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -62,6 +84,8 @@
 
     <!-- Separatist Attackers-->
     <ScriptedEvent identifier="sepoutposttakeoverevent">
+      <SetDataAction identifier="takeoverinprogress" value="true" />
+      <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -101,6 +125,26 @@
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
+          <CheckDataAction identifier="completedtakeoverpreviously" condition="true">
+            <Success>
+              <ConversationAction text="eventtext.takeover.success.info" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
+            </Success>
+            <Failure>
+              <SpawnAction itemidentifier="metalcrate" spawnlocation="MainSub" targettag="takeoverreward" targetmoduletags="airlock" ignorebyai="true" />
+              <StatusEffectAction targettag="takeoverreward">
+                <StatusEffect target="This" allowaccess="false" setvalue="true" />
+              </StatusEffectAction>
+              <ConversationAction text="eventtext.takeover.success.reward" dialogtype="Mission" targettag="player" eventsprite="Stuckinthemiddle1" />
+              <TriggerAction target1tag="player" target2tag="takeoverreward" applytotarget1="interactplayer" radius="500" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="true" allowmultipletargets="true" />
+              <SpawnAction itemidentifier="militaryradio" targetinventory="interactplayer" />
+              <StatusEffectAction targettag="takeoverreward">
+                <StatusEffect target="This" allowaccess="true" setvalue="true" />
+              </StatusEffectAction>
+              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="letter" />
+              <SetDataAction identifier="completedtakeoverpreviously" operation="Set" value="true" />
+              <ClearTagAction tag="interactplayer" />
+            </Failure>
+          </CheckDataAction>
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -123,72 +167,74 @@
       <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="separatiststation" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="banditstation" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerhusk" tag="churchstation" ContinueIfNoTargetsFound="true" />
-      <CheckConditionalAction targettag="coalitionstation">
-        <Conditional isDead="true" />
+      <!-- check if a takeover is active | succeed and allow starting a takeover if no takeover is currently active at this location -->
+      <CheckDataAction identifier="takeoverinprogress" condition="false">
         <Success>
-          <CheckConditionalAction targettag="separatiststation">
+          <!-- Checking if the target is dead allows the action to fail if the target is present and automatically succeeds if no target was found, checking for the next target -->
+          <CheckConditionalAction targettag="coalitionstation">
             <Conditional isDead="true" />
             <Success>
-              <CheckConditionalAction targettag="banditstation">
+              <CheckConditionalAction targettag="separatiststation">
                 <Conditional isDead="true" />
                 <Success>
-                  <CheckConditionalAction targettag="churchstation">
+                  <CheckConditionalAction targettag="banditstation">
                     <Conditional isDead="true" />
                     <Success>
-                      <ConversationAction text="According to the tracker you're not even at a station! Don't waste our time!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                      <CheckConditionalAction targettag="churchstation">
+                        <Conditional isDead="true" />
+                        <Success>
+                          <ConversationAction text="eventtext.manualtakeover.call.nostation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+                          <TriggerEventAction identifier="resettakeoverdata" />
+                        </Success>
+                        <Failure>
+                          <ConversationAction text="eventtext.manualtakeover.call.church" dialogtype="Small" targettag="statuseffecttarget" eventsprite="coalition" ContinueAutomatically="true" />
+                        </Failure>
+                      </CheckConditionalAction>
                     </Success>
                     <Failure>
-                      <ConversationAction text="You're at a station of the church of husk. We have no intend on interferring with them. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                      <ConversationAction text="eventtext.manualtakeover.call.bandits" dialogtype="Small" targettag="statuseffecttarget" eventsprite="coalition" ContinueAutomatically="true" />
                     </Failure>
                   </CheckConditionalAction>
                 </Success>
                 <Failure>
-                  <ConversationAction text="You're at a pirate station. We are not interested in their station. Do whatever, but we will not claim the station!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
+                  <ConversationAction text="eventtext.manualtakeover.call.coalition" dialogtype="Small" targettag="statuseffecttarget" eventsprite="coalition">
+                    <Option text="eventtext.manualtakeover.call.playerresponse">
+                      <ConversationAction text="eventtext.manualtakeover.call.permissiongranted" ContinueAutomatically="true" />
+                      <TriggerEventAction identifier="manualcooutposttakeoverevent" />
+                    </Option>
+                    <Option text="eventtext.option.nevermind" endconversation="true" />
+                  </ConversationAction>
                 </Failure>
               </CheckConditionalAction>
             </Success>
             <Failure>
-              <ConversationAction text="You're calling the coalition over the military frequency..." dialogtype="Small" targettag="player" eventsprite="coalition">
-                <Option text="We'd like to take over a station for you..." endconversation="true">
-                  <!-- <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -60">
-                    <Success> -->
-                      <TriggerEventAction identifier="manualcooutposttakeoverevent" />
-                    <!-- </Success>
-                    <Failure>
-                      <ConversationAction text="We're currently lacking the capacity to manage that station. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
-                    </Failure>
-                  </CheckReputationAction> -->
+              <ConversationAction text="eventtext.manualtakeover.call.separatists" dialogtype="Small" targettag="statuseffecttarget" eventsprite="separatists">
+                <Option text="eventtext.manualtakeover.call.playerresponse">
+                  <ConversationAction text="eventtext.manualtakeover.call.permissiongranted" ContinueAutomatically="true" />
+                  <TriggerEventAction identifier="manualsepoutposttakeoverevent" />
                 </Option>
-                <Option text="Nevermind" endconversation="true" />
+                <Option text="eventtext.option.nevermind" endconversation="true" />
               </ConversationAction>
             </Failure>
           </CheckConditionalAction>
         </Success>
         <Failure>
-          <ConversationAction text="You're calling the separatists over the military frequency..." dialogtype="Small" targettag="player" eventsprite="separatists">
-            <Option text="We'd like to take over a station for you..." endconversation="true">
-              <!-- <CheckReputationAction targettype="faction" identifier="separatists" condition="lt -60">
-                <Success> -->
-                  <TriggerEventAction identifier="manualsepoutposttakeoverevent" />
-                <!-- </Success>
-                <Failure>
-                  <ConversationAction text="We're currently lacking the capacity to manage that station. Permission denied!" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
-                </Failure>
-              </CheckReputationAction> -->
-            </Option>
-            <Option text="Nevermind" endconversation="true" />
-          </ConversationAction>
+          <!-- end event -->
         </Failure>
-      </CheckConditionalAction>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!-- Reset the takeoverinprogress data to false to allow triggering a manual takeover or destroying an outpost again -->
+    <ScriptedEvent identifier="resettakeoverdata">
+      <SetDataAction identifier="takeoverinprogress" value="false" />
     </ScriptedEvent>
 
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="manualcooutposttakeoverevent">
+      <SetDataAction identifier="takeoverinprogress" value="true" />
+      <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
-      <!-- <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" /> -->
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" /> -->
       <!-- VANILLA NPCs -->
       <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="sepnpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="sepnpc" ContinueIfNoTargetsFound="true" />
@@ -228,9 +274,7 @@
       <TagAction criteria="humanprefabidentifier:bartender" tag="sepnpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="sepnpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <WaitAction time="1" />
       <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
-      <ConversationAction text="eventtext.takeover.manual.attack" dialogtype="Small" targettag="player" eventsprite="coalition" ContinueAutomatically="true" />
       <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="sepnpc" CompareToTarget="sepnpc" MinPercentageRelativeToTarget="75">
@@ -263,11 +307,10 @@
 
     <!-- Separatist Attackers-->
     <ScriptedEvent identifier="manualsepoutposttakeoverevent">
+      <SetDataAction identifier="takeoverinprogress" value="true" />
+      <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
-      <!-- <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" /> -->
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" /> -->
       <!-- VANILLA NPCs -->
       <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="conpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="conpc" ContinueIfNoTargetsFound="true" />
@@ -307,9 +350,7 @@
       <TagAction criteria="humanprefabidentifier:bartender" tag="conpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:merchantsellonly" tag="conpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <WaitAction time="1" />
       <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
-      <ConversationAction text="eventtext.takeover.manual.attack" dialogtype="Small" targettag="player" eventsprite="separatists" ContinueAutomatically="true" />
       <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="conpc" CompareToTarget="conpc" MinPercentageRelativeToTarget="75">
@@ -414,17 +455,25 @@
             <!-- succeed if >90% enemies dead  -->
             <Conditional isdead="True"/>
             <Success>
-              <ReputationAction targettype="Location" increase="-75" />
-              <ModifyLocationAction type="abandoned" />
-              <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
-              <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+              <!-- check if a takeover is active | succeed and allow destruction of the station if no takeover is active at this location -->
+              <CheckDataAction identifier="takeoverinprogress" condition="false">
                 <Success>
-                  <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                  <ReputationAction targettype="Location" increase="-75" />
+                  <ModifyLocationAction type="abandoned" />
+                  <ConversationAction text="You hear multiple dockinghatches disengaging as the remaining inhabitants of the station made their escape, leaving it abandoned." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
+                  <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+                    <Success>
+                      <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                    </Success>
+                    <Failure>
+                      <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                    </Failure>
+                  </CheckReputationAction> -->
                 </Success>
                 <Failure>
-                  <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                  <GoTo name="endevent" />
                 </Failure>
-              </CheckReputationAction> -->
+              </CheckDataAction>
             </Success>
             <Failure>
               <Waitaction time="1" />
@@ -437,6 +486,7 @@
           <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
+      <Label name="endevent" />
     </ScriptedEvent>
     <!-- Turns a station into an empty location -->
     <ScriptedEvent identifier="outpostdestructionnostation">
@@ -511,16 +561,24 @@
             <!-- succeed if >90% enemies dead  -->
             <Conditional isdead="True"/>
             <Success>
-              <ModifyLocationAction type="none" />
-              <ConversationAction text="This place now lies in ruins..." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
-              <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+              <!-- check if a takeover is active | succeed and allow destruction of the station if no takeover is active at this location -->
+              <CheckDataAction identifier="takeoverinprogress" condition="false">
                 <Success>
-                  <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                  <ModifyLocationAction type="none" />
+                  <ConversationAction text="This place now lies in ruins..." dialogtype="Mission" targettag="player" eventsprite="abandoned" />
+                  <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
+                    <Success>
+                      <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
+                    </Success>
+                    <Failure>
+                      <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                    </Failure>
+                  </CheckReputationAction> -->
                 </Success>
                 <Failure>
-                  <ReputationAction targettype="Faction" identifier="bandits" increase="3" />
+                  <GoTo name="endevent" />
                 </Failure>
-              </CheckReputationAction> -->
+              </CheckDataAction>
             </Success>
             <Failure>
               <Waitaction time="1" />
@@ -533,6 +591,7 @@
           <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
+      <Label name="endevent" />
     </ScriptedEvent>
     
     <!-- TODO: DELETE THIS for takeover testing purposes no touchey until it works -->
