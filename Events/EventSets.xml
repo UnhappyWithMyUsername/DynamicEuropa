@@ -507,16 +507,67 @@
       </EventSet>
       
       <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters? compatibility? -->
-      <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
-        <Commonness commonness="100"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+      <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" eventcount="1" triggereventcooldown="false">
+        <EventSet identifier="drycave_enemies_crawlers" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+        </EventSet>
+        <EventSet identifier="drycave_enemies_mudraptor" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="20" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet>
+        <EventSet identifier="drycave_enemies_husks" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="20" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet>
+        <!-- TODO: Create mantis variant that can hide on structures, uses waypoints and doesn't target doors -->
+        <EventSet identifier="drycave_enemies_mantis" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="40" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet>
       </EventSet>
 
       <!-- Events specific to cities -->
