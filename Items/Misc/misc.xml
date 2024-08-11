@@ -155,5 +155,33 @@
         </Button>
       </CustomInterface>
     </Item>
+    <!-- Pressure Stabilizer for Outpost Security | Non-Player-Team-Interactable -->
+    <Item name="Biometrically Locked Pressure Stabilizer" identifier="pressurestabilizersecurity" category="Hidden" maxstacksize="32" maxstacksizecharacterinventory="8" Tags="" allowasextracargo="false" description="" scale="0.5" impactsoundtag="impact_metal_light" nonplayerteaminteractable="true" hideinmenus="true">
+      <InventoryIcon texture="Content/Items/Genetic/Genetic.png" sourcerect="244,62,76,65" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Genetic/Genetic.png" depth="0.6" sourcerect="67,85,73,35" origin="0.5,0.5" />
+      <Body radius="15" width="45" density="25" />
+      <Wearable slots="HealthInterface" msg="ItemMsgPickUpSelect">
+        <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,64,54" origin="0.6,0.0" />
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" disabledeltatime="true" interval="900" multiplyafflictionsbymaxvitality="true" comparison="And">
+          <Conditional InWater="true" />
+          <Affliction identifier="pressurestabilized" amount="900.0" />
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+      </Wearable>
+    </Item>
+    <!-- Hazmat Suit - Spawned on reactoroperator NPC for Enhanced Reactors compatibility - Does nothing and removes itself if Enhanced Reactors is not installed and loaded above DE -->
+    <Item name="Hazmat Suit" identifier="hazmatsuit1" aliases="orangejumpsuit" category="Equipment" tags="smallitem,clothing,radiationproof,deepdiving,divinggear_wearableindoors" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+      <Sprite texture="Content/UI/Focusindicator.png" sourcerect="0,0,1,1" depth="0.85" origin="0.5,0.5" />
+      <Body width="40" radius="27" density="15" friction="0.8" restitution="0.01" />
+      <Wearable slots="OuterClothes" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="Always" target="This" oneshot="true" delay="1" stackable="false">
+          <Remove />
+        </StatusEffect>
+      </Wearable>
+      <Holdable slots="LeftHand,RightHand" holdpos="0,-30" handle1="0,-30" aimable="false" pickkey="Use" msg="ItemMsgPickUpUse" />
+    </Item>
   </Override>
 </Items>
