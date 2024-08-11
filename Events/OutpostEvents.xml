@@ -16,7 +16,6 @@
             </Option> -->
 
   <EventSprites>
-    <Sprite identifier="de_oldman" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="34,512,188,255" origin="0.5,0.5" />
     <Sprite identifier="sonar" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="460,150,180,180" origin="0.5,0.5"/>
     <Sprite identifier="subblueprint" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1528,27,210,210" origin="0.5,0.5"/>
     <Sprite identifier="piratehaven" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="637,686,140,140" origin="0.5,0.5"/>
@@ -2219,17 +2218,17 @@
       <TagAction criteria="player" tag="player" />
       <Label name="waitforinput" />
       <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
-      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="de_oldman">
+      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="oldman">
         <Option text="eventtext.piratemissioninformant.option.buy">
           <CheckMoneyAction Amount="1000">
             <Success>
               <MoneyAction amount="-1000" />
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="de_oldman" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="oldman" />
               <MissionAction missiontag="coalitionciv" />
               <ClearTagAction tag="pmi_trig_player" />
             </Success>
             <Failure>
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="de_oldman" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="oldman" />
               <ClearTagAction tag="pmi_trig_player" />
               <GoTo name="waitforinput" />
             </Failure>
