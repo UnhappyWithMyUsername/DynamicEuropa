@@ -69,7 +69,7 @@
               <StatusEffectAction targettag="takeoverreward">
                 <StatusEffect target="This" allowaccess="true" setvalue="true" />
               </StatusEffectAction>
-              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="letter" />
+              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="Note2" />
               <SetDataAction identifier="completedtakeoverpreviously" operation="Set" value="true" />
               <ClearTagAction tag="interactplayer" />
             </Failure>
@@ -140,7 +140,7 @@
               <StatusEffectAction targettag="takeoverreward">
                 <StatusEffect target="This" allowaccess="true" setvalue="true" />
               </StatusEffectAction>
-              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="letter" />
+              <ConversationAction text="eventtext.takeover.success.reward.check" dialogtype="Small" targettag="interactplayer" eventsprite="Note2" />
               <SetDataAction identifier="completedtakeoverpreviously" operation="Set" value="true" />
               <ClearTagAction tag="interactplayer" />
             </Failure>
@@ -460,7 +460,7 @@
                 <Success>
                   <ReputationAction targettype="Location" increase="-75" />
                   <ModifyLocationAction type="destroyedstation" />
-                  <ConversationAction text="eventtext.outpostdestruction.npcsflee" dialogtype="Mission" targettag="player" eventsprite="abandoned" />
+                  <ConversationAction text="eventtext.outpostdestruction.npcsflee" dialogtype="Mission" targettag="player" eventsprite="ventinside" />
                   <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
                     <Success>
                       <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
@@ -565,7 +565,7 @@
               <CheckDataAction identifier="takeoverinprogress" condition="false">
                 <Success>
                   <ModifyLocationAction type="none" />
-                  <ConversationAction text="eventtext.outpostdestruction.placeruined" dialogtype="Mission" targettag="player" eventsprite="abandoned" />
+                  <ConversationAction text="eventtext.outpostdestruction.placeruined" dialogtype="Mission" targettag="player" eventsprite="ventinside" />
                   <!-- <CheckReputationAction targettype="faction" identifier="bandits" condition="lte -13">
                     <Success>
                       <ReputationAction targettype="Faction" identifier="bandits" increase="10" />
@@ -612,5 +612,6 @@
         <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="false" />
         <NPCChangeTeamAction npctag="tempcrew" teamtag="Team1" addtocrew="true" />
     </ScriptedEvent> --> 
+    
   </EventPrefabs>
 </Randomevents>
