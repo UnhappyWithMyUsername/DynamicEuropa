@@ -41,7 +41,6 @@
                                                   <Label name="continue16" _npos="6650.1313,5770.1636" />
                                                   <NPCFollowAction npctag="kira" targettag="boldcivilian2" follow="true" _npos="7036.1987,5773.367" />
                                                   <NPCFollowAction npctag="boldgroup" targettag="kira" follow="true" _npos="7446.658,5766.933" />
-                                                  <NPCFollowAction npctag="nervouscivilian" targettag="admin" follow="true" _npos="7839.6763,5769.6514" />
                                                   <ConversationAction text="Before she can utter another word, the two defiant civilians launch an attack on her, while the anxious civilian makes a dash to flee from the scene. &quot;Stop that individual! He's carrying a bomb!&quot; The officer shouts, attempting to alert her colleagues to the fleeing suspect." targettag="kiratriggerplayer" _npos="8256.479,5755.649">
                                                     <Option text="Chase after the nervous civilian." endconversation="true">
                                                       <Label name="chaseison" _npos="8496.539,5469.6016" />
@@ -49,7 +48,7 @@
                                                       <CombatAction combatmode="Arrest" isinstigator="false" npctag="kira" enemytag="boldgroup" _npos="9253.927,5627.9233" />
                                                       <CombatAction combatmode="Offensive" isinstigator="true" guardreaction="Arrest" npctag="boldgroup" enemytag="kira" _npos="9635.467,5630.962" />
                                                       <AfflictionAction affliction="combatstimulant" strength="85" targettag="kira" _npos="10010.331,5629.439" />
-                                                      <WaitAction time="10" _npos="10402.499,5642.722" />
+                                                      <WaitAction time="20" _npos="10402.499,5642.722" />
                                                       <TriggerAction target1tag="nervouscivilian" target2tag="kiratriggerplayer" radius="170" waitforinteraction="false" allowmultipletargets="false" _npos="10871.852,5564.5864" />
                                                       <NPCWaitAction npctag="nervouscivilian" wait="true" _npos="11249.003,5258.117" />
                                                       <ConversationAction text="As you close in on the civilian, he finds himself trapped and with no place for escape. Desperate, he turns toward you, attempting to draw a revolver from his pocket." targettag="kiratriggerplayer" _npos="11385.958,5673.7485">
@@ -67,7 +66,7 @@
                                                                           <SpawnAction itemidentifier="revolver" targettag="traitorgun" targetinventory="kiratriggerplayer" _npos="15285.564,4072.4163" />
                                                                           <StatusEffectAction targettag="traitorgun" _npos="15805.295,4125.369">
                                                                             <StatusEffect target="This" disabledeltatime="true" _npos="15824.426,4363.621">
-                                                                              <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="15935.597,4716.778" />
+                                                                              <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="15835.708,4555.849" />
                                                                             </StatusEffect>
                                                                           </StatusEffectAction>
                                                                           <ConversationAction text="The civilian complies, surrendering both the gun and the device. &quot;Thank you. I'll disappear before you know it.&quot; He says before bolting away at full speed." targettag="kiratriggerplayer" _npos="16295.0205,4137.9736">
@@ -87,18 +86,32 @@
                                                                           </ConversationAction>
                                                                         </Option>
                                                                         <Option text="“No, I can’t do that.”">
-                                                                          <ConversationAction text="“Then you leave me no choice…” He says with a somber expression, raising his gun toward you. With no alternative, you're forced to defend yourself." targettag="kiratriggerplayer" _npos="14392.737,4878.6743">
+                                                                          <SpawnAction itemidentifier="traitortimebomb" targettag="susbomb" targetinventory="nervouscivilian" ignorebyai="true" _npos="14510.629,4721.3423" />
+                                                                          <SpawnAction itemidentifier="revolver" targettag="traitorgun" targetinventory="nervouscivilian" _npos="14979.596,4748.896" />
+                                                                          <StatusEffectAction targettag="traitorgun" _npos="15402.557,4822.585">
+                                                                            <StatusEffect target="This" disabledeltatime="true" _npos="15431.0625,4992.753">
+                                                                              <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="15442.634,5174.3525" />
+                                                                            </StatusEffect>
+                                                                          </StatusEffectAction>
+                                                                          <ConversationAction text="“Then you leave me no choice…” He says with a somber expression, raising his gun toward you. With no alternative, you're forced to defend yourself." targettag="kiratriggerplayer" _npos="15957.228,4774.834">
                                                                             <Option text="Time to fight." endconversation="true">
-                                                                              <GoTo name="combatwithgun" _npos="14953.985,4975.1675" />
+                                                                              <GoTo name="combatwithgun" _npos="16589.104,4786.082" />
                                                                             </Option>
                                                                           </ConversationAction>
                                                                         </Option>
                                                                       </ConversationAction>
                                                                     </Success>
                                                                     <Failure>
-                                                                      <ConversationAction text="&quot;No... The coalition won't show mercy. In their eyes, I'm already condemned. I– I'm sorry, but I had no other option.&quot; He says with a somber expression, raising his gun toward you. With no alternative, you're forced to defend yourself." targettag="kiratriggerplayer" _npos="13808.141,5501.724">
+                                                                      <SpawnAction itemidentifier="traitortimebomb" targettag="susbomb" targetinventory="nervouscivilian" ignorebyai="true" _npos="13626.038,5447.6484" />
+                                                                      <SpawnAction itemidentifier="revolver" targettag="traitorgun" targetinventory="nervouscivilian" _npos="14113.447,5459.3604" />
+                                                                      <StatusEffectAction targettag="traitorgun" _npos="14648.818,5489.043">
+                                                                        <StatusEffect target="This" disabledeltatime="true" _npos="14665.043,5683.243">
+                                                                          <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="14635.586,5920.109" />
+                                                                        </StatusEffect>
+                                                                      </StatusEffectAction>
+                                                                      <ConversationAction text="&quot;No... The coalition won't show mercy. In their eyes, I'm already condemned. I– I'm sorry, but I had no other option.&quot; He says with a somber expression, raising his gun toward you. With no alternative, you're forced to defend yourself." targettag="kiratriggerplayer" _npos="15207.478,5582.1255">
                                                                         <Option text="Time to fight." endconversation="true">
-                                                                          <GoTo name="combatwithgun" _npos="14404.524,5595" />
+                                                                          <GoTo name="combatwithgun" _npos="15817.121,5610.299" />
                                                                         </Option>
                                                                       </ConversationAction>
                                                                     </Failure>
@@ -145,16 +158,16 @@
                                                             <Failure>
                                                               <Label name="faildisarm" _npos="12463.049,7097.205" />
                                                               <NPCWaitAction npctag="nervouscivilian" wait="true" _npos="12857.919,7108.5117" />
-                                                              <ConversationAction text="You attempt to disarm the civilian, but he skillfully evades your grasp, keeping himself out of reach. Now, you find yourself staring down the barrel of a gun." targettag="kiratriggerplayer" _npos="13239.977,7198.1235">
+                                                              <SpawnAction itemidentifier="traitortimebomb" targettag="susbomb" targetinventory="nervouscivilian" ignorebyai="true" _npos="13241.417,7200.769" />
+                                                              <SpawnAction itemidentifier="revolver" targettag="traitorgun" targetinventory="nervouscivilian" _npos="13652.825,7269.2124" />
+                                                              <StatusEffectAction targettag="traitorgun" _npos="14058.765,7332.708">
+                                                                <StatusEffect target="This" disabledeltatime="true" _npos="14110.765,7514.598">
+                                                                  <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="14163.776,7743.6626" />
+                                                                </StatusEffect>
+                                                              </StatusEffectAction>
+                                                              <ConversationAction text="You attempt to disarm the civilian, but he skillfully evades your grasp, keeping himself out of reach. Now, you find yourself staring down the barrel of a gun." targettag="kiratriggerplayer" _npos="14569.773,7323.6826">
                                                                 <Option text="Oh no..." endconversation="true">
-                                                                  <Label name="combatwithgun" _npos="13727.651,7317.819" />
-                                                                  <SpawnAction itemidentifier="traitortimebomb" targettag="susbomb" targetinventory="nervouscivilian" ignorebyai="true" _npos="14132.869,7273.954" />
-                                                                  <SpawnAction itemidentifier="revolver" targettag="traitorgun" targetinventory="nervouscivilian" _npos="14532.216,7272.407" />
-                                                                  <StatusEffectAction targettag="traitorgun" _npos="14984.912,7388.957">
-                                                                    <StatusEffect target="This" disabledeltatime="true" _npos="15007.533,7616.325">
-                                                                      <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="15025.137,7814.093" />
-                                                                    </StatusEffect>
-                                                                  </StatusEffectAction>
+                                                                  <Label name="combatwithgun" _npos="15114.521,7346.3555" />
                                                                   <CombatAction combatmode="Offensive" isinstigator="true" npctag="nervouscivilian" enemytag="kiratriggerplayer" _npos="15616.595,7367.768" />
                                                                   <TriggerAction target1tag="susbomb" target2tag="kiratriggerplayer" waitforinteraction="true" _npos="16139.185,7305.578" />
                                                                   <ConversationAction text="You retrieve the device from the civilian. Luckily, the bomb appears to be inactive. It would be wise to bring it back to the officer." targettag="kiratriggerplayer" dialogtype="Small" _npos="16705.992,7370.038">
@@ -177,8 +190,8 @@
                                                                   <SpawnItem identifier="revolverround" spawnposition="ThisInventory" count="6" _npos="13024.459,9025.389" />
                                                                 </StatusEffect>
                                                               </StatusEffectAction>
-                                                              <CombatAction combatmode="None" isinstigator="true" npctag="nervouscivilian" enemytag="kiratriggerplayer" _npos="13513.626,8563.299" />
-                                                              <WaitAction time="2" _npos="13986.248,8719.555" />
+                                                              <CombatAction combatmode="Defensive" isinstigator="true" npctag="nervouscivilian" enemytag="kiratriggerplayer" _npos="13513.626,8563.299" />
+                                                              <WaitAction time="1" _npos="13986.248,8719.555" />
                                                               <CombatAction combatmode="Offensive" isinstigator="true" npctag="nervouscivilian" enemytag="kiratriggerplayer" _npos="14472.401,8685.951" />
                                                               <TriggerAction target1tag="susbomb" target2tag="kiratriggerplayer" waitforinteraction="true" _npos="15008.338,8638.549" />
                                                               <ConversationAction text="You retrieve the device from the civilian. Luckily, the bomb appears to be inactive. It would be wise to bring it back to the officer." targettag="kiratriggerplayer" dialogtype="Small" _npos="15519.782,8647.488">
@@ -188,7 +201,7 @@
                                                                   <CheckItemAction targettag="kiratriggerplayer" itemtags="susbomb" _npos="17118.06,8633.484">
                                                                     <Success>
                                                                       <NPCWaitAction npctag="kira" wait="true" _npos="17617.566,8593.854" />
-                                                                      <ConversationAction text="As you return to the officer's side, you find that she has successfully subdued the attackers. Now she is busy tending to her wounds and instructing the guards to conduct patrols." targettag="kiratriggerplayer" _npos="18159.166,8381.528">
+                                                                      <ConversationAction text="When you return to the officer's side, you see she has successfully subdued the attackers. Now she is tending to her wounds while giving orders to the guards to begin patrols." targettag="kiratriggerplayer" _npos="18159.166,8381.528">
                                                                         <Option text="Approach the officer.">
                                                                           <ConversationAction text="She shifts her focus to you as she notices you drawing near." targettag="kiratriggerplayer" _npos="18721.115,8361.714">
                                                                             <Option text="Pass the bomb device to her.">
@@ -577,7 +590,7 @@
                                                                     </Success>
                                                                     <Failure>
                                                                       <NPCWaitAction npctag="kira" wait="true" _npos="17586.297,9295.38" />
-                                                                      <ConversationAction text="As you return to the officer's side, you find that she has successfully subdued the attackers. Now she is busy tending to her wounds and instructing the guards to conduct patrols. It would be wise not to disturb her unless you have the bomb to present as evidence for dealing with the culprit." targettag="kiratriggerplayer" dialogtype="Small" _npos="18179.389,9239.117">
+                                                                      <ConversationAction text="When you return to the officer's side, you see she has successfully subdued the attackers. Now she is tending to her wounds while giving orders to the guards to begin patrols. It’s best not to disturb her unless you have the bomb to show as proof that you've dealt with the culprit." targettag="kiratriggerplayer" dialogtype="Small" _npos="18179.389,9239.117">
                                                                         <Option text="Leave." endconversation="true">
                                                                           <NPCWaitAction npctag="kira" wait="false" _npos="18659.965,9325.033" />
                                                                           <WaitAction time="1" _npos="19068.316,9337.026" />
@@ -638,7 +651,6 @@
                                             <Option text="Continue.">
                                               <ConversationAction text="“You officers always love sticking your nose where they don't belong! To hell with this!” One of the civilians retorts, signaling to a nervous companion behind him, who stammers nervously, &quot;W-Wait, now?&quot;" targettag="kiratriggerplayer" _npos="6029.413,6847.926">
                                                 <Option text="Continue.">
-                                                  <NPCFollowAction npctag="nervouscivilian" targettag="admin" follow="true" _npos="6588.137,6851.821" />
                                                   <ConversationAction text="“Yes! Do it!” He exclaims. With that, the nervous civilian takes off, brandishing a device adorned with an array of colored wires. You observe the officer attempting to pursue the fleeing individual, only to be intercepted by two burly civilians intent on assaulting her. &quot;Damn it! Stop that guy! He got a bomb!&quot; The officer shouts, attempting to capture her colleague's attention amidst the chaos." targettag="kiratriggerplayer" _npos="7073.66,6829.848">
                                                     <Option text="Chase after the nervous civilian." endconversation="true">
                                                       <GoTo name="chaseison" _npos="7598.2334,6812.998" />
