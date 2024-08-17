@@ -2590,12 +2590,12 @@
     </ScriptedEvent>    
     
     <ScriptedEvent identifier="missionevent_escortorangeboys" commonness="20" requiredDestinationTypes="Outpost,Settlement,Colony,City">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="wasteguy" spawnlocation="Outpost" />
-      <ConversationAction text="A nearby habitation outpost has ordered a special delivery of fresh meat. We need someone to safely escort a pack of Orange Boys to the destination." speakertag="wasteguy" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
-        <Option text="Sure. So cute, so delicious...">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="escortboysnpc" spawnlocation="Outpost" />
+      <ConversationAction text="eventtext.missionevent_escortorangeboys" speakertag="escortboysnpc" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="instructor" >
+        <Option text="eventtext.missionevent_escortorangeboys.sure" endconversation="true" >
           <MissionAction missionidentifier="escortorangeboys" />
         </Option>
-        <Option text="Sorry, pets are friends, not food." endconversation="true">
+        <Option text="eventtext.missionevent_escortorangeboys.refuse" endconversation="true">
         </Option> 
       </ConversationAction>
     </ScriptedEvent>

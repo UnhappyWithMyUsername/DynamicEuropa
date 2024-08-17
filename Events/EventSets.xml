@@ -506,6 +506,11 @@
         <ScriptedEvent identifier="unlockpestnests" commonness="100" probability="1" />
       </EventSet>
       
+      <!-- Events specific to hydroponics outposts -->
+      <EventSet identifier="outpostevent.hydroponics.always" minleveldifficulty="10" maxleveldifficulty="100" locationtype="survey" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_escortorangeboys" commonness="200" probability="0.25" />
+      </EventSet>
+      
       <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters? compatibility? -->
       <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" eventcount="1" triggereventcooldown="false">
         <EventSet identifier="drycave_enemies_crawlers" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
