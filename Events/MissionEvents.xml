@@ -418,7 +418,7 @@
    
     <ScriptedEvent identifier="capturelivecrawlerevent">
       <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
-      <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocationType="MainPath" offset="500" />
+      <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocation="MainPath" offset="500" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
       <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
@@ -503,7 +503,7 @@
       <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
-      <SpawnAction speciesname="orangeboy_escort" TargetTag="escortboy" amount="5" SpawnLocationType="Mainsub" spawnpointtype="cargo" offset="100" />
+      <SpawnAction speciesname="orangeboy_escort" TargetTag="escortboy" amount="5" SpawnLocation="MainSub" spawnpointtype="cargo" offset="100" />
       <!-- check if 75% of orangeboys not dead, otherwise fail -->
       <Waitaction time="1" />
       <Label name="checkfordeadescortboys" />
