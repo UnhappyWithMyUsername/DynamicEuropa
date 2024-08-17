@@ -499,6 +499,41 @@
       </CountTargetsAction>
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="escortorangeboysevent">
+      <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
+      <SpawnAction speciesname="orangeboy_escort" TargetTag="escortboy" amount="5" SpawnLocationType="Mainsub" spawnpointtag="cargo" offset="100" />
+      <!-- check if 40% of orangeboys dead, fail -->
+      <Waitaction time="1" />
+      <Label name="checkfordeadescortboys" />
+      <CountTargetsAction targettag="escortboy" CompareToTarget="escortboy" MinPercentageRelativeToTarget="40">
+        <Conditional isdead="true" />
+        <Failure>         
+          <Waitaction time="1" />
+          <GoTo name="checkfordeadescortboys" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="outpostfixed" operation="set" value="1" />
+          <MissionStateAction missionidentifier="escortorangeboy" operation="Set" value="2" />
+          <ConversationAction text="The orangeboys have perished, and the feast is ruined." dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+        </Success>
+      </CountTargetsAction>
+      <OnRoundEndAction>
+          <CountTargetsAction targettag="escortboy" hulltag="playerhull" CompareToTarget="escortboy" MinPercentageRelativeToTarget="60">
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="escortedorangeboys" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+    
+    
+    
     <!-- UNUSED. TODO: rework -->
     <ScriptedEvent identifier="finddocuments" commonness="50">
       <TagAction criteria="player" tag="player" />
@@ -545,6 +580,7 @@
         <Goto name="finddocuments4" />       
       </ConversationAction>
     </ScriptedEvent>
+    
     
   </EventPrefabs>
 </Randomevents>

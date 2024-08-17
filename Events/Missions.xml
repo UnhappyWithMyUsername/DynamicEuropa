@@ -1796,6 +1796,29 @@
     <CompleteCheckDataAction identifier="outpostfixed" condition="eq 1"/>
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="230,230,50"/>
   </GotoMission>
+  
+  <GotoMission    
+    identifier="escortorangeboys"
+    name="missionname.escortorangeboys"
+    description="missiondescription.escortorangeboys"
+    tags="escortfood"
+    type="GoTo"
+    difficulty="2"
+    commonness="100"
+    reward="2500"
+    successmessage="missionsuccess.escortorangeboys"
+    failuremessage="missionfailure.escortorangeboys">
+    <Reputation identifier="location" amount="3" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,768,256,256" color="60,120,90"/>
+    <LocationType from="Hydroponics" to="Outpost"/>
+    <LocationType from="Hydroponics" to="Settlement"/>
+    <LocationType from="Hydroponics" to="Colony"/>
+    <LocationType from="Hydroponics" to="City"/>
+    <message header="missionheader0.escortorangeboys" text="missionmessage0.escortorangeboys" />
+    <TriggerEvent state="0" delay="0" eventidentifier="escortorangeboysevent" />
+    <CompleteCheckDataAction identifier="escortedorangeboys" condition="eq 1"/>
+  </GotoMission>
+  
 
   <!-- UNUSED. TODO: rework -->
   <!-- <AbandonedOutpostMission
