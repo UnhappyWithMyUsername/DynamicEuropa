@@ -2601,6 +2601,66 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <!--"Orange Protection Society"-->
+    <ScriptedEvent identifier="orangePETA" commonness="100">
+      <!-- checks if you've done 2 or more orangeboy transports -->
+      <CheckDataAction identifier="orangePETAcounter" condition="gte 2" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>
+          <CheckDataAction identifier="orangePETAnorepeat" condition="eq 0" >
+            <Failure>
+              <!-- does not spawn the event if already done -->
+            </Failure>
+            <Success>
+              <TagAction criteria="player" tag="player" />
+              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="orangelover" targettag="orangelover1" spawnlocation="Outpost" spawnpointtype="Path" lootingisstealing="false"/>
+              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="orangelover" targettag="orangelover2" spawnlocation="Outpost" spawnpointtype="Path" lootingisstealing="false"/>
+              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="orangelover" targettag="orangelover3" spawnlocation="Outpost" spawnpointtype="Path" lootingisstealing="false"/>
+              <!-- make sure the npcs have something to fight with -->
+              <NPCFollowAction npctag="orangelover2" targettag="orangelover1" follow="true" />
+              <NPCFollowAction npctag="orangelover3" targettag="orangelover2" follow="true" />
+              <TriggerAction target1tag="orangelover1" target2tag="player" applytotarget2="triggerer_player" radius="250" waitforinteraction="false"/>
+              <SetDataAction identifier="orangePETAnorepeat" operation="set" value="1" />
+              <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.spotted" eventsprite="group">
+                <Option text="EventText.orangePETA.whatme">
+                  <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.OPSspeech1" eventsprite="group" >
+                    <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.OPSspeech2" eventsprite="group" >
+                      <Option text="EventText.orangePETA.lie">
+                        <RNGAction chance="0.10">
+                          <Success>
+                            <GiveSkillEXPAction skill="helm" amount="3" targettag="triggerer_player" />
+                            <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.whatarelief" eventsprite="group" endconversation="true"/>
+                            <SpawnAction itemidentifier="chitinhelmet" amount="1" targetinventory="triggerer_player" />
+                            <NPCFollowAction npctag="troublemaker1" targettag="troublemaker2" follow="false" />
+                            <NPCFollowAction npctag="troublemaker2" targettag="troublemaker1" follow="false" />
+                          </Success>
+                          <Failure>
+                            <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.getem" eventsprite="mediator"/>
+                            <CombatAction combatmode="Offensive" npctag="orangelover1" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                            <CombatAction combatmode="Offensive" npctag="orangelover2" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                            <CombatAction combatmode="Offensive" npctag="orangelover3" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                          </Failure>
+                        </RNGAction>
+                      </Option>
+                      <Option text="EventText.orangePETA.delicious">
+                        <GiveSkillEXPAction skill="weapons" amount="2" targettag="triggerer_player" />
+                        <ConversationAction targettag="triggerer_player" text="EventText.orangePETA.getem" ContinueAutomatically="true" endconversation="true" eventsprite="mediator">
+                          <CombatAction combatmode="Offensive" npctag="orangelover1" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                          <CombatAction combatmode="Offensive" npctag="orangelover2" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                          <CombatAction combatmode="Offensive" npctag="orangelover3" enemytag="triggerer_player" isinstigator="true" guardreaction="arrest" witnessreaction="retreat" />
+                        </ConversationAction>
+                      </Option>
+                    </ConversationAction>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction> 
+            </Success>
+          </CheckDataAction>
+        </Success>
+      </CheckDataAction>
+    </ScriptedEvent>
 
     <!-- ////////////// OTHER EVENTS ///////////// -->
     
