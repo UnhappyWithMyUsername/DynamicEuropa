@@ -89,6 +89,13 @@
         <!-- multiply probability by 0 if next to hunting grounds-->
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
       </ChangeTo>
+      <ChangeTo type="HuskChurch" disallowedadjacentlocations="Lair,OuterLair,LairMudraptor,LairThresher" disallowedproximity="1" locationtypechangecooldown="2" probability="0.5" messagetag="locationchange.none.changeto.outpost">
+        <!-- if near a beacon station, increase the probability -->
+        <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
+        <!-- multiply probability by 0 if another church is within 4 steps -->
+        <Requirement function="Multiply" requiredlocations="HuskChurch" probability="0" requiredproximity="4" />
+        <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
+      </ChangeTo>
       <!-- <ChangeTo type="MilitaryForces" probability="0" messagetag="locationchange.UnderAttack.changeto.militaryforces">
         <Requirement requiredlocations="PirateOutpost" requireddurationrange="1,3" probability="0.2" requiredproximity="1" proximityprobabilityincrease="0.15" />
         <Requirement requiredlocations="MilitaryForces" requireddurationrange="1,3" probability="0.25" requiredproximity="1" proximityprobabilityincrease="0.15" />
