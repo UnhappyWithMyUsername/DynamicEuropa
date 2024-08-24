@@ -581,58 +581,6 @@
     <message header="missionheader0.spineling_electric2" text="missionmessage0.spineling_electric2" />
   </MonsterMission>
   
-  <SalvageMission identifier="stealingintel" tags="stealintel" type="Salvage" difficulty="3" commonness="0" reward="3000" sonarlabel="target" spawntype="Outpost" showmessagewhenpickedup="true" itemidentifier="documents" removeitem="true" containertag="admincabinet" requirewreck="false" BlockLocationTypeChanges="true">
-    <Reputation identifier="coalition" amount="-10" />
-    <Reputation identifier="separatists" amount="10" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233" />
-    <LocationType identifier="City" />
-    <LocationType identifier="Colony" />
-    <LocationType identifier="Military" />
-    <LocationType identifier="Base" />
-    
-    <!-- Unused. TODO: reenable multiple documents if ever fixed -->
-<!--     <target
-      spawntype="Outpost"
-      itemidentifier="documents"
-      containertag="locker"
-      sonarlabel="documents1"
-      requireretrieval="PickedUp"
-      allowcontinuebeforeretrieved="false"
-      hidelabelafterretrieved="true" >
-      <chooserandom>
-        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
-      </chooserandom>      
-    </target> 
-    <message header="" text="wrong documents"/>
-    
-    <target
-      spawntype="Outpost"
-      itemidentifier="documents"
-      containertag="locker"
-      sonarlabel="documents2"
-      requireretrieval="PickedUp"
-      allowcontinuebeforeretrieved="false"
-      hidelabelafterretrieved="true" >
-      <chooserandom>
-        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
-      </chooserandom>      
-    </target> 
-    <message header="" text="wrong documents"/>
-    
-    <target
-      spawntype="Outpost"
-      itemidentifier="classifieddocuments"
-      containertag="locker"
-      sonarlabel="documents3"
-      requireretrieval="RetrievedToSub"
-      allowcontinuebeforeretrieved="true">
-      <chooserandom>
-        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
-      </chooserandom>      
-    </target>   -->
-    
-    <message header="missionsuccess.stealingintel" text="missionmessage0.stealingintel" />    
-  </SalvageMission>
   
   <!-- PIRATE MISSIONS -->  
   <!-- TODO: change the wall health on submarines back to normal if devs ever add hull upgrades for the poor pirates -->
@@ -2258,5 +2206,119 @@
       <Metadata identifier="poisonchalicemissionnorepeat" value="1"/>
     </OutpostMission> -->
     
+  
+  <!-- Unused. BUGGED. TODO: reenable multiple documents if ever fixed -->
+<!--   <SalvageMission identifier="stealingintel" tags="stealintel" type="Salvage" difficulty="3" commonness="0" reward="3000" sonarlabel="target" spawntype="Outpost" showmessagewhenpickedup="true" itemidentifier="documents" removeitem="true" containertag="admincabinet" requirewreck="false" BlockLocationTypeChanges="true">
+    <Reputation identifier="coalition" amount="-10" />
+    <Reputation identifier="separatists" amount="10" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233" />
+    <LocationType identifier="City" />
+    <LocationType identifier="Colony" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    
+    <target
+      spawntype="Outpost"
+      itemidentifier="documents"  
+      containertag="locker"
+      sonarlabel="documents1"
+      requireretrieval="PickedUp"
+      allowcontinuebeforeretrieved="false"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target> 
+    <message header="" text="wrong documents"/>
+    
+    <target
+      spawntype="Outpost"
+      itemidentifier="documents"
+      containertag="locker"
+      sonarlabel="documents2"
+      requireretrieval="PickedUp"
+      allowcontinuebeforeretrieved="false"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target> 
+    <message header="" text="wrong documents"/>
+    
+    <target
+      spawntype="Outpost"
+      itemidentifier="classifieddocuments"
+      containertag="locker"
+      sonarlabel="documents3"
+      requireretrieval="RetrievedToSub"
+      allowcontinuebeforeretrieved="true">
+      <chooserandom>
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false"/>
+      </chooserandom>      
+    </target>  
+    
+    <message header="missionsuccess.stealingintel" text="missionmessage0.stealingintel" />    
+  </SalvageMission> -->
+  
+  
+  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
+<!--   <SalvageMission
+    identifier="findhiddenpylons"
+    name="missionname.findhiddenpylons"
+    description="missiondescription.findhiddenpylons"
+    successmessage="missionsuccess.findhiddenpylons"
+    failuremessage="missionfailure.findhiddenpylons"
+    tags="findhiddenpylons"
+    type="Salvage"
+    difficulty="3"
+    commonness="100"
+    reward="2000"
+    requireddeliveryamount="1"
+    PartiallyRetrievedMessage="missionmessage.findhiddenpylons.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.findhiddenpylons.allretrieved">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <LocationType from="AnyOutpost" to="AnyOutpost" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
+
+    <target
+      spawntype="mainpath"
+      itemidentifier="hiddenalienitem"
+      sonarlabel="documents1"
+      requireretrieval="Interact"
+      allowcontinuebeforeretrieved="true"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" showmessage="mission.gotoend2.logbooktext"/>
+      </chooserandom>    
+    </target> 
+    <message header="" text="eventtext.buttonpressed2.c1"/>
+    
+    <target
+      spawntype="mainpath"
+      itemidentifier="hiddenalienitem"
+      sonarlabel="documents2"
+      requireretrieval="Interact"
+      allowcontinuebeforeretrieved="true"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" />
+      </chooserandom>      
+    </target> 
+    <message header="" text="wrong documents"/>
+    
+    <target
+      spawntype="mainpath"
+      itemidentifier="hiddenalienitem"
+      sonarlabel="documents3"
+      requireretrieval="Interact"
+      allowcontinuebeforeretrieved="true"
+      hidelabelafterretrieved="true" >
+      <chooserandom>
+        <StatusEffect target="This" />
+      </chooserandom>      
+    </target>      
+  </SalvageMission> -->
+
 
 </Missions>
