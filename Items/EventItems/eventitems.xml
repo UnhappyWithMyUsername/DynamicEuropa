@@ -930,8 +930,8 @@
   <Item name="piezochipper" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="engcab" spawnprobability="0"/>
     <PreferredContainer secondary="wreckstoragecab,wreckengcab"  spawnprobability="0.05" />
-    <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,117,58" origin="0.5,0.5" />
-    <Sprite texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,117,58" depth="0.55" />
+    <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" origin="0.5,0.5" />
+    <Sprite texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" depth="0.55" />
     <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />    
     <MeleeWeapon slots="RightHand,LeftHand,Any" range="100" reload="1.1" controlpose="true" aimpos="45,15" handle1="-10,-5" holdangle="270" aimangle="-15" combatpriority="8">
       <RequiredSkill identifier="mechanical" level="40" />
@@ -952,7 +952,7 @@
       </Attack>
       <StatusEffect type="OnUse" target="UseTarget,This" comparison="and" >
         <Conditional hastag="piezocrystal" />
-        <particleemitter particle="iceshards" particleamount="3" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="150,150,255,200" />
+        <particleemitter particle="iceshards" particleamount="3" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="1000" selectionmode="Random" />
@@ -963,7 +963,7 @@
         <Conditional hastag="piezocrystal" />
         <Conditional condition="lt 30" />
         <SpawnItem identifier="piezochunk" spawnposition="This" />
-        <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="3.0" scalemax="5.0" drawontop="true" colormultiplier="150,150,255,200" />
+        <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="1000" selectionmode="Random" />
@@ -1020,7 +1020,7 @@
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This">      
         <Remove />
-        <particleemitter particle="iceshards" particleamount="5" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" drawontop="true" colormultiplier="150,150,255,200" />
+        <particleemitter particle="iceshards" particleamount="5" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" drawontop="true" colormultiplier="120,150,225,200" />
         <Sound file="Content/Sounds/Damage/GlassBreak1.ogg" range="300" frequencymultiplier="2" volume="0.5" selectionmode="Random" />
         <Sound file="Content/Sounds/Damage/GlassBreak2.ogg" range="300" frequencymultiplier="2" volume="0.5" selectionmode="Random" />
       </StatusEffect> 
