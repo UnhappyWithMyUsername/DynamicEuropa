@@ -2320,5 +2320,30 @@
     </target>      
   </SalvageMission> -->
 
+  <SalvageMission
+    identifier="piezosample"
+    tags="piezosample"
+    type="Salvage"
+    difficulty="5"
+    commonness="0"
+    reward="2000"
+    requirewreck="false">
+
+    <target
+      spawntype="None"
+      existingitemtag="piezocrystal"
+      sonarlabel="missionsonarlabel.gotoend2.switch"
+      requireretrieval="Interact"
+      allowcontinuebeforeretrieved="false"
+      hidelabelafterretrieved="true">
+      <chooserandom>
+        <StatusEffect target="This" spritecolor="255,0,255,255" setvalue="true"/>
+      </chooserandom>
+    </target>
+    <message header="" text="eventtext.buttonpressed2.c1"/>
+
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,0,256,256" color="255,129,15"/>    
+  </SalvageMission>
+
 
 </Missions>
