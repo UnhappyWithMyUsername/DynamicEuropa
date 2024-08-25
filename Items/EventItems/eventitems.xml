@@ -845,89 +845,8 @@
     <AiTarget Soundrange="5000" sonardisruption="0.1" />
   </Item>
 
-  <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
-    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="764,109,51,70" depth="0.8" origin="0.5,0.5" />
-    <Body width="45" height="65" density="8" />
-    <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
-    <Deconstruct time="10" chooserandom="true">
-      <Item identifier="sabotageeffect" />
-    </Deconstruct>
-  </Item>
 
-  <Item hideinmenus="true" name="sabotageeffect" identifier="sabotageeffect" tags="" category="Misc" Scale="0.5" sonarsize="20" noninteractable="true">
-    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
-    <ElectricalDischarger Range="50" duration="0.25" outdoorsonly="true" powerconsumption="0" Ison="True" RangeMultiplierInWalls="20000">
-      <Affliction identifier="stun" strength="8" />
-      <Affliction identifier="burn" strength="10" />
-      <StatusEffect target="This" type="Always" interval="1">
-        <ParticleEmitter particle="electricshock" anglemin="0" anglemax="360" particleamount="1" scalemin="0.25" scalemax="0.35" lifetime="2" />
-        <Explosion range="100" force="10" empstrength="10" applyfireeffects="true" flames="true"/>
-        <Sound file="Content/Items/MechanicalRepairFail.ogg" range="1000" frequencymultiplier="0.75" />
-			  <Fire size="10.0" />
-        <Use/>
-        <Remove/>
-      </StatusEffect>
-    </ElectricalDischarger>
-  </Item>
-  
-  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
-<!--   <Item identifier="hiddenalienitem" name="hiddenalienitem" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
-    <Body width="210" height="210" bodytype="Static" />
-    <StaticBody width="210" height="210" />
-    <Sprite name="hiddensprite" texture="Content/Items/Alien/guardianpod.png" sourcerect="0,644,380,380" depth="0.03" origin="0.5,0.5" />
-    <BrokenSprite name="realsprite" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="99" />
-    <DecorativeSprite name="realspritefullopacity" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.03" >
-      <IsActiveConditional condition="lte 51" />
-    </DecorativeSprite>    
-    <BrokenSprite name="brokensprite_gradual" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="50" />
-    <BrokenSprite name="brokensprite_broken" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.01" fadein="false" />
-    <LightComponent range="200" lightcolor="255,62,62,255" IsOn="true" castshadows="false" allowingameediting="false" vulnerabletoemp="false" flicker="0.8" flickerspeed="0.1" pulsefrequency="0.1" pulseamount="0.1">
-      <IsActiveConditional condition="lte 50" />
-      <sprite texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,813,210,210" origin="0.5,0.5" size="1,1" alpha="1.0" />
-      <StatusEffect type="OnActive" target="This">
-        <sound file="Content/Items/Alien/AlienArtifactLoop1.ogg" range="10000.0" loop="true" volume="0.1" frequencymultiplier="0.5" />
-        <ParticleEmitter particle="faradayfx" anglemax="360" distancemax="200" particlespersecond="10" scalemin="2.0" scalemax="3.0" colormultiplier="255,0,0,255" />
-      </StatusEffect>
-      <StatusEffect type="OnDamaged" target="This">
-        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="50" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
-        <Sound file="Content/Sounds/Damage/HitArmor1.ogg" range="2000" />
-        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
-      </StatusEffect>
-      <StatusEffect type="OnBroken" target="This" IsOn="false">
-        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="200" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
-        <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" range="50000" dontmuffle="true" soundselectionmode="All" />
-        <sound file="Content/Items/Weapons/Emp.ogg" dontmuffle="true" range="100000" />
-        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
-        <Explosion range="1500.0" structuredamage="600" itemdamage="1000" ballastfloradamage="1000" force="50.0" severlimbsprobability="2" decal="explosion" decalsize="1.0" camerashake="1000" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="5.0" penetration="0.5">
-          <Affliction identifier="explosiondamage" strength="1000" />
-          <Affliction identifier="burn" strength="1000" />
-          <Affliction identifier="radiationsickness" strength="100" />
-          <Affliction identifier="bleeding" strength="40" probability="0.05" dividebylimbcount="false" />
-          <Affliction identifier="stun" strength="30" />
-        </Explosion>
-        <Explosion range="6000" force="1" empstrength="0.5" showeffects="false" ignorecover="true">
-          <Affliction identifier="stun" strength="1" />
-        </Explosion>
-      </StatusEffect>
-      <StatusEffect type="Always" target="This" condition="20" >
-        <Conditional condition="gt 0" />
-      </StatusEffect>
-      <StatusEffect type="Always" target="This" condition="-35" comparison="and" >
-        <Conditional targetitemcomponent="TriggerComponent" triggeractive="true" />
-        <Conditional condition="gt 50" />
-        <ParticleEmitter particle="artifactholderfx" anglemax="360" distancemin="30" distancemax="300" velocitymin="5" velocitymax="20" particlespersecond="30" colormultiplier="50,120,180,255" />
-      </StatusEffect>
-    </LightComponent>
-    <TriggerComponent triggeredby="Human" force="0" radius="500" allowingameediting="false">
-    </TriggerComponent>
-    <AiTarget Soundrange="2000" sonardisruption="3" />
-    <Controller direction="None" canbepicked="true" istoggle="true" msg="ItemMsgPressSelect">
-      <sound file="Content/Items/Button/Switch1.ogg" type="OnUse" range="250.0" />
-      <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
-    </Controller>
-  </Item> -->
-  
-  <Item name="piezochipper" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+  <Item name="Old pick-chisel" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="engcab" spawnprobability="0"/>
     <PreferredContainer secondary="wreckstoragecab,wreckengcab"  spawnprobability="0.05" />
     <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" origin="0.5,0.5" />
@@ -937,7 +856,7 @@
       <RequiredSkill identifier="mechanical" level="40" />
       <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
       <StatusEffect type="OnUse" target="This" reload="1.1" setvalue="true" delay="1.4"/>
-      <Attack targetimpulse="5" structuredamage="15" itemdamage="12">
+      <Attack targetimpulse="2" structuredamage="15" itemdamage="12">
         <Affliction identifier="blunttrauma" strength="25" />
         <Affliction identifier="stun" strength="1" />
         <StatusEffect type="OnUse" target="UseTarget">
@@ -996,10 +915,10 @@
     <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="400" rangemultiplierinwalls="1">
       <Attack targetimpulse="20">
         <Affliction identifier="stun" strength="1"/>
+        <!-- TODO: enable this new shock affliction -->
         <!-- <Affliction identifier="electricshock" strength="30"/> -->
         <Affliction identifier="burn" strength="10"/>
       </Attack>
-      <!-- <StatusEffect type="OnImpact" target="This" Condition="-100.0" delay="0.2" /> -->
       <StatusEffect type="OnImpact" target="This">
         <Conditional condition="gt 0" />
         <Use />
@@ -1038,6 +957,91 @@
       <LightTexture texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="320,284,49,31" origin="0.5,0.5" />
     </LightComponent>
   </Item>
+  
+  
+  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
+<!--   <Item identifier="hiddenalienitem" name="hiddenalienitem" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
+    <Body width="210" height="210" bodytype="Static" />
+    <StaticBody width="210" height="210" />
+    <Sprite name="hiddensprite" texture="Content/Items/Alien/guardianpod.png" sourcerect="0,644,380,380" depth="0.03" origin="0.5,0.5" />
+    <BrokenSprite name="realsprite" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="99" />
+    <DecorativeSprite name="realspritefullopacity" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.03" >
+      <IsActiveConditional condition="lte 51" />
+    </DecorativeSprite>    
+    <BrokenSprite name="brokensprite_gradual" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="50" />
+    <BrokenSprite name="brokensprite_broken" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.01" fadein="false" />
+    <LightComponent range="200" lightcolor="255,62,62,255" IsOn="true" castshadows="false" allowingameediting="false" vulnerabletoemp="false" flicker="0.8" flickerspeed="0.1" pulsefrequency="0.1" pulseamount="0.1">
+      <IsActiveConditional condition="lte 50" />
+      <sprite texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,813,210,210" origin="0.5,0.5" size="1,1" alpha="1.0" />
+      <StatusEffect type="OnActive" target="This">
+        <sound file="Content/Items/Alien/AlienArtifactLoop1.ogg" range="10000.0" loop="true" volume="0.1" frequencymultiplier="0.5" />
+        <ParticleEmitter particle="faradayfx" anglemax="360" distancemax="200" particlespersecond="10" scalemin="2.0" scalemax="3.0" colormultiplier="255,0,0,255" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="50" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
+        <Sound file="Content/Sounds/Damage/HitArmor1.ogg" range="2000" />
+        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" IsOn="false">
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="200" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
+        <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" range="50000" dontmuffle="true" soundselectionmode="All" />
+        <sound file="Content/Items/Weapons/Emp.ogg" dontmuffle="true" range="100000" />
+        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
+        <Explosion range="1500.0" structuredamage="600" itemdamage="1000" ballastfloradamage="1000" force="50.0" severlimbsprobability="2" decal="explosion" decalsize="1.0" camerashake="1000" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="5.0" penetration="0.5">
+          <Affliction identifier="explosiondamage" strength="1000" />
+          <Affliction identifier="burn" strength="1000" />
+          <Affliction identifier="radiationsickness" strength="100" />
+          <Affliction identifier="bleeding" strength="40" probability="0.05" dividebylimbcount="false" />
+          <Affliction identifier="stun" strength="30" />
+        </Explosion>
+        <Explosion range="6000" force="1" empstrength="0.5" showeffects="false" ignorecover="true">
+          <Affliction identifier="stun" strength="1" />
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" condition="20" >
+        <Conditional condition="gt 0" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" condition="-35" comparison="and" >
+        <Conditional targetitemcomponent="TriggerComponent" triggeractive="true" />
+        <Conditional condition="gt 50" />
+        <ParticleEmitter particle="artifactholderfx" anglemax="360" distancemin="30" distancemax="300" velocitymin="5" velocitymax="20" particlespersecond="30" colormultiplier="50,120,180,255" />
+      </StatusEffect>
+    </LightComponent>
+    <TriggerComponent triggeredby="Human" force="0" radius="500" allowingameediting="false">
+    </TriggerComponent>
+    <AiTarget Soundrange="2000" sonardisruption="3" />
+    <Controller direction="None" canbepicked="true" istoggle="true" msg="ItemMsgPressSelect">
+      <sound file="Content/Items/Button/Switch1.ogg" type="OnUse" range="250.0" />
+      <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
+    </Controller>
+  </Item> -->
+
+    <!-- UNUSED. For sabotaging deconstructors -->
+<!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="764,109,51,70" depth="0.8" origin="0.5,0.5" />
+    <Body width="45" height="65" density="8" />
+    <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+    <Deconstruct time="10" chooserandom="true">
+      <Item identifier="sabotageeffect" />
+    </Deconstruct>
+  </Item>
+
+  <Item hideinmenus="true" name="sabotageeffect" identifier="sabotageeffect" tags="" category="Misc" Scale="0.5" sonarsize="20" noninteractable="true">
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
+    <ElectricalDischarger Range="50" duration="0.25" outdoorsonly="true" powerconsumption="0" Ison="True" RangeMultiplierInWalls="20000">
+      <Affliction identifier="stun" strength="8" />
+      <Affliction identifier="burn" strength="10" />
+      <StatusEffect target="This" type="Always" interval="1">
+        <ParticleEmitter particle="electricshock" anglemin="0" anglemax="360" particleamount="1" scalemin="0.25" scalemax="0.35" lifetime="2" />
+        <Explosion range="100" force="10" empstrength="10" applyfireeffects="true" flames="true"/>
+        <Sound file="Content/Items/MechanicalRepairFail.ogg" range="1000" frequencymultiplier="0.75" />
+			  <Fire size="10.0" />
+        <Use/>
+        <Remove/>
+      </StatusEffect>
+    </ElectricalDischarger>
+  </Item> -->
+  
   
 </Items>  
 </Override>
