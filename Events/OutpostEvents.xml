@@ -71,8 +71,8 @@
       <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
       <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnpointtag="selectedvendingmachine" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" />
       <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
       <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.starterdialogue" eventsprite="mines">
         <Option text="eventtext.Constructionprogress.wehavecrates">
@@ -507,7 +507,7 @@
                 </Option>
                 <Option text="eventtext.option.leave" endconversation="true">
                   <ClearTagAction tag="triggerer_player" />
-                  <GoTo name="waitforinput" />
+                  <GoTo name="scrapproposition" />
                 </Option>
               </ConversationAction>
             </Option>
@@ -598,7 +598,7 @@
         <Success>        
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="itemidentifier:op_researchterminal" tag="potentialresearchterminal" submarinetype="outpost" chooserandom="true" />
-          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="psychoresearcher" spawnpointtag="potentialresearchterminal" spawnlocation="Outpost" />     
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="psychoresearcher" spawnpointtag="potentialresearchterminal" spawnlocation="Outpost" />
           <NPCFollowAction npctag="psychoresearcher" targettag="potentialresearchterminal" follow="true"/>
           <TriggerAction target1tag="psychoresearcher" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
           <AfflictionAction targettag="psychoresearcher" affliction="psychosis" strength="100" />
@@ -2547,9 +2547,46 @@
           <ConversationAction targettag="player" text="eventtext.circuswelcome.foundus" dialogtype="Small" endconversation="true" eventsprite="Jestmaster" />
           <SetDataAction identifier="circuswelcomenorepeat" value="1" />
         </Success>  
-      </CheckDataAction >   
+      </CheckDataAction>
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="piezopioneer" commonness="100">
+      <CheckDataAction identifier="piezopioneernorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>        
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="minerskeptic" spawnlocation="Outpost" spawnpointtag="mineevent" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="minerpiezo" spawnlocation="Outpost" spawnpointtag="minerskeptic" />
+          <NPCFollowAction npctag="minerpiezo" targettag="minerskeptic" follow="true"/>
+          <TriggerAction target1tag="minerskeptic" target2tag="player" applytotarget2="hearer_player" radius="150" />
+          <ConversationAction targettag="hearer_player" text="EventText.piezopioneer.argument" eventsprite="mediator">
+            <Option text="EventText.piezopioneer.hmmm" endconversation="true" />
+          </ConversationAction>
+          <NPCFollowAction npctag="minerpiezo" targettag="minerskeptic" follow="false"/>
+          <Label name="tryagain" />
+          <WaitAction time="2" />
+          <TriggerAction target1tag="minerpiezo" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="EventText.piezopioneer.upsetminer" eventsprite="mechanic">
+            <Option text="EventText.piezopioneer.inquirepiezos" >
+              <ConversationAction targettag="triggerer_player" text="EventText.piezopioneer.taleofpioneers" eventsprite="badvibration1">
+                <Option text="EventText.piezopioneer.insane" >
+                  <ConversationAction targettag="triggerer_player" text="EventText.piezopioneer.strangetool" eventsprite="mechanic">
+                    <Option text="EventText.piezopioneer.youdontknow" >
+                      <ConversationAction targettag="triggerer_player" text="EventText.piezopioneer.taketool" eventsprite="mines" endconversation="true"/>
+                      <SpawnAction itemidentifier="piezochipper" amount="1" targetinventory="triggerer_player" />
+                      <SetDataAction identifier="piezopioneernorepeat" operation="set" value="1" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>      
+        </Success>
+      </CheckDataAction>
+    </ScriptedEvent>
+     
   </EventPrefabs>
 </Randomevents>
 </Override>

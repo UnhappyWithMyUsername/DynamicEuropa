@@ -64,5 +64,23 @@
     <LocationType from="AnyOutpost" to="MilitaryForces" />
   </PirateMission> -->
   
+
+    <ScriptedEvent identifier="testcheckselected">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:hiddenalienpylon" tag="hiddenalienpylon" />
+      <TutorialHighlightAction targettag="hiddenalienpylon" />
+      <Label name="beforecheck" />
+      <WaitAction time="1" />
+      <CheckSelectedAction targettag="hiddenalienpylon" charactertag="player">
+        <Success>
+          <ConversationAction targettag="player" text="tutorial.basics.endmessage.1" eventsprite="captain"/>
+        </Success>
+        <Failure>
+          <GoTo name="beforecheck" />
+        </Failure>     
+      </CheckSelectedAction>
+    </ScriptedEvent>
+  
+  
   </EventPrefabs>  
 </Randomevents>

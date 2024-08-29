@@ -249,7 +249,7 @@
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
     <Body width="64" height="24" density="30" />
     <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="OnUse" target="Character" oneshot="true" stackable="false">
+      <StatusEffect type="OnUse" target="Character" oneshot="false" interval="0.8" stackable="false">
         <TriggerEvent identifier="startmanualtakeover" />
       </StatusEffect>
       <StatusEffect type="OnUse" target="This" duration="0.1">
@@ -824,7 +824,7 @@
     </LightComponent> 
     <LightComponent LightColor="30,100,120,255" range="50" IsOn="true" pulseamount="0.2" pulsefrequency="0.2" offset="0,0" allowingameediting="false">
       <sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,363,144,85" origin="0.5,0.5" />
-    </LightComponent>          
+    </LightComponent>
     <AiTarget Soundrange="2000" sonardisruption="0.2" />
   </Item>
   
@@ -845,7 +845,179 @@
     <AiTarget Soundrange="5000" sonardisruption="0.1" />
   </Item>
 
-  <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
+
+  <Item name="Old pick-chisel" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="engcab" spawnprobability="0"/>
+    <PreferredContainer secondary="wreckstoragecab,wreckengcab"  spawnprobability="0.05" />
+    <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" origin="0.5,0.5" />
+    <Sprite texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" depth="0.55" />
+    <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />    
+    <MeleeWeapon slots="RightHand,LeftHand,Any" range="100" reload="1.1" controlpose="true" aimpos="45,15" handle1="-10,-5" holdangle="270" aimangle="-15" combatpriority="8">
+      <RequiredSkill identifier="mechanical" level="40" />
+      <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
+      <StatusEffect type="OnUse" target="This" reload="1.1" setvalue="true" delay="1.4"/>
+      <Attack targetimpulse="2" structuredamage="15" itemdamage="12">
+        <Affliction identifier="blunttrauma" strength="25" />
+        <Affliction identifier="stun" strength="1" />
+        <StatusEffect type="OnUse" target="UseTarget">
+          <Conditional entitytype="eq Character"/>
+          <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="500"/>
+          <Sound file="Content/Items/Weapons/Smack2.ogg" range="500" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" >
+          <Conditional skillrequirement="true" mechanical="lt 40" />
+          <Affliction identifier="stun" strength="0.3" />
+        </StatusEffect>
+      </Attack>
+      <StatusEffect type="OnUse" target="UseTarget,This" comparison="and" >
+        <Conditional hastag="piezocrystal" />
+        <particleemitter particle="iceshards" particleamount="3" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="1000" selectionmode="Random" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="UseTarget,This" comparison="and" >
+        <Conditional hastag="piezocrystal" />
+        <Conditional condition="lt 30" />
+        <SpawnItem identifier="piezochunk" spawnposition="This" spread="10" />
+        <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="1000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="1000" selectionmode="Random" />
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>
+   
+  <Item name="Piezo Crystal Chunk" identifier="piezochunk" description="A chunk of piezo crystal. Can be used as a makeshift battery... but don't drop it." category="Equipment,Electrical" maxstacksize="1" tags="smallitem,loadable,mobilebattery" scale="0.5" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light" health="30" impacttolerance="2" damagedbyexplosions="true" >
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer primary="stunbaton,underwaterscooter,handheldsonar,sonarbeacon,flashlight,portablepump,poweredcontainer" />
+    <Deconstruct time="5" chooserandom="true">
+      <Item identifier="zinc" amount="0"/>
+      <Item identifier="silicon" amount="0"/>
+      <Item identifier="aluminium" amount="0"/>
+      <Item identifier="zinc" amount="0"/>
+      <Item identifier="silicon" amount="0"/>
+      <Item identifier="aluminium" amount="0"/>
+      <Item identifier="zinc" amount="1" mincondition="0.95"/>
+      <Item identifier="silicon" amount="1" mincondition="0.95"/>
+      <Item identifier="aluminium" amount="1" mincondition="0.95"/>
+    </Deconstruct>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,960,64,64" origin="0.5,0.5" />
+    <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="320,284,49,31" origin="0.5,0.5" />
+    <Sprite texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="320,284,49,31" depth="0.55" />
+    <Body width="32" height="20" density="15" />
+    <Throwable slots="Any,RightHand,LeftHand" holdpos="0,0" handle1="0,0" throwforce="3.5" msg="ItemMsgPickUpSelect" > 
+    </Throwable>
+    <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="400" rangemultiplierinwalls="1">
+      <Attack targetimpulse="20">
+        <Affliction identifier="stun" strength="1"/>
+        <!-- TODO: enable this new shock affliction -->
+        <!-- <Affliction identifier="electricshock" strength="30"/> -->
+        <Affliction identifier="burn" strength="10"/>
+      </Attack>
+      <StatusEffect type="OnImpact" target="This">
+        <Conditional condition="gt 0" />
+        <Use />
+        <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="3000" />
+        <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="3000" />
+        <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="3000" />
+        <Explosion range="250.0" ballastfloradamage="60" structuredamage="30" itemdamage="0" empstrength="0.5" levelwalldamage="70" force="5.0" severlimbsprobability="0.1" decal="explosion" decalsize="0.5" camerashake="20" camerashakerange="350" flashrange="500" flashduration="2.0" screencolor="200,220,255,255" screencolorrange="500" screencolorduration="2.0" flames="false" >
+          <Affliction identifier="explosiondamage" strength="15" />
+          <Affliction identifier="burn" strength="5" />
+          <Affliction identifier="stun" strength="5" />
+        </Explosion>
+        <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This">
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="1000" frequencymultiplier="2" selectionmode="random" />
+        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="1000" frequencymultiplier="2" selectionmode="random" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">      
+        <Remove />
+        <particleemitter particle="iceshards" particleamount="5" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" drawontop="true" colormultiplier="120,150,225,200" />
+        <Sound file="Content/Sounds/Damage/GlassBreak1.ogg" range="300" frequencymultiplier="2" volume="0.5" selectionmode="Random" />
+        <Sound file="Content/Sounds/Damage/GlassBreak2.ogg" range="300" frequencymultiplier="2" volume="0.5" selectionmode="Random" />
+      </StatusEffect> 
+      <StatusEffect type="OnNotContained" target="This">
+        <Conditional condition="gt 0" />
+        <ParticleEmitter particle="ElectricShock" distancemin="0" distancemax="0" particlespersecond="5.0" anglemin="0" anglemax="360" scalemin="0.05" scalemax="0.1" />
+      </StatusEffect>
+    </ElectricalDischarger>
+    <LightComponent lightcolor="60,180,250,255" range="70.0" powerconsumption="0" flicker="0.5" flickerspeed="0.8" pulsefrequency="0.4" pulseamount="0.5" ison="true" drawbehindsubs="false">
+      <IsActiveConditional Condition="gt 0.0" />
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <LightComponent lightcolor="60,180,250,255" range="1.0" powerconsumption="0" pulsefrequency="0.4" pulseamount="0.5" ison="true" drawbehindsubs="false">
+      <IsActiveConditional Condition="gt 0.0" />
+      <LightTexture texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="320,284,49,31" origin="0.5,0.5" />
+    </LightComponent>
+  </Item>
+  
+  
+  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
+  <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
+    <Body width="210" height="210" bodytype="Static" />
+    <StaticBody width="210" height="210" />
+    <Sprite name="hiddensprite" texture="Content/Items/Alien/guardianpod.png" sourcerect="0,644,380,380" depth="0.03" origin="0.5,0.5" />
+    <BrokenSprite name="realsprite" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="99" />
+    <DecorativeSprite name="realspritefullopacity" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,385,210,210" origin="0.5,0.5" depth="0.03" >
+      <IsActiveConditional condition="lte 51" />
+    </DecorativeSprite>    
+    <BrokenSprite name="brokensprite_gradual" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.02" fadein="true" maxcondition="50" />
+    <BrokenSprite name="brokensprite_broken" texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,598,210,210" origin="0.5,0.5" depth="0.01" fadein="false" />
+    <LightComponent range="200" lightcolor="255,62,62,255" IsOn="true" castshadows="false" allowingameediting="false" vulnerabletoemp="false" flicker="0.8" flickerspeed="0.1" pulsefrequency="0.1" pulseamount="0.1">
+      <IsActiveConditional condition="lte 50" />
+      <sprite texture="Content/Items/Alien/EndRuin_Items.png" sourcerect="912,813,210,210" origin="0.5,0.5" size="1,1" alpha="1.0" />
+      <StatusEffect type="OnActive" target="This">
+        <sound file="Content/Items/Alien/AlienArtifactLoop1.ogg" range="10000.0" loop="true" volume="0.1" frequencymultiplier="0.5" />
+        <ParticleEmitter particle="faradayfx" anglemax="360" distancemax="200" particlespersecond="10" scalemin="2.0" scalemax="3.0" colormultiplier="255,0,0,255" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="50" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
+        <Sound file="Content/Sounds/Damage/HitArmor1.ogg" range="2000" />
+        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" IsOn="false">
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="200" particleamount="200" velocitymin="100" velocitymax="2000" scalemin="1" scalemax="2" />
+        <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" range="50000" dontmuffle="true" soundselectionmode="All" />
+        <sound file="Content/Items/Weapons/Emp.ogg" dontmuffle="true" range="100000" />
+        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" colormultiplier="255,0,0,255" />
+        <Explosion range="1500.0" structuredamage="600" itemdamage="1000" ballastfloradamage="1000" force="50.0" severlimbsprobability="2" decal="explosion" decalsize="1.0" camerashake="1000" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="5.0" penetration="0.5">
+          <Affliction identifier="explosiondamage" strength="1000" />
+          <Affliction identifier="burn" strength="1000" />
+          <Affliction identifier="radiationsickness" strength="100" />
+          <Affliction identifier="bleeding" strength="40" probability="0.05" dividebylimbcount="false" />
+          <Affliction identifier="stun" strength="30" />
+        </Explosion>
+        <Explosion range="6000" force="1" empstrength="0.5" showeffects="false" ignorecover="true">
+          <Affliction identifier="stun" strength="1" />
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" condition="20" >
+        <Conditional condition="gt 0" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" condition="-35" comparison="and" >
+        <Conditional targetitemcomponent="TriggerComponent" triggeractive="true" />
+        <Conditional condition="gt 50" />
+        <ParticleEmitter particle="artifactholderfx" anglemax="360" distancemin="30" distancemax="300" velocitymin="5" velocitymax="20" particlespersecond="30" colormultiplier="50,120,180,255" />
+      </StatusEffect>
+    </LightComponent>
+    <TriggerComponent triggeredby="Human" force="0" radius="500" allowingameediting="false">
+    </TriggerComponent>
+    <AiTarget Soundrange="2000" sonardisruption="3" />
+    <Controller direction="None" canbepicked="true" istoggle="true" msg="ItemMsgPressSelect">
+      <sound file="Content/Items/Button/Switch1.ogg" type="OnUse" range="250.0" />
+      <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
+    </Controller>
+  </Item>
+
+    <!-- UNUSED. For sabotaging deconstructors -->
+<!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="764,109,51,70" depth="0.8" origin="0.5,0.5" />
     <Body width="45" height="65" density="8" />
     <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
@@ -868,6 +1040,8 @@
         <Remove/>
       </StatusEffect>
     </ElectricalDischarger>
-  </Item>
+  </Item> -->
+  
+  
 </Items>  
 </Override>
