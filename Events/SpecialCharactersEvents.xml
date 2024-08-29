@@ -5311,5 +5311,132 @@
         </Success>
       </CheckReputationAction>
     </ScriptedEvent>
+    <!-- Cody Mccoy -->
+    <ScriptedEvent identifier="codymccoy">
+      <CheckDataAction identifier="meetingcody1" condition="eq true" _npos="-1084.0286,53.664764">
+        <Failure>
+          <CheckDataAction identifier="codydied" condition="eq true" _npos="-579.59906,47.713547">
+            <Failure>
+              <TagAction criteria="player" tag="player" _npos="0,0" />
+              <TagAction criteria="itemidentifier:dockinghatch" tag="airlock" continueifnotargetsfound="true" _npos="600,0" />
+              <TriggerAction target1tag="airlock" target2tag="player" applytotarget2="codytriggerplayer" radius="100" _npos="1200,0" />
+              <StatusEffectAction targettag="gunshoteffect" _npos="1800,0" />
+              <ConversationAction text="As your submarine's docking hatch latches onto the outpost, an unsettling silence hangs in the air. The usual chatter and movement are absent. Instead, the distant echoes of gunfire pierce the quiet, accompanied by the occasional shout. The metallic scent of blood lingers in the confined space, hinting at the violence that has recently unfolded.&#xD;" targettag="codytriggerplayer" _npos="2428.747,3.465332" />
+              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="lonestar" lootingisstealing="false" targettag="cody" spawnlocation="Outpost" teamid="FriendlyNPC" allowduplicates="false" targetmoduletags="AdminPirate" _npos="3051.732,1.996582" />
+              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="deadpirate" lootingisstealing="true" targettag="paidactors" spawnpointtag="cody" teamid="Team2" allowduplicates="true" amount="2" _npos="3793.0308,1.3522949" />
+              <WaitAction time="10" _npos="4439.7627,29.172363" />
+              <AfflictionAction affliction="bleeding" strength="100" limbtype="Torso" targettag="paidactors" _npos="4905.6646,35.38794" />
+              <AfflictionAction affliction="gunshotwound" strength="1000" limbtype="Torso" targettag="paidactors" _npos="5450.301,35.463135" />
+              <NPCWaitAction npctag="cody" wait="true" _npos="5987.7607,22.415771" />
+              <TriggerAction target1tag="cody" target2tag="codytriggerplayer" applytotarget2="teamcody" waitforinteraction="true" _npos="6580.2803,-12.264648" />
+              <NPCWaitAction npctag="cody" wait="true" _npos="7139.9077,-20.197998" />
+              <ConversationAction text="As you enter the bar, the aftermath of a brutal skirmish greets you. The bodies of bandits lie motionless on the cold steel floor, blood pooling around them. In the center of the carnage stands a lone figure, a man clad in a worn duster coat and a wide-brimmed hat, his revolver still smoking from recent use." targettag="codytriggerplayer" _npos="7749.5483,-45.56079">
+                <Option text="Continue.">
+                  <ConversationAction text="&quot;Well, well. What do we have here? A group of curious souls, or maybe just lost? Either way, you're walking into a mess I just cleaned up.&quot; He holsters his revolver and tips his hat.&#xD;" targettag="codytriggerplayer" _npos="8465.895,-41.928955">
+                    <Option text="Continue.">
+                      <ConversationAction text="&quot;Name's not important. What’s important is that there are more of those unlawful bastards on the way. Question is, where do you stand?&quot;" targettag="codytriggerplayer" _npos="9165.843,-44.878662">
+                        <Option text="“This place could use a little justice. Let's give these bandits something to remember.”">
+                          <ConversationAction text="&quot;Smart choice. These outlaws don't deserve to hold this place, and with some backup on my side, they'll wish they'd never come back.&quot; He pulls out a pack of cigarettes, lights one, and then gestures to the doors. &quot;I hope you are ready, when they come, it's gonna be a fight to remember.&quot;" targettag="codytriggerplayer" _npos="9989.075,-541.63794">
+                            <Option text="&quot;I was born ready.&quot;" endconversation="true">
+                              <NPCWaitAction npctag="cody" wait="false" _npos="10630.469,-516.5631" />
+                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="specialcombatpirate" lootingisstealing="true" targettag="badguy" teamid="FriendlyNPC" allowduplicates="true" allowinplayerview="false" _npos="11358.133,-613.0684" />
+                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="specialcombatpirate" lootingisstealing="true" targettag="badguy" teamid="FriendlyNPC" allowduplicates="true" allowinplayerview="false" _npos="11990.347,-626.16455" />
+                              <SpawnAction npcsetidentifier="customnpcs" npcidentifier="specialcombatpirate" lootingisstealing="true" targettag="badguy" teamid="FriendlyNPC" allowduplicates="true" allowinplayerview="false" _npos="12514.417,-629.61066" />
+                              <TagAction criteria="humanprefabidentifier:specialcombatpirate" tag="pirategroupattack" _npos="13065.503,-625.2929" />
+                              <TagAction criteria="humanprefabidentifier:lonestar" tag="teamcody" _npos="13563.814,-620.6849" />
+                              <Label name="pirateswarm" _npos="14091.682,-545.9935" />
+                              <CountTargetsAction targettag="pirategroupattack" comparetotarget="pirategroupattack" minpercentagerelativetotarget="100" _npos="14600.629,-507.6248">
+                                <Conditional isdead="True"/>
+                                <Conditional isunconscious="True" />
+                                <Success>
+                                  <CountTargetsAction targettag="cody" comparetotarget="cody" minpercentagerelativetotarget="100" _npos="15129.644,-1191.5408">
+                                    <Conditional isdead="True"/>
+                                    <Conditional isunconscious="True" />
+                                    <Success>
+                                      <AfflictionAction affliction="bloodloss" strength="1000" limbtype="Torso" targettag="cody" _npos="15618.537,-1451.4146" />
+                                      <ConversationAction text="You manage to fend off the remaining attackers but amidst the mayhem, the gunslinger takes a nasty blow and falls to the floor. You should probably check up on him." targettag="codytriggerplayer" _npos="16234.004,-1567.8685">
+                                        <Option text="Leave." endconversation="true">
+                                          <TriggerAction target1tag="cody" target2tag="codytriggerplayer" radius="75" disableiftargetincapacitated="false" _npos="16868.715,-1616.1361" />
+                                          <ConversationAction text="As you walk up to the wounded man, you notice he is still breathing but barely. Through shallow breaths, he manage to muster up some words. “Guess this marks the end of Lone Star, huh?”" targettag="codytriggerplayer" _npos="17352.209,-1615.376">
+                                            <Option text="&quot;Hold on, I'll get some help.&quot;">
+                                              <ConversationAction text="&quot;Guess this... Marks the end of Lone Star, huh...?&quot; He coughs with a pained smile, blood staining his lips. &quot;But we did it... Showed 'em what happens when they cross the wrong folks...&quot; He pauses, fighting for breath, then reaches out to grip your arm weakly." targettag="codytriggerplayer" _npos="17937.553,-1632.5894">
+                                                <Option text="&quot;Darn right they did.&quot;">
+                                                  <Label name="codyfinalwords" _npos="18514.895,-1675.3926" />
+                                                  <NPCWaitAction npctag="cody" wait="true" _npos="18961.215,-1695.428" />
+                                                  <ConversationAction text="&quot;Take this... This old iron's served me well. But now... It's your turn to carry the torch. Keep fightin'... Keep standin' tall... In this hell of a world.&quot;" targettag="codytriggerplayer" _npos="19376.498,-1657.7186">
+                                                    <Option text="&quot;I will.&quot;">
+                                                      <Label name="codyfinalwords2" _npos="19893.43,-1671.9475" />
+                                                      <NPCWaitAction npctag="cody" wait="true" _npos="20297.445,-1657.3925" />
+                                                      <ConversationAction text="His grip loosens, and his voice fades to a whisper.&#xD; &quot;Guess... I'll be seein' ya... In the next life... Partner.&quot;" targettag="codytriggerplayer" _npos="20840.434,-1708.1779">
+                                                        <Option text="Continue.">
+                                                          <ConversationAction text="With a final shuddering breath, the cowboy’s hand falls to the floor and his eyes close, the life leaving him as the outpost falls silent." targettag="codytriggerplayer" _npos="21476.809,-1702.9277">
+                                                            <Option text="Leave." endconversation="true">
+                                                              <SpawnAction itemidentifier="revolver" targetinventory="codytriggerplayer" _npos="21999.266,-1787.5782" />
+                                                              <ClearTagAction tag="codytriggerplayer" _npos="22417.445,-1684.1663" />
+                                                              <SetDataAction value="true" identifier="codydied" _npos="22859.252,-1691.0056" />
+                                                            </Option>
+                                                          </ConversationAction>
+                                                        </Option>
+                                                      </ConversationAction>
+                                                    </Option>
+                                                    <Option text="&quot;Don't die on me!&quot;">
+                                                      <GoTo name="codyfinalwords2" _npos="19883.412,-1427.9116" />
+                                                    </Option>
+                                                  </ConversationAction>
+                                                </Option>
+                                                <Option text="...">
+                                                  <GoTo name="codyfinalwords" _npos="18514.58,-1477.7694" />
+                                                </Option>
+                                              </ConversationAction>
+                                            </Option>
+                                          </ConversationAction>
+                                        </Option>
+                                      </ConversationAction>
+                                    </Success>
+                                    <Failure>
+                                      <StatusEffectAction targettag="cody" _npos="15553.674,-920.7129" >
+                                        <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true">
+                                          <ReduceAffliction type="damage" amount="1000" />
+                                          <ReduceAffliction type="bleeding" amount="1000" />
+                                        </StatusEffect>
+                                      </StatusEffectAction>
+                                      <TriggerAction target1tag="cody" target2tag="codytriggerplayer" radius="75" disableiftargetincapacitated="false" _npos="16023.085,-971.6241" />
+                                      <NPCWaitAction npctag="cody" wait="true" _npos="16416.283,-967.7507" />
+                                      <ConversationAction text="After a tense battle, the last of the bandits fall. The outpost is littered with bodies, but you've managed to defend it. &quot;Hell of a shootout, partner. Not many would've had the guts to stand with me, Lone Star. You did good, kid.&quot; He reaches into his coat and hands you a battered but finely crafted revolver. &#xD;" targettag="codytriggerplayer" _npos="16859.98,-993.0564">
+                                        <Option text="Continue.">
+                                          <ConversationAction text="&quot;Take this. It'll serve you well in the dark places of the world. Now, if you'll excuse me, I've got places to be and people to see. Maybe we'll cross paths again.&quot; With that, he tips his hat one last time and disappears into the shadows, leaving you with the spoils of victory." targettag="codytriggerplayer" _npos="17325.586,-985.582">
+                                            <Option text="Leave." endconversation="true">
+                                              <SpawnAction itemidentifier="revolver" targetinventory="codytriggerplayer" _npos="17817.244,-1056.8877" />
+                                              <ClearTagAction tag="codytriggerplayer" _npos="18294.713,-925.0967" />
+                                              <NPCWaitAction npctag="cody" wait="false" _npos="18297.5,-748.5" />
+                                              <SetDataAction value="true" identifier="meetingcody1" _npos="18298.54,-550.8363" />
+                                            </Option>
+                                          </ConversationAction>
+                                        </Option>
+                                      </ConversationAction>
+                                    </Failure>
+                                  </CountTargetsAction>
+                                </Success>
+                                <Failure>
+                                  <CombatAction combatmode="Offensive" isinstigator="true" npctag="pirategroupattack" enemytag="teamcody" _npos="15133.506,-190.64648" />
+                                  <CombatAction combatmode="Offensive" isinstigator="true" npctag="cody" enemytag="pirategroupattack" _npos="15649.59,-182.66498" />
+                                  <WaitAction time="8" _npos="16126.437,-158.9313" />
+                                  <Label name="pirateswarm" _npos="16595.158,-148.63058" />
+                                </Failure>
+                              </CountTargetsAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                        <Option text="“You've done well for yourself, but I don't trust you. I think this place is better off without you.”" />
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
   </EventPrefabs>
 </Randomevents>
