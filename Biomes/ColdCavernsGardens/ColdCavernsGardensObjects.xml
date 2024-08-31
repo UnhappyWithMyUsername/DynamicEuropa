@@ -6,7 +6,11 @@
 
   <!-- probably will only be used as background deco, these kind of level hazards are hard to get right -->
 <!--   <stalk spawnpos="Wall" alignment="Top" minsize="0.5" maxsize="2.5" depthrange="0,1" takelevelwalldamage="true" health="20" hidewhenbroken="true" clusteringamount="1" clusteringgroup="0" alignwithsurface="False" swingamount="0.5" swingfrequency="0.5" scaleoscillation="0,0.02" scaleoscillationfrequency="0.1" sonardisruption="0.0" sonarsize="5" maxcount="100">
-    <overridecommonness commonness="20" leveltype="coldcavernsgardens" />
+    <overridecommonness commonness="40" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="40" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="25" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation.png" sourcerect="775,0,249,849" origin="0.5,0.95"/>
     <AiTarget maxsoundrange="10000" maxsightrange="6000" />
     <Trigger position="0,650" width="250" height="250" sensor="false" triggeredby="Submarine" staytriggereddelay="10000000" triggeronce="true">
@@ -36,44 +40,75 @@
     </Trigger>
   </stalk> -->
 
-
-  <branchccg1 identifier="branchccg1" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,1" alignment="Top,Bottom" clusteringamount="0" clusteringgroup="0.1" alignwithsurface="False" swingamount="1" swingfrequency="0.2" scaleoscillation="0,0.12" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <branchccg1 identifier="branchccg1" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="0,30" randomoffset="0,0" commonness="0" depthrange="100,300" alignment="Top" clusteringamount="0" clusteringgroup="0.1" alignwithsurface="False" swingamount="1" swingfrequency="0.2" scaleoscillation="0,0.12" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="40" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="40" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="25" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation3.png" sourcerect="0,0,1024,1024" origin="0.5,0.95"/>
   </branchccg1>
   
-  <backgroundbranchccg1 identifier="backgroundbranchccg1" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="1" maxsize="2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="1000,2000" alignment="Top,Bottom" clusteringamount="0" clusteringgroup="0.2" alignwithsurface="True" swingamount="1" swingfrequency="0.2" scaleoscillation="0,0.12" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <backgroundbranchccg1 identifier="backgroundbranchccg1" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.8" maxsize="1.2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="1000,2000" alignment="Top" clusteringamount="0" clusteringgroup="0.2" alignwithsurface="True" minsurfacewidth="600" swingamount="1" swingfrequency="0.2" scaleoscillation="0,0.12" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100" spritecolor="200,200,200,255" >
+    <overridecommonness commonness="20" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="20" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="5" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation3.png" sourcerect="0,0,1024,1024" origin="0.5,0.95"/>
   </backgroundbranchccg1>
 
-  <branchccg2 identifier="branchccg2" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,1" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.3" alignwithsurface="False" swingamount="1" swingfrequency="0.6" scaleoscillation="0,0.15" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <branchccg2 identifier="branchccg2" spawnpos="MainPathWall, SidePathWall, RuinWall, OutpostWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,100" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.3" alignwithsurface="False" swingamount="1" swingfrequency="0.6" scaleoscillation="0,0.15" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100" >
+    <overridecommonness commonness="40" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="40" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="25" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation4.png" sourcerect="0,0,818,1024" origin="0.5,0.95"/>
   </branchccg2>
 
-  <backgroundbranchccg2 identifier="backgroundbranchccg2" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="1" maxsize="2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="2000,2000" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.4" alignwithsurface="True" swingamount="1" swingfrequency="0.6" scaleoscillation="0,0.15" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <backgroundbranchccg2 identifier="backgroundbranchccg2" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.8" maxsize="1.2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="2000,2000" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.4" alignwithsurface="True" minsurfacewidth="600"  swingamount="1" swingfrequency="0.6" scaleoscillation="0,0.15" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="20" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="20" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="5" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation4.png" sourcerect="0,0,818,1024" origin="0.5,0.95"/>
   </backgroundbranchccg2>
 
-  <branchccg3 identifier="branchccg3" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,1" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.5" alignwithsurface="False" swingamount="1" swingfrequency="0.3" scaleoscillation="0,0.13" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <branchccg3 identifier="branchccg3" spawnpos="MainPathWall, SidePathWall, RuinWall, OutpostWall" minsize="0.5" maxsize="0.75" randomrotation="-10,10" randomoffset="0,0" commonness="0" depthrange="100,300" alignment="Top" clusteringamount="0" clusteringgroup="0.5" alignwithsurface="False" swingamount="1" swingfrequency="0.3" scaleoscillation="0,0.13" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="40" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="40" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="25" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation5.png" sourcerect="0,0,555,1024" origin="0.6,0.95"/>
   </branchccg3>
   
-  <backgroundbranchccg3 identifier="backgroundbranchccg3" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="1" maxsize="2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="1000,2000" alignment="Bottom" clusteringamount="0" clusteringgroup="0.6" alignwithsurface="True" swingamount="1" swingfrequency="0.3" scaleoscillation="0,0.13" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="35" leveltype="coldcavernsgardens" />
+  <backgroundbranchccg3 identifier="backgroundbranchccg3" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.8" maxsize="1.2" randomrotation="-10,10" randomoffset="0,-1000" commonness="0" depthrange="1000,2000" alignment="Top" clusteringamount="0" clusteringgroup="0.6" alignwithsurface="False" minsurfacewidth="600"  swingamount="1" swingfrequency="0.3" scaleoscillation="0,0.13" scaleoscillationfrequency="0.2" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="20" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="20" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="5" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation5.png" sourcerect="0,0,555,1024" origin="0.6,0.95"/>
   </backgroundbranchccg3>
 
-  <branchccg4 identifier="branchccg4" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,1" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.7" alignwithsurface="False" swingamount="1" swingfrequency="0.5" scaleoscillation="0,0.14" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="30" leveltype="coldcavernsgardens" />
+  <branchccg4 identifier="branchccg4" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="0.75" randomrotation="-30,30" randomoffset="0,0" commonness="0" depthrange="0,1" alignment="Bottom" clusteringamount="0" clusteringgroup="0.7" alignwithsurface="False" swingamount="1" swingfrequency="0.5" scaleoscillation="0,0.14" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="40" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="40" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="25" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation5.png" sourcerect="580,151,444,873" origin="0.3,0.95"/>
   </branchccg4>
   
-  <backgroundbranchccg4 identifier="backgroundbranchccg4" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="1" maxsize="2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="1000,2000" alignment="Top,Left,Right,Bottom" clusteringamount="0" clusteringgroup="0.8" alignwithsurface="True" swingamount="1" swingfrequency="0.5" scaleoscillation="0,0.14" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
-    <overridecommonness commonness="40" leveltype="coldcavernsgardens" />
+  <backgroundbranchccg4 identifier="backgroundbranchccg4" spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.8" maxsize="1.2" randomrotation="0,0" randomoffset="0,-1000" commonness="0" depthrange="2000,3000" alignment="Bottom" clusteringamount="0" clusteringgroup="0.8" alignwithsurface="True" minsurfacewidth="600"  swingamount="1" swingfrequency="0.5" scaleoscillation="0,0.14" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
+    <overridecommonness commonness="20" leveltype="coldcavernstutorial" /> 
+    <overridecommonness commonness="20" leveltype="coldcavernsbasic" /> 
+    <overridecommonness commonness="15" leveltype="coldcavernsadvanced" /> 
+    <overridecommonness commonness="10" leveltype="coldcavernsmaze" /> 
+    <overridecommonness commonness="5" leveltype="coldcavernstransition" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation5.png" sourcerect="580,151,444,873" origin="0.3,0.95"/>
   </backgroundbranchccg4>
 
@@ -85,22 +120,22 @@
   ////// REJECTS ////////
   ////// REJECTS //////// -->
 
-  <!-- <branches1 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="true" swingamount="3" randomrotation="-20,20" commonness="0">
+  <!-- <branches1 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="True" minsurfacewidth="600"  swingamount="3" randomrotation="-20,20" commonness="0">
     <overridecommonness commonness="4" leveltype="coldcavernsgardens" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation2.png" sourcerect="0,0,525,484" origin="0.5,0.9"/>
   </branches1>
 
-  <branches2 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="true" swingamount="3" randomrotation="-20,20" commonness="0">
+  <branches2 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="True" minsurfacewidth="600"  swingamount="3" randomrotation="-20,20" commonness="0">
     <overridecommonness commonness="4" leveltype="coldcavernsgardens" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation2.png" sourcerect="247,0,278,479" origin="0.2,0.9"/>
   </branches2>
 
-  <branches3 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="true" swingamount="3" randomrotation="-20,20" commonness="0">
+  <branches3 spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="2.0" alignwithsurface="True" minsurfacewidth="600"  swingamount="3" randomrotation="-20,20" commonness="0">
     <overridecommonness commonness="4" leveltype="coldcavernsgardens" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation2.png" sourcerect="526,0,245,479" origin="0.4,0.9"/>
   </branches3> -->
   
-  <!-- <fungus spawnpos="MainPathWall, SidePathWall, RuinMainPathWall, SidePathWall, OutpostWall" minsize="0.5" maxsize="2.0" alignwithsurface="true" depthrange="0,1" commonness="0" scaleoscillation="0.05,0.1" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
+  <!-- <fungus spawnpos="MainPathWall, SidePathWall, RuinMainPathWall, SidePathWall, OutpostWall" minsize="0.5" maxsize="2.0" alignwithsurface="True" minsurfacewidth="600"  depthrange="0,1" commonness="0" scaleoscillation="0.05,0.1" scaleoscillationfrequency="0.1" sonardisruption="0" maxcount="100">
     <overridecommonness commonness="10" leveltype="coldcavernsgardens" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation2.png" sourcerect="0,681,442,343" origin="0.5,0.9"/>
   </fungus> -->
@@ -123,7 +158,7 @@
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation4.png" sourcerect="820,245,204,779" origin="0.5,0.95"/>
   </hay>
 
-  <leaves spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="1.5" alignwithsurface="true" commonness="0">
+  <leaves spawnpos="MainPathWall, SidePathWall, RuinWall" minsize="0.5" maxsize="1.5" alignwithsurface="True" minsurfacewidth="600"  commonness="0">
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation.png" sourcerect="305,722,461,301" origin="0.6,0.8"/>
     <overridecommonness commonness="3" leveltype="coldcavernsgardens" />
   </leaves>
@@ -138,7 +173,7 @@
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation.png" sourcerect="241,0,322,720" origin="0.5,0.15"/>
   </hanging2>
   
-  <spike spawnpos="MainPathWall, SidePathWall, RuinWall" alignment="Top" minsize="0.5" maxsize="1.5" alignwithsurface="true" randomrotation="-20,20" commonness="0">
+  <spike spawnpos="MainPathWall, SidePathWall, RuinWall" alignment="Top" minsize="0.5" maxsize="1.5" alignwithsurface="True" minsurfacewidth="600"  randomrotation="-20,20" commonness="0">
     <overridecommonness commonness="2" leveltype="coldcavernsgardens" />
     <Sprite texture="%ModDir%/Biomes/ColdCavernsGardens/vegetation.png" sourcerect="544,0,228,561" origin="0.5,0.95"/>
   </spike> -->
