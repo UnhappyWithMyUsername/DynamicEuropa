@@ -177,6 +177,7 @@
           <!-- Set the takeoverinprogress data to true to prevent being able to call this event again by another player while it's currently active -->
           <SetDataAction identifier="takeoverinprogress" value="true" />
           <!-- Checking if the target is dead allows the action to fail if the target is present and automatically succeeds if no target was found, checking for the next target -->
+          <!-- TODO: clean that up, it's better to have 4 events that can only trigger in specified locations rather than checking for NPC ??-->
           <CheckConditionalAction targettag="coalitionstation">
             <Conditional isDead="true" />
             <Success>
@@ -511,6 +512,7 @@
       </CountTargetsAction>
       <Label name="endevent" />
     </ScriptedEvent>
+    
     <!-- Turns a station into an empty location -->
     <ScriptedEvent identifier="outpostdestructionnostation">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
