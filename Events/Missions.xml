@@ -2280,6 +2280,8 @@
     <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
     <LocationType from="AnyOutpost" to="AnyOutpost" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="findhiddenpylonsevent" />
+    <CompleteCheckDataAction identifier="pylonsdestroyed" condition="eq 1"/>      
 
     <target
       spawntype="mainpath"
@@ -2292,7 +2294,7 @@
         <StatusEffect target="This" showmessage="mission.gotoend2.logbooktext"/>
       </chooserandom>    
     </target> 
-    <message header="" text="eventtext.buttonpressed2.c1"/>
+    <message header="objectivedone" text="objectivedone"/>
     
     <target
       spawntype="mainpath"
@@ -2317,10 +2319,12 @@
       <chooserandom>
         <StatusEffect target="This" />
       </chooserandom>      
-    </target>      
+    </target>    
+    
   </SalvageMission> -->
+  
 
-  <SalvageMission
+<!--   <SalvageMission
     identifier="piezosample"
     tags="piezosample"
     type="Salvage"
@@ -2343,7 +2347,7 @@
     <message header="" text="eventtext.buttonpressed2.c1"/>
 
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,0,256,256" color="255,129,15"/>    
-  </SalvageMission>
+  </SalvageMission> -->
 
 
 </Missions>

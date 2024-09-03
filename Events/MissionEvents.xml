@@ -1287,5 +1287,27 @@
       <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
     </ScriptedEvent> -->  
       
+    <!-- UNUSED, can't get the mission to accept the state as completed and succeed-->
+<!--     <ScriptedEvent identifier="findhiddenpylonsevent" commonness="50">
+      <SetDataAction identifier="pylonsdestroyed" operation="set" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:hiddenalienpylon" tag="breakthis" />
+      <Waitaction time="1" />
+      <Label name="checkfordestroyed" />
+      <CountTargetsAction targettag="breakthis" CompareToTarget="breakthis" MinPercentageRelativeToTarget="100">
+        <Conditional condition="lte 0" />
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkfordestroyed" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="pylonsdestroyed" operation="set" value="1" />
+          <MissionStateAction missionidentifier="findhiddenpylons" operation="Set" value="1" />
+          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+        </Success>
+      </CountTargetsAction>
+    </ScriptedEvent>  -->
+      
+      
   </EventPrefabs>
 </Randomevents>
