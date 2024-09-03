@@ -89,8 +89,7 @@
         <!-- multiply probability by 0 if next to hunting grounds-->
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="1" />
       </ChangeTo>
-      <!-- TODO: Add custom messagetag for turning into church -->
-      <ChangeTo type="HuskChurch" disallowedadjacentlocations="Lair,OuterLair,LairMudraptor,LairThresher" disallowedproximity="1" locationtypechangecooldown="2" probability="0.5" messagetag="locationchange.none.changeto.outpost">
+      <ChangeTo type="HuskChurch" disallowedadjacentlocations="Lair,OuterLair,LairMudraptor,LairThresher" disallowedproximity="1" locationtypechangecooldown="2" probability="0.5" messagetag="locationchange.none.changeto.huskchurch">
         <!-- if near a beacon station, increase the probability -->
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
         <!-- multiply probability by 0 if another church is within 4 steps -->
@@ -553,7 +552,6 @@
     </Hydroponics>
     
     <!-- MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING -->
-    <!-- TODO: redo the survey, make it look like a drone with engines and whatnot -->
     <Survey identifier="Survey" disallowedadjacentlocations="Survey,Mine" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 6: 0.0" mincountperzone="1: 1, 2: 1" beaconstationchance="0.00" AllowAsBiomeGate="false" IsAnyOutpost="false" Faction="none">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,0,128,128" color="143,465,239,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />

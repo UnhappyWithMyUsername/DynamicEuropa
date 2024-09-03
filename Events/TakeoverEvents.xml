@@ -3,7 +3,7 @@
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
     <!-- OUTPOST TAKEOVER -->
-    <!-- TODO: Change takeover to "liberate outpost" when tagging by team becomes possible and replace the removenpc SE with the following one: -->
+    <!-- TODO: NEXTUPDATE? Change takeover to "liberate outpost" when tagging by team becomes possible and replace the removenpc SE with the following one: -->
     <!--
     <StatusEffectAction targettag="removenpc" >
       <StatusEffect target="this" >
@@ -12,7 +12,7 @@
     </StatusEffectAction>
     -->
 
-    <!-- TODO: improve the logic of these later when tag improvements happen -->
+    <!-- TODO: NEXTUPDATE improve the logic of these later when tag improvements happen; tag humans from FriendlyNPC team instead of individual npc IDs -->
     
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="cooutposttakeoverevent">
@@ -22,7 +22,7 @@
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <!-- TODO: NEXTUPDATE? remove this when AI is fixed and change to team2 in mission itself https://github.com/FakeFishGames/Barotrauma/issues/13892 -->
       <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
@@ -93,7 +93,7 @@
       <TagAction criteria="bot" tag="bot" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <!-- TODO: remove this when AI is fixed and change to team2 in mission itself -->
+      <!-- TODO: NEXTUPDATE? remove this when AI is fixed and change to team2 in mission itself https://github.com/FakeFishGames/Barotrauma/issues/13892 -->
       <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
