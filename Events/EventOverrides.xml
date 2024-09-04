@@ -18,7 +18,7 @@
             <Option text="EventText.missionevent.pleasecontinue">
               <!-- "please continue" -->
               <ConversationAction text="EventText.missionevent_jailbreak_coalition.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" endconversation="true" />
-              <MissionAction missionidentifier="jailbreak_coalition" locationtype="City,Military,Base" requiredfaction="separatists" minlocationdistance="1" />
+              <MissionAction missionidentifier="jailbreak_coalition" locationtype="Colony,City,Base,Military" requiredfaction="separatists" minlocationdistance="1" />
             </Option>
           </ConversationAction>
         </Success>
@@ -37,9 +37,50 @@
             <Option text="EventText.missionevent.pleasecontinue">
               <!-- "please continue" -->
               <ConversationAction text="EventText.missionevent_jailbreak_separatists.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" />
-              <MissionAction missionidentifier="jailbreak_separatists" locationtype="City,Military,Base" requiredfaction="coalition" minlocationdistance="1" />
+              <MissionAction missionidentifier="jailbreak_separatists" locationtype="Colony,City,Base,Military" requiredfaction="coalition" minlocationdistance="1" />
             </Option>
           </ConversationAction>
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="missionevent_jailbreak_sootman" commonness="80">
+      <CheckReputationAction targettype="faction" identifier="separatists" condition="gte 50">
+        <Failure>
+          <!-- Do nothing -->
+        </Failure>
+        <Success>
+          <CheckDataAction identifier="jailbreak_sootman_unlocked" condition="eq true">
+            <Success>
+              <!-- do nothing -->
+            </Success>
+            <Failure>
+              <NPCWaitAction npctag="outpostmanager" wait="true" />
+              <ConversationAction text="EventText.missionevent_jailbreak_sootman.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+                <Option text="EventText.missionevent_tormsdalereport.whosthat">
+                  <!-- who's that? -->
+                  <ConversationAction text="EventText.missionevent_tormsdalereport.whospetran" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
+                    <Option text="EventText.missionevent_tormsdalereport.o1.o1">
+                      <!-- ok, what's the mission -->
+                      <Goto name="givemission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="EventText.missionevent.pleasecontinue">
+                  <!-- we're interested -->
+                  <Goto name="givemission" />
+                </Option>
+              </ConversationAction>
+              <Label name="givemission" />
+              <ConversationAction text="EventText.missionevent_jailbreak_sootman.c1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
+                <Option text="EventText.missionevent_jailbreak_sootman.c1.o1">
+                  <ConversationAction text="EventText.missionevent_jailbreak_sootman.c1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1" />
+                  <MissionAction missionidentifier="jailbreak_sootman" locationtype="Colony,City,Base,Military" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
+                  <SetDataAction identifier="jailbreak_sootman_unlocked" value="true" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
         </Success>
       </CheckReputationAction>
     </ScriptedEvent>
