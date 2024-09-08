@@ -2358,7 +2358,7 @@
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="itemtag:vendingmachine" tag="targetvendingmachine" submarinetype="Outpost" />
           <!-- wait a little before triggering so you have time to leave the sub -->
-          <WaitAction time="90" />
+          <WaitAction time="9" />
           <TriggerAction target1tag="player" target2tag="thief" applytotarget1="heyyouplayer" radius="200" />
           <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
           <NPCWaitAction npctag="thief" wait="false"/>
@@ -2373,7 +2373,7 @@
                       <SpawnAction itemidentifier="crowbar" targetinventory="triggerer_player" targettag="smashingcrowbar" />
                       <SpawnAction itemidentifier="toolbelt" targetinventory="thief" targettag="stealingbag" ignorebyai="true"/>
                       <NPCFollowAction npctag="thief" targettag="triggerer_player" follow="true"/>
-                      <TriggerAction target1tag="thief" target2tag="targetvendingmachine" applytotarget2="selectvendingmachine" radius="200" />                      
+                      <TriggerAction target1tag="thief" target2tag="targetvendingmachine" applytotarget2="selectvendingmachine" radius="200" /> 
                       <NPCFollowAction npctag="thief" targettag="triggerer_player" follow="false"/>
                       <TriggerAction target1tag="triggerer_player" target2tag="selectvendingmachine" radius="200" waitforinteraction="true" />
                       <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.readycrowbar" endeventifinterrupted="false" eventsprite="Terrorism1" endconversation="true" />
@@ -2385,8 +2385,9 @@
                           <Goto name="foundvendingmachine" />
                         </Failure>
                         <Success>
+                          <NPCChangeTeamAction npctag="thief" teamtag="Team1" />
                           <StatusEffectAction targettag="selectvendingmachine" >
-                            <StatusEffect target="this">
+                            <StatusEffect target="this" >
                               <SpawnItem identifier="banditprop6" spawnposition="This" Offset="0,10"/>
                               <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" range="500" />
                               <ParticleEmitter particle="shrapnel" particleamount="15" velocitymin="50" velocitymax="150" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" colormultiplier="255,255,255,180" />
@@ -2395,9 +2396,8 @@
                           <StatusEffectAction targettag="smashingcrowbar" >
                             <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true" />
                           </StatusEffectAction>
-                          <ReputationAction targettype="Location" increase="-1" />                          
-                          <CombatAction combatmode="arrest" npctag="vendingsecurity" enemytag="triggerer_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-                          <NPCOperateItemAction npctag="thief" targettag="selectvendingmachine" ItemComponentName="Fabricator" Operate="true" />
+                          <ReputationAction targettype="Location" increase="-1" />
+                          <NPCOperateItemAction npctag="thief" targettag="selectvendingmachine" ItemComponentName="Fabricator" Operate="true" AbandonOnReset="true" />
                           <WaitAction time="1" />
                           <!-- items spawned in bag -->
                           <SpawnAction itemidentifier="weldingfueltank" targetinventory="stealingbag" targettag="stolenitem" ignorebyai="true"/>
@@ -2417,7 +2417,13 @@
                           <StatusEffectAction targettag="stolenitem" >
                               <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true" />
                           </StatusEffectAction>
-                          <NPCOperateItemAction npctag="thief" targettag="selectvendingmachine" ItemComponentName="Fabricator" Operate="false" />
+                          <CombatAction combatmode="arrest" npctag="vendingsecurity" enemytag="triggerer_player" isinstigator="true" guardreaction="none" witnessreaction="none" />
+                          <WaitAction time="5" />
+                          <!-- jank, to make NPC stop operating -->
+                          <Goto name="skipoperate" />
+                          <Label name="skipoperate" />
+                          <CombatAction combatmode="Retreat" npctag="thief" enemytag="triggerer_player" isinstigator="false" witnessreaction="none"  />
+                          <NPCChangeTeamAction npctag="thief" teamtag="FriendlyNPC" />                          
                           <WaitAction time="3" />
                           <TriggerAction target1tag="triggerer_player" target2tag="thief" waitforinteraction="true" />
                           <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
@@ -2444,7 +2450,6 @@
       <Label name="end" />
     </ScriptedEvent>
     
-
     <!--"Orange Protection Society"-->
     <ScriptedEvent identifier="orangePETA" commonness="100">
       <!-- checks if you've done 2 or more orangeboy transports -->
