@@ -996,7 +996,7 @@
       <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="-1.065,0.7" alpha="1.0" />     
       <IsActiveConditional conditionpercentage="gte 95"/>
     </LightComponent>
-    <ItemContainer capacity="1" maxstacksize="1" canbeselected="true" hideitems="true" hudpos="0.5,0.6" containedstateindicatorstyle="battery">
+    <ItemContainer capacity="1" maxstacksize="1" canbeselected="true" hideitems="true" hudpos="0.5,0.6" containedstateindicatorstyle="battery" spawnwithid="batterycell" >
         <Containable items="mobilebattery">
           <StatusEffect type="OnContaining" target="Contained" Condition="-2" interval="1" disabledeltatime="true" >
             <Conditional condition="gt 0" />
@@ -1024,7 +1024,7 @@
       <StatusEffect type="OnBroken" target="This" >
         <particleemitter particle="whitegoosplash" particleamount="15" velocitymin="150" velocitymax="300" anglemin="30" anglemax="150" scalemin="0.5" scalemax="0.8" distancemin="10" distancemax="30" lifetimemultiplier="0.5" colormultiplier="60,80,100,255" />
         <sound file="Content/Sounds/Damage/Gore7.ogg" range="800.0" loop="true" volume="1.5" frequencymultiplier="1.25" />
-      </StatusEffect>      
+      </StatusEffect>
       <GuiFrame relativesize="0.2,0.2" anchor="Center" relativeoffset="0,0.2" style="ItemUI" />
       <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
       <Containable items="loadable" />
