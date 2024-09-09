@@ -959,7 +959,7 @@
   </Item>
   
   
-  <Item name="batterycrate" identifier="batterycrate" tags="battery,batterycellrecharger" category="Electrical,Machine" Scale="0.5" description=""  damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" >
+  <Item name="Biological Cargo" identifier="biocrate" tags="largeitem,poweredcontainer" category="Electrical,Machine" Scale="0.5" description=""  damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Items/Containers/containers2.png" depth="0.54" sourcerect="0,29,147,56" origin="0.5,0.5" />
     <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.54" sourcerect="190,101,258,128" origin="0.5,-0.38" rotation="180" offset="0,-5" offsetanim="Noise" offsetanimspeed="0.25" scale="0.55">
       <AnimationConditional condition="gt 0" />
@@ -971,7 +971,8 @@
     <!-- <BrokenSprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="722,0,118,159" depth="0.8" maxcondition="80" fadein="true" />
     <BrokenSprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="840,0,118,159" depth="0.8" maxcondition="0" /> -->
     <Body width="150" height="50" density="18" />
-    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect" />
+    <AiTarget soundrange="50000" sonarlabel="entityname.biocrate" staticsound="true" />
+    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="90,65" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
     <LightComponent lightcolor="255,30,30,150" castshadows="false" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
       <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="1.685,0.7" alpha="1.0" />
       <IsActiveConditional conditionpercentage="gte 0"/>
@@ -997,12 +998,22 @@
       <IsActiveConditional conditionpercentage="gte 95"/>
     </LightComponent>
     <ItemContainer capacity="1" maxstacksize="1" canbeselected="true" hideitems="true" hudpos="0.5,0.6" containedstateindicatorstyle="battery" spawnwithid="batterycell" >
-        <Containable items="mobilebattery">
-          <StatusEffect type="OnContaining" target="Contained" Condition="-2" interval="1" disabledeltatime="true" >
-            <Conditional condition="gt 0" />
-          </StatusEffect>
-        </Containable>
+      <Containable items="mobilebattery">
+        <StatusEffect type="OnContaining" target="Contained" Condition="-0.5" interval="1" disabledeltatime="true" >
+          <Conditional condition="gt 0" />
+        </StatusEffect>
+      </Containable>
+      <!-- 20 second grace period on spawn -->
+      <StatusEffect type="OnSpawn" target="This" duration="20" Condition="10" interval="1" disabledeltatime="true" oneshot="true" />
+      <!-- condition down and up -->
       <StatusEffect type="Always" target="This" Condition="-1" interval="1" disabledeltatime="true" />
+      <StatusEffect type="InWater" target="This" voltage="1" Condition="3" interval="1" disabledeltatime="true" comparison="And">
+        <RequiredItems items="mobilebattery" type="Contained" />
+        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="15" anglemax="30" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <Conditional condition="gt 0" />
+      </StatusEffect>
+      <!-- visuals -->
       <StatusEffect type="NotInWater" target="This" interval="2">
         <Sound file="Content/Characters/Leucocyte/CARRIER_celldeath1.ogg" range="500" loop="true" frequencymultiplier="0.35" volume="1" selectionmode="Random"/>
         <Sound file="Content/Characters/Leucocyte/CARRIER_celldeath2.ogg" range="500" loop="true" frequencymultiplier="0.35" volume="1" selectionmode="Random"/>
@@ -1010,20 +1021,15 @@
         <particleemitter particle="whitegoosplash" particleamount="1" velocitymin="70" velocitymax="100" anglemin="30" anglemax="150" scalemin="0.25" scalemax="0.5" distancemin="10" distancemax="30" lifetimemultiplier="0.5"/>
         <Conditional condition="gt 0" />
       </StatusEffect>
-      <StatusEffect type="InWater" target="This" voltage="1" Condition="3" interval="1" disabledeltatime="true" comparison="And">
-        <RequiredItems items="mobilebattery" type="Contained" />
-        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="15" anglemax="30" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
-        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
-        <Conditional condition="gt 0" />
+      <StatusEffect type="OnBroken" target="This" >
+        <particleemitter particle="whitegoosplash" particleamount="15" velocitymin="150" velocitymax="300" anglemin="30" anglemax="150" scalemin="0.5" scalemax="0.8" distancemin="10" distancemax="30" lifetimemultiplier="0.5" colormultiplier="60,80,100,255" />
+        <sound file="Content/Sounds/Damage/Gore7.ogg" range="800.0" loop="true" volume="1.5" frequencymultiplier="1.25" />
       </StatusEffect>
+      <!-- alarm -->
       <StatusEffect type="Always" target="This" comparison="And" >
         <sound file="Content/Items/AlarmBuzzerLoop.ogg" range="800.0" loop="true" volume="0.5" frequencymultiplier="1.25" />
         <Conditional condition="lt 20" />
         <Conditional condition="gt 0" />
-      </StatusEffect>
-      <StatusEffect type="OnBroken" target="This" >
-        <particleemitter particle="whitegoosplash" particleamount="15" velocitymin="150" velocitymax="300" anglemin="30" anglemax="150" scalemin="0.5" scalemax="0.8" distancemin="10" distancemax="30" lifetimemultiplier="0.5" colormultiplier="60,80,100,255" />
-        <sound file="Content/Sounds/Damage/Gore7.ogg" range="800.0" loop="true" volume="1.5" frequencymultiplier="1.25" />
       </StatusEffect>
       <GuiFrame relativesize="0.2,0.2" anchor="Center" relativeoffset="0,0.2" style="ItemUI" />
       <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />

@@ -166,7 +166,7 @@
         <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
       
-      <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="50" requiredDestinationTypes="study,research,huskchurch">
+      <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="50" requiredDestinationTypes="study,research,huskchurch,city">
         <ConversationAction text="EventText.missionevent_escorthuskvip.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="escorthuskvip" />
         <NPCWaitAction npctag="outpostmanager" wait="false" />
@@ -289,22 +289,6 @@
         </CheckDataAction>
       </ScriptedEvent>
 
-      <!-- Unused TODO: custom husk beacon/probe -->
-      <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
-        <CheckDataAction identifier="beaconhusknorepeat" condition="true">
-          <Success>
-          </Success>
-          <Failure>
-            <NPCWaitAction npctag="huskresearcher" wait="true" />
-            <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
-            <MissionAction missionidentifier="huskbeaconmission" />
-            <SetDataAction identifier="beaconhusknorepeat" value="1"/>
-            <NPCWaitAction npctag="outpostmanager" wait="false" />
-          </Failure>
-        </CheckDataAction>
-      </ScriptedEvent> -->
-
-
       <ScriptedEvent identifier="missionevent_hiddenandclowngerous" commonness="10">
         <CheckDataAction identifier="findclownhuskoperativenorepeat" condition="true">
           <Success>
@@ -357,9 +341,32 @@
         </CheckDataAction>
       </ScriptedEvent>
 
+    <ScriptedEvent identifier="missionevent_keepwetcargo" commonness="20" requiredDestinationTypes="clinic,hospital,study,research,huskchurch,city">
+      <ConversationAction text="Eventtext.missionevent_keepwetcargo" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" >
+        <Option text="EventText.missionevent_keepwetcargo.accept" endconversation="true" >
+          <MissionAction missionidentifier="keepwetcargo" />
+        </Option>
+        <Option text="EventText.generic.refuse" endconversation="true">
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>    
 
 
-  
+      <!-- Unused TODO: custom husk beacon/probe -->
+      <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+        <CheckDataAction identifier="beaconhusknorepeat" condition="true">
+          <Success>
+          </Success>
+          <Failure>
+            <NPCWaitAction npctag="huskresearcher" wait="true" />
+            <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
+            <MissionAction missionidentifier="huskbeaconmission" />
+            <SetDataAction identifier="beaconhusknorepeat" value="1"/>
+            <NPCWaitAction npctag="outpostmanager" wait="false" />
+          </Failure>
+        </CheckDataAction>
+      </ScriptedEvent> -->
+
   
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
