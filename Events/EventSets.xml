@@ -29,6 +29,7 @@
     </EventSet>
     
     <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+
       <!-- OUTPOST DESTRUCTION -->
       <EventSet identifier="outpostevents.outpostdesctruction.regular" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
         <ScriptedEvent identifier="outpostdestruction" commonness="100" probability="1.0" />
@@ -45,6 +46,11 @@
       <EventSet identifier="outpostevents.dynamiceuropa.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
       </EventSet>
+      
+      <!-- TODO: wait spawned NPC merchants to do have items (or starter outpost really) https://github.com/FakeFishGames/Barotrauma/discussions/14605 -->
+      <!-- <EventSet identifier="outpostevents.starteroutpostmerchant" leveltype="outpost" locationtype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="1" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="startermerchant" commonness="100" probability="1.0" />
+      </EventSet> -->
       
       <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction,hydroponics" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />

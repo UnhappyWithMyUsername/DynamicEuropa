@@ -2592,6 +2592,17 @@
       </CheckDataAction>
     </ScriptedEvent>
      
+    <!-- literally just spawns a merchant for the 1st outpost in campaign -->
+    <ScriptedEvent identifier="startermerchant" commonness="100">
+      <!-- <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <StatusEffectAction targettag="removenpc">
+        <StatusEffect type="Always" target="Character" oneshot="true">
+          <RemoveCharacter />
+        </StatusEffect>
+      </StatusEffectAction> -->
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="merchantoutpost" targettag="startermerchant" spawnlocation="Outpost" spawnpointtag="shop_outpost" teamid="FriendlyNPC" />
+    </ScriptedEvent>
+     
   </EventPrefabs>
 </Randomevents>
 </Override>
