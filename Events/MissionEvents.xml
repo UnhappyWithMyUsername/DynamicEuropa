@@ -1095,6 +1095,8 @@
         </CheckDataAction>
       </ScriptedEvent>
 
+
+
   
   
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
@@ -1314,6 +1316,60 @@
       </CountTargetsAction>
     </ScriptedEvent>  -->
       
+      
+     <!-- TODO: stranded divers mission, still doesnt spawn the divers on the proper spawnlocation + it's jank + bots are stupid (they refuse waitaction so I'm stunning them in a loop) also needs a proper NPC not just pirate divers -->
+    <!-- <ScriptedEvent identifier="rescuestrandeddiversevent">
+      <SetDataAction identifier="rescueddivers" operation="set" value="0" />
+      <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="strandeddiver" SpawnPointTag="cave" amount="2" teamid="Team1" />
+      <TagAction criteria="player" tag="player" />
+      <Label name="makediverimmortal" />
+      <NPCWaitAction npctag="strandeddiver" wait="true" />
+      <AfflictionAction affliction="pressurestabilized" strength="1" targettag="piratediver" />
+      <AfflictionAction affliction="stun" strength="1" targettag="piratediver" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="strandeddiver" MaxDistance="1500" AllowSameEntity="false">
+        <Success>
+          <NPCWaitAction npctag="strandeddiver" wait="false" />
+          <AfflictionAction affliction="pressurestabilized" strength="10" targettag="piratediver" />
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <GoTo name="makediverimmortal" />
+        </Failure>
+      </CheckVisibilityAction>
+      <Label name="checkfordeaddivers" />
+      <CountTargetsAction targettag="piratediver" CompareToTarget="piratediver" MinPercentageRelativeToTarget="100">
+        <Conditional isdead="false" />
+        <Success>         
+          <Waitaction time="1" />
+          <GoTo name="checkfordeaddivers" />
+        </Success>
+        <Failure>
+          <SetDataAction identifier="rescueddivers" operation="set" value="0" />
+          <MissionStateAction missionidentifier="escortorangeboys" operation="Set" value="1" />
+        </Failure>
+      </CountTargetsAction>
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="piratediver" hulltag="playerhull" CompareToTarget="piratediver" MinPercentageRelativeToTarget="100">
+          <Conditional isdead="false" />
+          <Success>
+            <SetDataAction identifier="rescueddivers" operation="set" value="1" />
+            <StatusEffectAction targettag="piratediver">
+              <StatusEffect type="Always" target="Character" >
+                <RemoveCharacter />
+              </StatusEffect>
+            </StatusEffectAction>
+          </Success>
+          <Failure>
+            <SetDataAction identifier="rescueddivers" operation="set" value="0" />
+            <StatusEffectAction targettag="strandeddiver">
+              <StatusEffect type="Always" target="Character" >
+                <RemoveCharacter />
+              </StatusEffect>
+            </StatusEffectAction>
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent> -->
       
   </EventPrefabs>
 </Randomevents>

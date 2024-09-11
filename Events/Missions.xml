@@ -1932,7 +1932,7 @@
       <LocationType from="Anyoutpost" to="Huskchurch"/>
       <message header="missionheader0.livecapture" text="missionmessage0.livecapture" />
       <TriggerEvent state="0" delay="0" eventidentifier="capturelivecrawlerevent" />
-      <CompleteCheckDataAction identifier="capturedlivetarget" condition="eq 1"/>      
+      <CompleteCheckDataAction identifier="capturedlivetarget" condition="eq 1"/>
       <Metadata identifier="capturelivecrawlernorepeat" value="1"/>
     </GotoMission>
 
@@ -1950,7 +1950,8 @@
       <TriggerEvent state="1" delay="5" eventidentifier="hiddenandclowngerous" campaignonly="true"/>
       <LocationType identifier="huskchurch" />
     </GotoMission>
-    
+
+  
   
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
@@ -2377,5 +2378,25 @@
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,0,256,256" color="255,129,15"/>    
   </SalvageMission> -->
 
+    
+  <!-- TODO: stranded divers mission, still doesnt spawn the divers on the proper spawnlocation + it's jank + bots are stupid -->
+  <!-- <GotoMission    
+    identifier="rescuestrandeddivers"
+    name="missionname.rescuestrandeddivers"
+    description="missiondescription.rescuestrandeddivers"
+    tags="capturemission"
+    type="GoTo"
+    difficulty="3"
+    commonness="0"
+    reward="3500"
+    successmessage="missionsuccess.rescuestrandeddivers"
+    failuremessage="missionfailure.rescuestrandeddivers">
+  <Reputation identifier="location" amount="3" />
+  <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,512,256,256" color="180,100,120" />
+  <LocationType from="AnyOutpost" to="AnyOutpost" />
+  <message header="missionheader0.rescuestrandeddivers" text="missionmessage0.rescuestrandeddivers" />
+  <TriggerEvent state="0" delay="0" eventidentifier="rescuestrandeddiversevent" />
+  <CompleteCheckDataAction identifier="rescueddivers" condition="eq 1"/>
+  </GotoMission> -->
 
 </Missions>
