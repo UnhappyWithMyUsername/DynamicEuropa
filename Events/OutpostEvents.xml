@@ -121,50 +121,22 @@
                     <Option text="eventtext.Constructionprogress.settlement">
                       <ModifyLocationAction type="Settlement" />
                       <ConversationAction text="eventtext.Constructionprogress.settlementpicked" />
-                      <MoneyAction amount="2000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
+                      <GoTo name="reward" />
                     </Option>
                     <Option text="eventtext.Constructionprogress.base">
                       <ModifyLocationAction type="Base" />
                       <ConversationAction text="eventtext.Constructionprogress.basepicked" />
-                      <MoneyAction amount="2000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
+                      <GoTo name="reward" />
                     </Option>
                     <Option text="eventtext.Constructionprogress.research">
                       <ModifyLocationAction type="Research" />
                       <ConversationAction text="eventtext.Constructionprogress.researchpicked" />
-                      <MoneyAction amount="2000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
+                      <GoTo name="reward" />
                     </Option>
                     <Option text="eventtext.Constructionprogress.hospital">
                       <ModifyLocationAction type="Hospital" />
                       <ConversationAction text="eventtext.Constructionprogress.hospitalpicked" />
-                      <MoneyAction amount="2000" />
-                      <ReputationAction targettype="Location" increase="5" />
-                      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
-                      <ClearTagAction tag="triggerer_player" />
-                      <ClearTagAction tag="contruction_manager" />
-                      <!-- end event -->
-                      <GoTo name="end" />
+                      <GoTo name="reward" />
                     </Option>
                   </ConversationAction>
                 </Option>
@@ -173,10 +145,6 @@
             <Failure>
               <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
                 <Option text="eventtext.Constructionprogress.thanks">
-                  <MoneyAction amount="2000" />
-                  <ReputationAction targettype="Location" increase="5" />
-                  <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
-                  <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
                   <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
                   <!-- 25% chance of any outcome -->
                   <RNGAction chance="0.50">
@@ -184,13 +152,11 @@
                       <RNGAction chance="0.50">
                         <Success>
                           <ModifyLocationAction type="Settlement" />
-                          <!-- end event -->
-                          <GoTo name="end" />
+                          <GoTo name="reward" />
                         </Success>
                         <Failure>
                           <ModifyLocationAction type="Base" />
-                          <!-- end event -->
-                          <GoTo name="end" />
+                          <GoTo name="reward" />
                         </Failure>
                       </RNGAction>
                     </Success>
@@ -198,13 +164,11 @@
                       <RNGAction chance="0.50">
                         <Success>
                           <ModifyLocationAction type="Research" />
-                          <!-- end event -->
-                          <GoTo name="end" />
+                          <GoTo name="reward" />
                         </Success>
                         <Failure>
                           <ModifyLocationAction type="Hospital" />
-                          <!-- end event -->
-                          <GoTo name="end" />
+                          <GoTo name="reward" />
                         </Failure>
                       </RNGAction>
                     </Failure>
@@ -225,9 +189,17 @@
             </Option>
           </ConversationAction>
         </Failure>
-      </CheckItemAction>
-      <Label name="end" />
+      </CheckItemAction>      
+      <Label name="reward" />
+      <NPCOperateItemAction npctag="worker1" targettag="selectedfabricator" ItemComponentName="Fabricator" Operate="true" />
+      <NPCOperateItemAction npctag="worker2" targettag="selecteddeconstructor" ItemComponentName="Deconstructor" Operate="true" />
       <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <MoneyAction amount="2000" />
+      <ReputationAction targettype="Location" increase="5" />
+      <SpawnAction itemidentifier="coalitioncommendation" targetinventory="triggerer_player" />
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="contruction_manager" />
+      <Label name="end" />
     </ScriptedEvent>
 
     <!-- Mine door event -->
