@@ -33,6 +33,8 @@
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
     
+    
+    <!-- TODO: Regalis for the love of god allow me to enforce this location as a starter -->
     <Tutorial identifier="TutorialOutpost" replaceinradiation="Abandoned" nameidentifiers="generic,city" forceoutpostgenerationparams="tutorialoutpost" allowinrandomlevels="false" ignoregenericevents="true" AllowAsBiomeGate="false">
       <Symbol texture="Content/Map/MapAtlas.png" sourcerect="256,512,128,128" color="128,206,175,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
@@ -43,7 +45,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.45" requireddurationrange="1,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         sellpricemodifier="0.3"
@@ -269,7 +271,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="1000"
@@ -295,7 +297,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+        <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>      
       <Store
         initialbalance="2000"
@@ -325,7 +327,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+        <Requirement requirehuntinggrounds="true" probability="0.2" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -378,7 +380,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="1500"
@@ -405,7 +407,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.25" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -431,9 +433,9 @@
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
-      <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
-      </ChangeTo>
+      <!-- <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
+      </ChangeTo> -->
       <Store
         initialbalance="5000"
         pricemodifierrange="5"
@@ -488,7 +490,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="1500"
@@ -513,7 +515,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -539,7 +541,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.05" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -572,7 +574,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="None" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
     </Survey>
 
@@ -592,7 +594,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -619,7 +621,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="1500"
@@ -644,7 +646,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="3000"
@@ -670,7 +672,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
       <!-- Normal "sell" price is set very low (1mk for all things), but requested goods are 0.8 (vs 0.6 for other outposts) -->
       <Store
@@ -699,7 +701,7 @@
         <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.15" requireddurationrange="3,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requiredduration="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="1" />
       </ChangeTo>
       <Store
         initialbalance="5000"
@@ -730,7 +732,7 @@
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="3,5" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Abandoned" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="1" />
       </ChangeTo>
     <Store
       maxreputationmodifier="0.1"
