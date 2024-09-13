@@ -133,6 +133,7 @@
       <!-- remove the construction if a lair is nearby -->
       <ChangeTo type="None" messagetag="locationchange.construction.changeto.none">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
+        <Requirement requirehuntinggrounds="true" probability="0.25" function="Add" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="Outpost" disallowedadjacentlocations="Outpost,Settlement,Colony,City" probability="0" disallowedproximity="2" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.settlement">
         <Requirement function="Add" requiredlocations="Hydroponics" probability="0.1" requiredproximity="3" />
