@@ -733,15 +733,16 @@
       <Label name="loop" />
       <RNGAction chance="0.50"> 
         <Success>
-          <CheckDataAction identifier="lairintensity" condition="neq 1">
+          <CheckDataAction identifier="lairintensity" condition="eq 0">
             <Success>
               <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+              <SpawnAction speciesname="mudraptor" amount="3" SpawnLocation="mainpath" offset="500" />
               <SetDataAction identifier="lairintensity" operation="Set" value="1" />
-              <WaitAction time="60" />
+              <WaitAction time="6" />
               <Goto name="loop" />     
             </Success>          
             <Failure>
-              <WaitAction time="20" />              
+              <WaitAction time="2" />              
               <SetDataAction identifier="lairintensity" operation="Set" value="0" />       
               <Goto name="loop" />
             </Failure>
