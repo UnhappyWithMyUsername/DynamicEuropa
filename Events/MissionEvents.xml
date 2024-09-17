@@ -731,27 +731,39 @@
     <ScriptedEvent identifier="laircrawlersoutside">
       <WaitAction time="5" />
       <Label name="loop" />
-      <RNGAction chance="0.50"> 
+      <CheckDataAction identifier="spawnwaves" condition="lt 5">
         <Success>
-          <CheckDataAction identifier="lairintensity" condition="neq 1">
+          <RNGAction chance="0.50"> 
             <Success>
-              <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
-              <SetDataAction identifier="lairintensity" operation="Set" value="1" />
-              <WaitAction time="60" />
-              <Goto name="loop" />     
-            </Success>          
+              <CheckDataAction identifier="waveinprogress" condition="neq 1">
+                <Success>
+                  <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+                  <SetDataAction identifier="waveinprogress" operation="Set" value="1" />
+                  <SetDataAction identifier="spawnwaves" operation="Add" condition="1" />
+                  <WaitAction time="60" />
+                  <Goto name="loop" />     
+                </Success>          
+                <Failure>
+                  <WaitAction time="20" />              
+                  <SetDataAction identifier="waveinprogress" operation="Set" value="0" />       
+                  <Goto name="loop" />
+                </Failure>
+              </CheckDataAction>
+            </Success>
             <Failure>
-              <WaitAction time="20" />              
-              <SetDataAction identifier="lairintensity" operation="Set" value="0" />       
+              <WaitAction time="5" />
               <Goto name="loop" />
             </Failure>
-          </CheckDataAction>
-        </Success>
+          </RNGAction>
+        </Success>          
         <Failure>
-          <WaitAction time="5" />
-          <Goto name="loop" />
+          <!-- end event -->
         </Failure>
-      </RNGAction>
+      </CheckDataAction>
+      <OnRoundEndAction>
+        <SetDataAction identifier="waveinprogress" operation="Set" value="0" />
+        <SetDataAction identifier="spawnwaves" operation="Set" condition="0" />
+      </OnRoundEndAction>
     </ScriptedEvent>    
     
     <ScriptedEvent identifier="laircrawlersoutside2">
