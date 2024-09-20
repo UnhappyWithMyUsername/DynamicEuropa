@@ -1521,6 +1521,33 @@
     <Metadata identifier="vipnappingnorepeat" value="1"/>
   </OutpostMission>
   
+  <AbandonedOutpostMission
+    identifier="assassinatebanditwitness"
+    tags="assasination"
+    achievementidentifier="abandonedoutpostassassinate"
+    type="OutpostDestroy"
+    reward="3000"
+    difficulty="3"
+    commonness="100"
+    allowretry="true"
+    description="missiondescription.assassinatebanditwitness"
+    successmessage="missionsuccess.assassinatebanditwitness"
+    failuremessage="missionfailure.assassinatebanditwitness">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="125,90,90,255"/>
+    <LocationType identifier="Colony" />
+    <LocationType identifier="City" />
+    <LocationType identifier="Military" />
+    <LocationType identifier="Base" />
+    <Characters>
+      <Character identifier="prisonerbanditsnitch" from="customnpcs" spawnpointtags="jail" spawnpointtype="corpse" teamid="FriendlyNpc" requirekill="true"  />
+      <Character identifier="prisonerbanditfake" from="customnpcs" spawnpointtags="jail" spawnpointtype="corpse" teamid="FriendlyNpc" requirekill="false"  />
+      <Character identifier="prisonerbanditfake" from="customnpcs" spawnpointtags="jail" spawnpointtype="corpse" teamid="FriendlyNpc" requirekill="false"  />
+    </Characters>
+    <TriggerEvent state="0" delay="5" eventidentifier="assassinatebanditwitnessevent" campaignonly="true"/>
+    <Reputation identifier="bandits" amount="3" />
+    <Metadata identifier="assassinatebanditwitnessnorepeat" value="1"/>
+  </AbandonedOutpostMission>
+  
   <EscortMission
     identifier="escortmedivac"
     tags="escortmedivac,escort"

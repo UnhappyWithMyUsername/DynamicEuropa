@@ -245,7 +245,7 @@
               <Option text="EventText.missionevent.pleasecontinue">
                 <!-- "please continue" -->
                 <ConversationAction text="EventText.missionevent_jailbreak_husk.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="huskinvite" endconversation="true" dialogtype="Small" />
-                <MissionAction missionidentifier="jailbreak_husk" locationtype="City,Military,Base" requiredfaction="" minlocationdistance="1" />
+                <MissionAction missionidentifier="jailbreak_husk" locationtype="City,Military,Base,Colony" requiredfaction="" minlocationdistance="1" />
               </Option>
             </ConversationAction>
           </Success>
@@ -1108,8 +1108,87 @@
       </ScriptedEvent>
 
 
+      <ScriptedEvent identifier="missionevent_assassinatebanditwitness">
+        <MissionAction missionidentifier="assassinatebanditwitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1" />
+      </ScriptedEvent>
 
-  
+      <ScriptedEvent identifier="assassinatebanditwitnessevent">
+        <TagAction criteria="player" tag="player" />
+        <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+        <TagAction criteria="humanprefabtag:securitynpc" tag="arrestplayer" ChoosePercentage="1" chooserandom="true" />
+        <TagAction criteria="humanprefabidentifier:prisonerbanditfake" tag="potentialprisoner" SubmarineType="Outpost" />
+        <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="potentialprisoner" SubmarineType="Outpost" />
+        <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="snitch" SubmarineType="Outpost" />
+        <AfflictionAction affliction="nastyscar" strength="1" targettag="snitch" />
+        <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget2="spotter_player" disableiftargetincapacitated="false" radius="200" waitforinteraction="false"  />
+        <ConversationAction text="You see several prisoners, but you don't know which one is your target..." targettag="spotter_player" dialogtype="Small" eventsprite="group" endconversation="true" />
+        <Label name="pickaprisoner" />
+        <ClearTagAction tag="chosen_prisoner" />
+        <ClearTagAction tag="speaker_player" />
+        <WaitAction time="1" />
+        <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
+        <ConversationAction text="Who the hell are you? Am I getting out yet?" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" >
+          <Option text="The Red Mantis crew sends their regards">
+            <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
+              <Success>
+                <ConversationAction text="Fuck! Security, there's a guy out to get me!" targettag="speaker_player" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+                <StatusEffectAction targettag="alarmbutton">
+                  <StatusEffect State="true" target="This" />
+                </StatusEffectAction>
+                <WaitAction time="2" />
+                <CombatAction combatmode="Offensive" npctag="snitch" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+                <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+              </Success>
+              <Failure>
+                <ConversationAction text="No really who the fuck are you? Security!" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" endconversation="true" />
+                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+                <StatusEffectAction targettag="alarmbutton">
+                  <StatusEffect State="true" target="This" />
+                </StatusEffectAction>
+                <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+              </Failure>
+            </CheckConditionalAction>
+          </Option>
+          <Option text="Nevermind. Stay inside.">
+            <SkillCheckAction requiredskill="weapons" requiredlevel="60" targettag="speaker_player">
+              <Success>
+                <ConversationAction text="Whatever you say, chief." targettag="speaker_player" dialogtype="small" />
+                <Goto name="pickaprisoner" />
+              </Success>
+              <Failure>
+                <!-- failed check, prisoners try to escape -->
+                <ConversationAction text="Whoever you are chump, I'm outta here!" targettag="speaker_player" dialogtype="small" eventsprite="mediator" />
+                <AfflictionAction affliction="slow" strength="60" targettag="potentialprisoner" />
+                <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="true"/>
+                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+                <StatusEffectAction targettag="alarmbutton">
+                  <StatusEffect State="true" target="This" />
+                </StatusEffectAction>
+                <TagAction criteria="eventtag:speaker_player" tag="potentialprisoner" />
+                <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="potentialprisoner" isinstigator="false" witnessreaction="retreat" />
+                <CombatAction combatmode="Arrest" npctag="arrestplayer" enemytag="speaker_player" isinstigator="false" witnessreaction="retreat" />
+                <WaitAction time="10" />
+                <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="false"/>
+              </Failure>
+            </SkillCheckAction>
+          </Option>
+        </ConversationAction>
+      </ScriptedEvent>
+
+<!--       <ScriptedEvent identifier="jailbreak_alarm">
+        <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
+        <NPCFollowAction npctag="triggerer_prisoner" targettag="triggerer_securitynpc" follow="true" />
+        <WaitAction time="3" />
+        <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+        <StatusEffectAction targettag="alarmbutton">
+          <StatusEffect State="true" target="This" />
+        </StatusEffectAction>
+        <ConversationAction text="EventText.jailbreak_alarm.c1" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+        <NPCFollowAction npctag="triggerer_prisoner" targettag="triggerer_securitynpc" follow="false" />
+        <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
+      </ScriptedEvent>
+ -->  
   
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
