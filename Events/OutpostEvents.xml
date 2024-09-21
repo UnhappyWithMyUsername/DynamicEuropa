@@ -1582,6 +1582,7 @@
       <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:pirateentrance" tag="pirateentrance" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="itemidentifier:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:piratechair" tag="piratechair" ContinueIfNoTargetsFound="true" />
       <NPCChangeTeamAction npctag="piratenpc" teamtag="FriendlyNPC" />
       <WaitAction time="1" />
       <CheckReputationAction targettype="faction" identifier="bandits" condition="gte -12">
@@ -1617,11 +1618,12 @@
         <Failure>
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="guard" SpawnPointTag="guard" />
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="dockingguard" SpawnPointTag="dockingguard" />
-          <NPCWaitAction NPCTag="guard" Wait="True" />
+          <NPCOperateItemAction npctag="guard" targettag="piratechair" ItemComponentName="Controller" operate="true" />
           <TriggerEventAction identifier="piratehavenalarm" />
           <SetDataAction identifier="pirateoutpostdestruction" value="0" /> <!-- Todo: remove this data and all its usecases in events entirely -->
           <!-- Toll part, reuse triggerer_player if this is bugged -->
           <Label name="patrol" />
+          <ClearTagAction tag="pso_trig_player" />
           <TriggerAction target1tag="guard" target2tag="player" applytotarget2="pso_trig_player" radius="250" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="true" allowmultipletargets="true" />
           <CheckReputationAction targettype="faction" identifier="coalition" condition="lt 20">
             <Success>
@@ -1648,22 +1650,16 @@
                               <ReputationAction targettype="Faction" identifier="coalition" increase="-20" />
                               <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
                               <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy.success" targettag="pso_trig_player" />
-                              <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
                             </Success>
                             <Failure>
                               <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy.failure" />
-                              <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
-                              <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                               <ClearTagAction tag="pso_trig_player" />
                             </Failure>
                           </CheckMoneyAction>
                         </Option>
                         <Option text="eventtext.option.leave">
                           <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.declined" targettag="pso_trig_player" />
-                          <NPCFollowAction npctag="guard" targettag="pso_trig_player" follow="false" />
-                          <NPCFollowAction npctag="dockingguard" targettag="pso_trig_player" follow="false" />
                           <ClearTagAction tag="pso_trig_player" />
                         </Option>
                       </ConversationAction>
@@ -1762,18 +1758,14 @@
                       </SkillCheckAction>
                     </Success>
                     <Failure>
-                      <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                      <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.rejected" />
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.rejected" ContinueAutomatically="true" endconversation="true"/>
                       <GoTo name="attack" />
                     </Failure>
                   </CheckMoneyAction>
                 </Option>
                 <Option text="eventtext.piratesecurityofficer.toll.option.insult">
                   <ReputationAction targettype="faction" identifier="bandits" increase="-5" />
-                  <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                  <CombatAction combatmode="Arrest" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                  <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
+                  <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" ContinueAutomatically="true" endconversation="true"/>
                   <GoTo name="attack" />
                 </Option>
               </ConversationAction>
@@ -1860,12 +1852,11 @@
                     </Option>    
                     <Option text="eventtext.piratesecurityofficer.toll.option.insult">
                       <ReputationAction targettype="Faction" identifier="bandits" increase="-5" />
+                      <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" ContinueAutomatically="true" endconversation="true" />
+                      <Label name="attack" />
                       <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
                       <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.toll.option.insult.answer" targettag="pso_trig_player" />
-                      <Label name="attack" />
                       <WaitAction time="30" />
-                      <ClearTagAction tag="pso_trig_player" />
                       <GoTo name="patrol" />
                     </Option>
                   </ConversationAction>
