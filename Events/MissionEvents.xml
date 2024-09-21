@@ -48,11 +48,8 @@
         </Failure>
         <Success>
           <TagAction criteria="player" tag="player" />
-          <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="kidnapper" spawnlocation="Outpost" targetmoduletags="adminpirate" />
-          <TriggerAction target1tag="player" target2tag="kidnapper" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.missionevent_vipnapping.listen" endeventifinterrupted="false" endconversation="true" dialogtype="Small" eventsprite="Silhouette" />
           <Label name="talktonpc" />
-          <ConversationAction speakertag="kidnapper" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="Silhouette" >
             <Option text="eventtext.missionevent_vipnapping.whatabout">
               <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.ransomplan" endeventifinterrupted="false" eventsprite="Silhouette" >
                 <Option text="eventtext.generic.continue" >
@@ -62,8 +59,8 @@
                       <MissionAction missiontag="vipnapping" locationtype="City,colony,research,hospital,factory,shipyard" minlocationdistance="1"/>
                       <SetDataAction identifier="vipnappingnorepeat" value="1" />
                     </Option>
-                    <Option text="eventtext.missionevent_vipnapping.notmykink">    
-                      <ConversationAction text="eventtext.missionevent_vipnapping.yourloss" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />                    
+                    <Option text="eventtext.missionevent_vipnapping.notmykink">
+                      <ConversationAction text="eventtext.missionevent_vipnapping.yourloss" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
                       <Goto name="end" />
                     </Option>
                   </ConversationAction>
@@ -79,6 +76,51 @@
       </CheckDataAction>
       <Label name="end" />
     </ScriptedEvent>
+    
+
+
+      <ScriptedEvent identifier="missionevent_silencewitness">
+        <CheckDataAction identifier="silencewitnessnorepeat" condition="eq 0" >
+          <Failure>
+            <Goto name="end" />
+          </Failure>
+          <Success>
+            <TagAction criteria="player" tag="player" />
+            <Label name="talktonpc" />
+            <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="EventText.missionevent_silencewitness.gangbounty" endeventifinterrupted="false" eventsprite="Silhouette" >
+              <Option text="EventText.missionevent_silencewitness.tellmemore">
+                <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.missionbrief" endeventifinterrupted="false" eventsprite="Silhouette" >
+                  <Option text="EventText.missionevent_silencewitness.accept" >
+                    <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                    <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
+                    <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                  </Option>
+                  <Option text="EventText.missionevent_silencewitness.seacario" >
+                    <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.dotdotdot" endeventifinterrupted="false" eventsprite="Silhouette" >
+                      <Option text="EventText.missionevent_silencewitness.accept" >
+                        <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                        <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
+                        <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                      </Option>
+                      <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true" >
+                        <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                      </Option>
+                    </ConversationAction>
+                  </Option>
+                  <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true">
+                    <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                  </Option>
+                </ConversationAction>
+              </Option>
+              <Option text="eventtext.generic.ignore" endconversation="true">        
+                <ClearTagAction tag="triggerer_player" />
+                <Goto name="talktonpc" />
+              </Option>
+            </ConversationAction>
+          </Success> 
+        </CheckDataAction>
+        <Label name="end" />
+      </ScriptedEvent> 
     
     <ScriptedEvent identifier="missionevent_escortmedivac" commonness="20" requiredDestinationTypes="city,clinic,hospital,huskchurch">
       <CheckDataAction identifier="escortmedivacnorepeat" condition="eq 0" >
@@ -1108,11 +1150,7 @@
       </ScriptedEvent>
 
 
-      <ScriptedEvent identifier="missionevent_assassinatebanditwitness">
-        <MissionAction missionidentifier="assassinatebanditwitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1" />
-      </ScriptedEvent>
-
-      <ScriptedEvent identifier="assassinatebanditwitnessevent">
+      <ScriptedEvent identifier="silencewitnessevent">
         <TagAction criteria="player" tag="player" />
         <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
         <TagAction criteria="humanprefabtag:securitynpc" tag="arrestplayer" ChoosePercentage="1" chooserandom="true" />
@@ -1121,17 +1159,17 @@
         <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="snitch" SubmarineType="Outpost" />
         <AfflictionAction affliction="nastyscar" strength="1" targettag="snitch" />
         <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget2="spotter_player" disableiftargetincapacitated="false" radius="200" waitforinteraction="false"  />
-        <ConversationAction text="You see several prisoners, but you don't know which one is your target..." targettag="spotter_player" dialogtype="Small" eventsprite="group" endconversation="true" />
+        <ConversationAction text="EventText.silencewitnessevent.whichone" targettag="spotter_player" dialogtype="Small" eventsprite="group" endconversation="true" />
         <Label name="pickaprisoner" />
         <ClearTagAction tag="chosen_prisoner" />
         <ClearTagAction tag="speaker_player" />
         <WaitAction time="1" />
         <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
-        <ConversationAction text="Who the hell are you? Am I getting out yet?" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" >
-          <Option text="The Red Mantis crew sends their regards">
+        <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" >
+          <Option text="EventText.silencewitnessevent.regards">
             <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
               <Success>
-                <ConversationAction text="Fuck! Security, there's a guy out to get me!" targettag="speaker_player" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+                <ConversationAction text="EventText.silencewitnessevent.righttarget" targettag="speaker_player" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
                 <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
                 <StatusEffectAction targettag="alarmbutton">
                   <StatusEffect State="true" target="This" />
@@ -1141,7 +1179,7 @@
                 <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
               </Success>
               <Failure>
-                <ConversationAction text="No really who the fuck are you? Security!" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" endconversation="true" />
+                <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" endconversation="true" />
                 <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
                 <StatusEffectAction targettag="alarmbutton">
                   <StatusEffect State="true" target="This" />
@@ -1150,15 +1188,15 @@
               </Failure>
             </CheckConditionalAction>
           </Option>
-          <Option text="Nevermind. Stay inside.">
+          <Option text="EventText.silencewitnessevent.nevermind">
             <SkillCheckAction requiredskill="weapons" requiredlevel="60" targettag="speaker_player">
               <Success>
-                <ConversationAction text="Whatever you say, chief." targettag="speaker_player" dialogtype="small" />
+                <ConversationAction text="EventText.silencewitnessevent.whatever" targettag="speaker_player" dialogtype="small" />
                 <Goto name="pickaprisoner" />
               </Success>
               <Failure>
                 <!-- failed check, prisoners try to escape -->
-                <ConversationAction text="Whoever you are chump, I'm outta here!" targettag="speaker_player" dialogtype="small" eventsprite="mediator" />
+                <ConversationAction text="EventText.silencewitnessevent.outtahere" targettag="speaker_player" dialogtype="small" eventsprite="mediator" />
                 <AfflictionAction affliction="slow" strength="60" targettag="potentialprisoner" />
                 <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="true"/>
                 <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
