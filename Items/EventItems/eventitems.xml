@@ -1037,6 +1037,38 @@
     </ItemContainer>
   </Item>
   
+  
+  <Item name="ventleakcloud" identifier="ventleakcloud" Scale="1" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyrepairtools="true" noninteractable="true">
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
+    <Body radius="30" bodytype="static"/>
+    <ItemComponent IsActive="true" >
+      <!-- 	particle emitter -->
+      <StatusEffect type="Always" target="This" condition="-1" >
+        <ParticleEmitter particle="acidmistgrenade" particlespersecond="15" scalemin="0.5" scalemax="1" velocitymin="25" velocitymax="50" anglemin="0" anglemax="360" copyentityangle="false" LifeTimeMultiplier="1" highqualitycollisiondetection="true" />
+        <ParticleEmitter particle="bubbles" particlespersecond="8" scalemin="0.5" scalemax="1" velocitymin="20" velocitymax="50" anglemin="0" anglemax="360" copyentityangle="false" LifeTimeMultiplier="1" />
+        <sound file="Content/Items/Tools/Sprayer.ogg" range="700.0" loop="true" volume="0.75" frequencymultiplier="2" />
+      </StatusEffect>
+      <!-- 	the actual damage emitter, 10 second lifetime, generates stun and slows  -->
+      <StatusEffect type="Always" target="This,NearbyCharacters" range="200" interval="0.2" targetlimbs="torso" disabledeltatime="true">
+        <Affliction identifier="acidburn" strength="0.4" />
+        <Affliction identifier="incrementalstun" strength="5" probability="0.25"/>
+        <Affliction identifier="slow" strength="5" />
+      </StatusEffect>
+      <StatusEffect type="OnFire" target="This" Condition="0.0" delay="0.1" interval="10" IsActive="false" setvalue="true" >
+        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="2000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="2000" />
+        <Explosion range="450.0" ballastfloradamage="100" structuredamage="20" levelwalldamage="50" itemdamage="100" force="8" flames="true" debris="true" applyFireEffects="true" decal="explosion" decalsize="0.5">
+          <Affliction identifier="burn" strength="15" />
+          <Affliction identifier="stun" strength="3" />
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" delay="0.1">
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
   <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
   <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
     <Body width="210" height="210" bodytype="Static" />
@@ -1093,6 +1125,7 @@
       <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
     </Controller>
   </Item>
+
 
     <!-- UNUSED. For sabotaging deconstructors -->
 <!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
