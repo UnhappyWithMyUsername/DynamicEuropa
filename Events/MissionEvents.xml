@@ -839,7 +839,7 @@
       <TagAction criteria="itemtag:fabricator" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:deconstructor" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:reactor" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemtag:oxygengenerator" tag="damagethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="outpostoxygenerator" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:oxygengenerator" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:vent" tag="ventthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:wire" tag="lockthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
@@ -861,7 +861,7 @@
       </StatusEffectAction>
       <StatusEffectAction targettag="burnthis">
         <StatusEffect target="This" >
-          <Fire size="50" />
+          <Fire size="10" />
         </StatusEffect>
       </StatusEffectAction>
       <StatusEffectAction targettag="lockthis">
@@ -878,13 +878,29 @@
       <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
         <Conditional condition="gte 90" />
         <Failure>
-          <!-- keep the vents going for the fire -->
-          <StatusEffectAction targettag="ventthis">
-            <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
-            <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
-          </StatusEffectAction>          
-          <Waitaction time="1" />
-          <GoTo name="checkforrepaired" />
+          <!-- keep the vents going for the fire if o2 generator isnt broken, repair O2 gen slightly so it doesnt die to fire -->
+          <CheckConditionalAction targettag="outpostoxygenerator" condition="gt 0">
+            <Success>
+              <StatusEffectAction targettag="outpostoxygenerator">
+                <StatusEffect target="This" condition="1" disabledeltatime="true" >
+                  <Conditional condition="gt 90" />
+                </StatusEffect>                
+              </StatusEffectAction>
+              <StatusEffectAction targettag="ventthis">
+                <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
+                <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
+              </StatusEffectAction>
+              <Waitaction time="1" />
+              <GoTo name="checkforrepaired" />
+            </Success>
+            <Failure>                 
+              <StatusEffectAction targettag="ventthis">
+                <StatusEffect target="This" duration="2" OxygenFlow="0" disabledeltatime="true" setvalue="true" />
+              </StatusEffectAction>         
+              <Waitaction time="1" />
+              <GoTo name="checkforrepaired" />
+            </Failure>
+          </CheckConditionalAction>
         </Failure>
         <Success>
           <SetDataAction identifier="outpostfixed" operation="set" value="1" />
