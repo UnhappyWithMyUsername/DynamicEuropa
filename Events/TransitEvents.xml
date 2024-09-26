@@ -72,9 +72,8 @@
       <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crr_trig_player" radius="100" waitforinteraction="true" />
       <ConversationAction text="eventtext.commsrelay.ruin" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar">
         <Option text="eventtext.option.investigate">
-          <StatusEffectAction targettag="crr_trig_player">
-            <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-              <!--<Affliction identifier="broadcastruin" amount="10"/>-->
+          <StatusEffectAction targettag="commsrelay">
+            <StatusEffect target="This" duration="10.5">
               <Sound file="%ModDir:2532991202%/Sounds/Events/AlienBroadcast.ogg" volume="1" loop="true" />
             </StatusEffect>
           </StatusEffectAction>
