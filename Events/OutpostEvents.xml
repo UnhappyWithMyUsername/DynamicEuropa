@@ -1602,12 +1602,11 @@
           <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true" />
           <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player" >
             <Option text="eventtext.option.listen">
-              <!-- TODO: NEXTUPDATE reenable this, sound loop should be fixed -->
-              <!-- <StatusEffectAction targettag="commsrelay">
+              <StatusEffectAction targettag="commsrelay">
                 <StatusEffect target="This" duration="10.2">
                   <Sound file="%ModDir:2532991202%/Sounds/Events/PirateBroadcast.ogg" range="500" volume="1" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction> -->
+              </StatusEffectAction>
               <ConversationAction text="eventtext.commsrelay.piratehaven.answer" dialogtype="Small" targettag="listener_player" eventsprite="piratehaven" endconversation="true" />
             </Option>
             <Option text="eventtext.option.ignore" endconversation="true">
@@ -1898,12 +1897,11 @@
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
           <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <!-- TODO: NEXTUPDATE? reenable when infinite sound loop is fixed  -->
-<!--           <StatusEffectAction targettag="piratehull">
+          <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" oneshot="true" >
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
             </StatusEffect>
-          </StatusEffectAction> -->
+          </StatusEffectAction>
           <ReputationAction targettype="Location" increase="-35" />
           <SetDataAction identifier="piratehavenunlocked" value="0" />
         </Failure>
