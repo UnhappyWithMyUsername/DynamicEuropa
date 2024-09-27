@@ -16,7 +16,7 @@
   </Item>
 
 
-  <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="smallitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
+  <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="largeitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
     <PreferredContainer primary="engcab" spawnprobability="0.00" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
     <Deconstruct time="10">
@@ -27,29 +27,32 @@
     <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
     <!-- TODO: updated the decorativesprite, uses unstable values, but doesnt seem to cause problems in stable so keep an eye on it -->
     <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.799" sourcerect="147,0,102,138" origin="0.5,0.5" offset="8,8" offsetanim="Noise" offsetanimspeed="10.0">
-      <IsActiveConditional targetcontaineditem="true" condition="gt 0.0"/>
-      <IsActiveConditional targetitemcomponent="LightComponent" IsActive="true" />
+      <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+      <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
     </DecorativeSprite>
     <DecorativeSprite name="big speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="6,187,61,63" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-13,17" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.05,0.05">
       <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
       <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
     </DecorativeSprite>
     <DecorativeSprite name="small speaker 1" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-30,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
       <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
       <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
     </DecorativeSprite>
     <DecorativeSprite name="small speaker 2" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="6,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
       <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
       <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
     </DecorativeSprite>
     <Body width="102" height="138" density="30" />
-    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" >
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="0" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" swingamount="0,0" swingspeed="0">
       <RequiredItem items="wrench" type="Equipped" />
     </Holdable>
     <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
       <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
         <Use />
-        <!--particleemitter particle="shockwavesmall" particlespersecond="3" scalemin="0.25" scalemax="0.75" /-->
         <Conditional targetcontaineditem="true" condition="gt 0" />
       </StatusEffect>
       <StatusEffect type="OnContained" target="This" IsActive="false">
