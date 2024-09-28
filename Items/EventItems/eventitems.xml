@@ -243,14 +243,48 @@
     </Wearable>
   </Item>
 
-  <Item name="Military Radio" identifier="militaryradio" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into military frequency. Can be used to take over a station of your choice for the enemy of the currently residing faction." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+  <Item name="Coalition Military Radio" identifier="militaryradiocoalition" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into a coalition military frequency. Can be used to take over a separatist station of your choice." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
     <PreferredContainer primary="crewcab" secondary="locker" />
     <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
     <Body width="64" height="24" density="30" />
     <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
       <StatusEffect type="OnUse" target="Character" oneshot="false" interval="0.8" stackable="false">
-        <TriggerEvent identifier="startmanualtakeover" />
+        <TriggerEvent identifier="startmanualtakeovercoalition" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" duration="0.1">
+        <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
+      </StatusEffect>
+    </Holdable>
+  </Item>
+  
+  <Item name="Separatist Military Radio" identifier="militaryradioseparatists" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into a separatist military frequency. Can be used to take over a separatist station of your choice." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+    <PreferredContainer primary="crewcab" secondary="locker" />
+    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
+    <Body width="64" height="24" density="30" />
+    <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="Character" oneshot="false" interval="0.8" stackable="false">
+        <TriggerEvent identifier="startmanualtakeoverseparatists" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" duration="0.1">
+        <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
+      </StatusEffect>
+    </Holdable>
+  </Item>
+  
+  <!-- TODO: unused since I split radios in 2 factions, kept for legacy purposes, try to break the radio so players get a new one -->
+  <Item name="Military Radio" identifier="militaryradio" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into military frequency. Can be used to take over a station of your choice for the enemy of the currently residing faction." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+    <PreferredContainer primary="crewcab" secondary="locker" />
+    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
+    <Body width="64" height="24" density="30" />
+    <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This,Character" oneshot="false" interval="0.8" stackable="false">
+        <TriggerEvent identifier="takeoverradiobroke" />
+        <particleemitter particle="brownchunks" drawontop="true" particleamount="25" velocitymin="100" velocitymax="500" anglemin="0" anglemax="360" distancemin="0" distancemax="10" scalemin="0.1" scalemax="0.35" />
+        <sound file="Content/Items/Door/DoorBreak2.ogg" range="1000" />
+        <Remove />
       </StatusEffect>
       <StatusEffect type="OnUse" target="This" duration="0.1">
         <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
