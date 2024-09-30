@@ -1618,7 +1618,6 @@
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="dockingguard" SpawnPointTag="dockingguard" />
           <NPCOperateItemAction npctag="guard" targettag="piratechair" ItemComponentName="Controller" operate="true" />
           <TriggerEventAction identifier="piratehavenalarm" />
-          <SetDataAction identifier="pirateoutpostdestruction" value="0" /> <!-- Todo: remove this data and all its usecases in events entirely -->
           <!-- Toll part, reuse triggerer_player if this is bugged -->
           <Label name="patrol" />
           <ClearTagAction tag="pso_trig_player" />
@@ -1880,11 +1879,7 @@
       <TagAction criteria="hullname:reactorroom" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:research" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="piratenpc" />
       <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
       <TriggerAction target1tag="player" target2tag="piratehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <CheckDataAction identifier="piratehavenunlocked" condition="eq 1">
@@ -1901,7 +1896,8 @@
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
             </StatusEffect>
           </StatusEffectAction>
-          <ReputationAction targettype="Location" increase="-35" />
+          <ReputationAction targettype="Location" increase="-5" />
+          <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
           <SetDataAction identifier="piratehavenunlocked" value="0" />
         </Failure>
       </CheckDataAction>
@@ -2097,19 +2093,9 @@
     </ScriptedEvent>
           
     <ScriptedEvent identifier="piratemissioninformant" commonness="100">
-      <Label name="CheckData" />
-      <WaitAction time="2" />
-      <CheckDataAction identifier="pirateoutpostdestruction" condition="eq 1">
-        <Success>
-          <Goto name="CheckData" />
-        </Success>
-        <Failure>
-          <Goto name="Start" />
-        </Failure>
-      </CheckDataAction>
-      <Label name="Start" />
       <TagAction criteria="player" tag="player" />
       <Label name="waitforinput" />
+      <ClearTagAction tag="pmi_trig_player" />
       <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
       <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="oldman">
         <Option text="eventtext.piratemissioninformant.option.buy">
@@ -2118,18 +2104,15 @@
               <MoneyAction amount="-1000" />
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="oldman" />
               <MissionAction missiontag="coalitionciv" />
-              <ClearTagAction tag="pmi_trig_player" />
             </Success>
             <Failure>
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="oldman" />
-              <ClearTagAction tag="pmi_trig_player" />
               <GoTo name="waitforinput" />
             </Failure>
           </CheckMoneyAction>
         </Option>
         <Option text="eventtext.option.leave">
           <ConversationAction text="eventtext.general.decline" targettag="pmi_trig_player" />
-          <ClearTagAction tag="pmi_trig_player" />
           <GoTo name="waitforinput" />
         </Option>
       </ConversationAction>
@@ -2142,9 +2125,6 @@
         <Success>
           <TagAction criteria="player" tag="player" />
           <SpawnAction itemidentifier="huskbodybag" targettag="bodybag" spawnlocation="Outpost" spawnpointtag="husk" ignorebyai="true" />
-          <!-- use a trigger to tag a single cabinet -->
-          <TriggerAction target1tag="bodybag" target2tag="player" radius="150" waitforinteraction="false"/>
-          <Label name="retry"/>
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="false"/>
           <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
           <WaitAction time="2" />
@@ -2152,6 +2132,7 @@
             <StatusEffect target="This" IsActive="true" />
           </StatusEffectAction>
           <Label name="retry" />
+          <ClearTagAction tag="bag_player" />
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="bag_player" radius="120" waitforinteraction="true"/>
           <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
             <Option text="EventText.piratebodybag.kickit" endconversation="true">
