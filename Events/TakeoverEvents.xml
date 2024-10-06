@@ -3,19 +3,23 @@
   <EventPrefabs>
     <!-- OUTPOST TAKEOVER -->
 
-
-    <ScriptedEvent identifier="cotakeoverdataTEST">      
-              <SetDataAction identifier="takeoverinprogress" value="false" />
-    </ScriptedEvent>
-
     <!--GET SEPARATIST-OUTPOST TAKEOVER MISSION | Triggered on coalition sergeant character in OutpostNpcs.xml-->
     <ScriptedEvent identifier="getcoalitiontakeovermission">
       <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="sergeant" />
       <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:militaryradiocoalition" tag="targetradio" ContinueIfNoTargetsFound="true" />
       <Label name="restart" />
+      <WaitAction time="1" />
       <ClearTagAction tag="gtom_player" />
+      <CheckReputationAction TargetType="Faction" identifier="separatists" condition="lte -30">
+        <Failure>
+          <GoTo name="end" />
+        </Failure>
+        <Success>
+          <!-- Continue -->
+        </Success>
+      </CheckReputationAction>
       <TriggerAction target1tag="player" target2tag="sergeant" applytotarget1="gtom_player" waitforinteraction="true" />
-      <TagAction criteria="itemtag:takeoverradio" tag="targetradio" ContinueIfNoTargetsFound="true" />
       <CountTargetsAction targettag="targetradio" MinAmount="1">
         <Success>
           <Label name="start" />
@@ -24,49 +28,34 @@
               <ConversationAction targettag="gtom_player" dialogtype="small" text="eventtext.gettakeovermission.general.isactive" eventsprite="coalition" />
             </Success>
             <Failure>
-              <CheckReputationAction TargetType="Faction" identifier="separatists" condition="lte -30">
+              <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 50">
                 <Success>
-                  <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 50">
+                  <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 60">
                     <Success>
-                      <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 60">
-                        <Success>
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.highrep.askingforhelp" eventsprite="coalition" >
-                            <Option text="eventtext.gettakeovermission.option.accept">
-                              <!-- accept takeover -->
-                              <Label name="accepttakeover" />
-                              <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" />                             
-                              <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
-                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" eventsprite="coalition">
-                                <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
-                                  <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer"  eventsprite="coalition" endconversation="true" />
-                                  <GoTo name="accepted" />
-                                </Option>
-                                <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
-                                  <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer"  eventsprite="coalition" endconversation="true" />
-                                </Option>
-                              </ConversationAction>
+                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.highrep.askingforhelp" eventsprite="coalition" >
+                        <Option text="eventtext.gettakeovermission.option.accept">
+                          <!-- accept takeover -->
+                          <Label name="accepttakeover" />
+                          <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" />                             
+                          <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" eventsprite="coalition">
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.acceptcrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.acceptcrew.answer"  eventsprite="coalition" endconversation="true" />
+                              <GoTo name="accepted" />
                             </Option>
-                            <Option text="eventtext.gettakeovermission.option.decline">
-                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" eventsprite="coalition" />
-                              <GoTo name="restart" />
+                            <Option text="eventtext.gettakeovermission.option.accept.answer.declinecrew">
+                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer.declinecrew.answer"  eventsprite="coalition" endconversation="true" />
                             </Option>
                           </ConversationAction>
-                        </Success>
-                        <Failure>
-                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.medrep.askingforhelp" eventsprite="coalition" >
-                            <Option text="eventtext.gettakeovermission.option.accept">
-                              <Goto name="accepttakeover" />
-                            </Option>
-                            <Option text="eventtext.gettakeovermission.option.decline">
-                              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" eventsprite="coalition" />
-                              <GoTo name="restart" />
-                            </Option>
-                          </ConversationAction>
-                        </Failure>
-                      </CheckReputationAction>
+                        </Option>
+                        <Option text="eventtext.gettakeovermission.option.decline">
+                          <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" eventsprite="coalition" />
+                          <GoTo name="restart" />
+                        </Option>
+                      </ConversationAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.lowrep.askingforhelp" eventsprite="coalition" >
+                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.medrep.askingforhelp" eventsprite="coalition" >
                         <Option text="eventtext.gettakeovermission.option.accept">
                           <Goto name="accepttakeover" />
                         </Option>
@@ -79,6 +68,15 @@
                   </CheckReputationAction>
                 </Success>
                 <Failure>
+                  <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.coalition.lowrep.askingforhelp" eventsprite="coalition" >
+                    <Option text="eventtext.gettakeovermission.option.accept">
+                      <Goto name="accepttakeover" />
+                    </Option>
+                    <Option text="eventtext.gettakeovermission.option.decline">
+                      <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.decline.answer" eventsprite="coalition" />
+                      <GoTo name="restart" />
+                    </Option>
+                  </ConversationAction>
                 </Failure>
               </CheckReputationAction>
             </Failure>
@@ -127,6 +125,7 @@
         </Success>
         <Failure></Failure>
       </CheckDataAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     
@@ -134,10 +133,19 @@
     <ScriptedEvent identifier="getseparatiststakeovermission">
       <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="sergeant" />
       <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:militaryradioseparatists"  tag="targetradio" ContinueIfNoTargetsFound="true" />
       <Label name="restart" />
       <ClearTagAction tag="gtom_player" />
+      <WaitAction time="1" />
+      <CheckReputationAction TargetType="Faction" identifier="coalition" condition="lte -30">
+        <Failure>
+          <GoTo name="end" />
+        </Failure>
+        <Success>
+          <!-- Continue -->
+        </Success>
+      </CheckReputationAction>
       <TriggerAction target1tag="player" target2tag="sergeant" applytotarget1="gtom_player" waitforinteraction="true" />
-      <TagAction criteria="itemtag:takeoverradio" tag="targetradio" ContinueIfNoTargetsFound="true" />
       <CountTargetsAction targettag="targetradio" MinAmount="1">
         <Success>
           <Label name="start" />
