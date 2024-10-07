@@ -30,11 +30,17 @@
     
     <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
 
+      <!-- OUTPOST TAKEOVER SERGEANT -->
+      <EventSet identifier="outpostevents.outposttakeover.sergeant" leveltype="outpost" locationtype="colony,city,camp,base,military,blockade" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="getseparatiststakeovermission" commonness="100" probability="1.0" faction="separatists"/>
+        <ScriptedEvent identifier="getcoalitiontakeovermission" commonness="100" probability="1.0" faction="coalition"/>
+      </EventSet>
+
       <!-- OUTPOST DESTRUCTION -->
-      <EventSet identifier="outpostevents.outpostdesctruction.regular" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+      <EventSet identifier="outpostevents.outpostdestruction.regular" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
         <ScriptedEvent identifier="outpostdestruction" commonness="100" probability="1.0" />
       </EventSet>
-      <EventSet identifier="outpostevents.outpostdesctruction.nostation" leveltype="outpost" locationtype="construction,survey,sinkingcircus" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+      <EventSet identifier="outpostevents.outpostdestruction.nostation" leveltype="outpost" locationtype="construction,survey,sinkingcircus" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
         <ScriptedEvent identifier="outpostdestructionnostation" commonness="100" probability="1.0" />
       </EventSet>
       <!-- ALLOWED OUTPOST TAKEOVERS -->
