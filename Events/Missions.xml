@@ -1553,6 +1553,35 @@
     <Metadata identifier="silencewitnessnorepeat" value="1"/>
   </AbandonedOutpostMission>
   
+  <OutpostDestroyMission name="Hostage Situation" identifier="hostagesituation" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="settlement,colony,research,hospital,factory,shipyard" reward="3500" difficulty="3" commonness="0" allowretry="true" BlockLocationTypeChanges="true" hostageskilledmessage="hostagesexecuted">
+    <Reputation identifier="location" amount="5" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,512,256,256" color="214,50,48" />
+    <Characters>
+      <Character identifier="banditleader" from="abandonedoutpostnpcs" spawnpointtags="admin" moduleflags="adminmodule" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" moduleflags="engineeringmodule" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" moduleflags="securitymodule" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" moduleflags="dockingmodule" requirekill="true" />
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" teamid="Team2" requirekill="true" />
+      <Character identifier="bandit_heavy" from="abandonedoutpostnpcs" teamid="Team2" requirekill="true" />
+      <Character identifier="bandit_elite" from="abandonedoutpostnpcs" teamid="Team2" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" multiplayeronly="true" requirekill="true" />
+      <Character identifier="bandit" from="abandonedoutpostnpcs" teamid="Team2" multiplayeronly="true" requirekill="true" />
+    </Characters>
+    <TriggerEvent state="0" delay="1" eventidentifier="hostagesituationevent" campaignonly="true" />
+    <TriggerEvent state="0" delay="1" eventidentifier="hostagesituationalarm" campaignonly="true" />
+    <LocationType identifier="settlement" />
+    <LocationType identifier="colony" />
+    <LocationType identifier="research" />
+    <LocationType identifier="hospital" />
+    <LocationType identifier="factory" />
+    <LocationType identifier="shipyard" />
+    <message header="missionheader0.hostagesituation" text="missionmessage0.hostagesituation" />
+    <!-- <Metadata identifier="completedhostagesituation" operation="Add" value="1"/> -->
+    <CompleteCheckDataAction identifier="hostagesituationresolved" condition="eq 1"/>
+    <CompleteCheckDataAction identifier="hostagesalive" condition="eq 1"/>
+  </OutpostDestroyMission>
+  
   <EscortMission
     identifier="escortmedivac"
     tags="escortmedivac,escort"

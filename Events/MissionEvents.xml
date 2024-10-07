@@ -56,7 +56,7 @@
                   <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.briefing" endeventifinterrupted="false" eventsprite="ventinside" >
                     <Option text="eventtext.missionevent_vipnapping.Imin">
                       <ConversationAction text="eventtext.missionevent_vipnapping.hereslocation" endeventifinterrupted="false" endconversation="true" eventsprite="HeartOfGold" />
-                      <MissionAction missiontag="vipnapping" locationtype="City,colony,research,hospital,factory,shipyard" minlocationdistance="1"/>
+                      <MissionAction missionidentifier="vipnapping" locationtype="City,colony,research,hospital,factory,shipyard" minlocationdistance="1"/>
                       <SetDataAction identifier="vipnappingnorepeat" value="1" />
                     </Option>
                     <Option text="eventtext.missionevent_vipnapping.notmykink">
@@ -76,51 +76,355 @@
       </CheckDataAction>
       <Label name="end" />
     </ScriptedEvent>
+
+    <ScriptedEvent identifier="missionevent_silencewitness">
+      <CheckDataAction identifier="silencewitnessnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+        <Success>
+          <TagAction criteria="player" tag="player" />
+          <Label name="talktonpc" />
+          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="EventText.missionevent_silencewitness.gangbounty" endeventifinterrupted="false" eventsprite="Silhouette" >
+            <Option text="EventText.missionevent_silencewitness.tellmemore">
+              <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.missionbrief" endeventifinterrupted="false" eventsprite="Silhouette" >
+                <Option text="EventText.missionevent_silencewitness.accept" >
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                  <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
+                  <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                </Option>
+                <Option text="EventText.missionevent_silencewitness.seacario" >
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.dotdotdot" endeventifinterrupted="false" eventsprite="Silhouette" >
+                    <Option text="EventText.missionevent_silencewitness.accept" >
+                      <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                      <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
+                      <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                    </Option>
+                    <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true" >
+                      <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true">
+                  <SetDataAction identifier="silencewitnessnorepeat" value="1" />
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="eventtext.generic.ignore" endconversation="true">        
+              <ClearTagAction tag="triggerer_player" />
+              <Goto name="talktonpc" />
+            </Option>
+          </ConversationAction>
+        </Success> 
+      </CheckDataAction>
+      <Label name="end" />
+    </ScriptedEvent> 
+
+    <ScriptedEvent identifier="missionevent_hostagesituation">
+      <CheckDataAction identifier="hostagesituationnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <CheckReputationAction targettype="faction" identifier="coalition" condition="gt 30" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
+      <Label name="talktonpc" />
+      <ConversationAction speakertag="outpostmanager" invokertag="triggerer_player" text="eventtext.missionevent_hostagesituation.distressed" endeventifinterrupted="false" eventsprite="Infiltration1" >
+        <Option text="eventtext.generic.continue">
+          <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_hostagesituation.missionbrief" endeventifinterrupted="false" eventsprite="Infiltration1" >
+            <Option text="eventtext.generic.continue" >
+              <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_hostagesituation.missionbrief" endeventifinterrupted="false" eventsprite="Infiltration1" >
+                <Option text="eventtext.missionevent_hostagesituation.ynomilitary">
+                  <ConversationAction text="eventtext.missionevent_hostagesituation.3rdparty" endeventifinterrupted="false" endconversation="true" eventsprite="Infiltration1" >
+                    <Option text="eventtext.missionevent_hostagesituation.volunteer" >
+                        <ConversationAction text="eventtext.missionevent_hostagesituation.freehostages" endeventifinterrupted="false" eventsprite="Infiltration1" endconversation="true" />
+                        <MissionAction missionidentifier="hostagesituation" />
+                        <SetDataAction identifier="hostagesituationnorepeat" value="1"/>
+                    </Option>
+                    <Option text="eventtext.missionevent_hostagesituation.canthelp" endconversation="true">
+                    </Option>                        
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="eventtext.generic.ignore" endconversation="true">        
+          <ClearTagAction tag="triggerer_player" />
+          <Goto name="talktonpc" />
+        </Option>
+      </ConversationAction>
+      <Label name="end" />
+    </ScriptedEvent>
     
-
-
-      <ScriptedEvent identifier="missionevent_silencewitness">
-        <CheckDataAction identifier="silencewitnessnorepeat" condition="eq 0" >
-          <Failure>
-            <Goto name="end" />
-          </Failure>
+    <!-- TODO: move this down -->
+    
+    <!-- remove this-->
+    
+    <!-- hostage situation-->
+    <ScriptedEvent identifier="hostagesituationevent">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpc" tag="security" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="security" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <!-- remove manager NPCs -->
+      <StatusEffectAction targettag="removenpc">
+        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
+          <RemoveCharacter />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- kill security -->
+      <AfflictionAction affliction="gunshotwound" strength="200" limbtype="torso" targettag="security" />
+      <AfflictionAction affliction="bleeding" strength="200" limbtype="torso" targettag="security" />
+      <AfflictionAction affliction="bloodloss" strength="200" limbtype="torso" targettag="security" />
+      <!-- handcuff other npcs with a delay so it also targets NPCs spawned by outposts -->
+      <WaitAction time="5" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <StatusEffectAction targettag="hostage" >
+        <StatusEffect target="this" >
+          <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- trigger radio message on reaching outpost -->
+      <TriggerAction target1tag="player" target2tag="eventstart" applytotarget1="triggerer_player" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <WaitAction time="1" />
+      <StatusEffectAction targettag="leader">
+        <StatusEffect target="this" duration="3" >
+          <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <ConversationAction text="You hear someone tune into your frequency: Whoever you are, don't take on step inside! We've got this whole outpost under our control! One move and we'll pull the trigger!" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
+        <Option text="We've come to negociate the ransom.">
+          <ConversationAction targettag="triggerer_player" text="You better come unarmed! Our leader is waiting in the admin office! Don't try anything funny!" endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
+        </Option>
+        <Option text="Diplomacy was never an option." endconversation="true">
+          <Goto name="end" />
+        </Option>
+      </ConversationAction>
+      <!-- wait for player to get near leader, make sure alarm hasnt been triggered by weapon -->
+      <TriggerAction target1tag="player" target2tag="leader" radius="300" />
+      <CheckDataAction identifier="hostagesituationweaponspotted" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <ConversationAction speakertag="leader" invokertag="negociator" text="Well well, if it isn't the coalition's lapdog. Here's what we want: 5000mk, cash, not traceable. Pay up, undock, then we'll free the station and everyone's gonna be fine, no hard done. Capiche?" endeventifinterrupted="True" eventsprite="ventinside" >
+        <Option text="Here's the cash. Just stick to your word.">
+          <!-- paying off the bandits -->
+          <Label name="paidoff" />
+          <CheckMoneyAction Amount="5000">
+            <Success>
+              <MoneyAction amount="-5000" />
+              <ConversationAction targettag="negociator" text="Wonderful! See lads, I told you the coalition always respects authority! Harr harr... We'll leave as soon as you've cleared the way. Now get the hell out of here before I change my mind." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+              <SetDataAction identifier="hostagesituationresolved" value="1" />
+              <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+              <WaitAction time="2" />
+              <ConversationAction targettag="negociator" text="You've informed the coalition that the ransom has been paid and the bandits are on their way. They're not happy, but they'll give you your reward nonetheless..." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+              <Goto name="end" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="negociator" text="Hey hey hey you guys are trying to cheat us? Get em'!" endconversation="true"/>
+              <Goto name="dealoff" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="You think you can get away with all this?">
+          <CheckReputationAction targettype="faction" identifier="bandits" condition="gte 15">
+            <Success>                
+              <ConversationAction targettag="negociator" text="Wait, I've heard of you... you're pretty infamous around these waters... You're telling me the gang is sending you to stop us?" endeventifinterrupted="True" eventsprite="ventinside">
+                <Option text="(Bluff) The other crews aren't pleased with your ways, you're attracting too much attention. They're giving you a chance to fuck off while you still can.">
+                  <ConversationAction targettag="negociator" text="Damnit! I should've stuck to smuggling drugs. We're packing up lads!" endeventifinterrupted="True" eventsprite="ventinside"/>
+                  <!-- bandits are scared and leave -->
+                  <Label name="banditsleave" />
+                  <WaitAction time="2" />
+                  <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
+                  <ConversationAction targettag="negociator" text="You've informed the coalition that the bandits are leaving the station. They don't know how you pulled it off, but they'll send you the reward right away." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+                  <SetDataAction identifier="hostagesituationresolved" value="1" />
+                  <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+                  <Goto name="end" />
+                </Option>
+                <Option text="I like what you're doing, but you're not that good at extorsion. Watch this:">
+                  <ConversationAction targettag="negociator" text="You tune into the coalition frequency. They're asking about the hostages." endeventifinterrupted="True" eventsprite="ventinside">
+                    <Option text="We've decided to side with the bandits. The ransom just went up: 10000mk, through wire.">
+                      <ConversationAction targettag="negociator" text="The officer is furious and curses you with every imaginable Europan slur. But it doesn't matter, there's nothing they can do about it. They send you the money." endeventifinterrupted="True" eventsprite="ventinside"/>
+                      <MoneyAction amount="10000" />
+                      <ReputationAction increase="-15" identifier="coalition" targettype="Faction" />
+                      <!-- <MissionAction missionidentifier="coalitionattack1" /> -->
+                      <ConversationAction targettag="negociator" text="That was some artful robbery! You're gonna split the money, right?" endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" >
+                        <Option text="Split the money."> 
+                        <CheckMoneyAction Amount="5000">
+                          <Success>
+                            <MoneyAction amount="-5000" />
+                            <ReputationAction increase="5" identifier="bandits" targettype="Faction" />
+                            <ConversationAction targettag="negociator" text="Can't wait to tell the guys at home about this. The bandits prepare to leave, and so should you." endeventifinterrupted="True" eventsprite="ventinside" />
+                            <Goto name="end" />
+                          </Success>
+                          <Failure>
+                            <ConversationAction targettag="negociator" text="Hey hey hey you guys are trying to cheat us? Get em'!" endconversation="true"/>
+                            <Goto name="dealoff" />
+                          </Failure>
+                        </CheckMoneyAction>
+                        </Option>
+                        <Option text="How about I kill you and keep it?" endconversation="true">
+                          <Goto name="dealoff" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                    <Option text="(Back off) Nevermind, we're still negociating. Over.">
+                      <ConversationAction targettag="negociator" text="What the hell was that, are you cozy with the coalition now? Then pay up." endeventifinterrupted="True" eventsprite="ventinside" >
+                        <Option text="Whatever, here's your 5000mk.">
+                          <Goto name="paidoff" />
+                        </Option>
+                        <Option text="Screw you. Deal's off the table." endconversation="true">
+                          <Goto name="dealoff" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction> 
+                </Option>
+              </ConversationAction> 
+            </Success>
+            <Failure>
+            </Failure>
+          </CheckReputationAction>  
+          <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
+            <Success>
+              <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
+              <ConversationAction targettag="negociator" text="The bandits seem agitated after noticing the guns on your submarine. Uh, yeah, you bet! We've got this station on lockdown, the coalition can't do squat, right guys?" endeventifinterrupted="True" eventsprite="ventinside" >
+                <Option text="(Bluff) In 2 hours, the coalition will send their operatives, and you'll get blasted apart. We'll give you a chance to leave, unscathed.">
+                  <SkillCheckAction requiredskill="helm" requiredlevel="40" targettag="negociator">
+                    <GiveSkillEXPAction skill="helm" amount="2" targettag="negociator" />
+                    <Success>
+                      <ConversationAction targettag="negociator" text="Fuck, I knew this was a bad idea... Everyone, we're pulling out! Take whatever loot you find and bounce!" endeventifinterrupted="True" eventsprite="ventinside"/>
+                      <Goto name="banditsleave" />
+                    </Success>
+                    <Failure>                     
+                      <ConversationAction targettag="negociator" text="Hah! Like I'm falling for this bullshit. The leader snaps their fingers." endeventifinterrupted="True" eventsprite="ventinside"/>
+                      <Goto name="shotsoff" />
+                    </Failure>
+                  </SkillCheckAction> 
+                </Option>
+                <Option text="Screw you. Deal's off the table." endconversation="true">
+                  <Goto name="dealoff" />
+                </Option>
+              </ConversationAction> 
+            </Success>
+            <Failure>
+              <ConversationAction targettag="negociator" text="I don't give two shits about what those rats think. Lemme show you. The leader snaps their fingers." endeventifinterrupted="True" eventsprite="ventinside" ContinueAutomatically="true" />
+              <Label name="shotsoff" />
+              <WaitAction time="2" />
+              <StatusEffectAction targettag="negociator">
+                <StatusEffect target="this" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot1.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+                <StatusEffect target="this" delay="0.2" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot2.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+                <StatusEffect target="this" delay="0.4" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot3.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <WaitAction time="2" />
+              <ConversationAction targettag="negociator" text="Hear that? That's one less hostage. Keep arguing and see what happens. Now pay up." endeventifinterrupted="True" eventsprite="ventinside" >
+                <Option text="Cease the bloodshed, here's the money.">
+                  <Goto name="paidoff" />
+                </Option>
+                <Option text="Screw you. Deal's off the table." endconversation="true">
+                  <Goto name="dealoff" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </SkillCheckAction>             
+        </Option>
+        <Option text="Screw you. Deal's off the table." endconversation="true">
+          <Label name="dealoff" />
+          <SetDataAction identifier="hostagesituationdealoff" value="1" />
+          <WaitAction time="2" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <TriggerEventAction identifier="killhostages"/>
+          <Goto name="end" />
+        </Option>
+      </ConversationAction>
+      <Label name="end" />
+      <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
+        <Conditional IsDead="false" />
+        <Success>
+          <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+          <WaitAction time="1" />
+          <Goto name="end" />
+        </Success>
+        <Failure>
+          <SetDataAction identifier="hostagesalive" operation="set" value="0" />
+          <!-- <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" /> -->
+          <ConversationAction targettag="player" text="Too many hostages died. Mission failed." dialogtype="mission" eventsprite="unconscious" />
+        </Failure>
+      </CountTargetsAction>
+      <!-- check if >50% of hostages are alive -->
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
+          <Conditional IsDead="false" />
           <Success>
-            <TagAction criteria="player" tag="player" />
-            <Label name="talktonpc" />
-            <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="EventText.missionevent_silencewitness.gangbounty" endeventifinterrupted="false" eventsprite="Silhouette" >
-              <Option text="EventText.missionevent_silencewitness.tellmemore">
-                <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.missionbrief" endeventifinterrupted="false" eventsprite="Silhouette" >
-                  <Option text="EventText.missionevent_silencewitness.accept" >
-                    <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
-                    <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
-                    <SetDataAction identifier="silencewitnessnorepeat" value="1" />
-                  </Option>
-                  <Option text="EventText.missionevent_silencewitness.seacario" >
-                    <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.dotdotdot" endeventifinterrupted="false" eventsprite="Silhouette" >
-                      <Option text="EventText.missionevent_silencewitness.accept" >
-                        <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
-                        <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
-                        <SetDataAction identifier="silencewitnessnorepeat" value="1" />
-                      </Option>
-                      <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true" >
-                        <SetDataAction identifier="silencewitnessnorepeat" value="1" />
-                      </Option>
-                    </ConversationAction>
-                  </Option>
-                  <Option text="EventText.missionevent_silencewitness.nogangbusiness" endconversation="true">
-                    <SetDataAction identifier="silencewitnessnorepeat" value="1" />
-                  </Option>
-                </ConversationAction>
-              </Option>
-              <Option text="eventtext.generic.ignore" endconversation="true">        
-                <ClearTagAction tag="triggerer_player" />
-                <Goto name="talktonpc" />
-              </Option>
-            </ConversationAction>
-          </Success> 
-        </CheckDataAction>
-        <Label name="end" />
-      </ScriptedEvent> 
+            <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="hostagesalive" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="hostagesituationalarm">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <TagAction criteria="humanprefabidentifier:banditleader" tag="leader" />
+      <Label name="checkforweapon" />
+      <WaitAction time="1" />
+      <CheckItemAction targettag="player" itemtags="weapon" RequireEquipped="true" ApplyTagToTarget="weaponwearer" >
+        <Failure>
+          <GoTo name="checkforweapon" />
+        </Failure>
+      </CheckItemAction>
+      <CheckDataAction identifier="hostagesituationdealoff" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <CheckVisibilityAction EntityTag="bandit" TargetTag="weaponwearer" maxdistance="400" CheckFacing="true">
+        <Failure>
+          <GoTo name="checkforweapon" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="hostagesituationweaponspotted" value="1" />
+          <ConversationAction targettag="player" text="These guys have a weapon!" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+          <WaitAction time="2" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <TriggerEventAction identifier="killhostages"/>
+        </Success>
+      </CheckVisibilityAction>
+      <Label name="end" />
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="killhostages"> />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <Label name="killhostagesloop" />
+      <ClearTagAction tag="hostage" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <CombatAction combatmode="Offensive" npctag="bandit" enemytag="hostage" isinstigator="true" witnessreaction="retreat" />
+      <WaitAction time="10" />
+      <Goto name="killhostagesloop" /> 
+    </ScriptedEvent>
     
     <ScriptedEvent identifier="missionevent_escortmedivac" commonness="20" requiredDestinationTypes="city,clinic,hospital,huskchurch">
       <CheckDataAction identifier="escortmedivacnorepeat" condition="eq 0" >
@@ -781,7 +1085,7 @@
                 <Success>
                   <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
                   <SetDataAction identifier="waveinprogress" operation="Set" value="1" />
-                  <SetDataAction identifier="spawnwaves" operation="Add" condition="1" />
+                  <SetDataAction identifier="spawnwaves" operation="Add" value="1" />
                   <WaitAction time="60" />
                   <Goto name="loop" />     
                 </Success>          
@@ -804,7 +1108,7 @@
       </CheckDataAction>
       <OnRoundEndAction>
         <SetDataAction identifier="waveinprogress" operation="Set" value="0" />
-        <SetDataAction identifier="spawnwaves" operation="Set" condition="0" />
+        <SetDataAction identifier="spawnwaves" operation="Set" value="0" />
       </OnRoundEndAction>
     </ScriptedEvent>    
     
