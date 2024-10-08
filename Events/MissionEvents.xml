@@ -11,34 +11,24 @@
     <!-- //////// MISSION-GIVING EVENTS aka missionevent_xxxxx //////// -->
     
     <ScriptedEvent identifier="missionevent_pirateany" commonness="100">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
       <ConversationAction text="eventtext.missionevent_piratemission1.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="piratemission" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
     </ScriptedEvent>
     <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
       <ConversationAction text="eventtext.missionevent_piratemission1.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="heavypirate" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
     </ScriptedEvent>
     <ScriptedEvent identifier="missionevent_pirateparty" commonness="100">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
       <ConversationAction text="eventtext.missionevent_piratemission2.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="partypirate" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
     </ScriptedEvent>
     <ScriptedEvent identifier="missionevent_piratestrange" commonness="100">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
       <ConversationAction text="eventtext.missionevent_piratemission3.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="strangepirate" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
     </ScriptedEvent>
     <ScriptedEvent identifier="missionevent_killmonster_thegreatsea" commonness="85">
-      <NPCWaitAction npctag="outpostmanager" wait="true" />
       <ConversationAction text="eventtext.missionevent_killmonster_regional.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
       <MissionAction missiontag="killmonster_thegreatsea" />
-      <NPCWaitAction npctag="outpostmanager" wait="false" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="missionevent_vipnapping">
@@ -238,25 +228,21 @@
       <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskmedicalcargo" />
-        <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskeggsmuggling.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskeggsmuggling" />
-        <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="50" requiredDestinationTypes="study,research,huskchurch,city">
         <ConversationAction text="EventText.missionevent_escorthuskvip.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="escorthuskvip" />
-        <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
 
       <ScriptedEvent identifier="missionevent_slimecollection" commonness="50" requiredDestinationTypes="huskchurch">
         <ConversationAction text="EventText.missionevent_slimecollection.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="slimecollection" />
-        <NPCWaitAction npctag="outpostmanager" wait="false" />
       </ScriptedEvent>
 
       <!--CONDITIONAL MISSIONS-->
@@ -294,7 +280,6 @@
                     </ConversationAction>
                   </Option>
                 </ConversationAction>
-                <NPCWaitAction npctag="outpostmanager" wait="false" />
               </Success>
             </CheckReputationAction>  
           </Success>
@@ -311,7 +296,6 @@
           <Success>
             <ConversationAction text="Eventtext.missionevent_escorthuskterrorist.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
             <MissionAction missionidentifier="escorthuskterrorist" />
-            <NPCWaitAction npctag="outpostmanager" wait="false" />
           </Success>
         </CheckReputationAction>  
       </ScriptedEvent>
@@ -363,7 +347,6 @@
                     </ConversationAction>
                   </Option>
                 </ConversationAction>
-                <NPCWaitAction npctag="outpostmanager" wait="false" />
               </Success>
             </CheckReputationAction>  
           </Success>
@@ -443,7 +426,6 @@
             <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
             <MissionAction missionidentifier="huskbeaconmission" />
             <SetDataAction identifier="beaconhusknorepeat" value="1"/>
-            <NPCWaitAction npctag="outpostmanager" wait="false" />
           </Failure>
         </CheckDataAction>
       </ScriptedEvent> -->
@@ -1460,7 +1442,6 @@
                 </ConversationAction>
               </Option>
             </ConversationAction>
-            <NPCWaitAction npctag="outpostmanager" wait="false" />
           </Success>
         </CheckDataAction>
       </ScriptedEvent>
@@ -1678,7 +1659,6 @@
               <Failure>
               </Failure>
               <Success>
-                <NPCWaitAction npctag="outpostmanager" wait="true" />
                 <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.majorproblem" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition" >
                   <Option text="EventText.missionevent_assassinatehuskresearcher.whatkindofproblem">
                     <ConversationAction text="EventText.missionevent_assassinatehuskresearcher.huskpathogen" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="JacovSubra2" endconversation="true" >
@@ -1696,7 +1676,6 @@
                     </ConversationAction>
                   </Option>
                 </ConversationAction>
-                <NPCWaitAction npctag="outpostmanager" wait="false" />
               </Success>
             </CheckReputationAction>  
           </Success>
