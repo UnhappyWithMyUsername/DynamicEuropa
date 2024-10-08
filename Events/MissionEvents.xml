@@ -162,8 +162,6 @@
     
     <!-- TODO: move this down -->
     
-    <!-- remove this-->
-    
     <!-- hostage situation-->
     <ScriptedEvent identifier="hostagesituationevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -201,12 +199,12 @@
           <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction text="You hear someone tune into your frequency: Whoever you are, don't take on step inside! We've got this whole outpost under our control! One move and we'll pull the trigger!" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
-        <Option text="We've come to negociate the ransom.">
-          <ConversationAction targettag="triggerer_player" text="You better come unarmed! Our leader is waiting in the admin office! Don't try anything funny!" endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
+        <Option text="EventText.hostagesituation.negociate">
+          <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
           <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
         </Option>
-        <Option text="Diplomacy was never an option." endconversation="true">
+        <Option text="EventText.hostagesituation.nonegociate" endconversation="true">
           <Goto name="end" />
         </Option>
       </ConversationAction>
@@ -217,74 +215,74 @@
           <Goto name="end" />
         </Failure>
       </CheckDataAction>
-      <ConversationAction speakertag="leader" invokertag="negociator" text="Well well, if it isn't the coalition's lapdog. Here's what we want: 5000mk, cash, not traceable. Pay up, undock, then we'll free the station and everyone's gonna be fine, no hard done. Capiche?" endeventifinterrupted="True" eventsprite="ventinside" >
-        <Option text="Here's the cash. Just stick to your word.">
+      <ConversationAction speakertag="leader" invokertag="negociator" text="EventText.hostagesituation.gangleader" endeventifinterrupted="True" eventsprite="silhouette" >
+        <Option text="EventText.hostagesituation.payransom">
           <!-- paying off the bandits -->
           <Label name="paidoff" />
           <CheckMoneyAction Amount="5000">
             <Success>
               <MoneyAction amount="-5000" />
-              <ConversationAction targettag="negociator" text="Wonderful! See lads, I told you the coalition always respects authority! Harr harr... We'll leave as soon as you've cleared the way. Now get the hell out of here before I change my mind." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.happybandit" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
               <SetDataAction identifier="hostagesituationresolved" value="1" />
               <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
               <WaitAction time="2" />
-              <ConversationAction targettag="negociator" text="You've informed the coalition that the ransom has been paid and the bandits are on their way. They're not happy, but they'll give you your reward nonetheless..." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
               <Goto name="end" />
             </Success>
             <Failure>
-              <ConversationAction targettag="negociator" text="Hey hey hey you guys are trying to cheat us? Get em'!" endconversation="true"/>
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney"  eventsprite="mediator" endconversation="true"/>
               <Goto name="dealoff" />
             </Failure>
           </CheckMoneyAction>
         </Option>
-        <Option text="You think you can get away with all this?">
+        <Option text="EventText.hostagesituation.intimidate">
           <CheckReputationAction targettype="faction" identifier="bandits" condition="gte 15">
             <Success>                
-              <ConversationAction targettag="negociator" text="Wait, I've heard of you... you're pretty infamous around these waters... You're telling me the gang is sending you to stop us?" endeventifinterrupted="True" eventsprite="ventinside">
-                <Option text="(Bluff) The other crews aren't pleased with your ways, you're attracting too much attention. They're giving you a chance to fuck off while you still can.">
-                  <ConversationAction targettag="negociator" text="Damnit! I should've stuck to smuggling drugs. We're packing up lads!" endeventifinterrupted="True" eventsprite="ventinside"/>
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.infamous" endeventifinterrupted="True" eventsprite="silhouette">
+                <Option text="EventText.hostagesituation.badforbusiness">
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.packitup" endeventifinterrupted="True" eventsprite="silhouette"/>
                   <!-- bandits are scared and leave -->
                   <Label name="banditsleave" />
                   <WaitAction time="2" />
                   <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
-                  <ConversationAction targettag="negociator" text="You've informed the coalition that the bandits are leaving the station. They don't know how you pulled it off, but they'll send you the reward right away." endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" />
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
                   <SetDataAction identifier="hostagesituationresolved" value="1" />
                   <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
                   <Goto name="end" />
                 </Option>
-                <Option text="I like what you're doing, but you're not that good at extorsion. Watch this:">
-                  <ConversationAction targettag="negociator" text="You tune into the coalition frequency. They're asking about the hostages." endeventifinterrupted="True" eventsprite="ventinside">
-                    <Option text="We've decided to side with the bandits. The ransom just went up: 10000mk, through wire.">
-                      <ConversationAction targettag="negociator" text="The officer is furious and curses you with every imaginable Europan slur. But it doesn't matter, there's nothing they can do about it. They send you the money." endeventifinterrupted="True" eventsprite="ventinside"/>
+                <Option text="EventText.hostagesituation.extorsion">
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="coalition">
+                    <Option text="EventText.hostagesituation.10000mk">
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.moneysent" endeventifinterrupted="True" eventsprite="coalition"/>
                       <MoneyAction amount="10000" />
                       <ReputationAction increase="-15" identifier="coalition" targettype="Faction" />
                       <!-- <MissionAction missionidentifier="coalitionattack1" /> -->
-                      <ConversationAction targettag="negociator" text="That was some artful robbery! You're gonna split the money, right?" endeventifinterrupted="True" eventsprite="ventinside" endconversation="true" >
-                        <Option text="Split the money."> 
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.artfulrobbery" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" >
+                        <Option text="EventText.hostagesituation.splitmoney"> 
                         <CheckMoneyAction Amount="5000">
                           <Success>
                             <MoneyAction amount="-5000" />
                             <ReputationAction increase="5" identifier="bandits" targettype="Faction" />
-                            <ConversationAction targettag="negociator" text="Can't wait to tell the guys at home about this. The bandits prepare to leave, and so should you." endeventifinterrupted="True" eventsprite="ventinside" />
+                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.telltheguys" endeventifinterrupted="True" eventsprite="silhouette" />
                             <Goto name="end" />
                           </Success>
                           <Failure>
-                            <ConversationAction targettag="negociator" text="Hey hey hey you guys are trying to cheat us? Get em'!" endconversation="true"/>
+                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney" endconversation="true"/>
                             <Goto name="dealoff" />
                           </Failure>
                         </CheckMoneyAction>
                         </Option>
-                        <Option text="How about I kill you and keep it?" endconversation="true">
+                        <Option text="EventText.hostagesituation.keepmoney" endconversation="true">
                           <Goto name="dealoff" />
                         </Option>
                       </ConversationAction>
                     </Option>
-                    <Option text="(Back off) Nevermind, we're still negociating. Over.">
-                      <ConversationAction targettag="negociator" text="What the hell was that, are you cozy with the coalition now? Then pay up." endeventifinterrupted="True" eventsprite="ventinside" >
-                        <Option text="Whatever, here's your 5000mk.">
+                    <Option text="EventText.hostagesituation.backoff">
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="silhouette" >
+                        <Option text="EventText.hostagesituation.payanyway">
                           <Goto name="paidoff" />
                         </Option>
-                        <Option text="Screw you. Deal's off the table." endconversation="true">
+                        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
                           <Goto name="dealoff" />
                         </Option>
                       </ConversationAction>
@@ -299,27 +297,27 @@
           <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
             <Success>
               <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
-              <ConversationAction targettag="negociator" text="The bandits seem agitated after noticing the guns on your submarine. Uh, yeah, you bet! We've got this station on lockdown, the coalition can't do squat, right guys?" endeventifinterrupted="True" eventsprite="ventinside" >
-                <Option text="(Bluff) In 2 hours, the coalition will send their operatives, and you'll get blasted apart. We'll give you a chance to leave, unscathed.">
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="silhouette" >
+                <Option text="EventText.hostagesituation.2hours">
                   <SkillCheckAction requiredskill="helm" requiredlevel="40" targettag="negociator">
                     <GiveSkillEXPAction skill="helm" amount="2" targettag="negociator" />
                     <Success>
-                      <ConversationAction targettag="negociator" text="Fuck, I knew this was a bad idea... Everyone, we're pulling out! Take whatever loot you find and bounce!" endeventifinterrupted="True" eventsprite="ventinside"/>
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.webounce" endeventifinterrupted="True" eventsprite="silhouette"/>
                       <Goto name="banditsleave" />
                     </Success>
                     <Failure>                     
-                      <ConversationAction targettag="negociator" text="Hah! Like I'm falling for this bullshit. The leader snaps their fingers." endeventifinterrupted="True" eventsprite="ventinside"/>
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="silhouette"/>
                       <Goto name="shotsoff" />
                     </Failure>
                   </SkillCheckAction> 
                 </Option>
-                <Option text="Screw you. Deal's off the table." endconversation="true">
+                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
                   <Goto name="dealoff" />
                 </Option>
               </ConversationAction> 
             </Success>
             <Failure>
-              <ConversationAction targettag="negociator" text="I don't give two shits about what those rats think. Lemme show you. The leader snaps their fingers." endeventifinterrupted="True" eventsprite="ventinside" ContinueAutomatically="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.snapfingers" endeventifinterrupted="True" eventsprite="silhouette" ContinueAutomatically="true" />
               <Label name="shotsoff" />
               <WaitAction time="2" />
               <StatusEffectAction targettag="negociator">
@@ -334,18 +332,18 @@
                 </StatusEffect>
               </StatusEffectAction>
               <WaitAction time="2" />
-              <ConversationAction targettag="negociator" text="Hear that? That's one less hostage. Keep arguing and see what happens. Now pay up." endeventifinterrupted="True" eventsprite="ventinside" >
-                <Option text="Cease the bloodshed, here's the money.">
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.shothostage" endeventifinterrupted="True" eventsprite="unconscious" >
+                <Option text="EventText.hostagesituation.ceasebloodshed">
                   <Goto name="paidoff" />
                 </Option>
-                <Option text="Screw you. Deal's off the table." endconversation="true">
+                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
                   <Goto name="dealoff" />
                 </Option>
               </ConversationAction>
             </Failure>
           </SkillCheckAction>             
         </Option>
-        <Option text="Screw you. Deal's off the table." endconversation="true">
+        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
           <Label name="dealoff" />
           <SetDataAction identifier="hostagesituationdealoff" value="1" />
           <WaitAction time="2" />
@@ -366,7 +364,7 @@
         <Failure>
           <SetDataAction identifier="hostagesalive" operation="set" value="0" />
           <!-- <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" /> -->
-          <ConversationAction targettag="player" text="Too many hostages died. Mission failed." dialogtype="mission" eventsprite="unconscious" />
+          <ConversationAction targettag="player" text="EventText.hostagesituation.toomanydead" dialogtype="mission" eventsprite="unconscious" />
         </Failure>
       </CountTargetsAction>
       <!-- check if >50% of hostages are alive -->
