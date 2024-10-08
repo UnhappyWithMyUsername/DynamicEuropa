@@ -161,270 +161,6 @@
       <Label name="end" />
     </ScriptedEvent>
     
-    <!-- TODO: move this down -->
-    
-    <!-- hostage situation-->
-    <ScriptedEvent identifier="hostagesituationevent">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
-      <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
-      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpc" tag="security" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="security" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <!-- remove manager NPCs -->
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction>
-      <!-- kill security -->
-      <AfflictionAction affliction="gunshotwound" strength="200" limbtype="torso" targettag="security" />
-      <AfflictionAction affliction="bleeding" strength="200" limbtype="torso" targettag="security" />
-      <AfflictionAction affliction="bloodloss" strength="200" limbtype="torso" targettag="security" />
-      <!-- handcuff other npcs with a delay so it also targets NPCs spawned by outposts -->
-      <WaitAction time="5" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
-      <StatusEffectAction targettag="hostage" >
-        <StatusEffect target="this" >
-          <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
-        </StatusEffect>
-      </StatusEffectAction>
-      <!-- trigger radio message on reaching outpost -->
-      <TriggerAction target1tag="player" target2tag="eventstart" applytotarget1="triggerer_player" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
-      <WaitAction time="1" />
-      <StatusEffectAction targettag="leader">
-        <StatusEffect target="this" duration="3" >
-          <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
-        </StatusEffect>
-      </StatusEffectAction>
-      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
-        <Option text="EventText.hostagesituation.negociate">
-          <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
-          <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
-        </Option>
-        <Option text="EventText.hostagesituation.nonegociate" endconversation="true">
-          <Goto name="end" />
-        </Option>
-      </ConversationAction>
-      <!-- wait for player to get near leader, make sure alarm hasnt been triggered by weapon -->
-      <TriggerAction target1tag="player" target2tag="leader" radius="300" />
-      <CheckDataAction identifier="hostagesituationweaponspotted" condition="eq 0" >
-        <Failure>
-          <Goto name="end" />
-        </Failure>
-      </CheckDataAction>
-      <ConversationAction speakertag="leader" invokertag="negociator" text="EventText.hostagesituation.gangleader" endeventifinterrupted="True" eventsprite="silhouette" >
-        <Option text="EventText.hostagesituation.payransom">
-          <!-- paying off the bandits -->
-          <Label name="paidoff" />
-          <CheckMoneyAction Amount="5000">
-            <Success>
-              <MoneyAction amount="-5000" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.happybandit" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
-              <SetDataAction identifier="hostagesituationresolved" value="1" />
-              <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
-              <WaitAction time="2" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
-              <Goto name="end" />
-            </Success>
-            <Failure>
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney"  eventsprite="mediator" endconversation="true"/>
-              <Goto name="dealoff" />
-            </Failure>
-          </CheckMoneyAction>
-        </Option>
-        <Option text="EventText.hostagesituation.intimidate">
-          <CheckReputationAction targettype="faction" identifier="bandits" condition="gte 15">
-            <Success>                
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.infamous" endeventifinterrupted="True" eventsprite="silhouette">
-                <Option text="EventText.hostagesituation.badforbusiness">
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.packitup" endeventifinterrupted="True" eventsprite="silhouette"/>
-                  <!-- bandits are scared and leave -->
-                  <Label name="banditsleave" />
-                  <WaitAction time="2" />
-                  <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
-                  <SetDataAction identifier="hostagesituationresolved" value="1" />
-                  <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
-                  <Goto name="end" />
-                </Option>
-                <Option text="EventText.hostagesituation.extorsion">
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="coalition">
-                    <Option text="EventText.hostagesituation.10000mk">
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.moneysent" endeventifinterrupted="True" eventsprite="coalition"/>
-                      <MoneyAction amount="10000" />
-                      <ReputationAction increase="-15" identifier="coalition" targettype="Faction" />
-                      <!-- <MissionAction missionidentifier="coalitionattack1" /> -->
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.artfulrobbery" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" >
-                        <Option text="EventText.hostagesituation.splitmoney"> 
-                        <CheckMoneyAction Amount="5000">
-                          <Success>
-                            <MoneyAction amount="-5000" />
-                            <ReputationAction increase="5" identifier="bandits" targettype="Faction" />
-                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.telltheguys" endeventifinterrupted="True" eventsprite="silhouette" />
-                            <Goto name="end" />
-                          </Success>
-                          <Failure>
-                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney" endconversation="true"/>
-                            <Goto name="dealoff" />
-                          </Failure>
-                        </CheckMoneyAction>
-                        </Option>
-                        <Option text="EventText.hostagesituation.keepmoney" endconversation="true">
-                          <Goto name="dealoff" />
-                        </Option>
-                      </ConversationAction>
-                    </Option>
-                    <Option text="EventText.hostagesituation.backoff">
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="silhouette" >
-                        <Option text="EventText.hostagesituation.payanyway">
-                          <Goto name="paidoff" />
-                        </Option>
-                        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
-                          <Goto name="dealoff" />
-                        </Option>
-                      </ConversationAction>
-                    </Option>
-                  </ConversationAction> 
-                </Option>
-              </ConversationAction> 
-            </Success>
-            <Failure>
-            </Failure>
-          </CheckReputationAction>  
-          <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
-            <Success>
-              <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="silhouette" >
-                <Option text="EventText.hostagesituation.2hours">
-                  <SkillCheckAction requiredskill="helm" requiredlevel="40" targettag="negociator">
-                    <GiveSkillEXPAction skill="helm" amount="2" targettag="negociator" />
-                    <Success>
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.webounce" endeventifinterrupted="True" eventsprite="silhouette"/>
-                      <Goto name="banditsleave" />
-                    </Success>
-                    <Failure>                     
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="silhouette"/>
-                      <Goto name="shotsoff" />
-                    </Failure>
-                  </SkillCheckAction> 
-                </Option>
-                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
-                  <Goto name="dealoff" />
-                </Option>
-              </ConversationAction> 
-            </Success>
-            <Failure>
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.snapfingers" endeventifinterrupted="True" eventsprite="silhouette" ContinueAutomatically="true" />
-              <Label name="shotsoff" />
-              <WaitAction time="2" />
-              <StatusEffectAction targettag="negociator">
-                <StatusEffect target="this" >
-                  <Sound file="Content/Items/Weapons/SMGsingleShot1.ogg" type="OnUse" range="3000" volume="2" />
-                </StatusEffect>
-                <StatusEffect target="this" delay="0.2" >
-                  <Sound file="Content/Items/Weapons/SMGsingleShot2.ogg" type="OnUse" range="3000" volume="2" />
-                </StatusEffect>
-                <StatusEffect target="this" delay="0.4" >
-                  <Sound file="Content/Items/Weapons/SMGsingleShot3.ogg" type="OnUse" range="3000" volume="2" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <WaitAction time="2" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.shothostage" endeventifinterrupted="True" eventsprite="unconscious" >
-                <Option text="EventText.hostagesituation.ceasebloodshed">
-                  <Goto name="paidoff" />
-                </Option>
-                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
-                  <Goto name="dealoff" />
-                </Option>
-              </ConversationAction>
-            </Failure>
-          </SkillCheckAction>             
-        </Option>
-        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
-          <Label name="dealoff" />
-          <SetDataAction identifier="hostagesituationdealoff" value="1" />
-          <WaitAction time="2" />
-          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
-          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
-          <TriggerEventAction identifier="killhostages"/>
-          <Goto name="end" />
-        </Option>
-      </ConversationAction>
-      <Label name="end" />
-      <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
-        <Conditional IsDead="false" />
-        <Success>
-          <SetDataAction identifier="hostagesalive" operation="set" value="1" />
-          <WaitAction time="1" />
-          <Goto name="end" />
-        </Success>
-        <Failure>
-          <SetDataAction identifier="hostagesalive" operation="set" value="0" />
-          <!-- <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" /> -->
-          <ConversationAction targettag="player" text="EventText.hostagesituation.toomanydead" dialogtype="mission" eventsprite="unconscious" />
-        </Failure>
-      </CountTargetsAction>
-      <!-- check if >50% of hostages are alive -->
-      <OnRoundEndAction>
-        <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
-          <Conditional IsDead="false" />
-          <Success>
-            <SetDataAction identifier="hostagesalive" operation="set" value="1" />
-          </Success>
-          <Failure>
-            <SetDataAction identifier="hostagesalive" operation="set" value="0" />
-          </Failure>
-        </CountTargetsAction>
-      </OnRoundEndAction>
-    </ScriptedEvent>
-
-    <ScriptedEvent identifier="hostagesituationalarm">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
-      <TagAction criteria="humanprefabidentifier:banditleader" tag="leader" />
-      <Label name="checkforweapon" />
-      <WaitAction time="1" />
-      <CheckItemAction targettag="player" itemtags="weapon" RequireEquipped="true" ApplyTagToTarget="weaponwearer" >
-        <Failure>
-          <GoTo name="checkforweapon" />
-        </Failure>
-      </CheckItemAction>
-      <CheckDataAction identifier="hostagesituationdealoff" condition="eq 0" >
-        <Failure>
-          <Goto name="end" />
-        </Failure>
-      </CheckDataAction>
-      <CheckVisibilityAction EntityTag="bandit" TargetTag="weaponwearer" maxdistance="400" CheckFacing="true">
-        <Failure>
-          <GoTo name="checkforweapon" />
-        </Failure>
-        <Success>
-          <SetDataAction identifier="hostagesituationweaponspotted" value="1" />
-          <ConversationAction targettag="player" text="These guys have a weapon!" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
-          <WaitAction time="2" />
-          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
-          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
-          <TriggerEventAction identifier="killhostages"/>
-        </Success>
-      </CheckVisibilityAction>
-      <Label name="end" />
-    </ScriptedEvent>
-
-    <ScriptedEvent identifier="killhostages"> />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
-      <Label name="killhostagesloop" />
-      <ClearTagAction tag="hostage" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
-      <CombatAction combatmode="Offensive" npctag="bandit" enemytag="hostage" isinstigator="true" witnessreaction="retreat" />
-      <WaitAction time="10" />
-      <Goto name="killhostagesloop" /> 
-    </ScriptedEvent>
-    
     <ScriptedEvent identifier="missionevent_escortmedivac" commonness="20" requiredDestinationTypes="city,clinic,hospital,huskchurch">
       <CheckDataAction identifier="escortmedivacnorepeat" condition="eq 0" >
         <Failure>
@@ -1054,6 +790,267 @@
       <Label name="end" />
     </ScriptedEvent>
 
+    <!-- hostage situation-->
+    <ScriptedEvent identifier="hostagesituationevent">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpc" tag="security" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="security" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <!-- remove manager NPCs -->
+      <StatusEffectAction targettag="removenpc">
+        <StatusEffect type="Always" target="Character" interval="1" stackable="false">
+          <RemoveCharacter />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- kill security -->
+      <AfflictionAction affliction="gunshotwound" strength="200" limbtype="torso" targettag="security" />
+      <AfflictionAction affliction="bleeding" strength="200" limbtype="torso" targettag="security" />
+      <AfflictionAction affliction="bloodloss" strength="200" limbtype="torso" targettag="security" />
+      <!-- handcuff other npcs with a delay so it also targets NPCs spawned by outposts -->
+      <WaitAction time="5" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <StatusEffectAction targettag="hostage" >
+        <StatusEffect target="this" >
+          <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- trigger radio message on reaching outpost -->
+      <TriggerAction target1tag="player" target2tag="eventstart" applytotarget1="triggerer_player" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
+      <WaitAction time="1" />
+      <StatusEffectAction targettag="leader">
+        <StatusEffect target="this" duration="3" >
+          <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
+        <Option text="EventText.hostagesituation.negociate">
+          <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
+        </Option>
+        <Option text="EventText.hostagesituation.nonegociate" endconversation="true">
+          <Goto name="end" />
+        </Option>
+      </ConversationAction>
+      <!-- wait for player to get near leader, make sure alarm hasnt been triggered by weapon -->
+      <TriggerAction target1tag="player" target2tag="leader" radius="300" />
+      <CheckDataAction identifier="hostagesituationweaponspotted" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <ConversationAction speakertag="leader" invokertag="negociator" text="EventText.hostagesituation.gangleader" endeventifinterrupted="True" eventsprite="silhouette" >
+        <Option text="EventText.hostagesituation.payransom">
+          <!-- paying off the bandits -->
+          <Label name="paidoff" />
+          <CheckMoneyAction Amount="5000">
+            <Success>
+              <MoneyAction amount="-5000" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.happybandit" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+              <SetDataAction identifier="hostagesituationresolved" value="1" />
+              <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+              <WaitAction time="2" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+              <Goto name="end" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney"  eventsprite="mediator" endconversation="true"/>
+              <Goto name="dealoff" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="EventText.hostagesituation.intimidate">
+          <CheckReputationAction targettype="faction" identifier="bandits" condition="gte 15">
+            <Success>                
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.infamous" endeventifinterrupted="True" eventsprite="silhouette">
+                <Option text="EventText.hostagesituation.badforbusiness">
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.packitup" endeventifinterrupted="True" eventsprite="silhouette"/>
+                  <!-- bandits are scared and leave -->
+                  <Label name="banditsleave" />
+                  <WaitAction time="2" />
+                  <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+                  <SetDataAction identifier="hostagesituationresolved" value="1" />
+                  <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+                  <Goto name="end" />
+                </Option>
+                <Option text="EventText.hostagesituation.extorsion">
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="coalition">
+                    <Option text="EventText.hostagesituation.10000mk">
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.moneysent" endeventifinterrupted="True" eventsprite="coalition"/>
+                      <MoneyAction amount="10000" />
+                      <ReputationAction increase="-15" identifier="coalition" targettype="Faction" />
+                      <!-- <MissionAction missionidentifier="coalitionattack1" /> -->
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.artfulrobbery" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" >
+                        <Option text="EventText.hostagesituation.splitmoney"> 
+                        <CheckMoneyAction Amount="5000">
+                          <Success>
+                            <MoneyAction amount="-5000" />
+                            <ReputationAction increase="5" identifier="bandits" targettype="Faction" />
+                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.telltheguys" endeventifinterrupted="True" eventsprite="silhouette" />
+                            <Goto name="end" />
+                          </Success>
+                          <Failure>
+                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.nomoney" endconversation="true"/>
+                            <Goto name="dealoff" />
+                          </Failure>
+                        </CheckMoneyAction>
+                        </Option>
+                        <Option text="EventText.hostagesituation.keepmoney" endconversation="true">
+                          <Goto name="dealoff" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                    <Option text="EventText.hostagesituation.backoff">
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="silhouette" >
+                        <Option text="EventText.hostagesituation.payanyway">
+                          <Goto name="paidoff" />
+                        </Option>
+                        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
+                          <Goto name="dealoff" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction> 
+                </Option>
+              </ConversationAction> 
+            </Success>
+            <Failure>
+            </Failure>
+          </CheckReputationAction>  
+          <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
+            <Success>
+              <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="silhouette" >
+                <Option text="EventText.hostagesituation.2hours">
+                  <SkillCheckAction requiredskill="helm" requiredlevel="40" targettag="negociator">
+                    <GiveSkillEXPAction skill="helm" amount="2" targettag="negociator" />
+                    <Success>
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.webounce" endeventifinterrupted="True" eventsprite="silhouette"/>
+                      <Goto name="banditsleave" />
+                    </Success>
+                    <Failure>                     
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="silhouette"/>
+                      <Goto name="shotsoff" />
+                    </Failure>
+                  </SkillCheckAction> 
+                </Option>
+                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
+                  <Goto name="dealoff" />
+                </Option>
+              </ConversationAction> 
+            </Success>
+            <Failure>
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.snapfingers" endeventifinterrupted="True" eventsprite="silhouette" ContinueAutomatically="true" />
+              <Label name="shotsoff" />
+              <WaitAction time="2" />
+              <StatusEffectAction targettag="negociator">
+                <StatusEffect target="this" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot1.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+                <StatusEffect target="this" delay="0.2" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot2.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+                <StatusEffect target="this" delay="0.4" >
+                  <Sound file="Content/Items/Weapons/SMGsingleShot3.ogg" type="OnUse" range="3000" volume="2" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <WaitAction time="2" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.shothostage" endeventifinterrupted="True" eventsprite="unconscious" >
+                <Option text="EventText.hostagesituation.ceasebloodshed">
+                  <Goto name="paidoff" />
+                </Option>
+                <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
+                  <Goto name="dealoff" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </SkillCheckAction>             
+        </Option>
+        <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
+          <Label name="dealoff" />
+          <SetDataAction identifier="hostagesituationdealoff" value="1" />
+          <WaitAction time="2" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <TriggerEventAction identifier="killhostages"/>
+          <Goto name="end" />
+        </Option>
+      </ConversationAction>
+      <Label name="end" />
+      <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
+        <Conditional IsDead="false" />
+        <Success>
+          <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+          <WaitAction time="1" />
+          <Goto name="end" />
+        </Success>
+        <Failure>
+          <SetDataAction identifier="hostagesalive" operation="set" value="0" />
+          <!-- <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" /> -->
+          <ConversationAction targettag="player" text="EventText.hostagesituation.toomanydead" dialogtype="mission" eventsprite="unconscious" />
+        </Failure>
+      </CountTargetsAction>
+      <!-- check if >50% of hostages are alive -->
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="hostagesalive" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="hostagesituationalarm">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <TagAction criteria="humanprefabidentifier:banditleader" tag="leader" />
+      <Label name="checkforweapon" />
+      <WaitAction time="1" />
+      <CheckItemAction targettag="player" itemtags="weapon" RequireEquipped="true" ApplyTagToTarget="weaponwearer" >
+        <Failure>
+          <GoTo name="checkforweapon" />
+        </Failure>
+      </CheckItemAction>
+      <CheckDataAction identifier="hostagesituationdealoff" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <CheckVisibilityAction EntityTag="bandit" TargetTag="weaponwearer" maxdistance="400" CheckFacing="true">
+        <Failure>
+          <GoTo name="checkforweapon" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="hostagesituationweaponspotted" value="1" />
+          <ConversationAction targettag="player" text="These guys have a weapon!" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+          <WaitAction time="2" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <TriggerEventAction identifier="killhostages"/>
+        </Success>
+      </CheckVisibilityAction>
+      <Label name="end" />
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="killhostages"> />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <Label name="killhostagesloop" />
+      <ClearTagAction tag="hostage" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <CombatAction combatmode="Offensive" npctag="bandit" enemytag="hostage" isinstigator="true" witnessreaction="retreat" />
+      <WaitAction time="10" />
+      <Goto name="killhostagesloop" /> 
+    </ScriptedEvent>
    
     <!-- TODO: NEXTUPDATE? remove this when devs allow triggering statuseffects in the mission itself just like Escort missions -->
     <ScriptedEvent identifier="huskcrewsymbiosis">
