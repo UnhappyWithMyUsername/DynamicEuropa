@@ -126,19 +126,15 @@
       <ConversationAction speakertag="hostagesecurity" invokertag="triggerer_player" text="eventtext.missionevent_hostagesituation.distressed" endeventifinterrupted="false" eventsprite="Infiltration1" >
         <Option text="eventtext.generic.continue">
           <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_hostagesituation.missionbrief" endeventifinterrupted="false" eventsprite="Infiltration1" >
-            <Option text="eventtext.generic.continue" >
-              <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_hostagesituation.missionbrief" endeventifinterrupted="false" eventsprite="Infiltration1" >
-                <Option text="eventtext.missionevent_hostagesituation.ynomilitary">
-                  <ConversationAction text="eventtext.missionevent_hostagesituation.3rdparty" endeventifinterrupted="false" endconversation="true" eventsprite="Infiltration1" >
-                    <Option text="eventtext.missionevent_hostagesituation.volunteer" >
-                      <ConversationAction text="eventtext.missionevent_hostagesituation.freehostages" endeventifinterrupted="false" eventsprite="Infiltration1" endconversation="true" />
-                      <MissionAction missionidentifier="hostagesituation" locationtype="settlement,colony,research,hospital,hydroponics,factory,shipyard" requiredfaction="Coalition" minlocationdistance="1"/>/>
-                      <SetDataAction identifier="hostagesituationnorepeat" value="1"/>
-                    </Option>
-                    <Option text="eventtext.missionevent_hostagesituation.canthelp" endconversation="true">
-                    </Option>                        
-                  </ConversationAction>
+            <Option text="eventtext.missionevent_hostagesituation.ynomilitary">
+              <ConversationAction text="eventtext.missionevent_hostagesituation.3rdparty" endeventifinterrupted="false" endconversation="true" eventsprite="Infiltration1" >
+                <Option text="eventtext.missionevent_hostagesituation.volunteer" >
+                  <ConversationAction text="eventtext.missionevent_hostagesituation.freehostages" endeventifinterrupted="false" eventsprite="Infiltration1" endconversation="true" />
+                  <MissionAction missionidentifier="hostagesituation" locationtype="settlement,colony,research,hospital,hydroponics,factory,shipyard" requiredfaction="Coalition" minlocationdistance="1"/>/>
+                  <SetDataAction identifier="hostagesituationnorepeat" value="1"/>
                 </Option>
+                <Option text="eventtext.missionevent_hostagesituation.canthelp" endconversation="true">
+                </Option>                        
               </ConversationAction>
             </Option>
           </ConversationAction>
@@ -801,6 +797,10 @@
           <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
         </StatusEffect>
       </StatusEffectAction>
+      <TagAction criteria="itemidentifier:handcuffs" tag="hostagecuffs" submarinetype="Outpost"/>
+      <StatusEffectAction targettag="hostagecuffs">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
       <!-- trigger radio message on reaching outpost -->
       <TriggerAction target1tag="player" target2tag="eventstart" applytotarget1="triggerer_player" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <WaitAction time="1" />
@@ -809,9 +809,10 @@
           <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="separatists" ContinueAutomatically="true" >
+      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="silhouette" ContinueAutomatically="true" >
         <Option text="EventText.hostagesituation.negociate">
           <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+          <NPCChangeTeamAction npctag="leader" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
         </Option>
         <Option text="EventText.hostagesituation.nonegociate" endconversation="true">
@@ -958,7 +959,7 @@
           <SetDataAction identifier="hostagesituationdealoff" value="1" />
           <WaitAction time="2" />
           <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
-          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="leader" teamtag="Team2" />
           <TriggerEventAction identifier="killhostages"/>
           <Goto name="end" />
         </Option>
@@ -1017,7 +1018,7 @@
           <ConversationAction targettag="player" text="These guys have a weapon!" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
           <WaitAction time="2" />
           <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
-          <NPCChangeTeamAction npctag="banditleader" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="leader" teamtag="Team2" />
           <TriggerEventAction identifier="killhostages"/>
         </Success>
       </CheckVisibilityAction>
