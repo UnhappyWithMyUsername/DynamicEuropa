@@ -18,7 +18,7 @@
   <EventSprites>
     <Sprite identifier="piratehaven" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="23,0,234,242" origin="0.5,0.5"/>
     <Sprite identifier="piratehaven2" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="263,6,242,238" origin="0.5,0.5"/>
-    <Sprite identifier="pirateoutpost" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="529,0,236,254" origin="0.5,0.5"/>
+    <Sprite identifier="banditcaptain" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="529,0,236,254" origin="0.5,0.5"/>
     <Sprite identifier="bandittalk" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="768,0,256,256" origin="0.5,0.5"/>
     
     <Sprite identifier="radiocall" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,269,216,216" origin="0.5,0.5"/>
@@ -34,6 +34,7 @@
     <Sprite identifier="huskoutbreak" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,769,226,235" origin="0.5,0.5"/>
     <Sprite identifier="brokenmachinery" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="283,792,199,199" origin="0.5,0.5"/>
     <Sprite identifier="malfunction" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="540,796,208,208" origin="0.5,0.5"/>
+    <Sprite identifier="destruction" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="768,768,256,256" origin="0.5,0.5"/>
     
     <Sprite identifier="medicalmask" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="37,772,182,251" origin="0.5,0.5"/>
     
@@ -1648,7 +1649,7 @@
             <Success>
               <TriggerAction target1tag="guard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
               <Label name="psooptions" />
-              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven2">
+              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven">
                 <!-- Pay the toll, get in, + reputation -->
                 <Option text="eventtext.piratesecurityofficer.highrep.pay.high">
                   <CheckMoneyAction Amount="1000">
@@ -1795,7 +1796,7 @@
                 <Success>
                   <TriggerAction target1tag="guard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
                   <Label name="psooptions2" />
-                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven2">
+                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven">
                     <!-- Pay the toll, get in, + reputation -->
                     <Option text="eventtext.piratesecurityofficer.lowrep.pay.high">
                       <CheckMoneyAction Amount="2000">

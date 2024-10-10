@@ -86,7 +86,7 @@
           <!-- gives a radio if this is your first time doing a takeover mission (eq 1), and gives you a new radio if you lost it -->
           <CheckDataAction identifier="completedcoalitiontakeover" condition="eq 1">
             <Success>
-              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.giveradio.coalition" eventsprite="coalition" />
+              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.giveradio.coalition" eventsprite="radiocall" />
               <SpawnAction itemidentifier="militaryradiocoalition" targetinventory="gtom_player" />
               <SetDataAction identifier="completedcoalitiontakeover" operation="Add" value="1" />
               <GoTo name="start" />
@@ -218,7 +218,7 @@
           <!-- gives a radio if this is your first time doing a takeover mission (eq 1), and gives you a new radio if you lost it -->
           <CheckDataAction identifier="completedseparatiststakeover" condition="eq 1">
             <Success>
-              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.giveradio.separatists" eventsprite="separatists" />
+              <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.giveradio.separatists" eventsprite="radiocall" />
               <SpawnAction itemidentifier="militaryradioseparatists" targetinventory="gtom_player" />
               <SetDataAction identifier="completedseparatiststakeover" operation="Add" value="1" />
               <GoTo name="start" />
@@ -628,7 +628,7 @@
                 <Success>
                   <ReputationAction targettype="Location" increase="-75" />
                   <ModifyLocationAction type="destroyedstation" />
-                  <ConversationAction text="eventtext.outpostdestruction.npcsflee" dialogtype="Mission" targettag="player" eventsprite="unconscious" />
+                  <ConversationAction text="eventtext.outpostdestruction.npcsflee" dialogtype="Mission" targettag="player" eventsprite="destruction" />
                 </Success>
                 <Failure>
                   <GoTo name="endevent" />
@@ -672,7 +672,7 @@
               <CheckDataAction identifier="takeoverinprogress" condition="false">
                 <Success>
                   <ModifyLocationAction type="none" />
-                  <ConversationAction text="eventtext.outpostdestruction.placeruined" dialogtype="Mission" targettag="player" eventsprite="unconscious" />
+                  <ConversationAction text="eventtext.outpostdestruction.placeruined" dialogtype="Mission" targettag="player" eventsprite="destruction" />
                 </Success>
                 <Failure>
                   <GoTo name="endevent" />
