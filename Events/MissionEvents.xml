@@ -39,9 +39,9 @@
         <Success>
           <TagAction criteria="player" tag="player" />
           <Label name="talktonpc" />
-          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="eventtext.missionevent_vipnapping.bigscore" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="eventtext.missionevent_vipnapping.whatabout">
-              <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.ransomplan" endeventifinterrupted="false" eventsprite="Silhouette" >
+              <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.ransomplan" endeventifinterrupted="false" eventsprite="bandittalk" >
                 <Option text="eventtext.generic.continue" >
                   <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_vipnapping.briefing" endeventifinterrupted="false" eventsprite="ventinside" >
                     <Option text="eventtext.missionevent_vipnapping.Imin">
@@ -50,7 +50,7 @@
                       <SetDataAction identifier="vipnappingnorepeat" value="1" />
                     </Option>
                     <Option text="eventtext.missionevent_vipnapping.notmykink">
-                      <ConversationAction text="eventtext.missionevent_vipnapping.yourloss" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
+                      <ConversationAction text="eventtext.missionevent_vipnapping.yourloss" endeventifinterrupted="false" endconversation="true" eventsprite="bandittalk" />
                       <Goto name="end" />
                     </Option>
                   </ConversationAction>
@@ -75,18 +75,18 @@
         <Success>
           <TagAction criteria="player" tag="player" />
           <Label name="talktonpc" />
-          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="EventText.missionevent_silencewitness.gangbounty" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="EventText.missionevent_silencewitness.gangbounty" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="EventText.missionevent_silencewitness.tellmemore">
-              <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.missionbrief" endeventifinterrupted="false" eventsprite="Silhouette" >
+              <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.missionbrief" endeventifinterrupted="false" eventsprite="bandittalk" >
                 <Option text="EventText.missionevent_silencewitness.accept" >
-                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="bandittalk" endconversation="true" />
                   <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
                   <SetDataAction identifier="silencewitnessnorepeat" value="1" />
                 </Option>
                 <Option text="EventText.missionevent_silencewitness.seacario" >
-                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.dotdotdot" endeventifinterrupted="false" eventsprite="Silhouette" >
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.dotdotdot" endeventifinterrupted="false" eventsprite="bandittalk" >
                     <Option text="EventText.missionevent_silencewitness.accept" >
-                      <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="Silhouette" endconversation="true" />
+                      <ConversationAction targettag="triggerer_player" text="EventText.missionevent_silencewitness.hitlocation" endeventifinterrupted="false" eventsprite="bandittalk" endconversation="true" />
                       <MissionAction missionidentifier="silencewitness" locationtype="City,Military,Base,Colony" requiredfaction="Coalition" minlocationdistance="1"/>
                       <SetDataAction identifier="silencewitnessnorepeat" value="1" />
                     </Option>
@@ -809,9 +809,9 @@
           <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
         </StatusEffect>
       </StatusEffectAction>
-      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="silhouette" ContinueAutomatically="true" >
+      <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="radiocall" ContinueAutomatically="true" >
         <Option text="EventText.hostagesituation.negociate">
-          <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+          <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
           <NPCChangeTeamAction npctag="leader" teamtag="FriendlyNPC" />
           <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
         </Option>
@@ -826,18 +826,18 @@
           <Goto name="end" />
         </Failure>
       </CheckDataAction>
-      <ConversationAction speakertag="leader" invokertag="negociator" text="EventText.hostagesituation.gangleader" endeventifinterrupted="True" eventsprite="silhouette" >
+      <ConversationAction speakertag="leader" invokertag="negociator" text="EventText.hostagesituation.gangleader" endeventifinterrupted="True" eventsprite="bandittalk" >
         <Option text="EventText.hostagesituation.payransom">
           <!-- paying off the bandits -->
           <Label name="paidoff" />
           <CheckMoneyAction Amount="5000">
             <Success>
               <MoneyAction amount="-5000" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.happybandit" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.happybandit" endeventifinterrupted="True" eventsprite="bandittalk" endconversation="true" />
               <SetDataAction identifier="hostagesituationresolved" value="1" />
               <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
               <WaitAction time="2" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
               <Goto name="end" />
             </Success>
             <Failure>
@@ -849,32 +849,32 @@
         <Option text="EventText.hostagesituation.intimidate">
           <CheckReputationAction targettype="faction" identifier="bandits" condition="gte 15">
             <Success>                
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.infamous" endeventifinterrupted="True" eventsprite="silhouette">
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.infamous" endeventifinterrupted="True" eventsprite="bandittalk">
                 <Option text="EventText.hostagesituation.badforbusiness">
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.packitup" endeventifinterrupted="True" eventsprite="silhouette"/>
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.packitup" endeventifinterrupted="True" eventsprite="bandittalk"/>
                   <!-- bandits are scared and leave -->
                   <Label name="banditsleave" />
                   <WaitAction time="2" />
                   <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" />
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="bandittalk" endconversation="true" />
                   <SetDataAction identifier="hostagesituationresolved" value="1" />
                   <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
                   <Goto name="end" />
                 </Option>
                 <Option text="EventText.hostagesituation.extorsion">
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="coalition">
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="radiocall">
                     <Option text="EventText.hostagesituation.10000mk">
                       <ConversationAction targettag="negociator" text="EventText.hostagesituation.moneysent" endeventifinterrupted="True" eventsprite="coalition"/>
                       <MoneyAction amount="10000" />
                       <ReputationAction increase="-15" identifier="coalition" targettype="Faction" />
                       <!-- <MissionAction missionidentifier="coalitionattack1" /> -->
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.artfulrobbery" endeventifinterrupted="True" eventsprite="silhouette" endconversation="true" >
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.artfulrobbery" endeventifinterrupted="True" eventsprite="bandittalk" endconversation="true" >
                         <Option text="EventText.hostagesituation.splitmoney"> 
                         <CheckMoneyAction Amount="5000">
                           <Success>
                             <MoneyAction amount="-5000" />
                             <ReputationAction increase="5" identifier="bandits" targettype="Faction" />
-                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.telltheguys" endeventifinterrupted="True" eventsprite="silhouette" />
+                            <ConversationAction targettag="negociator" text="EventText.hostagesituation.telltheguys" endeventifinterrupted="True" eventsprite="bandittalk" />
                             <Goto name="end" />
                           </Success>
                           <Failure>
@@ -889,7 +889,7 @@
                       </ConversationAction>
                     </Option>
                     <Option text="EventText.hostagesituation.backoff">
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="silhouette" >
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="bandittalk" >
                         <Option text="EventText.hostagesituation.payanyway">
                           <Goto name="paidoff" />
                         </Option>
@@ -908,16 +908,16 @@
           <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
             <Success>
               <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="silhouette" >
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="bandittalk" >
                 <Option text="EventText.hostagesituation.2hours">
                   <SkillCheckAction requiredskill="helm" requiredlevel="40" targettag="negociator">
                     <GiveSkillEXPAction skill="helm" amount="2" targettag="negociator" />
                     <Success>
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.webounce" endeventifinterrupted="True" eventsprite="silhouette"/>
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.webounce" endeventifinterrupted="True" eventsprite="bandittalk"/>
                       <Goto name="banditsleave" />
                     </Success>
                     <Failure>                     
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="silhouette"/>
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="bandittalk"/>
                       <Goto name="shotsoff" />
                     </Failure>
                   </SkillCheckAction> 
@@ -928,7 +928,7 @@
               </ConversationAction> 
             </Success>
             <Failure>
-              <ConversationAction targettag="negociator" text="EventText.hostagesituation.snapfingers" endeventifinterrupted="True" eventsprite="silhouette" ContinueAutomatically="true" />
+              <ConversationAction targettag="negociator" text="EventText.hostagesituation.snapfingers" endeventifinterrupted="True" eventsprite="bandittalk" ContinueAutomatically="true" />
               <Label name="shotsoff" />
               <WaitAction time="2" />
               <StatusEffectAction targettag="negociator">
@@ -1463,7 +1463,7 @@
         <ClearTagAction tag="speaker_player" />
         <WaitAction time="1" />
         <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
-        <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" >
+        <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="bandittalk" >
           <Option text="EventText.silencewitnessevent.regards">
             <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
               <Success>
@@ -1477,7 +1477,7 @@
                 <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
               </Success>
               <Failure>
-                <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="Silhouette" endconversation="true" />
+                <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="bandittalk" endconversation="true" />
                 <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
                 <StatusEffectAction targettag="alarmbutton">
                   <StatusEffect State="true" target="This" />

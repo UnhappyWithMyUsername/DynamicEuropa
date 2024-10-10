@@ -16,36 +16,44 @@
             </Option> -->
 
   <EventSprites>
-    <Sprite identifier="sonar" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="460,150,180,180" origin="0.5,0.5"/>
-    <Sprite identifier="subblueprint" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1528,27,210,210" origin="0.5,0.5"/>
-    <Sprite identifier="piratehaven" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="637,686,140,140" origin="0.5,0.5"/>
-    <Sprite identifier="piratehaven2" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="259,682,140,140" origin="0.5,0.5"/>
-    <Sprite identifier="sunkmarine" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="676,206,111,111" origin="0.5,0.5"/>
-    <Sprite identifier="hitthelever" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1313,553,180,180" origin="0.5,0.5"/>
-    <Sprite identifier="crowbarevent" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="300,506,176,176" origin="0.5,0.5"/>
-    <Sprite identifier="redalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="263,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="yellowalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="358,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="greenalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="454,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="rustcircuits" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="456,563,190,190" origin="0.5,0.5"/>
-    <Sprite identifier="rustdecal" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="746,817,240,181" origin="0.5,0.5"/>
+    <Sprite identifier="piratehaven" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="23,0,234,242" origin="0.5,0.5"/>
+    <Sprite identifier="piratehaven2" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="263,6,242,238" origin="0.5,0.5"/>
+    <Sprite identifier="pirateoutpost" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="529,0,236,254" origin="0.5,0.5"/>
+    <Sprite identifier="bandittalk" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="768,0,256,256" origin="0.5,0.5"/>
+    
+    <Sprite identifier="radiocall" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,269,216,216" origin="0.5,0.5"/>
+    <Sprite identifier="sonar" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="270,266,225,222" origin="0.5,0.5"/>
+    <Sprite identifier="subblueprint" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="530,260,239,235" origin="0.5,0.5"/>
+    <Sprite identifier="hitthelever" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="792,278,210,210" origin="0.5,0.5"/>
+    
+    <Sprite identifier="bloodycuffs" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="11,529,221,221" origin="0.5,0.5"/>
+    <Sprite identifier="firefight" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="267,529,224,224" origin="0.5,0.5"/>
+    <Sprite identifier="traitoress" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="527,529,223,224" origin="0.5,0.5"/>
+    <Sprite identifier="hostage" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="779,526,225,225" origin="0.5,0.5"/>
+    
+    <Sprite identifier="huskoutbreak" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,769,226,235" origin="0.5,0.5"/>
+    <Sprite identifier="brokenmachinery" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="283,792,199,199" origin="0.5,0.5"/>
+    <Sprite identifier="malfunction" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="540,796,208,208" origin="0.5,0.5"/>
+    
     <Sprite identifier="medicalmask" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="37,772,182,251" origin="0.5,0.5"/>
+    
+    
+    
   </EventSprites>
+  
+  
   
 <!--   
   TODO: custom eventsprites:
-  -Radio
   -Pirate haven
   -Bandit (leader)
   -Bandit
-  -Gunshots
-  -Handcuffs
-  -Sonar (proper one)
   -Outpost destruction 
-  -Broken machinery
   -->
   
   
   <EventPrefabs>
+  
     <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
       <WaitAction time="3" />
       <TagAction criteria="humanprefabidentifier:outpostmanager" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
@@ -1934,22 +1942,22 @@
               <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
               <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
               <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette">
+              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="bandittalk">
                 <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
                   <Label name="dialogstep2" />
                   <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
                   <WaitAction time="5" />
                   <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="Silhouette"/>
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="Silhouette">              
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="bandittalk"/>
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="bandittalk">              
                     <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
                       <Label name="dialogstep3" />
                       <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
                       <WaitAction time="5" />
                       <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="Silhouette">
+                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="bandittalk">
                         <Option text="eventtext.piratediversoutpost.takebooze">
-                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="Silhouette"/>
+                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="bandittalk"/>
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
@@ -1958,7 +1966,7 @@
                           <GoTo name="pirateinvaders" />
                         </Option >
                         <Option text="eventtext.piratediversoutpost.getthehelloff" >
-                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="Silhouette">
+                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="bandittalk">
                           <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
                             <!-- Go to part 2 -->
                             <GoTo name="pirateinvaders" />
@@ -2140,7 +2148,7 @@
           <TagAction criteria="player" tag="player" />
           <SpawnAction itemidentifier="huskbodybag" targettag="bodybag" spawnlocation="Outpost" spawnpointtag="husk" ignorebyai="true" />
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="false"/>
-          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
+          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="brokenmachinery" endconversation="true"/> 
           <WaitAction time="2" />
           <StatusEffectAction targettag="bodybag">
             <StatusEffect target="This" IsActive="true" />
@@ -2148,7 +2156,7 @@
           <Label name="retry" />
           <ClearTagAction tag="bag_player" />
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="bag_player" radius="120" waitforinteraction="true"/>
-          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
+          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="brokenmachinery" >
             <Option text="EventText.piratebodybag.kickit" endconversation="true">
               <SetDataAction identifier="piratebodybagnorepeat" operation="set" value="1" />            
               <StatusEffectAction targettag="bodybag">
@@ -2212,9 +2220,9 @@
           </StatusEffectAction>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" targetmoduletags="adminmodule" />
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="bandittalk" />
           <Label name="talktonpc" />
-          <ConversationAction speakertag="smuggler" invokertag="panty_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="smuggler" invokertag="panty_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="eventtext.generic.continue">
               <ConversationAction targettag="panty_player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                 <Option text="eventtext.generic.continue" >
@@ -2261,7 +2269,7 @@
                   <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                   <MoneyAction amount="500" targettag="deliverer_player" />
                   <SetDataAction identifier="pantytheftnorepeat" value="1" />
-                  <ConversationAction targettag="deliverer_player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                  <ConversationAction targettag="deliverer_player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
                 </Success>
                 <Failure>
                   <Goto name="noclothes" />
@@ -2270,7 +2278,7 @@
             </Success>
             <Failure>
               <Label name="noclothes" />
-              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="deliverer_player" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="deliverer_player" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
               <ClearTagAction tag="deliverer_player" />
               <Goto name="retry" />
             </Failure>
@@ -2293,10 +2301,10 @@
           <!-- wait a little before triggering so you have time to leave the sub -->
           <WaitAction time="60" />
           <TriggerAction target1tag="player" target2tag="thief" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
           <NPCWaitAction npctag="thief" wait="false"/>
           <Label name="talktonpc" />
-          <ConversationAction speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="eventtext.generic.continue">
               <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                 <Option text="eventtext.generic.continue" >
@@ -2362,7 +2370,7 @@
                           <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                           <MoneyAction amount="200" targettag="triggerer_player" />
                           <SetDataAction identifier="vendingsmashingnorepeat" value="1" />
-                          <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                          <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
                         </Success>
                       </CheckItemAction >
                     </Option>

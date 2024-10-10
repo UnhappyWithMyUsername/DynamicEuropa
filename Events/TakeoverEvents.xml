@@ -305,7 +305,7 @@
           <AfflictionAction targettag="defenders" affliction="stun" strength="10" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
-          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="Coalition" endconversation="true" />
         </Success>
         <Failure>
@@ -359,7 +359,7 @@
           <AfflictionAction targettag="defenders" affliction="stun" strength="10" />
           <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" />
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
-          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="separatists" endconversation="true" />
         </Success>
         <Failure>
@@ -394,7 +394,7 @@
           <CountTargetsAction minamount="1" targettag="targetreactor" >
             <Failure>
               <Label name="nostation" />
-              <ConversationAction text="eventtext.manualtakeover.call.nostation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+              <ConversationAction text="eventtext.manualtakeover.call.nostation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
               <SetDataAction identifier="takeoverinprogress" value="false" />
               <Goto name="end" />
             </Failure>
@@ -415,13 +415,13 @@
                           <Goto name="nostation" />
                         </Failure>
                         <Success>
-                          <ConversationAction text="eventtext.manualtakeover.call.church" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+                          <ConversationAction text="eventtext.manualtakeover.call.church" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
                           <SetDataAction identifier="takeoverinprogress" value="false" />
                         </Success>
                       </CountTargetsAction >
                     </Failure>
                     <Success>
-                      <ConversationAction text="eventtext.manualtakeover.call.bandits" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+                      <ConversationAction text="eventtext.manualtakeover.call.bandits" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
                       <SetDataAction identifier="takeoverinprogress" value="false" />
                     </Success>
                   </CountTargetsAction>
@@ -440,7 +440,7 @@
               </CountTargetsAction>
             </Failure>
             <Success>
-              <ConversationAction text="eventtext.manualtakeover.call.friendlystation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="coalition" endconversation="true" />
+              <ConversationAction text="eventtext.manualtakeover.call.friendlystation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" endconversation="true" />
               <SetDataAction identifier="takeoverinprogress" value="false" />
             </Success>
           </CountTargetsAction>
@@ -466,7 +466,7 @@
           <CountTargetsAction minamount="1" targettag="targetreactor" >
             <Failure>
               <Label name="nostation" />
-              <ConversationAction text="eventtext.manualtakeover.call.nostation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+              <ConversationAction text="eventtext.manualtakeover.call.nostation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
               <SetDataAction identifier="takeoverinprogress" value="false" />
               <Goto name="end" />
             </Failure>
@@ -487,13 +487,13 @@
                           <Goto name="nostation" />
                         </Failure>
                         <Success>
-                          <ConversationAction text="eventtext.manualtakeover.call.church" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+                          <ConversationAction text="eventtext.manualtakeover.call.church" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
                           <SetDataAction identifier="takeoverinprogress" value="false" />
                         </Success>
                       </CountTargetsAction >
                     </Failure>
                     <Success>
-                      <ConversationAction text="eventtext.manualtakeover.call.bandits" dialogtype="Small" targettag="statuseffecttarget" eventsprite="BombScare1" ContinueAutomatically="true" />
+                      <ConversationAction text="eventtext.manualtakeover.call.bandits" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" ContinueAutomatically="true" />
                       <SetDataAction identifier="takeoverinprogress" value="false" />
                     </Success>
                   </CountTargetsAction>
@@ -512,7 +512,7 @@
               </CountTargetsAction>
             </Failure>
             <Success>
-              <ConversationAction text="eventtext.manualtakeover.call.friendlystation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="separatists" endconversation="true" />
+              <ConversationAction text="eventtext.manualtakeover.call.friendlystation" dialogtype="Small" targettag="statuseffecttarget" eventsprite="radiocall" endconversation="true" />
               <SetDataAction identifier="takeoverinprogress" value="false" />
             </Success>
           </CountTargetsAction>
@@ -549,7 +549,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="sepnpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
-          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Coalition" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -70">
             <Success>
               <ReputationAction targettype="Faction" identifier="coalition" increase="25" />
@@ -587,7 +587,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="conpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
-          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="Separatists" />
+          <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -70">
             <Success>
               <ReputationAction targettype="Faction" identifier="separatists" increase="25" />

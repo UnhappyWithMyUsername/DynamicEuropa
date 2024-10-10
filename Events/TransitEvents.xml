@@ -282,7 +282,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" radius="200" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="redalarm" endconversation="true" />
+      <ConversationAction targettag="monitorchecker" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="malfunction" endconversation="true" />
       <Label name="restart" />
       <ClearTagAction tag="te_player" />
       <TriggerAction target1tag="activeengine" target2tag="player" applytotarget2="te_player" radius="300" waitforinteraction="true" />
@@ -360,7 +360,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="redalarm" dialogtype="Small"/>
+      <ConversationAction targettag="monitorchecker" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="malfunction" dialogtype="Small"/>
       <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
       <StatusEffectAction targettag="activereactor">
         <StatusEffect target="This" AutoTemp="false" duration="120" stackable="false">
@@ -424,7 +424,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.oxygenfluidleak.monitor" endconversation="true" eventsprite="redalarm"/>
+      <ConversationAction targettag="monitorchecker" text="eventtext.oxygenfluidleak.monitor" endconversation="true" eventsprite="malfunction"/>
       <Label name="repairgenerator" />
       <ClearTagAction tag="ofl_player" />
       <TriggerAction target1tag="activeoxygengenerator" target2tag="player" applytotarget2="ofl_player" radius="300" waitforinteraction="true" />
@@ -538,7 +538,7 @@
         <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
         <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
         <Success>
-          <ConversationAction text="EventText.beaconcommsjam.jammed" dialogtype="Small" targettag="player" eventsprite="rustcircuits" endconversation="true" continueautomatically="true" />
+          <ConversationAction text="EventText.beaconcommsjam.jammed" dialogtype="Small" targettag="player" eventsprite="brokenmachinery" endconversation="true" continueautomatically="true" />
           <Goto name="beaconactivecheck2" /> 
         </Success>
         <Failure>
