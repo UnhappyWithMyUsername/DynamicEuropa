@@ -2120,16 +2120,16 @@
       <Label name="waitforinput" />
       <ClearTagAction tag="pmi_trig_player" />
       <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
-      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="oldman">
+      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="banditcaptain">
         <Option text="eventtext.piratemissioninformant.option.buy">
           <CheckMoneyAction Amount="1000">
             <Success>
               <MoneyAction amount="-1000" />
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="oldman" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="banditcaptain" />
               <MissionAction missiontag="coalitionciv" />
             </Success>
             <Failure>
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="oldman" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="banditcaptain" />
               <GoTo name="waitforinput" />
             </Failure>
           </CheckMoneyAction>
