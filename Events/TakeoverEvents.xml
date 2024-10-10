@@ -527,7 +527,7 @@
     </ScriptedEvent>
 
 
-    <!-- TODO: remove specific NPCs? you can grab missions from manager in hostile outpost -->
+    <!-- TODO: remove specific NPCs? wait for devs fixing interacting with manager/services in hostile outpost -->
     <!-- Coalition Attackers-->
     <ScriptedEvent identifier="manualcooutposttakeoverevent">
       <SetDataAction identifier="takeoverinprogress" value="true" />
@@ -535,7 +535,7 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
+      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
       <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="sepnpc" CompareToTarget="sepnpc" MinPercentageRelativeToTarget="75">
@@ -573,7 +573,7 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
+      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
       <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="conpc" CompareToTarget="conpc" MinPercentageRelativeToTarget="75">
