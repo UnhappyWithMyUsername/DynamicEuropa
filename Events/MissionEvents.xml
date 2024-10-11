@@ -771,8 +771,8 @@
     <!-- hostage situation-->
     <ScriptedEvent identifier="hostagesituationevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
       <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="security" ContinueIfNoTargetsFound="true" />
@@ -837,6 +837,11 @@
               <SetDataAction identifier="hostagesituationresolved" value="1" />
               <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
               <WaitAction time="2" />
+              <StatusEffectAction targettag="negociator">
+                <StatusEffect target="this" duration="1" >
+                  <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="2" loop="true" />
+                </StatusEffect>
+              </StatusEffectAction>
               <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
               <Goto name="end" />
             </Success>
@@ -855,13 +860,28 @@
                   <!-- bandits are scared and leave -->
                   <Label name="banditsleave" />
                   <WaitAction time="2" />
+                  <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+                  <NPCFollowAction npctag="bandit" targettag="airlock" follow="true" />
                   <ReputationAction increase="2" identifier="coalition" targettype="Faction" />
-                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="piratehaven" endconversation="true" />
+                  <StatusEffectAction targettag="negociator">
+                    <StatusEffect target="this" duration="1" >
+                      <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="2" loop="true" />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
                   <SetDataAction identifier="hostagesituationresolved" value="1" />
                   <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+                  <TriggerAction target1tag="bandit" target2tag="airlock" radius="300" />
+                  <WaitAction time="10" />
+                  <NPCFollowAction npctag="bandit" targettag="airlock" follow="false" />
                   <Goto name="end" />
                 </Option>
                 <Option text="EventText.hostagesituation.extorsion">
+                  <StatusEffectAction targettag="negociator">
+                    <StatusEffect target="this" duration="1" >
+                      <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="2" loop="true" />
+                    </StatusEffect>
+                  </StatusEffectAction>
                   <ConversationAction targettag="negociator" text="EventText.hostagesituation.callcoalition" endeventifinterrupted="True" eventsprite="radiocall">
                     <Option text="EventText.hostagesituation.10000mk">
                       <ConversationAction targettag="negociator" text="EventText.hostagesituation.moneysent" endeventifinterrupted="True" eventsprite="coalition"/>
@@ -891,7 +911,7 @@
                     <Option text="EventText.hostagesituation.backoff">
                       <ConversationAction targettag="negociator" text="EventText.hostagesituation.backedoff" endeventifinterrupted="True" eventsprite="banditcaptain" >
                         <Option text="EventText.hostagesituation.payanyway">
-                          <Goto name="paidoff" />
+                          <Goto name="paidoff" endconversation="false" />
                         </Option>
                         <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
                           <Goto name="dealoff" />
@@ -917,8 +937,8 @@
                       <Goto name="banditsleave" />
                     </Success>
                     <Failure>                     
-                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="banditcaptain"/>
-                      <Goto name="shotsoff" />
+                      <ConversationAction targettag="negociator" text="EventText.hostagesituation.bullshit" endeventifinterrupted="True" eventsprite="banditcaptain" ContinueAutomatically="true"/>
+                      <Goto name="shotsoff" endconversation="false" />
                     </Failure>
                   </SkillCheckAction> 
                 </Option>
@@ -945,7 +965,7 @@
               <WaitAction time="2" />
               <ConversationAction targettag="negociator" text="EventText.hostagesituation.shothostage" endeventifinterrupted="True" eventsprite="unconscious" >
                 <Option text="EventText.hostagesituation.ceasebloodshed">
-                  <Goto name="paidoff" />
+                  <Goto name="paidoff" endconversation="false" />
                 </Option>
                 <Option text="EventText.hostagesituation.dealsoff" endconversation="true">
                   <Goto name="dealoff" />
