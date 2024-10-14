@@ -289,7 +289,8 @@
 
     <Colony identifier="Colony" replaceinradiation="Abandoned" namefile="Content/Map/cityNames.txt" commonnessperzone="1: 0.3, 2: 0.2, 3: 0.1, 4: 0, 5: 0, 6: 0"  beaconstationchance="0.00" AllowAsBiomeGate="false">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,256,128,128" color="162,213,220,255" />
-      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />      
+      <Hireable identifier="captain" commonness="1" />
       <Hireable identifier="assistant" commonness="3" />
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
@@ -377,7 +378,6 @@
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMilitary.png" premultiplyalpha="false" />
       <Hireable identifier="securityofficer" commonness="2" />
       <Hireable identifier="assistant" commonness="1" />
-      <Hireable identifier="mechanic" commonness="1" />
       <ChangeTo type="Military" probability="0.1" disallowedadjacentlocations="Military" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.base.changeto.military">
         <Requirement function="Add" requiredlocations="City" probability="0.5" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
         <Requirement function="Add" requiredlocations="Colony" probability="0.35" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
@@ -408,9 +408,6 @@
       <Hireable identifier="securityofficer" commonness="3" />
       <Hireable identifier="captain" commonness="1" />
       <Hireable identifier="assistant" commonness="2" />
-      <Hireable identifier="engineer" commonness="1" />
-      <Hireable identifier="mechanic" commonness="1" />
-      <Hireable identifier="medicaldoctor" commonness="1" />
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
@@ -433,7 +430,6 @@
     <MilitaryForces identifier="MilitaryForces" replaceinradiation="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0" AllowAsBiomeGate="false" beaconstationchance="0.00" hasoutpost="true">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="896,128,128,128" color="50,255,148,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
-      <Hireable identifier="securityofficer" commonness="1" />
       <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,OuterHuskLair,HuskgroundsDE,WasteyardDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,2" messagetag="locationchange.militaryforces.changeto.None" />
       <Store
         initialbalance="1000"
