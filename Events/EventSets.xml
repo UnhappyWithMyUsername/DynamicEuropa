@@ -498,17 +498,20 @@
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
-      <EventSet identifier="outpostevent.industrial.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.industrial.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,factory,shipyard,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="1.0" />
       </EventSet>
+      <EventSet identifier="outpostevents.industrial.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
+        <ScriptedEvent identifier="malfunctioningdefensebot" commonness="100" probability="0.25" />
+      </EventSet>
 
       <!-- Events specific to habitation outposts -->
-      <EventSet identifier="outpostevent.habitation.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.habitation.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
       </EventSet>
-      <EventSet identifier="outpostevents.habitation.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="false" eventcount="1" onceperoutpost="false">
+      <EventSet identifier="outpostevents.habitation.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
         <ScriptedEvent identifier="orangePETA" commonness="100" probability="0.25" />
       </EventSet>
 
