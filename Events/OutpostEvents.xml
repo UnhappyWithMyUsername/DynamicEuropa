@@ -7,13 +7,26 @@
   <!-- GENERIC IGNORE OPTION 
   USE THIS TO CLEAR TAG AND LOOP INTO THE CONVERSATION -->
   
-<!--        <GoTo name="retry" />
+      <!-- <Label name="retry" />
+        <ClearTagAction tag="triggerer_player" />
+      
+      <Option text="eventtext.option.ignore" endconversation="true">
+        <WaitAction time="2" />
+        <GoTo name="retry" />
+      </Option> -->
             
-            <Option text="eventtext.option.ignore" endconversation="true">
-              <ClearTagAction tag="medivac_player" />
-              <WaitAction time="2" />
-              <GoTo name="retry" />
-            </Option> -->
+            
+  <!-- GENERIC NO REPEAT OPTION 
+  PLACE THIS AT THE START OF THE EVENT AND LABEL AT THE END, SETDATAACTION SOMEWHERE -->
+      <!-- <CheckDataAction identifier="eventnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction> 
+      
+      <SetDataAction identifier="eventnorepeat" operation="set" value="1" />
+      
+      <Label name="end" /> -->
 
   <EventSprites>
     <Sprite identifier="piratehaven" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="23,0,234,242" origin="0.5,0.5"/>
