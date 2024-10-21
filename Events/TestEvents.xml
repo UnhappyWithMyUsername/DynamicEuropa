@@ -86,6 +86,12 @@
       <SetDataAction identifier="completedseparatiststakeover" operation="Add" value="1" />
     </ScriptedEvent>
   
+  
+    <ScriptedEvent identifier="soldierspawnTEST">
+      <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <NPCChangeTeamAction npctag="tempcrew" teamid="Team1" addtocrew="true" />
+    </ScriptedEvent> 
 
     <ScriptedEvent identifier="eventiconstest" >
       <TagAction criteria="player" tag="player" />
