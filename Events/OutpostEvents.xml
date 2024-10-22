@@ -7,31 +7,52 @@
   <!-- GENERIC IGNORE OPTION 
   USE THIS TO CLEAR TAG AND LOOP INTO THE CONVERSATION -->
   
-<!--        <GoTo name="retry" />
+      <!-- <Label name="retry" />
+        <ClearTagAction tag="triggerer_player" />
+      
+      <Option text="eventtext.option.ignore" endconversation="true">
+        <WaitAction time="2" />
+        <GoTo name="retry" />
+      </Option> -->
             
-            <Option text="eventtext.option.ignore" endconversation="true">
-              <ClearTagAction tag="medivac_player" />
-              <WaitAction time="2" />
-              <GoTo name="retry" />
-            </Option> -->
+            
+  <!-- GENERIC NO REPEAT OPTION 
+  PLACE THIS AT THE START OF THE EVENT AND LABEL AT THE END, SETDATAACTION SOMEWHERE -->
+      <!-- <CheckDataAction identifier="eventnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction> 
+      
+      <SetDataAction identifier="eventnorepeat" operation="set" value="1" />
+      
+      <Label name="end" /> -->
 
   <EventSprites>
-    <Sprite identifier="sonar" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="460,150,180,180" origin="0.5,0.5"/>
-    <Sprite identifier="subblueprint" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1528,27,210,210" origin="0.5,0.5"/>
-    <Sprite identifier="piratehaven" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="637,686,140,140" origin="0.5,0.5"/>
-    <Sprite identifier="piratehaven2" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="259,682,140,140" origin="0.5,0.5"/>
-    <Sprite identifier="sunkmarine" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="676,206,111,111" origin="0.5,0.5"/>
-    <Sprite identifier="hitthelever" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="1313,553,180,180" origin="0.5,0.5"/>
-    <Sprite identifier="crowbarevent" texture="Content/UI/Server/PlaystyleSerious.png" sourcerect="300,506,176,176" origin="0.5,0.5"/>
-    <Sprite identifier="redalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="263,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="yellowalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="358,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="greenalarm" texture="Content/UI/UIAtlasDevices.png" sourcerect="454,0,100,100" origin="0.5,0.5"/>
-    <Sprite identifier="rustcircuits" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="456,563,190,190" origin="0.5,0.5"/>
-    <Sprite identifier="rustdecal" texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" sourcerect="746,817,240,181" origin="0.5,0.5"/>
-    <Sprite identifier="medicalmask" texture="Content/Map/Outposts/Art/Event_pic2.png" sourcerect="37,772,182,251" origin="0.5,0.5"/>
+    <Sprite identifier="piratehaven" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="23,0,234,242" origin="0.5,0.5"/>
+    <Sprite identifier="piratehaven2" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="263,6,242,238" origin="0.5,0.5"/>
+    <Sprite identifier="banditcaptain" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="529,0,236,254" origin="0.5,0.5"/>
+    <Sprite identifier="bandittalk" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="768,0,256,256" origin="0.5,0.5"/>
+    
+    <Sprite identifier="radiocall" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,269,216,216" origin="0.5,0.5"/>
+    <Sprite identifier="sonar" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="270,266,225,222" origin="0.5,0.5"/>
+    <Sprite identifier="subblueprint" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="530,260,239,235" origin="0.5,0.5"/>
+    <Sprite identifier="hitthelever" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="792,278,210,210" origin="0.5,0.5"/>
+    
+    <Sprite identifier="bloodycuffs" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="11,529,221,221" origin="0.5,0.5"/>
+    <Sprite identifier="firefight" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="267,529,224,224" origin="0.5,0.5"/>
+    <Sprite identifier="traitoress" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="527,529,223,224" origin="0.5,0.5"/>
+    <Sprite identifier="hostage" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="779,526,225,225" origin="0.5,0.5"/>
+    
+    <Sprite identifier="huskoutbreak" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="25,769,226,235" origin="0.5,0.5"/>
+    <Sprite identifier="brokenmachinery" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="283,792,199,199" origin="0.5,0.5"/>
+    <Sprite identifier="malfunction" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="540,796,208,208" origin="0.5,0.5"/>
+    <Sprite identifier="destruction" texture="%ModDir:2532991202%/Events/DE_Event_pic1.png" sourcerect="768,768,256,256" origin="0.5,0.5"/>
   </EventSprites>
   
+    
   <EventPrefabs>
+  
     <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
       <WaitAction time="3" />
       <TagAction criteria="humanprefabidentifier:outpostmanager" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
@@ -1533,13 +1554,12 @@
               <StatusEffectAction targettag="alarm">
                 <StatusEffect IsOn="true" target="This" setvalue="true" />
               </StatusEffectAction>
-              <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-              <!-- TODO: reenable when infinite sound loop is fixed -->
-              <!-- <StatusEffectAction targettag="blockadehull">
+              <ConversationAction text="eventtext.blockadealarm.breakin" eventsprite="firefight" dialogtype="small" ContinueAutomatically="true" />
+              <StatusEffectAction targettag="blockadehull">
                 <StatusEffect target="this" duration="3" >
                   <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction> -->
+              </StatusEffectAction>
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
               <Label name="tagcombatloop" />              
@@ -1602,12 +1622,11 @@
           <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="listener_player" radius="300" waitforinteraction="true" />
           <ConversationAction text="eventtext.commsrelay.piratehaven" dialogtype="Small" targettag="listener_player" >
             <Option text="eventtext.option.listen">
-              <!-- TODO: NEXTUPDATE reenable this, sound loop should be fixed -->
-              <!-- <StatusEffectAction targettag="commsrelay">
+              <StatusEffectAction targettag="commsrelay">
                 <StatusEffect target="This" duration="10.2">
                   <Sound file="%ModDir:2532991202%/Sounds/Events/PirateBroadcast.ogg" range="500" volume="1" loop="true" />
                 </StatusEffect>
-              </StatusEffectAction> -->
+              </StatusEffectAction>
               <ConversationAction text="eventtext.commsrelay.piratehaven.answer" dialogtype="Small" targettag="listener_player" eventsprite="piratehaven" endconversation="true" />
             </Option>
             <Option text="eventtext.option.ignore" endconversation="true">
@@ -1620,7 +1639,6 @@
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="dockingguard" SpawnPointTag="dockingguard" />
           <NPCOperateItemAction npctag="guard" targettag="piratechair" ItemComponentName="Controller" operate="true" />
           <TriggerEventAction identifier="piratehavenalarm" />
-          <SetDataAction identifier="pirateoutpostdestruction" value="0" /> <!-- Todo: remove this data and all its usecases in events entirely -->
           <!-- Toll part, reuse triggerer_player if this is bugged -->
           <Label name="patrol" />
           <ClearTagAction tag="pso_trig_player" />
@@ -1629,7 +1647,7 @@
             <Success>
               <TriggerAction target1tag="guard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
               <Label name="psooptions" />
-              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven2">
+              <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.low.interact" eventsprite="piratehaven">
                 <!-- Pay the toll, get in, + reputation -->
                 <Option text="eventtext.piratesecurityofficer.highrep.pay.high">
                   <CheckMoneyAction Amount="1000">
@@ -1776,7 +1794,7 @@
                 <Success>
                   <TriggerAction target1tag="guard" target2tag="pso_trig_player" radius="200" waitforinteraction="false" />
                   <Label name="psooptions2" />
-                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven2">
+                  <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.toll.high.interact" eventsprite="piratehaven">
                     <!-- Pay the toll, get in, + reputation -->
                     <Option text="eventtext.piratesecurityofficer.lowrep.pay.high">
                       <CheckMoneyAction Amount="2000">
@@ -1882,11 +1900,7 @@
       <TagAction criteria="hullname:reactorroom" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:research" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hullname:subtopright" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="piratenpc" />
       <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
       <TriggerAction target1tag="player" target2tag="piratehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <CheckDataAction identifier="piratehavenunlocked" condition="eq 1">
@@ -1897,14 +1911,14 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
-          <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-          <!-- TODO: NEXTUPDATE? reenable when infinite sound loop is fixed  -->
-<!--           <StatusEffectAction targettag="piratehull">
+          <ConversationAction text="eventtext.piratehavenalarm.breakin" eventsprite="firefight" ContinueAutomatically="true" />
+          <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" oneshot="true" >
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
             </StatusEffect>
-          </StatusEffectAction> -->
-          <ReputationAction targettype="Location" increase="-35" />
+          </StatusEffectAction>
+          <ReputationAction targettype="Location" increase="-5" />
+          <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
           <SetDataAction identifier="piratehavenunlocked" value="0" />
         </Failure>
       </CheckDataAction>
@@ -1927,22 +1941,22 @@
               <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
               <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
               <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Silhouette">
+              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="bandittalk">
                 <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
                   <Label name="dialogstep2" />
                   <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
                   <WaitAction time="5" />
                   <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="Silhouette"/>
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="Silhouette">              
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="bandittalk"/>
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="bandittalk">              
                     <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
                       <Label name="dialogstep3" />
                       <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
                       <WaitAction time="5" />
                       <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="Silhouette">
+                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="bandittalk">
                         <Option text="eventtext.piratediversoutpost.takebooze">
-                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="Silhouette"/>
+                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="bandittalk"/>
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
                           <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
@@ -1951,7 +1965,7 @@
                           <GoTo name="pirateinvaders" />
                         </Option >
                         <Option text="eventtext.piratediversoutpost.getthehelloff" >
-                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="Silhouette">
+                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="bandittalk">
                           <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
                             <!-- Go to part 2 -->
                             <GoTo name="pirateinvaders" />
@@ -2065,7 +2079,7 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
-          <ConversationAction text="eventtext.piratearmoryalarm.breakin" eventsprite="NoticeBoard" ContinueAutomatically="true" />
+          <ConversationAction text="eventtext.piratearmoryalarm.breakin" eventsprite="firefight" ContinueAutomatically="true" />
           <ReputationAction targettype="Location" increase="-35" />
           <StatusEffectAction targettag="armorydoor">
             <StatusEffect target="this" IsOpen="true" noninteractable="true" setvalue="true" />
@@ -2100,39 +2114,26 @@
     </ScriptedEvent>
           
     <ScriptedEvent identifier="piratemissioninformant" commonness="100">
-      <Label name="CheckData" />
-      <WaitAction time="2" />
-      <CheckDataAction identifier="pirateoutpostdestruction" condition="eq 1">
-        <Success>
-          <Goto name="CheckData" />
-        </Success>
-        <Failure>
-          <Goto name="Start" />
-        </Failure>
-      </CheckDataAction>
-      <Label name="Start" />
       <TagAction criteria="player" tag="player" />
       <Label name="waitforinput" />
+      <ClearTagAction tag="pmi_trig_player" />
       <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
-      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="oldman">
+      <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="banditcaptain">
         <Option text="eventtext.piratemissioninformant.option.buy">
           <CheckMoneyAction Amount="1000">
             <Success>
               <MoneyAction amount="-1000" />
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="oldman" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="banditcaptain" />
               <MissionAction missiontag="coalitionciv" />
-              <ClearTagAction tag="pmi_trig_player" />
             </Success>
             <Failure>
-              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="oldman" />
-              <ClearTagAction tag="pmi_trig_player" />
+              <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="banditcaptain" />
               <GoTo name="waitforinput" />
             </Failure>
           </CheckMoneyAction>
         </Option>
         <Option text="eventtext.option.leave">
           <ConversationAction text="eventtext.general.decline" targettag="pmi_trig_player" />
-          <ClearTagAction tag="pmi_trig_player" />
           <GoTo name="waitforinput" />
         </Option>
       </ConversationAction>
@@ -2145,18 +2146,16 @@
         <Success>
           <TagAction criteria="player" tag="player" />
           <SpawnAction itemidentifier="huskbodybag" targettag="bodybag" spawnlocation="Outpost" spawnpointtag="husk" ignorebyai="true" />
-          <!-- use a trigger to tag a single cabinet -->
-          <TriggerAction target1tag="bodybag" target2tag="player" radius="150" waitforinteraction="false"/>
-          <Label name="retry"/>
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="false"/>
-          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="rustdecal" endconversation="true"/> 
+          <ConversationAction text="EventText.piratebodybag.smellyroom" dialogtype="small" targettag="triggerer_player" eventsprite="brokenmachinery" endconversation="true"/> 
           <WaitAction time="2" />
           <StatusEffectAction targettag="bodybag">
             <StatusEffect target="This" IsActive="true" />
           </StatusEffectAction>
           <Label name="retry" />
+          <ClearTagAction tag="bag_player" />
           <TriggerAction target1tag="bodybag" target2tag="player" applytotarget2="bag_player" radius="120" waitforinteraction="true"/>
-          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="rustdecal" >
+          <ConversationAction text="EventText.piratebodybag.hearthump" dialogtype="small" targettag="bag_player" eventsprite="brokenmachinery" >
             <Option text="EventText.piratebodybag.kickit" endconversation="true">
               <SetDataAction identifier="piratebodybagnorepeat" operation="set" value="1" />            
               <StatusEffectAction targettag="bodybag">
@@ -2220,9 +2219,9 @@
           </StatusEffectAction>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="smuggler" spawnlocation="Outpost" targetmoduletags="adminmodule" />
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction targettag="heyyouplayer" text="eventtext.pantytheft.heyyou" endeventifinterrupted="false" endconversation="true" eventsprite="bandittalk" />
           <Label name="talktonpc" />
-          <ConversationAction speakertag="smuggler" invokertag="panty_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="smuggler" invokertag="panty_player" text="eventtext.pantytheft.opportunity" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="eventtext.generic.continue">
               <ConversationAction targettag="panty_player" text="eventtext.pantytheft.confidentiality" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                 <Option text="eventtext.generic.continue" >
@@ -2269,7 +2268,7 @@
                   <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                   <MoneyAction amount="500" targettag="deliverer_player" />
                   <SetDataAction identifier="pantytheftnorepeat" value="1" />
-                  <ConversationAction targettag="deliverer_player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                  <ConversationAction targettag="deliverer_player" text="eventtext.pantytheft.clothesdelivered" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
                 </Success>
                 <Failure>
                   <Goto name="noclothes" />
@@ -2278,7 +2277,7 @@
             </Success>
             <Failure>
               <Label name="noclothes" />
-              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="deliverer_player" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+              <ConversationAction text="eventtext.pantytheft.moreclothes" targettag="deliverer_player" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
               <ClearTagAction tag="deliverer_player" />
               <Goto name="retry" />
             </Failure>
@@ -2301,10 +2300,10 @@
           <!-- wait a little before triggering so you have time to leave the sub -->
           <WaitAction time="60" />
           <TriggerAction target1tag="player" target2tag="thief" applytotarget1="heyyouplayer" radius="200" />
-          <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+          <ConversationAction targettag="heyyouplayer" text="eventtext.vendingsmashing.heyyou" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
           <NPCWaitAction npctag="thief" wait="false"/>
           <Label name="talktonpc" />
-          <ConversationAction speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="Silhouette" >
+          <ConversationAction speakertag="thief" invokertag="triggerer_player" text="eventtext.vendingsmashing.quickcash" endeventifinterrupted="false" eventsprite="bandittalk" >
             <Option text="eventtext.generic.continue">
               <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.machinetrick" endeventifinterrupted="false" dialogtype="Small" eventsprite="Terrorism1" >
                 <Option text="eventtext.generic.continue" >
@@ -2370,7 +2369,7 @@
                           <ReputationAction increase="3" identifier="bandits" targettype="Faction" />
                           <MoneyAction amount="200" targettag="triggerer_player" />
                           <SetDataAction identifier="vendingsmashingnorepeat" value="1" />
-                          <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="Silhouette" />
+                          <ConversationAction targettag="triggerer_player" text="eventtext.vendingsmashing.yourshare" dialogtype="Small" endconversation="true" eventsprite="bandittalk" />
                         </Success>
                       </CheckItemAction >
                     </Option>

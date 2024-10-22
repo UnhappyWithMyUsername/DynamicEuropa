@@ -6,12 +6,6 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <npcset identifier="DE_outpostnpcs">
  
-  
-    <!-- TODO: NEXTUPDATE replace separatist npc clothes entirely with new ones to match
-    pirateclothes to separatistcommoner1
-    pirateclothesnovice to separatistcommoner2
-    pirateclotheshard to separatistcommoner3 -->
- 
     <npc identifier="sergeantcoalition" job="captain" tags="cosergeant" spawnpointtags="admin" healthmultiplier="1.5" behavior="StayInHull">
       <ItemSet>
         <Item identifier="securityuniform2" equip="true" />
@@ -28,7 +22,6 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_coalitiontakeover" />
       </ItemSet>
       <ItemSet>
         <Item identifier="securityuniform2" equip="true" />
@@ -45,7 +38,6 @@
           <Item identifier="shotgunshell" amount="12" />
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_coalitiontakeover" />
       </ItemSet>
       <ItemSet>
         <Item identifier="securityuniform2" equip="true" />
@@ -62,13 +54,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_coalitiontakeover" />
       </ItemSet>
     </npc>
     
     <npc identifier="sergeantseparatists" job="captain" tags="sepsergeant" spawnpointtags="admin" healthmultiplier="1.5" behavior="StayInHull">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -82,10 +73,9 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_separatisttakeover" />
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="separatistcommoner3" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -99,10 +89,9 @@
           <Item identifier="assaultriflemagazine" amount="5" />
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_separatisttakeover" />
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="separatistcommoner3" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -115,7 +104,6 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="eventtrigger_separatisttakeover" />
       </ItemSet>
     </npc>
     
@@ -851,7 +839,7 @@
     <npc identifier="outpostmanagerseparatists" job="outpostmanager" tags="outpostmanager" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="1">
         <Item identifier="piratecaptainhat" equip="true" />
-        <Item identifier="pirateclotheshard" equip="true" outfit="true" />
+        <Item identifier="separatistcommoner3" equip="true" outfit="true" />
         <Item identifier="idcard" equip="true"/>
         <Item identifier="revolver" equip="false">
           <Item identifier="revolverround" amount="6"/>
@@ -909,7 +897,61 @@
         </Item>
       </ItemSet>
     </npc>
+    
+    <npc identifier="reactoroperatorcoalition" job="engineer" commonness="1" spawnpointtags="engineering" healthmultiplier="1" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
+      <ItemSet commonness="1">
+        <Item identifier="orangejumpsuit1" equip="true"/>
+        <Item identifier="hazmatsuit1" equip="true"/>
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="crowbar" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="orangejumpsuit2" equip="true"/>
+        <Item identifier="hazmatsuit1" equip="true"/>
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="crowbar" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
 
+    <npc identifier="reactoroperatorseparatists" job="engineer" commonness="1" spawnpointtags="engineering" healthmultiplier="1" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
+      <ItemSet commonness="1">
+        <Item identifier="engineerseparatistsuniform1" equip="true"/>
+        <Item identifier="hazmatsuit1" equip="true"/>
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="crowbar" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="engineerseparatistsuniform2" equip="true"/>
+        <Item identifier="hazmatsuit1" equip="true"/>
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="crowbar" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
     <npc identifier="subupgradenpc" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -920,6 +962,92 @@
           </Item>
         </Item>
         <Item identifier="commonerclothes5" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+ 
+    <npc identifier="subupgradenpccoalition" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="bluejumpsuit1" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="bluejumpsuit2" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="subupgradenpcseparatists" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="mechanicseparatistsuniform1" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="revolver" equip="false">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="mechanicseparatistsuniform2" equip="true" />
         <Item identifier="headset" equip="true" />
         <Item identifier="idcard" equip="true"/>
         <Item identifier="wrench" equip="true"/>
@@ -945,6 +1073,114 @@
         <Item identifier="wrench" equip="true"/>
         <Item identifier="screwdriver" equip="true"/>
         <Item identifier="bluejumpsuit1" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+
+    <npc identifier="subsalesnpccoalition" job="mechanic" commonness="1" spawnpointtags="shop_submarines" healthmultiplier="1" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainsuniform1" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainsuniform2" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainsuniform3" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+
+    <npc identifier="subsalesnpcseparatist" job="mechanic" commonness="1" spawnpointtags="shop_submarines" healthmultiplier="1" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainseparatistsuniform1" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainseparatistsuniform2" equip="true" />
+        <Item identifier="headset" equip="true" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="toolbelt" equip="true">
+          <Item identifier="weldingfueltank"/>
+          <Item identifier="aluminium"/>
+          <Item identifier="weldingtool">
+            <Item identifier="weldingfueltank" />
+          </Item>
+        </Item>
+        <Item identifier="wrench" equip="true"/>
+        <Item identifier="screwdriver" equip="true"/>
+        <Item identifier="captainseparatistsuniform3" equip="true" />
         <Item identifier="headset" equip="true" />
         <Item identifier="idcard" equip="true"/>
         <Item identifier="divingmask">
@@ -1161,7 +1397,7 @@
 
     <npc identifier="securitynpcseparatists" job="outpostsecurityofficer" tags="securitynpc" spawnpointtags="security" healthmultiplier="1.5" behavior="Patrol">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -1182,7 +1418,7 @@
         </Item>
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true"/>
+        <Item identifier="securityseparatistsuniform2" equip="true"/>
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -1204,7 +1440,7 @@
         </Item>
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true"/>
+        <Item identifier="securityseparatistsuniform3" equip="true"/>
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -1279,6 +1515,56 @@
     <npc identifier="outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
       <ItemSet commonness="1">
         <Item identifier="medicalofficerclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>    
+
+    <npc identifier="outpostdoctorcoalition" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+      <ItemSet commonness="1">
+        <Item identifier="medicalofficerclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="medicalofficerclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <npc identifier="outpostdoctorseparatists" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+      <ItemSet commonness="1">
+        <Item identifier="medicseparatistsuniform1" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antibloodloss1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="antidama1"/>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+      <ItemSet commonness="1">
+        <Item identifier="medicseparatistsuniform2" equip="true"/>
         <Item identifier="idcard" equip="true"/>
         <Item identifier="antibloodloss1"/>
         <Item identifier="antibloodloss1"/>
@@ -1660,7 +1946,7 @@
 
     <npc identifier="hireableseparatistsecurityofficer" job="securityofficer" skillmultiplier="1.5" experiencepoints="2000">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="headset" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -1680,7 +1966,7 @@
     </npc>
     <npc identifier="hireableseparatistsecurityofficerveteran" job="securityofficer" skillmultiplier="2.0" experiencepoints="6000">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="headset" equip="true" />
         <Item identifier="bandolier" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -1702,7 +1988,7 @@
 
     <npc identifier="hireableseparatistengineer" job="engineer" skillmultiplier="1.5" experiencepoints="2000">
       <ItemSet>
-        <Item identifier="pirateclothesnovice" equip="true" />
+        <Item identifier="separatistcommoner2" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false"/>
@@ -1717,7 +2003,7 @@
     </npc>
     <npc identifier="hireableseparatistengineerveteran" job="engineer" skillmultiplier="2.0" experiencepoints="6000">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false"/>
@@ -1732,7 +2018,7 @@
     </npc>
     <npc identifier="hireableseparatistmechanic" job="mechanic" skillmultiplier="1.5" experiencepoints="2000">
       <ItemSet>
-        <Item identifier="pirateclothesnovice" equip="true" />
+        <Item identifier="separatistcommoner2" equip="true" />
         <Item identifier="baseballcap" equip="true"/>
         <Item identifier="headset" equip="true" showpreview="false"/>
         <Item identifier="idcard" equip="true" />
@@ -1746,7 +2032,7 @@
     </npc>
     <npc identifier="hireableseparatistmechanicveteran" job="mechanic" skillmultiplier="2.0" experiencepoints="6000">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="baseballcap" equip="true"/>
         <Item identifier="headset" equip="true" showpreview="false"/>
         <Item identifier="idcard" equip="true" />
@@ -1860,14 +2146,14 @@
 
     <npc identifier="prisonerseparatists" tags="hostage,prisoner" job="assistant" moduleflags="none" faction="separatists" behavior="Passive" AllowDraggingIndefinitely="true">
       <ItemSet>
-        <Item identifier="pirateclothesnovice" equip="true" />
+        <Item identifier="separatistcommoner2" equip="true" />
         <Item identifier="idcard" equip="true"/>
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="idcard" equip="true"/>
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
@@ -1904,9 +2190,6 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="wrench" equip="true"/>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
@@ -1917,23 +2200,18 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="revolver">
           <Item identifier="revolverround" amount="6"/>
         </Item>
+        <Item identifier="revolverround" amount="6"/>
       </ItemSet>
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
         <Item identifier="banditclothes2" equip="true"/>
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
-        </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
         </Item>
         <Item identifier="baseballcap" equip="true"/>
         <Item identifier="crowbar" equip="false"/>
@@ -1944,14 +2222,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="crowbar" equip="true"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="revolver">
           <Item identifier="revolverround" amount="6"/>
         </Item>
+        <Item identifier="revolverround" amount="6"/>
       </ItemSet>
     </npc>
     <npc identifier="bandit_heavy" commonness="0" tags="bandit" faction="bandits" moduleflags="crewmodule,engineeringmodule" job="securityofficer" behavior="Passive" healthmultiplier="0.8" aimspeed="0.85" aimaccuracy="0.45" reportrange="550">
@@ -1961,9 +2237,6 @@
         <Item identifier="banditclothes1" equip="true"/>
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
-        </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
         </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="machinepistol" equip="true">
@@ -1978,14 +2251,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="revolver">
           <Item identifier="revolverround" amount="6"/>
         </Item>
+        <Item identifier="revolverround" amount="6"/>
       </ItemSet>
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1994,14 +2265,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="baseballcap" equip="true"/>
         <Item identifier="crowbar" equip="false"/>
-        <Item identifier="shotgun">
+        <Item identifier="shotgun" equip="true" >
           <Item identifier="shotgunshell" amount="6"/>
         </Item>
+        <Item identifier="shotgunshell" amount="6"/>
       </ItemSet>
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -2010,14 +2279,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="revolver" equip="true">
           <Item identifier="revolverround" amount="6"/>
         </Item>
+        <Item identifier="revolverround" amount="6"/>
       </ItemSet>
     </npc>
     <npc identifier="bandit_elite" commonness="0" tags="bandit" faction="bandits" moduleflags="crewmodule,engineeringmodule" job="securityofficer" behavior="Passive" aimspeed="0.9" aimaccuracy="0.65" reportrange="600">
@@ -2028,9 +2295,6 @@
         <Item identifier="piratehelmet" equip="true" />
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
-        </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
         </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="smgmagazine" amount="2" />
@@ -2050,9 +2314,6 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="revolverround" amount="6"/>
@@ -2071,13 +2332,10 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="baseballcap" equip="true"/>
         <Item identifier="crowbar" equip="false"/>
         <Item identifier="shotgunshell" amount="6"/>
-        <Item identifier="shotgun">
+        <Item identifier="shotgun" equip="true" >
           <Item identifier="shotgunshell" amount="6"/>
         </Item>
       </ItemSet>
@@ -2089,14 +2347,12 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="weldingtool">
-          <Item identifier="weldingfueltank" />
-        </Item>
         <Item identifier="divingknife" equip="false"/>
         <Item identifier="toolbelt" equip="true"/>
         <Item identifier="rifle" equip="true">
           <Item identifier="riflebullet" amount="6"/>
         </Item>
+        <Item identifier="riflebullet" amount="6"/>
       </ItemSet>
     </npc>
     <npc identifier="banditleader" commonness="0" tags="bandit" faction="bandits" moduleflags="adminmodule,securitymodule" spawnpointtags="banditleader" job="securityofficer" behavior="Passive" aimspeed="0.8" aimaccuracy="0.75" reportrange="750">
@@ -2114,9 +2370,10 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="shotgun">
+        <Item identifier="shotgun" equip="true">
           <Item identifier="shotgunshell" amount="6"/>
         </Item>
+        <Item identifier="shotgunshell" amount="12"/>
       </ItemSet>
       <ItemSet commonness="0.5">
         <Item identifier="idcard" equip="true"/>
@@ -2134,9 +2391,11 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="smg">
+        <Item identifier="smg" equip="true">
           <Item identifier="smgmagazine"/>
         </Item>
+        <Item identifier="smgmagazine"/>
+        <Item identifier="smgmagazine"/>
       </ItemSet>
     </npc>
     <npc identifier="banditleader_heavy" commonness="0" tags="bandit" faction="bandits" moduleflags="adminmodule,securitymodule" spawnpointtags="banditleader" job="securityofficer" behavior="Passive" aimspeed="0.85" aimaccuracy="0.75" reportrange="750">
@@ -2153,9 +2412,10 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="shotgun">
+        <Item identifier="shotgun" equip="true">
           <Item identifier="shotgunshell" amount="6"/>
         </Item>
+        <Item identifier="shotgunshell" amount="12"/>
       </ItemSet>
       <ItemSet commonness="0.5">
         <Item identifier="idcard" equip="true"/>
@@ -2171,9 +2431,11 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="smg">
+        <Item identifier="smg" equip="true" >
           <Item identifier="smgmagazine"/>
         </Item>
+        <Item identifier="smgmagazine"/>
+        <Item identifier="smgmagazine"/>
       </ItemSet>
       <ItemSet commonness="0.2">
         <Item identifier="idcard" equip="true"/>
@@ -2188,7 +2450,7 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="shotgununique">
+        <Item identifier="shotgununique" equip="true">
           <Item identifier="shotgunshell"/>
           <Item identifier="shotgunshell"/>
         </Item>
@@ -2207,9 +2469,11 @@
         <Item identifier="weldingtool">
           <Item identifier="weldingfueltank" />
         </Item>
-        <Item identifier="smgunique">
+        <Item identifier="smgunique" equip="true">
           <Item identifier="smgmagazine"/>
         </Item>
+        <Item identifier="smgmagazine"/>
+        <Item identifier="smgmagazine"/>
       </ItemSet>
       <ItemSet commonness="0.2">
         <Item identifier="idcard" equip="true"/>
@@ -2221,7 +2485,7 @@
         <Item identifier="divingmask">
           <Item identifier="oxygentank" />
         </Item>
-        <Item identifier="flamer">
+        <Item identifier="flamer" equip="true">
           <Item identifier="weldingfueltank"/>
         </Item>
       </ItemSet>
@@ -2257,7 +2521,7 @@
     </npc>
     <npc identifier="hostageseparatists" tags="hostage,prisoner" job="assistant" moduleflags="none" faction="separatists" behavior="Passive" AllowDraggingIndefinitely="true">
       <ItemSet>
-        <Item identifier="pirateclothesnovice" equip="true" />
+        <Item identifier="separatistcommoner2" equip="true" />
         <Item identifier="handcuffs" equip="true"/>
         <Item identifier="idcard" equip="true"/>
         <Item identifier="divingmask">
@@ -2265,7 +2529,7 @@
         </Item>
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="separatistcommoner1" equip="true" />
         <Item identifier="handcuffs" equip="true"/>
         <Item identifier="idcard" equip="true"/>
         <Item identifier="divingmask">

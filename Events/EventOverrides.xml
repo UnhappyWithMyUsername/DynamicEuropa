@@ -13,7 +13,6 @@
           <!-- Do nothing -->
         </Failure>
         <Success>
-          <NPCWaitAction npctag="outpostmanager" wait="true" />
           <ConversationAction text="EventText.missionevent_jailbreak_coalition.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Coalition">
             <Option text="EventText.missionevent.pleasecontinue">
               <!-- "please continue" -->
@@ -32,7 +31,6 @@
           <!-- Do nothing -->
         </Failure>
         <Success>
-          <NPCWaitAction npctag="outpostmanager" wait="true" />
           <ConversationAction text="EventText.missionevent_jailbreak_separatists.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
             <Option text="EventText.missionevent.pleasecontinue">
               <!-- "please continue" -->
@@ -55,7 +53,6 @@
               <!-- do nothing -->
             </Success>
             <Failure>
-              <NPCWaitAction npctag="outpostmanager" wait="true" />
               <ConversationAction text="EventText.missionevent_jailbreak_sootman.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
                 <Option text="EventText.missionevent_tormsdalereport.whosthat">
                   <!-- who's that? -->
@@ -97,7 +94,6 @@
               <!-- do nothing -->
             </Failure>
             <Success>
-              <NPCWaitAction npctag="outpostmanager" wait="true" />
               <ConversationAction text="EventText.missionevent_tormsdalereport.c1" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
                 <Option text="EventText.missionevent_tormsdalereport.whosthat">
                   <ConversationAction text="EventText.missionevent_tormsdalereport.whospetran" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Stuckinthemiddle1">
@@ -123,7 +119,6 @@
                                 <Option text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1.o1">
                                   <ConversationAction text="EventText.missionevent_tormsdalereport.c1.o1.o1.o1.o1.o1.c1" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" />
                                   <MissionAction missionidentifier="tormsdalereport" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" requiredfaction="coalition" minlocationdistance="2" CreateLocationIfNotFound="true" />
-                                  <NPCWaitAction npctag="outpostmanager" wait="false" />
                                   <SetDataAction identifier="tormsdalereport" value="1" />
                                 </Option>
                               </ConversationAction>
@@ -180,6 +175,85 @@
           <NPCFollowAction npctag="ecclesiast" targettag="triggerer_player" follow="false" />
         </Success>
       </CheckDataAction>
+    </ScriptedEvent>
+
+    <!-- overriding to make the spawning in our custom modules easier + no repeat -->
+    <ScriptedEvent identifier="malfunctioningdefensebot" commonness="100">
+      <CheckDataAction identifier="malfunctioningdefensebotnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction>
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction speciesname="Defensebot" targettag="scrapbot" spawnlocation="Outpost" targetmoduletags="ProductionFactory,ProductionShipyard" />
+      <SpawnAction itemidentifier="defensebotammobox" amount="1"  targetinventory="scrapbot" SpawnIfInventoryFull="false" ContinueIfFailedToSpawn="true" />
+      <StatusEffectAction targettag="scrapbot">
+        <StatusEffect target="This" IsDead="true" setvalue="true" />
+      </StatusEffectAction>
+      <Label name="restart" />
+      <ClearTagAction tag="triggerer_player" /> 
+      <TriggerAction target1tag="scrapbot" target2tag="player" applytotarget2="triggerer_player" radius="100" waitforinteraction="true" DisableIfTargetIncapacitated="false" />
+      <SetDataAction identifier="malfunctioningdefensebotnorepeat" operation="set" value="1" />
+      <ConversationAction text="EventText.malfunctioningdefensebot.c1" targettag="triggerer_player" eventsprite="brokenmachinery">
+        <Option text="EventText.malfunctioningdefensebot.o1">
+          <SkillCheckAction requiredskill="Mechanical" requiredlevel="60" targettag="triggerer_player">
+            <Success>
+              <ConversationAction text="EventText.malfunctioningdefensebot.o1.c1" targettag="triggerer_player" eventsprite="brokenmachinery">
+                <Option text="EventText.malfunctioningdefensebot.o1.c1.o1">
+                  <SkillCheckAction requiredskill="Electrical" requiredlevel="40" targettag="triggerer_player">
+                    <Success>
+                      <ConversationAction text="EventText.malfunctioningdefensebot.o1.c1.o1.c1" targettag="triggerer_player" eventsprite="brokenmachinery" endconversation="true">
+                      </ConversationAction>
+                      <!-- Revive it -->
+                      <StatusEffectAction targettag="scrapbot">
+                        <StatusEffect target="This" IsDead="false" setvalue="true">
+                          <Sound file="Content/Characters/Defensebot/DEFENCEBOT_interact1.ogg" range="100" />
+                        </StatusEffect>
+                      </StatusEffectAction>
+                      <!-- 'Petting' (playing with) them makes them join the crew automatically -->
+                    </Success>
+                    <Failure>
+                      <ConversationAction text="EventText.malfunctioningdefensebot.o1.c1.o1.c2" targettag="triggerer_player" eventsprite="brokenmachinery" endconversation="true">
+                      </ConversationAction>
+                      <!-- Revive it-->
+                      <StatusEffectAction targettag="scrapbot">
+                        <StatusEffect target="This" IsDead="false" setvalue="true">
+                          <Sound file="Content/Characters/Defensebot/DEFENCEBOT_interact3.ogg" range="100" />
+                        </StatusEffect>
+                      </StatusEffectAction>
+                      <!-- Turn hostile -->
+                      <NPCChangeTeamAction npctag="scrapbot" teamid="Team2" />
+                    </Failure>
+                  </SkillCheckAction>
+                </Option>
+                <Option text="EventText.malfunctioningdefensebot.o1.c1.o2" endconversation="true">
+                  <!-- Revive it -->
+                  <StatusEffectAction targettag="scrapbot">
+                    <StatusEffect target="This" IsDead="false" setvalue="true">
+                      <Sound file="Content/Characters/Defensebot/DEFENCEBOT_interact3.ogg" range="100" />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <!-- Turn hostile -->
+                  <NPCChangeTeamAction npctag="scrapbot" teamid="Team2" />
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction text="EventText.malfunctioningdefensebot.o1.c2" targettag="triggerer_player" eventsprite="brokenmachinery">
+                <Option text="EventText.malfunctioningdefensebot.o1.c2.o1" endconversation="true">
+                  <!-- Player broke it, but learns some mechanical skill in the process -->
+                  <GiveSkillEXPAction skill="mechanical" amount="2" targettag="triggerer_player" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </SkillCheckAction>
+        </Option>
+        <Option text="EventText.malfunctioningdefensebot.o2" endconversation="true">
+          <!-- Leave -->
+          <Goto name="restart" />
+        </Option>
+      </ConversationAction>
+      <Label name="end" />
     </ScriptedEvent>
 
   </EventPrefabs>

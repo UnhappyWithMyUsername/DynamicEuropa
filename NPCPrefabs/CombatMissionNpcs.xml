@@ -3,7 +3,7 @@
   <!-- Coalition -->
   <npcset identifier="de_coalitioncombat">
     <!-- enemy on takeover mission -->
-    <npc identifier="soldiercoalition" job="securityofficer" tags="coalitionsoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
+    <npc identifier="soldiercoalition" job="cosoldier" tags="coalitionsoldier" faction="coalition" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
       <ItemSet commonness="1">
         <Item identifier="securityuniform1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
@@ -54,7 +54,7 @@
       </ItemSet>
     </npc>    
     <!-- friendly temporary crewmember -->
-    <npc identifier="tempsoldiercoalition" job="cosoldier" tags="tempcrew" healthmultiplier="1.25" behavior="patrol">
+    <npc identifier="tempsoldiercoalition" job="cosoldier" tags="tempcrew" faction="coalition" healthmultiplier="1.25" behavior="patrol">
       <ItemSet>
         <Item identifier="securityuniform1" equip="true" />
         <Item identifier="bodyarmor" equip="true" />
@@ -118,15 +118,10 @@
   <!-- Separatists-->
   <npcset identifier="de_separatistscombat">
   
-    <!-- TODO: NEXTUPDATE replace 
-    pirateclothes to separatistcommoner1
-    pirateclothesnovice to separatistcommoner2
-    pirateclotheshard to separatistcommoner3 -->
-  
     <!-- enemy on takeover mission -->
-    <npc identifier="soldierseparatists" job="securityofficer" tags="separatistssoldier" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
+    <npc identifier="soldierseparatists" job="sepsoldier" tags="separatistssoldier" faction="separatists" behavior="Patrol" healthmultiplier="0.5" healthmultiplierinmultiplayer="1.5" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
       <ItemSet commonness="0.5">
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="piratehelmet" equip="true" />
@@ -141,7 +136,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.5">
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="securityseparatistsuniform2" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -155,7 +150,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.3">
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="securityseparatistsuniform3" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="piratehelmet" equip="true" />
@@ -171,7 +166,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.4">
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="separatistcommoner3" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity" />
@@ -187,9 +182,9 @@
       </ItemSet>
     </npc>
     <!-- friendly temporary crewmember -->
-    <npc identifier="tempsoldierseparatists" job="sepsoldier" tags="tempcrew" healthmultiplier="1.25" behavior="patrol">
+    <npc identifier="tempsoldierseparatists" job="sepsoldier" faction="separatists" tags="tempcrew" healthmultiplier="1.25" behavior="patrol">
       <ItemSet>
-        <Item identifier="pirateclothes" equip="true" />
+        <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="idcard" equip="true" tags="id_security,id_septempcrew" />
@@ -208,7 +203,7 @@
         <Item identifier="handcuffs" amount="3" />
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="securityseparatistsuniform2" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="idcard" equip="true" tags="id_security,id_septempcrew" />
@@ -227,7 +222,7 @@
         <Item identifier="handcuffs" amount="3" />
       </ItemSet>
       <ItemSet>
-        <Item identifier="pirateclotheshard" equip="true" />
+        <Item identifier="securityseparatistsuniform3" equip="true" />
         <Item identifier="piratebodyarmor" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="idcard" equip="true" tags="id_security,id_septempcrew" />
@@ -1469,8 +1464,8 @@
     <npc identifier="separatist_captain" job="captain" moduleflags="none" behavior="Patrol" healthmultiplier="0.5" aimspeed="0.8" aimaccuracy="0.3">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true" showpreview="false" />
-        <Item identifier="piratecaptainhat" equip="true" />
-        <Item identifier="pirateclothes" equip="true" outfit="true" />
+        <Item identifier="captainsseparatistcap2" equip="true" />
+        <Item identifier="captainseparatistsuniform3" equip="true" outfit="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="revolver" equip="false">
           <Item identifier="revolverround" />
@@ -1486,8 +1481,8 @@
     <npc identifier="separatist_captainveteran" job="captain" moduleflags="none" behavior="Patrol" healthmultiplier="1.1" aimspeed="0.8" aimaccuracy="0.7">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true" showpreview="false" />
-        <Item identifier="piratecaptainhat" equip="true" />
-        <Item identifier="pirateclotheshard" equip="true" outfit="true" />
+        <Item identifier="captainsseparatistcap1" equip="true" />
+        <Item identifier="captainseparatistsuniform2" equip="true" outfit="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="shotgununique">
           <Item identifier="shotgunshell" />
@@ -1502,7 +1497,7 @@
     </npc>
     <npc identifier="separatist_securityrecruit" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.55" aimspeed="0.8" aimaccuracy="0.3">
       <ItemSet commonness="1">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="divingknife" />
@@ -1512,7 +1507,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.5">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform2" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="harpoongun">
@@ -1528,7 +1523,7 @@
     </npc>
     <npc identifier="separatist_securitygunner" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.75" aimspeed="0.8" aimaccuracy="0.6">
       <ItemSet>
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform3" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="revolver">
@@ -1548,7 +1543,7 @@
     </npc>
     <npc identifier="separatist_securitybrute" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="0.9" aimspeed="0.5" aimaccuracy="0.1">
       <ItemSet commonness="1">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="divingknife" />
@@ -1559,7 +1554,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.5">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform2" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="shotgun">
@@ -1577,7 +1572,7 @@
     </npc>
     <npc identifier="separatist_securityelite" job="securityofficer" spawnpointtags="security" behavior="Patrol" healthmultiplier="1.1" aimspeed="1.0" aimaccuracy="0.8">
       <ItemSet commonness="1">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform3" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="smg">
@@ -1593,7 +1588,7 @@
         </Item>
       </ItemSet>
       <ItemSet commonness="0.3">
-        <Item identifier="securityuniform1" equip="true" />
+        <Item identifier="securityseparatistsuniform2" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="grenadelauncher">
@@ -1611,7 +1606,7 @@
     </npc>
     <npc identifier="separatist_engineerrecruit" job="engineer" commonness="1" behavior="Patrol" healthmultiplier="0.4" aimspeed="0.8" aimaccuracy="0.3">
       <ItemSet>
-        <Item identifier="orangejumpsuit1" equip="true" />
+        <Item identifier="engineerseparatistsuniform1" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
@@ -1628,7 +1623,7 @@
     </npc>
     <npc identifier="separatist_engineerveteran" job="engineer" behavior="Patrol" healthmultiplier="0.7" aimspeed="0.8" aimaccuracy="0.3">
       <ItemSet>
-        <Item identifier="orangejumpsuit2" equip="true" />
+        <Item identifier="engineerseparatistsuniform2" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="idcard" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
@@ -1645,7 +1640,7 @@
     </npc>
     <npc identifier="separatist_mechanicrecruit" job="mechanic" healthmultiplier="0.4" aimspeed="0.6" aimaccuracy="0.3">
       <ItemSet>
-        <Item identifier="bluejumpsuit1" equip="true" />
+        <Item identifier="mechanicseparatistsuniform1" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="idcard" equip="true" />
@@ -1661,7 +1656,7 @@
     </npc>
     <npc identifier="separatist_mechanicveteran" job="mechanic" healthmultiplier="0.7" aimspeed="0.6" aimaccuracy="0.3">
       <ItemSet>
-        <Item identifier="bluejumpsuit2" equip="true" />
+        <Item identifier="mechanicseparatistsuniform2" equip="true" />
         <Item identifier="piratebandana" equip="true" />
         <Item identifier="headset" equip="true" showpreview="false" />
         <Item identifier="idcard" equip="true" />

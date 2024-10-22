@@ -72,9 +72,8 @@
       <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crr_trig_player" radius="100" waitforinteraction="true" />
       <ConversationAction text="eventtext.commsrelay.ruin" dialogtype="Small" targettag="crr_trig_player" eventsprite="sonar">
         <Option text="eventtext.option.investigate">
-          <StatusEffectAction targettag="crr_trig_player">
-            <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-              <!--<Affliction identifier="broadcastruin" amount="10"/>-->
+          <StatusEffectAction targettag="commsrelay">
+            <StatusEffect target="This" duration="10.5">
               <Sound file="%ModDir:2532991202%/Sounds/Events/AlienBroadcast.ogg" volume="1" loop="true" />
             </StatusEffect>
           </StatusEffectAction>
@@ -283,7 +282,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" radius="200" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="redalarm" endconversation="true" />
+      <ConversationAction targettag="monitorchecker" text="eventtext.troubledengine.monitor" dialogtype="Small" eventsprite="malfunction" endconversation="true" />
       <Label name="restart" />
       <ClearTagAction tag="te_player" />
       <TriggerAction target1tag="activeengine" target2tag="player" applytotarget2="te_player" radius="300" waitforinteraction="true" />
@@ -361,7 +360,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="redalarm" dialogtype="Small"/>
+      <ConversationAction targettag="monitorchecker" text="eventtext.reactormalfunction.monitor" endconversation="true" eventsprite="malfunction" dialogtype="Small"/>
       <TriggerAction target1tag="activereactor" target2tag="player" applytotarget2="rm_player" radius="300" waitforinteraction="true" />
       <StatusEffectAction targettag="activereactor">
         <StatusEffect target="This" AutoTemp="false" duration="120" stackable="false">
@@ -425,7 +424,7 @@
         </StatusEffect>
       </StatusEffectAction>
       <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" waitforinteraction="true" />
-      <ConversationAction targettag="monitorchecker" text="eventtext.oxygenfluidleak.monitor" endconversation="true" eventsprite="redalarm"/>
+      <ConversationAction targettag="monitorchecker" text="eventtext.oxygenfluidleak.monitor" endconversation="true" eventsprite="malfunction"/>
       <Label name="repairgenerator" />
       <ClearTagAction tag="ofl_player" />
       <TriggerAction target1tag="activeoxygengenerator" target2tag="player" applytotarget2="ofl_player" radius="300" waitforinteraction="true" />
@@ -529,10 +528,8 @@
       <Label name="end" />
     </ScriptedEvent>
     
-    
-    <!-- TODO: NEXTUPDATE bug ENABLE THIS WHEN DEV FIXES LOGICALOPERATOR https://github.com/FakeFishGames/Barotrauma/issues/14338 -->
     <!-- jams your headsets if you activate the beacon -->
-<!--     <ScriptedEvent identifier="beaconcommsjam">
+    <ScriptedEvent identifier="beaconcommsjam">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:mobileradio" tag="mobileradio" />
@@ -541,7 +538,7 @@
         <Conditional targetitemcomponent="Sonar" voltage="gt 0.5" />
         <Conditional targetitemcomponent="Sonar" CurrentMode="Active" />
         <Success>
-          <ConversationAction text="You hear scrambled noises coming from your headset. The beacon signal is active, but it's malfunctioning and jamming communications." dialogtype="Small" targettag="player" eventsprite="rustcircuits" endconversation="true" continueautomatically="true" />
+          <ConversationAction text="EventText.beaconcommsjam.jammed" dialogtype="Small" targettag="player" eventsprite="brokenmachinery" endconversation="true" continueautomatically="true" />
           <Goto name="beaconactivecheck2" /> 
         </Success>
         <Failure>
@@ -565,7 +562,7 @@
           <Goto name="beaconactivecheck2" /> 
         </Failure>
       </CheckConditionalAction>
-    </ScriptedEvent> -->
+    </ScriptedEvent>
     
     <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
     <!-- <ScriptedEvent identifier="militarypatrol">

@@ -170,7 +170,7 @@
   
   <!-- Construction Materials -->
   <Item name="Construction Material Crate" identifier="constructionmaterialcrate" tags="crate,constructionmaterials" description="A crate full of processed construction materials. Can be delivered to construction sites." scale="0.5" impactsoundtag="impact_metal_heavy">
-    <PreferredContainer primary="cargocontainer" spawnprobability="0.2" />
+    <PreferredContainer primary="cargocontainer" spawnprobability="0.1" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="0,0,146,82" origin="0.5,0.5" />
     <Body width="144" height="78" density="25" />
     <Fabricate requiredtime="10" suitablefabricators="fabricator">    
@@ -243,14 +243,48 @@
     </Wearable>
   </Item>
 
-  <Item name="Military Radio" identifier="militaryradio" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into military frequency. Can be used to take over a station of your choice for the enemy of the currently residing faction." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+  <Item name="Coalition Military Radio" identifier="militaryradiocoalition" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into a coalition military frequency. Can be used to take over a separatist station of your choice." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
     <PreferredContainer primary="crewcab" secondary="locker" />
     <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
     <Body width="64" height="24" density="30" />
     <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
       <StatusEffect type="OnUse" target="Character" oneshot="false" interval="0.8" stackable="false">
-        <TriggerEvent identifier="startmanualtakeover" />
+        <TriggerEvent identifier="startmanualtakeovercoalition" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" duration="0.1">
+        <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
+      </StatusEffect>
+    </Holdable>
+  </Item>
+  
+  <Item name="Separatist Military Radio" identifier="militaryradioseparatists" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into a separatist military frequency. Can be used to take over a coalition station of your choice." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+    <PreferredContainer primary="crewcab" secondary="locker" />
+    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
+    <Body width="64" height="24" density="30" />
+    <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="Character" oneshot="false" interval="0.8" stackable="false">
+        <TriggerEvent identifier="startmanualtakeoverseparatists" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" duration="0.1">
+        <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
+      </StatusEffect>
+    </Holdable>
+  </Item>
+  
+  <!-- TODO: unused since I split radios in 2 factions, kept for legacy purposes, try to break the radio so players get a new one -->
+  <Item name="Military Radio" identifier="militaryradio" Tags="smallitem,takeoverradio" category="Misc" description="A radio capable of calling into military frequency. Can be used to take over a station of your choice for the enemy of the currently residing faction." hideinmenus="true" cargocontaineridentifier="metalcrate" scale="0.5" isshootable="true" requireaimtouse="true" impactsoundtag="impact_soft">
+    <PreferredContainer primary="crewcab" secondary="locker" />
+    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,83,61,52" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="62,83,64,27" depth="0.55" />
+    <Body width="64" height="24" density="30" />
+    <Holdable slots="Any,RightHand,LeftHand" holdpos="25,35" handle1="15,0" holdangle="260" aimpos="30,18" aimangle="260" aimable="false" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This,Character" oneshot="false" interval="0.8" stackable="false">
+        <TriggerEvent identifier="takeoverradiobroke" />
+        <particleemitter particle="brownchunks" drawontop="true" particleamount="25" velocitymin="100" velocitymax="500" anglemin="0" anglemax="360" distancemin="0" distancemax="10" scalemin="0.1" scalemax="0.35" />
+        <sound file="Content/Items/Door/DoorBreak2.ogg" range="1000" />
+        <Remove />
       </StatusEffect>
       <StatusEffect type="OnUse" target="This" duration="0.1">
         <Sound file="Content/Sounds/RadioStatic.ogg" loop="true" range="500" volume="1.0" />
@@ -638,7 +672,6 @@
     </ItemComponent>
   </Item>
   <!-- Submarine Charger Relay -->
-  <!-- TODO: Make event to pay to power your submarine from the station | used for small stations -->
   <Item hideinmenus="true" name="Event - Charger Relay" identifier="chargerrelay" category="Electrical" Tags="smallitem,signal,logic" maxstacksize="8" cargocontaineridentifier="metalcrate" description="TRIGGERS THE CHARGING DOCK EVENT. DO NOT USE THIS IN ANY MODULE OTHER THAN THE AIRLOCK THAT IS SUPPOSED TO NOT SUPPLY POWER UNLESS PAID FOR!" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
     <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="512,388,63,57" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Electricity/signalcomp.png" depth="0.8" sourcerect="64,128,32,32" origin="0.5,0.5" canflipx="false" />
@@ -848,7 +881,7 @@
 
   <Item name="Old pick-chisel" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="engcab" spawnprobability="0"/>
-    <PreferredContainer secondary="wreckstoragecab,wreckengcab"  spawnprobability="0.05" />
+    <PreferredContainer secondary="wreckstoragecab,wreckengcab" spawnprobability="0.01" />
     <InventoryIcon texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" origin="0.5,0.5" />
     <Sprite texture="%Moddir%/Items/DE-ItemsAtlas.png" sourcerect="180,270,118,58" depth="0.55" />
     <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />    
@@ -915,8 +948,7 @@
     <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="400" rangemultiplierinwalls="1">
       <Attack targetimpulse="20">
         <Affliction identifier="stun" strength="1"/>
-        <!-- TODO: NEXTUPDATE enable this new shock affliction -->
-        <!-- <Affliction identifier="electricshock" strength="30"/> -->
+        <Affliction identifier="electricshock" strength="30"/>
         <Affliction identifier="burn" strength="10"/>
       </Attack>
       <StatusEffect type="OnImpact" target="This">

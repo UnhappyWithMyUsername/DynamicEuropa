@@ -80,7 +80,37 @@
         </Failure>     
       </CheckSelectedAction>
     </ScriptedEvent>
+      
+    <ScriptedEvent identifier="TAKEOVERRADIODATATEST">
+      <SetDataAction identifier="completedcoalitiontakeover" operation="Add" value="1" />
+      <SetDataAction identifier="completedseparatiststakeover" operation="Add" value="1" />
+    </ScriptedEvent>
   
+  
+    <ScriptedEvent identifier="soldierspawnTEST">
+      <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <NPCChangeTeamAction npctag="tempcrew" teamid="Team1" addtocrew="true" />
+    </ScriptedEvent> 
+
+    <ScriptedEvent identifier="eventiconstest" >
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="pirateoutpost" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="bandittalk" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="radiocall" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="sonar" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="subblueprint" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="hitthelever" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="bloodycuffs" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="firefight" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="traitoress" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="hostage" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="huskoutbreak" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="brokenmachinery" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
+    </ScriptedEvent>
   
   </EventPrefabs>  
 </Randomevents>
