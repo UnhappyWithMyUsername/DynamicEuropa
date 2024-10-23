@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
   <Override>
+  
     <Item name="Take Item" identifier="invisibleholder" description="An invisible item holder that deletes itself when interacted with. Good for making items hold in place without using platforms" SpriteColor="195,136,60,100" IntentoryIconColor="255,255,255,255" category="misc" tags="holder" canflipx="true" canflipy="true" scale="0.5" noninteractable="False">
       <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="716,951,70,70" />
       <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
@@ -21,6 +22,7 @@
         </Statuseffect>
       </ItemContainer>
     </Item>
+    
     <Item name="Poster - Religion is Poison" identifier="de_posterreligionisbad1"  width="143" height="200" scale="0.5" noninteractable="true" category="Decorative">
       <sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="861,330,162,219" depth="0.855" premultiplyalpha="false" origin="0.5,0.5" />
     </Item>
@@ -82,6 +84,7 @@
         </StatusEffect>
       </ItemComponent>
     </Item>
+    
     <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched. "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
     <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
       <Upgrade gameversion="2.0.0.0" noninteractable="false" />
@@ -104,6 +107,7 @@
         </StatusEffect>
       </Holdable>
     </Item>
+    
     <!-- Gives random medical plants when "untagled". "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
     <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
       <Body radius="30" width="20" density="10.5" />
@@ -154,6 +158,142 @@
           <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" />
         </Button>
       </CustomInterface>
+    </Item>
+    
+    <!-- Pressure Stabilizer for Outpost Security | Non-Player-Team-Interactable -->
+    <Item name="Biometrically Locked Pressure Stabilizer" identifier="pressurestabilizersecurity" category="Hidden" maxstacksize="32" maxstacksizecharacterinventory="8" Tags="" allowasextracargo="false" description="" scale="0.5" impactsoundtag="impact_metal_light" nonplayerteaminteractable="true" hideinmenus="true">
+      <InventoryIcon texture="Content/Items/Genetic/Genetic.png" sourcerect="244,62,76,65" origin="0.5,0.5" />
+      <Sprite texture="Content/Items/Genetic/Genetic.png" depth="0.6" sourcerect="67,85,73,35" origin="0.5,0.5" />
+      <Body radius="15" width="45" density="25" />
+      <Wearable slots="HealthInterface" msg="ItemMsgPickUpSelect">
+        <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,64,54" origin="0.6,0.0" />
+        <StatusEffect type="OnNotContained" target="This">
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnWearing" target="Character" disabledeltatime="true" interval="900" multiplyafflictionsbymaxvitality="true" comparison="And">
+          <Conditional InWater="true" />
+          <Affliction identifier="pressurestabilized" amount="900.0" />
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+        </StatusEffect>
+      </Wearable>
+    </Item>
+    
+    
+      
+    <Item name="Clown Delivery System" identifier="railgunshellclown" tags="railgunequipment,railgunammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="">
+      <PreferredContainer primary="railgunammocontainer" amount="6" mincondition="1" />
+      <PreferredContainer secondary="wreckrailgunammocontainer" amount="1" spawnprobability="0.01" />
+      <Price baseprice="500">
+        <Price storeidentifier="merchantclown" multiplier="1" minavailable="3" sold="true" />
+      </Price>
+      <Deconstruct time="10">
+        <Item identifier="dementonite" />
+      </Deconstruct>
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="162,382,64,64" origin="0.5,0.5" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="161,340,216,31" depth="0.55" origin="0.5,0.5" />
+      <Body width="215" height="30" density="20" />
+      <Holdable canbecombined="false" slots="LeftHand,RightHand" holdpos="0,-15" handle1="-30,-5" holdangle="170" aimable="false" msg="ItemMsgPickUpSelect">
+        <!-- slow down the character when holding the item -->
+        <StatValue stattype="MovementSpeed" value="-0.2" />
+        <!-- adjust hold position when swimming -->
+        <StatusEffect type="OnActive" target="This" holdpos="-10,-15" handle1="0,-5" holdangle="70" setvalue="true" interval="1.1">
+          <Conditional InWater="true" />
+        </StatusEffect>
+        <!-- revert hold position adjustment when walking -->
+        <StatusEffect type="OnActive" target="This" holdpos="0,-15" handle1="-30,-5" holdangle="170" setvalue="true" interval="1.1">
+          <Conditional InWater="false" />
+        </StatusEffect>
+      </Holdable>
+      <Projectile characterusable="false" launchimpulse="0" maxtargetstohit="1" damagedoors="true">
+        <Attack structuredamage="100" itemdamage="100" severlimbsprobability="5" penetration="0.6" targetforce="1000">
+          <Affliction identifier="explosiondamage" strength="250" />
+          <Affliction identifier="bleeding" strength="50" />
+          <Affliction identifier="stun" strength="15" />
+        </Attack>
+        <StatusEffect type="OnActive" target="This">
+          <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
+          <sound file="Content/Items/Misc/GuitarClown.ogg" range="800" loop="true" volume="2" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This" allowwhenbroken="true" Condition="-100.0" setvalue="true">
+          <sound file="Content/Items/Weapons/honk.ogg" range="5000" volume="2" frequencymultiplier="0.5" />
+          <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particleamount="50" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
+          <Explosion range="250.0" structuredamage="50" itemdamage="200" force="10.0" severlimbsprobability="0.5" decal="explosion" decalsize="0.3" penetration="0.5">
+            <Affliction identifier="stun" strength="3" />
+          </Explosion>
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <!-- short-range explosion to destroy walls immediately around the pod, making it less likely for the character to get stuck e.g. between multiple walls or inside some weird wall setup -->
+          <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
+          <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+          <Remove />
+        </StatusEffect>
+      </Projectile>
+      <ItemContainer hideitems="true" capacity="1" maxstacksize="1" canbeselected="false" containedspritedepth="0.81">
+        <SlotIcon slotindex="0" texture="Content/Map/Outposts/Art/GenericAssets2.png" sourcerect="1489,287,205,181" />
+        <GuiFrame relativesize="0.2,0.25" anchor="Center" minsize="140,170" maxsize="280,280" style="ItemUI" />
+        <Containable items="clowngear,clowns" />
+      </ItemContainer>
+      <Controller UserPos="0,-20" direction="Right" canbeselected="true" AllowSelectingWhenSelectedByBot="false" AllowSelectingWhenSelectedByOther="false" selectkey="Use" drawuserbehind="true" forceusertostayattached="true" msg="itemmsggoinside">
+        <RequiredItem items="clowngear" type="Picked" CharacterInventorySlotType="InnerClothes" />
+        <limbposition limb="Head" position="74,-40" />
+        <limbposition limb="Torso" position="74,-40" />
+        <limbposition limb="Waist" position="74,-40" />
+        <limbposition limb="LeftHand" position="74,-40" />
+        <limbposition limb="RightHand" position="74,-40" />
+        <limbposition limb="RightLeg" position="74,-40" />
+        <limbposition limb="LeftLeg" position="74,-40" />
+        <limbposition limb="RightFoot" position="74,-40" />
+        <limbposition limb="LeftFoot" position="74,-40" />
+        <StatusEffect type="OnActive" targettype="Character" delay="0.25" stackable="true" indetectable="true" DisableFocusingOnEntities="true" invisibletimer="0.1" IgnoreMeleeWeapons="true" PressureProtection="6500.0" oxygenavailable="1000" setvalue="true" />
+        <LightComponent range="10" castshadows="false" PowerConsumption="0" lightcolor="150,0,0,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true" >      
+          <sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="817,809,108,31" origin="-0.42,0.5" alpha="1"/>
+          <IsActiveConditional IsContained="false"/>
+        </LightComponent>
+      </Controller>
+    </Item>
+      
+    <!-- Overriding vanilla beers to remove them from the mod - they're unfinished and worse than Hungry Europan drinks -->
+    <Item name="" nameidentifier="beerbottle" identifier="beerbottle1" category="Medical,Misc" maxstacksize="8" cargocontaineridentifier="mediccrate" description="" Tags="smallitem" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light">
+      <Sprite texture="Content/Map/Outposts/Art/AdminResidentAssets.png" sourcerect="835,0,20,63" depth="0.6" origin="0.5,0.5" />
+      <SuitableTreatment type="psychosis" suitability="12" />
+      <Body width="20" height="63" density="20" />
+      <Holdable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="32,28" holdangle="30" aimangle="120" aimable="false" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnSecondaryUse" target="This" Condition="-30.0"/>
+        <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
+        <!-- When beer is drunk -->
+        <StatusEffect type="OnSecondaryUse" target="This,UseTarget" duration="20" disabledeltatime="true">
+          <Conditional Condition="lte 1" />
+          <Use/>
+        </StatusEffect>
+        <!-- When beer is used in Health GUI -->
+        <StatusEffect type="OnUse" target="UseTarget" duration="12" stackable="false">
+          <ReduceAffliction identifier="psychosis" amount="1" />
+          <ReduceAffliction identifier="hallucinating" amount="1" />
+          <Affliction identifier="drunk" amount="2" />
+          <ReduceAffliction type="damage" amount="0.5" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <Item name="" nameidentifier="beerbottle" identifier="beerbottle2" variantof="beerbottle1">
+      <Sprite texture="Content/Map/Outposts/Art/AdminResidentAssets.png" sourcerect="856,0,21,63" depth="0.6" origin="0.5,0.5" />
+    </Item>
+  
+  
+  
+    
+    <!-- Hazmat Suit - Spawned on reactoroperator NPC for Enhanced Reactors compatibility - Does nothing and removes itself if Enhanced Reactors is not installed and loaded above DE -->
+    <Item hideinmenus="true" name="Hazmat Suit" identifier="hazmatsuit1" aliases="orangejumpsuit" category="Equipment" tags="smallitem,clothing,radiationproof,deepdiving,divinggear_wearableindoors" fireproof="true" cargocontaineridentifier="metalcrate" description="ONLY EXISTS FOR 'ENHANCED REACTORS' COMPATIBILITY" scale="0.5" impactsoundtag="impact_soft">
+      <Sprite texture="Content/UI/Focusindicator.png" sourcerect="0,0,1,1" depth="0.85" origin="0.5,0.5" />
+      <Body width="40" radius="27" density="15" friction="0.8" restitution="0.01" />
+      <Wearable slots="OuterClothes" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="Always" target="This" oneshot="true" delay="1" stackable="false">
+          <Remove />
+        </StatusEffect>
+      </Wearable>
+      <Holdable slots="LeftHand,RightHand" holdpos="0,-30" handle1="0,-30" aimable="false" pickkey="Use" msg="ItemMsgPickUpUse" />
     </Item>
   </Override>
 </Items>

@@ -559,7 +559,7 @@
     </Item>
   </Override>
   <Override>
-    <Item name="Energy Drink" identifier="he-energydrink1" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing energy drink. Good for when you're absolutely shit-faced and need to sober up a bit." Tags="smallitem,drinkitem" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+    <Item name="Energy Drink" identifier="he-energydrink1" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" description="A refreshing energy drink. Good for when you're absolutely shit-faced and need to sober up a bit." Tags="smallitem,drinkitem" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
       <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
@@ -579,14 +579,14 @@
           <Conditional Condition="equals 100" />
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
         </StatusEffect>
-        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
-        <StatusEffect type="OnUse" target="Character" comparison="And">
-          <ReduceAffliction identifier="drunk" amount="1.5" />
-          <ReduceAffliction identifier="drunknodebuffs" amount="1.5" />
-          <ReduceAffliction identifier="hallucinating" amount="1.5" />
-          <Affliction identifier="haste" amount="12.0" />
-          <!--<Affliction identifier="nausea" amount="50" probability="0.001"/>-->
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" >
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" interval="0.1" disabledeltatime="true">
+          <ReduceAffliction identifier="drunk" amount="0.20" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="0.20" />
+          <ReduceAffliction identifier="hallucinating" amount="1.5" />
+          <Affliction identifier="haste" amount="1.2" />
         </StatusEffect>
         <StatusEffect type="OnBroken" target="This">
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />
@@ -602,7 +602,7 @@
     </Item>
   </Override>
   <Override>
-    <Item name="Can of Couwola Cola" identifier="he-colacan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola. Super refreshing and good for when you're absolutely shit-faced and need to sober up a quickly. Mass-consumption may cause discomfort." Tags="smallitem,drinkitem,cola,colafuel1" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+    <Item name="Can of Couwola Cola" identifier="he-colacan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola. Super refreshing and good for when you're absolutely shit-faced and need to sober up a quickly. Mass-consumption may cause discomfort." Tags="smallitem,drinkitem,cola,colafuel1" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
       <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
@@ -622,12 +622,13 @@
           <Conditional Condition="equals 100" />
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
         </StatusEffect>
-        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
-        <StatusEffect type="OnUse" target="Character" comparison="And">
-          <ReduceAffliction identifier="drunk" amount="2.0" />
-          <ReduceAffliction identifier="drunknodebuffs" amount="2.0" />
-          <Affliction identifier="haste" amount="16.0" />
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" >
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" interval="0.1" disabledeltatime="true">
+          <ReduceAffliction identifier="drunk" amount="0.20" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="0.20" />
+          <Affliction identifier="haste" amount="1.2" />
         </StatusEffect>
         <StatusEffect type="OnBroken" target="This">
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />
@@ -643,7 +644,7 @@
     </Item>
   </Override>
   <Override>
-    <Item name="Can of Couwola Cola Zero" identifier="he-colazerocan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola Zero. No sugar, but full flavor! Very refreshing and good for when you're absolutely shit-faced and need to sober up a quickly." Tags="smallitem,drinkitem,colazero,colafuel2" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
+    <Item name="Can of Couwola Cola Zero" identifier="he-colazerocan" category="Misc" subcategory="Drinks" maxstacksize="32" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" description="A refreshing can of Couwola Cola Zero. No sugar, but full flavor! Very refreshing and good for when you're absolutely shit-faced and need to sober up a quickly." Tags="smallitem,drinkitem,colazero,colafuel2" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_aluminiumcan_full" impacttolerance="5.5" isshootable="true" requireaimtouse="true" canflipx="false">
       <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="abandonedcrewcab" minamount="1" maxamount="1" spawnprobability="0.01" />
       <PreferredContainer secondary="crewcab" minamount="0" maxamount="8" spawnprobability="0.1" />
@@ -663,12 +664,13 @@
           <Conditional Condition="equals 100" />
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenCan.ogg" loop="false" range="200" volume="1.5" />
         </StatusEffect>
-        <StatusEffect type="OnUse" target="This" Condition="-12.0" />
-        <StatusEffect type="OnUse" target="Character" comparison="And">
-          <ReduceAffliction identifier="drunk" amount="1.25" />
-          <ReduceAffliction identifier="drunknodebuffs" amount="1.25" />
-          <Affliction identifier="haste" amount="13.0" />
+        <StatusEffect type="OnUse" target="This" Condition="-12.0" >
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="Character" interval="0.1" disabledeltatime="true">
+          <ReduceAffliction identifier="drunk" amount="0.20" />
+          <ReduceAffliction identifier="drunknodebuffs" amount="0.20" />
+          <Affliction identifier="haste" amount="1" />
         </StatusEffect>
         <StatusEffect type="OnBroken" target="This">
           <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Misc/CanCrush1.ogg" range="350" volume="3" selectionmode="Random" />

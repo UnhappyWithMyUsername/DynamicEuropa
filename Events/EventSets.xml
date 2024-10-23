@@ -10,6 +10,7 @@
     Hydrothermal Wastes: 65-80
 
   -->
+  
   <!--OUTPOST EVENTS-->
   <Override>
     <EventSet identifier="otherlocationevents" leveltype="outpost" locationtype="lair,lairmudraptor,lairthresher,huskgroundsde,militaryforces" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
@@ -29,50 +30,100 @@
     </EventSet>
     
     <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
-    
-      <!-- DYNAMIC EUROPA - ALWAYS TRIGGERED EVENTS -->
-      <EventSet identifier="outpostevents.dynamiceuropa.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
-        <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
+
+
+      <!-- OUTPOST TAKEOVER EVENTS -->
+      <!-- OUTPOST TAKEOVER EVENTS -->
+      <!-- OUTPOST TAKEOVER EVENTS -->
+      <!-- OUTPOST TAKEOVER EVENTS -->
+      
+      <EventSet identifier="outpostevents.outposttakeover.sergeant" leveltype="outpost" locationtype="colony,city,camp,base,military,blockade" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="getseparatiststakeovermission" commonness="100" probability="1.0" faction="separatists"/>
+        <ScriptedEvent identifier="getcoalitiontakeovermission" commonness="100" probability="1.0" faction="coalition"/>
       </EventSet>
+
+      <EventSet identifier="outpostevents.outpostdestruction.regular" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="outpostdestruction" commonness="100" probability="1.0" />
+      </EventSet>
+      <EventSet identifier="outpostevents.outpostdestruction.nostation" leveltype="outpost" locationtype="construction,survey,sinkingcircus" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="outpostdestructionnostation" commonness="100" probability="1.0" />
+      </EventSet>
+      <!-- ALLOWED OUTPOST TAKEOVERS -->
+      <!-- <EventSet identifier="outpostevents.allowedoutposttakeovers" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="outpostdestruction" commonness="100" probability="1.0" />
+      </EventSet> -->
+
+
+
+      <!-- SHOP EVENTS -->
+      <!-- SHOP EVENTS -->
+      <!-- SHOP EVENTS -->
+      <!-- SHOP EVENTS -->
       
       <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction,hydroponics" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
         <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
         <!-- <ScriptedEvent identifier="quartermaster" commonness="100" probability="1.0" /> -->
-      </EventSet>
+      </EventSet>            
+      <!-- TODO: wait spawned NPC merchants to do have items (or starter outpost really) https://github.com/FakeFishGames/Barotrauma/discussions/14605 -->
+      <!-- <EventSet identifier="outpostevents.starteroutpostmerchant" leveltype="outpost" locationtype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="1" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="startermerchant" commonness="100" probability="1.0" />
+      </EventSet> -->
       
+      
+      <!-- only exists to make lithomorphs go away in outpost levels -->
       <EventSet identifier="outpostevents.dynamiceuropa.removelithomorphs" minleveldifficulty="0" maxleveldifficulty="100" 
       leveltype="outpost" allowatstart="true" chooserandom="false" eventcount="1" onceperoutpost="false">
         <ScriptedEvent identifier="removelithomorphsoutpost" commonness="100" probability="1.0" />
       </EventSet>
       
-      <EventSet identifier="outpostevents.sinkingcircus" allowatstart="true" chooserandom="false" eventcount="7" faction="clowns" locationtype="sinkingcircus">
-        <ScriptedEvent identifier="clownspecialhire1" commonness="100" />
-        <ScriptedEvent identifier="pathofthebikehorn1" commonness="100" />
-        <ScriptedEvent identifier="pathofthebikehorn2" commonness="100" />
-        <ScriptedEvent identifier="pathofthebikehorn3" commonness="100" />
-        <ScriptedEvent identifier="pathofthebikehorn4" commonness="100" />
-        <ScriptedEvent identifier="pathofthebikehorn5" commonness="100" />
-        <ScriptedEvent identifier="circuswelcome" commonness="100" />
-      </EventSet>
 
-      <!-- DYNAMIC EUROPA - RANDOM EVENTS -->
-      <EventSet identifier="outpostevents.dynamiceuropa.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
-        <ScriptedEvent identifier="sadashikira" faction="coalition" commonness="50"/>
-      </EventSet>
+      <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->
+      <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->
+      <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->
+      <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->      
+    
+      <EventSet identifier="customcharacterevents" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="true">      
+        <EventSet identifier="outpostevents.dynamiceuropa.kumo" minleveldifficulty="0" maxleveldifficulty="80" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="false">
+          <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
+        </EventSet>        
+        <EventSet identifier="outpostevents.dynamiceuropa.kira" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+          <ScriptedEvent identifier="sadashikira" faction="coalition" commonness="100" probability="1.0" />
+        </EventSet>
+        <EventSet identifier="outpostevents.dynamiceuropa.frenjokster1" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="1" onceperoutpost="true">
+          <EventSet identifier="outpostevents.dynamiceuropa.random1" minleveldifficulty="0" maxleveldifficulty="30" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="true">
+            <ScriptedEvent identifier="frenseynomor" commonness="100" probability="0.3" />
+            <ScriptedEvent identifier="jokster" commonness="100" probability="0.3" />
+          </EventSet>      
+          <EventSet identifier="outpostevents.dynamiceuropa.frenjokster2" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="true">
+            <ScriptedEvent identifier="frenseynomor" commonness="100" probability="0.6" />
+            <ScriptedEvent identifier="jokster" commonness="100" probability="0.6" />
+          </EventSet>
+        </EventSet>
+      </EventSet>      
+      
+      
 
-      <EventSet identifier="outpostevents.dynamiceuropa.random1" minleveldifficulty="0" maxleveldifficulty="30" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="true">
-        <ScriptedEvent identifier="frenseynomor" commonness="30" probability="0.3" />
-        <ScriptedEvent identifier="jokster" commonness="30" probability="0.3" />
-      </EventSet>
+      <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
+      <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
+      <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
+      <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
 
-      <EventSet identifier="outpostevents.dynamiceuropa.random2" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="true">
-        <ScriptedEvent identifier="frenseynomor" commonness="60" probability="0.3" />
-        <ScriptedEvent identifier="jokster" commonness="60" probability="0.3" />
-      </EventSet>
-
-      <!-- For the medivac transport, don't trigger in outposts with medical doctor -->
-      <EventSet identifier="outpostevents.dynamiceuropa.medivac" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,camp,base,military,study,research,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
-        <ScriptedEvent identifier="missionevent_escortmedivac" commonness="50" probability="0.25" />
+      <EventSet identifier="specialmissionevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="true" ignorecooldown="true">
+        <EventSet identifier="outpostevents.dynamiceuropa.medivac" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,camp,base,military,study,research,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
+          <ScriptedEvent identifier="missionevent_escortmedivac" commonness="50" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevents.dynamiceuropa.industrialincident" minleveldifficulty="15" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,camp,base,military,study,research,clinic,hospital,hydroponics" allowatstart="true" chooserandom="false" onceperoutpost="true">
+          <ScriptedEvent identifier="missionevent_industrialincident" commonness="50" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.retrieveindustrialwaste" minleveldifficulty="30" maxleveldifficulty="80" locationtype="construction,shipyard,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+          <ScriptedEvent identifier="missionevent_retrieveindustrialwaste" commonness="200" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.capturelivecrawler" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="50" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.hostagesituation" leveltype="outpost" locationtype="outpost,settlement,colony,city,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_hostagesituation" commonness="50" probability="0.25" />
+        </EventSet>
       </EventSet>
 
       <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
@@ -291,7 +342,6 @@
       <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
         <EventSet identifier="missionevents.husk.destination.easy" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
           <ScriptedEvent identifier="missionevent_slimecollection" commonness="100" probability="0.25" />
-          <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="50" probability="0.25" />
           <ScriptedEvent identifier="missionevent_assassinatehuskresearcher" commonness="50" probability="0.25" faction="coalition" />
           <ScriptedEvent identifier="missionevent_huskcultinterception" commonness="50" probability="0.25" faction="separatists" />
         </EventSet>
@@ -301,6 +351,7 @@
       <EventSet identifier="researchhuskoutpostmission" leveltype="outpost" locationtype="study,research,huskchurch" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
         <EventSet identifier="missionevents.researchhuskoutpostmission.easy" minleveldifficulty="20" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
           <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="100" probability="0.25" />
+          <ScriptedEvent identifier="missionevent_keepwetcargo" commonness="100" probability="0.25" />
           <!-- <ScriptedEvent identifier="missionevent_beaconspecialhusk" /> -->
         </EventSet>
       </EventSet>
@@ -370,14 +421,14 @@
       </EventSet>
       
       <!-- high-difficulty clown events -->
-      <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.clowns" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="clownrelations1" commonness="50" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="clownbrutality" commonness="100" faction="clowns" probability="0.5" />
         <ScriptedEvent identifier="clownrelations2" commonness="100" faction="clowns" probability="0.5" />
       </EventSet>
       
       <!-- high-difficulty husk cult events -->
-      <EventSet identifier="outpostevent.difficult.generic.randomevents.huskcult" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,hospital,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.difficult.generic.randomevents.huskcult" minleveldifficulty="30" maxleveldifficulty="80" locationtype="colony,settlement,clinic,study,hydroponics,blockade,camp,base" allowatstart="true" chooserandom="true" onceperoutpost="true">
         <ScriptedEvent identifier="outbreak" commonness="100" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultist" commonness="50" faction="huskcult" probability="0.5" />
         <ScriptedEvent identifier="huskcultambush" commonness="50" faction="huskcult" probability="0.5" />
@@ -418,7 +469,7 @@
       </EventSet>
       
       <!-- Events specific to military outposts -->
-      <EventSet identifier="outpostevent.military.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.military.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp,blockade" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />
       </EventSet>      
@@ -427,7 +478,7 @@
       </EventSet>
       
       <!-- Events specific to research outposts -->
-      <EventSet identifier="outpostevent.research.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.research.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardresearch" commonness="200" probability="1.0" />
       </EventSet>
@@ -442,29 +493,35 @@
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
-      <EventSet identifier="outpostevent.industrial.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,shipyard,factory,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.industrial.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="construction,factory,shipyard,mine,hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardindustrial" commonness="200" probability="1.0" />
-        <ScriptedEvent identifier="missionevent_retrieveindustrialwaste" commonness="200" probability="0.25" />
+      </EventSet>
+      <EventSet identifier="outpostevents.industrial.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="factory,shipyard" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
+        <ScriptedEvent identifier="malfunctioningdefensebot" commonness="100" probability="0.25" />
       </EventSet>
 
       <!-- Events specific to habitation outposts -->
-      <EventSet identifier="outpostevent.habitation.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="colony,settlement,outpost,city" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.habitation.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
       </EventSet>
+      <EventSet identifier="outpostevents.habitation.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
+        <ScriptedEvent identifier="orangePETA" commonness="100" probability="0.25" />
+      </EventSet>
 
       <!-- Events specific to medical outposts -->
-      <EventSet identifier="outpostevent.medical.always" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
+      <EventSet identifier="outpostevent.medical.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardmedical" commonness="200" probability="1.0" />
       </EventSet>
-      <EventSet identifier="outpostevents.dynamiceuropa.hospital" minleveldifficulty="0" maxleveldifficulty="100" locationtype="hospital" allowatstart="true" chooserandom="false" eventcount="1" onceperoutpost="false">
-        <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
+      <EventSet identifier="outpostevent.medical.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
+        <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
+        <ScriptedEvent identifier="mindsunraveled" commonness="200" probability="1.0" />
       </EventSet>
 
       <!-- Events specific to construction outposts -->
-      <EventSet identifier="outpostevent.construction.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction" allowatstart="true" exhaustible="true">
+      <EventSet identifier="outpostevent.construction.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction" allowatstart="true" exhaustible="false" ignorecooldown="true">
         <ScriptedEvent identifier="Constructionprogress" commonness="200" probability="1" />
       </EventSet>     
 
@@ -476,8 +533,11 @@
       <!-- Events specific to mining outposts -->
       <EventSet identifier="outpostevent.mine.randomevents" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="true" ignorecooldown="true" triggereventcooldown="false" onceperoutpost="true" eventcount="1">
         <!-- TODO: Adjust/override events so spawned NPCs don't die in dry cave? -->
-        <ScriptedEvent identifier="consultant" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="occupationalhazards" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="consultant" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="occupationalhazards" commonness="100" probability="0.25" />
+      </EventSet>
+      <EventSet identifier="outpostevent.mine.greatsea" leveltype="outpost" minleveldifficulty="50" maxleveldifficulty="65" locationtype="mine" allowatstart="true" chooserandom="true" ignorecooldown="true" triggereventcooldown="false" onceperoutpost="true" eventcount="1">
+        <ScriptedEvent identifier="piezopioneer" commonness="100" probability="0.5" />
       </EventSet>
       <EventSet identifier="outpostevent.mine.randomization" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" locationtype="mine" allowatstart="true" chooserandom="false" ignorecooldown="true" triggereventcooldown="false" exhaustible="true" onceperoutpost="false" eventcount="4">
         <ScriptedEvent identifier="minedoorevent" commonness="100" probability="1" />
@@ -486,17 +546,75 @@
         <ScriptedEvent identifier="unlockpestnests" commonness="100" probability="1" />
       </EventSet>
       
+      <!-- Events specific to hydroponics outposts -->
+      <EventSet identifier="outpostevent.hydroponics.always" minleveldifficulty="10" maxleveldifficulty="100" locationtype="hydroponics" allowatstart="true" chooserandom="true" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_escortorangeboys" commonness="200" probability="0.5" />
+      </EventSet>
+      
       <!-- Populate dry caves. Must have 1 monsterevent per monster to spawn in different modules. TODO: Custom monsters? compatibility? -->
-      <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
-        <Commonness commonness="100"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
-        <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+      <EventSet identifier="drycave_enemies" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" eventcount="1" triggereventcooldown="false">
+        <EventSet identifier="drycave_enemies_crawlers" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairCrawler_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+        </EventSet>
+        <EventSet identifier="drycave_enemies_mudraptor" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="20" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_unarmored" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_unarmored" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_unarmored" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_unarmored" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_hatchling" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-LairMudraptor_veteran" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet>
+        <!-- <EventSet identifier="drycave_enemies_husks" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="20" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Husk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="DE-Crawlerhusk" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet> -->
+        <!-- TODO: Create mantis variant that can hide on structures, uses waypoints and doesn't target doors -->
+        <EventSet identifier="drycave_enemies_mantis" leveltype="outpost" locationtype="mine" allowatstart="true" minleveldifficulty="40" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" triggereventcooldown="false">
+          <Commonness commonness="100"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="2" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="1" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.5" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+          <MonsterEvent characterfile="Mantis" minamount="1" maxamount="1" spawntype="Outpost" spawnprobability="0.25" spawnpointtag="drycave_monster"/>
+        </EventSet>
       </EventSet>
 
       <!-- Events specific to cities -->
@@ -783,9 +901,13 @@
         <ScriptedEvent identifier="missionevent_escort1clowns" commonness="50" faction="clowns" probability="0.8" />
         <ScriptedEvent identifier="missionevent_clownoutbreak" commonness="50" faction="clowns" probability="0.8" />
       </EventSet>
+      
 
-      <!--  Faction-specific events that can only occur once. 
-        In a separate set to make these very common (when they are valid for the situation) -->
+      <!--  Faction-specific events -->
+      <!--  Faction-specific events -->
+      <!--  Faction-specific events -->
+      <!--  Faction-specific events -->
+        
       <EventSet identifier="outpostevents.clowns" allowatstart="true" chooserandom="true" eventcount="3" faction="clowns" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ScriptedEvent identifier="clownspecialhire1" commonness="100" />
         <ScriptedEvent identifier="pathofthebikehorn1" commonness="100" />
@@ -794,6 +916,17 @@
         <ScriptedEvent identifier="pathofthebikehorn4" commonness="100" />
         <ScriptedEvent identifier="pathofthebikehorn5" commonness="100" />
       </EventSet>
+      
+      <EventSet identifier="outpostevents.sinkingcircus" allowatstart="true" chooserandom="false" eventcount="7" faction="clowns" locationtype="sinkingcircus">
+        <ScriptedEvent identifier="clownspecialhire1" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn1" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn2" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn3" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn4" commonness="100" />
+        <ScriptedEvent identifier="pathofthebikehorn5" commonness="100" />
+        <ScriptedEvent identifier="circuswelcome" commonness="100" />
+      </EventSet>      
+      
       <EventSet identifier="outpostevents.separatists" allowatstart="true" chooserandom="true" eventcount="2" faction="separatists" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ScriptedEvent identifier="separatistspecialhire1" commonness="100" />
         <ScriptedEvent identifier="separatistspecialhire2" commonness="100" />
@@ -817,6 +950,7 @@
         <ScriptedEvent identifier="waytoascension5" commonness="100" />
       </EventSet>
     </EventSet>
+        
   </Override>
   
   
@@ -828,9 +962,10 @@
       </EventSet>
       <EventSet identifier="de_outpostevents.pirate.random" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="piratemissioninformant" commonness="100" />
+        <ScriptedEvent identifier="missionevent_vipnapping" commonness="100" />
+        <ScriptedEvent identifier="missionevent_silencewitness" commonness="100" />
         <ScriptedEvent identifier="piratediversoutpost" commonness="50" />
         <ScriptedEvent identifier="piratebodybag" commonness="100" />
-        <ScriptedEvent identifier="missionevent_vipnapping" commonness="100" />
       </EventSet>
       <!-- MissionEvents specific to pirate outposts 
       <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
@@ -875,24 +1010,24 @@
       </EventSet>-->
     </EventSet>
   </Override>
+  
   <!--TRANSIT EVENTS-->
   <Override>
     <EventSet identifier="transitevents" leveltype="LocationConnection" allowatstart="true" chooserandom="false" campaign="true" ignoreintensity="true" additive="true">
       <!-- All Biomes -->
-      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="10" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="stowaway22" commonness="100" probability="0.1" triggercooldown="false" />
         <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
         <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
         <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.02" triggercooldown="false" />
-        <!-- <ScriptedEvent identifier="beaconcommsjam" commonness="100" probability="0.02" triggercooldown="false" /> -->
+        <ScriptedEvent identifier="oxygenfluidleak" commonness="100" probability="0.02" triggercooldown="false" />
+        <ScriptedEvent identifier="beaconcommsjam" commonness="100" probability="0.02" triggercooldown="false" />
       </EventSet>
-      <EventSet identifier="DEtransitevents.commsrelay.wrecks" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" ignorecooldown="true" chooserandom="false">
-        <ScriptedEvent identifier="commsrelay_wreck" commonness="100" probability="0.25" triggercooldown="false" />
-      </EventSet>
-      <EventSet identifier="DEtransitevents.commsrelay.ruins" minleveldifficulty="0" maxleveldifficulty="100" maxintensity="0.2" chooserandom="true" perruin="true" triggereventcooldown="false" ignorecooldown="true">
-        <ScriptedEvent identifier="commsrelay_ruin" commonness="100" probability="0.25" triggercooldown="false" />
+      <EventSet identifier="DEtransitevents.commsrelay.wrecks" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" ignorecooldown="true" chooserandom="true">
+        <ScriptedEvent identifier="commsrelay_wreck" commonness="100" probability="0.20" triggercooldown="false" />
+        <ScriptedEvent identifier="commsrelay_ruin" commonness="100" probability="0.20" triggercooldown="false" />
       </EventSet>
     </EventSet>
   </Override>
@@ -951,6 +1086,8 @@
     </EventSet>
     
   </EventSet>
+  
+ 
   <EventSet identifier="GotoHuskLairEventSet" leveltype="LocationConnection" locationtype="OuterHuskLair" allowatstart="true" campaign="true" ignoreintensity="true" additive="true">
   
     <EventSet identifier="HuskDifficulty0-30" minleveldifficulty="0" maxleveldifficulty="30" allowatstart="false" ignorecooldown="true">
@@ -995,10 +1132,4 @@
     
   </EventSet>
   
-  <!-- BROKEN NOT USED literally replaces minerals in dry caves -->
-  <!-- <EventSet identifier="outpostevent.mine.randomminerals" leveltype="outpost" locationtype="mine" minleveldifficulty="0" maxleveldifficulty="80"  allowatstart="true" onceperoutpost="true">
-    <ScriptedEvent identifier="spawnrandomminerals" commonness="100" probability="1" />
-  </EventSet> -->
-  
-
 </Randomevents>

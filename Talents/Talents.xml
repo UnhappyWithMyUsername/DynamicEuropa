@@ -5,14 +5,13 @@
     <Talent identifier="stayingtipsy">
       <Icon texture="Content/UI/TalentsIcons2.png" sheetindex="6,4" sheetelementsize="128,128" />
       <Description tag="talentdescription.stayingtipsy" />
-      <AbilityGroupInterval interval="10.0">
+      <AbilityGroupInterval interval="5.0">
         <Abilities>
           <CharacterAbilityApplyStatusEffects>
             <StatusEffects>
               <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" SetValue="true" Comparison="And">
-                <Conditional drunk="lte 35" />
-                <Conditional drunknodebuffs="lte 35" />
-                <Affliction identifier="drunk" strength="35" />
+                <Conditional drunknodebuffs="lte 30" />
+                <Affliction identifier="drunk" strength="10" />
               </StatusEffect>
             </StatusEffects>
           </CharacterAbilityApplyStatusEffects>

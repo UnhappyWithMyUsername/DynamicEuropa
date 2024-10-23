@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+
+  <!-- PUT ALL THE EVENTS FOR TESTING HERE -->
+  <EventPrefabs>
+  
+    <ScriptedEvent identifier="takeovertestcoal">
+      <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />  
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+        <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="tempsoldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <TagAction criteria="hullname:airlock" tag="subairlock" submarinetype="Player" ContinueIfNoTargetsFound="true" />
+        <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="true" />
+        <WaitAction time="2" />
+        <NPCFollowAction npctag="tempcrew" targettag="subairlock" follow="false" />
+        <NPCChangeTeamAction npctag="tempcrew" teamtag="Team1" addtocrew="true" />
+    </ScriptedEvent> 
+  
+    <ScriptedEvent identifier="spawnescortboy"> 
+        <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="escortboy" TargetTag="tempcrew" SpawnLocation="MainSub" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+    </ScriptedEvent> 
+  
+    
+    <!-- change the missionidentifier and value to test mission "states" -->
+    <ScriptedEvent identifier="missionstateeventTEST">
+          <MissionStateAction missionidentifier="escortorangeboys" operation="Set" value="0" />
+    </ScriptedEvent>    
+    
+  <!-- test for militaryforces, unused -->
+  <!-- <PirateMission
+    type="Pirate"
+    identifier="militarypatrol2"
+    tags="militarypatrol"
+    showinmenus="false"
+    showstartmessage="false"
+    issideobjective="true"
+    achievementidentifier="combatmissionseparatistsvscoalition"
+    difficulty="4"
+    commonness="0"
+    reward="0"
+    addedmissiondifficultyperplayer="8">
+    <Reputation identifier="separatists" amount="10" amountforopposingfaction="-10" />
+    <SubmarineTypes>
+      <Submarine path="Content/Map/EnemySubmarines/DugongPirate.sub" faction="coalition" preferreddifficulty="10" alternatereward="3200"/>
+    </SubmarineTypes>
+    <Characters>
+      <Character typeidentifier="coalitioncaptain" minamount="1" maxamount="1"/>
+    </Characters>
+    <CharacterTypes>
+      <CharacterType typeidentifier="coalitioncaptain">
+        <Character identifier="coalitioncaptain" from="combatmissioncoalitionnpcs" preferreddifficulty="50" iscommander="true" />
+      </CharacterType>
+    </CharacterTypes>
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
+    <message header="missionheader0.pirate1" text="missionmessage0.pirate1"/>
+    <message header="missionheader1.pirate1" text="missionmessage1.pirate1"/>
+    <LocationType from="AnyOutpost" to="MilitaryForces" />
+  </PirateMission> -->
+  
+
+    <ScriptedEvent identifier="testcheckselected">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:hiddenalienpylon" tag="hiddenalienpylon" />
+      <TutorialHighlightAction targettag="hiddenalienpylon" />
+      <Label name="beforecheck" />
+      <WaitAction time="1" />
+      <CheckSelectedAction targettag="hiddenalienpylon" charactertag="player">
+        <Success>
+          <ConversationAction targettag="player" text="tutorial.basics.endmessage.1" eventsprite="captain"/>
+        </Success>
+        <Failure>
+          <GoTo name="beforecheck" />
+        </Failure>     
+      </CheckSelectedAction>
+    </ScriptedEvent>
+      
+    <ScriptedEvent identifier="TAKEOVERRADIODATATEST">
+      <SetDataAction identifier="completedcoalitiontakeover" operation="Add" value="1" />
+      <SetDataAction identifier="completedseparatiststakeover" operation="Add" value="1" />
+    </ScriptedEvent>
+  
+  
+    <ScriptedEvent identifier="soldierspawnTEST">
+      <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" LootingIsStealing="True" TargetTag="tempcrew" SpawnLocation="Outpost" TeamID="Team1" addtocrew="true" />
+      <NPCChangeTeamAction npctag="tempcrew" teamid="Team1" addtocrew="true" />
+    </ScriptedEvent> 
+
+    <ScriptedEvent identifier="eventiconstest" >
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="pirateoutpost" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="bandittalk" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="radiocall" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="sonar" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="subblueprint" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="hitthelever" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="bloodycuffs" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="firefight" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="traitoress" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="hostage" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="huskoutbreak" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="brokenmachinery" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
+    </ScriptedEvent>
+  
+  </EventPrefabs>  
+</Randomevents>

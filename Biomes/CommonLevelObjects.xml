@@ -2,7 +2,7 @@
 <!--COMMON-->
 <levelobjects>
   <!--Vents-->
-  <lavaventde identifier="lavaventDE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10000" randomoffset="0,0">
+  <lavaventde identifier="lavaventDE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10" randomoffset="0,0">
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="1030,1247,440,803" origin="0.5,0.9" />
     <Trigger randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
       <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
@@ -22,11 +22,15 @@
     </Trigger>
     <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
     <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
-    <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
-    <overridecommonness commonness="0" leveltype="outpostlevel" />
+    <overridecommonness leveltype="hydrothermalwastes" commonness="0" />
+    <overridecommonness leveltype="coldcavernsoutpost" commonness="0" />
+    <overridecommonness leveltype="ridgeoutpost" commonness="0" />
+    <overridecommonness leveltype="plateauoutpost" commonness="0" />
+    <overridecommonness leveltype="greatseaoutpost" commonness="0" />
+    <overridecommonness leveltype="wastesoutpost" commonness="0" />  
     <overridecommonness commonness="0" leveltype="endzone" />
   </lavaventde>
-  <lavavent2de identifier="lavavent2DE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10000" randomoffset="0,0">
+  <lavavent2de identifier="lavavent2DE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10" randomoffset="0,0">
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.9" />
     <Trigger randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
       <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
@@ -47,22 +51,23 @@
     <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
     <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
     <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
-    <overridecommonness commonness="0" leveltype="outpostlevel" />
+    <overridecommonness leveltype="hydrothermalwastes" commonness="0" />
+    <overridecommonness leveltype="coldcavernsoutpost" commonness="0" />
+    <overridecommonness leveltype="ridgeoutpost" commonness="0" />
+    <overridecommonness leveltype="plateauoutpost" commonness="0" />
+    <overridecommonness leveltype="greatseaoutpost" commonness="0" />
+    <overridecommonness leveltype="wastesoutpost" commonness="0" /> 
     <overridecommonness commonness="0" leveltype="endzone" />
   </lavavent2de>
-  <Override>
-    <ballastfloraspores identifier="ballastfloraspores" spawnpos="MainPath" alignment="TopLeft, BottomRight" minsize="1" maxsize="2" randomrotation="0,360" commonness="0.5" maxcount="3" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="0" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0">
-      <overridecommonness commonness="0" leveltype="coldcaverns" />
-      <overridecommonness commonness="0" leveltype="outpostlevel" />
-      <overridecommonness commonness="2" leveltype="theaphoticplateau" />
-      <overridecommonness commonness="0" leveltype="endzone" />
-      <Trigger position="0,0" radius="1500" triggeredby="Submarine" infectidentifier="ballastflora" infectionchance="0.05" />
-      <!--InnerSpores, Inner and Outer are separate because X amount of particles in a big radius tend to clamp up in center. Having Inner and Outer spreads them more evenly.-->
-      <ParticleEmitter particle="spore" particlespersecond="10" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="100" distancemax="600" />
-      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="5" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="100" distancemax="600" velocitymin="0" velocitymax="10" />
-      <!--OuterSpores-->
-      <ParticleEmitter particle="spore" particlespersecond="50" position="0,0" anglemin="0" anglemax="360" velocitymin="0" velocitymax="10" scalemin="1" scalemax="1.5" distancemin="615" distancemax="1600" />
-      <ParticleEmitter particle="toxinmistlargefade" particlespersecond="30" position="0,0" anglemin="0" anglemax="360" scalemin="4.0" scalemax="5.0" distancemin="615" distancemax="1600" velocitymin="0" velocitymax="10" />
-    </ballastfloraspores>
-  </Override>
+  
+  <!-- pondering adding background chunks to outpost levels so the outpost isnt floating but it's not encased in ceiling either -->
+  
+  <!-- COLD CAVERNS OUTPOST CHUNKS -->
+  <!-- <BackgroundChunksOutpost identifier="coldcavernsBackgroundChunksOutpost" spawnpos="OutpostWall" minsurfacewidth="500" minsize="2" maxsize="3" randomrotation="-180,180" commonness="0" depthrange="1500,2500" alignment="TopLeft, BottomRight" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0" maxcount="20" randomoffset="1000,1000">
+    <overridecommonness leveltype="coldcavernsoutpost" commonness="100" />
+    <Sprite texture="Content/Map/Biomes/ColdCaverns/BackgroundChunks.png" sourcerect="1365,0,683,1024" origin="0.5,0.5" />
+    <Sprite texture="Content/Map/Biomes/ColdCaverns/BackgroundChunks.png" sourcerect="0,0,683,1024" origin="0.5,0.5" />
+    <Sprite texture="Content/Map/Biomes/ColdCaverns/BackgroundChunks.png" sourcerect="683,0,683,1024" origin="0.5,0.5" />
+  </BackgroundChunksOutpost> -->
+  
 </levelobjects>

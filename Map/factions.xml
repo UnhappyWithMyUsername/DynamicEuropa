@@ -2,7 +2,7 @@
 <Override>
   <Factions>
   
-    <Faction identifier="coalition" initialreputation="15" minreputation="-100" maxreputation="100" menuorder="0" controlledoutpostpercentage="60" startoutpost="true" opposingfaction="separatists">
+    <Faction identifier="coalition" initialreputation="10" minreputation="-100" maxreputation="100" menuorder="0" controlledoutpostpercentage="60" startoutpost="true" opposingfaction="separatists">
       <Icon name="CoalitionIcon" texture="Content/UI/CampaignUIAtlas2.png" sourcerect="143,523,94,113" color="62,177,182,255"/>
       <IconSmall name="CoalitionIconSmall" texture="Content/Map/MapAtlas.png" sourcerect="3,838,50,50"/>
       <Portrait name="CoalitionPortrait" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="0,0,852,340" />
@@ -17,7 +17,7 @@
       <AutomaticMission leveltype="LocationConnection" missiontag="coalitionattack" minreputation="-100" maxreputation="-50" MaxDistanceFromFactionOutpost="3" DisallowBetweenOtherFactionOutposts="true" minprobability="0.15" maxprobability="0.01"/>
     </Faction>
     
-    <Faction identifier="separatists" initialreputation="-10" minreputation="-100" maxreputation="100" menuorder="1" controlledoutpostpercentage="40" opposingfaction="coalition">
+    <Faction identifier="separatists" initialreputation="-5" minreputation="-100" maxreputation="100" menuorder="1" controlledoutpostpercentage="40" opposingfaction="coalition">
       <Icon name="SeparatistIcon" texture="Content/UI/CampaignUIAtlas2.png" sourcerect="268,523,105,113" color="215,156,85,255"/>
       <IconSmall name="SeparatistIconSmall" texture="Content/Map/MapAtlas.png" sourcerect="58,837,50,50"/>
       <Portrait name="SeparatistPortrait" texture="Content/UI/Server/ServerAtlas1.png" sourcerect="0,342,852,340"/>
@@ -55,7 +55,7 @@
       <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratecaptainlord" minreputation="15"/>
       <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratesecurityrecruit" minreputation="15"/>
       <Hireable npcsetidentifier="pirate_npcs" npcidentifier="piratesecuritybrute" minreputation="15"/>
-      <!-- TODO: bandit subs. Give existing separatist subs to bandits, and give new subs to separatists?  -->
+      <!-- TODO: bandit subs. Give existing separatist subs to bandits, and give new subs to separatists? causes problems with mod compatibility since I have to specify the sub itself instead of using tags meaning modded pirate subs wont appear  -->
       <AutomaticMission leveltype="LocationConnection" missiontag="pirateattack" minreputation="-20" maxreputation="-15" MaxDistanceFromFactionOutpost="10" DisallowBetweenOtherFactionOutposts="false" minprobability="0.15" maxprobability="0.01"/>
     </Faction>
     
