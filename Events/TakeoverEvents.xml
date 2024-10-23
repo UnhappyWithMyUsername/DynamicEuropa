@@ -503,7 +503,7 @@
                   <ConversationAction text="eventtext.manualtakeover.call.separatists" dialogtype="Small" targettag="statuseffecttarget" eventsprite="separatists">
                     <Option text="eventtext.manualtakeover.call.playerresponse">
                       <ConversationAction text="eventtext.manualtakeover.call.permissiongranted" ContinueAutomatically="true" />
-                      <TriggerEventAction identifier="manualcooutposttakeoverevent" />
+                      <TriggerEventAction identifier="manualsepoutposttakeoverevent" />
                     </Option>
                     <Option text="eventtext.option.nevermind" endconversation="true">
                       <SetDataAction identifier="takeoverinprogress" value="false" />
@@ -536,7 +536,7 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
+      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
       <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="sepnpc" CompareToTarget="sepnpc" MinPercentageRelativeToTarget="75">
@@ -574,7 +574,7 @@
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
-      <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
+      <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
       <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="conpc" CompareToTarget="conpc" MinPercentageRelativeToTarget="75">
