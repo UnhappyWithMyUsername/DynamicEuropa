@@ -1956,11 +1956,10 @@
                           <GoTo name="pirateinvaders" />
                         </Option >
                         <Option text="eventtext.piratediversoutpost.getthehelloff" >
-                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" endconversation="true" eventsprite="bandittalk">
+                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" eventsprite="bandittalk" endconversation="true" />
                           <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
-                            <!-- Go to part 2 -->
-                            <GoTo name="pirateinvaders" />
-                          </ConversationAction>
+                          <!-- Go to part 2 -->
+                          <GoTo name="pirateinvaders" />
                         </Option >
                       </ConversationAction>
                     </Option>  
@@ -1992,7 +1991,7 @@
               <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
               <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
               <!-- use spoken dialogue if ever implemented -->
-              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" ContinueAutomatically="true"/>
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true"/>
               <SetDataAction identifier="piratediversnorepeat" operation="set" value="1" />
               <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
               <Label name="combatrefresh" />
