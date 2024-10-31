@@ -1644,13 +1644,13 @@
                   <CheckMoneyAction Amount="1000">
                     <Success>
                       <MoneyAction amount="-1000" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success" targettag="pso_trig_player" />
+                      <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
+                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success" targettag="pso_trig_player" eventsprite="piratehaven" />
                       <SetDataAction identifier="piratehavenunlocked" value="1" />
                       <StatusEffectAction targettag="pirateentrance">
                         <StatusEffect target="This" State="true" setvalue="true" disabledeltatime="true" />
                       </StatusEffectAction>
-                      <ReputationAction targettype="Faction" identifier="bandits"  increase="5" />
-                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation" targettag="pso_trig_player">
+                      <ConversationAction text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation" targettag="pso_trig_player" eventsprite="piratehaven">
                         <!-- Option to pay extra to lower your coalition reputation? -->
                         <Option text="eventtext.piratesecurityofficer.highrep.paytoll.success.extra.reputation.buy">
                           <CheckMoneyAction Amount="1000">
@@ -1939,6 +1939,8 @@
                   <WaitAction time="5" />
                   <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
                   <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="bandittalk"/>
+                  <WaitAction time="5" />
+                  <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
                   <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="bandittalk">              
                     <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
                       <Label name="dialogstep3" />
@@ -1987,12 +1989,14 @@
               </StatusEffectAction>
               <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
               <WaitAction time="2" />
+              <NPCFollowAction npctag="pirateambusher" targettag="navterminal" follow="true" />
               <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
               <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
               <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
               <!-- use spoken dialogue if ever implemented -->
-              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true"/>
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="firefight" ContinueAutomatically="true"/>
               <SetDataAction identifier="piratediversnorepeat" operation="set" value="1" />
+              <NPCChangeTeamAction npctag="pirateambusher" teamtag="Team2" />
               <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
               <Label name="combatrefresh" />
               <TagAction criteria="player" tag="player" />
