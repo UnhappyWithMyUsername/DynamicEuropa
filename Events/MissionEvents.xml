@@ -792,6 +792,7 @@
       <!-- handcuff other npcs with a delay so it also targets NPCs spawned by outposts -->
       <WaitAction time="5" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <TriggerEventAction identifier="checkhostagesdead"/>
       <StatusEffectAction targettag="hostage" >
         <StatusEffect target="this" >
           <SpawnItem identifier="handcuffs" spawnposition="ThisInventory" Equip="true" /> 
@@ -806,7 +807,7 @@
       <WaitAction time="1" />
       <StatusEffectAction targettag="leader">
         <StatusEffect target="this" duration="3" >
-          <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" />
+          <Sound file="Content/Sounds/Radiostatic.ogg" range="10000" volume="2" loop="true" dontmuffle="true" />
         </StatusEffect>
       </StatusEffectAction>
       <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="radiocall" ContinueAutomatically="true" >
@@ -820,7 +821,22 @@
         </Option>
       </ConversationAction>
       <!-- wait for player to get near leader, make sure alarm hasnt been triggered by weapon -->
-      <TriggerAction target1tag="player" target2tag="leader" radius="300" />
+      <Label name="isleaderalive" />
+      <CheckConditionalAction targettag="leader" IsDead="False">
+        <Success>
+          <CheckVisibilityAction EntityTag="leader" TargetTag="player" maxdistance="300" CheckFacing="false">
+            <Success>
+              <!-- proceed to talk to leader if player gets near, otherwise keep checking if alive -->
+            </Success>
+            <Failure>
+              <GoTo name="isleaderalive" />
+            </Failure>
+          </CheckVisibilityAction>
+        </Success>
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckConditionalAction>
       <CheckDataAction identifier="hostagesituationweaponspotted" condition="eq 0" >
         <Failure>
           <Goto name="end" />
@@ -843,6 +859,7 @@
                 </StatusEffect>
               </StatusEffectAction>
               <ConversationAction targettag="negociator" text="EventText.hostagesituation.paidransom" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
+              <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="1" />
               <Goto name="end" />
             </Success>
             <Failure>
@@ -868,6 +885,7 @@
                       <Sound file="Content/Sounds/Radiostatic.ogg" range="500" volume="2" loop="true" />
                     </StatusEffect>
                   </StatusEffectAction>
+                  <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="1" />
                   <ConversationAction targettag="negociator" text="EventText.hostagesituation.banditsleave" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
                   <SetDataAction identifier="hostagesituationresolved" value="1" />
                   <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
@@ -925,7 +943,7 @@
             <Failure>
             </Failure>
           </CheckReputationAction>  
-          <SkillCheckAction requiredskill="weapons" requiredlevel="80" targettag="negociator">
+          <SkillCheckAction requiredskill="weapons" requiredlevel="85" targettag="negociator">
             <Success>
               <GiveSkillEXPAction skill="weapons" amount="2" targettag="negociator" />
               <ConversationAction targettag="negociator" text="EventText.hostagesituation.scaredbandits" endeventifinterrupted="True" eventsprite="piratehaven" >
@@ -985,19 +1003,6 @@
         </Option>
       </ConversationAction>
       <Label name="end" />
-      <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
-        <Conditional IsDead="false" />
-        <Success>
-          <SetDataAction identifier="hostagesalive" operation="set" value="1" />
-          <WaitAction time="1" />
-          <Goto name="end" />
-        </Success>
-        <Failure>
-          <SetDataAction identifier="hostagesalive" operation="set" value="0" />
-          <!-- <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" /> -->
-          <ConversationAction targettag="player" text="EventText.hostagesituation.toomanydead" dialogtype="mission" eventsprite="unconscious" />
-        </Failure>
-      </CountTargetsAction>
       <!-- check if >50% of hostages are alive -->
       <OnRoundEndAction>
         <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
@@ -1043,6 +1048,24 @@
         </Success>
       </CheckVisibilityAction>
       <Label name="end" />
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="checkhostagesdead"> />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="hostage" IgnoreIncapacitatedCharacters="true" />
+      <Label name="hostagesdeadloop" />
+      <CountTargetsAction targettag="hostage" CompareToTarget="hostage" MinPercentageRelativeToTarget="50">
+        <Conditional IsDead="false" />
+        <Success>
+          <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+          <WaitAction time="1" />
+          <Goto name="hostagesdeadloop" />
+        </Success>
+        <Failure>
+          <SetDataAction identifier="hostagesalive" operation="set" value="0" />
+          <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" />
+          <!-- <ConversationAction targettag="player" text="EventText.hostagesituation.toomanydead" dialogtype="mission" eventsprite="unconscious" /> -->
+        </Failure>
+      </CountTargetsAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="killhostages"> />
