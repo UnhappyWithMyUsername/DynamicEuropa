@@ -257,9 +257,7 @@
                 <TagAction criteria="player" tag="player" />
                 <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="missionnpc" spawnlocation="Outpost" targetmoduletags="adminmodule" />
                 <TriggerAction target1tag="missionnpc" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true" />
-                <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="true" />
                 <ConversationAction text="EventText.missionevent_huskcultinterception.churchmakesmeds" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists">
-                <WaitAction time="5" />
                   <Option text="EventText.missionevent_huskcultinterception.Whataboutit">
                     <ConversationAction text="EventText.missionevent_huskcultinterception.dependentonmeds" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Separatists" endconversation="true" >
                       <Option text="EventText.generic.continue">
@@ -280,7 +278,6 @@
             </CheckReputationAction>  
           </Success>
         </CheckDataAction>
-        <NPCFollowAction npctag="missionnpc" targettag="triggerer_player" follow="false" />
       </ScriptedEvent>
       
       <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="20" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
