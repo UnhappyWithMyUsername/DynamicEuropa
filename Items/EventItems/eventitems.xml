@@ -190,7 +190,14 @@
   
   <!-- Ducky Diving Suit -->
   <Item name="Ducky Diving Suit" identifier="duckysuit" variantof="pucs" description="A strange suit offered to you by your friend Jokster. It seems to be a custom modified PUCS suit with some swimming speed enhancements from the slipsuit." allowasextracargo="true" botpriority="1.5" hideinmenus="true">
-    <Price baseprice="950" sold="false" />
+    <Price baseprice="950" sold="false">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" minavailable="0" maxavailable="3" sold="false">
+      </Price>
+      <Price storeidentifier="merchantresearch" multiplier="1.2" />
+      <Price storeidentifier="merchantmilitary" />
+      <Price storeidentifier="merchantmine" multiplier="1.1" />
+    </Price>
     <PreferredContainer primary="divingsuitcontainer" spawnprobability="0.0" />
     <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.0" />
     <Deconstruct time="30">
