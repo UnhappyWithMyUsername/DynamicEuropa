@@ -1287,280 +1287,307 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
-
-      <ScriptedEvent identifier="hiddenandclowngerous" commonness="10">
-        <TagAction criteria="player" tag="player"/>
-        <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
-        <TagAction criteria="itemtag:hornitem" tag="bikehorn" />
-        <SpawnAction npcsetidentifier="husknpcs" npcidentifier="huskcultistsecurity" targettag="headofsecurity" targetmoduletags="adminmodule" offset="150" />
-        <ConversationAction text="EventText.hiddenandclowngerous.thisistheplace" targettag="player" eventsprite="infiltration2" dialogtype="Small"/>
-        <Label name="waitforhonks" />
-        <WaitAction time="1" />
-        <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" ApplyTagToLinkedHulls="honkedhull" />
-        <CountTargetsAction targettag="honkedhull" CompareToTarget="anyhull" MinPercentageRelativeToTarget="25">
-          <Success>
-            <TagAction criteria="itemidentifier:opdeco_trashcan" tag="clowntrashcan" submarinetype="outpost" chooserandom="true" />
-            <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" radius="100" />
-            <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.psstoverhere" eventsprite="Infiltration2" />
-            <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true"/>
-            <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.trashfound" eventsprite="Infiltration2" >
-              <Option text="EventText.hiddenandclowngerous.whyintrash" >
-                  <ConversationAction text="EventText.hiddenandclowngerous.hidingobivously" targettag="triggerer_player" eventsprite="infiltration2">
-                    <Option text="EventText.hiddenandclowngerous.whatdidyouexpect" >
-                      <Label name="studiedhusks" />
-                      <ConversationAction text="EventText.hiddenandclowngerous.studiedhusks" targettag="triggerer_player" eventsprite="infiltration2">
-                        <Option text="EventText.hiddenandclowngerous.timetoleave">
-                          <Label name="cantgetout" />
-                          <ConversationAction text="EventText.hiddenandclowngerous.cantgetout">
-                            <Option text="EventText.hiddenandclowngerous.gotosecurity" >
-                              <ConversationAction text="EventText.hiddenandclowngerous.timetonegociate"/>
-                              <Goto name="talktohusksecurity" />
-                            </Option >
-                          </ConversationAction>
+    <ScriptedEvent identifier="hiddenandclowngerous" commonness="10">
+      <TagAction criteria="player" tag="player"/>
+      <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
+      <TagAction criteria="itemtag:hornitem" tag="bikehorn" />
+      <SpawnAction npcsetidentifier="husknpcs" npcidentifier="huskcultistsecurity" targettag="headofsecurity" targetmoduletags="adminmodule" offset="150" />
+      <ConversationAction text="EventText.hiddenandclowngerous.thisistheplace" targettag="player" eventsprite="infiltration2" dialogtype="Small"/>
+      <Label name="waitforhonks" />
+      <WaitAction time="1" />
+      <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" ApplyTagToLinkedHulls="honkedhull" />
+      <CountTargetsAction targettag="honkedhull" CompareToTarget="anyhull" MinPercentageRelativeToTarget="25">
+        <Success>
+          <TagAction criteria="itemidentifier:opdeco_trashcan" tag="clowntrashcan" submarinetype="outpost" chooserandom="true" />
+          <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" radius="100" />
+          <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.psstoverhere" eventsprite="Infiltration2" />
+          <TriggerAction target1tag="clowntrashcan" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true"/>
+          <ConversationAction targettag="triggerer_player" text="EventText.hiddenandclowngerous.trashfound" eventsprite="Infiltration2" >
+            <Option text="EventText.hiddenandclowngerous.whyintrash" >
+                <ConversationAction text="EventText.hiddenandclowngerous.hidingobivously" targettag="triggerer_player" eventsprite="infiltration2">
+                  <Option text="EventText.hiddenandclowngerous.whatdidyouexpect" >
+                    <Label name="studiedhusks" />
+                    <ConversationAction text="EventText.hiddenandclowngerous.studiedhusks" targettag="triggerer_player" eventsprite="infiltration2">
+                      <Option text="EventText.hiddenandclowngerous.timetoleave">
+                        <Label name="cantgetout" />
+                        <ConversationAction text="EventText.hiddenandclowngerous.cantgetout">
+                          <Option text="EventText.hiddenandclowngerous.gotosecurity" >
+                            <ConversationAction text="EventText.hiddenandclowngerous.timetonegociate"/>
+                            <Goto name="talktohusksecurity" />
+                          </Option >
+                        </ConversationAction>
+                      </Option >
+                      <Option text="EventText.hiddenandclowngerous.pullnose" >
+                        <Goto name="cantgetout" />
+                      </Option >
+                    </ConversationAction>
+                  </Option>
+                  <Option text="EventText.hiddenandclowngerous.unbelievable" >
+                    <Goto name="studiedhusks" />
+                  </Option >
+              </ConversationAction>
+            </Option>
+          </ConversationAction> 
+        </Success>
+        <Failure>
+          <Goto name="waitforhonks" />
+        </Failure>
+      </CountTargetsAction>
+      <!-- Talk to security. -->
+      <Label name="talktohusksecurity" />
+      <TriggerAction target1tag="player" target2tag="headofsecurity" applytotarget1="playernegociator" waitforinteraction="true" />
+      <NPCFollowAction npctag="headofsecurity" targettag="playernegociator" follow="true" />
+      <ConversationAction text="EventText.hiddenandclowngerous.sternsecurity" targettag="playernegociator" eventsprite="BombScare1">
+        <Option text="EventText.hiddenandclowngerous.heardanysqueaks" >
+          <ConversationAction text="EventText.hiddenandclowngerous.lookingforclown" targettag="playernegociator" eventsprite="infiltration2">
+            <Option text="EventText.hiddenandclowngerous.nofanofclowns" >
+              <ConversationAction text="EventText.hiddenandclowngerous.clownsnottolerated" targettag="playernegociator" eventsprite="infiltration2">
+                <!-- tell clown to leave -->
+                <Option text="EventText.hiddenandclowngerous.allowclowntoleave" >
+                  <ConversationAction text="EventText.hiddenandclowngerous.fineclowncanleave" endconversation="true"/>
+                  <!-- go back to the clown -->
+                  <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                  <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                    <Option text="EventText.hiddenandclowngerous.youcango" >
+                      <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
+                      <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
+                      <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                      <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
+                      <ReputationAction targettype="Faction" identifier="huskcult" increase="3" />
+                      <TriggerAction target1tag="clownfiltrator" target2tag="playernegociator" waitforinteraction="true"/>
+                      <ConversationAction text="EventText.hiddenandclowngerous.smellyclown" targettag="playernegociator" eventsprite="infiltration2">
+                        <Option text="EventText.hiddenandclowngerous.joinmycrew" endconversation="true">
+                          <ConversationAction text="EventText.hiddenandclowngerous.joinsthecrew" endconversation="true"/>
+                          <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="true" />
                         </Option >
-                        <Option text="EventText.hiddenandclowngerous.pullnose" >
-                          <Goto name="cantgetout" />
+                        <Option text="EventText.hiddenandclowngerous.laughatyourself" endconversation="true">
+                          <ConversationAction text="EventText.hiddenandclowngerous.clowngrateful" endconversation="true"/>    
+                          <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
                         </Option >
                       </ConversationAction>
-                    </Option>
-                    <Option text="EventText.hiddenandclowngerous.unbelievable" >
-                      <Goto name="studiedhusks" />
                     </Option >
-                </ConversationAction>
-              </Option>
-            </ConversationAction> 
+                  </ConversationAction>
+                </Option >
+                <!-- path of the pranks -->
+                <Option text="EventText.hiddenandclowngerous.seennoclown" >
+                  <ConversationAction text="EventText.hiddenandclowngerous.dontbotherme" endconversation="true"/>
+                  <!-- go back to the clown -->
+                  <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                  <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                    <Option text="EventText.hiddenandclowngerous.nonegociation" >
+                      <ConversationAction text="EventText.hiddenandclowngerous.escapeplan" >
+                        <Option text="EventText.hiddenandclowngerous.whatprank" >
+                          <ConversationAction text="EventText.hiddenandclowngerous.givesgrenade" endconversation="true"/>
+                            <SpawnAction itemidentifier="stungrenade" targetinventory="triggerer_player" targettag="prankgrenade" />
+                            <WaitAction time="2" />
+                            <TagAction criteria="itemidentifier:suppliescabinet" tag="prankcabinet" submarinetype="outpost" />
+                            <HighlightAction targettag="prankcabinet" state="true" />
+                            <label name="waitforprank" />
+                            <CheckItemAction targettag="prankcabinet" itemtags="prankgrenade" >
+                              <Success>
+                                <HighlightAction targettag="prankcabinet" state="false" />
+                                <NPCFollowAction npctag="headofsecurity" targettag="prankgrenade" follow="true" />
+                                <StatusEffectAction targettag="prankgrenade">
+                                  <StatusEffect duration="30" noninteractable="true" checkconditionalalways="true" setvalue="true" >
+                                    <Conditional condition="gt 0" />
+                                    <Sound file="Content/Items/Misc/AccordionLoop.ogg" range="1000" volume="2" frequencymultiplier="1.5" loop="true"/>
+                                    <ParticleEmitter particle="shockwavesmall" particlespersecond="5" scalemin="1" scalemax="2" />
+                                  </StatusEffect>
+                                </StatusEffectAction>
+                                <TriggerAction target1tag="headofsecurity" target2tag="prankgrenade" radius="250" />
+                                <ConversationAction text="EventText.hiddenandclowngerous.honkit" targettag="triggerer_player" endconversation="true" dialogtype="Small"/>
+                                <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" />
+                                <StatusEffectAction targettag="prankgrenade">
+                                  <StatusEffect delay="1">
+                                    <Use />
+                                    <Remove />
+                                  </StatusEffect>
+                                </StatusEffectAction>
+                                <ReputationAction targettype="Faction" identifier="huskcult" increase="-5" />
+                                <TagAction criteria="itemtag:navterminal" tag="navterminal" submarinetype="player" />
+                                <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan" teamid="Team1"/>
+                                <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
+                                <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                                <NPCFollowAction npctag="clownfiltrator" targettag="navterminal" follow="true" />
+                                <ConversationAction text="EventText.hiddenandclowngerous.pathoftrickster" >
+                                  <Option text="EventText.hiddenandclowngerous.clowncanjoin" endconversation="true">
+                                    <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
+                                    <ReputationAction targettype="Faction" identifier="clowns" increase="10" />
+                                    <!-- end -->
+                                  </Option>
+                                </ConversationAction>
+                              </Success>
+                              <Failure>
+                                <Waitaction time="2" />
+                                <Goto name="waitforprank" />
+                              </Failure>
+                            </CheckItemAction>
+                        </Option >
+                      </ConversationAction>
+                    </Option >
+                  </ConversationAction>
+                </Option >
+                <!-- sell out the clown -->
+                <Option text="EventText.hiddenandclowngerous.snitchonclown" >
+                  <ConversationAction text="EventText.hiddenandclowngerous.luretheclown" endconversation="true"/>
+                  <!-- go back to the clown -->
+                  <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
+                  <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
+                    <Option text="EventText.hiddenandclowngerous.lietoclown" >
+                      <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
+                    </Option >
+                  </ConversationAction>
+                  <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
+                  <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
+                  <Label name="waitforhandcuffedclown" />
+                  <CombatAction combatmode="arrest" npctag="headofsecurity" enemytag="clownfiltrator" isinstigator="false" guardreaction="arrest" witnessreaction="none" />
+                  <WaitAction time="2" />
+                  <CombatAction combatmode="retreat" npctag="clownfiltrator" enemytag="headofsecurity" isinstigator="true" guardreaction="arrest" witnessreaction="none" />
+                  <CheckItemAction targettag="clownfiltrator" itemidentifiers="handcuffs" requireequipped="true" >
+                    <Success>
+                      <ConversationAction text="EventText.hiddenandclowngerous.clownarrested" targettag="triggerer_player" eventsprite="infiltration2" endconversation="true"/>
+                      <ReputationAction targettype="Faction" identifier="clowns" increase="-5" />
+                      <ReputationAction targettype="Faction" identifier="huskcult" increase="10" />
+                      <MoneyAction amount="500" />
+                    </Success>
+                    <Failure>
+                      <Waitaction time="2" />
+                      <Goto name="waitforhandcuffedclown" />
+                    </Failure>
+                  </CheckItemAction>
+                </Option >
+              </ConversationAction>
+            </Option >
+          </ConversationAction>
+        </Option >
+      </ConversationAction>        
+      <Label name="end" />
+    </ScriptedEvent>
+
+
+    <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="20" requiredDestinationTypes="huskchurch">
+      <CheckDataAction identifier="capturelivecrawlernorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>          
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="huskcultist" targettag="cultist" spawnlocation="Outpost" />
+          <ConversationAction text="EventText.missionevent_capturelivecrawler.periloustask" speakertag="cultist" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
+            <Option text="EventText.missionevent_capturelivecrawler.whattask">
+              <!-- "please continue" -->
+              <ConversationAction text="EventText.missionevent_capturelivecrawler.experiments" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" >
+                <Option text="EventText.missionevent_capturelivecrawler.incidents">
+                  <ConversationAction text="EventText.missionevent_capturelivecrawler.missionbrief" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
+                    <Option text="EventText.missionevent_capturelivecrawler.Iwilldoit" >
+                      <MissionAction missionidentifier="capturelivecrawler" />                        
+                      <ConversationAction text="EventText.missionevent_capturelivecrawler.takethis" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" />
+                      <SpawnAction itemidentifier="chloralhydrate" amount="8" targettag="sedative" targetinventory="triggerer_player" />
+                    </Option>
+                    <Option text="EventText.missionevent_capturelivecrawler.Noway" endconversation="true">   
+                      <ReputationAction targettype="Faction" identifier="huskcult" increase="-2" />
+                      <SetDataAction identifier="capturelivecrawlernorepeat" value="1"/> 
+                    </Option>                    
+                  </ConversationAction> 
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Success>
+      </CheckDataAction>
+    </ScriptedEvent>    
+
+    <ScriptedEvent identifier="chimeravialevent" commonness="50">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:husksamplevial" tag="vial" />
+      <SetDataAction identifier="chimerasamples" operation="set" value="0" />
+      <Label name="checkforvial" />
+      <CheckConditionalAction targettag="vial" condition="gte 100">
+        <Success>
+        <MissionStateAction missionidentifier="chimerasamples" operation="set" value="1" />
+        </Success>
+        <Failure>                        
+          <Waitaction time="1" />
+          <GoTo name="checkforvial" />
+        </Failure>
+      </CheckConditionalAction>
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="vial" hulltag="playerhull" CompareToTarget="vial" MinPercentageRelativeToTarget="1">
+          <Conditional condition="gte 100" />
+          <Success>
+            <SetDataAction identifier="chimerasamples" operation="set" value="1" />
+            <RemoveItemAction targettag="vial" Amount="100" />
           </Success>
           <Failure>
-            <Goto name="waitforhonks" />
+            <SetDataAction identifier="chimerasamples" operation="set" value="0" />
+            <RemoveItemAction targettag="vial" Amount="100" />
           </Failure>
         </CountTargetsAction>
-        <!-- Talk to security. -->
-        <Label name="talktohusksecurity" />
-        <TriggerAction target1tag="player" target2tag="headofsecurity" applytotarget1="playernegociator" waitforinteraction="true" />
-        <NPCFollowAction npctag="headofsecurity" targettag="playernegociator" follow="true" />
-        <ConversationAction text="EventText.hiddenandclowngerous.sternsecurity" targettag="playernegociator" eventsprite="BombScare1">
-          <Option text="EventText.hiddenandclowngerous.heardanysqueaks" >
-            <ConversationAction text="EventText.hiddenandclowngerous.lookingforclown" targettag="playernegociator" eventsprite="infiltration2">
-              <Option text="EventText.hiddenandclowngerous.nofanofclowns" >
-                <ConversationAction text="EventText.hiddenandclowngerous.clownsnottolerated" targettag="playernegociator" eventsprite="infiltration2">
-                  <!-- tell clown to leave -->
-                  <Option text="EventText.hiddenandclowngerous.allowclowntoleave" >
-                    <ConversationAction text="EventText.hiddenandclowngerous.fineclowncanleave" endconversation="true"/>
-                    <!-- go back to the clown -->
-                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
-                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
-                      <Option text="EventText.hiddenandclowngerous.youcango" >
-                        <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
-                        <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
-                        <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
-                        <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
-                        <ReputationAction targettype="Faction" identifier="huskcult" increase="3" />
-                        <TriggerAction target1tag="clownfiltrator" target2tag="playernegociator" waitforinteraction="true"/>
-                        <ConversationAction text="EventText.hiddenandclowngerous.smellyclown" targettag="playernegociator" eventsprite="infiltration2">
-                          <Option text="EventText.hiddenandclowngerous.joinmycrew" endconversation="true">
-                            <ConversationAction text="EventText.hiddenandclowngerous.joinsthecrew" endconversation="true"/>
-                            <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="true" />
-                          </Option >
-                          <Option text="EventText.hiddenandclowngerous.laughatyourself" endconversation="true">
-                            <ConversationAction text="EventText.hiddenandclowngerous.clowngrateful" endconversation="true"/>    
-                            <ReputationAction targettype="Faction" identifier="clowns" increase="3" />
-                          </Option >
-                        </ConversationAction>
-                      </Option >
-                    </ConversationAction>
-                  </Option >
-                  <!-- path of the pranks -->
-                  <Option text="EventText.hiddenandclowngerous.seennoclown" >
-                    <ConversationAction text="EventText.hiddenandclowngerous.dontbotherme" endconversation="true"/>
-                    <!-- go back to the clown -->
-                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
-                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
-                      <Option text="EventText.hiddenandclowngerous.nonegociation" >
-                        <ConversationAction text="EventText.hiddenandclowngerous.escapeplan" >
-                          <Option text="EventText.hiddenandclowngerous.whatprank" >
-                            <ConversationAction text="EventText.hiddenandclowngerous.givesgrenade" endconversation="true"/>
-                              <SpawnAction itemidentifier="stungrenade" targetinventory="triggerer_player" targettag="prankgrenade" />
-                              <WaitAction time="2" />
-                              <TagAction criteria="itemidentifier:suppliescabinet" tag="prankcabinet" submarinetype="outpost" />
-                              <HighlightAction targettag="prankcabinet" state="true" />
-                              <label name="waitforprank" />
-                              <CheckItemAction targettag="prankcabinet" itemtags="prankgrenade" >
-                                <Success>
-                                  <HighlightAction targettag="prankcabinet" state="false" />
-                                  <NPCFollowAction npctag="headofsecurity" targettag="prankgrenade" follow="true" />
-                                  <StatusEffectAction targettag="prankgrenade">
-                                    <StatusEffect duration="30" noninteractable="true" checkconditionalalways="true" setvalue="true" >
-                                      <Conditional condition="gt 0" />
-                                      <Sound file="Content/Items/Misc/AccordionLoop.ogg" range="1000" volume="2" frequencymultiplier="1.5" loop="true"/>
-                                      <ParticleEmitter particle="shockwavesmall" particlespersecond="5" scalemin="1" scalemax="2" />
-                                    </StatusEffect>
-                                  </StatusEffectAction>
-                                  <TriggerAction target1tag="headofsecurity" target2tag="prankgrenade" radius="250" />
-                                  <ConversationAction text="EventText.hiddenandclowngerous.honkit" targettag="triggerer_player" endconversation="true" dialogtype="Small"/>
-                                  <WaitForItemUsedAction itemtag="bikehorn" targetitemcomponent="RangedWeapon" />
-                                  <StatusEffectAction targettag="prankgrenade">
-                                    <StatusEffect delay="1">
-                                      <Use />
-                                      <Remove />
-                                    </StatusEffect>
-                                  </StatusEffectAction>
-                                  <ReputationAction targettype="Faction" identifier="huskcult" increase="-5" />
-                                  <TagAction criteria="itemtag:navterminal" tag="navterminal" submarinetype="player" />
-                                  <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan" teamid="Team1"/>
-                                  <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
-                                  <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
-                                  <NPCFollowAction npctag="clownfiltrator" targettag="navterminal" follow="true" />
-                                  <ConversationAction text="EventText.hiddenandclowngerous.pathoftrickster" >
-                                    <Option text="EventText.hiddenandclowngerous.clowncanjoin" endconversation="true">
-                                      <NPCChangeTeamAction npctag="clownfiltrator" teamid="Team1" addtocrew="false" />
-                                      <ReputationAction targettype="Faction" identifier="clowns" increase="10" />
-                                      <!-- end -->
-                                    </Option>
-                                  </ConversationAction>
-                                </Success>
-                                <Failure>
-                                  <Waitaction time="2" />
-                                  <Goto name="waitforprank" />
-                                </Failure>
-                              </CheckItemAction>
-                          </Option >
-                        </ConversationAction>
-                      </Option >
-                    </ConversationAction>
-                  </Option >
-                  <!-- sell out the clown -->
-                  <Option text="EventText.hiddenandclowngerous.snitchonclown" >
-                    <ConversationAction text="EventText.hiddenandclowngerous.luretheclown" endconversation="true"/>
-                    <!-- go back to the clown -->
-                    <TriggerAction target1tag="clowntrashcan" target2tag="playernegociator" waitforinteraction="true"/>
-                    <ConversationAction text="EventText.hiddenandclowngerous.didtheylikejoke">
-                      <Option text="EventText.hiddenandclowngerous.lietoclown" >
-                        <ConversationAction text="EventText.hiddenandclowngerous.clownleavestrash" endconversation="true"/>
-                      </Option >
-                    </ConversationAction>
-                    <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="clownfiltrator" targettag="clownfiltrator" SpawnPointTag="clowntrashcan"/>
-                    <SpawnAction itemidentifier="bananapeel" SpawnPointTag="clowntrashcan" Amount="3" ignorebyai="true" offset="150" />
-                    <Label name="waitforhandcuffedclown" />
-                    <CombatAction combatmode="arrest" npctag="headofsecurity" enemytag="clownfiltrator" isinstigator="false" guardreaction="arrest" witnessreaction="none" />
-                    <WaitAction time="2" />
-                    <CombatAction combatmode="retreat" npctag="clownfiltrator" enemytag="headofsecurity" isinstigator="true" guardreaction="arrest" witnessreaction="none" />
-                    <CheckItemAction targettag="clownfiltrator" itemidentifiers="handcuffs" requireequipped="true" >
-                      <Success>
-                        <ConversationAction text="EventText.hiddenandclowngerous.clownarrested" targettag="triggerer_player" eventsprite="infiltration2" endconversation="true"/>
-                        <ReputationAction targettype="Faction" identifier="clowns" increase="-5" />
-                        <ReputationAction targettype="Faction" identifier="huskcult" increase="10" />
-                        <MoneyAction amount="500" />
-                      </Success>
-                      <Failure>
-                        <Waitaction time="2" />
-                        <Goto name="waitforhandcuffedclown" />
-                      </Failure>
-                    </CheckItemAction>
-                  </Option >
-                </ConversationAction>
-              </Option >
-            </ConversationAction>
-          </Option >
-        </ConversationAction>        
-        <Label name="end" />
-      </ScriptedEvent>
+      </OnRoundEndAction>
+    </ScriptedEvent>
 
-
-      <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="20" requiredDestinationTypes="huskchurch">
-        <CheckDataAction identifier="capturelivecrawlernorepeat" condition="eq 0" >
-          <Failure>
-            <!-- does not spawn the event if already done -->
-          </Failure>
-          <Success>          
-            <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="huskcultist" targettag="cultist" spawnlocation="Outpost" />
-            <ConversationAction text="EventText.missionevent_capturelivecrawler.periloustask" speakertag="cultist" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
-              <Option text="EventText.missionevent_capturelivecrawler.whattask">
-                <!-- "please continue" -->
-                <ConversationAction text="EventText.missionevent_capturelivecrawler.experiments" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" >
-                  <Option text="EventText.missionevent_capturelivecrawler.incidents">
-                    <ConversationAction text="EventText.missionevent_capturelivecrawler.missionbrief" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
-                      <Option text="EventText.missionevent_capturelivecrawler.Iwilldoit" >
-                        <MissionAction missionidentifier="capturelivecrawler" />                        
-                        <ConversationAction text="EventText.missionevent_capturelivecrawler.takethis" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" />
-                        <SpawnAction itemidentifier="chloralhydrate" amount="8" targettag="sedative" targetinventory="triggerer_player" />
-                      </Option>
-                      <Option text="EventText.missionevent_capturelivecrawler.Noway" endconversation="true">   
-                        <ReputationAction targettype="Faction" identifier="huskcult" increase="-2" />
-                        <SetDataAction identifier="capturelivecrawlernorepeat" value="1"/> 
-                      </Option>                    
-                    </ConversationAction> 
-                  </Option>
-                </ConversationAction>
-              </Option>
-            </ConversationAction>
-          </Success>
-        </CheckDataAction>
-      </ScriptedEvent>
-
-
-      <ScriptedEvent identifier="silencewitnessevent">
-        <TagAction criteria="player" tag="player" />
-        <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
-        <TagAction criteria="humanprefabtag:securitynpc" tag="arrestplayer" ChoosePercentage="1" chooserandom="true" />
-        <TagAction criteria="humanprefabidentifier:prisonerbanditfake" tag="potentialprisoner" SubmarineType="Outpost" />
-        <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="potentialprisoner" SubmarineType="Outpost" />
-        <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="snitch" SubmarineType="Outpost" />
-        <AfflictionAction affliction="nastyscar" strength="1" targettag="snitch" />
-        <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget2="spotter_player" disableiftargetincapacitated="false" radius="200" waitforinteraction="false"  />
-        <ConversationAction text="EventText.silencewitnessevent.whichone" targettag="spotter_player" dialogtype="Small" eventsprite="group" endconversation="true" />
-        <Label name="pickaprisoner" />
-        <ClearTagAction tag="chosen_prisoner" />
-        <ClearTagAction tag="speaker_player" />
-        <WaitAction time="1" />
-        <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
-        <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" >
-          <Option text="EventText.silencewitnessevent.regards">
-            <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
-              <Success>
-                <ConversationAction text="EventText.silencewitnessevent.righttarget" targettag="speaker_player" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
-                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
-                <StatusEffectAction targettag="alarmbutton">
-                  <StatusEffect State="true" target="This" />
-                </StatusEffectAction>
-                <WaitAction time="2" />
-                <CombatAction combatmode="Offensive" npctag="snitch" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
-                <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
-              </Success>
-              <Failure>
-                <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" endconversation="true" />
-                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
-                <StatusEffectAction targettag="alarmbutton">
-                  <StatusEffect State="true" target="This" />
-                </StatusEffectAction>
-                <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
-              </Failure>
-            </CheckConditionalAction>
-          </Option>
-          <Option text="EventText.silencewitnessevent.nevermind">
-            <SkillCheckAction requiredskill="weapons" requiredlevel="60" targettag="speaker_player">
-              <Success>
-                <ConversationAction text="EventText.silencewitnessevent.whatever" targettag="speaker_player" dialogtype="small" />
-                <Goto name="pickaprisoner" />
-              </Success>
-              <Failure>
-                <!-- failed check, prisoners try to escape -->
-                <ConversationAction text="EventText.silencewitnessevent.outtahere" targettag="speaker_player" dialogtype="small" eventsprite="mediator" />
-                <AfflictionAction affliction="slow" strength="60" targettag="potentialprisoner" />
-                <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="true"/>
-                <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
-                <StatusEffectAction targettag="alarmbutton">
-                  <StatusEffect State="true" target="This" />
-                </StatusEffectAction>
-                <TagAction criteria="eventtag:speaker_player" tag="potentialprisoner" />
-                <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="potentialprisoner" isinstigator="false" witnessreaction="retreat" />
-                <CombatAction combatmode="Arrest" npctag="arrestplayer" enemytag="speaker_player" isinstigator="false" witnessreaction="retreat" />
-                <WaitAction time="10" />
-                <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="false"/>
-              </Failure>
-            </SkillCheckAction>
-          </Option>
-        </ConversationAction>
-      </ScriptedEvent>
+    <ScriptedEvent identifier="silencewitnessevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+      <TagAction criteria="humanprefabtag:securitynpc" tag="arrestplayer" ChoosePercentage="1" chooserandom="true" />
+      <TagAction criteria="humanprefabidentifier:prisonerbanditfake" tag="potentialprisoner" SubmarineType="Outpost" />
+      <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="potentialprisoner" SubmarineType="Outpost" />
+      <TagAction criteria="humanprefabidentifier:prisonerbanditsnitch" tag="snitch" SubmarineType="Outpost" />
+      <AfflictionAction affliction="nastyscar" strength="1" targettag="snitch" />
+      <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget2="spotter_player" disableiftargetincapacitated="false" radius="200" waitforinteraction="false"  />
+      <ConversationAction text="EventText.silencewitnessevent.whichone" targettag="spotter_player" dialogtype="Small" eventsprite="group" endconversation="true" />
+      <Label name="pickaprisoner" />
+      <ClearTagAction tag="chosen_prisoner" />
+      <ClearTagAction tag="speaker_player" />
+      <WaitAction time="1" />
+      <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
+      <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" >
+        <Option text="EventText.silencewitnessevent.regards">
+          <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
+            <Success>
+              <ConversationAction text="EventText.silencewitnessevent.righttarget" targettag="speaker_player" dialogtype="Small" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+              <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+              <StatusEffectAction targettag="alarmbutton">
+                <StatusEffect State="true" target="This" />
+              </StatusEffectAction>
+              <WaitAction time="2" />
+              <CombatAction combatmode="Offensive" npctag="snitch" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+            </Success>
+            <Failure>
+              <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" endconversation="true" />
+              <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+              <StatusEffectAction targettag="alarmbutton">
+                <StatusEffect State="true" target="This" />
+              </StatusEffectAction>
+              <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
+            </Failure>
+          </CheckConditionalAction>
+        </Option>
+        <Option text="EventText.silencewitnessevent.nevermind">
+          <SkillCheckAction requiredskill="weapons" requiredlevel="60" targettag="speaker_player">
+            <Success>
+              <ConversationAction text="EventText.silencewitnessevent.whatever" targettag="speaker_player" dialogtype="small" />
+              <Goto name="pickaprisoner" />
+            </Success>
+            <Failure>
+              <!-- failed check, prisoners try to escape -->
+              <ConversationAction text="EventText.silencewitnessevent.outtahere" targettag="speaker_player" dialogtype="small" eventsprite="mediator" />
+              <AfflictionAction affliction="slow" strength="60" targettag="potentialprisoner" />
+              <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="true"/>
+              <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
+              <StatusEffectAction targettag="alarmbutton">
+                <StatusEffect State="true" target="This" />
+              </StatusEffectAction>
+              <TagAction criteria="eventtag:speaker_player" tag="potentialprisoner" />
+              <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="potentialprisoner" isinstigator="false" witnessreaction="retreat" />
+              <CombatAction combatmode="Arrest" npctag="arrestplayer" enemytag="speaker_player" isinstigator="false" witnessreaction="retreat" />
+              <WaitAction time="10" />
+              <NPCFollowAction npctag="potentialprisoner" targettag="airlock" follow="false"/>
+            </Failure>
+          </SkillCheckAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
 
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />

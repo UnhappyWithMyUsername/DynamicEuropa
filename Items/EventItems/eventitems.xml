@@ -1189,6 +1189,20 @@
     </Repairable>
   </Item>  
   
+
+  <Item name="" identifier="husksamplevial" hideinmenus="true" category="Medical" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="mediccrate" Tags="smallitem,missionitem" description="" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="medcab" secondary="medcontainer"/>
+    <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="419,268,16,46" depth="0.6" origin="0.5,0.5" />
+    <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />
+    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+      <!-- 1% condition because otherwise the item is "broken" and can't be swung-->
+      <StatusEffect type="OnSpawn" target="this" condition="1" setvalue="true" />
+      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="34" AllowWhenBroken="true" disabledeltatime="true" >
+        <Conditional speciesname="husk_chimera"/>
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>
   
   <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
   <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
