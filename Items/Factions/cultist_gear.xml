@@ -89,8 +89,9 @@
       <sprite name="Cultist Right Lower Arm" texture="Content/Items/Jobgear/Cultist/cultist2.png" limb="RightArm" hidelimb="true" inherittexturescale="true" inheritorigin="true" inheritsourcerect="true" >      
         <LightComponent range="10.0" lightcolor="30,180,80,255" powerconsumption="10" IsOn="true" pulseamount="0.5" pulsefrequency="0.5" allowingameediting="false"> 
           <LightTexture texture="Content/Lights/light_fluorescent_L2.png" origin="0.65,0.2" size="1.0,0.5" />
-          <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" Interval="0.1" IsOn="true" setvalue="true">
+          <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" Interval="0.1" IsOn="true" setvalue="true" comparison="And">
             <RequiredItem items="antibiotics" type="Contained" />
+            <Conditional husktransformimmunity="lt 100" />
           </StatusEffect>
         </LightComponent>
       </sprite>
@@ -109,7 +110,6 @@
         <Affliction identifier="disguisedashusk" amount="1.0" />
       </StatusEffect>
       <StatusEffect target="Character" type="OnWearing" HideFace="true" setvalue="true"/>
-      <!-- only heals if husk infection is at 75% (when the husk appendage spawns) -->
       <StatusEffect target="Character,Contained" type="OnWearing" condition="-0.1" >
         <Conditional huskinfection="gt 75" />
         <RequiredItem items="antibiotics" type="Contained" />
@@ -117,7 +117,6 @@
         <ReduceAffliction type="bleeding" amount="0.1" />
         <Affliction identifier="husktransformimmunitytemporary" amount="50" />
       </StatusEffect>
-      <!-- can't take ABX out because partials suck -->
       <StatusEffect target="Contained" type="OnContained" noninteractable="true" setvalue="true" >
         <RequiredItem items="antibiotics" type="Contained" />
         <Conditional condition="lt 100" />
