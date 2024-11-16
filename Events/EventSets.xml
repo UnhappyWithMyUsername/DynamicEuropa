@@ -447,7 +447,7 @@
         <ScriptedEvent identifier="checkblockadestate_greatsea_separatists" commonness="100" probability="1.0" faction="separatists" />
       </EventSet>
       
-      <!-- Pirate mission events, scale difficulty? -->
+      <!-- Pirate mission events, only appear in military outposts, scale difficulty? -->
       <EventSet identifier="outpostevent.military.missionevents.europanridge" minleveldifficulty="15" maxleveldifficulty="35" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
         <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
@@ -474,7 +474,8 @@
         <ScriptedEvent identifier="jobboardmilitary" commonness="200" probability="1.0" />
       </EventSet>      
       <EventSet identifier="outpostevent.military.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="military,base,camp" allowatstart="true" chooserandom="true" onceperoutpost="true">
-        <ScriptedEvent identifier="bigbrother" commonness="150" probability="0.5" faction="coalition"/>
+        <ScriptedEvent identifier="bigbrother" commonness="50" probability="0.5" faction="coalition"/>
+        <ScriptedEvent identifier="missionevent_cargodefensebots" commonness="100" probability="0.5" />
       </EventSet>
       
       <!-- Events specific to research outposts -->

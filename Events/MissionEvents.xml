@@ -217,9 +217,19 @@
         </Option> 
       </ConversationAction>
     </ScriptedEvent>
-    
+
+    <!-- Also includes the defective bot variant -->
+    <ScriptedEvent identifier="missionevent_cargodefensebots" commonness="20" requiredDestinationTypes="outpost,settlement,colony,clinic,hospital,study,research,hydroponics,factory,shipyard">
+      <ConversationAction text="Eventtext.missionevent_cargodefensebots" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" >
+        <Option text="EventText.missionevent_cargodefensebots.accept" endconversation="true" >
+          <MissionAction missiontag="cargodefensebots" />
+        </Option>
+        <Option text="EventText.generic.refuse" endconversation="true">
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>  
    
-      <!--MANAGER MISSIONS-->
+      <!--HUSK MANAGER MISSIONS-->
       
       <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
