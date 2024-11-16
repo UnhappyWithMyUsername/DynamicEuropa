@@ -1109,11 +1109,10 @@
   </Item>
   
   
-  <Item name="Inactive Defense Bot" identifier="cargodefensebot" tags="largeitem,mechanical,crate" category="Misc" Scale="0.5" description=""  damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
+  <Item name="Inactive Defense Bot" identifier="cargodefensebot" tags="largeitem,mechanical,crate" category="Misc" Scale="0.5" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,104" origin="0.5,0.5" />
     <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
     <Body width="149" height="104" density="18" />
-    <AiTarget soundrange="50000" sonarlabel="entityname.cargodefensebot" staticsound="true" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="70,45" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
     <!-- This only exists to trigger deterioration... -->
     <Powered powerconsumption="0" currpowerconsumption="0" isactive="true" />
@@ -1132,26 +1131,23 @@
       </StatusEffect>
       <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
+        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="25" ScaleMin="0.1" ScaleMax="0.12" />
         <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
       </StatusEffect>
       <!-- visuals -->
-      <LightComponent lightcolor="150,150,30,150" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
-        <sprite texture="Content/Characters/Defensebot/DefenseBot.png" sourcerect="0,149,28,20" origin="0.5,0.5" size="1,1" alpha="1.0" />
+      <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+        <sprite texture="Content/Characters/Defensebot/DefenseBot.png" sourcerect="64,104,25,8" origin="0.5,1.6" size="1,1" alpha="1.0" />
         <IsActiveConditional conditionpercentage="gt 20"/>
       </LightComponent>
       <!-- alarm -->
-      <StatusEffect type="Always" target="This" comparison="And" >
-        <sound file="Content/Items/AlarmBuzzerLoop.ogg" range="800.0" loop="true" volume="0.5" frequencymultiplier="1.25" />
-        <Conditional condition="lte 20" />
-        <Conditional condition="gt 0" />
-      </StatusEffect>
-      <LightComponent lightcolor="255,30,30,150" castshadows="false" blinkfrequency="2" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
-        <sprite texture="Content/Characters/Defensebot/DefenseBot.png" sourcerect="0,149,28,20" origin="0.5,0.5" size="1,1" alpha="1.0" />
+      <LightComponent lightcolor="255,30,30,220" castshadows="false" blinkfrequency="2" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+        <sprite texture="Content/Characters/Defensebot/DefenseBot.png" sourcerect="64,104,25,8" origin="0.5,1.6" size="1,1" alpha="1.0" />
         <IsActiveConditional conditionpercentage="lte 20"/>
         <IsActiveConditional conditionpercentage="gt 0"/>
+        <sound file="Content/Items/AlarmBuzzerLoop.ogg" range="800.0" type="OnActive" loop="true" volume="0.5" frequencymultiplier="1.25" />
       </LightComponent>
       <StatusEffect type="OnBroken" target="This" >
-        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" particleamount="100" velocitymin="100" velocitymax="1000" scalemin="0.3" scalemax="0.5" />
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" particleamount="100" velocitymin="100" velocitymax="1000" scalemin="0.8" scalemax="1.2" />
         <Explosion range="150" force="10" flash="true" shockwave="true" sparks="true" flames="true" smoke="true" underwaterbubble="true" structuredamage="0" itemdamage="20" decal="explosion" decalsize="0.3">
           <Affliction identifier="explosiondamage" strength="50" />
           <Affliction identifier="stun" strength="0.75" />
@@ -1162,7 +1158,36 @@
         <Remove />
       </StatusEffect>
     </Repairable>
-  </Item>   
+  </Item>
+  
+  <Item name="Inactive Defense Bot" identifier="cargodefensebot_defective" tags="largeitem,mechanical,crate" category="Misc" Scale="0.5" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true" hideinmenus="true" health="50">
+    <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,104" origin="0.5,0.5" />
+    <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
+    <Body width="149" height="104" density="18" />
+    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="70,45" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
+    <!-- This only exists to trigger deterioration... -->
+    <Powered powerconsumption="0" currpowerconsumption="0" isactive="true" />
+    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="100000" mindeteriorationdelay="240" maxdeteriorationdelay="540" mindeteriorationcondition="0" RepairThreshold="0" msg="ItemMsgRepairWrench" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.16" minsize="400,200" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+      <RequiredItem items="wrench" type="equipped" />
+      <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
+        <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
+        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+      </StatusEffect>
+      <!-- visuals -->
+      <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+        <sprite texture="Content/Characters/Defensebot/DefenseBot.png" sourcerect="64,104,25,8" origin="0.5,1.6" size="1,1" alpha="1.0" />
+        <IsActiveConditional conditionpercentage="gt 0"/>
+      </LightComponent>
+      <StatusEffect type="OnBroken" target="This" >
+        <sound File="Content/Characters/Defensebot/DEFENCEBOT_interact3.ogg" State="Unhappy" Range="1000" Volume="1" Tags="" />
+        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="25" ScaleMin="0.1" ScaleMax="0.12" />
+        <SpawnCharacter speciesname="Defensebot_defective" AfflictionOnSpawn="emp" AfflictionStrength="3" team="team2"/>
+        <TriggerEvent identifier="defectivebotteamswap" />
+        <Remove />
+      </StatusEffect>
+    </Repairable>
+  </Item>  
   
   
   <!-- UNUSED, BUGGED. INTERACT DONT WORK -->

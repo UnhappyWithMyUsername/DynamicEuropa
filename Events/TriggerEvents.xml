@@ -14,6 +14,12 @@
         <StatusEffect target="This" condition="0.0" setvalue="true" />
       </StatusEffectAction>
     </ScriptedEvent>
+    
+    <ScriptedEvent identifier="defectivebotteamswap" commonness="0">
+      <TagAction criteria="SpeciesName:Defensebot_defective" tag="defectivebot" /> <!-- Turn hostile -->
+      <NPCChangeTeamAction npctag="defectivebot" teamid="Team2" />
+    </ScriptedEvent>
+    
     <!-- GENERIC EVENTS -->
     <!-- BARTENDER -->
     <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100">
