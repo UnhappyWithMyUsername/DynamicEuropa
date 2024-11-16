@@ -1115,8 +1115,9 @@
     <Body width="149" height="104" density="18" />
     <AiTarget soundrange="50000" sonarlabel="entityname.cargodefensebot" staticsound="true" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="70,45" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
-    <ItemComponent IsActive="true" />
-    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="0.1" mindeteriorationdelay="120" maxdeteriorationdelay="720" mindeteriorationcondition="0" RepairThreshold="90" fixDurationHighSkill="5" fixDurationLowSkill="10" msg="ItemMsgRepairWrench" hudpriority="10">
+    <!-- This only exists to trigger deterioration... -->
+    <Powered powerconsumption="0" currpowerconsumption="0" isactive="true" />
+    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="0.3" mindeteriorationdelay="120" maxdeteriorationdelay="540" mindeteriorationcondition="0" RepairThreshold="90" fixDurationHighSkill="5" fixDurationLowSkill="10" msg="ItemMsgRepairWrench" hudpriority="10">
       <GuiFrame relativesize="0.2,0.16" minsize="400,200" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
       <RequiredSkill identifier="mechanical" level="55" />
       <RequiredItem items="wrench" type="equipped" />
@@ -1129,7 +1130,7 @@
         <Affliction identifier="stun" strength="1" />
         <Affliction identifier="electricshock" strength="35" probability="0.5"/>
       </StatusEffect>
-      <StatusEffect type="InWater" target="This" voltage="1" Condition="-0.5" interval="1" disabledeltatime="true">
+      <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
         <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
       </StatusEffect>
