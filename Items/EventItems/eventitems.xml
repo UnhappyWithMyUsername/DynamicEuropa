@@ -1121,8 +1121,8 @@
       <RequiredSkill identifier="mechanical" level="55" />
       <RequiredItem items="wrench" type="equipped" />
       <ParticleEmitter particle="damagebubbles" particlespersecond="2" scalemin="0.5" scalemax="1.5" anglemax="360" distancemax="20" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
-      <ParticleEmitter particle="DarkSmoke" particlespersecond="8" scalemin="0.5" scalemax="1" anglemax="360" distancemax="100" velocitymin="-50" velocitymax="50" mincondition="0.0" maxcondition="50.0" />
-      <ParticleEmitter particle="heavysmoke" particlespersecond="2" scalemin="0.5" scalemax="1" anglemax="360" distancemax="100" maxcondition="15.0" />
+      <ParticleEmitter particle="DarkSmoke" particlespersecond="8" scalemin="0.5" scalemax="1" anglemax="360" distancemax="20" velocitymin="-50" velocitymax="50" mincondition="0.0" maxcondition="50.0" />
+      <ParticleEmitter particle="heavysmoke" particlespersecond="2" scalemin="0.5" scalemax="1" anglemax="360" distancemax="20" maxcondition="15.0" />
       <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
         <Sound file="Content/Items/MechanicalRepairFail.ogg" frequencymultiplier="1.5" range="1000" />
         <Affliction identifier="lacerations" strength="2" />
@@ -1131,8 +1131,8 @@
       </StatusEffect>
       <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
-        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="25" ScaleMin="0.1" ScaleMax="0.12" />
-        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="15" ScaleMin="0.1" ScaleMax="0.12" />
+        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
       </StatusEffect>
       <!-- visuals -->
       <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
@@ -1172,7 +1172,7 @@
       <RequiredItem items="wrench" type="equipped" />
       <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
-        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="150" anglemax="165" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <ParticleEmitter particle="bubbles" particleamount="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
       </StatusEffect>
       <!-- visuals -->
       <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
@@ -1181,7 +1181,7 @@
       </LightComponent>
       <StatusEffect type="OnBroken" target="This" >
         <sound File="Content/Characters/Defensebot/DEFENCEBOT_interact3.ogg" State="Unhappy" Range="1000" Volume="1" Tags="" />
-        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="25" ScaleMin="0.1" ScaleMax="0.12" />
+        <ParticleEmitter particle="ElectricShock" ParticleAmount="2" DistanceMin="10" DistanceMax="15" ScaleMin="0.1" ScaleMax="0.12" />
         <SpawnCharacter speciesname="Defensebot_defective" AfflictionOnSpawn="emp" AfflictionStrength="3" team="team2"/>
         <TriggerEvent identifier="defectivebotteamswap" />
         <Remove />
