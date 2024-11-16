@@ -1084,21 +1084,6 @@
       <WaitAction time="10" />
       <Goto name="killhostagesloop" /> 
     </ScriptedEvent>
-   
-    <!-- UNUSED, the update should apply statuseffects to characters in pirate missions directly -->
-    <!-- <ScriptedEvent identifier="huskcrewsymbiosis">
-      <TagAction criteria="humanprefabidentifier:huskcultcaptain" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultcaptainlord" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultsecurityrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultsecurityelite" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultengineerrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultengineerveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultmechanicrecruit" tag="huskcrew" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:huskcultmechanicveteran" tag="huskcrew" ContinueIfNoTargetsFound="true" /> 
-      <AfflictionAction affliction="husksymbiosis" strength="100" targettag="huskcrew" />
-    </ScriptedEvent>    -->
-    
-    
     
     <!-- Prototype of an event that spawns enemies outside in lair levels
     TODO - figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
@@ -1464,7 +1449,6 @@
       <Label name="end" />
     </ScriptedEvent>
 
-
     <ScriptedEvent identifier="missionevent_capturelivecrawler" commonness="20" requiredDestinationTypes="huskchurch">
       <CheckDataAction identifier="capturelivecrawlernorepeat" condition="eq 0" >
         <Failure>
@@ -1496,7 +1480,7 @@
       </CheckDataAction>
     </ScriptedEvent>    
 
-    <ScriptedEvent identifier="chimeravialevent" commonness="50">
+    <ScriptedEvent identifier="chimerasamplesmissionevent" commonness="50">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:husksamplevial" tag="vial" />
       <SetDataAction identifier="chimerasamples" operation="set" value="0" />
