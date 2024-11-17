@@ -1078,6 +1078,13 @@
           <Conditional IsDead="false" />
           <Success>
             <SetDataAction identifier="hostagesalive" operation="set" value="1" />
+            <!-- check if bandits are dead if you went the killing route -->
+            <CountTargetsAction targettag="bandit" CompareToTarget="bandit" MinPercentageRelativeToTarget="100">
+              <Conditional IsDead="true" />
+              <Success>
+                <SetDataAction identifier="hostagesituationresolved" operation="set" value="1" />
+              </Success>
+            </CountTargetsAction>
           </Success>
           <Failure>
             <SetDataAction identifier="hostagesalive" operation="set" value="0" />
