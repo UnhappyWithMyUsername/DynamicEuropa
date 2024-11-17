@@ -427,7 +427,6 @@
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="huskcultist" targettag="cultist" spawnlocation="Outpost" />
           <ConversationAction text="EventText.missionevent_capturelivecrawler.periloustask" speakertag="cultist" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
             <Option text="EventText.missionevent_capturelivecrawler.whattask">
-              <!-- "please continue" -->
               <ConversationAction text="EventText.missionevent_capturelivecrawler.experiments" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" >
                 <Option text="EventText.missionevent_capturelivecrawler.incidents">
                   <ConversationAction text="EventText.missionevent_capturelivecrawler.missionbrief" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
@@ -454,17 +453,15 @@
         <Failure>
           <!-- does not spawn the event if already done -->
         </Failure>
-        <Success>          
-          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="huskcultist" targettag="cultist" spawnlocation="Outpost" />
-          <ConversationAction text="EventText.missionevent_chimerasamples.periloustask" speakertag="cultist" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
-            <Option text="EventText.missionevent_chimerasamples.whattask">
-              <!-- "please continue" -->
-              <ConversationAction text="EventText.missionevent_chimerasamples.experiments" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" >
-                <Option text="EventText.missionevent_chimerasamples.incidents">
-                  <ConversationAction text="EventText.missionevent_chimerasamples.missionbrief" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
+        <Success>
+          <ConversationAction text="EventText.missionevent_chimerasamples.request" speakertag="huskresearcher" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
+            <Option text="EventText.missionevent_chimerasamples.whatisit">
+              <ConversationAction text="EventText.missionevent_chimerasamples.newlifeform" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" >
+                <Option text="EventText.missionevent_chimerasamples.interesting">
+                  <Label name="next" />
+                  <ConversationAction text="EventText.missionevent_chimerasamples.givevial" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
                     <Option text="EventText.missionevent_chimerasamples.Iwilldoit" >
-                      <MissionAction missionidentifier="chimerasamples" />                        
-                      <ConversationAction text="EventText.missionevent_chimerasamples.takethis" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" endconversation="true" />
+                      <MissionAction missionidentifier="chimerasamples" />
                       <SpawnAction itemidentifier="husksamplevial" amount="1" targettag="vial" targetinventory="triggerer_player" />
                     </Option>
                     <Option text="EventText.missionevent_chimerasamples.Noway" endconversation="true">   
@@ -472,6 +469,9 @@
                       <SetDataAction identifier="chimerasamplesnorepeat" value="1"/> 
                     </Option>                    
                   </ConversationAction> 
+                </Option>
+                <Option text="EventText.missionevent_chimerasamples.worse">
+                  <Goto name="next" />
                 </Option>
               </ConversationAction>
             </Option>
