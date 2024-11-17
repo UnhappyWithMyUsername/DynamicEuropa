@@ -448,7 +448,7 @@
       </CheckDataAction>
     </ScriptedEvent>    
 
-    <ScriptedEvent identifier="missionevent_chimerasamples" commonness="20" requiredDestinationTypes="huskchurch">
+    <ScriptedEvent identifier="missionevent_chimerasamples" commonness="20" >
       <CheckDataAction identifier="chimerasamplesnorepeat" condition="eq 0" >
         <Failure>
           <!-- does not spawn the event if already done -->
@@ -460,7 +460,7 @@
                 <Option text="EventText.missionevent_chimerasamples.interesting">
                   <Label name="next" />
                   <ConversationAction text="EventText.missionevent_chimerasamples.givevial" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="cultist" >
-                    <Option text="EventText.missionevent_chimerasamples.Iwilldoit" >
+                    <Option text="EventText.missionevent_chimerasamples.Iwilldoit" endconversation="true" >
                       <MissionAction missionidentifier="chimerasamples" />
                       <SpawnAction itemidentifier="husksamplevial" amount="1" targettag="vial" targetinventory="triggerer_player" />
                     </Option>
