@@ -1541,9 +1541,13 @@
           <TagAction criteria="player" tag="player" />
           <TagAction criteria="hullname:commandroom" tag="blockadehull" submarinetype="Outpost" />
           <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarm" />
+          <!-- spawns security in the blockade room -->
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
           <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="security" spawnlocation="Outpost" spawnpointtag="blockadehull"/>
+          <SpawnAction speciesname="Defensebot_outpost" targettag="security" spawnlocation="Outpost" spawnpointtag="defensebot" requirespawnpointtag="true" teamid="FriendlyNPC" />
+          <SpawnAction speciesname="Defensebot_outpost" targettag="security" spawnlocation="Outpost" spawnpointtag="defensebot" requirespawnpointtag="true" teamid="FriendlyNPC" />
           <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
           <CheckDataAction identifier="blockadeopened" condition="eq 1">
             <Success>
