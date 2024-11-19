@@ -27,6 +27,17 @@
         <WaitAction time="1" />
     </ScriptedEvent> 
   
+    <ScriptedEvent identifier="forcesayTEST"> 
+      <TagAction criteria="player" tag="player" />
+      <Label name="keeptalking" />
+      <StatusEffectAction targettag="player">
+          <StatusEffect target="this">
+            <Forcesay message="eventtext.forcesayTEST.testing" sayinradio="true" />
+          </StatusEffect>
+      </StatusEffectAction>
+      <WaitAction time="1" />
+      <Goto name="keeptalking" />
+    </ScriptedEvent> 
     
     <!-- change the missionidentifier and value to test mission "states" -->
     <ScriptedEvent identifier="missionstateeventTEST">
