@@ -899,15 +899,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_coldcaverns_coalition_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -919,15 +911,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_europanridge_coalition_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -939,15 +923,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_aphoticplateau_coalition_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -959,15 +935,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_greatsea_coalition_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -980,15 +948,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_coldcaverns_separatists_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -1000,15 +960,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_europanridge_separatists_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -1020,15 +972,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_aphoticplateau_separatists_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -1040,15 +984,7 @@
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
       <CheckDataAction identifier="blockade_greatsea_separatists_unlocked" condition="true">
         <Success>
-          <!-- if a blockade of this faction was unlocked for this biome, check if the unlock path event is active on the current blockade to determine if the doors should unlock or not -->
-          <CheckObjectiveAction identifier="eventtext.openblockade.gotolever" type="Added">
-            <Success>
-              <!-- do nothing -->
-            </Success>
-            <Failure>
-              <TriggerEventAction identifier="opendoortoblockade" />
-            </Failure>
-          </CheckObjectiveAction>
+          <TriggerEventAction identifier="opendoortoblockade" />
         </Success>
         <Failure>
           <!-- do nothing -->
@@ -1501,6 +1437,7 @@
       <StatusEffectAction targettag="blockadedoor">
         <StatusEffect target="this" ShouldBeOpen="true" noninteractable="true" setvalue="true" />
       </StatusEffectAction>
+      <SetDataAction identifier="blockadeopened" value="1" />
     </ScriptedEvent>
     
     <!-- simple event that unlocks the path by flicking a lever -->
