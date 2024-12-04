@@ -882,8 +882,8 @@
       <ConversationAction text="EventText.hostagesituation.radiocall" dialogtype="Small" targettag="triggerer_player" eventsprite="radiocall" ContinueAutomatically="true" >
         <Option text="EventText.hostagesituation.negociate">
           <ConversationAction targettag="triggerer_player" text="EventText.hostagesituation.sendnegociator" endeventifinterrupted="True" eventsprite="radiocall" endconversation="true" />
-          <NPCChangeTeamAction npctag="leader" teamtag="FriendlyNPC" />
-          <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" />
+          <NPCChangeTeamAction npctag="leader" teamtag="FriendlyNPC" RemoveFromCrew="true" />
+          <NPCChangeTeamAction npctag="bandit" teamtag="FriendlyNPC" RemoveFromCrew="true" />
         </Option>
         <Option text="EventText.hostagesituation.nonegociate" endconversation="true">
           <Goto name="end" />
@@ -1144,7 +1144,8 @@
       </CountTargetsAction>
     </ScriptedEvent>
 
-    <ScriptedEvent identifier="killhostages"> />
+    <ScriptedEvent identifier="killhostages">
+      <WaitAction time="2" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
       <Label name="killhostagesloop" />
       <ClearTagAction tag="hostage" />
