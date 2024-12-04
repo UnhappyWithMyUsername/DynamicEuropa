@@ -1238,16 +1238,16 @@
       <TagAction criteria="itemtag:electricalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <!-- keep O2 gen running, destroy JBs/Decon/Fabricator, damage O2 generator and reactor, start fires, lock wires, remove extinguishers and repair tools -->
       <StatusEffectAction targettag="breakthis">
-        <StatusEffect target="This" condition="0" setvalue="true" />
+        <StatusEffect target="This" indestructible="false" condition="0" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="damagethis">
-        <StatusEffect target="This" condition="20" setvalue="true" />
+        <StatusEffect target="This" indestructible="false" condition="20" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="repairthis">
-        <StatusEffect target="This" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+        <StatusEffect target="This" indestructible="false" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="outpostoxygenerator">
-        <StatusEffect target="This" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+        <StatusEffect target="This" indestructible="false" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="burnthis">
         <StatusEffect target="This" >
