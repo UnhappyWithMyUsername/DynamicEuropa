@@ -906,6 +906,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <ScriptedEvent identifier="checkblockadestate_europanridge_coalition" commonness="100">
       <WaitAction time="8" />
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
@@ -918,6 +919,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <ScriptedEvent identifier="checkblockadestate_aphoticplateau_coalition" commonness="100">
       <WaitAction time="8" />
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
@@ -930,6 +932,7 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
     <ScriptedEvent identifier="checkblockadestate_greatsea_coalition" commonness="100">
       <WaitAction time="8" />
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
@@ -942,6 +945,9 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+    
+    
+    
     
     <ScriptedEvent identifier="checkblockadestate_coldcaverns_separatists" commonness="100">
       <WaitAction time="8" />
@@ -1037,6 +1043,11 @@
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_coldcaverns_coalition_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcaverns.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1079,12 +1090,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridge" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="40" faction="coalition" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_europanridge_coalition_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
           <ConversationAction text="EventText.unlockpatheuropanridge.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1127,12 +1144,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateau" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="50" faction="coalition" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_aphoticplateau_coalition_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateau.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1175,12 +1198,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatsea" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipcoalitionreputation" unlockpathreputation="75" faction="coalition" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_greatsea_coalition_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 75">
         <Success>
           <ConversationAction text="EventText.unlockpathgreatsea.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
@@ -1223,12 +1252,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_coldcaverns_separatists_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 30">
         <Success>
           <ConversationAction text="EventText.unlockpathcoldcavernsseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1271,12 +1306,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_europanridge_separatists_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 40">
         <Success>
           <ConversationAction text="eventtext.unlockpatheuropanridgeseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1319,12 +1360,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_aphoticplateau_separatists_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 50">
         <Success>
           <ConversationAction text="EventText.unlockpathaphoticplateauseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular"/>
@@ -1367,12 +1414,18 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
+      <CheckDataAction identifier="blockade_greatsea_separatists_unlocked" condition="true">
+        <Success>
+          <Goto name="skip" />
+        </Success>
+      </CheckDataAction>
       <CheckReputationAction targettype="Location" condition="gte 75">
         <Success>
           <ConversationAction text="eventtext.unlockpathgreatseaseparatists.c1" speakertag="unlockpathnpc" dialogtype="Regular" eventsprite="captain"/>
@@ -1415,6 +1468,7 @@
           </ConversationAction>
         </Failure>
       </CheckReputationAction>
+      <Label name="skip" />
     </ScriptedEvent>    
     
     <!-- opens the door leading to blockade lever, triggered by events above -->
