@@ -112,6 +112,16 @@
       <MissionAction missionidentifier="industrialincident" locationtype="factory,shipyard" />
     </ScriptedEvent>    
     
+    <ScriptedEvent identifier="pinkindustrialsTEST" commonness="50">
+      <TagAction criteria="itemtag:junctionbox" tag="pinkthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
+      <TagAction criteria="itemtag:fabricator" tag="pinkthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:deconstructor" tag="pinkthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemtag:reactor" tag="pinkthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <StatusEffectAction targettag="pinkthis">
+        <StatusEffect target="This" spritecolor="255,0,255,255" setvalue="true" />
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
     <ScriptedEvent identifier="missionevent_hostagesituationTEST" requiredDestinationTypes="settlement,colony,research,hospital,hydroponics,factory,shipyard">
       <MissionAction missionidentifier="hostagesituation" locationtype="settlement,colony,research,hospital,hydroponics,factory,shipyard" requiredfaction="Coalition" minlocationdistance="1"/>
     </ScriptedEvent>
