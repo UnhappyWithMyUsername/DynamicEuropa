@@ -1638,7 +1638,36 @@
     <LocationType from="AnyOutpost" to="AnyOutpost" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
   </SalvageMission>
-
+  
+  <SalvageMission
+    identifier="retrievehammerheadmucus"
+    name="missionname.retrievehammerheadmucus"
+    description="missiondescription.retrievehammerheadmucus"
+    successmessage="missionsuccess.retrievehammerheadmucus"
+    failuremessage="missionfailure.retrievehammerheadmucus"
+    tags="salvage,salvageartifact"
+    type="Salvage"
+    difficulty="2"
+    commonness="80"
+    reward="2000"
+    requireddeliveryamount="0.01"
+    PartiallyRetrievedMessage="missionmessage.retrievehammerheadmucus.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.retrievehammerheadmucus.allretrieved">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <target
+      spawntype="mainpath"
+      itemidentifier="hammerheadmucus"
+      sonarlabel="missionsonarlabel.retrievehammerheadmucus"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="RetrievedToSub"
+      hidelabelafterretrieved="false"
+      minamount="3" maxamount="4">
+    </target>
+    <LocationType from="AnyOutpost" to="AnyOutpost" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
+  </SalvageMission>
+  
   <MonsterMission
     identifier="salvagekillmoloch"
     textidentifier="salvagekillmoloch"
