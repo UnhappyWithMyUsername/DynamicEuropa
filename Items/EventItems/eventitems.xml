@@ -1261,6 +1261,36 @@
     </Controller>
   </Item>
 
+  <Item name="" identifier="DEmissionegg" tags="missionegg,hammerhead,hammerheadegg" description="Spawn fishes for missions, to name" scale="0.5" category="Electrical" spritecolor="255,255,150,255" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="20" >
+    <sprite texture="Content/Map/MapAtlas.png" sourcerect="784,526,100,100" depth="0.800" premultiplyalpha="false" origin="0.5,0.5" />
+    <Body radius="50" density="12" />
+    <Holdable slots="RightHand+LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+    <EntitySpawnerComponent ItemIdentifier="" SpeciesName="Hammerheadspawn_hatched" OnlySpawnWhenCrewInRange="False" CrewAreaShape="Circle" CrewAreaBounds="500,500" CrewAreaRadius="500" CrewAreaOffset="0,0" SpawnAreaShape="Rectangle" SpawnAreaBounds="200,200" SpawnAreaRadius="100" SpawnAreaOffset="0,80" SpawnTimerRange="1,1" SpawnAmountRange="10,12" MaximumAmount="10" PreloadCharacter="False" />  
+    <ItemComponent IsActive="true">
+      <!-- <StatusEffect type="Always" target="This" sightrange="500" soundrange="1000" setvalue="true" oneshot="true" /> -->
+      <StatusEffect type="Always" target="This" Scale="0.05" >
+        <Conditional Scale="lt 0.45" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" Scale="-0.1" duration="2" interval="2">
+        <Conditional Scale="gte 0.55" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="1" distancemin="25" distancemax="100" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="gib" particleamount="10" scalemin="0.25" scalemax="1" distancemin="25" distancemax="50" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <ParticleEmitter particle="organeruption" particleamount="50" scalemin="1" scalemax="2" velocitymin="100" velocitymax="500" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="2" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="gib" particleamount="10" scalemin="0.5" scalemax="2" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="bloodsplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1"/>
+        <ParticleEmitter particle="whitegoosplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1"/>
+        <Sound file="Content/Map/Thalamus/Sounds/CARRIER_organs2.ogg" range="1000" volume="1" />
+        <Remove/>
+      </StatusEffect>
+    </ItemComponent>
+    <aitarget sightrange="2000" soundrange="2000" static="true" />
+  </Item>
+
 
     <!-- UNUSED. For sabotaging deconstructors -->
 <!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
