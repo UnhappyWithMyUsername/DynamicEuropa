@@ -1,4 +1,4 @@
-﻿<Charactervariant ShowHealthBar="false" inherit="Hammerheadspawn" SpeciesName="Hammerheadspawn_hatched" speciestranslationoverride="Hammerheadspawn" DisplayName="" Group="hammerhead" >
+﻿<Charactervariant ShowHealthBar="false" inherit="Hammerheadspawn" SpeciesName="Hammerheadspawn_hatched" speciestranslationoverride="Hammerheadspawn" DisplayName="" Group="hammerhead" noise="35" >
   <ai combatstrength="10" sight="1" hearing="1" aggressionhurt="100" aggressiongreed="50" fleehealththreshold="0" attackwhenprovoked="False" avoidgunfire="False" aggressiveboarding="True">
     <target Tag="hammerheadmucus" State="Protect" Priority="100" ReactDistance="1000" offset="0,100" />
     <target tag="decoy" state="Attack" priority="200" ignoreifnotinsamesub="True" />
@@ -11,8 +11,10 @@
     <target tag="human" state="Attack" priority="50" reactdistance="500" />
     <target tag="weaker" state="Attack" priority="50" />
     <target tag="crawler" state="Avoid" priority="50" />
-    <target tag="room" state="Attack" priority="1"/>
-    <target tag="sonar" state="Attack" priority="1" />
+    <target tag="room" state="Observe" priority="0"/>
+    <target tag="sonar" state="Observe" priority="0" />
     <SwarmBehavior mindistfromclosest="25" maxdistfromcenter="250" cohesion="1" />
-  </ai>
+  </ai> 
+  <ragdoll scalemultiplier="1.5"/>
+  <attack damagemultiplier="1.5" rangemultiplier="1.5" />
   </Charactervariant>

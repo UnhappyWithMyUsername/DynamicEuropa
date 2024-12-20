@@ -1261,13 +1261,16 @@
     </Controller>
   </Item>
 
-  <Item name="" identifier="hammerheadmucus" tags="hammerhead,hammerheadmucus" description="Spawn fishes for missions, to name" scale="0.5" category="Electrical" spritecolor="255,255,150,255" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="20" >
-    <sprite texture="Content/Map/MapAtlas.png" sourcerect="784,526,100,100" depth="0.800" premultiplyalpha="false" origin="0.5,0.5" />
-    <Body radius="50" density="12" />
+  <Item name="" identifier="hammerheadmucus" tags="hammerhead,hammerheadmucus" description="Spawn fishes for missions, to name" scale="0.5" category="Electrical" spritecolor="255,255,150,255" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="20" sonarsize="10">
+    <Sprite texture="Content/Items/Containers/containers2.png" depth="0.54" sourcerect="0,29,147,56" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.54" sourcerect="190,101,258,128" origin="0.5,0.8" rotation="180" offset="0,-5" scale="0.55">
+      <IsActiveConditional hastag="neq pickedup" />
+    </DecorativeSprite>
+    <Body radius="50" density="13" />
     <Holdable slots="RightHand+LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
     <EntitySpawnerComponent ItemIdentifier="" SpeciesName="Hammerheadspawn_hatched" OnlySpawnWhenCrewInRange="False" CrewAreaShape="Circle" CrewAreaBounds="0,0" CrewAreaRadius="0" CrewAreaOffset="0,0" SpawnAreaShape="circle" SpawnAreaBounds="0,0" SpawnAreaRadius="100" SpawnAreaOffset="0,80" SpawnTimerRange="1,1" SpawnAmountRange="10,12" MaximumAmount="10" MaximumAmountrangepadding="0" PreloadCharacter="False" />  
     <ItemComponent IsActive="true">
-      <!-- <StatusEffect type="Always" target="This" sightrange="500" soundrange="1000" setvalue="true" oneshot="true" /> -->
+      <StatusEffect type="OnContained" target="This" tags="pickedup" setvalue="true" oneshot="true" />
       <StatusEffect type="Always" target="This" Scale="0.05" >
         <Conditional Scale="lt 0.45" />
       </StatusEffect>
