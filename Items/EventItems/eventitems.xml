@@ -1290,7 +1290,7 @@
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This">
         <ParticleEmitter particle="organeruption" particleamount="25" scalemin="0.2" scalemax="0.35" velocitymin="100" velocitymax="500" anglemin="0" anglemax="360" colormultiplier="150,180,120,255" />
-        <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="2" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="0.5" scalemax="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
         <ParticleEmitter particle="gib" particleamount="10" scalemin="0.5" scalemax="2" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
         <ParticleEmitter particle="bloodsplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1"/>
         <ParticleEmitter particle="whitegoosplash" particleamount="5" velocitymin="0" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" colormultiplier="150,180,120,255"/>
@@ -1298,6 +1298,9 @@
         <Remove/>
       </StatusEffect>
     </ItemComponent>
+    <LightComponent range="5" lightcolor="190,140,80,140" powerconsumption="0" IsOn="true" castshadows="false" allowingameediting="false" pulsefrequency="1" pulseamount="0.30">
+      <sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" depth="0.025" sourcerect="300,291,98,113" origin="0.5,0.5" alpha="1.0" />
+    </LightComponent>
     <aitarget sightrange="2000" soundrange="2000" static="true" />
     <Deconstruct time="8" chooserandom="true" amount="3" requireddeconstructor="deconstructor">
       <Item identifier="mucusball" />
