@@ -188,6 +188,13 @@
       <MissionAction missionidentifier="retrieveindustrialwaste" />
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="missionevent_retrievehammerheadmucus" commonness="100">
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="mucusguy" spawnlocation="Outpost" />
+      <ConversationAction text="eventtext.missionevent_retrievehammerheadmucus" speakertag="mucusguy" endeventifinterrupted="false" dialogtype="Small" >
+        <Option text="eventtext.missionevent_retrievehammerheadmucus.disgusting" endconversation="true" />
+      </ConversationAction>
+      <MissionAction missionidentifier="retrievehammerheadmucus" />
+    </ScriptedEvent>    
     
     <ScriptedEvent identifier="missionevent_industrialincident" requiredDestinationTypes="factory,shipyard">
       <CheckDataAction identifier="industrialincidentnorepeat" condition="eq 0" >
