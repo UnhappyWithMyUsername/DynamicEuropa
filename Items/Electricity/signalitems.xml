@@ -17,59 +17,94 @@
 
 
   <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="largeitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
-    <PreferredContainer primary="engcab" spawnprobability="0.00" />
-    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
-    <Deconstruct time="10">
-      <Item identifier="fpgacircuit" />
-    </Deconstruct>
-    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="1000" fabricationlimitmin="1" fabricationlimitmax="1" />
-    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
-    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
-    <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.799" sourcerect="147,0,102,138" origin="0.5,0.5" offset="8,8" offsetanim="Noise" offsetanimspeed="10.0">
-      <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
-      <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
-      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
-    </DecorativeSprite>
-    <DecorativeSprite name="big speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="6,187,61,63" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-13,17" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.05,0.05">
-      <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
-      <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
-      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
-    </DecorativeSprite>
-    <DecorativeSprite name="small speaker 1" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-30,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
-      <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
-      <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
-      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
-    </DecorativeSprite>
-    <DecorativeSprite name="small speaker 2" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="6,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
-      <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
-      <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
-      <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
-    </DecorativeSprite>
-    <Body width="102" height="138" density="30" />
-    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="0" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" swingamount="0,0" swingspeed="0">
-      <RequiredItem items="wrench" type="Equipped" />
-    </Holdable>
-    <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
-      <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
-        <Use />
-        <Conditional targetcontaineditem="true" condition="gt 0" />
-      </StatusEffect>
-      <StatusEffect type="OnContained" target="This" IsActive="false">
-        <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
-      </StatusEffect>
-    </LightComponent>
-    <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
-      <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
-      <!-- uses a fuckton of different tags for mod compatibility -->
-      <Containable items="sound,music,song,cassette-playernotes" />
-    </ItemContainer>
-    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-    </ConnectionPanel>
-  </Item>
+      <PreferredContainer primary="engcab" spawnprobability="0.00" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+      <Deconstruct time="10">
+        <Item identifier="fpgacircuit" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="1000" fabricationlimitmin="1" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
+      <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.799" sourcerect="147,0,102,138" origin="0.5,0.5" offset="8,8" offsetanim="Noise" offsetanimspeed="10.0">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="big speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="6,187,61,63" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-13,17" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.05,0.05">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 1" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-30,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 2" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="6,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <Body width="102" height="138" density="30" />
+      <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="0" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" swingamount="0,0" swingspeed="0">
+        <RequiredItem items="wrench" type="Equipped" />
+        <!-- Apply "short_range" tag if the item does not yet have a range defining tag set on it to allow music to play instantly without having to select a range first -->
+        <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" oneshot="true" comparison="And">
+          <Conditional HasTag="neq short_range" />
+          <Conditional HasTag="neq long_range" />
+        </StatusEffect>
+      </Holdable>
+      <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+        <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+          <Use />
+          <Conditional targetcontaineditem="true" condition="gt 0" />
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This" IsActive="false">
+          <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
+        </StatusEffect>
+      </LightComponent>
+      <Powered PowerConsumption="0" ManuallySelectedSound="0" />
+      <!-- TODO: See if it becomes possible to change the volume of music on the CD item via a button on the music player by targeting and changing the PowerConsumption value of the CD once BaroDevs fixed StatusEffect being unable to alter component values of other items -->
+      <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+        <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+        <!-- Change music sound range on supported music discs to 140m by applying "long_range" tag to the item on button press -->
+        <Button text="140m Range">
+          <StatusEffect type="OnUse" target="This" tags="long_range" setvalue="true" />
+        </Button>
+        <!-- Change music sound range on supported music discs to 10m by applying "short_range" tag to the item on button press -->
+        <Button text="10m Range">
+          <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" />
+        </Button>
+      </CustomInterface>
+      <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+        <GuiFrame relativesize="0.1,0.15" relativeoffset="0.0,0.1" anchor="BottomCenter" style="ConnectionPanel" />
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press -->
+        <Button text="Next Track">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="1" disabledeltatime="true" />
+        </Button>
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press as long as its value is greater than 0 -->
+        <Button text="Previous Track">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true">
+            <Conditional ManuallySelectedSound="gt 0" />
+          </StatusEffect>
+        </Button>
+        <!-- Reset the "ManuallySelectedSound" value to 0 on button press -->
+        <Button text="Jump To First">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" />
+        </Button>
+      </CustomInterface>
+      <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
+        <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
+        <!-- uses a fuckton of different tags for mod compatibility -->
+        <Containable items="sound,music,song,cassette-playernotes" />
+      </ItemContainer>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+      </ConnectionPanel>
+    </Item>
   
   <Item name="Decorative Speaker" description="Speaker with animation when active" identifier="decospeaker" category="Electrical" Tags="" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" nonplayerteaminteractable="true">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
