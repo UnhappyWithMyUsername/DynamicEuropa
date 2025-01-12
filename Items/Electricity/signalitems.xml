@@ -162,9 +162,7 @@
   <!-- ////////// MUSIC ////////// -->
   <!-- ////////// MUSIC ////////// -->
   <!-- ////////// MUSIC ////////// -->
-
-  <!-- use this as a reference, everything else is variantof -->
-  <Item name="Song: Alien Syndicate (Re_]|M|[_ix)" description="Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod" identifier="music_aliensyndicateremix" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+  <Item name="CD: Pirate Rave" identifier="cd_album_piraterave1" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a variety of tracks often heard when dealing with pirates. \nTrack-List:\n1. Alien Syndicate (Re_]|M|[_ix) by _]|M|[_\n2. Abandon Ship by Simon Chylinski\n3. Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx\n4. The Rebel Path by P.T. Adamczyk\n5. Contra la Luna by P.T. Adamczyk\n6. Cyborg by Full Kontakt">
     <PreferredContainer primary="engcab" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
     <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
@@ -175,195 +173,278 @@
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
     <Body width="65" height="56" density="15" />
     <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
-    <GreaterComponent canbepicked="false" canbeselected="false" allowingameediting="false" timeframe="0" />
-    <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
-      <Button text="140m Range">
-        <StatusEffect type="OnUse" target="This" timeframe="0" setvalue="true" />
-      </Button>
-      <Button text="10m Range">
-        <StatusEffect type="OnUse" target="This" timeframe="1" setvalue="true" />
-      </Button>
-    </CustomInterface>
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+    <Powered IsActive="true" PowerConsumption="0">
+      <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+      <!-- Song 1 - Index 0 - Short Range | Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <ParticleEmitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+      <!-- Song 1 - Index 0 - Long Range | Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <ParticleEmitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-    </ItemComponent>
+
+      <!-- Song 2 - Index 1 - Short Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 2 - Index 1 - Long Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 3 - Index 2 - Short Range | Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 3 - Index 2 - Long Range | Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 4 - Index 3 - Short Range | The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 4 - Index 3 - Long Range | The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+
+      <!-- Song 5 - Index 4 - Short Range | Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 5 - Index 4 - Long Range | Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+
+      <!-- Song 6 - Index 5 - Short Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 6 - Index 5 - Long Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+    </Powered>
+  </Item>
+  
+  <Item name="CD: Subnautica OST" identifier="cd_album_subnautica" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the Subnautica OST. \nTrack-List:\n1. Abandon Ship by Simon Chylinski\n2. Exosuit by Simon Chylinski\n3. Red Alert by Simon Chylinski\n4. Seamoth by Simon Chylinski">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+    <Body width="65" height="56" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <Powered IsActive="true" PowerConsumption="0">
+      <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+      <!-- Song 1 - Index 0 - Short Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 1 - Index 0 - Long Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+
+      <!-- Song 2 - Index 1 - Short Range | Exosuit by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 2 - Index 1 - Long Range | Exosuit by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 3 - Index 2 - Short Range | Red Alert by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 3 - Index 2 - Long Range | Red Alert by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 4 - Index 3 - Short Range | Seamoth by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 4 - Index 3 - Long Range | Seamoth by Simon Chylinski from Subnautica OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+    </Powered>
   </Item>
 
-  <Item name="Song: Exosuit" description="Exosuit by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_exosuit"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Abandon Ship" description="Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_abandonship"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Red Alert" description="Red Alert by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_redalert"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Clock Watch" description="Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_clockwatch"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
+  <Item name="CD: GRIP OST" identifier="cd_album_grip" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the GRIP OST. \nTrack-List:\n1. Clock Watch by Full Kontakt\n2. Cerbera by Imperium\n3. Cyborg by Full Kontakt\n4. Black Out by Full Kontakt">
+    <PreferredContainer primary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+    <Body width="65" height="56" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <Powered IsActive="true" PowerConsumption="0">
+      <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+      <!-- Song 1 - Index 0 - Short Range | Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
+      <!-- Song 1 - Index 0 - Long Range | Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Cerbera" description="Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cerbera"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
+
+      <!-- Song 2 - Index 1 - Short Range | Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
+      <!-- Song 2 - Index 1 - Long Range | Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
-    </ItemComponent>
+      
+      <!-- Song 3 - Index 2 - Short Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 3 - Index 2 - Long Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 4 - Index 3 - Short Range | Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 4 - Index 3 - Long Range | Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+    </Powered>
   </Item>
 
-  <Item name="Song: Seamoth" description="Seamoth by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_seamoth"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" type="OnActive" range="14000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" type="OnActive" range="1000.0" loop="true" volume="1.8" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Cyborg" description="Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cyborg"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="14000" loop="true" volume="3.5" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="1000" loop="true" volume="3.5" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
-  <Item name="Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna"  variantof="music_aliensyndicateremix">
-    <ItemComponent>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="0" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnActive" range="14000.0" loop="true" volume="2.5" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This" >
-        <Conditional timeframe="1" />
-        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
-        <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnActive" range="1000.0" loop="true" volume="2.5" />
-      </StatusEffect>
-    </ItemComponent>
-  </Item>
-  
   <!-- OUTPOST SONGS | Exclusive to outpost music players. Should not be obtainable. -->
   <Item name="Outpost Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
     <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
@@ -412,6 +493,45 @@
       </StatusEffect>
     </ItemComponent>
   </Item>
+  
+  <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+  <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+  <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+  <Item name="Song: Alien Syndicate (Re_]|M|[_ix)" description="Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod" identifier="music_aliensyndicateremix" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+    <Body width="65" height="56" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="Always" target="This" oneshot="true">
+        <Remove />
+        <SpawnItem identifier="cd_album_piraterave1" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+      </StatusEffect>
+    </Holdable>
+  </Item>
 
+  <Item name="Song: Exosuit" description="Exosuit by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_exosuit"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Abandon Ship" description="Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_abandonship"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Red Alert" description="Red Alert by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_redalert"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Clock Watch" description="Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_clockwatch"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Cerbera" description="Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cerbera"  variantof="music_aliensyndicateremix" />
+
+  <Item name="Song: Seamoth" description="Seamoth by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_seamoth"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Cyborg" description="Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cyborg"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout"  variantof="music_aliensyndicateremix" />
+  
+  <Item name="Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna"  variantof="music_aliensyndicateremix" />
+  
 </Items>
 </Override>
