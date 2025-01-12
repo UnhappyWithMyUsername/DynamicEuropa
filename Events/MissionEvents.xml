@@ -532,6 +532,42 @@
       <ConversationAction text="eventtext.piratemissionbroadcast.receive" targettag="listener" waitforinteraction="false" dialogtype="small" />
       <ClearTagAction tag="listener" />
     </ScriptedEvent>
+
+    <!-- Randomize the music of a raving pirate vessel | Only randomizes between the first 4 songs on a CD -->
+    <ScriptedEvent identifier="randomizepiratemusic">
+      <WaitAction time="10" />
+      <TagAction criteria="itemidentifier:raverplayer" tag="targetmusicplayer" submarinetype="Enemy" />
+      <RNGAction chance="0.5">
+        <Success>
+          <RNGAction chance="0.5">
+            <Success>
+              <StatusEffectAction targettag="targetmusicplayer">
+                <StatusEffect target="This" ManuallySelectedSound="0" tags="long_range" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+            </Success>
+            <Failure>
+              <StatusEffectAction targettag="targetmusicplayer">
+                <StatusEffect target="This" ManuallySelectedSound="1" tags="long_range" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+            </Failure>
+          </RNGAction>
+        </Success>
+        <Failure>
+          <RNGAction chance="0.5">
+            <Success>
+              <StatusEffectAction targettag="targetmusicplayer">
+                <StatusEffect target="This" ManuallySelectedSound="2" tags="long_range" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+            </Success>
+            <Failure>
+              <StatusEffectAction targettag="targetmusicplayer">
+                <StatusEffect target="This" ManuallySelectedSound="3" tags="long_range" setvalue="true" disabledeltatime="true" />
+              </StatusEffectAction>
+            </Failure>
+          </RNGAction>
+        </Failure>
+      </RNGAction>
+    </ScriptedEvent>
     
     <!-- Coalition Cargo Vessel -->
     <ScriptedEvent identifier="cocargobroadcast">
