@@ -17,7 +17,7 @@
 
 
   <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="largeitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
-    <PreferredContainer primary="engcab" spawnprobability="0.00" />
+    <PreferredContainer primary="crewcab" secondary="engcab" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
     <Deconstruct time="10">
       <Item identifier="fpgacircuit" />
@@ -84,8 +84,9 @@
       </Button>
       <!-- Increase the "ManuallySelectedSound" value by 1 on button press as long as its value is greater than 0 -->
       <Button text="GUI.button.previoustrack">
-        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true">
-          <Conditional ManuallySelectedSound="gt 0" />
+        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true" />
+        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="25" setvalue="true" disabledeltatime="true">
+          <Conditional ManuallySelectedSound="lt 0" />
         </StatusEffect>
       </Button>
       <!-- Reset the "ManuallySelectedSound" value to 0 on button press -->
@@ -163,7 +164,7 @@
   <!-- ////////// MUSIC ////////// -->
   <!-- ////////// MUSIC ////////// -->
   <Item name="CD: Pirate Rave" identifier="cd_album_piraterave1" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a variety of tracks often heard when dealing with pirates. \nTrack-List:\n1. Alien Syndicate (Re_]|M|[_ix) by _]|M|[_\n2. Abandon Ship by Simon Chylinski\n3. Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx\n4. The Rebel Path by P.T. Adamczyk\n5. Contra la Luna by P.T. Adamczyk\n6. Cyborg by Full Kontakt">
-    <PreferredContainer primary="engcab" />
+    <PreferredContainer primary="crewcab" secondary="engcab" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
     <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
     <Deconstruct time="10">
@@ -276,11 +277,20 @@
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
         <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
+
+      <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="eq 6" />
+      </StatusEffect>
+      <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="5" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="gt 6" />
+      </StatusEffect>
     </Powered>
   </Item>
   
   <Item name="CD: Subnautica OST" identifier="cd_album_subnautica" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the Subnautica OST. \nTrack-List:\n1. Abandon Ship by Simon Chylinski\n2. Exosuit by Simon Chylinski\n3. Red Alert by Simon Chylinski\n4. Seamoth by Simon Chylinski">
-    <PreferredContainer primary="engcab" />
+    <PreferredContainer primary="crewcab" secondary="engcab" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
     <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
     <Deconstruct time="10">
@@ -359,11 +369,20 @@
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
         <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
       </StatusEffect>
+
+      <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="eq 4" />
+      </StatusEffect>
+      <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="3" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="gt 4" />
+      </StatusEffect>
     </Powered>
   </Item>
 
   <Item name="CD: GRIP OST" identifier="cd_album_grip" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the GRIP OST. \nTrack-List:\n1. Clock Watch by Full Kontakt\n2. Cerbera by Imperium\n3. Cyborg by Full Kontakt\n4. Black Out by Full Kontakt">
-    <PreferredContainer primary="engcab" />
+    <PreferredContainer primary="crewcab" secondary="engcab" />
     <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
     <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
     <Deconstruct time="10">
@@ -441,6 +460,15 @@
         <Conditional HasTag="eq long_range" targetcontainer="true" />
         <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
         <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="eq 4" />
+      </StatusEffect>
+      <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="3" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="gt 4" />
       </StatusEffect>
     </Powered>
   </Item>
