@@ -472,6 +472,166 @@
       </StatusEffect>
     </Powered>
   </Item>
+  
+  <Item name="CD: Forgive Me Father OST" identifier="cd_album_forgivemefather" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the Forgive Me Father OST. \nTrack-List:\n1. Forgiveness Is Divine by Tim Fialka\n2. Good Time For You To Get Angry by Tim Fialka\n3. Big Ugly Fish Pt.1 by Tim Fialka\n4. Big Ugly Fish Pt.2 by Tim Fialka\n5. Rain And Pain by Tim Fialka\n6. Sweetie, Get Me Bazooka by Tim Fialka\n7. Welcome To Pestisville by Tim Fialka\n8. A Crow's Breakfast by Tim Fialka">
+    <PreferredContainer primary="crewcab" secondary="engcab" />
+    <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+    <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+    <Deconstruct time="10">
+      <Item identifier="plastic" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+    <Body width="65" height="56" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+    <Powered IsActive="true" PowerConsumption="0">
+      <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+      <!-- Song 1 - Index 0 - Short Range | Forgiveness Is Divine by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ForgivenessIsDivine.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 1 - Index 0 - Long Range | Forgiveness Is Divine by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ForgivenessIsDivine.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+
+      <!-- Song 2 - Index 1 - Short Range | Good Time For You To Get Angry by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_GoodTimeForYouToGetAngry.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 2 - Index 1 - Long Range | Good Time For You To Get Angry by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_GoodTimeForYouToGetAngry.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 3 - Index 2 - Short Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt1.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 3 - Index 2 - Long Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt1.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 4 - Index 3 - Short Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt2.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 4 - Index 3 - Long Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt2.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+
+      <!-- Song 5 - Index 4 - Short Range | Rain And Pain by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_RainAndPain.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 5 - Index 4 - Long Range | Rain And Pain by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_RainAndPain.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 6 - Index 5 - Short Range | Sweetie, Get Me Bazooka by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_SweetieGetMeBazooka.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 6 - Index 5 - Long Range | Sweetie, Get Me Bazooka by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_SweetieGetMeBazooka.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 7 - Index 6 - Short Range | Welcome To Pestisville by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 6" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_WelcomeToPestisville.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 7 - Index 6 - Long Range | Welcome To Pestisville by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 6" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_WelcomeToPestisville.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Song 8 - Index 7 - Short Range | A Crow's Breakfast by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 7" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq short_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ACrowsBreakfast.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      <!-- Song 8 - Index 7 - Long Range | A Crow's Breakfast by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+      <StatusEffect type="OnUse" target="This" comparison="And">
+        <Conditional ManuallySelectedSound="eq 7" targetcontainer="true" />
+        <Conditional IsOn="eq true" targetcontainer="true" />
+        <Conditional HasTag="eq long_range" targetcontainer="true" />
+        <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+        <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ACrowsBreakfast.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+      </StatusEffect>
+      
+      <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="eq 8" />
+      </StatusEffect>
+      <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+      <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="3" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+        <Conditional ManuallySelectedSound="gt 8" />
+      </StatusEffect>
+    </Powered>
+  </Item>
 
   <!-- OUTPOST SONGS | Exclusive to outpost music players. Should not be obtainable. -->
   <Item name="Outpost Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
