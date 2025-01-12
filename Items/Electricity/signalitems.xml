@@ -48,6 +48,11 @@
     <Body width="102" height="138" density="30" />
     <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="0" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" swingamount="0,0" swingspeed="0">
       <RequiredItem items="wrench" type="Equipped" />
+      <!-- Apply "short_range" tag if the item does not yet have a range defining tag set on it to allow music to play instantly without having to select a range first -->
+      <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" oneshot="true" comparison="And">
+        <Conditional HasTag="neq short_range" />
+        <Conditional HasTag="neq long_range" />
+      </StatusEffect>
     </Holdable>
     <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
       <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
@@ -58,6 +63,36 @@
         <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
       </StatusEffect>
     </LightComponent>
+    <Powered PowerConsumption="0" ManuallySelectedSound="0" />
+    <!-- TODO: See if it becomes possible to change the volume of music on the CD item via a button on the music player by targeting and changing the PowerConsumption value of the CD once BaroDevs fixed StatusEffect being unable to alter component values of other items -->
+    <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+      <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+      <!-- Change music sound range on supported music discs to 140m by applying "long_range" tag to the item on button press -->
+      <Button text="GUI.button.140mrange">
+        <StatusEffect type="OnUse" target="This" tags="long_range" setvalue="true" />
+      </Button>
+      <!-- Change music sound range on supported music discs to 10m by applying "short_range" tag to the item on button press -->
+      <Button text="GUI.button.10mrange">
+        <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+      <GuiFrame relativesize="0.1,0.15" relativeoffset="0.0,0.1" anchor="BottomCenter" style="ConnectionPanel" />
+      <!-- Increase the "ManuallySelectedSound" value by 1 on button press -->
+      <Button text="GUI.button.nexttrack">
+        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="1" disabledeltatime="true" />
+      </Button>
+      <!-- Increase the "ManuallySelectedSound" value by 1 on button press as long as its value is greater than 0 -->
+      <Button text="GUI.button.previoustrack">
+        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true">
+          <Conditional ManuallySelectedSound="gt 0" />
+        </StatusEffect>
+      </Button>
+      <!-- Reset the "ManuallySelectedSound" value to 0 on button press -->
+      <Button text="GUI.button.jumptofirst">
+        <StatusEffect type="OnUse" target="This" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" />
+      </Button>
+    </CustomInterface>
     <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
       <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
       <!-- uses a fuckton of different tags for mod compatibility -->
