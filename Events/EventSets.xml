@@ -82,10 +82,7 @@
       <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->
       <!-- DYNAMIC EUROPA - CUSTOM CHARACTER EVENTS -->      
     
-      <EventSet identifier="customcharacterevents" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="true">      
-        <EventSet identifier="outpostevents.dynamiceuropa.kumo" minleveldifficulty="0" maxleveldifficulty="80" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="false">
-          <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
-        </EventSet>        
+      <EventSet identifier="customcharacterevents" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="true">            
         <EventSet identifier="outpostevents.dynamiceuropa.kira" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
           <ScriptedEvent identifier="sadashikira" faction="coalition" commonness="100" probability="1.0" />
         </EventSet>
@@ -99,7 +96,11 @@
             <ScriptedEvent identifier="jokster" commonness="100" probability="0.6" />
           </EventSet>
         </EventSet>
-      </EventSet>      
+      </EventSet> 
+
+      <EventSet identifier="outpostevents.dynamiceuropa.kumo" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,city,base,military,blockade,research,hospital,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
+        <ScriptedEvent identifier="kazuyakumo" commonness="100" probability="1.0" faction="separatists" />
+      </EventSet>     
       
       
 
