@@ -523,7 +523,20 @@
       <!-- Events specific to construction outposts -->
       <EventSet identifier="outpostevent.construction.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="construction" allowatstart="true" exhaustible="false" ignorecooldown="true">
         <ScriptedEvent identifier="Constructionprogress" commonness="200" probability="1" />
-      </EventSet>     
+      </EventSet>
+      <!-- Events specific to upgrading outposts, 1 for each type, always triggers but presence of optional module is random -->
+      <EventSet identifier="outpostevent.upgrade.settlement" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement" allowatstart="true" exhaustible="false" ignorecooldown="true">
+        <ScriptedEvent identifier="ConstructionUpgradeToColony" commonness="200" probability="1" />
+      </EventSet>
+      <EventSet identifier="outpostevent.upgrade.camp" minleveldifficulty="0" maxleveldifficulty="100" locationtype="camp" allowatstart="true" exhaustible="false" ignorecooldown="true">
+        <ScriptedEvent identifier="ConstructionUpgradeToBase" commonness="200" probability="1" />
+      </EventSet>
+      <EventSet identifier="outpostevent.upgrade.clinic" minleveldifficulty="0" maxleveldifficulty="100" locationtype="clinic" allowatstart="true" exhaustible="false" ignorecooldown="true">
+        <ScriptedEvent identifier="ConstructionUpgradeToHospital" commonness="200" probability="1" />
+      </EventSet>
+      <EventSet identifier="outpostevent.upgrade.study" minleveldifficulty="0" maxleveldifficulty="100" locationtype="study" allowatstart="true" exhaustible="false" ignorecooldown="true">
+        <ScriptedEvent identifier="ConstructionUpgradeToResearch" commonness="200" probability="1" />
+      </EventSet>
 
       <!-- Events specific to survey outposts -->
       <EventSet identifier="outpostevent.survey.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="survey" allowatstart="true" chooserandom="true" exhaustible="true">

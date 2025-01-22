@@ -77,6 +77,13 @@
       <NPCOperateItemAction npctag="outpostdoctor" targettag="doctorseat" ItemComponentName="Controller" operate="true" />
     </ScriptedEvent>
     
+    
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    
     <!-- only exists to help players figure out how to make construction crates, triggered by event below -->
     <ScriptedEvent identifier="Constructionrecipe" commonness="100">
       <TagAction criteria="player" tag="player" />
@@ -221,6 +228,186 @@
       <ClearTagAction tag="triggerer_player" />
       <ClearTagAction tag="contruction_manager" />
     </ScriptedEvent>
+    
+    
+    <!-- ////////////////////// -->
+      
+    <!-- Construction UPGRADE events, allow upgrading an outpost, simplified from construction -->
+    <ScriptedEvent identifier="ConstructionUpgradeToColony" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerEventAction identifier="Constructionrecipe" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.ConstructionUpgrade.starterdialogue" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.letmecheck">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.ifyoufindcrates" />
+        </Option>
+        <Option text="eventtext.Constructionprogress.notinterested">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.findmeagain" />
+        </Option>
+      </ConversationAction>
+      <ClearTagAction tag="triggerer_player" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <Label name="waitingforgoods" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="3">
+        <Success>
+          <StatusEffectAction targettag="constructioncargounit">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+            <Option text="eventtext.Constructionprogress.thanks">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
+                <ModifyLocationAction type="Colony" />
+                <GoTo name="reward" />
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <GoTo name="waitingforgoods" />
+        </Failure>
+      </CheckItemAction>      
+      <Label name="reward" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <MoneyAction amount="1000" />
+      <ReputationAction targettype="Location" increase="3" />
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="ConstructionUpgradeToBase" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerEventAction identifier="Constructionrecipe" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.ConstructionUpgrade.starterdialogue" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.letmecheck">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.ifyoufindcrates" />
+        </Option>
+        <Option text="eventtext.Constructionprogress.notinterested">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.findmeagain" />
+        </Option>
+      </ConversationAction>
+      <ClearTagAction tag="triggerer_player" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <Label name="waitingforgoods" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="3">
+        <Success>
+          <StatusEffectAction targettag="constructioncargounit">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+            <Option text="eventtext.Constructionprogress.thanks">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
+                <ModifyLocationAction type="base" />
+                <GoTo name="reward" />
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <GoTo name="waitingforgoods" />
+        </Failure>
+      </CheckItemAction>      
+      <Label name="reward" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <MoneyAction amount="1000" />
+      <ReputationAction targettype="Location" increase="3" />
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="ConstructionUpgradeToHospital" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerEventAction identifier="Constructionrecipe" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.ConstructionUpgrade.starterdialogue" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.letmecheck">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.ifyoufindcrates" />
+        </Option>
+        <Option text="eventtext.Constructionprogress.notinterested">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.findmeagain" />
+        </Option>
+      </ConversationAction>
+      <ClearTagAction tag="triggerer_player" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <Label name="waitingforgoods" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="3">
+        <Success>
+          <StatusEffectAction targettag="constructioncargounit">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+            <Option text="eventtext.Constructionprogress.thanks">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
+                <ModifyLocationAction type="hospital" />
+                <GoTo name="reward" />
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <GoTo name="waitingforgoods" />
+        </Failure>
+      </CheckItemAction>      
+      <Label name="reward" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <MoneyAction amount="1000" />
+      <ReputationAction targettype="Location" increase="3" />
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="ConstructionUpgradeToResearch" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TriggerEventAction identifier="Constructionrecipe" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
+      <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.ConstructionUpgrade.starterdialogue" eventsprite="mines">
+        <Option text="eventtext.Constructionprogress.letmecheck">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.ifyoufindcrates" />
+        </Option>
+        <Option text="eventtext.Constructionprogress.notinterested">
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.findmeagain" />
+        </Option>
+      </ConversationAction>
+      <ClearTagAction tag="triggerer_player" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" />
+      <Label name="waitingforgoods" />
+      <CheckItemAction targettag="constructioncargounit" itemidentifiers="constructionmaterialcrate" amount="3">
+        <Success>
+          <StatusEffectAction targettag="constructioncargounit">
+            <StatusEffect target="this" noninteractable="true" setvalue="true" />
+          </StatusEffectAction>
+          <TriggerAction target1tag="worker1" target2tag="player" applytotarget1="contruction_manager" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.cratesdelivered" eventsprite="mines">
+            <Option text="eventtext.Constructionprogress.thanks">
+              <ConversationAction targettag="triggerer_player" text="eventtext.Constructionprogress.backtowork" />
+                <ModifyLocationAction type="researchoutpost" />
+                <GoTo name="reward" />
+            </Option>
+          </ConversationAction>
+        </Success>
+        <Failure>
+          <GoTo name="waitingforgoods" />
+        </Failure>
+      </CheckItemAction>      
+      <Label name="reward" />
+      <HighlightAction targettag="constructioncargounit" targetcharacter="player" state="false" />
+      <MoneyAction amount="1000" />
+      <ReputationAction targettype="Location" increase="3" />
+    </ScriptedEvent>
+    
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
+    <!-- ////////////////////// -->
 
     <!-- Mine door event -->
     <ScriptedEvent identifier="minedoorevent" commonness="100">
