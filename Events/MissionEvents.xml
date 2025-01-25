@@ -220,7 +220,7 @@
           <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_alcoholcontraband.dontdrink" endeventifinterrupted="false" eventsprite="banditcaptain" endconversation="true"/>
           <MissionAction missionidentifier="alcoholcontraband" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" />
           <SpawnAction itemidentifier="metalcrate" targettag="contrabandcrate" targetinventory="triggerer_player" />
-          <SpawnAction itemidentifier="he-rum" targetinventory="contrabandcrate" amount="10" />              
+          <SpawnAction itemidentifier="contrabandrum" targetinventory="contrabandcrate" amount="10" />
         </Option>
         <Option text="EventText.generic.refuse" endconversation="true" />
       </ConversationAction>
@@ -1683,10 +1683,17 @@
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:bartenderchair" tag="bar" />
       <TagAction criteria="humanprefabidentifier:bartender" tag="bartenderchair" />
-      <TagAction criteria="itemidentifier:he-rum" tag="contrabandrum" submarinetype="Player"/>
+      <TagAction criteria="itemidentifier:contrabandrum" tag="contrabandrum" submarinetype="Player"/>
+      <TagAction criteria="itemtag:crate" tag="targetcrate" submarinetype="Player"/>
       <StatusEffectAction targettag="contrabandrum">
         <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
       </StatusEffectAction>
+      <StatusEffectAction targettag="targetcrate">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true">
+          <RequiredItems identifier="contrabandrum" type="contained" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerEventAction identifier="alcoholcontrabandeventloop" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="contrabandsecurity" spawnlocation="Outpost" />
       <NPCOperateItemAction npctag="bartender" targettag="bar" operate="true" />
       <ClearTagAction tag="triggerer_player" />
@@ -1695,9 +1702,9 @@
       <TriggerAction target1tag="bartender" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true" />
       <ConversationAction text="eventtext.alcoholcontrabandevent.bartender" targettag="triggerer_player" dialogtype="Small" eventsprite="oldman" >
         <Option text="eventtext.alcoholcontrabandevent.delivery" >
-          <CheckItemAction targettag="triggerer_player" itemidentifiers="he-rum" amount="10" recursive="true" >
+          <CheckItemAction targettag="triggerer_player" itemidentifiers="contrabandrum" amount="10" recursive="true" >
             <Success>
-              <RemoveItemAction targettag="triggerer_player" ItemIdentifiers="he-rum" Amount="10" />
+              <RemoveItemAction targettag="triggerer_player" ItemIdentifiers="contrabandrum" Amount="10" />
               <SetDataAction identifier="alcoholdelivered" operation="set" value="1" />
               <MissionStateAction missionidentifier="alcoholcontraband" operation="Set" value="2" />
               <MoneyAction amount="500" />
@@ -1713,6 +1720,22 @@
           <Goto name="waitforinput" />
         </Option>
       </ConversationAction>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="alcoholcontrabandeventloop" commonness="100">
+      <TagAction criteria="itemidentifier:contrabandrum" tag="contrabandrum" submarinetype="Player" />
+      <Label name="recheck" />
+      <WaitAction time="1" />
+      <TagAction criteria="itemtag:crate" tag="targetcontainer" />
+      <TagAction criteria="itemtag:mobilecontainer" tag="targetcontainer" />
+      <StatusEffectAction targettag="contrabandrum">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
+      <StatusEffectAction targettag="targetcontainer">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true">
+          <RequiredItems identifier="contrabandrum" type="contained" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <GoTo name="recheck" />
     </ScriptedEvent>
     
 
