@@ -23,6 +23,12 @@
     <!-- GENERIC EVENTS -->
     <!-- BARTENDER -->
     <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100">
+
+      <CheckMissionAction MissionIdentifier="alcoholcontraband" Type="Current">
+        <Success>
+          <Goto name="end" />
+        </Success>        
+      </CheckMissionAction>
       <SetDataAction identifier="bartender_tipped" value="0" />
       <!--randomize amount of available drinks-->
       <!--Beer - Coalition Premium-->
@@ -858,7 +864,9 @@
           </ConversationAction>
         </Failure>
       </CheckAfflictionAction>
+      <Label name="end" />
     </ScriptedEvent>
+    
     <!-- MONSTER EVENTS -->
     <!-- RANDOM -->
     <ScriptedEvent identifier="de-triggerevents-random">
