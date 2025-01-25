@@ -211,7 +211,20 @@
         </Success> 
       </CheckDataAction>
       <Label name="end" />
-    </ScriptedEvent>    
+    </ScriptedEvent>   
+    
+    <ScriptedEvent identifier="missionevent_alcoholcontraband" >
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction speakertag="outpostmanagerpirate" invokertag="triggerer_player" text="eventtext.missionevent_alcoholcontraband" endeventifinterrupted="false" eventsprite="banditcaptain" >
+        <Option text="eventtext.missionevent_alcoholcontraband.takejob">
+          <ConversationAction targettag="triggerer_player" text="eventtext.missionevent_alcoholcontraband.dontdrink" endeventifinterrupted="false" eventsprite="banditcaptain" endconversation="true"/>
+          <MissionAction missionidentifier="alcoholcontraband" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" />
+          <SpawnAction itemidentifier="metalcrate" targettag="contrabandcrate" targetinventory="triggerer_player" />
+          <SpawnAction itemidentifier="he-rum" targetinventory="contrabandcrate" amount="10" />              
+        </Option>
+        <Option text="EventText.generic.refuse" endconversation="true" />
+      </ConversationAction>
+    </ScriptedEvent>   
     
     <ScriptedEvent identifier="missionevent_escortorangeboys" commonness="20" requiredDestinationTypes="Outpost,Settlement,Colony,City">
       <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
@@ -1159,7 +1172,7 @@
         </Failure>
         <Success>
           <SetDataAction identifier="hostagesituationweaponspotted" value="1" />
-          <ConversationAction targettag="player" text="These guys have a weapon!" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
+          <ConversationAction targettag="player" text="EventText.hostagesituationalarm.gunspotted" dialogtype="small" endeventifinterrupted="True" eventsprite="mediator" ContinueAutomatically="true" endconversation="true" />
           <WaitAction time="2" />
           <NPCChangeTeamAction npctag="bandit" teamtag="Team2" />
           <NPCChangeTeamAction npctag="leader" teamtag="Team2" />
@@ -1663,6 +1676,46 @@
         </Option>
       </ConversationAction>
     </ScriptedEvent>
+    
+    <!-- BARTENDER -->
+    <ScriptedEvent identifier="alcoholcontrabandevent" commonness="100">
+      <SetDataAction identifier="alcoholdelivered" operation="set" value="0" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:bartenderchair" tag="bar" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:he-rum" tag="contrabandrum" submarinetype="Player"/>
+      <StatusEffectAction targettag="contrabandrum">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
+      <SpawnAction npcsetidentifier="DE_outpostnpcs" npcidentifier="bartender" targettag="bartender" requirespawnpointtag="true" spawnpointtag="bar" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="contrabandsecurity" spawnlocation="Outpost" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="contrabandsecurity" spawnlocation="Outpost" />
+      <NPCOperateItemAction npctag="bartender" targettag="bar" operate="true" />
+      <ClearTagAction tag="triggerer_player" />
+      <Label name="waitforinput" />
+      <WaitAction time="1"/>
+      <TriggerAction target1tag="bartender" target2tag="player" applytotarget2="triggerer_player" waitforinteraction="true" />
+      <ConversationAction text="eventtext.alcoholcontrabandevent.bartender" targettag="triggerer_player" dialogtype="Small" eventsprite="oldman" >
+        <Option text="eventtext.alcoholcontrabandevent.delivery" >
+          <CheckItemAction targettag="triggerer_player" itemidentifiers="he-rum" amount="10" recursive="true" >
+            <Success>
+              <RemoveItemAction targettag="triggerer_player" ItemIdentifiers="he-rum" Amount="10" />
+              <SetDataAction identifier="alcoholdelivered" operation="set" value="1" />
+              <MissionStateAction missionidentifier="alcoholcontraband" operation="Set" value="2" />
+              <MoneyAction amount="500" />
+              <ConversationAction text="eventtext.alcoholcontrabandevent.thirsty" targettag="triggerer_player" dialogtype="Small" eventsprite="oldman" endconversation="true" />
+            </Success>
+            <Failure>
+              <ConversationAction text="eventtext.alcoholcontrabandevent.nogoods" targettag="triggerer_player" dialogtype="Small" eventsprite="oldman" endconversation="true" />
+              <GoTo name="waitforinput" />
+            </Failure>
+          </CheckItemAction> 
+        </Option>
+        <Option text="eventtext.generic.ignore" endconversation="true" >
+          <Goto name="waitforinput" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    
 
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
