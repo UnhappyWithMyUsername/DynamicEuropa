@@ -23,12 +23,6 @@
     <!-- GENERIC EVENTS -->
     <!-- BARTENDER -->
     <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100">
-
-      <CheckMissionAction MissionIdentifier="alcoholcontraband" Type="Current">
-        <Success>
-          <Goto name="end" />
-        </Success>        
-      </CheckMissionAction>
       <SetDataAction identifier="bartender_tipped" value="0" />
       <!--randomize amount of available drinks-->
       <!--Beer - Coalition Premium-->
@@ -173,6 +167,11 @@
       <TagAction criteria="itemidentifier:bartenderchair" tag="bar" ContinueIfNoTargetsFound="true" />
       <SpawnAction npcsetidentifier="DE_outpostnpcs" npcidentifier="bartender" targettag="bartender" requirespawnpointtag="true" spawnpointtag="bar" spawnlocation="Outpost" />
       <NPCOperateItemAction npctag="bartender" targettag="bar" operate="true" />
+      <CheckMissionAction MissionIdentifier="alcoholcontraband" Type="Current">
+        <Success>
+          <Goto name="end" />
+        </Success>        
+      </CheckMissionAction>
       <Label name="waitforinput" />
       <TriggerAction target1tag="bartender" target2tag="player" applytotarget2="bt_trig_player" waitforinteraction="true" />
       <!--check if player drank-->

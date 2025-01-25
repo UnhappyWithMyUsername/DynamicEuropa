@@ -1680,8 +1680,9 @@
     <!-- BARTENDER -->
     <ScriptedEvent identifier="alcoholcontrabandevent" commonness="100">
       <SetDataAction identifier="alcoholdelivered" operation="set" value="0" />
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:bartenderchair" tag="bar" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:bartenderchair" tag="bar" />
+      <TagAction criteria="humanprefabidentifier:bartender" tag="bartenderchair" />
       <TagAction criteria="itemidentifier:he-rum" tag="contrabandrum" submarinetype="Player"/>
       <StatusEffectAction targettag="contrabandrum">
         <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
