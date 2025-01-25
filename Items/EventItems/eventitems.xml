@@ -26,21 +26,48 @@
   </Item>
 
   <!-- Contraband Rum -->
-  <Item hideinmenus="true" name="Mariner's Moonshine" identifier="contrabandrum" variantof="he-rum" description="A special brand of rum, made with a concotion of sea mushrooms, psilotoad juices and matured in a rusty bathtub." spritecolor="255,255,180,255">
-    <PreferredContainer secondary="wreckmedcab,abandonedmedcab" amount="0" spawnprobability="0.00" />
-    <PreferredContainer secondary="abandonedcrewcab" minamount="0" maxamount="0" spawnprobability="0.00" />
-    <PreferredContainer secondary="crewcab" amount="0" spawnprobability="0.00" notcampaign="true" />
-    <PreferredContainer primary="liquorcrate" secondary="kitchen" />
-    <Price />
-    <Price />
-    <Price />
-    <Price />
-    <Price />
-    <Fabricate />
-    <Fabricate />
-    <Fabricate />
-    <Fabricate />
-    <Fabricate />
+  <Item hideinmenus="true" name="Mariner's Moonshine" identifier="contrabandrum" category="Medical,Misc" maxstacksize="8" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate"  description="A special brand of rum, made with a concotion of sea mushrooms, psilotoad juices and matured in a rusty bathtub." Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true" spritecolor="255,255,120,255" >
+    <PreferredContainer primary="crate" />
+    <Price baseprice="150" sold="false">
+    </Price>
+    <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="0,0,27,66" depth="0.6" origin="0.5,0.5" />
+    <Body width="27" height="66" density="15" />
+    <Holdable canBeCombined="true" removeOnCombined="false" slots="Any,RightHand,LeftHand" aimpos="32,28" holdpos="30,-15" holdangle="0" aimangle="120" aimable="false" swingwhenaiming="true" swingamount="3,9" swingspeed="0.2" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" Condition="99" setvalue="true">
+        <Conditional Condition="equals 100" />
+        <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/OpenBottle.ogg" loop="false" range="200" volume="5.0" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Condition="-6.0" />
+      <StatusEffect type="OnUse" target="Character">
+        <Affliction identifier="psychosisresistance" amount="8" />
+        <ReduceAffliction identifier="psychosis" amount="2" />
+        <ReduceAffliction identifier="nausea" amount="2" />
+        <ReduceAffliction identifier="hallucinating" amount="2" />
+        <ReduceAffliction identifier="he-halucinova" amount="2" />
+        <Affliction identifier="drunk" amount="5" />
+        <ReduceAffliction type="damage" amount="1.0" />
+        <ReduceAffliction type="burn" amount="1.0" />
+        <Affliction identifier="radiationsickness" amount="0.5" />
+        <Sound file="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Sounds/Items/Drinks/Drinking.ogg" loop="true" range="200" volume="5.0" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="Character">
+        <Conditional huskinfection="lt 90.0" />
+        <ReduceAffliction identifier="huskinfection" amount="4" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This">
+        <Explosion range="0.0" structuredamage="0" itemdamage="0" force="0.0" severlimbsprobability="0.0" decal="fruitsplatter1" decalsize="1.0" />
+        <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1" />
+        <Sound file="Content/Sounds/Damage/GlassImpact1.ogg" selectionmode="Random" range="600" />
+        <Sound file="Content/Sounds/Damage/GlassImpact2.ogg" selectionmode="Random" range="600" />
+        <Sound file="Content/Sounds/Damage/GlassImpact3.ogg" selectionmode="Random" range="600" />
+        <Sound file="Content/Sounds/Damage/GlassImpact4.ogg" selectionmode="Random" range="600" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+        <SpawnItem identifier="he-emptybottlerum" spawnposition="SameInventory" spawnifcantbecontained="true" SpawnIfInventoryFull="true" />
+      </StatusEffect>
+    </Holdable>
   </Item>
 
   <!-- Documents -->
