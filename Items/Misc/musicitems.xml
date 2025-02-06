@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Items>
+    <Item name="Music Player" description="Music Player" identifier="raverplayer" category="Electrical" Tags="largeitem,musicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+      <Deconstruct time="10">
+        <Item identifier="fpgacircuit" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="1000" fabricationlimitmin="1" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
+      <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.799" sourcerect="147,0,102,138" origin="0.5,0.5" offset="8,8" offsetanim="Noise" offsetanimspeed="10.0">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="big speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="6,187,61,63" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-13,17" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.05,0.05">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 1" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-30,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 2" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="6,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+        <IsActiveConditional  targetitemcomponent="Holdable" attached="true" />
+      </DecorativeSprite>
+      <Body width="102" height="138" density="30" />
+      <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="0" msg="ItemMsgDetachWrench" PickingTime="5.0" aimpos="65,-10" attachable="true" swingamount="0,0" swingspeed="0">
+        <RequiredItem items="wrench" type="Equipped" />
+        <!-- Apply "short_range" tag if the item does not yet have a range defining tag set on it to allow music to play instantly without having to select a range first -->
+        <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" oneshot="true" comparison="And">
+          <Conditional HasTag="neq short_range" />
+          <Conditional HasTag="neq long_range" />
+        </StatusEffect>
+      </Holdable>
+      <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+        <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+          <Use />
+          <Conditional targetcontaineditem="true" condition="gt 0" />
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This" IsActive="false">
+          <Conditional targetitemcomponent="Holdable" IsActive="eq false" />
+        </StatusEffect>
+      </LightComponent>
+      <Powered PowerConsumption="0" ManuallySelectedSound="0" />
+      <!-- TODO: See if it becomes possible to change the volume of music on the CD item via a button on the music player by targeting and changing the PowerConsumption value of the CD once BaroDevs fixed StatusEffect being unable to alter component values of other items -->
+      <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+        <GuiFrame relativesize="0.1,0.1" relativeoffset="0.0,0.0" anchor="BottomCenter" style="ConnectionPanel" />
+        <!-- Change music sound range on supported music discs to 140m by applying "long_range" tag to the item on button press -->
+        <Button text="GUI.button.140mrange">
+          <StatusEffect type="OnUse" target="This" tags="long_range" setvalue="true" />
+        </Button>
+        <!-- Change music sound range on supported music discs to 10m by applying "short_range" tag to the item on button press -->
+        <Button text="GUI.button.10mrange">
+          <StatusEffect type="OnUse" target="This" tags="short_range" setvalue="true" />
+        </Button>
+      </CustomInterface>
+      <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="false">
+        <GuiFrame relativesize="0.1,0.15" relativeoffset="0.0,0.1" anchor="BottomCenter" style="ConnectionPanel" />
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press -->
+        <Button text="GUI.button.nexttrack">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="1" disabledeltatime="true" />
+        </Button>
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press as long as its value is greater than 0 -->
+        <Button text="GUI.button.previoustrack">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true" />
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="25" setvalue="true" disabledeltatime="true">
+            <Conditional ManuallySelectedSound="lt 0" />
+          </StatusEffect>
+        </Button>
+        <!-- Reset the "ManuallySelectedSound" value to 0 on button press -->
+        <Button text="GUI.button.jumptofirst">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" />
+        </Button>
+      </CustomInterface>
+      <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
+        <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
+        <!-- uses a fuckton of different tags for mod compatibility -->
+        <Containable items="sound,music,song,cassette-playernotes" />
+      </ItemContainer>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+      </ConnectionPanel>
+    </Item>
+    
+    <Item name="Decorative Speaker" description="Speaker with animation when active" identifier="decospeaker" category="Electrical" Tags="" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" nonplayerteaminteractable="true">
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
+      <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.799" sourcerect="147,0,102,138" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="10.0">
+        <IsActiveConditional targetitemcomponent="LightComponent" IsActive="true" />
+      </DecorativeSprite>
+      <DecorativeSprite name="big speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="6,187,61,63" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-13,17" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.05,0.05">
+        <!-- <AnimationConditional targetcontaineditem="true" condition="gt 0.0" /> -->
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 1" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="-30,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <!-- <AnimationConditional targetcontaineditem="true" condition="gt 0.0" /> -->
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      </DecorativeSprite>
+      <DecorativeSprite name="small speaker 2" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="76,187,30,32" depth="0.798" premultiplyalpha="false" origin="0.5,0.5" offset="6,-39" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.035,0.035">
+        <!-- <AnimationConditional targetcontaineditem="true" condition="gt 0.0" /> -->
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      </DecorativeSprite>
+      <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+        <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+          <particleemitter particle="shockwavesmall" particlespersecond="3" scalemin="0.25" scalemax="0.75" />
+        </StatusEffect>
+      </LightComponent>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+      </ConnectionPanel>
+    </Item>
+
+    <Item name="Outpost Music Player" description="Hidden Music Player for outpost modules" identifier="raverplayeroutpost" category="Electrical" Tags="outpostmusicplayer" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" spritecolor="255,0,0,255" noninteractable="true" hiddeningame="true">
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="147,0,102,138" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="250,0,88,88" origin="0.5,0.5" />
+      <LightComponent allowingameediting="false" canbeselected="false" lightcolor="0,0,0,0" castshadows="false" range="0">
+        <StatusEffect type="OnActive" targettype="This,Contained" voltage="1">
+          <Use />
+          <Conditional targetcontaineditem="true" condition="gt 0" />
+        </StatusEffect>
+      </LightComponent>
+      <ItemContainer hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="true">
+        <!-- uses a fuckton of different tags for mod compatibility -->
+        <Containable items="sound,music,song,cassette-playernotes" />
+      </ItemContainer>
+      <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+        <RequiredItem items="screwdriver" type="Equipped" />
+        <input name="toggle" displayname="connection.togglestate" />
+        <input name="set_state" displayname="connection.setstate" />
+      </ConnectionPanel>
+    </Item>
+    
+    <Item name="Portable Music Player" description="A portable music player capable of playing cassettes and CDs. Keep away from water! Can be repaired with a screwdriver." identifier="portablemusicplayer" category="Electrical" Tags="mediumitem,musicplayer,short_range" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="4">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="0" spawnprobability="0.00" />
+      <Deconstruct time="10">
+        <Item identifier="fpgacircuit" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="750" fabricationlimitmin="1" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.502" sourcerect="859,250,164,79" origin="0.5,0.5" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="859,250,164,79" origin="0.5,0.5" />
+      <Body width="158" height="70" density="30" />
+      <!-- add aimpos="0,25" to <Holdable> and remove <Throwable> if we want the player character to be able to put the item on their shoulder like the boombox in Sunken Tapes instead of being able to throw it -->
+      <!-- <Holdable selectkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="10,-70" handle1="-10,40" handle2="10,40" holdangle="2" msg="ItemMsgDetachWrench" PickingTime="0.0" aimable="false" attachable="false" swingamount="0,0" swingspeed="0" /> -->
+      <Throwable electkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="1,-70" handle1="-2,20" handle2="-2,20" holdangle="2" aimable="true" aimpos="-50,-20" throwforce="3.5" msg="ItemMsgPickUpSelect" />
+      <LightComponent allowingameediting="false" canbeselected="false" lightcolor="150,255,150,150" castshadows="false" range="10" IsOn="false" PowerConsumption="1">
+        <LightSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="1,136,43,26" origin="0.5,0.7" />
+        <StatusEffect type="OnActive" targettype="This,Contained">
+          <Use />
+          <Conditional targetcontaineditem="true" condition="gt 0" />
+        </StatusEffect>
+        <StatusEffect type="OnImpact" target="This" condition="-10" />
+        <StatusEffect type="InWater" target="This" condition="-1" interval="1" disabledeltatime="true" />
+        <StatusEffect type="OnActive" target="This" condition="-0.1" interval="10" disabledeltatime="true" />
+        <StatusEffect type="OnActive" target="Contained" targets="mobilebattery" condition="-0.05" interval="1" disabledeltatime="true" />
+        <StatusEffect type="OnSpawn" target="This" DontCleanUp="True" setvalue="true" oneshot="true" />
+      </LightComponent>
+      <!-- GreaterComponent exists to make use of the timeframe value for StatusEffects to set and check against to toggle the item state -->
+      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0" />
+      <Powered PowerConsumption="0" ManuallySelectedSound="0" />
+      <!-- TODO: See if it becomes possible to change the volume of music on the CD item via a button on the music player by targeting and changing the PowerConsumption value of the CD once BaroDevs fixed StatusEffect being unable to alter component values of other items -->
+      <CustomInterface canbeselected="true" selectkey="Action" drawhudwhenequipped="true">
+        <GuiFrame relativesize="0.1,0.15" relativeoffset="0.0,0.1" anchor="BottomCenter" style="ItemUI" />
+        <!-- Button to toggle the item on and off -->
+        <Button text="GUI.button.onoff">
+          <!-- Increase timeframe by 1 when the button was pressed -->
+          <StatusEffect type="OnUse" target="This" timeframe="1" targetitemcomponent="GreaterComponent" disabledeltatime="true" AllowWhenBroken="true" />
+          <!-- Turn the item on when the button was pressed and the timeframe has a value of "1" -->
+          <StatusEffect type="OnUse" target="This" IsOn="true" setvalue="true" disabledeltatime="true" AllowWhenBroken="true">
+            <Conditional timeframe="eq 1" />
+          </StatusEffect>
+          <!-- Turn the item off when the button was pressed and the timefame does not have a value of "1" -->
+          <StatusEffect type="OnUse" target="This" IsOn="false" setvalue="true" disabledeltatime="true" AllowWhenBroken="true">
+            <Conditional timeframe="gte 2" />
+          </StatusEffect>
+          <!-- Reset the timeframe value back to "0" if the button was pressed and the timeframe exceeded a value of "1" -->
+          <StatusEffect type="OnUse" target="This" timeframe="0" targetitemcomponent="GreaterComponent" setvalue="true" AllowWhenBroken="true">
+            <Conditional timeframe="gte 2" />
+          </StatusEffect>
+        </Button>
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press -->
+        <Button text="GUI.button.nexttrack">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="1" disabledeltatime="true" AllowWhenBroken="true" />
+        </Button>
+        <!-- Increase the "ManuallySelectedSound" value by 1 on button press as long as its value is greater than 0 -->
+        <Button text="GUI.button.previoustrack">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="-1" disabledeltatime="true" AllowWhenBroken="true" />
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="25" setvalue="true" disabledeltatime="true" AllowWhenBroken="true">
+            <Conditional ManuallySelectedSound="lt 0" />
+          </StatusEffect>
+        </Button>
+        <!-- Reset the "ManuallySelectedSound" value to 0 on button press -->
+        <Button text="GUI.button.jumptofirst">
+          <StatusEffect type="OnUse" target="This" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" AllowWhenBroken="true" />
+        </Button>
+      </CustomInterface>
+      <ItemContainer canbeselected="true" selectkey="Action" hideitems="true" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="6" itempos="0,0" iteminterval="0,0" itemrotation="0" containedspritedepth="0.79" msg="ItemMsgInteractSelect" autofill="True">
+        <GuiFrame relativesize="0.1,0.15" anchor="Center" style="ItemUI" />
+        <RequiredItem items="screwdriver" type="equipped" requireempty="true" />
+        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+        <!-- uses a fuckton of different tags for mod compatibility -->
+        <Containable items="sound,music,song,cassette-playernotes">
+          <StatusEffect type="OnContaining" target="This" comparison="And">
+            <Conditional IsOn="true" />
+            <Conditional condition="lte 50" />
+            <Conditional condition="gt 25" />
+            <RequiredItem items="mobilebattery" type="Contained" />
+            <Sound file="%ModDir:2532991202%/Sounds/Items/Electricity/static_weak.ogg" range="1000.0" loop="true" volume="3.0" />
+          </StatusEffect>
+          <StatusEffect type="OnContaining" target="This" comparison="And">
+            <Conditional IsOn="true" />
+            <Conditional condition="lte 25" />
+            <RequiredItem items="mobilebattery" type="Contained" />
+            <Sound file="%ModDir:2532991202%/Sounds/Items/Electricity/static_strong.ogg" range="1000.0" loop="true" volume="1.0" />
+          </StatusEffect>
+        </Containable>
+        <SubContainer capacity="1">
+          <Containable items="mobilebattery">
+            <StatusEffect type="OnContaining" target="This" voltage="1" setvalue="true">
+              <!-- <RequiredItem items="mobilebattery" type="Contained" /> -->
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+      <Repairable selectkey="Action" header="electricalrepairsheader" deteriorationspeed="0.0" mindeteriorationdelay="120" maxdeteriorationdelay="720" MinDeteriorationCondition="10" minsabotagecondition="10" RepairThreshold="25" fixDurationHighSkill="5" fixDurationLowSkill="25" msg="ItemMsgRepairScrewdriver" hudpriority="10">
+        <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+        <RequiredSkill identifier="electrical" level="55" />
+        <RequiredItem items="screwdriver" type="equipped" />
+        <ParticleEmitter particle="damagebubbles" particlespersecond="2" scalemin="0.5" scalemax="0.8" anglemax="360" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
+        <ParticleEmitter particle="heavysmoke" particlespersecond="2" scalemin="0.5" scalemax="0.8" anglemax="360" distancemax="20" mincondition="0.0" maxcondition="25.0" />
+        <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+          <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+          <ParticleEmitter particle="ElectricShock" DistanceMin="10" DistanceMax="25" ParticleAmount="5" ScaleMin="0.1" ScaleMax="0.12" />
+        </StatusEffect>
+      </Repairable>
+    </Item>
+    
+    
+    <!-- ////////// MUSIC ////////// -->
+    <!-- ////////// MUSIC ////////// -->
+    <!-- ////////// MUSIC ////////// -->
+    <Item name="CD: Pirate Rave" identifier="cd_album_piraterave1" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a variety of tracks often heard when dealing with pirates. \nTrack-List:\n1. Alien Syndicate (Re_]|M|[_ix) by _]|M|[_\n2. Abandon Ship by Simon Chylinski\n3. Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx\n4. The Rebel Path by P.T. Adamczyk\n5. Contra la Luna by P.T. Adamczyk\n6. Cyborg by Full Kontakt">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+      <Deconstruct time="10">
+        <Item identifier="plastic" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="68,508,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <Powered IsActive="true" PowerConsumption="0">
+        <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+        <!-- Song 1 - Index 0 - Short Range | Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <ParticleEmitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 1 - Index 0 - Long Range | Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <ParticleEmitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Alien Syndicate.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 2 - Index 1 - Short Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 2 - Index 1 - Long Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 3 - Index 2 - Short Range | Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 3 - Index 2 - Long Range | Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 4 - Index 3 - Short Range | The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 4 - Index 3 - Long Range | The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.66" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 5 - Index 4 - Short Range | Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 5 - Index 4 - Long Range | Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.43" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 6 - Index 5 - Short Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 6 - Index 5 - Long Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="eq 6" />
+        </StatusEffect>
+        <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="5" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="gt 6" />
+        </StatusEffect>
+      </Powered>
+    </Item>
+    
+    <Item name="CD: Subnautica OST" identifier="cd_album_subnautica" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the Subnautica OST. \nTrack-List:\n1. Abandon Ship by Simon Chylinski\n2. Exosuit by Simon Chylinski\n3. Red Alert by Simon Chylinski\n4. Seamoth by Simon Chylinski">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+      <Deconstruct time="10">
+        <Item identifier="plastic" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="0,449,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <Powered IsActive="true" PowerConsumption="0">
+        <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+        <!-- Song 1 - Index 0 - Short Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 1 - Index 0 - Long Range | Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.4" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Abandon Ship.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 2 - Index 1 - Short Range | Exosuit by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 2 - Index 1 - Long Range | Exosuit by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Exosuit.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 3 - Index 2 - Short Range | Red Alert by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 3 - Index 2 - Long Range | Red Alert by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Red Alert.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 4 - Index 3 - Short Range | Seamoth by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 4 - Index 3 - Long Range | Seamoth by Simon Chylinski from Subnautica OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.42" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Seamoth.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="eq 4" />
+        </StatusEffect>
+        <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="3" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="gt 4" />
+        </StatusEffect>
+      </Powered>
+    </Item>
+
+    <Item name="CD: GRIP OST" identifier="cd_album_grip" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the GRIP OST. \nTrack-List:\n1. Clock Watch by Full Kontakt\n2. Cerbera by Imperium\n3. Cyborg by Full Kontakt\n4. Black Out by Full Kontakt">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+      <Deconstruct time="10">
+        <Item identifier="plastic" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="68,449,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <Powered IsActive="true" PowerConsumption="0">
+        <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+        <!-- Song 1 - Index 0 - Short Range | Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 1 - Index 0 - Long Range | Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Clock Watch.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 2 - Index 1 - Short Range | Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 2 - Index 1 - Long Range | Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_cerbera.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 3 - Index 2 - Short Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 3 - Index 2 - Long Range | Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rave_Cyborg.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 4 - Index 3 - Short Range | Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 4 - Index 3 - Long Range | Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="eq 4" />
+        </StatusEffect>
+        <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="3" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="gt 4" />
+        </StatusEffect>
+      </Powered>
+    </Item>
+    
+    <Item name="CD: Forgive Me Father OST" identifier="cd_album_forgivemefather" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true" description="A CD featuring a some tracks from the Forgive Me Father OST. \nTrack-List:\n1. Forgiveness Is Divine by Tim Fialka\n2. Good Time For You To Get Angry by Tim Fialka\n3. Big Ugly Fish Pt.1 by Tim Fialka\n4. Big Ugly Fish Pt.2 by Tim Fialka\n5. Rain And Pain by Tim Fialka\n6. Sweetie, Get Me Bazooka by Tim Fialka\n7. Welcome To Pestisville by Tim Fialka\n8. A Crow's Breakfast by Tim Fialka">
+      <PreferredContainer primary="crewcab" secondary="engcab" />
+      <PreferredContainer secondary="wreckengcab,abandonedengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.01" />
+      <PreferredContainer secondary="musicplayer" amount="1" spawnprobability="1" />
+      <Deconstruct time="10">
+        <Item identifier="plastic" />
+      </Deconstruct>
+      <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="250" fabricationlimitmin="0" fabricationlimitmax="1" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="0,508,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <Powered IsActive="true" PowerConsumption="0">
+        <!-- Play the track corresponding to the current value of the "ManuallySelectedSound" variable of the container this item is in, if the container is also turned on -->
+        <!-- Song 1 - Index 0 - Short Range | Forgiveness Is Divine by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ForgivenessIsDivine.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 1 - Index 0 - Long Range | Forgiveness Is Divine by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 0" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.34" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ForgivenessIsDivine.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 2 - Index 1 - Short Range | Good Time For You To Get Angry by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_GoodTimeForYouToGetAngry.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 2 - Index 1 - Long Range | Good Time For You To Get Angry by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 1" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_GoodTimeForYouToGetAngry.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 3 - Index 2 - Short Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt1.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 3 - Index 2 - Long Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 2" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.41" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt1.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 4 - Index 3 - Short Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt2.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 4 - Index 3 - Long Range | Big Ugly Fish by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 3" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_BigUglyFishPt2.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+
+        <!-- Song 5 - Index 4 - Short Range | Rain And Pain by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_RainAndPain.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 5 - Index 4 - Long Range | Rain And Pain by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 4" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_RainAndPain.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 6 - Index 5 - Short Range | Sweetie, Get Me Bazooka by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_SweetieGetMeBazooka.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 6 - Index 5 - Long Range | Sweetie, Get Me Bazooka by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 5" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_SweetieGetMeBazooka.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 7 - Index 6 - Short Range | Welcome To Pestisville by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 6" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_WelcomeToPestisville.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 7 - Index 6 - Long Range | Welcome To Pestisville by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 6" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_WelcomeToPestisville.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Song 8 - Index 7 - Short Range | A Crow's Breakfast by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 7" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq short_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ACrowsBreakfast.ogg" range="1000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        <!-- Song 8 - Index 7 - Long Range | A Crow's Breakfast by Tim Fialka from Forgive Me Father OST (Link on modpage) -->
+        <StatusEffect type="OnUse" target="This" comparison="And">
+          <Conditional ManuallySelectedSound="eq 7" targetcontainer="true" />
+          <Conditional IsOn="eq true" targetcontainer="true" />
+          <Conditional HasTag="eq long_range" targetcontainer="true" />
+          <particleemitter particle="shockwavesmall" particleamount="3" emitinterval="0.47" scalemin="0.25" scalemax="0.75" />
+          <Sound file="%ModDir:2532991202%/Sounds/Music/Rock_ACrowsBreakfast.ogg" range="14000.0" loop="true" volume="1.8" selectionmode="Manual" mutebackgroundmusic="true" />
+        </StatusEffect>
+        
+        <!-- Jump to first track if on the last track "Next Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="0" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="eq 8" />
+        </StatusEffect>
+        <!-- Jump to last track if on the first track "Previous Track" was selected on the music player -->
+        <StatusEffect type="OnUse" target="Parent" ManuallySelectedSound="7" setvalue="true" disabledeltatime="true" comparison="And" interval="0.1">
+          <Conditional ManuallySelectedSound="gt 8" />
+        </StatusEffect>
+      </Powered>
+    </Item>
+
+    <!-- OUTPOST SONGS | Exclusive to outpost music players. Should not be obtainable. -->
+    <Item name="Outpost Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+      <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <ItemComponent>
+        <StatusEffect type="OnUse" target="This" >
+          <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Scavenger Hunt.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    
+    <Item name="Outpost Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+      <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <ItemComponent>
+        <StatusEffect type="OnUse" target="This" >
+          <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_The Rebel Path.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    
+    <Item name="Outpost Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+      <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <ItemComponent>
+        <StatusEffect type="OnUse" target="This" >
+          <sound file="%ModDir:2532991202%/Sounds/Music/OutpostRave_Black Out.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    
+    <Item name="Outpost Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna_outpost" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+      <PreferredContainer primary="outpostmusicplayer" spawnprobability="1.0" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" />
+      <ItemComponent>
+        <StatusEffect type="OnUse" target="This" >
+          <sound file="%ModDir:2532991202%/Sounds/Music/Rave_Contra la Luna.ogg" type="OnUse" range="2000" loop="true" volume="3.5" />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    
+    <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+    <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+    <!-- ////////// BACKWARDS COMPATIBILITY ////////// -->
+    <Item name="Song: Alien Syndicate (Re_]|M|[_ix)" description="Alien Syndicate (Re_]|M|[_ix) by _]|M|[_ (myself) made for this mod" identifier="music_aliensyndicateremix" category="Electrical" Tags="smallitem,sound" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.3" impactsoundtag="impact_metal_light" isshootable="true">
+      <Deconstruct time="10">
+        <Item identifier="plastic" />
+      </Deconstruct>
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.8" sourcerect="62,111,67,58" origin="0.5,0.5" />
+      <Body width="65" height="56" density="15" />
+      <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="Always" target="This" oneshot="true">
+          <Remove />
+          <SpawnItem identifier="cd_album_piraterave1" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+
+    <Item name="Song: Exosuit" description="Exosuit by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_exosuit"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Abandon Ship" description="Abandon Ship by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_abandonship"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Red Alert" description="Red Alert by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_redalert"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Clock Watch" description="Clock Watch by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_clockwatch"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Cerbera" description="Cerbera by Imperium from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cerbera"  variantof="music_aliensyndicateremix" />
+
+    <Item name="Song: Seamoth" description="Seamoth by Simon Chylinski from Subnautica OST (Link on modpage)" identifier="music_seamoth"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Cyborg" description="Cyborg by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_cyborg"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Scavenger Hunt Techno (EurocorpFx Remake)" description="Scavenger Hunt Techno (EurocorpFx Remake) by EurocorpFx from Youtube (Link on modpage)" identifier="music_scavengerhunt"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: The Rebel Path" description="The Rebel Path by P.T. Adamczyk from Cyberpunk 2077 OST (Link on modpage)" identifier="music_rebelpath"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Black Out" description="Black Out by Full Kontakt from GRIP: Combat Racing OST (Link on modpage)" identifier="music_blackout"  variantof="music_aliensyndicateremix" />
+    
+    <Item name="Song: Contra la Luna" description="Contra la Luna by P.T. Adamczyk from Cyberpunk 2077 Phantom Liberty OST (Link on modpage)" identifier="music_contralaluna"  variantof="music_aliensyndicateremix" />
+    
+  </Items>
+</Override>
