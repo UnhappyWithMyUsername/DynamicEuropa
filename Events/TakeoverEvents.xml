@@ -377,6 +377,29 @@
       <NPCChangeTeamAction npctag="tempcrew" teamtag="FriendlyNPC" removefromcrew="true" />
     </ScriptedEvent>
 
+    <!-- spawn more soldiers if very low reputation, so there's more to fight in stations -->
+    <ScriptedEvent identifier="spawnsoldierslowrep_co">
+      <TagAction criteria="player" tag="player" />
+      <CheckReputationAction TargetType="Faction" identifier="coalition" condition="lte -60">
+        <Success>
+          <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+          <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+          <SpawnAction NPCSetIdentifier="de_coalitioncombat" NPCIdentifier="soldiercoalition" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="spawnsoldierslowrep_sep">
+      <TagAction criteria="player" tag="player" />
+      <CheckReputationAction TargetType="Faction" identifier="coalition" condition="lte -60">
+        <Success>
+          <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+          <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+          <SpawnAction NPCSetIdentifier="de_separatistscombat" NPCIdentifier="soldierseparatists" teamid="FriendlyNPC" SpawnLocation="Outpost" TargetTag="extrasoldier" />
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+    
     <!-- ////////// MANUALLY TRIGGERED TAKEOVERS \\\\\\\\\\ -->
     <ScriptedEvent identifier="startmanualtakeovercoalition">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
