@@ -15,22 +15,20 @@
       <UnlockPathAction />
       <ConversationAction text="This command only works in an outpost bordering the new biome. If you have no outpost, open console and type togglecampaignteleport to teleport to the other biome" targettag="player" dialogtype="Regular" endconversation="true" />
     </ScriptedEvent> 
-    cotakeoveractive
     
     <ScriptedEvent identifier="getnewtakeovermission" commonness="0">
       <TagAction criteria="player" tag="player" />
-      <ConversationAction text="Only use this if your takeover mission is unreachable. This will give you another mission (in another location hopefully), but will not remove the current one." targettag="player" dialogtype="Regular" >
-        <CheckReputationAction TargetType="Faction" identifier="coalition" condition="lte -30">
-          <Success>
-            <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
-          </Success>
-        </CheckReputationAction>
-        <CheckReputationAction TargetType="Faction" identifier="separatists" condition="lte -30">
-          <Success>
-            <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
-          </Success>
-        </CheckReputationAction>
-      </ConversationAction >
+      <ConversationAction text="Only use this if your takeover mission is unreachable. This will give you another mission (in another location hopefully), but will not remove the current one. You have to be ahead of the old mission for this to work." targettag="player" dialogtype="Regular" endconversation="true" />
+      <CheckReputationAction TargetType="Faction" identifier="coalition" condition="lte -30">
+        <Success>
+          <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
+        </Success>
+      </CheckReputationAction>
+      <CheckReputationAction TargetType="Faction" identifier="separatists" condition="lte -30">
+        <Success>
+          <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
+        </Success>
+      </CheckReputationAction>
     </ScriptedEvent> 
    
   
