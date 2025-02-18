@@ -264,7 +264,6 @@
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="friendlyoutpostbot" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -280,6 +279,7 @@
       <TagAction criteria="humanprefabidentifier:soldierseparatists" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:defensebot" submarinetype="Outpost" team="FriendlyNPC" tag="defenders" />
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- making sure these are in team 2 -->
       <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <WaitAction time="1" />
@@ -321,7 +321,6 @@
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="friendlyoutpostbot" />
       <TagAction criteria="itemidentifier:dockinghatch" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="hull" tag="eventstart" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- tag and remove security: they are terminators and keep responding to attacks after surrender -->
       <TagAction criteria="humanprefabidentifier:securitynpc" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:securitynpcseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -337,6 +336,7 @@
       <TagAction criteria="humanprefabidentifier:soldiercoalition" tag="defenders" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:defensebot" submarinetype="Outpost" team="FriendlyNPC" tag="defenders" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
+      <TriggerAction target1tag="player" target2tag="eventstart" radius="100" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" allowmultipletargets="true" />
       <!-- making sure these are in team 2 -->
       <NPCChangeTeamAction npctag="defenders" teamtag="Team2" />
       <WaitAction time="1" />
