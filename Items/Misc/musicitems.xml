@@ -151,21 +151,37 @@
         <Item identifier="fpgacircuit" />
       </Deconstruct>
       <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="750" fabricationlimitmin="1" fabricationlimitmax="1" />
-      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.502" sourcerect="859,250,164,79" origin="0.5,0.5" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.510" sourcerect="859,250,164,79" origin="0.5,0.5" />
+      <DecorativeSprite name="shaking" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.509" sourcerect="859,270,164,59" origin="0.5,0.31" offset="6,6" offsetanim="Noise" offsetanimspeed="10.0">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      </DecorativeSprite>
+      <DecorativeSprite name="left speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="867,281,28,28" depth="0.508" premultiplyalpha="false" origin="0.5,0.5" offset="-60,-5" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.1,0.1">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true"  />
+      </DecorativeSprite>
+      <DecorativeSprite name="Right speaker" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="987,281,28,28" depth="0.508" premultiplyalpha="false" origin="0.5,0.5" offset="60,-5" scaleanim="Sine" scaleanimspeed="52" scaleanimamount="0.1,0.1">
+        <AnimationConditional targetcontaineditem="true" condition="gt 0.0" />
+        <AnimationConditional targetitemcomponent="LightComponent" IsActive="true" />
+      </DecorativeSprite>
       <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="859,250,164,79" origin="0.5,0.5" />
       <Body width="158" height="70" density="30" />
       <!-- add aimpos="0,25" to <Holdable> and remove <Throwable> if we want the player character to be able to put the item on their shoulder like the boombox in Sunken Tapes instead of being able to throw it -->
-      <!-- <Holdable selectkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="10,-70" handle1="-10,40" handle2="10,40" holdangle="2" msg="ItemMsgDetachWrench" PickingTime="0.0" aimable="false" attachable="false" swingamount="0,0" swingspeed="0" /> -->
-      <Throwable electkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="1,-70" handle1="-2,20" handle2="-2,20" holdangle="2" aimable="true" aimpos="-50,-20" throwforce="3.5" msg="ItemMsgPickUpSelect" />
+      <Holdable selectkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="10,-70" handle1="-10,40" handle2="10,40" holdangle="2" msg="ItemMsgDetachWrench" PickingTime="0.0" aimable="false" attachable="false" swingamount="10,5" swingspeed="5" swingwhenholding="false" >
+      </Holdable>  
+      <!-- <Throwable electkey="Select" pickkey="Select" slots="RightHand,LeftHand" holdpos="1,-70" handle1="-2,20" handle2="-2,20" holdangle="2" aimable="true" aimpos="-50,-20" throwforce="3.5" msg="ItemMsgPickUpSelect" /> -->
       <LightComponent allowingameediting="false" canbeselected="false" lightcolor="150,255,150,150" castshadows="false" range="10" IsOn="false" PowerConsumption="1">
         <LightSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="1,136,43,26" origin="0.5,0.7" />
         <StatusEffect type="OnActive" targettype="This,Contained">
           <Use />
           <Conditional targetcontaineditem="true" condition="gt 0" />
+          <ParticleEmitter particle="bubbles" particlespersecond="1" anglemin="60" anglemax="120" scalemin="0.5" scalemax="1" velocitymin="10" velocitymax="30" copyentityangle="false" drawontop="true" />
         </StatusEffect>
-        <StatusEffect type="OnImpact" target="This" condition="-10" />
+        <!-- enable this for shaking, but needs to be reversible... -->
+        <!-- <StatusEffect type="OnActive" target="This" swingwhenholding="true" targetitemcomponent="Holdable" /> -->
         <StatusEffect type="InWater" target="This" condition="-1" interval="1" disabledeltatime="true" />
-        <StatusEffect type="OnActive" target="This" condition="-0.1" interval="10" disabledeltatime="true" />
+        <!-- <StatusEffect type="OnImpact" target="This" condition="-10" /> -->
+        <!-- <StatusEffect type="OnActive" target="This" condition="-0.1" interval="10" disabledeltatime="true" /> -->
         <StatusEffect type="OnActive" target="Contained" targets="mobilebattery" condition="-0.05" interval="1" disabledeltatime="true" />
         <StatusEffect type="OnSpawn" target="This" DontCleanUp="True" setvalue="true" oneshot="true" />
       </LightComponent>
