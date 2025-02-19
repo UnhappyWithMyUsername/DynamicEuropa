@@ -2624,14 +2624,16 @@
 
     <!-- ////////////// OTHER EVENTS ///////////// -->
     
-    <!-- remove lithomorphs in outpost levels, I hate it -->
+    <!-- remove lithomorphs in outpost levels, I hate it. repeated once because it sometimes fail -->
     <ScriptedEvent identifier="removelithomorphsoutpost" commonness="100">
       <TagAction criteria="itemtag:lithomorphspawner" tag="lithomorphspawner" />
+      <Label name="removelithosagain" />
       <StatusEffectAction targettag="lithomorphspawner">
         <StatusEffect target="This" >
           <Remove/>
         </StatusEffect>
       </StatusEffectAction>
+      <GoTo name="removelithosagain" maxtimes="1" />
     </ScriptedEvent>
         
     <ScriptedEvent identifier="circuswelcome" commonness="100">
