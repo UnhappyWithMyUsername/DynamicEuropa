@@ -70,7 +70,7 @@
   </Item>
   
   <!-- Comment out zealot robes? I prefer my version but it's not necessary I guess -->
-  <Item name="" identifier="zealotrobes" category="Equipment" tags="smallitem,clothing,huskcult" fireproof="false" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+  <!-- <Item name="" identifier="zealotrobes" category="Equipment" tags="smallitem,clothing,huskcult" fireproof="false" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="crewcab"/>
     <Price baseprice="150" canbespecial="false" sold="false">
       <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="4" sold="true">
@@ -111,20 +111,22 @@
       </StatusEffect>
       <StatusEffect target="Character" type="OnWearing" HideFace="true" setvalue="true"/>
       <StatusEffect target="Character,Contained" type="OnWearing" condition="-0.1" >
-        <Conditional huskinfection="gt 75" />
+        <Conditional huskinfection="gt 76" />
         <RequiredItem items="antibiotics" type="Contained" />
         <ReduceAffliction type="damage" amount="0.25" />
         <ReduceAffliction type="bleeding" amount="0.1" />
+        <ReduceAffliction type="huskinfection" amount="1" />
         <Affliction identifier="husktransformimmunitytemporary" amount="50" />
-      </StatusEffect>
-      <StatusEffect target="Contained" type="OnContained" noninteractable="true" setvalue="true" >
-        <RequiredItem items="antibiotics" type="Contained" />
-        <Conditional condition="lt 100" />
       </StatusEffect>
     </Wearable>    
     <ItemContainer capacity="1" maxstacksize="1" containedstateindicatorstyle="syringe">
       <SlotIcon slotindex="0" texture="Content/Items/InventoryIconAtlas.png" sourcerect="576,704,64,64" origin="0.5,0.5" />
-      <Containable items="antibiotics" />
+      <Containable items="antibiotics" >
+        <StatusEffect target="Contained" type="OnRemoved" >
+          <Conditional condition="lt 100" />
+          <Remove />
+        </StatusEffect>
+      </Containable>
       <StatusEffect type="OnWearing" target="Character,Contained" comparison="and" playsoundonrequireditemfailure="true" >   
         <RequiredItem items="antibiotics" type="Contained" matchonempty="true" />
         <Conditional huskinfection="gt 75" />
@@ -139,7 +141,7 @@
         <Sound file="Content/Items/WarningBeepSlow.ogg" range="150" loop="true" frequencymultiplier="0.6"/>
       </StatusEffect>
     </ItemContainer>
-  </Item>
+  </Item> -->
   
   <!-- Custom chalice -->
   <Item name="" identifier="huskchalice" nameidentifier="huskchalice" tags="mediumitem,huskcult"  scale="0.5" impactsoundtag="impact_metal_heavy" category="Misc" DontCleanUp="true">
