@@ -11,7 +11,7 @@
     initialdepthmin="360000"
     initialdepthmax="450000"
     levelobjectamount="3000"
-    ambientlightcolor="4,6,8,255"
+    AmbientLightColor="20,30,40,255"
     backgroundtexturecolor="8,16,20,255"
     backgroundcolor="2,4,5,255"
     wallcolor="255,255,255,255"
@@ -19,9 +19,9 @@
     maxwidth="300000"
     voronoisiteinterval="2000,2000"
     voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.5"
-    cellirregularity="0.1"
+    CellSubdivisionLength="800"
+    CellRoundingAmount="0.4"
+    CellIrregularity="0.8"
     mainpathnodeintervalrange="5000,10000"
     cavecount="1"
     itemcount="400"
@@ -46,12 +46,13 @@
     mintunnelradius="6500"
     mincorpsecount="3"
     maxcorpsecount="6"
-    wreckhullfloodingchance="0.5"
+    HuskProbability="0.2"
+    WreckHullFloodingChance="0.25"
     wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
+    WreckFloodingHullMaxWaterPercentage="0.3"
     sidetunnelcount="1,1"
     minsidetunnelradius="2000,6000"
-    icespirecount="20"
+    icespirecount="15"
     walltexturesize="512"
     walledgetexturewidth="1024"
     walledgeexpandoutwardsamount="128"
@@ -80,12 +81,103 @@
       premultiplyalpha="false" />
   </GreatSeaBasic>
 
+  <GreatSeaVertical
+    identifier="greatseavertical"
+    type="LocationConnection"
+    biomes="thegreatsea"
+    commonness="20"
+    height="140000"
+    initialdepthmin="320000"
+    initialdepthmax="380000"
+    levelobjectamount="3000"
+    AmbientLightColor="20,30,40,255"
+    backgroundtexturecolor="8,16,20,255"
+    backgroundcolor="2,4,5,255"
+    wallcolor="255,255,255,255"
+    minwidth="80000"
+    maxwidth="100000"
+    voronoisiteinterval="2000,2000"
+    voronoisitevariance="800,800"
+    CellSubdivisionLength="800"
+    CellRoundingAmount="0.4"
+    CellIrregularity="0.8"
+    mainpathnodeintervalrange="5000,10000"
+    cavecount="1"
+    itemcount="400"
+    floatingicechunkcount="20"
+    islandcount="15"
+    seafloordepth="-45000"
+    seafloorvariance="1000"
+    mountaincountmin="0"
+    mountaincountmax="0"
+    mountainheightmin="1000"
+    mountainheightmax="5000"
+    RuinCount="0"
+    MinRuinCount="0"
+    MaxRuinCount="1"
+    minwreckcount="1"
+    maxwreckcount="1"
+    thalamusprobability="0.4"
+    bottomholeprobability="0.9"
+    waterparticlescale="1"
+    startposition="0.1,0.1"
+    endposition="0.9,0.9"
+    createholenexttoend="True"
+    mintunnelradius="6500"
+    mincorpsecount="3"
+    maxcorpsecount="6"
+    HuskProbability="0.2"
+    WreckHullFloodingChance="0.25"
+    wreckfloodinghullminwaterpercentage="0.1"
+    WreckFloodingHullMaxWaterPercentage="0.3"
+    sidetunnelcount="1,1"
+    minsidetunnelradius="2000,6000"
+    icespirecount="10"
+    walltexturesize="512"
+    walledgetexturewidth="1024"
+    walledgeexpandoutwardsamount="128"
+    walledgeexpandinwardsamount="128"
+    backgroundcreatureamount="80"
+    resourceintervalrange="19200,38400"
+    caveresourceintervalrange="9600,19200"
+    resourceclustersizerange="3,5"
+    resourcespawnchance="0.3"
+    caveresourcespawnchance="0.6"
+    AbyssResourceClustersMin="40"
+    AbyssResourceClustersMax="50">
+    <!--
+    <Background
+      texture="Content/Map/iceBackgroundFade.png" />
+    <BackgroundTop
+      texture="Content/Map/iceBackground.png"
+      premultiplyalpha="false" />
+      -->
+    <WaterParticles
+      texture="Content/Map/Biomes/TheGreatSea/BackgroundParticles.png" />
+    <Wall
+      texture="Content/Map/Biomes/TheGreatSea/LevelWall.png"
+      premultiplyalpha="false" />
+    <WallEdge
+      texture="Content/Map/Biomes/TheGreatSea/LevelWallEdge.png" />
+    <DestructibleWall
+      texture="Content/Map/Biomes/DestructibleWall.png" />
+    <DestructibleWallEdge
+      texture="Content/Map/Biomes/DestructibleWallEdge.png" />
+    <WallDestroyed
+      texture="Content/Map/Biomes/DestroyedWall.png"
+      premultiplyalpha="false" />
+  </GreatSeaVertical>
+
   <GreatSeaOpen
     identifier="greatseaopen"
+    type="LocationConnection"                             
     biomes="thegreatsea"
     minleveldifficulty="55"
-    commonness="50"
-    Type="LocationConnection"
+    commonness="25"
+    height="70000"
+    initialdepthmin="360000"
+    initialdepthmax="450000"
+    levelobjectamount="3000"
     AmbientLightColor="20,30,40,255"
     BackgroundTextureColor="8,16,20,255"
     BackgroundColor="2,4,5,255"
@@ -94,25 +186,21 @@
     EndPosition="0.9,0.8"
     CreateHoleNextToEnd="True"
     CreateHoleToAbyss="True"
-    LevelObjectAmount="2000"
     BackgroundCreatureAmount="80"
     MinWidth="200000"
     MaxWidth="300000"
-    Height="60000"
-    InitialDepthMin="400000"
-    InitialDepthMax="500000"
     MinTunnelRadius="6500"
     SideTunnelCount="2,2"
     SideTunnelVariance="0.5"
     MinSideTunnelRadius="10000,20000"
-    VoronoiSiteInterval="3000,2000"
-    VoronoiSiteVariance="800,800"
-    CellSubdivisionLength="10000"
-    CellRoundingAmount="0.0"
-    CellIrregularity="0.3"
+    voronoisiteinterval="2000,2000"
+    voronoisitevariance="800,800"
+    CellSubdivisionLength="800"
+    CellRoundingAmount="0.4"
+    CellIrregularity="0.8"
     MainPathNodeIntervalRange="10000,10000"
     MainPathVariance="1.0"
-    CaveCount="3"
+    CaveCount="2"
     ItemCount="400"
     ResourceIntervalRange="19200,38400"
     CaveResourceIntervalRange="9600,19200"
@@ -272,94 +360,7 @@
     <FlashSound
       file="%ModDir:2532991202%/Sounds/Ambient/ThunderLarge1.ogg" />
   </GreatSeaNarrow>
-
-  <GreatSeaVertical
-    identifier="greatseavertical"
-    type="LocationConnection"
-    biomes="thegreatsea"
-    commonness="20"
-    height="140000"
-    initialdepthmin="320000"
-    initialdepthmax="380000"
-    levelobjectamount="3000"
-    ambientlightcolor="4,6,8,255"
-    backgroundtexturecolor="8,16,20,255"
-    backgroundcolor="2,4,5,255"
-    wallcolor="255,255,255,255"
-    minwidth="80000"
-    maxwidth="100000"
-    voronoisiteinterval="2000,2000"
-    voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.5"
-    cellirregularity="0.1"
-    mainpathnodeintervalrange="5000,10000"
-    cavecount="1"
-    itemcount="400"
-    floatingicechunkcount="20"
-    islandcount="15"
-    seafloordepth="-45000"
-    seafloorvariance="1000"
-    mountaincountmin="0"
-    mountaincountmax="0"
-    mountainheightmin="1000"
-    mountainheightmax="5000"
-    RuinCount="0"
-    MinRuinCount="0"
-    MaxRuinCount="1"
-    minwreckcount="1"
-    maxwreckcount="1"
-    thalamusprobability="0.4"
-    bottomholeprobability="0.9"
-    waterparticlescale="1"
-    startposition="0.1,0.1"
-    endposition="0.9,0.9"
-    createholenexttoend="True"
-    mintunnelradius="6500"
-    mincorpsecount="3"
-    maxcorpsecount="6"
-    wreckhullfloodingchance="0.5"
-    wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
-    sidetunnelcount="1,1"
-    minsidetunnelradius="2000,6000"
-    icespirecount="10"
-    walltexturesize="512"
-    walledgetexturewidth="1024"
-    walledgeexpandoutwardsamount="128"
-    walledgeexpandinwardsamount="128"
-    backgroundcreatureamount="80"
-    resourceintervalrange="19200,38400"
-    caveresourceintervalrange="9600,19200"
-    resourceclustersizerange="3,5"
-    resourcespawnchance="0.3"
-    caveresourcespawnchance="0.6"
-    AbyssResourceClustersMin="40"
-    AbyssResourceClustersMax="50">
-    <!--
-    <Background
-      texture="Content/Map/iceBackgroundFade.png" />
-    <BackgroundTop
-      texture="Content/Map/iceBackground.png"
-      premultiplyalpha="false" />
-      -->
-    <WaterParticles
-      texture="Content/Map/Biomes/TheGreatSea/BackgroundParticles.png" />
-    <Wall
-      texture="Content/Map/Biomes/TheGreatSea/LevelWall.png"
-      premultiplyalpha="false" />
-    <WallEdge
-      texture="Content/Map/Biomes/TheGreatSea/LevelWallEdge.png" />
-    <DestructibleWall
-      texture="Content/Map/Biomes/DestructibleWall.png" />
-    <DestructibleWallEdge
-      texture="Content/Map/Biomes/DestructibleWallEdge.png" />
-    <WallDestroyed
-      texture="Content/Map/Biomes/DestroyedWall.png"
-      premultiplyalpha="false" />
-  </GreatSeaVertical>
-
-
+  
   <PlateauTransition
     identifier="plateautransition"
     type="LocationConnection"
@@ -370,17 +371,17 @@
     initialdepthmin="360000"
     initialdepthmax="420000"
     levelobjectamount="8000"
-    ambientlightcolor="7,8,4,255"
+    ambientlightcolor="15,20,25,255"
     backgroundtexturecolor="34,38,10,255"
     backgroundcolor="3,3,3,255"
     wallcolor="255,255,255,255"
     minwidth="200000"
     maxwidth="280000"
     voronoisiteinterval="2000,2000"
-    voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.5"
-    cellirregularity="0.1"
+    VoronoiSiteVariance="800,800"
+    CellSubdivisionLength="800"
+    CellRoundingAmount="0.4"
+    CellIrregularity="0.8"
     mainpathnodeintervalrange="10000,20000"
     cavecount="3"
     itemcount="400"
@@ -404,9 +405,10 @@
     mintunnelradius="6500"
     mincorpsecount="3"
     maxcorpsecount="6"
-    wreckhullfloodingchance="0.5"
+    HuskProbability="0.2"
+    WreckHullFloodingChance="0.25"
     wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
+    WreckFloodingHullMaxWaterPercentage="0.3"
     sidetunnelcount="1,1"
     minsidetunnelradius="1000,3000"
     icespirecount="0"
@@ -424,7 +426,9 @@
     resourcespawnchance="0.3"
     caveresourcespawnchance="0.6"
     AbyssResourceClustersMin="30"
-    AbyssResourceClustersMax="40">
+    AbyssResourceClustersMax="40"
+    FlashInterval="60,180"
+    FlashColor="15,20,40,255">
     <WaterParticles
       texture="Content/Map/Biomes/AphoticPlateau/BackgroundParticles.png" />
     <Wall
@@ -452,7 +456,7 @@
     initialdepthmin="100000"
     initialdepthmax="200000"
     levelobjectamount="200"
-    ambientlightcolor="4,6,8,255"
+    AmbientLightColor="20,30,40,255"
     backgroundtexturecolor="8,16,20,255"
     backgroundcolor="2,4,5,255"
     wallcolor="255,255,255,255"
@@ -460,9 +464,9 @@
     maxwidth="50000"
     voronoisiteinterval="2000,2000"
     voronoisitevariance="800,800"
-    cellsubdivisionlength="1500"
-    cellroundingamount="0.1"
-    cellirregularity="0.3"
+    CellSubdivisionLength="1000"
+    CellRoundingAmount="0.4"
+    CellIrregularity="0.1"
     mainpathnodeintervalrange="10000,10000"
     cavecount="0"
     itemcount="0"
@@ -485,10 +489,11 @@
     mintunnelradius="5000"
     mincorpsecount="1"
     maxcorpsecount="5"
+    HuskProbability="0.2"
     thalamusprobability="0"
-    wreckhullfloodingchance="0.5"
+    WreckHullFloodingChance="0.25"
     wreckfloodinghullminwaterpercentage="0.1"
-    wreckfloodinghullmaxwaterpercentage="1"
+    WreckFloodingHullMaxWaterPercentage="0.3"
     sidetunnelcount="0,0"
     minsidetunnelradius="25000,25000"
     backgroundcreatureamount="160"
@@ -532,8 +537,8 @@
   commonness="0"
   initialdepthmin="100000"
   initialdepthmax="200000"
-  levelobjectamount="500"
-  ambientlightcolor="4,6,8,255"
+  levelobjectamount="500"  
+  AmbientLightColor="20,30,40,255"
   backgroundtexturecolor="8,16,20,255"
   backgroundcolor="2,4,5,255"
   wallcolor="255,255,255,255"
