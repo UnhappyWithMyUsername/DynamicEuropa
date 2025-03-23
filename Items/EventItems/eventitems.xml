@@ -131,12 +131,14 @@
         <TriggerEvent identifier="nuclearbombexplosion" />
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This" delay="0.2" sonardisruption="1.0" disabledeltatime="true" stackable="false">
-        <Explosion range="5000" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" camerashake="5000" flashrange="10000" flashduration="5.0" screencolor="195,255,170,255" screencolorrange="5000" screencolorduration="3.0" decal="explosion" decalsize="5" ignorecover="true" DistanceFalloff="false">
+        <Explosion range="5000" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" ignorecover="true" DistanceFalloff="false">
           <Affliction identifier="explosiondamage" strength="1000" />
           <Affliction identifier="radiationsickness" strength="1000" />
           <Affliction identifier="burn" strength="800" />
           <Affliction identifier="stun" strength="20" />
         </Explosion>
+        <!-- second explosion for visuals -->
+        <Explosion range="10" camerashake="1000" camerashakerange="100000" flashrange="100000" flashduration="5.0" screencolor="195,255,170,255" screencolorrange="100000" screencolorduration="3.0" decal="explosion" decalsize="5" ignorecover="true"/>
         <Sound file="%ModDir:2532991202%/Sounds/Explosions/ExplosionMassive2.ogg" volume="4.0" range="20000" loop="false" />
         <ParticleEmitter particle="underwaterexplosion" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="0" scalemin="15" scalemax="15" />
         <Remove />
