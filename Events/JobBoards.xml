@@ -26,7 +26,7 @@
                 <Success>
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" applytotarget2="jb_trig_player" waitforinteraction="true" />
                   <ConversationAction targettag="jb_trig_player" text="eventtext.jobboardde.interact" eventsprite="noticeboard" dialogtype="Regular">
-                    <Option text="eventtext.jobboardde.option.piratemission">
+                    <!-- <Option text="eventtext.jobboardde.option.piratemission">
                       <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.piratemission.info" eventsprite="noticeboard">
                         <Option text="eventtext.option.accept">
                           <ConversationAction text="eventtext.jobboardde.option.piratemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
@@ -55,7 +55,7 @@
                           <GoTo name="waitforinput" />
                         </Option>
                       </ConversationAction>
-                    </Option>
+                    </Option> -->
                     <Option text="eventtext.jobboardde.option.monstermission">
                       <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.monstermission.info" eventsprite="noticeboard">
                         <Option text="eventtext.option.accept">
@@ -592,31 +592,27 @@
                     <Success>
                       <TriggerAction target1tag="potentialjobboard" target2tag="player" applytotarget2="jb_trig_player" waitforinteraction="true" />
                       <ConversationAction targettag="jb_trig_player" text="eventtext.jobboardde.interact" eventsprite="noticeboard" dialogtype="Regular">
-                        <Option text="eventtext.jobboardde.option.piratemission">
-                          <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.piratemission.info" eventsprite="noticeboard">
+                        <Option text="eventtext.jobboardde.option.salvagemission">
+                          <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.salvagemission.info" eventsprite="noticeboard">
                             <Option text="eventtext.option.accept">
-                              <ConversationAction text="eventtext.jobboardde.option.piratemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
-                              <RNGAction chance="0.65">
+                              <ConversationAction text="eventtext.jobboardde.option.salvagemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
+                              <RNGAction chance="1">
                                 <Success>
-                                  <RNGAction chance="0.8">
-                                    <Success>
-                                      <MissionAction missionidentifier="pirate_heavy" />
-                                    </Success>
-                                    <Failure>
-                                      <MissionAction missionidentifier="pirate_piezo" />
-                                    </Failure>
-                                  </RNGAction>
+                                  <MissionAction missiontag="salvagewreck" />
+                                  <ClearTagAction tag="jb_trig_player" />
+                                  <SetDataAction identifier="jobboardempty" operation="add" value="1" />
+                                  <GoTo name="waitforinput" />
                                 </Success>
                                 <Failure>
-                                  <MissionAction missionidentifier="pirate_party" />
+                                  <MissionAction missiontag="salvageartifact" />
+                                  <ClearTagAction tag="jb_trig_player" />
+                                  <SetDataAction identifier="jobboardempty" operation="add" value="1" />
+                                  <GoTo name="waitforinput" />
                                 </Failure>
                               </RNGAction>
-                              <ClearTagAction tag="jb_trig_player" />
-                              <SetDataAction identifier="jobboardempty" operation="add" value="1" />
-                              <GoTo name="waitforinput" />
                             </Option>
                             <Option text="eventtext.option.decline">
-                              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="jb_trig_player" />
+                              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
                               <ClearTagAction tag="jb_trig_player" />
                               <GoTo name="waitforinput" />
                             </Option>
