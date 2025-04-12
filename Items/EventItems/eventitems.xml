@@ -587,6 +587,89 @@
       </StatusEffect>
     </Holdable>
   </Item>
+  <!--Toucher of Grass' fucking badass cool throwing axe that teleports back to you-->
+    <Item name="Dementonite Boarding Axe" identifier="boardingaxedementonite" category="Weapon" cargocontaineridentifier="metalcrate" inventoryiconcolor="136,142,166,255" spritecolor="136,142,166" hideinmenus="true" tags="mediumitem,weapon,mountableweapon" HideConditionBar="true" Scale="0.5" sticktocharacters="true" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="true" sticktolighttargets="true" >
+      <PreferredContainer secondary="wreckweaponholder" spawnprobability="0.05" />
+      <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.1" />
+      <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder" />
+      <Deconstruct time="10">
+        <Item identifier="dementonite" />
+        <Item identifier="titanium" />
+      </Deconstruct>
+      <InventoryIcon texture="Content/Items/JobGear/TalentGear.png" sourcerect="165,366,64,64" origin="0.5,0.5" />
+      <BrokenSprite texture="Content/Items/JobGear/TalentGear.png" sourcerect="1,1,1,1" depth="0.55" origin="0.5,0.2" maxcondition="90" />
+      <Sprite texture="%ModDir%/Items/EventItems/dementoniteboardingaxe.png" sourcerect="3,4,52,164" depth="0.55" origin="0.5,0.2" />
+      <Body width="161" height="20" density="25" DoesStick="true" />
+      <RangedWeapon barrelpos="0,0" unskilledspread="3" spread="0" combatPriority="80" reload="3" drawhudwhenequipped="true" launchimpulse="6.0" crosshairscale="0.15" WeaponDamageModifier="1.0" >
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+            <RequiredItems items="boardingaxedementoniteprojectile" type="Contained" />
+            <RequiredSkill identifier="weapons" level="60" />
+             <StatusEffect type="OnUse" target="This" setvalue="true" condition="10" />
+             <StatusEffect type="OnUse" target="Character">
+              <Sound file="Content/Items/Alien/AlienTurret2.ogg" range="500" />
+              <Affliction identifier="psychosis" strength="5" probability="0.15" />
+            </StatusEffect>
+             <StatusEffect type="OnContained" target="This" condition="100" setvalue="true" >
+              <RequiredItem items="boardingaxedementoniteprojectile" type="Contained" targetslot="0" />
+             </StatusEffect>
+             <RequiredItems items="boardingaxedementoniteprojectile" type="Contained" />
+      </RangedWeapon>
+      <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="55,40" handle1="-5,-90" handle2="0,-115" aimangle="-10" msg="ItemMsgPickUpSelect" />
+          <ItemContainer canbeselected="false" ShowContainedStateIndicator="false" drawinventory="false" allowaccess="false" capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" spawnwithid="boardingaxedementoniteprojectile" >
+            <Containable items="boardingaxedementoniteprojectile" >
+            <StatusEffect type="OnRemoved" target="This" delay="4" stackable="false" disableDeltaTime="true" >
+             <SpawnItem identifier="boardingaxedementoniteprojectile" spawnposition="ThisInventory" SpawnIfInventoryFull="false" SpawnIfCantBeContained="false" />
+             <ParticleEmitter particle="psychosisfx" particleamount="5" velocitymin="0.5" velocitymax="1" scalemin="0.8" scalemax="1.0" />
+            </StatusEffect>
+            </Containable>
+          </ItemContainer>
+          <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+          <Quality>
+            <QualityStat stattype="FirepowerMultiplier" value="0.1" />
+          </Quality>
+          <SkillRequirementHint identifier="weapons" level="60" />
+    </Item>
+
+    <Item name="Dementonite Boarding Axe" identifier="boardingaxedementoniteprojectile" category="Weapon" maxstacksize="1" maxstacksizecharacterinventory="1" interactthroughwalls="true" inventoryiconcolor="136,142,166,255" spritecolor="136,142,166" hideinmenus="true" hide="true" cargocontaineridentifier="metalcrate" tags="mediumitem" Scale="0.5" >
+      <PreferredContainer primary="boardingaxedementonite" amount="1" spawnprobability="1" />
+      <Sprite texture="Content/Items/JobGear/TalentGear.png" sourcerect="1,425,164,53" depth="0.55" origin="0.5,0.2" />
+      <Body width="25" height="12" density="35" />
+      <Rope sourcepullforce="300" targetpullforce="150" projectilepullforce="5" maxlength="4500" snaponcollision="false" spritewidth="3" tile="true" origin="0.05,0.5" targetminmass="10" lerpforces="true" snapanimduration="0.5" ReelSoundPitchSlide="1.0,2.25">
+            <Sprite texture="Content/Map/Thalamus/thalamus.png" sourcerect="1,1,1,1" depth="0.57" origin="0.5,0.5" />
+            <ReelSound file="Content/Items/Alien/AlienPump.ogg" range="1000" volume="10" />
+            <!-- Snap after 1 seconds if not stuck to anything -->
+            <StatusEffect type="OnUse" target="This" Snapped="true" delay="1" checkconditionalalways="true">
+              <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+            </StatusEffect>
+          </Rope>
+      <Projectile characterusable="false" launchimpulse="10" sticktocharacters="true" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="true" sticktolighttargets="true">
+        <Attack structuredamage="15" itemdamage="30" targetforce="20" severlimbsprobability="0.8" >
+          <Affliction identifier="lacerations" strength="46" />
+          <Affliction identifier="bleeding" strength="10" />
+          <Affliction identifier="stun" strength="0.5" />
+          <Affliction identifier="psychosis" strength="5" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="UseTarget">
+            <Conditional entitytype="eq Character" />
+            <ParticleEmitter particle="weldspark" particleamount="3" copyentityangle="true" anglemin="130" anglemax="230" velocitymin="650" velocitymax="1500" scalemin="0.5" scalemax="1.0" drawontop="true" colormultiplier="255,200,225,180" />
+            <Sound file="Content/Sounds/Damage/LimbSlash1.ogg" selectionmode="random" range="500" />
+            <Sound file="Content/Sounds/Damage/LimbSlash2.ogg" range="500" />
+            <Sound file="Content/Sounds/Damage/LimbSlash3.ogg" range="500" />
+            <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="500" />
+            <Sound file="Content/Sounds/Damage/LimbSlash5.ogg" range="500" />
+            <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="500" />
+       </StatusEffect>
+       <StatusEffect type="OnImpact" target="UseTarget">
+        <Conditional entitytype="eq Structure" />
+        <ParticleEmitter particle="weldspark" particleamount="3" copyentityangle="true" anglemin="130" anglemax="230" velocitymin="650" velocitymax="1500" scalemin="0.5" scalemax="1.0" drawontop="true" colormultiplier="255,200,225,180" />
+       </StatusEffect>
+       <StatusEffect type="OnNotContained" target="This,Character" Oneshot="true" delay="4">
+        <ParticleEmitter particle="psychosisfx" particleamount="5" velocitymin="0.5" velocitymax="1" scalemin="0.8" scalemax="1.0" />
+        <Removeitem />
+      </StatusEffect>
+      </Projectile>
+    </Item>
   <!-- Pirate Armory Alarm -->
   <Item name="Alarm Buzzer" identifier="pa-armoryalarmbuzzer" description="TRIGGERS PIRATE ARMORY EVENT WHEN ACTIVATED TO MAKE PIRATES HOSTILE" category="Electrical" Tags="smallitem,sound" maxstacksize="8" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" isshootable="true" noninteractable="true" hideinmenus="true">
     <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,127,64,64" origin="0.5,0.5" />
