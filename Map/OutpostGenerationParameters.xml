@@ -6,7 +6,7 @@
     <!-- MODULE LIST -->
     <OutpostConfig identifier="TODO_Modules" 
       allowedlocationtypes="!!!DONT_EVER_DELETE_THIS_CONFIG!!!" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       spawncrewinsideoutpost="true">
@@ -82,7 +82,7 @@
     <!-- STARTER OUTPOST | If Regalis ever allows us to force this outpost at the start we can make a cool custom starter here -->
 <!--     <OutpostConfig identifier="tutorialoutpost" 
       allowedlocationtypes="tutorialoutpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       spawncrewinsideoutpost="true">
@@ -100,7 +100,22 @@
       </npcs>
     </OutpostConfig> -->
 
-    <!-- ABANDONED STATION -->
+    <!-- ABANDONED STATION -->  
+      <!-- unused for now -->
+      <OutpostConfig
+      identifier="AbandonedIrradiated"
+      totalmodulecount="6" minhallwaylength="0"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="1"/>
+      <modulecount flag="AbandonedCrewModule" count="1"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
     <OutpostConfig
       identifier="abandonedoutpostregular"
       totalmodulecount="6" minhallwaylength="0"
@@ -111,16 +126,16 @@
       allowstealing="true"
       appendtoreachtotalmodulecount="false"
       PreferredDifficulty="20">
-      <modulecount flag="DE_AbandonedAirlock" count="1"/>
-      <modulecount flag="DE_AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="DE_AbandonedAdminModule" count="1"/>
-      <modulecount flag="DE_AbandonedCrewModule" count="1"/>
-      <modulecount flag="DE_AbandonedResearchModule" count="1"/>
-      <modulecount flag="DE_AbandonedSecurityModule" count="1"/>
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="1"/>
+      <modulecount flag="AbandonedCrewModule" count="1"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
     </OutpostConfig>
     <OutpostConfig
       identifier="abandonedoutpostlarge"
-      totalmodulecount="9" minhallwaylength="0"
+      totalmodulecount="8" minhallwaylength="0"
       allowedlocationtypes="Abandoned"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
@@ -128,16 +143,16 @@
       allowstealing="true"
       appendtoreachtotalmodulecount="false"
       PreferredDifficulty="40">
-      <modulecount flag="DE_AbandonedAirlock" count="1"/>
-      <modulecount flag="DE_AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="DE_AbandonedAdminModule" count="2"/>
-      <modulecount flag="DE_AbandonedCrewModule" count="3"/>
-      <modulecount flag="DE_AbandonedResearchModule" count="1"/>
-      <modulecount flag="DE_AbandonedSecurityModule" count="1"/>
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="2"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
     </OutpostConfig>
     <OutpostConfig
       identifier="abandonedoutposthuge"
-      totalmodulecount="12" minhallwaylength="0"
+      totalmodulecount="10" minhallwaylength="0"
       allowedlocationtypes="Abandoned"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
@@ -145,17 +160,17 @@
       allowstealing="true"
       appendtoreachtotalmodulecount="false"
       PreferredDifficulty="60">
-      <modulecount flag="DE_AbandonedAirlock" count="1"/>
-      <modulecount flag="DE_AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="DE_AbandonedAdminModule" count="3"/>
-      <modulecount flag="DE_AbandonedCrewModule" count="3"/>
-      <modulecount flag="DE_AbandonedResearchModule" count="2"/>
-      <modulecount flag="DE_AbandonedSecurityModule" count="2"/>
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="2"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="2"/>
     </OutpostConfig>
 
     <!-- CHURCH OF HUSK -->
     <OutpostConfig identifier="huskchurch"
-      replaceinradiation="abandonedoutpost"
+      replaceinradiation=""
       totalmodulecount="5"
       appendtoreachtotalmodulecount="false"
       minhallwaylength="400"
@@ -210,7 +225,7 @@
 
     <!-- HABITATION OUTPOSTS -->
     <OutpostConfig identifier="outpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="4" 
       minhallwaylength="400" 
       allowedlocationtypes="Outpost" 
@@ -238,7 +253,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="settlement" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Settlement" 
@@ -281,7 +296,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="colony" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Colony" 
@@ -333,7 +348,7 @@
 
     <!-- TODO: needs ButcherStoreCity? -->
     <OutpostConfig identifier="city" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="9" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false" 
@@ -407,7 +422,7 @@
 
     <!-- MEDICAL OUTPOSTS -->
     <OutpostConfig identifier="clinic" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="Clinic" 
@@ -437,7 +452,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="hospital" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Hospital" 
@@ -482,7 +497,7 @@
 
     <!-- RESEARCH OUTPOSTS -->
     <OutpostConfig identifier="study" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="Study" 
@@ -512,7 +527,7 @@
     </OutpostConfig>
         
     <OutpostConfig identifier="researchoutpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="research" 
@@ -554,7 +569,7 @@
     
     <!-- MILITARY OUTPOSTS -->
     <OutpostConfig identifier="camp" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="Camp" 
@@ -592,7 +607,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="base" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="5" 
       minhallwaylength="400" 
       allowedlocationtypes="Base" 
@@ -637,7 +652,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="militaryoutpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="8" 
       minhallwaylength="400" 
       allowedlocationtypes="Military" 
@@ -702,7 +717,7 @@
     </OutpostConfig>
     
     <OutpostConfig identifier="Blockade" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="6" 
       minhallwaylength="400" 
       allowedlocationtypes="Blockade" 
@@ -789,7 +804,7 @@
 
     <!-- MINING OUTPOSTS -->
     <OutpostConfig identifier="survey" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="1" 
       minhallwaylength="0" 
       allowedlocationtypes="Survey" 
@@ -799,7 +814,7 @@
     </OutpostConfig>
 
     <OutpostConfig identifier="miningoutpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="10" 
       minhallwaylength="0" 
       allowedlocationtypes="Mine" 
@@ -821,7 +836,7 @@
 
     <!-- NO-TYPE OUTPOSTS -->
     <OutpostConfig identifier="construction" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="1" 
       minhallwaylength="400" 
       allowedlocationtypes="Construction" 
@@ -843,7 +858,7 @@
     <!-- INDUSTRIAL OUTPOSTS -->
     
     <OutpostConfig identifier="factory" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Factory" 
@@ -896,7 +911,7 @@
     </OutpostConfig>
 
     <OutpostConfig identifier="shipyard" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="Shipyard" 
@@ -948,7 +963,7 @@
 
     <!-- FOOD OUTPOSTS -->
     <OutpostConfig identifier="hydroponics" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="8" 
       minhallwaylength="400" 
       allowedlocationtypes="Hydroponics" 
@@ -991,7 +1006,7 @@
 
     <!-- PIRATE OUTPOST -->
     <OutpostConfig identifier="pirateoutpost" 
-      replaceinradiation="abandonedoutpost" 
+      replaceinradiation="" 
       totalmodulecount="7" 
       minhallwaylength="400" 
       allowedlocationtypes="PirateOutpost" 

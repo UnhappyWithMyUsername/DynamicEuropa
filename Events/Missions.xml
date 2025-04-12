@@ -305,15 +305,17 @@
   <!--END OF OVERRIDES-->
   <!--END OF OVERRIDES-->
   
-    <!-- Lair -->
+    <!-- Lairs -->
+    <!-- KNOWN BUG: enemies spawned inside a lair via mission wont attack the sub, I assume the sub being docked makes it part of the outpost -->
+    <!-- TODO: fix this!! -->
   <CrawlerLairMission identifier="crawlerlair1" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="2000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="30">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Laircrawler_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Laircrawler" min="4" max="5" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Laircrawler_large" min="1" max="2" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Laircrawler_large" min="2" max="2" spawnpointtags="boss" requirekill="false" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -332,13 +334,13 @@
   </CrawlerLairMission>
   
   <CrawlerLairMission identifier="crawlerlair2" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="2500" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="30" maxleveldifficulty="50">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Laircrawler_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Laircrawler" min="5" max="7" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Laircrawler_large" min="2" max="3" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Laircrawler_large" min="3" max="3" spawnpointtags="boss" requirekill="false" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -361,13 +363,14 @@
   </CrawlerLairMission>
   
   <CrawlerLairMission identifier="crawlerlair3" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="3000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" >
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Laircrawler_hatchling" min="3" max="5" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Laircrawler" min="4" max="6" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Laircrawler_large" min="4" max="6" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Laircrawler_large" min="3" max="4" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Laircrawler_hatchling" min="5" max="6" spawnpointtags="boss" requirekill="false" />
       <Character identifier="DE-Lairbroodmother" min="1" max="1" spawnpointtags="boss" />
     </Characters>
     <Items>
@@ -401,13 +404,14 @@
   </CrawlerLairMission>
   
   <MudraptorLairMission identifier="mudraptorlair1" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="15" maxleveldifficulty="40">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-lairmudraptor_hatchling" min="3" max="4" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor" min="1" max="2" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-lairmudraptor_hatchling" min="2" max="2" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-lairmudraptor" min="1" max="2" spawnpointtags="boss" requirekill="false" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -426,14 +430,15 @@
   </MudraptorLairMission>
 
   <MudraptorLairMission identifier="mudraptorlair2" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="40" maxleveldifficulty="60">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-lairmudraptor_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-lairmudraptor" min="2" max="3" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor_veteran" min="0" max="1" spawnpointtags="boss" />
+      <Character identifier="DE-lairmudraptor_hatchling" min="2" max="2" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-lairmudraptor_veteran" min="1" max="1" spawnpointtags="boss" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -456,14 +461,15 @@
   </MudraptorLairMission>
   
   <MudraptorLairMission identifier="mudraptorlair3" textidentifier="destroylair" tags="destroylair,mudraptorlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="60">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-lairmudraptor_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-lairmudraptor" min="3" max="4" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor_veteran" min="1" max="2" spawnpointtags="boss" />
+      <Character identifier="DE-lairmudraptor_hatchling" min="3" max="3" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-lairmudraptor_veteran" min="2" max="2" spawnpointtags="boss" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -493,12 +499,14 @@
   </MudraptorLairMission>
   
   <ThresherLairMission identifier="thresherlair1" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="3000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="45" maxleveldifficulty="60">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Lairtigerthresher" min="4" max="5" spawnpointtags="nest" requirekill="false" />
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="2" max="2" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-Lairtigerthresher" min="1" max="2" spawnpointtags="boss" requirekill="false" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -520,13 +528,14 @@
   </ThresherLairMission>
   
   <ThresherLairMission identifier="thresherlair2" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="3500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="60"  maxleveldifficulty="75">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Lairtigerthresher" min="5" max="7" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Lairbonethresher" min="0" max="1" spawnpointtags="boss" />
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="2" max="2" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-Lairbonethresher" min="1" max="1" spawnpointtags="boss" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -558,13 +567,14 @@
   </ThresherLairMission>
   
   <ThresherLairMission identifier="thresherlair3" textidentifier="destroylair" tags="destroylair,thresherlair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="75">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="Lair" to="None" requiredduration="0" cooldownafterchange="1" />
     <Characters>
       <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
       <Character identifier="DE-Lairtigerthresher" min="4" max="5" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Lairbonethresher" min="1" max="2" spawnpointtags="boss" />
+      <Character identifier="DE-Lairtigerthresher_hatchling" min="3" max="4" spawnpointtags="boss" requirekill="false" />
+      <Character identifier="DE-Lairbonethresher" min="1" max="1" spawnpointtags="boss" />
     </Characters>
     <Items>
       <Item identifier="Laircore" spawnpointtags="laircore" />
@@ -596,10 +606,11 @@
   </ThresherLairMission>
 
   <HuskCrawlerLairMission identifier="huskcrawlerlair1" textidentifier="huskcrawlerlair" tags="husklair" type="OutpostDestroy" reward="4000" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="50">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="HuskgroundsDE" />
-    <LocationTypeChange from="HuskgroundsDE" to="MilitaryForces" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="HuskgroundsDE" to="None" requiredduration="0" cooldownafterchange="1" />
     <Items>
+      <Item identifier="Laircore" spawnpointtags="laircore" />
       <Item identifier="selfdestructcrawleregg" spawnpointtags="nest" />
     </Items>
     <Characters>
@@ -613,15 +624,17 @@
   </HuskCrawlerLairMission>
   
   <HuskCrawlerLairMission identifier="huskcrawlerlair2" textidentifier="huskcrawlerlair" tags="husklair" type="OutpostDestroy" reward="4500" difficulty="4" commonness="100" allowretry="true" sonarlabel="Target" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="50" maxleveldifficulty="100">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="HuskgroundsDE" />
-    <LocationTypeChange from="HuskgroundsDE" to="MilitaryForces" requiredduration="1" cooldownafterchange="1" />
+    <LocationTypeChange from="HuskgroundsDE" to="None" requiredduration="0" cooldownafterchange="1" />
     <Items>
+      <Item identifier="Laircore" spawnpointtags="laircore" />
       <Item identifier="selfdestructcrawleregg" spawnpointtags="nest" />
     </Items>
     <Characters>
-      <Character identifier="DE-Crawlerhusk" min="10" max="12" spawnpointtags="nest" requirekill="true" />
+      <Character identifier="DE-Crawlerhusk" min="8" max="10" spawnpointtags="nest" requirekill="true" />
       <Character identifier="DE-Crawlerhusk" min="6" max="8" spawnpointtags="nest" requirekill="true" multiplayeronly="true" />
+      <Character identifier="Husk_Prowler" min="2" max="2" spawnpointtags="nest" requirekill="true" />
       <Character identifier="Husk_Chimera" min="1" max="1" spawnpointtags="boss" requirekill="true" />
     </Characters>
     <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
@@ -1336,167 +1349,6 @@
     <LocationType from="Survey" to="Any"/>
     <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
   </MineralMission>
-
-  <!-- BACKWARDS COMPATIBILITY | THESE MISSIONS ARE UNOBTAINABLE THROUGH GAMEPLAY AND ONLY EXIST TO ALLOW OLDER CAMPAIGNS TO LOAD -->
-  <CrawlerLairMission
-    identifier="crawlerlair"
-    tags=""
-    type="OutpostDestroy"
-    textidentifier="destroylair"
-    reward="3500"
-    difficulty="4"
-    commonness="100"
-    allowretry="true"
-    sonarlabel="Nest"
-    unhideentitysubcategories="abandonedmonster"
-    requireCorrectLocationType="true">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
-    <LocationType identifier="Lair" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
-    <Characters>
-      <Character identifier="DE-Laircrawler_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Laircrawler" min="5" max="7" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Laircrawler_large" min="2" max="3" spawnpointtags="nest" requirekill="false" />
-    </Characters>
-    <Items>
-      <Item identifier="Laircore" spawnpointtags="laircore" />
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
-      </Item>
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
-      </Item>
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
-      </Item>
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="crawleregg" spawnpointtags="nest" requirekill="false" />
-    </Items>
-    <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
-    <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
-  </CrawlerLairMission>
-  
-  <MudraptorLairMission
-    identifier="mudraptorlair"
-    tags=""
-    type="OutpostDestroy"
-    textidentifier="destroylair"
-    reward="4000"
-    difficulty="4"
-    commonness="100"
-    allowretry="true"
-    sonarlabel="Nest"
-    unhideentitysubcategories="abandonedmonster"
-    requireCorrectLocationType="true">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
-    <LocationType identifier="Lair" />
-    <LocationType identifier="LairMudraptor" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
-    <LocationTypeChange from="LairMudraptor" to="None" requiredduration="1" cooldownafterchange="1" />
-    <Characters>
-      <Character identifier="DE-lairmudraptor_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor_unarmored" min="3" max="5" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor" min="2" max="3" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-lairmudraptor_veteran" min="0" max="1" spawnpointtags="boss" />
-    </Characters>
-    <Items>
-      <Item identifier="Laircore" spawnpointtags="laircore" />
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
-      </Item>
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
-      </Item>
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
-      </Item>
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="largemudraptoregg" spawnpointtags="nest" requirekill="false" />
-    </Items>
-    <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
-    <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
-  </MudraptorLairMission>
-  
-  <ThresherLairMission
-    identifier="thresherlair"
-    tags=""
-    type="OutpostDestroy"
-    textidentifier="destroylair"
-    reward="4500"
-    difficulty="4"
-    commonness="100"
-    allowretry="true"
-    sonarlabel="Nest"
-    unhideentitysubcategories="abandonedmonster"
-    requireCorrectLocationType="true">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
-    <LocationType identifier="Lair" />
-    <LocationType identifier="LairThresher" />
-    <LocationTypeChange from="Lair" to="None" requiredduration="1" cooldownafterchange="1" />
-    <LocationTypeChange from="LairThresher" to="None" requiredduration="1" cooldownafterchange="1" />
-    <Characters>
-      <Character identifier="DE-Lairtigerthresher_hatchling" min="4" max="6" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Lairtigerthresher" min="5" max="7" spawnpointtags="nest" requirekill="false" />
-      <Character identifier="DE-Lairbonethresher" min="0" max="1" spawnpointtags="boss" />
-    </Characters>
-    <Items>
-      <Item identifier="Laircore" spawnpointtags="laircore" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="5" />
-      </Item>
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="7" />
-      </Item>
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="9" />
-      </Item>
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="11" />
-      </Item>
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false">
-        <StatusEffectOnApproach target="This" Scale="1.0" setvalue="true" delay="13" />
-      </Item>
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-      <Item identifier="tigerthresheregg" spawnpointtags="nest" requirekill="false" />
-    </Items>
-    <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
-    <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
-  </ThresherLairMission>
-  
-  <HuskCrawlerLairMission
-    identifier="huskcrawlerlair"
-    tags=""
-    type="OutpostDestroy"
-    reward="4500"
-    difficulty="4"
-    commonness="100"
-    allowretry="true"
-    sonarlabel="Target"
-    unhideentitysubcategories="abandonedmonster"
-    requireCorrectLocationType="true">
-    <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="214,50,48" />
-    <LocationType identifier="HuskgroundsDE" />
-    <LocationTypeChange from="HuskgroundsDE" to="MilitaryForces" requiredduration="1" cooldownafterchange="1" />
-    <Items>
-      <Item identifier="selfdestructcrawleregg" spawnpointtags="nest" />
-    </Items>
-    <Characters>
-      <Character identifier="DE-Crawlerhusk" min="12" max="16" spawnpointtags="nest" requirekill="true" />
-      <Character identifier="DE-Crawlerhusk" min="4" max="8" spawnpointtags="nest" requirekill="true" multiplayeronly="true" />
-    </Characters>
-    <message header="missionheader0.destroylair" text="missionmessage0.destroylair" />
-    <TriggerEvent state="0" eventidentifier="lairbombspawn" campaignonly="true"/>
-  </HuskCrawlerLairMission>
-  
   
   <OutpostMission
     identifier="vipnapping"
