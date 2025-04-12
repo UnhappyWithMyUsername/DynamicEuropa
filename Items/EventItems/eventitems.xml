@@ -604,7 +604,7 @@
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
             <RequiredItems items="boardingaxedementoniteprojectile" type="Contained" />
-            <RequiredSkill identifier="weapons" level="60" />
+            <RequiredSkill identifier="weapons" level="100" />
              <StatusEffect type="OnUse" target="This" setvalue="true" condition="10" />
              <StatusEffect type="OnUse" target="Character">
               <Sound file="Content/Items/Alien/AlienTurret2.ogg" range="500" />
@@ -615,10 +615,10 @@
              </StatusEffect>
              <RequiredItems items="boardingaxedementoniteprojectile" type="Contained" />
       </RangedWeapon>
-      <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="55,40" handle1="-5,-90" handle2="0,-115" aimangle="-10" msg="ItemMsgPickUpSelect" />
+      <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="55,40" holdangle="-20" handle1="-5,-90" handle2="0,-110" aimangle="0" msg="ItemMsgPickUpSelect" />
           <ItemContainer canbeselected="false" ShowContainedStateIndicator="false" drawinventory="false" allowaccess="false" capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" spawnwithid="boardingaxedementoniteprojectile" >
             <Containable items="boardingaxedementoniteprojectile" >
-            <StatusEffect type="OnRemoved" target="This" delay="4" stackable="false" disableDeltaTime="true" >
+            <StatusEffect type="OnRemoved" target="This" delay="3.5" stackable="false" disableDeltaTime="true" >
              <SpawnItem identifier="boardingaxedementoniteprojectile" spawnposition="ThisInventory" SpawnIfInventoryFull="false" SpawnIfCantBeContained="false" />
              <ParticleEmitter particle="psychosisfx" particleamount="5" velocitymin="0.5" velocitymax="1" scalemin="0.8" scalemax="1.0" />
             </StatusEffect>
@@ -644,11 +644,11 @@
             </StatusEffect>
           </Rope>
       <Projectile characterusable="false" launchimpulse="10" sticktocharacters="true" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="true" sticktolighttargets="true">
-        <Attack structuredamage="15" itemdamage="30" targetforce="20" severlimbsprobability="0.8" >
+        <Attack structuredamage="15" itemdamage="30" targetforce="20" severlimbsprobability="7.5" >
           <Affliction identifier="lacerations" strength="46" />
           <Affliction identifier="bleeding" strength="10" />
           <Affliction identifier="stun" strength="0.5" />
-          <Affliction identifier="psychosis" strength="5" />
+          <Affliction identifier="psychosis" strength="10" />
         </Attack>
         <StatusEffect type="OnImpact" target="UseTarget">
             <Conditional entitytype="eq Character" />
@@ -664,7 +664,7 @@
         <Conditional entitytype="eq Structure" />
         <ParticleEmitter particle="weldspark" particleamount="3" copyentityangle="true" anglemin="130" anglemax="230" velocitymin="650" velocitymax="1500" scalemin="0.5" scalemax="1.0" drawontop="true" colormultiplier="255,200,225,180" />
        </StatusEffect>
-       <StatusEffect type="OnNotContained" target="This,Character" Oneshot="true" delay="4">
+       <StatusEffect type="OnNotContained" target="This,Character" Oneshot="true" delay="3.5">
         <ParticleEmitter particle="psychosisfx" particleamount="5" velocitymin="0.5" velocitymax="1" scalemin="0.8" scalemax="1.0" />
         <Removeitem />
       </StatusEffect>
