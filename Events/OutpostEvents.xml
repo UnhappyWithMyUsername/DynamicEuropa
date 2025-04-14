@@ -2560,6 +2560,97 @@
       <Label name="end" />
     </ScriptedEvent>
     
+    <ScriptedEvent identifier="methformedsTEST">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="mafiadoctornpc" targettag="mafiadoctor" spawnlocation="Outpost" targetmoduletags="crewmodule" />
+      <ConversationAction speakertag="mafiadoctor" invokertag="triggerer_player" text="eventtext.methformeds.nometh" eventsprite="doctor" dialogtype="small" > 
+      </ConversationAction>
+      <StatusEffectAction targettag="mafiadoctor" >
+        <StatusEffect target="this" >
+          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" volume="2" />
+          <Affliction identifier="stun" amount="1" />
+        </StatusEffect>
+        <StatusEffect target="this" duration="30.0" >
+          <Affliction identifier="chemaddiction" amount="3" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <ClearTagAction tag="triggerer_player" />
+      <ClearTagAction tag="mafiadoctor" />
+    </ScriptedEvent>
+   
+    <!-- TODO: BUGGED, the doctor interact button is disabled after conversations/triggers and never reappaears after ending the event, currently no way to make it appear again, guess I'll just heal through med UI
+    spawns an unlicensed doctor, you're supposed to give meth to access the doctor UI -->
+    <ScriptedEvent identifier="methformeds">
+      <CheckDataAction identifier="methformedsnorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>
+          <SpawnAction npcsetidentifier="customnpcs" npcidentifier="mafiadoctornpc" targettag="mafiadoctor" spawnlocation="Outpost" targetmoduletags="crewmodule"/>
+          <TagAction criteria="player" tag="player" />
+          <Label name="spotdoctor" />
+          <TriggerAction target1tag="player" target2tag="mafiadoctor" applytotarget1="triggerer_player" waitforinteraction="true" radius="300" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.dirtydoctor" dialogtype="Regular" eventsprite="doctor" >
+            <Option text="eventtext.methformeds.dontlookgood">
+              <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.lostlicense" eventsprite="doctor" >
+                <Option text="eventtext.methformeds.nojob"> 
+                  <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.kickedout" eventsprite="doctor" >
+                    <Option text="eventtext.methformeds.useadoc">
+                      <Goto name="skiptrigger" />
+                      <Label name="methcheck" />
+                      <TriggerAction target1tag="player" target2tag="mafiadoctor" applytotarget1="triggerer_player" radius="200" waitforinteraction="true" />
+                      <Label name="skiptrigger" />
+                      <ConversationAction text="eventtext.methformeds.findmeth" targettag="triggerer_player" eventsprite="doctor" >
+                        <Option text="EventText.methformeds.havesome" endconversation="true">
+                          <CheckItemAction targettag="triggerer_player" itemidentifiers="meth" amount="1" ApplyTagToItem="pickedmeth">
+                            <Failure>
+                              <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.nometh" eventsprite="doctor" dialogtype="small" endconversation="true" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <Goto name="methcheck" />
+                            </Failure>
+                            <Success>
+                              <TagAction criteria="eventtag:pickedmeth" tag="removemeth" chooserandom="true" ChoosePercentage="1"/>
+                              <StatusEffectAction targettag="removemeth">
+                                <StatusEffect target="This" >
+                                  <Remove />
+                                </StatusEffect>
+                              </StatusEffectAction>
+                              <StatusEffectAction targettag="mafiadoctor" >
+                                <StatusEffect target="this">
+                                  <Sound file="Content/Items/Medical/Syringe.ogg" range="500" volume="2" />
+                                  <Affliction identifier="stun" amount="1" />
+                                </StatusEffect>
+                                <StatusEffect target="this" duration="30.0" >
+                                  <Affliction identifier="chemaddiction" amount="3" />
+                                </StatusEffect>
+                              </StatusEffectAction>
+                              <ReputationAction increase="2" identifier="bandits" targettype="Faction" />
+                              <ConversationAction text="eventtext.methformeds.feelsgood" endconversation="true" eventsprite="doctor" />
+                              <!-- <SetDataAction identifier="methformedsnorepeat" value="1" /> -->
+                              <Goto name="end" />
+                            </Success>
+                          </CheckItemAction >
+                        </Option>
+                        <Option text="eventtext.generic.ignore" endconversation="true">
+                          <ClearTagAction tag="triggerer_player" />
+                          <Goto name="methcheck" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="eventtext.generic.ignore" endconversation="true">
+              <ClearTagAction tag="triggerer_player" />
+              <Goto name="spotdoctor" />
+            </Option>
+          </ConversationAction>
+        </Success> 
+      </CheckDataAction>
+      <Label name="end" />
+    </ScriptedEvent>
+    
     <!--"Orange Protection Society"-->
     <ScriptedEvent identifier="orangePETA" commonness="100">
       <!-- checks if you've done 2 or more orangeboy transports -->
