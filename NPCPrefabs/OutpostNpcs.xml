@@ -107,6 +107,7 @@
       </ItemSet>
     </npc>
     
+    <!-- IS THERE A NEED FOR THIS? WE CAN JUST USE OVERRIDEN VANILLA ONE NO? -->
     <!-- doctor is the same as vanilla, but instead of checking for a specific outpost module and then limiting that NPC to that module only, it checks for a spawnpoint tag instead to allow for custom placement -->
     <npc identifier="de_outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -122,6 +123,7 @@
       </ItemSet>
     </npc>
     
+    <!-- Unused NPC for unused event -->
     <npc identifier="quartermaster" job="mechanic" spawnpointtags="shop" commonness="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="headset" equip="true">
@@ -164,7 +166,7 @@
       </ItemSet>
     </npc>
 
-    <!-- merchant NPC that only buys items but doesnt sell any, used in outposts without shops? -->
+    <!-- merchant NPC that only buys items but doesnt sell any, currently not used -->
     <npc identifier="merchantsellonly" job="watchman" spawnpointtags="shop" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -185,6 +187,8 @@
   <!--                               Pirate NPCs                                 -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <npcset identifier="outpostnpcspirate">
+  
+    <!-- All of these NPCs have meaningful overrides like spawnpoint, faction, equipment... DO NOT TOUCH -->
   
     <npc identifier="outpostmanagerpirate" job="captain" tags="managerpirate,outpostmanagerpirate,piratenpc" faction="bandits" spawnpointtags="pirateadmin" healthmultiplier="0.5" behavior="Passive" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="0.5">
@@ -787,6 +791,8 @@
   <!--                     Vanilla Outpost NPCs Overrides                        -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <npcset identifier="outpostnpcs1">
+  
+    <!-- REMOVERRIDE? -->
     <npc identifier="captain" job="captain" commonness="1" spawnpointtags="admin" behavior="Passive" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true" tags="id_outpostsecurity"/>
@@ -823,6 +829,7 @@
       </ItemSet>-->
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="outpostmanagercoalition" job="outpostmanager" tags="outpostmanager" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="1">
         <Item identifier="administratorclothes" equip="true"/>
@@ -836,6 +843,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="outpostmanagerseparatists" job="outpostmanager" tags="outpostmanager" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
       <ItemSet commonness="1">
         <Item identifier="piratecaptainhat" equip="true" />
@@ -850,6 +858,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? I don't know what the comment below means -->
     <!-- for backwards compatibility (some mods that override location types still use this - if it doesn't exist, you can't get any missions)
           not used by the vanilla game -->
     <npc identifier="outpostmanager" job="outpostmanager" tags="outpostmanager" spawnpointtags="admin" behavior="Passive" preferredoutpostmoduletypes="admin,adminmodule">
@@ -865,6 +874,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="hrmanager" job="watchman" spawnpointtags="hr" healthmultiplier="1" campaigninteractiontype="Crew" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="quartermasterclothes" equip="true"/>
@@ -883,6 +893,7 @@
       </ItemSet>
     </npc>
 
+    <!-- This one has the hazmat suit for enhanced reactors compatibility -->
     <npc identifier="reactoroperator" job="engineer" commonness="1" spawnpointtags="engineering" healthmultiplier="1" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
       <ItemSet commonness="1">
         <Item identifier="orangejumpsuit2" equip="true"/>
@@ -898,6 +909,7 @@
       </ItemSet>
     </npc>
     
+    <!-- This one has the hazmat suit for enhanced reactors compatibility -->
     <npc identifier="reactoroperatorcoalition" job="engineer" commonness="1" spawnpointtags="engineering" healthmultiplier="1" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
       <ItemSet commonness="1">
         <Item identifier="orangejumpsuit1" equip="true"/>
@@ -925,6 +937,7 @@
       </ItemSet>
     </npc>
 
+    <!-- This one has the hazmat suit for enhanced reactors compatibility -->
     <npc identifier="reactoroperatorseparatists" job="engineer" commonness="1" spawnpointtags="engineering" healthmultiplier="1" behavior="Passive" preferredoutpostmoduletypes="engineeringmodule">
       <ItemSet commonness="1">
         <Item identifier="engineerseparatistsuniform1" equip="true"/>
@@ -952,6 +965,7 @@
       </ItemSet>
     </npc>
     
+    <!-- uses spawn point tag -->
     <npc identifier="subupgradenpc" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -975,6 +989,7 @@
       </ItemSet>
     </npc>
  
+    <!-- uses spawn point tag -->
     <npc identifier="subupgradenpccoalition" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -1018,6 +1033,7 @@
       </ItemSet>
     </npc>
     
+    <!-- uses spawn point tag -->
     <npc identifier="subupgradenpcseparatists" job="mechanic" commonness="1" spawnpointtags="shop_upgrades" healthmultiplier="1" campaigninteractiontype="Upgrade" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -1061,6 +1077,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="subsalesnpc" job="mechanic" commonness="1" spawnpointtags="shop_submarines" healthmultiplier="1" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -1081,6 +1098,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="subsalesnpccoalition" job="mechanic" commonness="1" spawnpointtags="shop_submarines" healthmultiplier="1" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -1135,6 +1153,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="subsalesnpcseparatist" job="mechanic" commonness="1" spawnpointtags="shop_submarines" healthmultiplier="1" campaigninteractiontype="PurchaseSub" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="toolbelt" equip="true">
@@ -1189,6 +1208,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantoutpost" job="watchman" spawnpointtags="shop_outpost" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1205,6 +1225,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantcity" job="watchman" spawnpointtags="shop_city" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1221,6 +1242,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantmine" job="watchman" spawnpointtags="shop_mine" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1237,6 +1259,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantresearch" job="watchman" spawnpointtags="shop_research" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1253,6 +1276,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantmilitary" job="watchman" spawnpointtags="shop_military" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1269,6 +1293,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? same spawn point as vanilla -->
     <npc identifier="merchantarmory" job="watchman" spawnpointtags="armory" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1283,6 +1308,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantmedical" job="watchman" spawnpointtags="shop_medical" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="medicalofficerclothes" equip="true"/>
@@ -1297,6 +1323,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="merchantengineering" job="watchman" spawnpointtags="shop_engineering" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="orangejumpsuit1" equip="true"/>
@@ -1309,6 +1336,7 @@
       </ItemSet>
     </npc>
     
+    <!-- REMOVERRIDE? uses pressure stabilizer -->
     <npc identifier="securitynpccoalition" job="outpostsecurityofficer" tags="securitynpc" spawnpointtags="security" healthmultiplier="1.2" behavior="Patrol">
       <ItemSet>
         <Item identifier="securitypatrolclothes" equip="true" />
@@ -1375,6 +1403,7 @@
       </ItemSet>
     </npc>
 
+    <!-- uses spawn point tag -->
     <npc identifier="armsdealer" job="watchman" spawnpointtags="shop_weapons" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="baseballcap" equip="true"/>
@@ -1395,6 +1424,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? uses pressure stabilizer -->
     <npc identifier="securitynpcseparatists" job="outpostsecurityofficer" tags="securitynpc" spawnpointtags="security" healthmultiplier="1.2" behavior="Patrol">
       <ItemSet>
         <Item identifier="securityseparatistsuniform1" equip="true" />
@@ -1461,6 +1491,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="cargomissiongiver" job="mechanic" moduleflags="none" behavior="Passive">
       <ItemSet>
         <Item identifier="commonerclothes1" equip="true"/>
@@ -1495,6 +1526,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="salvagemissiongiver" job="medicaldoctor" moduleflags="none" behavior="Passive">
       <ItemSet commonness="1">
         <Item identifier="doctorsuniform1" equip="true"/>
@@ -1512,7 +1544,8 @@
       </ItemSet>
     </npc>
 
-    <npc identifier="outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+    <!-- uses spawn point tag -->
+    <npc identifier="outpostdoctor" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" moduleflags="MedicalModule" behavior="Passive">
       <ItemSet commonness="1">
         <Item identifier="medicalofficerclothes" equip="true"/>
         <Item identifier="idcard" equip="true"/>
@@ -1526,7 +1559,8 @@
       </ItemSet>
     </npc>    
 
-    <npc identifier="outpostdoctorcoalition" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+    <!-- uses spawn point tag -->
+    <npc identifier="outpostdoctorcoalition" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" moduleflags="MedicalModule" behavior="Passive">
       <ItemSet commonness="1">
         <Item identifier="medicalofficerclothes" equip="true"/>
         <Item identifier="idcard" equip="true"/>
@@ -1551,7 +1585,8 @@
       </ItemSet>
     </npc>
     
-    <npc identifier="outpostdoctorseparatists" job="medicaldoctor" campaigninteractiontype="MedicalClinic" moduleflags="MedicalModule" behavior="Passive">
+    <!-- uses spawn point tag -->
+    <npc identifier="outpostdoctorseparatists" job="medicaldoctor" campaigninteractiontype="MedicalClinic" spawnpointtags="doctor" moduleflags="MedicalModule" behavior="Passive">
       <ItemSet commonness="1">
         <Item identifier="medicseparatistsuniform1" equip="true"/>
         <Item identifier="idcard" equip="true"/>
@@ -1576,6 +1611,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? same spawn point as vanilla -->
     <npc identifier="watchman" job="watchman" spawnpointtags="unlockpath" healthmultiplier="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="watchmanclothes" equip="true"/>
@@ -1595,6 +1631,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? same spawn point as vanilla -->
     <npc identifier="watchmanseparatist" job="watchman" spawnpointtags="unlockpath" healthmultiplier="1" behavior="StayInHull">
       <ItemSet commonness="1">
         <Item identifier="watchmanclothes" equip="true"/>
@@ -1614,6 +1651,7 @@
       </ItemSet>
     </npc>
     
+    <!-- REMOVERRIDE? -->
     <npc identifier="commoner" commonness="0" moduleflags="none" job="mechanic" behavior="Passive" healthmultiplier="0.75" preferredoutpostmoduletypes="crewmodule,seccrewmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1676,7 +1714,8 @@
       </ItemSet>
     </npc>
 
-    <npc identifier="researcher" commonness="0" moduleflags="none" job="medicaldoctor" behavior="Passive" healthmultiplier="0.75" ModuleFlags="ResearchModule" preferredoutpostmoduletypes="researchmodule,crewmodule">
+    <!-- REMOVERRIDE? -->
+    <npc identifier="researcher" commonness="0" moduleflags="none" job="medicaldoctor" tags="researchernpc" behavior="Passive" healthmultiplier="0.75" ModuleFlags="ResearchModule" preferredoutpostmoduletypes="researchmodule,crewmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
         <Item identifier="researcherclothes" equip="true"/>
@@ -1686,6 +1725,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="miner" commonness="0" moduleflags="none" job="mechanic" behavior="Passive" healthmultiplier="0.75" preferredoutpostmoduletypes="crewmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1714,6 +1754,7 @@
       </ItemSet>
     </npc>    
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="hardhatman" commonness="0" moduleflags="none" job="mechanic" behavior="Passive" preferredoutpostmoduletypes="crewmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1726,6 +1767,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="clown" commonness="0" faction="clowns" moduleflags="clownmodule" job="assistant" behavior="Passive" preferredoutpostmoduletypes="clownmodule" spawnpointtags="clown">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1774,6 +1816,7 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE? -->
     <npc identifier="merchantclown" commonness="0" faction="clowns" moduleflags="clownmodule" job="assistant" behavior="Passive" preferredoutpostmoduletypes="clownmodule" campaigninteractiontype="Store" spawnpointtags="clown">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1783,6 +1826,7 @@
       </ItemSet>
     </npc>
     
+    <!-- REMOVERRIDE? -->
     <npc identifier="huskcultist" tags="huskcultist" faction="huskcult" commonness="0" moduleflags="huskmodule" job="assistant" behavior="Passive" healthmultiplier="0.5" preferredoutpostmoduletypes="huskmodule" spawnpointtags="husk">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1797,7 +1841,7 @@
       </ItemSet>
     </npc>
     
-    <!-- Husk NPCs -->
+    <!-- I have no idea why this one is different from the vanilla eccelsiast, but I'd rather not touch it -->
     <npc identifier="huskcultecclesiast" tags="huskcultist,huskresearcher" commonness="0" moduleflags="researchmodule" job="assistant" behavior="StayInHull" healthmultiplier="1.0" spawnpointtags="research">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true" tags="id_huskresearcher"/>
@@ -1822,6 +1866,8 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                                  Hireable                                 -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- I honestly forgot what the fuck we're overriding on hireables, seriously -->
 
     <npc identifier="hireablecoalitionsecurityofficer" job="securityofficer" tags="securitynpc" skillmultiplier="1.5" experiencepoints="2000">
       <ItemSet>
@@ -2639,7 +2685,7 @@
       </ItemSet>
     </npc>
 
-    <!-- cultists are security -->
+    <!-- templars are security -->
     <npc identifier="huskcultistsecurity" tags="huskcultist,securitynpc" commonness="0" job="securityofficer" behavior="Patrol" healthmultiplier="1.2" spawnpointtags="husk">
     
       <!-- Boring regular security itemset -->
