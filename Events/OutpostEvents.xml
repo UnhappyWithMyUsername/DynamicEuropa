@@ -2578,8 +2578,8 @@
       <ClearTagAction tag="mafiadoctor" />
     </ScriptedEvent>
    
-    <!-- TODO: BUGGED, the doctor interact button is disabled after conversations/triggers and never reappaears after ending the event, currently no way to make it appear again, guess I'll just heal through med UI
-    spawns an unlicensed doctor, you're supposed to give meth to access the doctor UI -->
+    <!-- BUGGED, the doctor interact button is disabled after conversations/triggers and never reappaears after ending the event, currently no way to make it appear again, guess I'll just heal through event instead
+    spawns an unlicensed doctor, you're supposed to give meth to access the doctor UI, but the doc gets increasingly addicted and overdoses -->
     <ScriptedEvent identifier="methformeds">
       <CheckDataAction identifier="methformedsnorepeat" condition="eq 0" >
         <Failure>
@@ -2590,6 +2590,7 @@
           <TagAction criteria="player" tag="player" />
           <Label name="spotdoctor" />
           <TriggerAction target1tag="player" target2tag="mafiadoctor" applytotarget1="triggerer_player" waitforinteraction="true" radius="300" />
+          <SetDataAction identifier="methformedsnorepeat" value="1" />
           <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.dirtydoctor" dialogtype="Regular" eventsprite="doctor" >
             <Option text="eventtext.methformeds.dontlookgood">
               <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.lostlicense" eventsprite="doctor" >
@@ -2598,6 +2599,7 @@
                     <Option text="eventtext.methformeds.useadoc">
                       <Goto name="skiptrigger" />
                       <Label name="methcheck" />
+                      <ClearTagAction tag="triggerer_player" />
                       <TriggerAction target1tag="player" target2tag="mafiadoctor" applytotarget1="triggerer_player" radius="200" waitforinteraction="true" />
                       <Label name="skiptrigger" />
                       <ConversationAction text="eventtext.methformeds.findmeth" targettag="triggerer_player" eventsprite="doctor" >
@@ -2605,7 +2607,6 @@
                           <CheckItemAction targettag="triggerer_player" itemidentifiers="meth" amount="1" ApplyTagToItem="pickedmeth">
                             <Failure>
                               <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.nometh" eventsprite="doctor" dialogtype="small" endconversation="true" />
-                              <ClearTagAction tag="triggerer_player" />
                               <Goto name="methcheck" />
                             </Failure>
                             <Success>
@@ -2622,17 +2623,27 @@
                                 </StatusEffect>
                                 <StatusEffect target="this" duration="30.0" >
                                   <Affliction identifier="chemaddiction" amount="3" />
+                                  <Affliction identifier="chemwithdrawal" amount="0.5" />
+                                  <Affliction identifier="haste" amount="1" />
                                 </StatusEffect>
                               </StatusEffectAction>
-                              <ReputationAction increase="2" identifier="bandits" targettype="Faction" />
-                              <ConversationAction text="eventtext.methformeds.feelsgood" endconversation="true" eventsprite="doctor" />
-                              <!-- <SetDataAction identifier="methformedsnorepeat" value="1" /> -->
+                              <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.feelsgood" endconversation="true" dialogtype="small" eventsprite="doctor" />
+                              <StatusEffectAction targettag="triggerer_player" >
+                                <StatusEffect target="this" duration="5.0" >
+                                  <Sound file="Content/Items/Medical/bandage1.ogg" range="500" volume="2" />
+                                  <ReduceAffliction identifier="damage" amount="2" />
+                                  <ReduceAffliction identifier="bleeding" amount="1" />
+                                  <ReduceAffliction identifier="bloodloss" amount="1" />
+                                  <ReduceAffliction identifier="burn" amount="1" />
+                                </StatusEffect>
+                              </StatusEffectAction>
+                              <WaitAction time="5" />
+                              <Goto name="methcheck" MaxTimes="3" />
                               <Goto name="end" />
                             </Success>
                           </CheckItemAction >
                         </Option>
                         <Option text="eventtext.generic.ignore" endconversation="true">
-                          <ClearTagAction tag="triggerer_player" />
                           <Goto name="methcheck" />
                         </Option>
                       </ConversationAction>
