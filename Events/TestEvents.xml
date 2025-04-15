@@ -173,5 +173,17 @@
       <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
     </ScriptedEvent>
   
+  
+    <ScriptedEvent identifier="operateTEST"> 
+        <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="scrapdealer" targettag="controllernpc" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" targetmoduletags="crewmodule"/>
+        <WaitAction time="1" />
+        <SpawnAction itemidentifier="rum" SpawnPointTag="controllernpc" targettag="controlleditem" offset="100" />
+        <WaitAction time="1" />
+        <NPCOperateItemAction npctag="controllernpc" targettag="controlleditem" ItemComponentName="Holdable" operate="true" OrderOption="" RequireEquip="true"/>
+        <WaitAction time="1" />
+        <!-- <NPCOperateItemAction npctag="controllernpc" targettag="controlleditem" ItemComponentName="Holdable" operate="false" OrderOption="" RequireEquip="true"/> -->
+        <!-- <NPCWaitAction npctag="controllernpc" wait="true" priority="50"/> -->
+    </ScriptedEvent>
+  
   </EventPrefabs>  
 </Randomevents>
