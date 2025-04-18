@@ -2096,104 +2096,6 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
-        
-    <!-- "Pirate Divers" 
-    A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
-    <ScriptedEvent identifier="piratediversoutpost">
-      <CheckDataAction identifier="piratediversnorepeat" condition="eq 0" >
-        <Failure>
-        </Failure>
-        <Success>
-          <CheckReputationAction targettype="faction" identifier="bandits" condition="lt -5">
-            <Success>
-              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
-              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
-              <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
-              <TagAction criteria="player" tag="player" />
-              <TagAction criteria="crew" tag="crew" />
-              <WaitAction time="10" />
-              <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
-              <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
-              <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="bandittalk">
-                <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
-                  <Label name="dialogstep2" />
-                  <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-                  <WaitAction time="5" />
-                  <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="bandittalk"/>
-                  <WaitAction time="5" />
-                  <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="bandittalk">              
-                    <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
-                      <Label name="dialogstep3" />
-                      <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
-                      <WaitAction time="5" />
-                      <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
-                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="bandittalk">
-                        <Option text="eventtext.piratediversoutpost.takebooze">
-                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="bandittalk"/>
-                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
-                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
-                          <!-- Go to part 2 -->
-                          <GoTo name="pirateinvaders" />
-                        </Option >
-                        <Option text="eventtext.piratediversoutpost.getthehelloff" >
-                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" eventsprite="bandittalk" endconversation="true" />
-                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
-                          <!-- Go to part 2 -->
-                          <GoTo name="pirateinvaders" />
-                        </Option >
-                      </ConversationAction>
-                    </Option>  
-                    <Option text="eventtext.piratediversoutpost.dontcare" endconversation="true" >
-                      <GoTo name="dialogstep3" />
-                    </Option >
-                  </ConversationAction>
-                </Option >
-                <Option text="eventtext.piratediversoutpost.buggeroff" endconversation="true" >
-                  <GoTo name="dialogstep2" />
-                </Option >
-              </ConversationAction>
-              <!-- part 2: pirates invade -->
-              <Label name="pirateinvaders" />
-              <WaitAction time="15" />
-              <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
-              <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
-              <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
-              <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false"/>
-              <WaitAction time="3" />
-              <StatusEffectAction targettag="piratediver">
-                <StatusEffect target="this" >
-                  <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
-              <WaitAction time="2" />
-              <NPCFollowAction npctag="pirateambusher" targettag="navterminal" follow="true" />
-              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
-              <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
-              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
-              <!-- use spoken dialogue if ever implemented -->
-              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="firefight" ContinueAutomatically="true"/>
-              <SetDataAction identifier="piratediversnorepeat" operation="set" value="1" />
-              <NPCChangeTeamAction npctag="pirateambusher" teamtag="Team2" />
-              <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
-              <Label name="combatrefresh" />
-              <TagAction criteria="player" tag="player" />
-              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-              <WaitAction time="5" />
-              <GoTo name="combatrefresh" />
-            </Success>
-            <Failure>
-            </Failure>
-          </CheckReputationAction>
-        </Success>
-      </CheckDataAction>
-    </ScriptedEvent>
     
     <!-- If you didn't pay enough at the toll, the armory is locked and you have to pay extra to get inside -->
     <ScriptedEvent identifier="piratearmorylocked">
@@ -2293,6 +2195,34 @@
       <ClearTagAction tag="triggerer_player" />
       <GoTo name="attackplayer" />
     </ScriptedEvent>
+
+    
+    <!-- Checks if pirates are dead but I don't think this actually does anything??? It just switches them to team2  -->
+    <ScriptedEvent identifier="piratecheckfordead">
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantcity" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <Label name="recheck" />
+      <CheckConditionalAction targettag="deadpirate" isdead="true" >
+        <Success>
+          <NPCChangeTeamAction npctag="deadpirate" teamtag="Team2" />
+        </Success>
+        <Failure>
+          <WaitAction time="1" />
+          <GoTo name="recheck" />
+        </Failure>
+      </CheckConditionalAction>
+    </ScriptedEvent>
           
     <!-- Pirate informant
     You can pay the pirate manager to access a cargo robbing mission -->
@@ -2320,6 +2250,105 @@
           <GoTo name="waitforinput" />
         </Option>
       </ConversationAction>
+    </ScriptedEvent>
+    
+
+    <!-- "Pirate Divers" 
+    A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
+    <ScriptedEvent identifier="piratediversoutpost">
+      <CheckDataAction identifier="piratediversnorepeat" condition="eq 0" >
+        <Failure>
+        </Failure>
+        <Success>
+          <CheckReputationAction targettype="faction" identifier="bandits" condition="lt -5">
+            <Success>
+              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Player" />
+              <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
+              <TagAction criteria="itemtag:navterminal" tag="navterminal" SubmarineType="Player" chooserandom="true" />
+              <TagAction criteria="player" tag="player" />
+              <TagAction criteria="crew" tag="crew" />
+              <WaitAction time="10" />
+              <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="pirateambusher" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
+              <TriggerAction target1tag="player" target2tag="pirateambusher" applytotarget1="playertofollow" radius="50" waitforinteraction="false" />
+              <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+              <ConversationAction targettag="playertofollow" text="eventtext.piratediversoutpost.meetambusher" endeventifinterrupted="false" dialogtype="Small" eventsprite="bandittalk">
+                <Option text="eventtext.piratediversoutpost.agree" endconversation="true" >
+                  <Label name="dialogstep2" />
+                  <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+                  <WaitAction time="5" />
+                  <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain" eventsprite="bandittalk"/>
+                  <WaitAction time="5" />
+                  <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+                  <ConversationAction text="eventtext.piratediversoutpost.Iwascaptain2" eventsprite="bandittalk">              
+                    <Option text="eventtext.piratediversoutpost.goodluck" endconversation="true">
+                      <Label name="dialogstep3" />
+                      <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="true" />
+                      <WaitAction time="5" />
+                      <TriggerAction target1tag="pirateambusher" target2tag="player" applytotarget2="playertofollow" radius="150" waitforinteraction="false" />
+                      <ConversationAction text="eventtext.piratediversoutpost.offersbooze" eventsprite="bandittalk">
+                        <Option text="eventtext.piratediversoutpost.takebooze">
+                          <ConversationAction text="eventtext.piratediversoutpost.drinkup" eventsprite="bandittalk"/>
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <SpawnAction itemidentifier="he-rum" targetinventory="playertofollow" />
+                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                          <!-- Go to part 2 -->
+                          <GoTo name="pirateinvaders" />
+                        </Option >
+                        <Option text="eventtext.piratediversoutpost.getthehelloff" >
+                          <ConversationAction text="eventtext.piratediversoutpost.dontgetalong" eventsprite="bandittalk" endconversation="true" />
+                          <NPCFollowAction npctag="pirateambusher" targettag="playertofollow" follow="false" />
+                          <!-- Go to part 2 -->
+                          <GoTo name="pirateinvaders" />
+                        </Option >
+                      </ConversationAction>
+                    </Option>  
+                    <Option text="eventtext.piratediversoutpost.dontcare" endconversation="true" >
+                      <GoTo name="dialogstep3" />
+                    </Option >
+                  </ConversationAction>
+                </Option >
+                <Option text="eventtext.piratediversoutpost.buggeroff" endconversation="true" >
+                  <GoTo name="dialogstep2" />
+                </Option >
+              </ConversationAction>
+              <!-- part 2: pirates invade -->
+              <Label name="pirateinvaders" />
+              <WaitAction time="15" />
+              <SpawnAction npcsetidentifier="pirate_npcs" npcidentifier="piratediver" targettag="piratediver" SpawnLocation="Outpost" spawnpointtag="piratedivers" teamid="Team2" amount="3" />
+              <NPCFollowAction npctag="pirateambusher" targettag="airlock" follow="true" />
+              <NPCFollowAction npctag="piratediver" targettag="airlock" follow="true" />
+              <TriggerAction target1tag="piratediver" target2tag="airlock" applytotarget1="boardedpirate" radius="100" waitforinteraction="false"/>
+              <WaitAction time="3" />
+              <StatusEffectAction targettag="piratediver">
+                <StatusEffect target="this" >
+                  <Sound file="Content/Items/Tools/Crowbar.ogg" volume="3" range="2000" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.soundinairlock" dialogtype="Small" eventsprite="ventinside" ContinueAutomatically="true" />
+              <WaitAction time="2" />
+              <NPCFollowAction npctag="pirateambusher" targettag="navterminal" follow="true" />
+              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="true" />
+              <TriggerAction target1tag="piratediver" target2tag="navterminal" applytotarget2="playertofollow" radius="400" waitforinteraction="false" />
+              <NPCFollowAction npctag="piratediver" targettag="navterminal" follow="false" />
+              <!-- use spoken dialogue if ever implemented -->
+              <ConversationAction targettag="player" text="eventtext.piratediversoutpost.takeover" dialogtype="Small" eventsprite="firefight" ContinueAutomatically="true"/>
+              <SetDataAction identifier="piratediversnorepeat" operation="set" value="1" />
+              <NPCChangeTeamAction npctag="pirateambusher" teamtag="Team2" />
+              <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
+              <Label name="combatrefresh" />
+              <TagAction criteria="player" tag="player" />
+              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <WaitAction time="5" />
+              <GoTo name="combatrefresh" />
+            </Success>
+            <Failure>
+            </Failure>
+          </CheckReputationAction>
+        </Success>
+      </CheckDataAction>
     </ScriptedEvent>
     
     <!-- Pirate body bag
@@ -2354,33 +2383,6 @@
           </ConversationAction>
         </Success>
       </CheckDataAction>
-    </ScriptedEvent>
-    
-    <!-- Checks if pirates are dead but I don't think this actually does anything??? It just switches them to team2  -->
-    <ScriptedEvent identifier="piratecheckfordead">
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <Label name="recheck" />
-      <CheckConditionalAction targettag="deadpirate" isdead="true" >
-        <Success>
-          <NPCChangeTeamAction npctag="deadpirate" teamtag="Team2" />
-        </Success>
-        <Failure>
-          <WaitAction time="1" />
-          <GoTo name="recheck" />
-        </Failure>
-      </CheckConditionalAction>
     </ScriptedEvent>
     
     <!-- "Panty theft"
