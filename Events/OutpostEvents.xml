@@ -53,6 +53,7 @@
     
   <EventPrefabs>
   
+    <!-- spawns NPCs in the fake militaryforces subs, not a fan of this one -->
     <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
       <WaitAction time="3" />
       <TagAction criteria="humanprefabidentifier:outpostmanager" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
@@ -92,7 +93,10 @@
       <ConversationAction targettag="triggerer_player" text="eventtext.constructionrecipe.recipe" eventsprite="mines" endconversation="true" />
     </ScriptedEvent>
     
-    <!-- Construction event -->
+    <!-- Construction event
+    Deliver 5 construction crates to a construction site, put them inside ULD (crate storage thingy)
+    If you have >50 reputation, you can pick the type of outpost that will be built. 
+    Undock for the outpost to be built. -->
     <ScriptedEvent identifier="Constructionprogress" commonness="100">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
@@ -232,7 +236,7 @@
     
     <!-- ////////////////////// -->
       
-    <!-- Construction UPGRADE events, allow upgrading an outpost, simplified from construction -->
+    <!-- Construction UPGRADE events, allow upgrading an outpost, simplified from construction (3 crates instead of 5) -->
     <ScriptedEvent identifier="ConstructionUpgradeToColony" commonness="100">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
@@ -409,7 +413,8 @@
     <!-- ////////////////////// -->
     <!-- ////////////////////// -->
 
-    <!-- Mine door event -->
+    <!-- Mine door event
+    Pay to get access to the mines / dry cave -->
     <ScriptedEvent identifier="minedoorevent" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="player" tag="player" />
@@ -450,6 +455,7 @@
       </ConversationAction>
     </ScriptedEvent>
 
+    <!-- check if you paid for the mine access, -reputation if you dont -->
     <ScriptedEvent identifier="checkminepayment">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:entrance" tag="entrance" submarinetype="Outpost" />
@@ -471,6 +477,7 @@
     
     <!-- Events that randomly delete cave/lair items     -->
     
+    <!-- randomizes ore nodes in dry caves -->
     <ScriptedEvent identifier="unlockorenodes" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
@@ -482,6 +489,7 @@
       </StatusEffectAction>
     </ScriptedEvent>
     
+    <!-- randomizes ore nodes in lairs -->
     <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" ChoosePercentage="80"/>
@@ -493,6 +501,7 @@
       </StatusEffectAction>
     </ScriptedEvent>
     
+    <!-- randomizes plant nodes in dry caves -->
     <ScriptedEvent identifier="unlockplantnodes" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
@@ -504,6 +513,7 @@
       </StatusEffectAction>
     </ScriptedEvent>
 
+    <!-- randomizes plant nodes in lairs -->
     <ScriptedEvent identifier="unlockplantnodeslair" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="itemidentifier:plantcluster" tag="deleteplantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
@@ -515,6 +525,7 @@
       </StatusEffectAction>
     </ScriptedEvent>
     
+    <!-- randomizes pest nests in dry caves -->
     <ScriptedEvent identifier="unlockpestnests" commonness="100">
       <WaitAction time="2" />
       <TagAction criteria="itemidentifier:cavepestspawner" tag="deletepestnest" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
@@ -526,7 +537,9 @@
       </StatusEffectAction>
     </ScriptedEvent>
     
-    <!-- TODO: find a way to replace this, the event is everywhere -->
+    <!-- "Reactor operator sale"
+    Spawns a NPC that sells fuel rods at stations that do not have an engineering merchant so people don't get soft-locked.
+    TODO: find a way to replace this, the event is everywhere -->
     <ScriptedEvent identifier="reactoroperatorsale" commonness="100">
       <TagAction criteria="player" tag="player" />
       <Label name="waitforinput" />
@@ -597,7 +610,7 @@
       </CheckReputationAction>
     </ScriptedEvent>
 
-    <!-- Unused since we have vending machines -->
+    <!-- Unused since welding fuel is sold in vending machines -->
     <ScriptedEvent identifier="quartermaster" commonness="100">
       <TagAction criteria="player" tag="player" />
       <SpawnAction npcsetidentifier="DE_outpostnpcs" npcidentifier="quartermaster" targettag="quartermaster" spawnlocation="Outpost" />
@@ -612,10 +625,6 @@
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
               <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
-              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
-              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
-              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
-              <SpawnAction itemidentifier="weldingfueltank" targetinventory="qm_trig_player" />
               <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.weldingfuel.buy.success" eventsprite="mechanic" />
               <ClearTagAction tag="qm_trig_player" />
             </Success>
@@ -626,22 +635,6 @@
             </Failure>
           </CheckMoneyAction>
         </Option>
-<!--         <Option text="eventtext.shop.quartermaster.option.scrap">
-          <CheckMoneyAction targettag="qm_trig_player" Amount="1000">
-            <Success>
-              <MoneyAction targettag="qm_trig_player" amount="-1000" />
-              <SpawnAction itemidentifier="scrap" targetinventory="qm_trig_player" />
-              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.scrap.buy.success" eventsprite="mechanic" />
-              <MissionAction missiontag="salvagewreck" />
-              <ClearTagAction tag="qm_trig_player" />
-            </Success>
-            <Failure>
-              <ConversationAction targettag="qm_trig_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="mechanic" />
-              <ClearTagAction tag="qm_trig_player" />
-              <GoTo name="waitforinput" />
-            </Failure>
-          </CheckMoneyAction>
-        </Option> -->
         <Option text="eventtext.option.leave">
           <ConversationAction text="eventtext.general.decline" targettag="qm_trig_player" />
           <ClearTagAction tag="qm_trig_player" />
@@ -651,7 +644,8 @@
     </ScriptedEvent>    
     
 
-    <!-- scrap dealer, buy scrap  -->
+    <!-- "Scrap dealer 1"
+    Buy scrap and acess to scrap dealer 2 -->
     <ScriptedEvent identifier="scrapdealer1" commonness="100">
       <CheckDataAction identifier="scrapdealerprogress" condition="eq 0">
         <Failure>
@@ -706,7 +700,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
     
-    <!-- scrap dealer 2, buy scrap a gain get a salvage mission -->
+    <!-- "Scrap dealer 2"
+    Buy scrap and gain get a salvage mission -->
     <ScriptedEvent identifier="scrapdealer2" commonness="100">
       <CheckDataAction identifier="scrapdealerprogress" condition="eq 1">
         <Failure>
@@ -754,7 +749,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
     
-    <!-- scrap dealer 3, transit event, spawns the corpse of the scrap dealer -->
+    <!-- "Scrap dealer 3"
+    Transit event, spawns the corpse of the scrap dealer inside a wreck (RIP) -->
     <ScriptedEvent identifier="scrapdealer3" commonness="25">
       <CheckDataAction identifier="scrapdealerprogress" condition="eq 2">
         <Failure>
@@ -768,7 +764,8 @@
       </CheckDataAction>
     </ScriptedEvent>
 
-    <!-- spooky research outpost event -->
+    <!-- "Psychovisions"
+    Spooky research station event, if you interact with a research station while psychotic. Way too hard to trigger -->
     <ScriptedEvent identifier="psychovisions" commonness="100">
       <CheckDataAction identifier="psychovisionsnorepeat" condition="eq 0" >
         <Failure>
@@ -852,7 +849,7 @@
       </CheckDataAction>
     </ScriptedEvent>
     
-    <!--COALITION SECURITY OFFICER
+    <!-- COALITION SECURITY OFFICER - Super old and unused 
     <ScriptedEvent identifier="securityofficer" commonness="100">
       <TagAction criteria="player" tag="player"/>
       <Label name="restart"/>
@@ -1081,6 +1078,7 @@
     /////////////////// BLOCKADE EVENTS ////////////////
     /////////////////// BLOCKADE EVENTS //////////////// -->
     
+    <!-- Check if a blockade of the same faction to the same biome has been opened, so you don't have to pay twice if you visit another allied blockade. -->    
     <ScriptedEvent identifier="checkblockadestate_coldcaverns_coalition" commonness="100">
       <WaitAction time="8" />
       <!-- check if a blockade of this faction was unlocked previously for this biome -->
@@ -1183,8 +1181,8 @@
       </CheckDataAction>
     </ScriptedEvent>
 
-    <!--"Unlock Path blockade (generic template, versions by biome/cost below)"
-         Only used for negociating and disabling the alarm, the actual event is openblockade -->
+    <!--"Unlock Path blockade" (generic template, versions by biome/cost below)
+    Only used for negociating and disabling the alarm, the actual event that unlocks the biome is openblockade -->
     <ScriptedEvent identifier="unlockpathblockade" commonness="0" unlockpathevent="true">
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
@@ -1679,7 +1677,7 @@
       <SetDataAction identifier="blockadeopened" value="1" />
     </ScriptedEvent>
     
-    <!-- simple event that unlocks the path by flicking a lever -->
+    <!-- simple event that unlocks the path by flicking a lever, allows forcing blockades open -->
     <ScriptedEvent identifier="openblockade" commonness="1" >
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:blockadeswitch" submarinetype="Outpost" tag="blockadeswitch" />
@@ -1760,6 +1758,15 @@
     /////////////////// BANDIT EVENTS ////////////////
     /////////////////// BANDIT EVENTS //////////////// -->
     
+    <!-- "Pirate toll" 
+    When entering a pirate outpost, you have to pay a toll to get in. There are multiple options:
+    -Paying the toll gives access for a high cost.
+    -Haggling checks your Helm (charisma) skill, can lock you out of accessing the armory
+    -Plead checks your Helm (charisma) skill, get mugged you if you fail + no armory
+    
+    If you have >20 coalition reputation, the costs are increased.
+    If you have >60 coalition reputation, the pirates wont let you in. 
+    If you have <-13 bandit reputation (hostile), this doesnt trigger. -->
     <ScriptedEvent identifier="pirateoutpostevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="piratenpc" ContinueIfNoTargetsFound="true" />
@@ -2052,7 +2059,7 @@
       <Label name="end" />
     </ScriptedEvent>
     
-    <!-- triggers alarm if it detects a player in the pirate outpost without negociating with NPC -->
+    <!-- triggers alarm if it detects a player in the pirate outpost without negociating with the toll NPC -->
     <ScriptedEvent identifier="piratehavenalarm">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -2090,7 +2097,8 @@
       </CheckDataAction>
     </ScriptedEvent>
         
-    <!-- Pirate Divers -->
+    <!-- "Pirate Divers" 
+    A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
     <ScriptedEvent identifier="piratediversoutpost">
       <CheckDataAction identifier="piratediversnorepeat" condition="eq 0" >
         <Failure>
@@ -2187,6 +2195,7 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- If you didn't pay enough at the toll, the armory is locked and you have to pay extra to get inside -->
     <ScriptedEvent identifier="piratearmorylocked">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:armorybutton" tag="armorybutton" SubmarineType="Outpost" ContinueIfNoTargetsFound="false"  />
@@ -2234,6 +2243,7 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <!-- triggers an alarm if you break into the armory -->
     <ScriptedEvent identifier="piratearmoryalarm">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:armorydoor" tag="armorydoor" SubmarineType="Outpost" />
@@ -2258,6 +2268,7 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- triggers an alarm if you break into the armory stash. TODO: simply reduce reputation instead of tagging all the things?    -->
     <ScriptedEvent identifier="piratestashalarm">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
@@ -2283,6 +2294,8 @@
       <GoTo name="attackplayer" />
     </ScriptedEvent>
           
+    <!-- Pirate informant
+    You can pay the pirate manager to access a cargo robbing mission -->
     <ScriptedEvent identifier="piratemissioninformant" commonness="100">
       <TagAction criteria="player" tag="player" />
       <Label name="waitforinput" />
@@ -2309,6 +2322,8 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <!-- Pirate body bag
+    Spawns a suspicious body bag in the pirate outpost "morgue" module. The bag shakes and a husk is released -->
     <ScriptedEvent identifier="piratebodybag" commonness="100">
       <CheckDataAction identifier="piratebodybagnorepeat" condition="eq 0" >
         <Failure>
@@ -2341,6 +2356,7 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- Checks if pirates are dead but I don't think this actually does anything??? It just switches them to team2  -->
     <ScriptedEvent identifier="piratecheckfordead">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:merchantcity" tag="deadpirate" ContinueIfNoTargetsFound="true" />
@@ -2367,6 +2383,8 @@
       </CheckConditionalAction>
     </ScriptedEvent>
     
+    <!-- "Panty theft"
+    A bandit asks you to steal some clothes and put them in a duffel bag. The duffel bag is marked as stolen, so avoid security. Gives bandit reputation -->
     <ScriptedEvent identifier="pantytheft">
       <CheckDataAction identifier="pantytheftnorepeat" condition="eq 0" >
         <Failure>
@@ -2457,6 +2475,8 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- Vending Smashing
+    A bandit asks you to rob a vending machine. You equip a crowbar, it breaks and items drop, but it alerts security. Gives bandit reputation -->
     <ScriptedEvent identifier="vendingsmashing">
       <CheckDataAction identifier="vendingsmashingnorepeat" condition="eq 0" >
         <Failure>
@@ -2559,25 +2579,7 @@
       </CheckDataAction>
       <Label name="end" />
     </ScriptedEvent>
-    
-    <ScriptedEvent identifier="methformedsTEST">
-      <TagAction criteria="player" tag="player" />
-      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="mafiadoctornpc" targettag="mafiadoctor" spawnlocation="Outpost" targetmoduletags="crewmodule" />
-      <ConversationAction speakertag="mafiadoctor" invokertag="triggerer_player" text="eventtext.methformeds.nometh" eventsprite="doctor" dialogtype="small" > 
-      </ConversationAction>
-      <StatusEffectAction targettag="mafiadoctor" >
-        <StatusEffect target="this" >
-          <Sound file="Content/Items/Medical/Syringe.ogg" range="500" volume="2" />
-          <Affliction identifier="stun" amount="1" />
-        </StatusEffect>
-        <StatusEffect target="this" duration="30.0" >
-          <Affliction identifier="chemaddiction" amount="3" />
-        </StatusEffect>
-      </StatusEffectAction>
-      <ClearTagAction tag="triggerer_player" />
-      <ClearTagAction tag="mafiadoctor" />
-    </ScriptedEvent>
-   
+       
     <!-- BUGGED, the doctor interact button is disabled after conversations/triggers and never reappaears after ending the event, currently no way to make it appear again, guess I'll just heal through event instead
     spawns an unlicensed doctor, you're supposed to give meth to access the doctor UI, but the doc gets increasingly addicted and overdoses -->
     <ScriptedEvent identifier="methformeds">
@@ -2662,7 +2664,9 @@
       <Label name="end" />
     </ScriptedEvent>
     
-    <!--"Orange Protection Society"-->
+    <!--"Orange Protection Society"
+    if you did 2+ missions or events that involve hurting orangeboys, a group of NPCs with chitin helmets spawns and confronts you
+    you can lie and they'll give you a helmet, or provoke them and fight -->
     <ScriptedEvent identifier="orangePETA" commonness="100">
       <!-- checks if you've done 2 or more orangeboy transports -->
       <CheckDataAction identifier="orangePETAcounter" condition="gte 2" >
@@ -2737,6 +2741,8 @@
       <GoTo name="removelithosagain" maxtimes="1" />
     </ScriptedEvent>
         
+    <!-- "Circus welcome"
+    triggers when you step inside the sinking circus for the first time, gives you reputation and triggers a cool visual effect -->
     <ScriptedEvent identifier="circuswelcome" commonness="100">
       <CheckDataAction identifier="circuswelcomenorepeat" condition="eq 0" >
         <Failure>
@@ -2769,6 +2775,8 @@
       </CheckDataAction>
     </ScriptedEvent>
     
+    <!-- "Piezo Pioneer"
+    NPCs talk about how pioneers used piezo crystals as an energy source, gives you a special pickaxes to harvest piezo shards (batteries/grenades)  -->
     <ScriptedEvent identifier="piezopioneer" commonness="100">
       <CheckDataAction identifier="piezopioneernorepeat" condition="eq 0" >
         <Failure>
@@ -2806,7 +2814,7 @@
       </CheckDataAction>
     </ScriptedEvent>
      
-    <!-- literally just spawns a merchant for the 1st outpost in campaign -->
+    <!-- literally just spawns a merchant for the 1st outpost in campaign, doesnt work rn -->
     <ScriptedEvent identifier="startermerchant" commonness="100">
       <!-- <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <StatusEffectAction targettag="removenpc">

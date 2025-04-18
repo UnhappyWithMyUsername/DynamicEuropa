@@ -583,7 +583,8 @@
       </RNGAction>
     </ScriptedEvent>
     
-    <!-- Coalition Cargo Vessel -->
+    <!-- "Coalition Cargo Broadcast" 
+    Talk with the coalition cargo submarine you're supposed to intercept, you can trick them into boarding their submarine-->
     <ScriptedEvent identifier="cocargobroadcast">
       <TagAction criteria="humanprefabidentifier:coalitioncaptain" tag="transmitter" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:coalitioncaptainlord" tag="transmitter" ContinueIfNoTargetsFound="true" />
@@ -689,7 +690,7 @@
       <Label name="end" />
     </ScriptedEvent>    
 
-    <!-- TODO test: jettison cargo -->
+    <!-- UNUSED TODO: enemy cargo sub jettisons cargo pod and flees? -->
     <ScriptedEvent identifier="cocargojettison">
       <SpawnAction NPCSetIdentifier="combatmissioncoalitionnpcs" NPCIdentifier="coalitioncaptain" TeamID="FriendlyNPC" />
       <TagAction criteria="player" tag="player" />
@@ -713,10 +714,9 @@
       </StatusEffectAction>
       <Label name="end" />
     </ScriptedEvent>    
-
-    
-    
-    <!-- Coalition Civilian Transport -->
+ 
+    <!-- "Coalition Civilian Transport" 
+    Rob, hire or execute civilians in the mission -->
     <ScriptedEvent identifier="cocivtransport">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="humanprefabidentifier:coalition_civilian_medic" tag="civilian" ContinueIfNoTargetsFound="true" />
@@ -848,6 +848,7 @@
       </ConversationAction>
     </ScriptedEvent>
           
+    <!-- spawns the nuclear bomb for lair missions -->
     <ScriptedEvent identifier="lairbombspawn">
       <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
       <TagAction criteria="player" tag="player" />
@@ -870,6 +871,7 @@
       </CheckConditionalAction>
     </ScriptedEvent>
     
+    <!-- event for vipnapping -->
     <ScriptedEvent identifier="vipnappingevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="submarinehull" submarinetype="Player" />
@@ -894,7 +896,8 @@
       <Label name="end" />
     </ScriptedEvent>
 
-    <!-- hostage situation-->
+    <!-- Hostage situation 
+    Allows you to pay the ransom to free the outpost, intimidate bandits, if enemies spot a gun they will turn hostile and start executing civilians -->
     <ScriptedEvent identifier="hostagesituationevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
@@ -1213,7 +1216,7 @@
     </ScriptedEvent>
     
     <!-- Prototype of an event that spawns enemies outside in lair levels
-    TODO - figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
+    TODO: figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
     
     <ScriptedEvent identifier="laircrawlersoutside">
       <WaitAction time="5" />
@@ -1257,6 +1260,7 @@
       <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
     </ScriptedEvent> -->
    
+    <!-- check if mutated crawler is inside the sub -->
     <ScriptedEvent identifier="capturelivecrawlerevent">
       <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
       <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocation="MainPath" offset="500" />
@@ -1278,6 +1282,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <!-- check if outpost is repaired -->
     <ScriptedEvent identifier="industrialincidentevent" commonness="50">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:junctionbox" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
@@ -1359,6 +1365,8 @@
       </CountTargetsAction>
     </ScriptedEvent>
     
+    
+    <!-- check if orangeboys arent dead -->
     <ScriptedEvent identifier="escortorangeboysevent">
       <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
@@ -1402,6 +1410,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <!-- I forgot about this event entirely -->
     <ScriptedEvent identifier="hiddenandclowngerous" commonness="10">
       <TagAction criteria="player" tag="player"/>
       <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
@@ -1579,6 +1589,8 @@
       <Label name="end" />
     </ScriptedEvent>
 
+
+    <!-- check if samples have been collected -->
     <ScriptedEvent identifier="chimerasamplesmissionevent" commonness="50">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
@@ -1614,6 +1626,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <!-- interact with prisoners to find out who is the target witness and a bunch of other stuff I forgot about -->
     <ScriptedEvent identifier="silencewitnessevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
@@ -1678,7 +1692,7 @@
       </ConversationAction>
     </ScriptedEvent>
     
-    <!-- BARTENDER -->
+    <!-- Deliver crates of alcohol to bartender  -->
     <ScriptedEvent identifier="alcoholcontrabandevent" commonness="100">
       <SetDataAction identifier="alcoholdelivered" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
