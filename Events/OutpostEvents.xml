@@ -2290,25 +2290,18 @@
       </CheckDataAction>
       <TagAction criteria="player" tag="player" />
       <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="orangegambler1" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
-      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="orangegambler2" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="orangegambler1" offset="500" />
-      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangetyler" SpawnLocation="Outpost" SpawnPointTag="orangegambler1" teamid="Team2" />
-      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangedurden" SpawnLocation="Outpost" SpawnPointTag="orangegambler2" teamid="Team2" /> 
-      <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
-      <NPCFollowAction npctag="orangegambler1" targettag="orangetyler" follow="true" priority="90" AbandonOnReset="false" />
-      <NPCFollowAction npctag="orangegambler2" targettag="orangedurden" follow="true" priority="90" AbandonOnReset="false" />
-      <TriggerAction target1tag="orangegambler1" target2tag="orangetyler" radius="500" waitforinteraction="true" selectontrigger="true" />
-      <TriggerAction target1tag="orangegambler2" target2tag="orangedurden" radius="500" waitforinteraction="true" selectontrigger="true" />
-      <!-- <NPCFollowAction npctag="orangetyler" targettag="orangedurden" follow="true" priority="100" AbandonOnReset="false" />
-      <NPCFollowAction npctag="orangedurden" targettag="orangetyler" follow="true" priority="100" AbandonOnReset="false" /> -->
-      <CheckItemAction targettag="orangetyler" itemidentifiers="petnametag" ApplyTagToItem="tylertag"  />
-      <CheckItemAction targettag="orangedurden" itemidentifiers="petnametag" ApplyTagToItem="durdentag" />
-      <StatusEffectAction targettag="tylertag" >
-        <StatusEffect target="This" WrittenName="Tyler" setvalue="true" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="orangegambler2" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="orangegambler1" />
+      <NPCWaitAction npctag="orangegambler1" targettag="orangegambler2" wait="true" priority="90" AbandonOnReset="false" />
+      <NPCWaitAction npctag="orangegambler2" targettag="orangegambler1" wait="true" priority="90" AbandonOnReset="false" />
+      <!-- spawn and color crates -->
+      <SpawnAction itemidentifier="metalcrate" targetinventory="orangegambler1" targettag="tylercrate" />
+      <SpawnAction itemidentifier="metalcrate" targetinventory="orangegambler2" targettag="durdencrate" />
+      <StatusEffectAction targettag="tylercrate" >
+        <StatusEffect target="this" spritecolor="255,120,110" setvalue="true" />
       </StatusEffectAction>
-      <StatusEffectAction targettag="durdentag" >
-        <StatusEffect target="This" WrittenName="Durden" setvalue="true" />
+      <StatusEffectAction targettag="durdencrate" >
+        <StatusEffect target="this" spritecolor="150,255,230" setvalue="true" />
       </StatusEffectAction>
-      <NPCWaitAction npctag="fighters" wait="true" priority="100"/>
       <Label name="talktonpc" />
       <ClearTagAction tag="triggerer_player" />
       <TriggerAction target1tag="player" target2tag="orangegambler1" applytotarget1="triggerer_player" radius="50" waitforinteraction="true" />
@@ -2327,8 +2320,33 @@
                   <MoneyAction targettag="triggerer_player" amount="-300"/>
                   <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.betsareoff" endconversation="true" /> 
                   <WaitAction time="1" />
-                  <NPCWaitAction npctag="fighters" wait="false" priority="100"/>
+                  <!-- spawn the orangeboys, give name tags, effects on crate -->
+                  <SpawnAction SpeciesName="orangeboy_combat" targettag="orangetyler" SpawnLocation="Outpost" SpawnPointTag="tylercrate" teamid="Team2" />
+                  <SpawnAction SpeciesName="orangeboy_combat" targettag="orangedurden" SpawnLocation="Outpost" SpawnPointTag="durdencrate" teamid="Team2" /> 
+                  <StatusEffectAction targettag="tylercrate" >
+                    <StatusEffect target="this" >
+                      <Sound file="Content/Items/Door/Doorbreak1.ogg" range="500" frequencymultiplier="2" volume="2" />
+                      <ParticleEmitter particle="shrapnel" particleamount="15" velocitymin="50" velocitymax="150" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" colormultiplier="255,255,255,180" />
+                      <Remove />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <StatusEffectAction targettag="durdencrate" >
+                    <StatusEffect target="this" >
+                      <Sound file="Content/Items/Door/Doorbreak2.ogg" range="500" frequencymultiplier="2" volume="2" />
+                      <ParticleEmitter particle="shrapnel" particleamount="20" velocitymin="50" velocitymax="150" anglemin="0" anglemax="360" scalemin="0.75" scalemax="2" colormultiplier="255,255,255,180" />
+                      <Remove />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <CheckItemAction targettag="orangetyler" itemidentifiers="petnametag" ApplyTagToItem="tylertag"  />
+                  <CheckItemAction targettag="orangedurden" itemidentifiers="petnametag" ApplyTagToItem="durdentag" />
+                  <StatusEffectAction targettag="tylertag" >
+                    <StatusEffect target="This" WrittenName="Tyler" setvalue="true" />
+                  </StatusEffectAction>
+                  <StatusEffectAction targettag="durdentag" >
+                    <StatusEffect target="This" WrittenName="Durden" setvalue="true" />
+                  </StatusEffectAction>
                   <!-- I am giving those idiots a genetic affliction to trigger their attack in their AI. It's an absurd roundabout way of doing it -->
+                  <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
                   <AfflictionAction targettag="fighters" affliction="strengthen" strength="100" />
                   <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" />
                   <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" />
@@ -2361,9 +2379,6 @@
                   <GoTo name="gamblingloop"/>
                 </Failure>
               </CheckMoneyAction>
-            </Option>
-            <Option text="eventtext.orangecombat.rescuepets" endconversation="true" >
-              <GoTo name="checkorangedeadloop" />
             </Option>
             <Option text="eventtext.generic.ignore" endconversation="true" >
               <ClearTagAction tag="triggerer_player" />
@@ -2416,7 +2431,8 @@
                   <Goto name="end" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youlost" dialogtype="small" endconversation="true" />         
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youlost" dialogtype="small" endconversation="true" eventsprite="bandittalk" />
+                  <Goto name="end" />
                 </Failure>
               </CheckDataAction>
             </Success>
@@ -2431,7 +2447,8 @@
                   <Goto name="end" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youlost" dialogtype="small" endconversation="true" />         
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youlost" dialogtype="small" endconversation="true" eventsprite="bandittalk" />
+                  <Goto name="end" />
                 </Failure>
               </CheckDataAction>
             </Success>
@@ -2451,6 +2468,13 @@
       </CheckDataAction>
       <!-- end -->
       <Label name="end" />
+      <OnRoundEndAction>
+        <StatusEffectAction targettag="fighters">
+          <StatusEffect type="Always" target="Character" >
+            <RemoveCharacter />
+          </StatusEffect>
+        </StatusEffectAction>
+      </OnRoundEndAction>
     </ScriptedEvent>
 
     <!-- "Pirate Divers" 

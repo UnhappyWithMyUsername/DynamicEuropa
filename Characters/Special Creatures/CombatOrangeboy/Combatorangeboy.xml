@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Charactervariant inherit="orangeboy" speciesname="orangeboy_combat" >
+<Charactervariant inherit="orangeboy" speciesname="orangeboy_combat" stunimmunity="true" >
   <health vitality="30" />
-  <ragdoll color="255,255,255,255" scalemultiplier="1.25"/>
+  <ragdoll color="255,255,255,255" scalemultiplier="1.25" draggable="false" CanBeDragged="false" />
   <ai combatstrength="20" sight="10" hearing="1" fleehealththreshold="0" aggressiveboarding="True" aggressiongreed="20" aggressionhurt="300" attackwhenprovoked="True" avoidgunfire="False" randomattack="True">
     <petbehavior maxhappiness="100" unhappythreshold="100" happythreshold="100" happinessdecreaserate="100" hungerincreaserate="0.03" playforce="6.0" playcooldown="0" playtimer="0" ToggleOwner="false" HideStatusIndicators="true" >
     </petbehavior>
     <target Tag="orangeboy_combat" State="Attack" Priority="99" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" >
       <Conditional strengthen="gte 1" />
-    </target>
-    <target Tag="orangeboy_combat" State="follow" Priority="99" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" >
-      <Conditional strengthen="lte 0" />
     </target>
     <target Tag="hostile" State="Aggressive" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
     <target Tag="equal" State="Aggressive" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
@@ -21,6 +18,7 @@
     <Item identifier="petnametag" />
   </Inventory>
   <attack damagemultiplier="3" impactmultiplier="0.5" />
+  
 </Charactervariant>
 
 <!-- 
