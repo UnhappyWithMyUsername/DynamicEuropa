@@ -2252,6 +2252,173 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <!-- TODO: bugged, remove -->
+    <ScriptedEvent identifier="orangecombatTEST">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangefighter1" SpawnPointTag="player" teamid="Team2" />
+      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangefighter2" SpawnPointTag="player" teamid="Team2"/> 
+      <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
+      <CheckItemAction targettag="orangefighter1" itemidentifiers="petnametag" ApplyTagToItem="tylertag"  />
+      <CheckItemAction targettag="orangefighter2" itemidentifiers="petnametag" ApplyTagToItem="durdentag" />
+      <NPCFollowAction npctag="orangefighter1" targettag="orangefighter2" follow="true" priority="100"/>
+      <NPCFollowAction npctag="orangefighter2" targettag="orangefighter1" follow="true" priority="100"/>
+      <NPCWaitAction npctag="fighters" wait="true" priority="100"/>
+      <AfflictionAction targettag="fighters" affliction="paralysis" strength="100" />
+      <StatusEffectAction targettag="tylertag" >
+        <StatusEffect target="This" WrittenName="Tyler" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="durdentag" >
+        <StatusEffect target="This" WrittenName="Durden" setvalue="true" />
+      </StatusEffectAction>
+      <ClearTagAction tag="triggerer_player" /> 
+      <Label name="combat" />
+      <WaitAction time="5" />
+      <NPCWaitAction npctag="fighters" wait="false" priority="100"/>
+      <AfflictionAction targettag="fighters" affliction="paralysis" strength="-100" />
+      <CombatAction combatmode="Offensive" npctag="orangefighter1" enemytag="orangefighter2" isinstigator="true" witnessreaction="none" />
+      <CombatAction combatmode="Offensive" npctag="orangefighter2" enemytag="orangefighter1" isinstigator="true" witnessreaction="none" />
+      <Goto name="combat" />
+    </ScriptedEvent>
+
+    <!-- "Orangeboy combat" 
+    A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
+    <ScriptedEvent identifier="orangecombat">
+      <CheckDataAction identifier="orangecombatnorepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="orangegambler1" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="pirateambusher" />
+      <SpawnAction npcsetidentifier="outpostnpcspirate" npcidentifier="commonerpirate" targettag="orangegambler2" spawnlocation="Outpost" targetmoduletags="crewpirate" spawnpointtag="orangegambler1" />
+      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangefighter1" SpawnLocation="Outpost" SpawnPointTag="orangegambler1" teamid="Team2" />
+      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangefighter2" SpawnLocation="Outpost" SpawnPointTag="orangegambler2" teamid="Team2" /> 
+      <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
+      <!-- paralyze those fuckers or they attack eachother instantly. I legit couldnt find a way to make them attack eachother with combataction, so for now they have attack defined as part of AI. It's stupid.  -->
+      <AfflictionAction targettag="fighters" affliction="paralysis" strength="100" />
+      <CheckItemAction targettag="orangefighter1" itemidentifiers="petnametag" ApplyTagToItem="tylertag"  />
+      <CheckItemAction targettag="orangefighter2" itemidentifiers="petnametag" ApplyTagToItem="durdentag" />
+      <StatusEffectAction targettag="tylertag" >
+        <StatusEffect target="This" WrittenName="Tyler" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="durdentag" >
+        <StatusEffect target="This" WrittenName="Durden" setvalue="true" />
+      </StatusEffectAction>
+      <NPCFollowAction npctag="orangegambler1" targettag="orangefighter1" follow="true" priority="50"/>
+      <NPCFollowAction npctag="orangegambler2" targettag="orangefighter2" follow="true" priority="50"/>
+      <NPCFollowAction npctag="orangefighter1" targettag="orangefighter2" follow="true" priority="50"/>
+      <NPCFollowAction npctag="orangefighter2" targettag="orangefighter1" follow="true" priority="50"/>
+      <NPCWaitAction npctag="fighters" wait="true" priority="100"/>
+      <Label name="talktonpc" />
+      <ClearTagAction tag="triggerer_player" />
+      <TriggerAction target1tag="player" target2tag="orangegambler1" applytotarget1="triggerer_player" radius="50" waitforinteraction="true" />
+      <SetDataAction identifier="orangecombatnorepeat" operation="set" value="1" />
+      <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.cheering" endeventifinterrupted="false" dialogtype="regular" eventsprite="bandittalk">
+        <Option text="eventtext.orangecombat.whatsthis" endconversation="true" >
+          <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.petfighters" endeventifinterrupted="false" dialogtype="regular" eventsprite="bandittalk" />
+          <Goto name="skiptrigger" />
+          <Label name="gamblingloop" />
+          <TriggerAction target1tag="player" target2tag="orangegambler1" applytotarget1="triggerer_player" radius="50" waitforinteraction="true" />
+          <Label name="skiptrigger" />
+          <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.gambling" endeventifinterrupted="false" dialogtype="regular" eventsprite="bandittalk">
+            <Option text="eventtext.orangecombat.picktyler" endconversation="true" >
+              <CheckMoneyAction targettag="triggerer_player" Amount="300">
+                <Success>
+                  <MoneyAction targettag="triggerer_player" amount="-300"/>
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.betsareoff" endconversation="true" /> 
+                  <WaitAction time="3" />
+                  <NPCWaitAction npctag="fighters" wait="false" priority="100"/>
+                  <AfflictionAction targettag="fighters" affliction="paralysis" strength="-100" />
+                  <CombatAction combatmode="Offensive" npctag="orangefighter1" enemytag="orangefighter2" isinstigator="true" witnessreaction="none" />
+                  <CombatAction combatmode="Offensive" npctag="orangefighter2" enemytag="orangefighter1" isinstigator="true" witnessreaction="none" />
+                  <SetDataAction identifier="betontyler" operation="set" value="1" />
+                  <GoTo name="checkorangedeadloop"/>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.nomoney"/>
+                  <ClearTagAction tag="triggerer_player"/>
+                  <GoTo name="gamblingloop"/>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.orangecombat.pickdurden" endconversation="true" >
+              <CheckMoneyAction targettag="triggerer_player" Amount="300">
+                <Success>
+                  <MoneyAction targettag="triggerer_player" amount="-300"/>
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.betsareoff" endconversation="true" /> 
+                  <WaitAction time="3" />
+                  <NPCWaitAction npctag="fighters" wait="false" priority="100"/>
+                  <AfflictionAction targettag="fighters" affliction="paralysis" strength="-100" />
+                  <CombatAction combatmode="Offensive" npctag="orangefighter1" enemytag="orangefighter2" isinstigator="true" witnessreaction="none" />
+                  <CombatAction combatmode="Offensive" npctag="orangefighter2" enemytag="orangefighter1" isinstigator="true" witnessreaction="none" />
+                  <SetDataAction identifier="betondurden" operation="set" value="1" />
+                  <GoTo name="checkorangedeadloop"/>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.nomoney"/>
+                  <ClearTagAction tag="triggerer_player"/>
+                  <GoTo name="gamblingloop"/>
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="eventtext.orangecombat.rescuepets" endconversation="true" >
+              <GoTo name="end" />
+            </Option>
+            <Option text="eventtext.generic.ignore" endconversation="true" >
+              <ClearTagAction tag="triggerer_player" />
+              <GoTo name="gamblingloop" />
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="eventtext.generic.ignore" endconversation="true" >
+          <GoTo name="talktonpc" />
+        </Option >
+      </ConversationAction>      
+      <!-- check for dead orangeboys, make sure they werent touched -->
+      <Label name="checkorangedeadloop" />
+      <WaitAction time="1" />
+      <CheckDataAction identifier="touchedorangeboys" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckDataAction>
+      <CheckConditionalAction targettag="orangefighter1" IsDead="true">
+        <Success>
+          <CheckDataAction identifier="betondurden" condition="eq 1" >
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youwon" endconversation="true" /> 
+              <MoneyAction targettag="triggerer_player" amount="600" />
+              <Goto name="end" />
+            </Success>
+            <Failure>
+              <Goto name="end" />
+            </Failure>
+          </CheckDataAction>
+        </Success>
+        <Failure>
+          <Goto name="checkorangedeadloop" />
+        </Failure>
+      </CheckConditionalAction>
+      <CheckConditionalAction targettag="orangefighter2" IsDead="true">
+        <Success>
+          <CheckDataAction identifier="betontyler" condition="eq 1" >
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="eventtext.orangecombat.youwon" endconversation="true" /> 
+              <MoneyAction targettag="triggerer_player" amount="600" />
+              <Goto name="end" />
+            </Success>
+            <Failure>
+              <Goto name="end" />
+            </Failure>
+          </CheckDataAction>
+        </Success>
+        <Failure>
+          <Goto name="checkorangedeadloop" />
+        </Failure>
+      </CheckConditionalAction>
+      <!-- end -->
+      <Label name="end" />
+    </ScriptedEvent>
 
     <!-- "Pirate Divers" 
     A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
