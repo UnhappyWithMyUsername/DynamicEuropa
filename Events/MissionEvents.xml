@@ -1327,8 +1327,8 @@
         </StatusEffect>
       </StatusEffectAction>
       <!-- check for all damaged items repaired -->
-      <Label name="checkforrepaired" />
       <Waitaction time="1" />
+      <Label name="checkforrepaired" />
       <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
         <Conditional condition="gte 80" />
         <Failure>
@@ -1344,12 +1344,14 @@
                 <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
                 <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
               </StatusEffectAction>
+              <Waitaction time="1" />
               <GoTo name="checkforrepaired" />
             </Success>
             <Failure>                 
               <StatusEffectAction targettag="ventthis">
                 <StatusEffect target="This" duration="2" OxygenFlow="0" disabledeltatime="true" setvalue="true" />
               </StatusEffectAction>         
+              <Waitaction time="1" />
               <GoTo name="checkforrepaired" />
             </Failure>
           </CheckConditionalAction>
