@@ -2216,31 +2216,22 @@
     </ScriptedEvent>
 
     
-    <!-- Checks if pirates are dead but what is this event about??? It triggers if you enter haven with hostile rep and just switches pirates to team2 when dead, what's the point?  -->
+    <!-- Loop that checks if enough pirates are dead and flips them to team2 -->
     <ScriptedEvent identifier="piratecheckfordead">
+      <WaitAction time="5" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="deadpirate" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="outpostpirate" />
       <Label name="recheck" />
-      <CheckConditionalAction targettag="deadpirate" isdead="true" >
+      <CountTargetsAction targettag="outpostpirate" CompareToTarget="outpostpirate" MinPercentageRelativeToTarget="10">
+        <Conditional isdead="True"/>
         <Success>
-          <NPCChangeTeamAction npctag="deadpirate" teamtag="Team2" />
+          <NPCChangeTeamAction npctag="outpostpirate" teamtag="Team2" />
         </Success>
         <Failure>
           <WaitAction time="1" />
-          <GoTo name="recheck" />
+          <Goto name="recheck" />
         </Failure>
-      </CheckConditionalAction>
+      </CountTargetsAction>
     </ScriptedEvent>
           
     <!-- Pirate informant
