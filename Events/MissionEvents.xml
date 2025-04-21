@@ -221,6 +221,9 @@
           <MissionAction missionidentifier="alcoholcontraband" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" />
           <SpawnAction itemidentifier="metalcrate" targettag="contrabandcrate" targetinventory="triggerer_player" />
           <SpawnAction itemidentifier="contrabandrum" targetinventory="contrabandcrate" amount="10" />
+          <StatusEffectAction targettag="contrabandcrate" >
+            <StatusEffect target="this" spritecolor="200,160,120" setvalue="true" />
+          </StatusEffectAction>
         </Option>
         <Option text="EventText.generic.refuse" endconversation="true" />
       </ConversationAction>
