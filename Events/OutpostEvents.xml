@@ -657,12 +657,12 @@
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.scrapseller" eventsprite="office">
             <Option text="EventText.scrapdealer1.sellmescrap">
-              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.junktreasure" eventsprite="office" />
+              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.junktreasure" eventsprite="ScrapMetal" />
               <GoTo name="skiptrigger" />
               <Label name="scrapproposition" />
               <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
               <Label name="skiptrigger" />
-              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.buyscrap" eventsprite="office">
+              <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.buyscrap" eventsprite="ScrapMetal">
                 <Option text="EventText.scrapdealer1.deal">
                   <CheckMoneyAction targettag="triggerer_player" Amount="250">
                     <Success>
@@ -672,7 +672,7 @@
                       <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.scrapbought" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.nomoney" eventsprite="office" />
+                      <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer1.nomoney" eventsprite="ScrapMetal" />
                       <ClearTagAction tag="triggerer_player" />
                       <GoTo name="scrapproposition" />
                     </Failure>
@@ -716,7 +716,7 @@
           <Label name="scrapproposition" />
           <TriggerAction target1tag="scrapdealer" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <Label name="skiptrigger" />
-          <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.buyscrap" eventsprite="office">
+          <ConversationAction targettag="triggerer_player" text="EventText.scrapdealer2.buyscrap" eventsprite="ScrapMetal">
             <Option text="EventText.scrapdealer1.deal">
               <CheckMoneyAction targettag="triggerer_player" Amount="250">
                 <Success>
@@ -727,7 +727,7 @@
                   <MissionAction missiontag="salvagewreck" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="office" />
+                  <ConversationAction targettag="triggerer_player" text="eventtext.shop.quartermaster.option.scrap.buy.failure" eventsprite="ScrapMetal" />
                   <ClearTagAction tag="triggerer_player" />
                   <GoTo name="scrapproposition" />
                 </Failure>
@@ -2819,7 +2819,7 @@
           <Label name="spotdoctor" />
           <TriggerAction target1tag="player" target2tag="mafiadoctor" applytotarget1="triggerer_player" waitforinteraction="true" radius="300" />
           <SetDataAction identifier="methformedsnorepeat" value="1" />
-          <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.dirtydoctor" dialogtype="Regular" eventsprite="doctor" >
+          <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.dirtydoctor" dialogtype="Regular" eventsprite="GuyWithAlcohol" >
             <Option text="eventtext.methformeds.dontlookgood">
               <ConversationAction targettag="triggerer_player" text="eventtext.methformeds.lostlicense" eventsprite="doctor" >
                 <Option text="eventtext.methformeds.nojob"> 
