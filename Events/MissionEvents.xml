@@ -690,7 +690,7 @@
       <Label name="end" />
     </ScriptedEvent>    
 
-    <!-- UNUSED TODO: enemy cargo sub jettisons cargo pod and flees? -->
+    <!-- UNUSED TODO: enemy cargo sub jettisons cargo pod and flees? specific to Possum submarine -->
     <ScriptedEvent identifier="cocargojettison">
       <SpawnAction NPCSetIdentifier="combatmissioncoalitionnpcs" NPCIdentifier="coalitioncaptain" TeamID="FriendlyNPC" />
       <TagAction criteria="player" tag="player" />
@@ -1216,7 +1216,7 @@
     </ScriptedEvent>
     
     <!-- Prototype of an event that spawns enemies outside in lair levels
-    TODO: figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
+    TODO: figure out an outpostlevel configuration: mainpath will sometimes intersect with the sub and enemies spawn in it, but with nearmainsub, enemies can spawn spontaneously inside the outpost (above the sub) -->
     
     <ScriptedEvent identifier="laircrawlersoutside">
       <WaitAction time="5" />

@@ -516,7 +516,7 @@
         <ScriptedEvent identifier="methformeds" commonness="50" probability="0.25" />
       </EventSet>
       
-      <!-- TODO: use this event to spawn bartender instead of the chair? takes work -->
+      <!-- TODO: use this event to spawn bartender instead of the chair? too much work -->
       <!-- <EventSet identifier="outpostevents.civilian.bartender" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
         <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100" probability="0.00" />
       </EventSet> -->
@@ -1072,8 +1072,7 @@
   </Override>
 
   <!-- Spawns more monsters in outerlair caves
-       TODO: fine tune monster spawns with difficulties
-             create more locationtypes to make monster types match - we currently only have 1 outerlair type  -->
+       TODO: fine tune difficulties, create more locationtypes to make monster types match - we currently only have 1 outerlair type  -->
   <EventSet identifier="GotoLairEventSet" leveltype="LocationConnection" locationtype="OuterLair" allowatstart="true" campaign="true" ignoreintensity="true" additive="true">
   
     <EventSet identifier="Difficulty0-30" minleveldifficulty="0" maxleveldifficulty="30" allowatstart="false" ignorecooldown="true">
