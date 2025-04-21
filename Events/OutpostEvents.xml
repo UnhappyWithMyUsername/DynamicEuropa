@@ -2117,7 +2117,7 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
-          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box -->
+          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
           <ConversationAction text="eventtext.piratehavenalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" oneshot="true" >
@@ -2179,7 +2179,7 @@
       </ConversationAction>
     </ScriptedEvent>
     
-    <!-- triggers an alarm if you break into the armory -->
+    <!-- triggers an alarm if you break into the armory stash -->
     <ScriptedEvent identifier="piratearmoryalarm">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:armorydoor" tag="armorydoor" SubmarineType="Outpost" />
@@ -2194,8 +2194,8 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>          
-          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box -->
-          <ConversationAction text="eventtext.piratearmoryalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
+          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
+          <ConversationAction targettag="player" text="eventtext.piratearmoryalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <ReputationAction targettype="Location" increase="-35" />
           <StatusEffectAction targettag="armorydoor">
             <StatusEffect target="this" IsOpen="true" noninteractable="true" setvalue="true" />
@@ -2207,27 +2207,12 @@
     <!-- triggers an alarm if you break into the armory stash. TODO: simply reduce reputation instead of tagging all the things?    -->
     <ScriptedEvent identifier="piratestashalarm">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantcity" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantmedical" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:merchantarmory" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subupgradenpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:subsalesnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:repairnpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:reactoroperatorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:commonerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:hrmanagerpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostdoctorpirate" tag="piratenpc" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="piratenpc" />
+      <TagAction criteria="humanprefabidentifier:securitynpcpirate" tag="security" ChoosePercentage="100" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="hullname:armory" tag="armory" submarinetype="Outpost" />
       <NPCChangeTeamAction npctag="piratenpc" teamtag="Team2" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="3000" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <Label name="attackplayer" />
-      <TriggerAction target1tag="player" target2tag="piratenpc" applytotarget1="triggerer_player" applytotarget2="attacker" radius="800" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="false" allowmultipletargets="true" />
-      <CombatAction combatmode="Offensive" npctag="attacker" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
-      <WaitAction time="10" />
-      <ClearTagAction tag="triggerer_player" />
-      <GoTo name="attackplayer" />
+      <NPCFollowAction npctag="security" targettag="armory" follow="true" priority="10"/>
+      <CombatAction combatmode="Offensive" npctag="security" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none" />
     </ScriptedEvent>
 
     
