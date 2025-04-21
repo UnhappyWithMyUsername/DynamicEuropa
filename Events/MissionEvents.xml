@@ -1314,6 +1314,7 @@
       </StatusEffectAction>
       <StatusEffectAction targettag="outpostoxygenerator">
         <StatusEffect target="This" indestructible="false" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+        <StatusEffect target="This" targetitemcomponent="PowerContainer" GeneratedAmount="10000" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="burnthis">
         <StatusEffect target="This" >
@@ -1328,23 +1329,17 @@
           <Remove />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- check for all damaged items repaired -->
+      <!-- check for all damaged items repaired -->      
+      <ClearTagAction tag="breakthis" />
+      <ClearTagAction tag="damagethis" />
+      <ClearTagAction tag="burnthis" />
       <Label name="checkforrepaired" />
       <Waitaction time="1" />
-      <!-- tag repaired items with "isrepaired" and disable their passive deterioration -->
-      <CheckConditionalAction targettag="repairthis" condition="gte 80">
-        <Success>
-          <StatusEffectAction targettag="repairthis">
-            <StatusEffect target="This" tags="isrepaired" conditionpercentage="100" deteriorationspeed="0.0" setvalue="true">
-              <Conditional condition="gte 80" />
-            </StatusEffect>
-          </StatusEffectAction>
-        </Success>
-        <Failure />
+      <!-- tag repaired items with "isrepaired" and remove the highlight from items with the tag "isrepaired" -->
+      <CheckConditionalAction targettag="repairthis" ApplyTagToTarget="isrepaired" condition="gte 80">
       </CheckConditionalAction>
-      <!-- remove the highlight from items with the tag "isrepaired" -->
-      <TagAction criteria="itemtag:isrepaired" tag="removehighlight" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
-      <HighlightAction targettag="removehighlight" state="false" />
+      <HighlightAction targettag="isrepaired" state="false" />
+      <!-- mission succeeds if all items are over 80 condition -->
       <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
         <Conditional condition="gte 80" />
         <Failure>
@@ -1354,17 +1349,16 @@
               <StatusEffectAction targettag="outpostoxygenerator">
                 <StatusEffect target="This" condition="1" disabledeltatime="true" >
                   <Conditional condition="gt 90" />
-                </StatusEffect>                
+                </StatusEffect>
               </StatusEffectAction>
               <StatusEffectAction targettag="ventthis">
-                <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
-                <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
+                <StatusEffect target="This" duration="1" OxygenFlow="500000" disabledeltatime="true" stackable="false" setvalue="true" />
               </StatusEffectAction>
               <GoTo name="checkforrepaired" />
             </Success>
             <Failure> 
               <StatusEffectAction targettag="ventthis">
-                <StatusEffect target="This" duration="2" OxygenFlow="0" disabledeltatime="true" setvalue="true" />
+                <StatusEffect target="This" duration="1" OxygenFlow="0" disabledeltatime="true" stackable="false" setvalue="true" />
               </StatusEffectAction>
               <GoTo name="checkforrepaired" />
             </Failure>
