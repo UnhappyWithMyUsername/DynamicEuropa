@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Override>
 <npcsets>
+
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                               Outpost NPCs                                -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -790,6 +791,9 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                     Vanilla Outpost NPCs Overrides                        -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  
+
+  <!-- TODO: MAKE SURE THESE ARE UP TO DATE WITH VANILLA. We change nothing about some NPCs, but cannot partially override NPCs in the set, so I would have to make our overriden NPCs be part of a different "override" set and reference the new set identifier and that would break EVERYTHING. I'll leave REMOVERRIDE as a sign that we dont change these particular NPCs  -->  
   <npcset identifier="outpostnpcs1">
   
     <!-- REMOVERRIDE? -->
@@ -1867,7 +1871,7 @@
     <!--                                  Hireable                                 -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-    <!-- I honestly forgot what the fuck we're overriding on hireables, so I commented them out -->
+    <!-- we have to override these as part of the whole NPCset otherwise the game will throw errors -->
 
     <npc identifier="hireablecoalitionsecurityofficer" job="securityofficer" tags="securitynpc" skillmultiplier="1.5" experiencepoints="2850" BaseSalary="500" SkillSalaryMultiplier="0.75">
       <ItemSet>
