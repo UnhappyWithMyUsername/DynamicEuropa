@@ -2118,7 +2118,7 @@
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
           <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
-          <ConversationAction text="eventtext.piratehavenalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
+          <ConversationAction targettag="player" text="eventtext.piratehavenalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" oneshot="true" >
               <Sound file="Content/Sounds/Radiostatic.ogg" range="4000" volume="2" loop="true" />
@@ -2193,7 +2193,7 @@
         <Failure>
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
-          </StatusEffectAction>          
+          </StatusEffectAction> 
           <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
           <ConversationAction targettag="player" text="eventtext.piratearmoryalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <ReputationAction targettype="Location" increase="-35" />
@@ -2204,7 +2204,7 @@
       </CheckDataAction>
     </ScriptedEvent>
     
-    <!-- triggers an alarm if you break into the armory stash. TODO: simply reduce reputation instead of tagging all the things?    -->
+    <!-- triggers an alarm if you break into the armory stash.  -->
     <ScriptedEvent identifier="piratestashalarm">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="piratenpc" />
@@ -2262,34 +2262,6 @@
       </ConversationAction>
     </ScriptedEvent>
     
-    <!-- TODO: bugged, remove -->
-    <ScriptedEvent identifier="orangecombatTEST">
-      <TagAction criteria="player" tag="player" />
-      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangetyler" SpawnPointTag="player" teamid="Team2" />
-      <SpawnAction SpeciesName="orangeboy_combat" targettag="orangedurden" SpawnPointTag="player" teamid="Team2"/> 
-      <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
-      <CheckItemAction targettag="orangetyler" itemidentifiers="petnametag" ApplyTagToItem="tylertag"  />
-      <CheckItemAction targettag="orangedurden" itemidentifiers="petnametag" ApplyTagToItem="durdentag" />
-      <NPCFollowAction npctag="orangetyler" targettag="orangedurden" follow="true" priority="100"/>
-      <NPCFollowAction npctag="orangedurden" targettag="orangetyler" follow="true" priority="100"/>
-      <NPCWaitAction npctag="fighters" wait="true" priority="100"/>
-      <AfflictionAction targettag="fighters" affliction="paralysis" strength="100" />
-      <StatusEffectAction targettag="tylertag" >
-        <StatusEffect target="This" WrittenName="Tyler" setvalue="true" />
-      </StatusEffectAction>
-      <StatusEffectAction targettag="durdentag" >
-        <StatusEffect target="This" WrittenName="Durden" setvalue="true" />
-      </StatusEffectAction>
-      <ClearTagAction tag="triggerer_player" /> 
-      <Label name="combat" />
-      <WaitAction time="5" />
-      <NPCWaitAction npctag="fighters" wait="false" priority="100"/>
-      <AfflictionAction targettag="fighters" affliction="paralysis" strength="-100" />
-      <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" />
-      <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" />
-      <Goto name="combat" />
-    </ScriptedEvent>
-
     <!-- "Orangeboy combat" 
     A NPC talks and follows you around in the outpost as a distraction while pirate divers spawn and invade your ship from the airlock -->
     <ScriptedEvent identifier="orangecombat">

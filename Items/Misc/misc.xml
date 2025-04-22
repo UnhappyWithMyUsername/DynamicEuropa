@@ -85,8 +85,9 @@
       </ItemComponent>
     </Item>
     
-    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched. "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
-    <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
+    <!-- TODO: if barodevs ever ACCEPT MY FUCKING PR, no need for the unbundle jank, just use deconstruction -->
+    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched that needs to be "unbundled", we only do that to avoid stuff falling on the floor because research tables only have 1 output slot IT'S SO STUPID -->
+    <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
       <Upgrade gameversion="2.0.0.0" noninteractable="false" />
       <Body radius="30" width="20" density="10.5" />
       <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
@@ -108,8 +109,8 @@
       </Holdable>
     </Item>
     
-    <!-- Gives random medical plants when "untagled". "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
-    <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
+    <!-- Gives random medical plants when "untangled".  -->
+    <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
       <Body radius="30" width="20" density="10.5" />
       <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
       <Deconstruct time="3" requireddeconstructor="deconstructor" />
