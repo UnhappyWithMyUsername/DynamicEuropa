@@ -1997,7 +1997,7 @@
     <ScriptedEvent identifier="findbigalienturret" commonness="50">
       <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:hiddenalienpylon" tag="breakthis" />
+      <TagAction criteria="itemidentifier:bigalienturret" tag="breakthis" />
       <Waitaction time="1" />
       <Label name="checkfordestroyed" />
       <CountTargetsAction targettag="breakthis" CompareToTarget="breakthis" MinPercentageRelativeToTarget="100">
@@ -2008,7 +2008,7 @@
         </Failure>
         <Success>
           <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="1" />
-          <MissionStateAction missionidentifier="bigalienturret" operation="Set" value="1" />
+          <MissionStateAction missionidentifier="destroybigalienturret" operation="Set" value="1" />
           <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
         </Success>
       </CountTargetsAction>
