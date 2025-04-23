@@ -1212,17 +1212,28 @@
   
   <Item name="Inactive Defense Bot" identifier="cargodefensebot_defective" tags="largeitem,mechanical,crate" category="Misc" Scale="0.4" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true" hideinmenus="true" health="50">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,96" origin="0.5,0.5" />
-    <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
+    <!-- <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" /> -->
     <Body width="149" height="96" density="18" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="70,45" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
     <!-- This only exists to trigger deterioration... -->
     <Powered powerconsumption="0" currpowerconsumption="0" isactive="true" />
-    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="100000" mindeteriorationdelay="120" maxdeteriorationdelay="240" mindeteriorationcondition="0" RepairThreshold="0" msg="ItemMsgRepairWrench" hudpriority="10">
+    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="20" mindeteriorationdelay="120" maxdeteriorationdelay="240" mindeteriorationcondition="0" RepairThreshold="0" msg="ItemMsgRepairWrench" hudpriority="10">
       <GuiFrame relativesize="0.2,0.16" minsize="400,200" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
       <RequiredItem items="wrench" type="equipped" />
       <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
         <ParticleEmitter particle="bubbles" particleamount="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" >
+        <Conditional condition="lte 40" />
+        <ParticleEmitter particle="weldspark" particlespersecond="5" anglemin="0" anglemax="360" scalemin="0.75" scalemax="1" distancemin="0" distancemax="20" velocitymin="100" velocitymax="200" copyentityangle="true" />
+        <ParticleEmitter particle="bubbles" particlespersecond="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <ParticleEmitter particle="ElectricShock" particlespersecond="1" anglemin="0" anglemax="360" scalemin="0.05" scalemax="0.1" />
+        <sound file="Content/Items/Electricity/zap1.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap2.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap3.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap4.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap5.ogg" range="800.0" selectionmode="Random" loop="true" />
       </StatusEffect>
       <!-- visuals -->
       <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
