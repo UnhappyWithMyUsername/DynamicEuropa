@@ -4097,7 +4097,7 @@
                                                                                                                                       <AfflictionAction affliction="psychosis" strength="100" targettag="jokertriggerplayer" _npos="22278.555,8942.368" />
                                                                                                                                       <WaitAction time="30" _npos="22714.346,8962.756" />
                                                                                                                                       <AfflictionAction affliction="combatstimulant" strength="40" targettag="jokertriggerplayer" _npos="23186.727,8969.431" />
-                                                                                                                                      <ConversationAction text="EventText.jokster.o3.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.o1.o1.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.c1" targettag="jokertriggerplayer" _npos="23640.246,8973.653">
+                                                                                                                                      <ConversationAction text="EventText.jokster.o3.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.o1.o1.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.c1" targettag="jokertriggerplayer" dialogtype="Small" _npos="23640.246,8973.653">
                                                                                                                                         <Option text="EventText.jokster.o3.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.o1.o1.o1.o1.o1.o3.o2.o1.o1.o1.o1.o1.o1" endconversation="true">
                                                                                                                                           <ClearTagAction tag="jokertriggerplayer" _npos="24163.36,9024.586" />
                                                                                                                                         </Option>
@@ -4790,10 +4790,10 @@
                                                                           <ClearTagAction tag="jokertriggerplayer" _npos="17995.29,426.0155" />
                                                                         </Success>
                                                                         <Failure>
-                                                                          <WaitAction time="10" _npos="16895.611,688.52405" />
+                                                                          <WaitAction time="8" _npos="16895.611,688.52405" />
                                                                           <StatusEffectAction targettag="joker" _npos="17394.348,785.1737">
                                                                             <StatusEffect target="Character" oneshot="true" comparison="And" disabledeltatime="true" _npos="17811.56,927.02136">
-                                                                              <Conditional vitality="lt 0" _npos="18295.076,990.06024" />
+                                                                              <Conditional isdead="eq true" _npos="18295.076,990.06024" />
                                                                               <TriggerEvent identifier="jokerdeath" _npos="18792.283,1015.63837" />
                                                                             </StatusEffect>
                                                                           </StatusEffectAction>
