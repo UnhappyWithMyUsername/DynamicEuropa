@@ -1265,7 +1265,7 @@
     </MeleeWeapon>
   </Item>
   
-  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
+  <!-- UNUSED, BUGGED. INTERACT DONT WORK https://github.com/FakeFishGames/Barotrauma/discussions/14489 -->
   <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
     <Body width="210" height="210" bodytype="Static" />
     <StaticBody width="210" height="210" />
@@ -1316,9 +1316,8 @@
     <TriggerComponent triggeredby="Human" force="0" radius="500" allowingameediting="false">
     </TriggerComponent>
     <AiTarget Soundrange="2000" sonardisruption="3" />
-    <Controller direction="None" canbepicked="true" istoggle="true" msg="ItemMsgPressSelect">
-      <sound file="Content/Items/Button/Switch1.ogg" type="OnUse" range="250.0" />
-      <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
+    <Controller direction="None" canbepicked="true" canbeselected="true" msg="ItemMsgPressSelect">
+      <sound file="Content/Items/Alien/AlienButton.ogg" type="OnUse" range="500.0" volume="3" />
     </Controller>
   </Item>
 
