@@ -237,7 +237,7 @@
         <sound file="Content/Items/Alien/AlienWeapon.ogg" range="3000" loop="true" frequencymultiplier="2" volume="3"/>
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This,Contained" delay="10" > 
-        <ParticleEmitter particle="shrapnel" particleamount="30" anglemin="-20" anglemax="200" distancemin="0" distancemax="50" velocitymin="200" velocitymax="800" scalemin="4" scalemax="6" />
+        <ParticleEmitter particle="shrapnel" particleamount="30" anglemin="-20" anglemax="200" distancemin="0" distancemax="50" velocitymin="200" velocitymax="800" scalemin="4" scalemax="6" lifetimemultiplier="2" />
         <ParticleEmitter particle="sonarflorawave" particleamount="2" scalemin="30" scalemax="30" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" lifetimemultiplier="4" />
         <Explosion range="500.0" ballastfloradamage="300" structuredamage="300" itemdamage="1000" force="20" severlimbsprobability="0.75" debris="true" decal="explosion" decalsize="0.75" penetration="0.5"
                    camerashake="200" camerashakerange="10000"
@@ -282,6 +282,7 @@
       <StatusEffect type="OnBroken" target="This" >
         <Explosion range="300.0" structuredamage="30" force="20.0" empstrength="0.5">
           <Affliction identifier="explosiondamage" strength="50" />
+          <Affliction identifier="stun" strength="1" />
         </Explosion>
         <Remove />
       </StatusEffect>
