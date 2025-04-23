@@ -199,9 +199,13 @@
       </StatusEffect>
       <SubContainer capacity="1" maxstacksize="1">
         <Containable items="explosive" hide="false">
-          <StatusEffect type="OnContaining" target="This,Contained" delay="2" condition="-1000" setvalue="true" >
+          <StatusEffect type="OnContaining" target="This">
             <RequiredItem items="explosive" type="Contained"/>
-            <ParticleEmitter particle="ElectricShock" distancemin="-150" distancemax="150" particlespersecond="2.0" particleamount="5" emitinterval="2.1" scalemin="0.1" scalemax="0.2" copyentityangle="true" />
+            <ParticleEmitter particlespersecond="3.0" particle="ElectricShock" distancemin="-150" distancemax="150" scalemin="0.5" scalemax="1" copyentityangle="true" />
+            <ParticleEmitter particle="weldspark" particlespersecond="10.0" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" distancemin="-150" distancemax="150" scalemin="1" scalemax="2" copyentityangle="true" />
+          </StatusEffect>
+          <StatusEffect type="OnContaining" target="This,Contained" delay="5" Condition="-100" setvalue="true" >
+            <RequiredItem items="explosive" type="Contained"/>
           </StatusEffect>
         </Containable>
       </SubContainer>
