@@ -70,4 +70,22 @@
     <Sprite texture="Content/Map/Biomes/ColdCaverns/BackgroundChunks.png" sourcerect="683,0,683,1024" origin="0.5,0.5" />
   </BackgroundChunksOutpost> -->
   
+  
+  <barnaclespawner identifier="barnaclespawner" spritecolor="255,246,228,255" spawnpos="MainPathWall" takelevelwalldamage="true" health="20" hidewhenbroken="true" minsurfacewidth="100" minsize="0.5" maxsize="0.8" randomrotation="0,0" randomoffset="0,0" commonness="0" depthrange="-1,-0.1" alignment="Bottom" clusteringamount="0" clusteringgroup="0" alignwithsurface="True" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" sonardisruption="0.1" maxcount="20">
+    <Sprite name="alienturret" texture="Content/Items/Alien/AlienTurret.png" depth="0.1" sourcerect="4,318,251,192" canflipy="false" />
+    <overridecommonness leveltype="europanridge" commonness="500" />
+    <Trigger position="0,0" width="70" height="350" sensor="false" triggeredby="Human" staytriggereddelay="10000000" triggeronce="true">
+      <OverrideProperties>
+        <Sprite name="alienturret" texture="Content/Items/Alien/AlienTurret.png" depth="0.1" sourcerect="0,0,1,1" canflipy="false" />
+      </OverrideProperties>
+      <StatusEffect target="This">
+        <SpawnItem identifier="barnaclething" spawnposition="this" rotationtype="Collider" rotation="0" />
+        <Sound file="Content/Sounds/Damage/GlassBreak4.ogg" range="1000" dontmuffle="true" volume="0.5" />
+        <particleemitter particle="iceshards" particleamount="50" velocitymin="0" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="360" scalemin="1" scalemax="1.5" />
+      </StatusEffect>
+    </Trigger>
+    <LightSource range="500" color="250,25,250,250" drawbehindsubs="true" pulseamount="0.3" pulsefrequency="0.1" />
+  </barnaclespawner>
+  
+  
 </levelobjects>
