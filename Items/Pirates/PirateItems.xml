@@ -177,7 +177,15 @@
       </StatusEffect>
       <!-- SUPER SIMPLIFIED pirate exosuit so they don't use fuel/oxygen or inventory. They are supposed to be locked and not available for players -->
       <!-- removes itself if not worn-->
-      <StatusEffect type="OnNotContained" target="This" >
+      <StatusEffect type="OnNotContained" target="This" condition="-100" setvalue="true"/>
+      <StatusEffect type="OnWearing" target="Character,This" delay="1" condition="-100" setvalue="true">
+        <Conditional IsDead="true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" >
+        <Explosion range="150" force="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="true" underwaterbubble="true" structuredamage="10" itemdamage="0" decal="explosion" >
+          <Affliction identifier="explosiondamage" strength="30" />
+          <Affliction identifier="stun" strength="0.75" />
+        </Explosion>
         <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="30" velocitymin="100" velocitymax="500" scalemin="1" scalemax="2" />
         <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="10" velocitymin="100" velocitymax="500" scalemin="1" scalemax="2" />
         <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="500" frequencymultiplier="0.7" />
