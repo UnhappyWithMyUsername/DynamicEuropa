@@ -374,14 +374,16 @@
       <sound file="Content/Items/Weapons/WEAPONS_chargeUp.ogg" type="OnWearing" range="500.0" volumeproperty="Speed" volume="0.2" loop="true" frequencymultiplier="0.5" />
     </Wearable>
     <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
-      <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
-      <SlotIcon slotindex="1" texture="Content/UI/ContainerIndicators.png" sourcerect="2,184,120,32" origin="0.5,0.5" />
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+      <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5" />
       <SubContainer capacity="1" maxstacksize="1">
         <Containable items="oxygensource,weldingtoolfuel" />
       </SubContainer>
       <SubContainer capacity="1" maxstacksize="1">
-        <Containable items="mobilebattery">
-          <StatusEffect type="OnContaining" target="This" Voltage="1.0" setvalue="true" />
+        <Containable items="divingsuitfuel">
+          <StatusEffect type="OnContaining" target="This,Character" Voltage="1.0" setvalue="true">
+            <Conditional IsDead="false" />
+          </StatusEffect>
         </Containable>
       </SubContainer>
       <SubContainer capacity="10">
