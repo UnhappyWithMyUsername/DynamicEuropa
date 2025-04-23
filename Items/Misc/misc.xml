@@ -281,7 +281,22 @@
       <Sprite texture="Content/Map/Outposts/Art/AdminResidentAssets.png" sourcerect="856,0,21,63" depth="0.6" origin="0.5,0.5" />
     </Item>
   
-  
+
+  <Item name="SUPERHEALINGSYRINGE" identifier="SUPERHEALINGSYRINGE" description="FOR TESTING PURPOSES ONLY, IF YOU SOMEHOW GET THIS IN CAMPAIGN THROW IT OUT AND REPORT IT" category="Medical" maxstacksize="32" maxstacksizecharacterinventory="8" Tags="smallitem,chem,medical,syringe" allowasextracargo="true" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light" colormultiplier="255,0,255,255">
+    <InventoryIcon texture="Content/Items/Medical/Medicines.png" sourcerect="448,256,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Medical/Medicines.png" sourcerect="303,310,35,67" depth="0.6" origin="0.5,0.5" />
+    <Body width="35" height="65" density="10.2" waterdragcoefficient="1"/>
+    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+      <StatusEffect type="Onuse" target="UseTarget">
+        <GiveTalentInfo giverandom="true" talentidentifiers="crustyseaman,exampleofhealth,swole,genetampering" />
+          <Affliction identifier="healdamage" amount="100" />
+          <Affliction identifier="husksymbiosis" amount="100" />
+          <ReduceAffliction type="damage" amount="100" />
+          <ReduceAffliction type="burn" amount="100" />
+          <ReduceAffliction type="poison" amount="100" />
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>
   
     
     <!-- Hazmat Suit - Spawned on reactoroperator NPC for Enhanced Reactors compatibility - Does nothing and removes itself if Enhanced Reactors is not installed and loaded above DE -->
