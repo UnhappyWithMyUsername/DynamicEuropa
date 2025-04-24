@@ -2788,6 +2788,102 @@
       <Label name="end" />
     </ScriptedEvent>
        
+    
+    <!-- Duck Corleone
+    A bandit asks you to drop a plastic duck in the administator's cabinet. Gives bandit reputation -->
+    <ScriptedEvent identifier="duckcorleone">
+      <CheckDataAction identifier="duckcorleonenorepeat" condition="eq 0" >
+        <Failure>
+          <!-- does not spawn the event if already done -->
+        </Failure>
+        <Success>
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securitynpc" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="mafioso" spawnlocation="Outpost" targetmoduletags="crewmodule" />
+          <TagAction criteria="player" tag="player" />
+          <TagAction criteria="itemtag:admincabinet" tag="targetcabinet" submarinetype="Outpost" />
+          <TagAction criteria="humanprefabidentifier:outpostmanager" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+          <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="outpostmanager" ContinueIfNoTargetsFound="true" />
+          <TriggerAction target1tag="player" target2tag="mafioso" applytotarget1="triggerer_player" radius="20" />
+          <SetDataAction identifier="duckcorleonenorepeat" value="1" />
+          <NPCWaitAction npctag="mafioso" wait="true" priority="50"/>
+          <AfflictionAction targettag="triggerer_player" affliction="stun" strength="0.35" />
+          <StatusEffectAction targettag="triggerer_player">
+            <StatusEffect target="This" >            
+              <Sound file="Content/Sounds/Impact/softimpact3.ogg" range="150" volume="2" frequencymultiplier="1" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.heyyou" endeventifinterrupted="false" dialogtype="Regular" eventsprite="MysteryMan">         
+            <Option text="eventtext.generic.continue">
+              <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.delivery" dialogtype="Regular" endeventifinterrupted="false" eventsprite="MysteryMan" >
+                <Option text="eventtext.duckcorleone.whatisit">
+                  <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.themessage" endeventifinterrupted="false" dialogtype="Regular" eventsprite="MysteryMan" >
+                    <Option text="eventtext.duckcorleone.Iwilldoit" >
+                      <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.good" endeventifinterrupted="false" dialogtype="Regular" eventsprite="MysteryMan" endconversation="true" />
+                      <SpawnAction itemidentifier="piraterubberduck" targetinventory="triggerer_player" targettag="scaryduck" Equip="true" />
+                      <StatusEffectAction targettag="scaryduck">
+                        <StatusEffect target="this" tags="id_outpostmanager" setvalue="true" />
+                      </StatusEffectAction>
+                      <Label name="opencabinet" />
+                      <TriggerAction target1tag="triggerer_player" target2tag="targetcabinet" radius="200" waitforinteraction="true" selectontrigger="true" />
+                      <CheckItemAction targettag="triggerer_player" itemtags="scaryduck" RequireEquipped="false">
+                        <Failure>
+                          <WaitAction time="1" />   
+                          <Goto name="opencabinet" />
+                        </Failure>
+                        <Success>    
+                          <!-- try not to get seen by the admin -->
+                          <CheckVisibilityAction EntityTag="outpostmanager" TargetTag="triggerer_player" maxdistance="400" CheckFacing="true">
+                            <Success>
+                              <StatusEffectAction targettag="outpostmanager">
+                                <StatusEffect target="this">
+                                  <Forcesay message="eventtext.duckcorleone.security" sayinradio="true" />
+                                </StatusEffect>
+                              </StatusEffectAction>
+                              <ReputationAction targettype="Location" increase="-2" />
+                              <CombatAction combatmode="Arrest" npctag="securitynpc" enemytag="triggerer_player" isinstigator="false" guardreaction="none" witnessreaction="retreat" cooldown="30"/>
+                            </Success>
+                          </CheckVisibilityAction>
+                          <!-- tag items as stolen -->
+                          <StatusEffectAction targettag="scaryduck" >
+                              <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true" />
+                          </StatusEffectAction>
+                          <StatusEffectAction targettag="targetcabinet">
+                            <StatusEffect target="This" >
+                              <Sound file="%ModDir:2532991202%/Sounds/Impact/RubberDuck4.ogg" range="300" volume="2" frequencymultiplier="1" />
+                            </StatusEffect>
+                          </StatusEffectAction>  
+                          <WaitAction time="5" />
+                          <Label name="checkduckinside" />
+                          <CheckItemAction targettag="targetcabinet" itemtags="scaryduck" >
+                            <Failure>
+                              <WaitAction time="1" />
+                              <Goto name="checkduckinside" /> 
+                            </Failure>
+                          </CheckItemAction>
+                          <TriggerAction target1tag="triggerer_player" target2tag="mafioso" waitforinteraction="true" />
+                          <ReputationAction increase="2" identifier="bandits" targettype="Faction" />
+                          <MoneyAction amount="500" targettag="triggerer_player" />
+                          <SetDataAction identifier="duckcorleonenorepeat" value="1" />
+                          <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.pleased" dialogtype="Small" endconversation="true" eventsprite="MysteryMan2" />
+                        </Success>
+                      </CheckItemAction >
+                    </Option>
+                    <Option text="eventtext.generic.refuse">
+                      <ReputationAction increase="-1" identifier="bandits" targettype="Faction" />
+                      <ConversationAction targettag="triggerer_player" text="eventtext.duckcorleone.unfortunate" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="MysteryMan2" />
+                      <Goto name="end" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Success> 
+      </CheckDataAction>
+      <Label name="end" />
+    </ScriptedEvent>
+       
     <!-- BUGGED, the doctor interact button is disabled after conversations/triggers and never reappaears after ending the event, currently no way to make it appear again, guess I'll just heal through event instead
     spawns an unlicensed doctor, you're supposed to give meth to access the doctor UI, but the doc gets increasingly addicted and overdoses -->
     <ScriptedEvent identifier="methformeds">
