@@ -264,7 +264,7 @@
   </Item>
   
 
-  <Item name="" identifier="BIGalienturretammo" category="Alien" tags="alien,alienturretammo" scale="0.5">
+  <Item name="BIGalienturretammo" identifier="BIGalienturretammo" category="Alien" tags="alien,alienturretammo" scale="0.5" noninteractable="true">
     <Sprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.7" sourcerect="839,768,71,256" origin="0.5,0.5" />
     <Body radius="25" density="10" />
     <Projectile characterusable="false" launchimpulse="25.0" launchrotation="90" >
@@ -273,15 +273,15 @@
       </Attack>
       <StatusEffect type="OnImpact" target="This" condition="-1000" duration="1" stackable="false" oneshot="true">
         <Use/>
-        <ParticleEmitter particle="cyborgammotracer" anglemax="360" distancemax="200" scalemultiplier="2.0,2.0" particleamount="3"/>
+        <ParticleEmitter particle="cyborgammotracer" anglemin="0" anglemax="360" distancemin="0" distancemax="0" scalemultiplier="5.0,5.0" particleamount="3"/>
       </StatusEffect>
       <StatusEffect type="OnActive" target="This">
-        <ParticleEmitter particle="cyborgammotracer" anglemax="360" distancemax="0" particlespersecond="300" scalemultiplier="2.0,2.0"/>
+        <ParticleEmitter particle="cyborgammotracer" anglemin="0" anglemax="360" distancemin="0" distancemax="0" particlespersecond="300" scalemultiplier="2.0,2.0"/>
       </StatusEffect>
       <!-- reduce condition to give the bolt a 10 second lifetime -->
       <StatusEffect type="OnNotContained" target="This" condition="-10" />
       <StatusEffect type="OnBroken" target="This">
-        <Explosion range="300.0" structuredamage="30" force="20.0" empstrength="0.5">
+        <Explosion range="300.0" structuredamage="30" force="25.0" empstrength="0.5">
           <Affliction identifier="explosiondamage" strength="50" />
           <Affliction identifier="stun" strength="0.5" />
         </Explosion>
