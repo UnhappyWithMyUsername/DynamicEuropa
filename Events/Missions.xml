@@ -2453,33 +2453,32 @@
   
   <SalvageMission
     identifier="destroybigalienturret"
+    tags="killmonster_set4"
     name="missionname.bigalienturret"
     description="missiondescription.bigalienturret"
     successmessage="missionsuccess.bigalienturret"
     failuremessage="missionfailure.bigalienturret"
-    tags="bigalienturret"
     type="Salvage"
     difficulty="3"
-    commonness="100"
+    commonness="50"
     reward="2000"
-    requireddeliveryamount="1"
+    requireddeliveryamount="0"
     PartiallyRetrievedMessage="missionmessage.bigalienturret.partiallyretrieved"
     AllRetrievedMessage="missionmessage.bigalienturret.allretrieved">
     <Reputation identifier="location" amount="3" />
-    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <LocationType from="AnyOutpost" to="AnyOutpost" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
-    <TriggerEvent state="0" delay="5" eventidentifier="findbigalienturret" />
-    <CompleteCheckDataAction identifier="bigalienturretdestroyed" condition="eq 1"/>      
+    <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <LocationType from="Any" to="Any" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,0,256,256" color="120,20,130"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="destroybigalienturretevent" />
+    <CompleteCheckDataAction identifier="bigalienturretdestroyed" condition="eq 1"/>
+    <Metadata identifier="bigalienturretdestroyed" value="0"/>    
 
     <target
       spawntype="mainpath"
       itemidentifier="bigalienturret"
-      sonarlabel="documents1"
-      requireretrieval="Interact"
-      PointToSub="true"
-      allowcontinuebeforeretrieved="true"
-      hidelabelafterretrieved="true" >
+      requireretrieval="PickedUp"
+      hidelabelafterretrieved="true"
+      sonarlabel="" >
     </target> 
     <message header="objectivedone" text="objectivedone"/>
 

@@ -179,19 +179,19 @@
     </LightComponent> 
   </Item>
   
-  <Item name="" identifier="bigalienturret" nameidentifier="alienturret" category="Alien" subcategory="devices" Tags="turret,alien" scale="2" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2500" explosiondamagemultiplier="3" sonarsize="40">
+  <Item name="" identifier="bigalienturret" nameidentifier="alienturret" category="Alien" subcategory="devices" Tags="turret,alien,ignorebyai" scale="2" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2500" explosiondamagemultiplier="3" sonarsize="50" isdangerous="true">
     <Body radius="40" density="10"/>
     <Sprite name="alienturret" texture="Content/Items/Alien/AlienTurret.png" depth="0.7" sourcerect="4,318,251,192" canflipy="false" />
     <BrokenSprite name="alienturret_broken_gradual" texture="Content/Items/Alien/AlienTurret.png" sourcerect="257,318,251,192" depth="0.69" fadein="true" maxcondition="80" />
     <BrokenSprite name="alienturret_broken" texture="Content/Items/Alien/AlienTurret.png" sourcerect="257,318,251,192" depth="0.68" fadein="false" />
-    <Decorativesprite SourceRect="21,1367,395,395" Texture="Content/Items/Alien/AlienRuins_Items.png" Origin="0.5,0.5" Depth="0.1" Offset="0,0" RandomOffset="0,0" OffsetAnim="Noise" OffsetAnimSpeed="0" RotationSpeed="10000" Rotation="360" RandomRotation="0,0" Scale="1.5" RandomScale="0,0" RotationAnim="None" Color="255,255,255,100" >
+    <Decorativesprite name="shield" SourceRect="21,1367,395,395" Texture="Content/Items/Alien/AlienRuins_Items.png" Origin="0.5,0.5" Depth="0.1" Offset="0,0" RandomOffset="0,0" OffsetAnim="Noise" OffsetAnimSpeed="0" RotationSpeed="10000" Rotation="360" RandomRotation="0,0" Scale="1.5" RandomScale="0,0" RotationAnim="None" Color="255,255,255,100" >
       <IsActiveConditional condition="gt 0" />    
     </Decorativesprite>
     <Decorativesprite name="debris1" texture="Content/Map/AlienWallSet2.png" sourcerect="1,1,510,339" Origin="0.5,0.5" Depth="0.23" Offset="-100,-100" Scale="0.25" RandomRotation="-20,20" />
     <Decorativesprite name="debris2" texture="Content/Map/AlienWallSet2.png" sourcerect="1,342,510,339" Origin="0.5,0.5" Depth="0.21" Offset="-25,-125" Scale="0.35" RandomRotation="-20,20" />
     <Decorativesprite name="debris3" texture="Content/Map/AlienWallSet2.png" sourcerect="1,684,510,339" Origin="0.5,0.5" Depth="0.22" Offset="25,-125" Scale="0.35" RandomRotation="-20,20" />
     <Decorativesprite name="debris4" texture="Content/Map/AlienWallSet2.png" sourcerect="1,1025,510,339" Origin="0.5,0.5" Depth="0.24" Offset="100,-100" Scale="0.25" RandomRotation="-20,20" />
-    <ItemContainer hideitems="true" drawinventory="true" capacity="2" maxstacksize="1" canbeselected="true" characterusable="true">
+    <ItemContainer hideitems="true" drawinventory="false" capacity="2" maxstacksize="1" canbeselected="false" characterusable="false">
       <Containable items="BIGalienturretammo" />
       <!-- when the turret is fired, it triggers this statuseffect and spawns new ammo -->
       <StatusEffect type="OnUse" target="Contained">
@@ -211,7 +211,7 @@
       </SubContainer>
     </ItemContainer>
     <!-- Triggercomponent allows making alien turret damageable while allowing them to be rotated -->
-    <TriggerComponent triggeredby="Human" radius="1000" force="0" forcefluctuationstrength="0.25" forcefluctuationinterval="10" distancebasedforce="true" >
+    <TriggerComponent triggeredby="Human" radius="1000" force="-50" forcefluctuationstrength="0.25" forcefluctuationinterval="10" distancebasedforce="true" >
     </TriggerComponent>
     <Turret autooperate="true" AIrange="10000" friendlytag="ancientalien" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="true" targetmonsters="false" targethumans="true" targetsubmarines="true" targetitems="false" canbeselected="false" firingoffset="0,-200" characterusable="false" linkable="true" barrelpos="125,127" rotationlimits="180,360" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="50" reload="4" springstiffnesslowskill="1" springstiffnesshighskill="1" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="1" rotationspeedhighskill="1">
       <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
@@ -220,7 +220,7 @@
       <RailSpriteBroken name="alienturret_rail_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="254,0,184,316" origin="0.5,0.83" />      
       <BarrelSprite name="alienturret_barrel" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="188,2,66,184" origin="0.5,1.57" />
       <BarrelSpriteBroken name="alienturret_barrel_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="442,2,66,184" origin="0.5,1.57" />      
-      <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="2000" directional="true" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true" ignorecontinuoustoggle="false" InheritParentIsActive="false">
+      <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="2000" directional="true" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true" ignorecontinuoustoggle="false" InheritParentIsActive="false" canbeselected="false" characterusable="false">
         <LightTexture texture="Content/Lights/lightcone.png" origin="-0.055,0.5" size="1.0,0.3" />
       </LightComponent>
       <StatusEffect type="OnUse" target="This">

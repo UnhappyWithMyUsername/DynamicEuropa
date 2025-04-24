@@ -502,8 +502,18 @@
           </ConversationAction>
         </Success>
       </CheckDataAction>
-    </ScriptedEvent>  
+    </ScriptedEvent>
 
+    <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="20" >
+      <ConversationAction text="Eventtext.missionevent_destroybigalienturret" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="ancient1">
+        <Option text="EventText.missionevent_destroybigalienturret.accept" >
+          <ConversationAction text="Eventtext.missionevent_destroybigalienturret.explosives" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="ancient1" endconversation="true" />
+          <MissionAction missionidentifier="destroybigalienturret" />
+        </Option>
+        <Option text="EventText.generic.refuse" endconversation="true">
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
 
       <!-- Unused TODO: custom husk beacon/probe, still no way to spawn specific beacons/wrecks in missions... -->
       <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
@@ -1994,7 +2004,7 @@
     </ScriptedEvent> 
     
     <!-- UNUSED, can't get the mission to accept the state as completed and succeed -->
-    <ScriptedEvent identifier="findbigalienturret" commonness="50">
+    <ScriptedEvent identifier="destroybigalienturretevent" commonness="50">
       <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:bigalienturret" tag="breakthis" />
@@ -2008,8 +2018,7 @@
         </Failure>
         <Success>
           <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="1" />
-          <MissionStateAction missionidentifier="destroybigalienturret" operation="Set" value="1" />
-          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+          <MissionStateAction missionidentifier="destroybigalienturret" operation="Set" value="4" />
         </Success>
       </CountTargetsAction>
     </ScriptedEvent> 
