@@ -1740,7 +1740,8 @@
               </StatusEffectAction>
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
-              <WaitAction time="1" />
+              <WaitAction time="1" />              
+              <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
               <Label name="tagcombatloop" />              
               <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
               <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="triggerer_player" isinstigator="false" witnessreaction="retreat" />
@@ -2094,6 +2095,7 @@
     </ScriptedEvent>
     
     <!-- triggers alarm if it detects a player in the pirate outpost without negociating with the toll NPC -->
+    <!-- TODO: simplify hull tagging? -->
     <ScriptedEvent identifier="piratehavenalarm">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -2179,6 +2181,7 @@
       </ConversationAction>
     </ScriptedEvent>
     
+    <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
     <!-- triggers an alarm if you break into the armory stash -->
     <ScriptedEvent identifier="piratearmoryalarm">
       <TagAction criteria="player" tag="player" />
