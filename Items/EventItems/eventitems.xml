@@ -185,6 +185,7 @@
     </ItemComponent>
   </Item>
 
+  <!-- the thing you have to blow up inside lairs -->
   <Item name="Heart of the lair" noninteractable="false" identifier="laircore" tags="laircore" scale="1.2" category="Misc" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2000" sonarsize="30">
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
     <!-- add more scum with offset if needed -->
@@ -773,6 +774,7 @@
     <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
   </Item>
 
+  <!-- WE TRY TO AVOID EVENT TRIGGER ITEMS AS MUCH AS POSSIBLE NOW, MOST OF THESE ARE UNUSED -->
   <!-- PLACEABLE EVENT TRIGGERS -->
   <!-- generic events -->
   <Item name="Triggered Event - Bartender" identifier="eventtrigger_bartender" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
@@ -849,7 +851,7 @@
     </LightComponent>
   </Item>  
   
-  <!-- only used for locating crawlers -->
+  <!-- item that only exists for locating targets, spawned in their inventory -->
   <Item hideinmenus="true" name="Alien liver" identifier="monsterlocatoritem" category="Misc" tags="alien,capturetargetitem" noninteractable="true" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
     <Body radius="50" density="10" />
@@ -863,6 +865,7 @@
     <AiTarget soundrange="5000000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true" NeedsUpdate="true" />
   </Item>
   
+  <!-- custom item for pirate outpost event -->
   <Item hideinmenus="true" name="Suspicious package" identifier="huskbodybag" category="Misc" tags="bodybag" scale="0.6" health="100" impactsoundtag="impact_soft" flipx="true" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,409,283,27" depth="0.55" origin="0.5,0.5" />
     <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,436,283,76" depth="0.54" origin="0.5,0.5" offset="5,12" offsetanim="noise" rotation="2" offsetanimspeed="50.0">
@@ -893,6 +896,7 @@
     </ItemComponent>
   </Item>
   
+  <!-- radioactive barrel for the salvage mission -->
   <Item hideinmenus="true" name="Radioactive Waste" identifier="radioactivewaste" tags="radioactive" category="Misc" Scale="0.5" sonarsize="30" >
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,269,144,85" depth="0.65" origin="0.5,0.5" />
     <Body width="144" height="78" density="25" friction="0.8" />
@@ -931,7 +935,7 @@
     <AiTarget Soundrange="5000" sonardisruption="0.1" />
   </Item>
 
-
+  <!-- event item that allows you to harvest piezo chunks -->
   <Item name="Old pick-chisel" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="engcab" spawnprobability="0"/>
     <PreferredContainer secondary="wreckstoragecab,wreckengcab" spawnprobability="0.01" />
@@ -1043,7 +1047,7 @@
     </LightComponent>
   </Item>
   
-  
+  <!-- cargo for transport mission, you have to keep it wet and powered or something -->
   <Item name="Biological Cargo" identifier="biocrate" tags="largeitem,poweredcontainer" category="Electrical,Machine" Scale="0.5" description=""  damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Items/Containers/containers2.png" depth="0.54" sourcerect="0,29,147,56" origin="0.5,0.5" />
     <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.54" sourcerect="190,101,258,128" origin="0.5,-0.38" rotation="180" offset="0,-5" offsetanim="Noise" offsetanimspeed="0.25" scale="0.55">
@@ -1122,7 +1126,7 @@
     </ItemContainer>
   </Item>
   
-  
+  <!-- gas cloud spawned by vents in malfunction event -->
   <Item name="ventleakcloud" identifier="ventleakcloud" Scale="1" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyrepairtools="true" noninteractable="true">
     <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
     <Body radius="30" bodytype="static"/>
@@ -1154,7 +1158,7 @@
     </ItemComponent>
   </Item>
   
-  
+  <!-- cargo defense bot you have to keep repaired for the mission -->
   <Item name="Inactive Defense Bot" identifier="cargodefensebot" tags="largeitem,mechanical,crate" category="Misc" Scale="0.4" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,96" origin="0.5,0.5" />
     <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
@@ -1206,6 +1210,7 @@
     </Repairable>
   </Item>
   
+  <!-- defective version of defense bot cargo that turns into a hostile bot -->
   <Item name="Inactive Defense Bot" identifier="cargodefensebot_defective" tags="largeitem,mechanical,crate" category="Misc" Scale="0.4" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true" hideinmenus="true" health="50">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,96" origin="0.5,0.5" />
     <!-- <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" /> -->
@@ -1246,7 +1251,7 @@
     </Repairable>
   </Item>  
   
-
+  <!-- sample vial used to stab the chimera in the mission -->
   <Item name="" identifier="husksamplevial" hideinmenus="true" category="Medical" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="mediccrate" Tags="smallitem,missionitem" description="" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="medcab" secondary="medcontainer"/>
     <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
@@ -1317,6 +1322,7 @@
     </Controller>
   </Item>
 
+  <!-- ball of goop that spawns hammerhead babies guarding it for the mission -->
   <Item name="" identifier="hammerheadmucus" tags="hammerhead,hammerheadmucus" description="Spawn fishes for missions, to name" scale="0.5" category="Electrical" spritecolor="255,255,150,255" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="20" sonarsize="15">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="430,257,115,117" origin="0.5,0.5" />
     <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.53" sourcerect="421,376,124,58" origin="0.5,0.5" rotation="0" offset="0,-50">
