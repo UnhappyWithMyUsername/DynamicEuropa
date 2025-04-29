@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Override>
 <Items>
 
   <!-- Spike shot by the giant electric spineling, sticks to the ship and shocks it periodically -->
@@ -273,7 +275,7 @@
   </Item>
 
   <!-- locked gas emitter that spawns in waste crawlers when they die -->
-  <Item name="Acid Gases" identifier="wastesporeemitter" Scale="1" category="hidden" nonplayerteaminteractable="True" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyprojectiles="false" damagedbyrepairtools="true" spritecolor="180,230,50,255" hideconditionbar="true">
+  <Item name="Acid Gases" identifier="toxicgasemitter" Scale="1" category="hidden" nonplayerteaminteractable="True" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyprojectiles="false" damagedbyrepairtools="true" spritecolor="180,230,50,255" hideconditionbar="true">
     <Sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="274,145,95,95" depth="0.55" />
     <Body radius="20" bodytype="kinematic"/>
     <Holdable slots="Any" msg="ItemMsgPickUpSelect" />
@@ -333,9 +335,10 @@
         <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="0" anglemax="0" particleamount="10" velocitymin="-10" velocitymax="-100" scalemin="0.5" scalemax="1" />
       </StatusEffect>
     </Projectile>
-    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" spawnwithid="wastesporeemitter">
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" spawnwithid="toxicgasemitter">
     </ItemContainer>
   </Item>
 
   
 </Items>
+</Override>
