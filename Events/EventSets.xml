@@ -359,6 +359,12 @@
           <!-- <ScriptedEvent identifier="missionevent_beaconspecialhusk" /> -->
         </EventSet>
       </EventSet>
+      <!-- RUIN/LORE EVENTS, those require a research outpost, disabled them because it needs preplaced layer bullshit, will be reenabled if I'm bothered -->
+      <!-- <EventSet identifier="outpostevents.research.triggeralways" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research,city" allowatstart="true" chooserandom="false" onceperoutpost="true"> 
+        <ScriptedEvent identifier="explorealienruins1" />
+        <ScriptedEvent identifier="explorealienruins2" />
+        <ScriptedEvent identifier="explorealienruins3" />
+      </EventSet> -->
 
       <!-- low-difficulty random events -->
       <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,city,clinic,hospital,study,research,hydroponics,blockade,camp,base,military,factory,shipyard" allowatstart="true" chooserandom="true" onceperoutpost="true">
@@ -650,11 +656,20 @@
         <ScriptedEvent identifier="hognose" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="radiationescapee" commonness="50" />
         <ScriptedEvent identifier="pantytheft" commonness="50" />        
-      </EventSet>
-      
+      </EventSet>      
+
+      <!-- RUIN LORE EVENTS, made them occur in civilian + research outposts  -->
+      <!--Always trigger when past difficulty 15, unless completed. Foreshadows explore alien ruins event set, completing part 1 of that set first will block this event.-->
+      <EventSet identifier="ruinmissionforeshadowing" minleveldifficulty="15" locationtype="settlement,colony,city,study,research,huskchurch">
+        <ScriptedEvent identifier="associate" />
+      </EventSet>      
       <!--Always trigger when past difficulty 25, unless completed. Introduces alien ruins.-->
-      <EventSet identifier="ruinintroduction" allowatstart="true" minleveldifficulty="25">
+      <EventSet identifier="ruinintroduction" allowatstart="true" minleveldifficulty="25" locationtype="settlement,colony,city,study,research,huskchurch">
         <ScriptedEvent identifier="badvibrations1" />
+      </EventSet>      
+      <!--Always trigger when past difficulty 50, unless completed. Foreshadows Dr. af Grann. -->
+      <EventSet identifier="outpostevent.nowayout" minleveldifficulty="50" locationtype="settlement,colony,city,study,research,huskchurch">
+        <ScriptedEvent identifier="nowayout" />
       </EventSet>
       
       <!-- Vanilla Mission Event sets -->
