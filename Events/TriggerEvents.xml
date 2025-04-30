@@ -182,7 +182,7 @@
             <Success>
               <CheckDataAction identifier="bartender_tipped" condition="eq 1">
                 <Success>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.offerdrink.drunk" dialogtype="Regular">
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.offerdrink.drunk" dialogtype="Regular">
                     <Option text="eventtext.bartender.buy.coalitionbeer">
                       <CheckDataAction identifier="bt_coalitionbeer_amount" value="neq 0">
                         <Success>
@@ -191,19 +191,19 @@
                               <MoneyAction amount="-10" />
                               <SpawnAction itemidentifier="he-beercoalitionpremium" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_coalitionbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -217,19 +217,19 @@
                               <MoneyAction amount="-10" />
                               <SpawnAction itemidentifier="he-beerjovianforce" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_separatistbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -243,19 +243,19 @@
                               <MoneyAction amount="-59" />
                               <SpawnAction itemidentifier="he-beerliquidascension" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_huskbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -269,19 +269,19 @@
                               <MoneyAction amount="-38" />
                               <SpawnAction itemidentifier="he-beerclownjuice" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_clownbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -295,19 +295,19 @@
                               <MoneyAction amount="-125" />
                               <SpawnAction itemidentifier="he-whiskey" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_whiskey_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -321,19 +321,19 @@
                               <MoneyAction amount="-150" />
                               <SpawnAction itemidentifier="rum" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_rum_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -347,7 +347,7 @@
                   </ConversationAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.offerdrink.drunk" dialogtype="Regular">
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.offerdrink.drunk" dialogtype="Regular">
                     <Option text="eventtext.bartender.buy.coalitionbeer">
                       <CheckDataAction identifier="bt_coalitionbeer_amount" value="neq 0">
                         <Success>
@@ -356,19 +356,19 @@
                               <MoneyAction amount="-10" />
                               <SpawnAction itemidentifier="he-beercoalitionpremium" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_coalitionbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -382,19 +382,19 @@
                               <MoneyAction amount="-10" />
                               <SpawnAction itemidentifier="he-beerjovianforce" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_separatistbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -408,19 +408,19 @@
                               <MoneyAction amount="-59" />
                               <SpawnAction itemidentifier="he-beerliquidascension" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_huskbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -434,19 +434,19 @@
                               <MoneyAction amount="-38" />
                               <SpawnAction itemidentifier="he-beerclownjuice" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_clownbeer_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -460,19 +460,19 @@
                               <MoneyAction amount="-125" />
                               <SpawnAction itemidentifier="he-whiskey" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_whiskey_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -486,19 +486,19 @@
                               <MoneyAction amount="-150" />
                               <SpawnAction itemidentifier="rum" targetinventory="bt_trig_player" />
                               <SetDataAction identifier="bt_rum_amount" operation="add" value="-1" />
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.drunk" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.drunk" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Success>
                             <Failure>
-                              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                               <ClearTagAction tag="bt_trig_player" />
                               <GoTo name="waitforinput" />
                             </Failure>
                           </CheckMoneyAction>
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -509,13 +509,13 @@
                         <Success>
                           <MoneyAction amount="-50" />
                           <SetDataAction identifier="bartender_tipped" value="1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.tip.success" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.tip.success" />
                           <MissionAction missiontag="salvageartifact" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.tip.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.tip.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
@@ -531,7 +531,7 @@
               </CheckDataAction>
             </Success>
             <Failure>
-              <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.offerdrink.slightdrunk" dialogtype="Regular">
+              <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.offerdrink.slightdrunk" dialogtype="Regular">
                 <Option text="eventtext.bartender.buy.coalitionbeer">
                   <CheckDataAction identifier="bt_coalitionbeer_amount" value="neq 0">
                     <Success>
@@ -540,19 +540,19 @@
                           <MoneyAction amount="-10" />
                           <SpawnAction itemidentifier="he-beercoalitionpremium" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_coalitionbeer_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -566,19 +566,19 @@
                           <MoneyAction amount="-10" />
                           <SpawnAction itemidentifier="he-beerjovianforce" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_separatistbeer_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -592,19 +592,19 @@
                           <MoneyAction amount="-59" />
                           <SpawnAction itemidentifier="he-beerliquidascension" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_huskbeer_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -618,19 +618,19 @@
                           <MoneyAction amount="-38" />
                           <SpawnAction itemidentifier="he-beerclownjuice" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_clownbeer_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -644,19 +644,19 @@
                           <MoneyAction amount="-125" />
                           <SpawnAction itemidentifier="he-whiskey" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_whiskey_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -670,19 +670,19 @@
                           <MoneyAction amount="-150" />
                           <SpawnAction itemidentifier="rum" targetinventory="bt_trig_player" />
                           <SetDataAction identifier="bt_rum_amount" operation="add" value="-1" />
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.slightdrunk" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.slightdrunk" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Success>
                         <Failure>
-                          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                           <ClearTagAction tag="bt_trig_player" />
                           <GoTo name="waitforinput" />
                         </Failure>
                       </CheckMoneyAction>
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
@@ -698,7 +698,7 @@
           </CheckAfflictionAction>
         </Success>
         <Failure>
-          <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.offerdrink.nodrunk" dialogtype="Regular">
+          <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.offerdrink.nodrunk" dialogtype="Regular">
             <Option text="eventtext.bartender.buy.coalitionbeer">
               <CheckDataAction identifier="bt_coalitionbeer_amount" value="neq 0">
                 <Success>
@@ -707,19 +707,19 @@
                       <MoneyAction amount="-10" />
                       <SpawnAction itemidentifier="he-beercoalitionpremium" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_coalitionbeer_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.coalitionbeer.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.coalitionbeer.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
@@ -733,19 +733,19 @@
                       <MoneyAction amount="-10" />
                       <SpawnAction itemidentifier="he-beerjovianforce" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_separatistbeer_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.separatistbeer.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.separatistbeer.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
@@ -759,19 +759,19 @@
                       <MoneyAction amount="-59" />
                       <SpawnAction itemidentifier="he-beerliquidascension" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_huskbeer_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.huskbeer.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.huskbeer.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
@@ -785,19 +785,19 @@
                       <MoneyAction amount="-38" />
                       <SpawnAction itemidentifier="he-beerclownjuice" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_clownbeer_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.clownbeer.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.clownbeer.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
@@ -811,19 +811,19 @@
                       <MoneyAction amount="-125" />
                       <SpawnAction itemidentifier="he-whiskey" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_whiskey_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.whiskey.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.whiskey.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
@@ -837,19 +837,19 @@
                       <MoneyAction amount="-150" />
                       <SpawnAction itemidentifier="rum" targetinventory="bt_trig_player" />
                       <SetDataAction identifier="bt_rum_amount" operation="add" value="-1" />
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.success.nodrunk" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.success.nodrunk" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Success>
                     <Failure>
-                      <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.buy.rum.failure" />
+                      <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.buy.rum.failure" />
                       <ClearTagAction tag="bt_trig_player" />
                       <GoTo name="waitforinput" />
                     </Failure>
                   </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="bt_trig_player" text="eventtext.bartender.outofstock" />
+                  <ConversationAction targettag="bt_trig_player" eventsprite="guywithalcohol" text="eventtext.bartender.outofstock" />
                   <ClearTagAction tag="bt_trig_player" />
                   <GoTo name="waitforinput" />
                 </Failure>
