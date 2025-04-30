@@ -535,7 +535,6 @@
         <ScriptedEvent identifier="jobboardmedical" commonness="200" probability="1.0" />
       </EventSet>
       <EventSet identifier="outpostevent.medical.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
-        <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="mindsunraveled" commonness="200" probability="1.0" />
       </EventSet>
 
@@ -1071,11 +1070,13 @@
   <Override>
     <EventSet identifier="transitevents" leveltype="LocationConnection" allowatstart="true" chooserandom="false" campaign="true" ignoreintensity="true" additive="true">
       <!-- All Biomes -->
-      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="stowaway22" commonness="100" probability="0.1" triggercooldown="false" />
-        <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
         <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
+        <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
+      </EventSet>
+      <EventSet identifier="DEtransitevents.reputation.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="oxygenfluidleak" commonness="100" probability="0.02" triggercooldown="false" />
