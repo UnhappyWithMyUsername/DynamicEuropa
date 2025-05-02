@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--COMMON-->
 <levelobjects>
-  <!--Vents-->
+  <!--Vents that spawn on main path walls and not just abyss-->
   <lavaventde identifier="lavaventDE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10" randomoffset="0,0">
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="1030,1247,440,803" origin="0.5,0.9" />
     <Trigger randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
@@ -22,13 +22,8 @@
     </Trigger>
     <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
     <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
-    <overridecommonness leveltype="hydrothermalwastes" commonness="0" />
-    <overridecommonness leveltype="coldcavernsoutpost" commonness="0" />
-    <overridecommonness leveltype="ridgeoutpost" commonness="0" />
-    <overridecommonness leveltype="plateauoutpost" commonness="0" />
-    <overridecommonness leveltype="greatseaoutpost" commonness="0" />
-    <overridecommonness leveltype="wastesoutpost" commonness="0" />  
-    <overridecommonness commonness="0" leveltype="endzone" />
+    <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
+    <overridecommonness leveltype="wastesoutpost" commonness="0" />
   </lavaventde>
   <lavavent2de identifier="lavavent2DE" SpawnPos="MainPathWall, SidePathWall" alignment="Top" minsize="0.5" maxsize="1" randomrotation="0,0" sonardisruption="0.5" depthrange="0,1" clusteringamount="0" clusteringgroup="0" alignwithsurface="False" minsurfacewidth="528" swingamount="0" swingfrequency="0" scaleoscillation="0,0" scaleoscillationfrequency="0" commonness="0" maxcount="10" randomoffset="0,0">
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.9" />
@@ -51,13 +46,7 @@
     <ParticleEmitter particle="volcanosmoke" particlespersecond="5" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
     <LightSource color="50,0,0,255" range="2048" flicker="0.2" flickerspeed="0.1" pulseamount="0.5" pulsefrequency="0.3" />
     <overridecommonness leveltype="hydrothermalwastes" commonness="5" />
-    <overridecommonness leveltype="hydrothermalwastes" commonness="0" />
-    <overridecommonness leveltype="coldcavernsoutpost" commonness="0" />
-    <overridecommonness leveltype="ridgeoutpost" commonness="0" />
-    <overridecommonness leveltype="plateauoutpost" commonness="0" />
-    <overridecommonness leveltype="greatseaoutpost" commonness="0" />
-    <overridecommonness leveltype="wastesoutpost" commonness="0" /> 
-    <overridecommonness commonness="0" leveltype="endzone" />
+    <overridecommonness leveltype="wastesoutpost" commonness="0" />
   </lavavent2de>
   
   <!-- pondering adding background chunks to outpost levels so the outpost isnt floating but it's not encased in ceiling either -->
