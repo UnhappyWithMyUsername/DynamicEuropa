@@ -3138,12 +3138,22 @@
       <SetDataAction identifier="redraptorwon" operation="set" value="0" />
       <SetDataAction identifier="greenraptorwon" operation="set" value="0" />
       <SetDataAction identifier="blueraptorwon" operation="set" value="0" />
-      <SetDataAction identifier="betonraptor" operation="set" value="0" />
+      <SetDataAction identifier="betonraptorcounter" operation="set" value="0" />
       <SetDataAction identifier="raptorracefinished" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="bookmaker" spawnlocation="Outpost" spawnpointtag="mineevent" />
+      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
+      <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="bookmaker" spawnlocation="Outpost" spawnpointtag="bookmaker" />
+      <SpawnAction speciesname="Mudraptorred" targettag="redraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/><!-- 
+      <SpawnAction speciesname="Mudraptorgreen" targettag="greenraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
+      <SpawnAction speciesname="Mudraptorblue" targettag="blueraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/> -->
       <Label name="talktobookie" />
       <ClearTagAction tag="gambler_player" />
+      <CheckDataAction identifier="betonraptorcounter" condition="gte 5" >
+        <Success>
+          <Goto name="betsareoff" />
+        </Success>
+      </CheckDataAction>
       <ConversationAction text="Wanna gamble?" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="captain">
         <!-- Pick red raptor -->
         <Option text="EventText.mudraptorracing.pickred">
@@ -3155,8 +3165,9 @@
                   <MoneyAction targettag="mde_player" amount="-250" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.betonred" eventsprite="mines" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_red" amount="1" targetinventory="gambler_player" />
+                  <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonred" operation="set" value="1" />
-                  <Goto name="proceed" />
+                  <Goto name="talktobookie" />
                 </Success>
                 <Failure>
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
@@ -3171,10 +3182,32 @@
           <Goto name="talktobookie" />
         </Option>
       </ConversationAction>
+      
+      <Label name="betsareoff" />
+      <ConversationAction text="All bets are off! Time to unleash the raptors!" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="captain" endconversation="true"/>
+      
       <!-- Remove all tickets -->
       <OnRoundEndAction>
         <RemoveItemAction targettag="raceticket" Amount="100" />
       </OnRoundEndAction>
+    </ScriptedEvent>
+    
+
+    <ScriptedEvent identifier="mudraptorracing_TEST">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
+      <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
+      <!-- touch the lever to start the race -->
+      <TriggerAction target1tag="player" target2tag="raptorracelever" applytotarget1="triggerer_player" waitforinteraction="true" selectontrigger="true" />   <StatusEffectAction targettag="raptorracelever">
+        <StatusEffect target="This" state="true" setvalue="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="petfoodgun">
+        <StatusEffect target="This" offset="30,0"> 
+          <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1000" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
+          <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
+          <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="0.8" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
 
     <ScriptedEvent identifier="mudraptorracing_cashout">
