@@ -3,6 +3,8 @@
   <!--OVERRIDES-->
   <!--OVERRIDES-->
   <!--OVERRIDES-->
+  <!-- These missions are overriden mostly to match custom location identifiers -->
+  
   <Override>
     <OutpostDestroyMission identifier="huskcultspecialassassinate" type="OutpostDestroy" achievementidentifier="huskcultspecialassassinate" reward="2000" difficulty="4" commonness="0" allowretry="true" sonarlabel="target" requireCorrectLocationType="true" BlockLocationTypeChanges="true">
       <Reputation identifier="huskcult" amount="10" />
@@ -1660,6 +1662,7 @@
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
 
+    <!-- Simple cargo mission -->
     <CargoMission
       identifier="huskmedicalcargo"
       tags="cargohusk"
@@ -1678,6 +1681,7 @@
       <LocationType from="huskchurch" to="Anyoutpost"/>
     </CargoMission>
 
+    <!-- Simple cargo mission but with husk eggs inside, there is no twist... -->
     <CargoMission
       identifier="huskeggsmuggling"
       tags="cargohusk,cargosmugglinghusk"
@@ -1702,6 +1706,7 @@
       <LocationType from="huskchurch" to="AnyOutpost"/>
     </CargoMission>
 
+    <!-- the crate needs to be kept powered and wet -->
     <CargoMission
       identifier="keepwetcargo"
       tags="cargohusk"
@@ -1725,6 +1730,7 @@
       <message header="missionheader0.keepwetcargo" text="missionmessage0.keepwetcargo"/>
     </CargoMission>
     
+    <!-- simple VIP escort -->
     <EscortMission
       identifier="escorthuskvip"
       tags="escortVIP,escort"
@@ -1742,7 +1748,7 @@
         <Character from="husknpcsmission" identifier="huskbodyguard"/>
         <Character from="husknpcsmission" identifier="huskbodyguard"/>
       </Characters>
-      <Reputation identifier="huskcult" amount="7" amountforopposingfaction="-7" />
+      <Reputation identifier="huskcult" amount="5" amountforopposingfaction="-5" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,512,256,256" color="40,140,80" />
       <LocationType from="AnyOutpost" to="huskchurch"/>
       <LocationType from="AnyOutpost" to="Research"/>
@@ -1751,6 +1757,7 @@
       <message header="missionheader0.escort2" text="missionmessage0.escort2"/>
     </EscortMission>
 
+    <!-- Gather slime samples -->
     <MineralMission
       identifier="slimecollection"
       textIdentifier="slimecollection"
@@ -1774,12 +1781,13 @@
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
     
+    <!-- escort mission but with a husk fanatic armed with unique knife and unstable compound N -->
     <EscortMission
       identifier="escorthuskterrorist"
-      tags="escortterrorists,escortterroristshusk,escort"
+      tags="escortterrorists,escortterroristshusk,escort,escortcommonerscoalition,escortcommonersseparatists"
       type="Escort"
       difficulty="2"
-      commonness="100"
+      commonness="10"
       reward="2500"
       achievementidentifier="escortmission"
       baseescortedcharacters="1"
@@ -1801,7 +1809,7 @@
         <Item identifier="volatilecompoundn" mindifficulty="40"/>
         <Item identifier="divingknifeunique" mindifficulty="60"/>
       </TerroristItems>
-      <Reputation identifier="location" amount="5" />
+      <Reputation identifier="location" amount="3" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,512,256,256" color="243,146,55" />
       <LocationType from="AnyOutpost" to="AnyOutpost" />
       <message header="missionheader0.escorthuskterrorist" text="missionmessage0.escorthuskterrorist"/>
