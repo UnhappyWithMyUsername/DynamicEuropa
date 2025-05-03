@@ -460,5 +460,37 @@
     <Throwable slots="Any,RightHand,LeftHand" throwforce="3.0" holdangle="0" handle1="-8,0" aimpos="35,-200" msg="ItemMsgPickUpSelect" />
   </Item>
 
+  <!-- only used in raptor race -->
+  <Item name="Raptor rubber duck" identifier="raptorrubberduck" category="Material" maxstacksize="1" Tags="toy,mediumitem,monsterfood,bait" scale="0.35" impactsoundtag="impact_rubberduck" noninteractable="false" hideinmenus="true" impacttolerance="0.2" health="50" damagedbymonsters="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,804,107,102" depth="0.55" origin="0.5,0.5" />
+    <Body width="20" radius="45" density="0.6" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="3" />
+    </Deconstruct>
+    <Throwable slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnImpact" target="This" setvalue="true" soundrange="10000" sightrange="6000">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+        <particleemitter particleamount="20" particle="brownchunks" drawontop="true" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" copyentitangle="false" distancemin="0" distancemax="30" scalemin="0.35" scalemax="0.6" colormultiplier="255,255,0,255"  />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" range="1000" dontmuffle="true" />
+      </StatusEffect>
+    </Throwable>
+    <AiTarget sightrange="2000" soundrange="2000" static="True" />
+    <ItemComponent isactive="true">
+    </ItemComponent>
+  </Item> 
+
   </Override>
 </Items>
