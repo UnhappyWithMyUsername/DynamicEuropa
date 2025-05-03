@@ -254,12 +254,12 @@
    
       <!--HUSK MANAGER MISSIONS-->
       
-      <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskmedicalcargo" />
       </ScriptedEvent>
       
-      <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskeggsmuggling.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskeggsmuggling" />
       </ScriptedEvent>
@@ -314,7 +314,7 @@
         </CheckDataAction>
       </ScriptedEvent>
       
-      <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="20" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="25" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <!-- only get this if husk reputation is low -->
         <CheckReputationAction targettype="faction" identifier="huskcult" condition="lte -15">
           <Failure>
