@@ -3129,6 +3129,42 @@
       </CheckDataAction>
     </ScriptedEvent>
      
+
+
+    <ScriptedEvent identifier="mudraptorracing">
+      <SetDataAction identifier="betonred" operation="set" value="0" />
+      <SetDataAction identifier="betongreen" operation="set" value="0" />
+      <SetDataAction identifier="betonblue" operation="set" value="0" />
+      <SetDataAction identifier="betonraptor" operation="set" value="0" />
+      <SetDataAction identifier="raptorracefinished" operation="set" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="bookmaker" spawnlocation="Outpost" spawnpointtag="mineevent" />
+      <Label name="talktobookie" />
+      <ClearTagAction tag="gambler_player" />
+      <ConversationAction text="Wanna gamble?" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="captain">
+        <Option text="EventText.mudraptorracing.pickred" >
+          <CheckMoneyAction targettag="gambler_player" amount="500">
+            <Success>
+              <MoneyAction targettag="mde_player" amount="-500" />
+              <ConversationAction targettag="gambler_player" text="EventText.mine.terminal.interact.pay.success" eventsprite="mines" dialogtype="small" />
+              <SetDataAction identifier="betonred" operation="set" value="1" />
+              <Goto name="proceed" />
+            </Success>
+            <Failure>
+              <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+              <GoTo name="talktobookie" />
+            </Failure>
+          </CheckMoneyAction>
+          <ConversationAction targettag="triggerer_player" text="EventText.mudraptorracing.betonred" eventsprite="mines" endconversation="true"/>
+          <SetDataAction identifier="betonred" operation="set" value="1" />
+        </Option>
+        <Option text="eventtext.generic.ignore" endconversation="true">
+          <Goto name="talktobookie" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>  
+     
+     
     <!-- literally just spawns a merchant for the 1st outpost in campaign, doesnt work rn -->
     <ScriptedEvent identifier="startermerchant" commonness="100">
       <!-- <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
