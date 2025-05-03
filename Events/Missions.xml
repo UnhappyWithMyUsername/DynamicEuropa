@@ -1187,6 +1187,9 @@
   
   
   <!-- SURVEY MISSIONS -->
+  <!-- SURVEY MISSIONS -->
+  <!-- SURVEY MISSIONS -->
+  
   <MineralMission
     identifier="surveymission1"
     textIdentifier="surveyedminerals"
@@ -1352,6 +1355,13 @@
     <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
   </MineralMission>
   
+  <!-- END OF SURVEY MISSIONS -->
+  <!-- END OF SURVEY MISSIONS -->
+  <!-- END OF SURVEY MISSIONS -->
+  
+  
+  
+  <!-- kidnap a vip from an outpost, bring it to your sub by force -->
   <OutpostMission
     identifier="vipnapping"
     name="missionname.vipnapping"
@@ -1382,6 +1392,7 @@
     <Metadata identifier="vipnappingnorepeat" value="1"/>
   </OutpostMission>
   
+  <!-- identify a bandit turncoat in a cell and kill it -->
   <AbandonedOutpostMission
     identifier="silencewitness"
     tags="assasination"
@@ -1409,6 +1420,7 @@
     <Metadata identifier="silencewitnessnorepeat" value="1"/>
   </AbandonedOutpostMission>
   
+  <!-- outpost is taken hostage by bandits, you can either kill the bandits, pay a ransom or intimidate them. Fighting bandits will ma-->
   <OutpostDestroyMission name="Hostage Situation" identifier="hostagesituation" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" reward="3500" difficulty="3" commonness="0" allowretry="true" BlockLocationTypeChanges="true" hostageskilledmessage="hostagesexecuted">
     <Reputation identifier="location" amount="5" />
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,512,256,256" color="60,125,125"/>
@@ -1439,6 +1451,7 @@
     <CompleteCheckDataAction identifier="hostagesalive" condition="eq 1"/>
   </OutpostDestroyMission>
   
+  <!-- escort one sick patient, spreads disease to nearby crew -->
   <EscortMission
     identifier="escortmedivac"
     tags="escortmedivac,escort"
@@ -1464,6 +1477,7 @@
     <message header="missionheader0.escortmedivac" text="missionmessage0.escortmedivac"/>
   </EscortMission>
   
+  <!-- retrieve radioactive barrels -->
   <SalvageMission
     identifier="retrieveindustrialwaste"
     name="missionname.retrieveindustrialwaste"
@@ -1493,6 +1507,7 @@
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="512,256,256,256" color="120,214,48"/>
   </SalvageMission>
   
+  <!-- retrieve one hammerhead mucus, hammerhead spawns swim around it -->
   <SalvageMission
     identifier="retrievehammerheadmucus"
     name="missionname.retrievehammerheadmucus"
@@ -1522,6 +1537,7 @@
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="140,160,90"/>
   </SalvageMission>
   
+  <!-- kill black moloch mission disguised as artifact retrieval -->
   <MonsterMission
     identifier="salvagekillmoloch"
     textidentifier="salvagekillmoloch"
@@ -1538,7 +1554,7 @@
     <message header="missionheader0.salvagekillmoloch" text="missionmessage0.salvagekillmoloch"/>
   </MonsterMission>
 
-  <!-- turns out for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
+  <!-- for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
   <GotoMission
     name=""
     identifier="industrialincident"
@@ -1555,6 +1571,7 @@
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="230,230,50"/>
   </GotoMission>
   
+  <!-- escort orange boys, keep them fed -->
   <GotoMission    
     identifier="escortorangeboys"
     name="missionname.escortorangeboys"
@@ -1578,6 +1595,7 @@
     <CompleteCheckDataAction identifier="escortedorangeboys" condition="eq 1"/>
   </GotoMission>
     
+  <!-- transport inactive defense bots, keep them repaired and away from water-->
   <CargoMission
     identifier="cargodefensebots"
     tags="cargodefensebots"
@@ -1605,6 +1623,7 @@
     <LocationType from="AnyOutpost" to="Shipyard"/>
   </CargoMission>  
   
+  <!-- transport defense bots but some turn hostile when they break -->
   <CargoMission
     identifier="cargodefensebots_defective"
     tags="cargodefensebots"
@@ -1633,7 +1652,7 @@
     <LocationType from="AnyOutpost" to="Shipyard"/>
   </CargoMission>
 
-  <!-- turns out for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
+  <!-- for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
   <GotoMission
     name=""
     identifier="alcoholcontraband"
@@ -1654,6 +1673,40 @@
     <CompleteCheckDataAction identifier="alcoholdelivered" condition="eq 1"/>
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="150,80,50"/>
   </GotoMission>
+
+  <!-- destroy a large alien turret -->
+  <SalvageMission
+    identifier="destroybigalienturret"
+    tags="killalienthing"
+    name="missionname.bigalienturret"
+    description="missiondescription.bigalienturret"
+    successmessage="missionsuccess.bigalienturret"
+    failuremessage="missionfailure.bigalienturret"
+    type="Salvage"
+    difficulty="3"
+    commonness="50"
+    reward="2000"
+    requireddeliveryamount="0"
+    PartiallyRetrievedMessage="missionmessage.bigalienturret.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.bigalienturret.allretrieved">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <LocationType from="Any" to="Any" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,0,256,256" color="120,20,130"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="destroybigalienturretevent" />
+    <CompleteCheckDataAction identifier="bigalienturretdestroyed" condition="eq 1"/>
+    <Metadata identifier="bigalienturretdestroyed" value="0"/>    
+
+    <target
+      spawntype="mainpath"
+      itemidentifier="bigalienturret"
+      requireretrieval="PickedUp"
+      hidelabelafterretrieved="true"
+      sonarlabel="" >
+    </target> 
+    <message header="objectivedone" text="objectivedone"/>
+
+  </SalvageMission>
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
@@ -1865,6 +1918,7 @@
       <Metadata identifier="assassinatehuskresearchernorepeat" value="1"/>
     </AbandonedOutpostMission>
 
+    <!-- husk cult ambush -->
     <PirateMission
       type="Pirate"
       identifier="huskcultattack1"
@@ -1936,6 +1990,7 @@
       <LocationType from="AnyOutpost" to="AnyOutpost" />
     </PirateMission>   
 
+    <!-- husk cult interception (mission) -->
     <PirateMission
       type="Pirate"
       identifier="huskcultinterception" 
@@ -2005,6 +2060,7 @@
       <Metadata identifier="huskinterceptionmissionnorepeat" value="1"/>
     </PirateMission> 
 
+    <!-- capture a mutated crawler -->
     <GotoMission    
       identifier="capturelivecrawler"
       name="missionname.livecapture"
@@ -2025,6 +2081,7 @@
       <Metadata identifier="capturelivecrawlernorepeat" value="1"/>
     </GotoMission>
     
+    <!-- gather a chimera blood sample -->
     <GotoMission    
       identifier="chimerasamples"
       name="missionname.chimerasamples"
@@ -2459,39 +2516,6 @@
     
   </SalvageMission> -->
   
-  <SalvageMission
-    identifier="destroybigalienturret"
-    tags="killalienthing"
-    name="missionname.bigalienturret"
-    description="missiondescription.bigalienturret"
-    successmessage="missionsuccess.bigalienturret"
-    failuremessage="missionfailure.bigalienturret"
-    type="Salvage"
-    difficulty="3"
-    commonness="50"
-    reward="2000"
-    requireddeliveryamount="0"
-    PartiallyRetrievedMessage="missionmessage.bigalienturret.partiallyretrieved"
-    AllRetrievedMessage="missionmessage.bigalienturret.allretrieved">
-    <Reputation identifier="location" amount="3" />
-    <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <LocationType from="Any" to="Any" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,0,256,256" color="120,20,130"/>
-    <TriggerEvent state="0" delay="5" eventidentifier="destroybigalienturretevent" />
-    <CompleteCheckDataAction identifier="bigalienturretdestroyed" condition="eq 1"/>
-    <Metadata identifier="bigalienturretdestroyed" value="0"/>    
-
-    <target
-      spawntype="mainpath"
-      itemidentifier="bigalienturret"
-      requireretrieval="PickedUp"
-      hidelabelafterretrieved="true"
-      sonarlabel="" >
-    </target> 
-    <message header="objectivedone" text="objectivedone"/>
-
-  </SalvageMission>
-
 <!--   <SalvageMission
     identifier="piezosample"
     tags="piezosample"
