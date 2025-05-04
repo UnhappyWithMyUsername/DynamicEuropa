@@ -3183,7 +3183,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_red" amount="1" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_red" amount="1" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonred" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3199,7 +3199,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-500" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_red" amount="3" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_red" amount="3" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonred" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3224,7 +3224,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_green" amount="1" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_green" amount="1" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betongreen" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3240,7 +3240,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-300" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_green" amount="3" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_green" amount="3" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betongreen" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3265,7 +3265,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_blue" amount="1" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_blue" amount="1" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonblue" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3281,7 +3281,7 @@
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-300" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
-                  <SpawnAction itemidentifier="raceticket_blue" amount="3" targetinventory="gambler_player" />
+                  <SpawnAction itemidentifier="raceticket_blue" amount="3" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonblue" operation="set" value="1" />
                   <Goto name="talktobookie" />
@@ -3430,7 +3430,6 @@
       </ConversationAction>
       <!-- PHASE 5: REMOVE ALL TICKETS -->
       <OnRoundEndAction>
-        <TagAction criteria="itemtag:raceticket" tag="raceticket" />
         <RemoveItemAction targettag="raceticket" Amount="100" />
       </OnRoundEndAction>
     </ScriptedEvent>    
@@ -3453,7 +3452,7 @@
             </StatusEffect>
           </StatusEffectAction>
         </Success>
-      </CheckDataAction>      
+      </CheckDataAction>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="mudraptorracing_winner_green">
@@ -3474,7 +3473,7 @@
             </StatusEffect>
           </StatusEffectAction>
         </Success>
-      </CheckDataAction>      
+      </CheckDataAction>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="mudraptorracing_winner_blue">
