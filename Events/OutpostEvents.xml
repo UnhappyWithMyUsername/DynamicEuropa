@@ -3317,6 +3317,7 @@
         <StatusEffect target="This" state="true" setvalue="true" />
       </StatusEffectAction>
       <WaitAction time="4" />
+      <!-- shoot the ducky -->
       <StatusEffectAction targettag="petfoodgun">
         <StatusEffect target="This" offset="30,0"> 
           <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
@@ -3324,6 +3325,7 @@
           <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1" />
         </StatusEffect>
       </StatusEffectAction>
+      <!-- slow down 2 raptors to avoid ties -->
       <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChoosePercentage="67"/>
       <StatusEffectAction targettag="slowerraptor">
         <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true"/>
