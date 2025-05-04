@@ -88,7 +88,7 @@
     <!-- only exists to help players figure out how to make construction crates, triggered by event below -->
     <ScriptedEvent identifier="Constructionrecipe" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerAction target1tag="constructioncargounit" target2tag="player" applytotarget2="triggerer_player"  radius="150" waitforinteraction="true" />
       <ConversationAction targettag="triggerer_player" text="eventtext.constructionrecipe.recipe" eventsprite="mines" endconversation="true" />
     </ScriptedEvent>
@@ -101,7 +101,7 @@
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:fabricator" tag="selectedfabricator" SubmarineType="Outpost" chooserandom="true" />
       <TagAction criteria="itemtag:deconstructor" tag="selecteddeconstructor" SubmarineType="Outpost" chooserandom="true" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" />
@@ -239,7 +239,7 @@
     <!-- Construction UPGRADE events, allow upgrading an outpost, simplified from construction (3 crates instead of 5) -->
     <ScriptedEvent identifier="ConstructionUpgradeToColony" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
@@ -283,7 +283,7 @@
     
     <ScriptedEvent identifier="ConstructionUpgradeToBase" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
@@ -327,7 +327,7 @@
     
     <ScriptedEvent identifier="ConstructionUpgradeToHospital" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
@@ -371,7 +371,7 @@
     
     <ScriptedEvent identifier="ConstructionUpgradeToResearch" commonness="100">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:unitloaddevice" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
+      <TagAction criteria="itemtag:constructioncargounit" tag="constructioncargounit" SubmarineType="Outpost" chooserandom="true" />
       <TriggerEventAction identifier="Constructionrecipe" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker2" spawnlocation="Outpost" spawnpointtag="constructionworker" requirespawnpointtag="true" ContinueIfFailedToSpawn="false" />
