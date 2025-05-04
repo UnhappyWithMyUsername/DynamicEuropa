@@ -3362,8 +3362,8 @@
               <!-- check if raptor of the same color won -->
               <CheckDataAction identifier="redraptorwon" condition="eq 1" >
                 <Success>
-                  <!-- use this label for payout -->
-                  <Label name="payout" />
+                  <!-- use this label for payout - COMMENTED OUT BECAUSE GAME THROWS YELLOW ERROR -->
+                  <!-- <Label name="payout" /> -->
                   <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
                   <StatusEffectAction targettag="removeticket">
                     <StatusEffect target="This" >
@@ -3375,8 +3375,8 @@
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
-                  <!-- use this label for raptor lost -->
-                  <Label name="raptorlost" />
+                  <!-- use this label for raptor lost - COMMENTED OUT BECAUSE GAME THROWS YELLOW ERROR -->
+                  <!-- <Label name="raptorlost" /> -->
                   <ClearTagAction tag="pickedticket" />
                   <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
                   <GoTo name="cashout" />
@@ -3384,8 +3384,8 @@
               </CheckDataAction> 
             </Success>
             <Failure>
-              <!-- use this label for no ticket -->
-              <Label name="noticket" />
+              <!-- use this label for no ticket - COMMENTED OUT BECAUSE GAME THROWS YELLOW ERROR -->
+              <!-- <Label name="noticket" /> -->
               <ClearTagAction tag="pickedticket" />
               <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
               <GoTo name="cashout" />
@@ -3399,15 +3399,30 @@
               <!-- check if raptor of the same color won -->
               <CheckDataAction identifier="greenraptorwon" condition="eq 1" >
                 <Success>
-                  <Goto name="payout" />
+                  <!-- <Goto name="payout" /> -->
+                  <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
+                  <StatusEffectAction targettag="removeticket">
+                    <StatusEffect target="This" >
+                      <Sound file="Content/Sounds/UI/UI_labelMarkka.ogg" range="300" volume="2"/>
+                      <Remove />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <MoneyAction targettag="cashout_player" amount="200" />
+                  <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
-                  <Goto name="raptorlost" />
+                  <!-- <Goto name="raptorlost" /> -->
+                  <ClearTagAction tag="pickedticket" />
+                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
+                  <GoTo name="cashout" />
                 </Failure> 
               </CheckDataAction> 
             </Success>
             <Failure>
-              <Goto name="noticket" />
+              <!-- <Goto name="noticket" /> -->
+              <ClearTagAction tag="pickedticket" />
+              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
+              <GoTo name="cashout" />
             </Failure> 
           </CheckItemAction>
         </Option>
@@ -3418,15 +3433,31 @@
               <!-- check if raptor of the same color won -->
               <CheckDataAction identifier="blueraptorwon" condition="eq 1" >
                 <Success>
-                  <Goto name="payout" />
+                  <!-- <Goto name="payout" /> -->
+                  <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
+                  <StatusEffectAction targettag="removeticket">
+                    <StatusEffect target="This" >
+                      <Sound file="Content/Sounds/UI/UI_labelMarkka.ogg" range="300" volume="2"/>
+                      <Remove />
+                    </StatusEffect>
+                  </StatusEffectAction>
+                  <MoneyAction targettag="cashout_player" amount="200" />
+                  <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
-                  <Goto name="raptorlost" />
+                  <!-- <Goto name="raptorlost" /> -->
+                  <!-- <Goto name="raptorlost" /> -->
+                  <ClearTagAction tag="pickedticket" />
+                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
+                  <GoTo name="cashout" />
                 </Failure> 
               </CheckDataAction> 
             </Success>
             <Failure>
-              <Goto name="noticket" />
+              <!-- <Goto name="noticket" /> -->
+              <ClearTagAction tag="pickedticket" />
+              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
+              <GoTo name="cashout" />
             </Failure>          
           </CheckItemAction>           
         </Option>
