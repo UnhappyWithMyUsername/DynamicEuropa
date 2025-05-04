@@ -3130,8 +3130,10 @@
     </ScriptedEvent>
      
 
-
     <ScriptedEvent identifier="mudraptorracing">
+      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
+      <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
+      <TagAction criteria="player" tag="player" />
       <SetDataAction identifier="betonred" operation="set" value="0" />
       <SetDataAction identifier="betongreen" operation="set" value="0" />
       <SetDataAction identifier="betonblue" operation="set" value="0" />
@@ -3161,7 +3163,7 @@
         <Failure>        
           <StatusEffectAction targettag="bookmaker">
             <StatusEffect target="this">
-              <Forcesay message="eventtext.mudraptorracing.morebets" sayinradio="false" />
+              <Forcesay message="Eventtext.mudraptorracing.morebets" sayinradio="false" />
             </StatusEffect>
           </StatusEffectAction>
         </Failure>         
@@ -3211,7 +3213,7 @@
         <!-- Pick green raptor -->
         <Option text="EventText.mudraptorracing.pickgreen">
           <!-- How much do you bet, create more for different sums -->
-          <ConversationAction text="How much on green?" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
+          <ConversationAction text="EventText.mudraptorracing.howmuchgreen" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
             <Option text="EventText.mudraptorracing.100">
               <CheckMoneyAction targettag="gambler_player" amount="100">
                 <Success>
@@ -3252,7 +3254,7 @@
         <!-- Pick blue raptor -->
         <Option text="EventText.mudraptorracing.pickblue">
           <!-- How much do you bet, create more for different sums -->
-          <ConversationAction text="How much on blue?" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
+          <ConversationAction text="EventText.mudraptorracing.howmuchblue" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
             <Option text="EventText.mudraptorracing.100">
               <CheckMoneyAction targettag="gambler_player" amount="100">
                 <Success>
@@ -3299,7 +3301,7 @@
       <!-- PHASE 2: BETS ARE OFF, HIT THE LEVER -->
       <!-- PHASE 2: BETS ARE OFF, HIT THE LEVER -->
       <Label name="betsareoff" />
-      <ConversationAction text="EventText.mudraptorracing.betsareoff" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="gambler" endconversation="true"/>
+      <ConversationAction text="EventText.mudraptorracing.betsareoff" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Small" eventsprite="gambler" endconversation="true"/>
       <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
       <!-- touch the lever to start the race -->
       <TriggerAction target1tag="player" target2tag="raptorracelever" applytotarget1="triggerer_player" waitforinteraction="true" selectontrigger="true" />
@@ -3320,14 +3322,14 @@
       <!-- PHASE 3: WAIT FOR A RAPTOR TO WIN --> 
       <!-- PHASE 3: WAIT FOR A RAPTOR TO WIN --> 
       <!-- PHASE 3: WAIT FOR A RAPTOR TO WIN -->
-      <Goto name="waitforfinish" />
+      <Label name="waitforfinish" />
       <WaitAction time="1" />
       <CheckDataAction identifier="raptorracefinished" condition="gte 1" >
         <Failure>
           <Goto name="waitforfinish" />
         </Failure> 
       </CheckDataAction>
-      <ConversationAction text="EventText.mudraptorracing.winner" TargetTag="gambler_player" dialogtype="Regular" eventsprite="mediator" endconversation="true" /> 
+      <ConversationAction text="EventText.mudraptorracing.winner" TargetTag="gambler_player" dialogtype="small" eventsprite="mediator" endconversation="true" /> 
       <!-- PHASE 4: CASHOUT TERMINAL -->
       <!-- PHASE 4: CASHOUT TERMINAL -->
       <!-- PHASE 4: CASHOUT TERMINAL -->
@@ -3341,14 +3343,13 @@
       <WaitAction time="1" />
       <TriggerAction target1tag="player" target2tag="cashoutterminal" applytotarget1="cashout_player" radius="150" waitforinteraction="true" />
       <Label name="cashout_repeat" />
-      <WaitAction time="1" />
       <ConversationAction text="EventText.mudraptorracing.cashout.claim" TargetTag="cashout_player" dialogtype="Regular" eventsprite="brokenterminal">  
         <Option text="EventText.mudraptorracing.cashout.redticket">
-          <!-- check if raptor of the same color won -->
-          <CheckDataAction identifier="redraptorwon" condition="eq 1" > 
+          <!-- check if you have a ticket -->
+          <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_red" amount="1" ApplyTagToItem="pickedticket">
             <Success>
-              <!-- check if you have a ticket -->
-              <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_red" amount="1" ApplyTagToItem="pickedticket">
+              <!-- check if raptor of the same color won -->
+              <CheckDataAction identifier="redraptorwon" condition="eq 1" >
                 <Success>
                   <!-- use this label for payout -->
                   <Label name="payout" />
@@ -3359,62 +3360,64 @@
                       <Remove />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <MoneyAction targettag="cashout_player" amount="100" />
+                  <MoneyAction targettag="cashout_player" amount="200" />
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
-                  <!-- use this label for no ticket -->
-                  <Label name="noticket" />
-                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
+                  <!-- use this label for raptor lost -->
+                  <Label name="raptorlost" />
+                  <ClearTagAction tag="pickedticket" />
+                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
                   <GoTo name="cashout" />
                 </Failure> 
-              </CheckItemAction> 
+              </CheckDataAction> 
             </Success>
             <Failure>
-              <!-- use this label for raptor lost -->
-              <Label name="raptorlost" />
-              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
+              <!-- use this label for no ticket -->
+              <Label name="noticket" />
+              <ClearTagAction tag="pickedticket" />
+              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
               <GoTo name="cashout" />
             </Failure>
-          </CheckDataAction> 
+          </CheckItemAction>
         </Option>
-        <Option text="EventText.mudraptorracing.cashout.greenticket">
-          <!-- check if raptor of the same color won -->
-          <CheckDataAction identifier="greenraptorwon" condition="eq 1" > 
+        <Option text="EventText.mudraptorracing.cashout.greenticket"> 
+          <!-- check if you have a ticket -->
+          <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_green" amount="1" ApplyTagToItem="pickedticket">
             <Success>
-              <!-- check if you have a ticket -->
-              <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_green" amount="1" ApplyTagToItem="pickedticket">
+              <!-- check if raptor of the same color won -->
+              <CheckDataAction identifier="greenraptorwon" condition="eq 1" >
                 <Success>
                   <Goto name="payout" />
                 </Success> 
                 <Failure>
-                  <Goto name="noticket" />
+                  <Goto name="raptorlost" />
                 </Failure> 
-              </CheckItemAction> 
+              </CheckDataAction> 
             </Success>
             <Failure>
-              <Goto name="raptorlost" />
-            </Failure>
-          </CheckDataAction> 
+              <Goto name="noticket" />
+            </Failure> 
+          </CheckItemAction>
         </Option>
-        <Option text="EventText.mudraptorracing.cashout.blueticket">
-          <!-- check if raptor of the same color won -->
-          <CheckDataAction identifier="blueraptorwon" condition="eq 1" > 
+        <Option text="EventText.mudraptorracing.cashout.blueticket" > 
+          <!-- check if you have a ticket -->
+          <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_blue" amount="1" ApplyTagToItem="pickedticket">
             <Success>
-              <!-- check if you have a ticket -->
-              <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_blue" amount="1" ApplyTagToItem="pickedticket">
+              <!-- check if raptor of the same color won -->
+              <CheckDataAction identifier="blueraptorwon" condition="eq 1" >
                 <Success>
                   <Goto name="payout" />
                 </Success> 
                 <Failure>
-                  <Goto name="noticket" />
+                  <Goto name="raptorlost" />
                 </Failure> 
-              </CheckItemAction> 
+              </CheckDataAction> 
             </Success>
             <Failure>
-              <Goto name="raptorlost" />
-            </Failure>
-          </CheckDataAction> 
+              <Goto name="noticket" />
+            </Failure>          
+          </CheckItemAction>           
         </Option>
         <Option text="eventtext.generic.ignore" endconversation="true">
           <Goto name="cashout" />
@@ -3430,11 +3433,11 @@
       <TagAction criteria="hullname:finishline" tag="finishline" submarinetype="Outpost" />
       <TagAction criteria="speciesname:Mudraptorred" tag="Mudraptorred" submarinetype="Outpost" />
       <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
-      <TriggerAction target1tag="Mudraptorred" target2tag="finishline" radius="10" disableiftargetincapacitated="true" />
+      <TriggerAction target1tag="Mudraptorred" target2tag="finishline" radius="10" disableiftargetincapacitated="true" disableincombat="false" />
       <CheckDataAction identifier="raptorracefinished" condition="lte 0" >
         <Success>
-          <SetDataAction identifier="redraptorwon" operation="Set" value="1" />
           <SetDataAction identifier="raptorracefinished" operation="set" value="1" />
+          <SetDataAction identifier="redraptorwon" operation="Set" value="1" />
           <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
           <StatusEffectAction targettag="confettilauncher" >
             <StatusEffect target="this" duration="10" >
@@ -3451,11 +3454,11 @@
       <TagAction criteria="hullname:finishline" tag="finishline" submarinetype="Outpost" />
       <TagAction criteria="speciesname:Mudraptorgreen" tag="Mudraptorgreen" submarinetype="Outpost" />
       <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
-      <TriggerAction target1tag="Mudraptorgreen" target2tag="finishline" radius="10" disableiftargetincapacitated="true" />
+      <TriggerAction target1tag="Mudraptorgreen" target2tag="finishline" radius="10" disableiftargetincapacitated="true" disableincombat="false" />
       <CheckDataAction identifier="raptorracefinished" condition="lte 0" >
         <Success>
-          <SetDataAction identifier="greenraptorwon" operation="Set" value="1" />
           <SetDataAction identifier="raptorracefinished" operation="set" value="1" />
+          <SetDataAction identifier="greenraptorwon" operation="Set" value="1" />
           <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
           <StatusEffectAction targettag="confettilauncher" >
             <StatusEffect target="this" duration="10" >
@@ -3472,11 +3475,11 @@
       <TagAction criteria="hullname:finishline" tag="finishline" submarinetype="Outpost" />
       <TagAction criteria="speciesname:Mudraptorblue" tag="Mudraptorblue" submarinetype="Outpost" />
       <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
-      <TriggerAction target1tag="Mudraptorblue" target2tag="finishline" radius="10" disableiftargetincapacitated="true" />
+      <TriggerAction target1tag="Mudraptorblue" target2tag="finishline" radius="10" disableiftargetincapacitated="true" disableincombat="false"/>
       <CheckDataAction identifier="raptorracefinished" condition="lte 0" >
         <Success>
-          <SetDataAction identifier="blueraptorwon" operation="Set" value="1" />
           <SetDataAction identifier="raptorracefinished" operation="set" value="1" />
+          <SetDataAction identifier="blueraptorwon" operation="Set" value="1" />
           <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher" />
           <StatusEffectAction targettag="confettilauncher" >
             <StatusEffect target="this" duration="10" >
