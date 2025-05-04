@@ -3146,11 +3146,11 @@
       <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
       <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="bookmaker" spawnlocation="Outpost" spawnpointtag="bookmaker" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="commoner" spawnlocation="Outpost" spawnpointtag="spectator" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="commoner" spawnlocation="Outpost" spawnpointtag="spectator" />
-      <SpawnAction speciesname="Mudraptorred" targettag="redraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
-      <SpawnAction speciesname="Mudraptorgreen" targettag="greenraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
-      <SpawnAction speciesname="Mudraptorblue" targettag="blueraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="spectator1" spawnlocation="Outpost" spawnpointtag="spectator" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="spectator2" spawnlocation="Outpost" spawnpointtag="spectator" />
+      <SpawnAction speciesname="Mudraptorred" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorgreen" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorblue" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
       <!-- PHASE 1: TALK TO NPC TO TAKE BETS -->
       <!-- PHASE 1: TALK TO NPC TO TAKE BETS -->
       <!-- PHASE 1: TALK TO NPC TO TAKE BETS -->
@@ -3323,6 +3323,10 @@
           <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
           <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1" />
         </StatusEffect>
+      </StatusEffectAction>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChoosePercentage="67"/>
+      <StatusEffectAction targettag="slowerraptor">
+        <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true"/>
       </StatusEffectAction>
       <!-- PHASE 3: WAIT FOR A RAPTOR TO WIN --> 
       <!-- PHASE 3: WAIT FOR A RAPTOR TO WIN --> 
@@ -3498,29 +3502,24 @@
     </ScriptedEvent>
     
 
-    <!-- check which raptor crossed the line -->    
     <ScriptedEvent identifier="mudraptorracing_TEST">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
-      <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
-      <TagAction criteria="itemtag:cashoutlight" tag="cashoutlight" />
-      <!-- touch the lever to start the race -->
-      <SpawnAction speciesname="Mudraptorred" targettag="redraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
-      <SpawnAction speciesname="Mudraptorgreen" targettag="greenraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
-      <SpawnAction speciesname="Mudraptorblue" targettag="blueraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50"/>
-      <TriggerAction target1tag="player" target2tag="raptorracelever" applytotarget1="triggerer_player" waitforinteraction="true" selectontrigger="true" />
-      <TriggerEventAction identifier="mudraptorracing_winner_red" />
-      <TriggerEventAction identifier="mudraptorracing_winner_green" />
-      <TriggerEventAction identifier="mudraptorracing_winner_blue" />
-      <StatusEffectAction targettag="raptorracelever">
-        <StatusEffect target="This" state="true" setvalue="true" />
-      </StatusEffectAction>
-      <WaitAction time="4" />
+      <SpawnAction speciesname="Mudraptorred" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorgreen" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorblue" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <WaitAction time="3" />
       <StatusEffectAction targettag="petfoodgun">
         <StatusEffect target="This" offset="30,0"> 
           <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
           <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
           <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChoosePercentage="67"/>
+      <StatusEffectAction targettag="slowerraptor">
+        <StatusEffect target="This" speedmultiplier="0.17" duration="4" setvalue="true">
+          <Affliction identifier="psychosis" strength="100" />
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent>
