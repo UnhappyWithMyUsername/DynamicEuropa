@@ -3166,23 +3166,23 @@
           </StatusEffectAction>
         </Failure>         
       </CheckDataAction>
-      <ConversationAction text="EventText.mudraptorracing.bookmaker" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="captain">
+      <ConversationAction text="EventText.mudraptorracing.bookmaker" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="gambler">
         <!-- Pick red raptor -->
         <Option text="EventText.mudraptorracing.pickred">
           <!-- How much do you bet, create more for different sums -->
-          <ConversationAction text="EventText.mudraptorracing.howmuchred" targettag="gambler_player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="EventText.mudraptorracing.howmuchred" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
             <Option text="EventText.mudraptorracing.100">
               <CheckMoneyAction targettag="gambler_player" amount="100">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_red" amount="1" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonred" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3191,14 +3191,14 @@
               <CheckMoneyAction targettag="gambler_player" amount="500">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-500" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_red" amount="3" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonred" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3211,19 +3211,19 @@
         <!-- Pick green raptor -->
         <Option text="EventText.mudraptorracing.pickgreen">
           <!-- How much do you bet, create more for different sums -->
-          <ConversationAction text="How much on green?" targettag="gambler_player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="How much on green?" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
             <Option text="EventText.mudraptorracing.100">
               <CheckMoneyAction targettag="gambler_player" amount="100">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_green" amount="1" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betongreen" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3232,14 +3232,14 @@
               <CheckMoneyAction targettag="gambler_player" amount="300">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-300" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_green" amount="3" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betongreen" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3252,19 +3252,19 @@
         <!-- Pick blue raptor -->
         <Option text="EventText.mudraptorracing.pickblue">
           <!-- How much do you bet, create more for different sums -->
-          <ConversationAction text="How much on blue?" targettag="gambler_player" dialogtype="Regular" eventsprite="captain">
+          <ConversationAction text="How much on blue?" targettag="gambler_player" dialogtype="Regular" eventsprite="gambler">
             <Option text="EventText.mudraptorracing.100">
               <CheckMoneyAction targettag="gambler_player" amount="100">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-100" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_blue" amount="1" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonblue" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3273,14 +3273,14 @@
               <CheckMoneyAction targettag="gambler_player" amount="300">
                 <Success>
                   <MoneyAction targettag="gambler_player" amount="-300" />
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="mines" endconversation="true"/>
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_blue" amount="3" targetinventory="gambler_player" />
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
                   <SetDataAction identifier="betonblue" operation="set" value="1" />
                   <Goto name="talktobookie" />
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="mines" dialogtype="small" />
+                  <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.nomoney" eventsprite="gambler" dialogtype="small" />
                   <GoTo name="talktobookie" />
                 </Failure>
               </CheckMoneyAction>  
@@ -3299,7 +3299,7 @@
       <!-- PHASE 2: BETS ARE OFF, HIT THE LEVER -->
       <!-- PHASE 2: BETS ARE OFF, HIT THE LEVER -->
       <Label name="betsareoff" />
-      <ConversationAction text="EventText.mudraptorracing.betsareoff" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="captain" endconversation="true"/>
+      <ConversationAction text="EventText.mudraptorracing.betsareoff" speakertag="bookmaker" invokertag="gambler_player" dialogtype="Regular" eventsprite="gambler" endconversation="true"/>
       <TriggerEventAction identifier="mudraptorracing_winner_red" />
       <TriggerEventAction identifier="mudraptorracing_winner_green" />
       <TriggerEventAction identifier="mudraptorracing_winner_blue" />      
@@ -3313,7 +3313,7 @@
           <Goto name="waitforfinish" />
         </Failure> 
       </CheckDataAction>
-      <ConversationAction text="We have a winner! Make sure to cash out your winning tickets at the terminal." TargetTag="gambler_player" dialogtype="Regular" eventsprite="captain" endconversation="true" /> 
+      <ConversationAction text="EventText.mudraptorracing.winner" TargetTag="gambler_player" dialogtype="Regular" eventsprite="mediator" endconversation="true" /> 
       <!-- PHASE 4: CASHOUT TERMINAL -->
       <!-- PHASE 4: CASHOUT TERMINAL -->
       <!-- PHASE 4: CASHOUT TERMINAL -->
@@ -3327,7 +3327,8 @@
       <WaitAction time="1" />
       <TriggerAction target1tag="player" target2tag="cashoutterminal" applytotarget1="cashout_player" radius="150" waitforinteraction="true" />
       <Label name="cashout_repeat" />
-      <ConversationAction text="Insert your tickets to claim your prize" TargetTag="cashout_player" dialogtype="Regular" eventsprite="captain">  
+      <WaitAction time="1" />
+      <ConversationAction text="EventText.mudraptorracing.cashout.claim" TargetTag="cashout_player" dialogtype="Regular" eventsprite="brokenterminal">  
         <Option text="EventText.mudraptorracing.cashout.redticket">
           <!-- check if raptor of the same color won -->
           <CheckDataAction identifier="redraptorwon" condition="eq 1" > 
@@ -3335,23 +3336,30 @@
               <!-- check if you have a ticket -->
               <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_red" amount="1" ApplyTagToItem="pickedticket">
                 <Success>
+                  <!-- use this label for payout -->
+                  <Label name="payout" />
                   <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
                   <StatusEffectAction targettag="removeticket">
                     <StatusEffect target="This" >
+                      <Sound file="Content/Sounds/UI/UI_labelMarkka.ogg" range="300" volume="2"/>
                       <Remove />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <MoneyAction targettag="mde_player" amount="500" />
+                  <MoneyAction targettag="cashout_player" amount="100" />
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
-                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="mines" dialogtype="small" />
+                  <!-- use this label for no ticket -->
+                  <Label name="noticket" />
+                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
                   <GoTo name="cashout" />
                 </Failure> 
               </CheckItemAction> 
             </Success>
             <Failure>
-              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="mines" dialogtype="small" />
+              <!-- use this label for raptor lost -->
+              <Label name="raptorlost" />
+              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="brokenterminal" dialogtype="small" />
               <GoTo name="cashout" />
             </Failure>
           </CheckDataAction> 
@@ -3363,24 +3371,15 @@
               <!-- check if you have a ticket -->
               <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_green" amount="1" ApplyTagToItem="pickedticket">
                 <Success>
-                  <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
-                  <StatusEffectAction targettag="removeticket">
-                    <StatusEffect target="This" >
-                      <Remove />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <MoneyAction targettag="mde_player" amount="500" />
-                  <Goto name="cashout_repeat" />
+                  <Goto name="payout" />
                 </Success> 
                 <Failure>
-                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="mines" dialogtype="small" />
-                  <GoTo name="cashout" />
+                  <Goto name="noticket" />
                 </Failure> 
               </CheckItemAction> 
             </Success>
             <Failure>
-              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="mines" dialogtype="small" />
-              <GoTo name="cashout" />
+              <Goto name="raptorlost" />
             </Failure>
           </CheckDataAction> 
         </Option>
@@ -3391,24 +3390,15 @@
               <!-- check if you have a ticket -->
               <CheckItemAction targettag="cashout_player" itemidentifiers="raceticket_blue" amount="1" ApplyTagToItem="pickedticket">
                 <Success>
-                  <TagAction criteria="eventtag:pickedticket" tag="removeticket" chooserandom="true" ChoosePercentage="1"/>
-                  <StatusEffectAction targettag="removeticket">
-                    <StatusEffect target="This" >
-                      <Remove />
-                    </StatusEffect>
-                  </StatusEffectAction>
-                  <MoneyAction targettag="mde_player" amount="500" />
-                  <Goto name="cashout_repeat" />
+                  <Goto name="payout" />
                 </Success> 
                 <Failure>
-                  <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="mines" dialogtype="small" />
-                  <GoTo name="cashout" />
+                  <Goto name="noticket" />
                 </Failure> 
               </CheckItemAction> 
             </Success>
             <Failure>
-              <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.raptorlost" eventsprite="mines" dialogtype="small" />
-              <GoTo name="cashout" />
+              <Goto name="raptorlost" />
             </Failure>
           </CheckDataAction> 
         </Option>
