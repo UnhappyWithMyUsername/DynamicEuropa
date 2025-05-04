@@ -3158,9 +3158,14 @@
       <ClearTagAction tag="gambler_player" />
       <CheckDataAction identifier="betonraptorcounter" condition="gte 3" >
         <Success>
+          <StatusEffectAction targettag="bookmaker">
+            <StatusEffect target="this">
+              <Forcesay message="Eventtext.mudraptorracing.enoughbets" sayinradio="false" />
+            </StatusEffect>
+          </StatusEffectAction>
           <Goto name="betsareoff" />
         </Success>
-        <Failure>        
+        <Failure>
           <StatusEffectAction targettag="bookmaker">
             <StatusEffect target="this">
               <Forcesay message="Eventtext.mudraptorracing.morebets" sayinradio="false" />
