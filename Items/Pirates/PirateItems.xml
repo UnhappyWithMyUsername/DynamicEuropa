@@ -3,6 +3,7 @@
 <Override>
 <Items>
 
+  <!-- make bandit clothes sellable in pirate store -->
   <Item name="" identifier="banditclothes1" nameidentifier="banditoutfit" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing" scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="abandonedcrewcabinet" amount="1" spawnprobability="0.2" />
     <PreferredContainer primary="crewcab"/>
@@ -82,6 +83,7 @@
     </Wearable>
   </Item>
 
+  <!-- make dirtybomb sellable in pirate store. should it be? -->
   <Item name="" identifier="dirtybomb" category="Weapon" Tags="smallitem,explosive,separatists" allowasextracargo="true" maxstacksize="8" Scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="secarmcab" secondary="armcab"/>
     <Price baseprice="240" sold="false">
@@ -135,7 +137,7 @@
     </Throwable>
   </Item>
   
-  <!-- pirate exosuit but deletes itself -->
+  <!-- pirate exosuit FOR NPCS. deletes itself when NPC dies, drops suit part, does not use fuel/oxygen -->
   <Item name="" description="" identifier="exosuitPA" category="Diving,Equipment" tags="diving,divinggear_wearableindoors,provocative,deepdiving,deepdivinglarge" scale="0.605" fireproof="true" isshootable="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" nonplayerteaminteractable="True" hideinmenus="True">
     <Price baseprice="2473" canbespecial="false" sold="false" />
     <Deconstruct time="30">
@@ -206,6 +208,7 @@
     <aitarget maxsightrange="1500" />
   </Item>
   
+  <!-- pirate exosuit craftable by players to use, uses fuel/oxygen -->
   <Item name="Pirate Exosuit" identifier="exosuitplayerPA" description="" category="Diving,Equipment" tags="diving,divinggear_wearableindoors,provocative,deepdiving,deepdivinglarge" scale="0.605" fireproof="true" isshootable="true" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy">
     <Price baseprice="2473" canbespecial="false" sold="false" />
     <Deconstruct time="30">
@@ -376,6 +379,7 @@
     <Holdable canBeCombined="false" removeOnCombined="false" slots="RightHand+LeftHand,Any" holdangle="0" holdpos="36,-20" msg="ItemMsgPickUpSelect" />
   </Item>
   
+  <!-- red suit used by pirates (stands apart visually), basically a disposable suit -->
   <Item name="Makeshift Pirate Diving Suit" identifier="piratedivingsuitmakeshift" category="Diving,Equipment" tags="diving,deepdiving,divinggear_wearableindoors,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy" botpriority="3">
     <Deconstruct time="1" />
     <InventoryIcon texture="%ModDir:2532991202%/Items/Pirates/PirateSuit.png" sourcerect="280,300,95,90" origin="0.5,0.5" />
