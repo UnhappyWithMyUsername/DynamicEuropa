@@ -170,6 +170,7 @@
         <SpawnItem identifier="BIGalienturretammo" spawnposition="ThisInventory" />
       </StatusEffect>
       <SubContainer capacity="1" maxstacksize="1">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,384,64,64" origin="0.5,0.5" />
         <Containable items="explosive" hide="false">
           <StatusEffect type="OnContaining" target="This">
             <RequiredItem items="explosive" type="Contained"/>
@@ -182,6 +183,7 @@
         </Containable>
       </SubContainer>
     </ItemContainer>
+        
     <!-- Triggercomponent allows making alien turret damageable while allowing them to be rotated -->
     <TriggerComponent triggeredby="Human" radius="1000" force="-50" forcefluctuationstrength="0.25" forcefluctuationinterval="10" distancebasedforce="true" >
     </TriggerComponent>
@@ -235,7 +237,7 @@
     </LightComponent> 
   </Item>
   
-  <Item name="BIGalienturretammo" identifier="BIGalienturretammo" category="Alien" tags="alien,alienturretammo" scale="0.5" noninteractable="true">
+  <Item name="BIGalienturretammo" identifier="BIGalienturretammo" category="Alien" tags="alien,alienturretammo" scale="0.5" noninteractable="true" hideinmenus="true">
     <Sprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.7" sourcerect="839,768,71,256" origin="0.5,0.5" />
     <Body radius="25" density="10" />
     <Projectile characterusable="false" launchimpulse="30.0" launchrotation="90" >
