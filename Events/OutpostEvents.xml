@@ -3326,7 +3326,8 @@
         </StatusEffect>
       </StatusEffectAction>
       <!-- slow down 2 raptors to avoid ties -->
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChoosePercentage="67"/>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
       <StatusEffectAction targettag="slowerraptor">
         <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true"/>
       </StatusEffectAction>
@@ -3549,10 +3550,12 @@
           <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1" />
         </StatusEffect>
       </StatusEffectAction>
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChoosePercentage="67"/>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
       <StatusEffectAction targettag="slowerraptor">
-        <StatusEffect target="This" speedmultiplier="0.17" duration="4" setvalue="true">
+        <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true">
           <Affliction identifier="psychosis" strength="100" />
+          <Affliction identifier="burn" strength="20" />
         </StatusEffect>
       </StatusEffectAction>
     </ScriptedEvent>
