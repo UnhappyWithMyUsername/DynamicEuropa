@@ -946,8 +946,8 @@
       <RequiredSkill identifier="mechanical" level="40" />
       <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
       <StatusEffect type="OnUse" target="This" reload="1.1" setvalue="true" delay="1.4"/>
-      <Attack targetimpulse="2" structuredamage="15" itemdamage="12">
-        <Affliction identifier="blunttrauma" strength="25" />
+      <Attack targetimpulse="1" structuredamage="15" itemdamage="12">
+        <Affliction identifier="blunttrauma" strength="20" />
         <Affliction identifier="stun" strength="1" />
         <StatusEffect type="OnUse" target="UseTarget">
           <Conditional entitytype="eq Character"/>
@@ -971,7 +971,7 @@
       <StatusEffect type="OnUse" target="UseTarget,This" comparison="and" >
         <Conditional hastag="piezocrystal" />
         <Conditional condition="lt 30" />
-        <SpawnItem identifier="piezochunk" spawnposition="This" spread="10" />
+        <SpawnItem identifier="piezochunk" spawnposition="This" spread="60" aimspread="60"  />
         <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
