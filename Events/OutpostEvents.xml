@@ -2610,11 +2610,8 @@
           <!-- does not spawn the event if already done -->
         </Failure>
         <Success>
-          <!-- waits until other events are spawned so it can tag other npcs too -->
-          <Waitaction time="10" />
           <TagAction criteria="player" tag="player" />
-          <!-- tags the ID cards on bots -->
-          <TagAction criteria="bot" tag="outpostbot" submarinetype="Outpost" />
+          <!-- tags the clothes on bots -->
           <TagAction criteria="itemtag:clothing" tag="stolenclothes" submarinetype="Outpost" />
           <!-- unlocks the shelf in the vanilla outpost that contains clothes -->
           <TagAction criteria="itemidentifier:crateshelf" tag="unlockcrateshelf" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -2634,10 +2631,11 @@
                 <Option text="eventtext.generic.continue" >
                   <ConversationAction targettag="panty_player" text="eventtext.pantytheft.plantingtags" endeventifinterrupted="false" eventsprite="JacovSubra1" >
                     <Option text="eventtext.pantytheft.ifitpays">
+                      <!-- Spawns bag. If bag gets near clothes, mark it as stolen and proceed -->
                       <ConversationAction text="eventtext.pantytheft.grabclothes" endeventifinterrupted="false" endconversation="true" eventsprite="Duffelbag" />
                       <SpawnAction itemidentifier="traitorduffelbag" targetinventory="panty_player" targettag="stealingbag" />
                       <StatusEffectAction targettag="stealingbag" >
-                        <StatusEffect target="This" delay="30" SpawnedInCurrentOutpost="true" AllowStealing="false" stackable="false" setvalue="true" />
+                        <StatusEffect target="This" delay="60" SpawnedInCurrentOutpost="true" AllowStealing="false" stackable="false" setvalue="true" />
                       </StatusEffectAction> 
                     </Option>
                     <Option text="eventtext.generic.refuse" endconversation="true">        
@@ -2657,7 +2655,7 @@
           <Label name="retry" />
           <Waitaction time="1" />
           <TriggerAction target1tag="player" target2tag="smuggler" applytotarget1="deliverer_player" waitforinteraction="true" />
-          <!-- double check: if player carries bag, and if bad has ID cards -->
+          <!-- double check: if player carries bag, and if bag has clothes -->
           <CheckItemAction targettag="deliverer_player" itemtags="stealingbag" >
             <Success>
               <CheckItemAction targettag="stealingbag" itemtags="stolenclothes" amount="5" ApplyTagToItem="removeclothes">
