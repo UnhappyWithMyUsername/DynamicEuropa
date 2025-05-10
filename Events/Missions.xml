@@ -767,10 +767,9 @@
   </PirateMission>
   
   <PirateMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
-    <Reputation identifier="coalition" amount="3" />
-    <Reputation identifier="separatists" amount="3" />
-    <Reputation identifier="huskcult" amount="3" />
-    <Reputation identifier="clowns" amount="-5" />
+    <Reputation identifier="Location" amount="3" />
+    <Reputation identifier="bandits" amount="-2" />
+    <Reputation identifier="clowns" amount="-2" />
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="5000" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="5000" />
@@ -780,6 +779,7 @@
       <Character typeidentifier="partypiratesecurity" minamount="3" maxamount="3" />
       <Character typeidentifier="partypiratemechanic" minamount="1" maxamount="1" />
       <Character typeidentifier="partypirateengineer" minamount="1" maxamount="1" />
+      <Character typeidentifier="partypirateclown" minamount="1" maxamount="1" />
     </Characters>
     <CharacterTypes>
       <CharacterType typeidentifier="partypiratecaptain">
@@ -799,6 +799,9 @@
       <CharacterType typeidentifier="partypirateengineer">
         <Character identifier="partypirateengineerrecruit" from="partypirates" preferreddifficulty="40" />
         <Character identifier="partypirateengineerveteran" from="partypirates" preferreddifficulty="70" />
+      </CharacterType>
+      <CharacterType typeidentifier="partypirateclown">
+        <Character identifier="partypirateclown" from="partypirates" />
       </CharacterType>
     </CharacterTypes>
     <TriggerEvent state="0" delay="0" eventidentifier="randomizepiratemusic" campaignonly="true" />
