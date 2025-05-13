@@ -38,24 +38,16 @@
     
     
     <!-- TODO: Regalis for the love of god allow me to enforce this location as a starter -->
-    <Tutorial identifier="TutorialOutpost" replaceinradiation="" nameidentifiers="generic,city" forceoutpostgenerationparams="tutorialoutpost" allowinrandomlevels="false" ignoregenericevents="true" AllowAsBiomeGate="false">
+    
+    <StarterOutpost identifier="StarterOutpost" nameidentifiers="StarterOutpost" ForceAsStartOutpost="true" forceoutpostgenerationparams="StarterOutpost" allowinrandomlevels="false" ignoregenericevents="true" AllowAsBiomeGate="false">
       <Symbol texture="Content/Map/MapAtlas.png" sourcerect="256,512,128,128" color="128,206,175,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
-      </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.45" requireddurationrange="1,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="DestroyedStation" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="0" />
-      </ChangeTo>
       <Store
         sellpricemodifier="0.3"
         pricemodifierrange="5"
         dailyspecialscount="0"
         requestedgoodscount="0" />
-    </Tutorial>
+    </StarterOutpost>
 
     <None identifier="None" namefile="Content/Map/locationNames.txt" commonnessperzone="1: 3.0, 2: 3.0, 3: 2.0, 4: 2.0, 5: 3.0, 6: 0" hasoutpost="false" beaconstationchance="0.5">
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,768,128,128" color="128,206,175,255" />
