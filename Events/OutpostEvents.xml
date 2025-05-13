@@ -1966,12 +1966,14 @@
                           <Forcesay message="eventtext.piratesecurityofficer.highrep.plead.rejected" sayinradio="false" />
                         </StatusEffect>
                       </StatusEffectAction>
+                      <ConversationAction targettag="pso_trig_player" text="eventtext.piratesecurityofficer.highrep.plead.rejected" eventsprite="piratehaven" endconversation="true" ContinueAutomatically="true"/>
+                      <WaitAction time="1" />
                       <GoTo name="attack" />
                     </Failure>
                   </CheckMoneyAction>
                 </Option>
                 <!-- insult, NPC attacks, lose reputation -->
-                <Option text="eventtext.piratesecurityofficer.toll.option.insult">
+                <Option text="eventtext.piratesecurityofficer.toll.option.insult" endconversation="true">
                   <ReputationAction targettype="faction" identifier="bandits" increase="-2" /> 
                   <StatusEffectAction targettag="guard">
                     <StatusEffect target="this">
@@ -2078,7 +2080,7 @@
                       </CheckMoneyAction>
                     </Option>
                     <!-- insult, NPC attacks, lose reputation -->
-                    <Option text="eventtext.piratesecurityofficer.toll.option.insult">
+                    <Option text="eventtext.piratesecurityofficer.toll.option.insult" endconversation="true">
                       <ReputationAction targettype="Faction" identifier="bandits" increase="-2" />
                       <StatusEffectAction targettag="guard">
                         <StatusEffect target="this">
