@@ -359,6 +359,12 @@
           <!-- <ScriptedEvent identifier="missionevent_beaconspecialhusk" /> -->
         </EventSet>
       </EventSet>
+      <!-- RUIN/LORE EVENTS, those require a research outpost, disabled them because it needs preplaced layer bullshit, will be reenabled if I'm bothered -->
+      <!-- <EventSet identifier="outpostevents.research.triggeralways" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research,city" allowatstart="true" chooserandom="false" onceperoutpost="true"> 
+        <ScriptedEvent identifier="explorealienruins1" />
+        <ScriptedEvent identifier="explorealienruins2" />
+        <ScriptedEvent identifier="explorealienruins3" />
+      </EventSet> -->
 
       <!-- low-difficulty random events -->
       <EventSet identifier="outpostevents.easy.generic.randomevents" minleveldifficulty="0" maxleveldifficulty="30" locationtype="colony,settlement,city,clinic,hospital,study,research,hydroponics,blockade,camp,base,military,factory,shipyard" allowatstart="true" chooserandom="true" onceperoutpost="true">
@@ -421,6 +427,7 @@
         <ScriptedEvent identifier="stuckinthemiddle" commonness="50" faction="coalition" /> <!-- technically a separatist event, but happens in a coalition outpost -->
         <ScriptedEvent identifier="returner" commonness="50" />
         <ScriptedEvent identifier="vendingsmashing" commonness="50" />
+        <ScriptedEvent identifier="duckcorleone" commonness="50" />
         <ScriptedEvent identifier="scrapdealer2" commonness="60" />      
       </EventSet>
       
@@ -487,7 +494,7 @@
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardresearch" commonness="200" probability="1.0" />
       </EventSet>
-      <EventSet identifier="outpostevent.research.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <EventSet identifier="outpostevent.research.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" onceperoutpost="true"> 
         <ScriptedEvent identifier="crawleroutbreak" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="impromptuengineering" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="captivesouls" commonness="50" probability="0.5" />
@@ -495,6 +502,7 @@
         <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="tastetest" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="psychovisions" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="200" />
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
@@ -512,10 +520,11 @@
         <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
       </EventSet>
       <EventSet identifier="outpostevents.habitation.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
-        <ScriptedEvent identifier="orangePETA" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="orangePETA" commonness="100" probability="1" />
+        <ScriptedEvent identifier="methformeds" commonness="50" probability="0.25" />
       </EventSet>
       
-      <!-- TODO: use this event to spawn bartender instead of the chair -->
+      <!-- TODO: use this event to spawn bartender instead of the chair? too much work -->
       <!-- <EventSet identifier="outpostevents.civilian.bartender" minleveldifficulty="0" maxleveldifficulty="100" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
         <ScriptedEvent identifier="de-triggerevents-bartender" commonness="100" probability="0.00" />
       </EventSet> -->
@@ -526,7 +535,6 @@
         <ScriptedEvent identifier="jobboardmedical" commonness="200" probability="1.0" />
       </EventSet>
       <EventSet identifier="outpostevent.medical.randomevents" minleveldifficulty="0" maxleveldifficulty="80" locationtype="clinic,hospital" allowatstart="true" chooserandom="true" exhaustible="true">
-        <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="mindsunraveled" commonness="200" probability="1.0" />
       </EventSet>
 
@@ -648,10 +656,23 @@
         <ScriptedEvent identifier="radiationescapee" commonness="50" />
         <ScriptedEvent identifier="pantytheft" commonness="50" />        
       </EventSet>
-      
+      <!-- race track -->
+      <EventSet identifier="outpostevent.city.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="city" allowatstart="true" exhaustible="true" ignorecooldown="true">
+        <ScriptedEvent identifier="mudraptorracing" commonness="100" probability="1" />
+      </EventSet> 
+
+      <!-- RUIN LORE EVENTS, made them occur in civilian + research outposts  -->
+      <!--Always trigger when past difficulty 15, unless completed. Foreshadows explore alien ruins event set, completing part 1 of that set first will block this event.-->
+      <EventSet identifier="ruinmissionforeshadowing" minleveldifficulty="15" locationtype="settlement,colony,city,study,research,huskchurch">
+        <ScriptedEvent identifier="associate" />
+      </EventSet>      
       <!--Always trigger when past difficulty 25, unless completed. Introduces alien ruins.-->
-      <EventSet identifier="ruinintroduction" allowatstart="true" minleveldifficulty="25">
+      <EventSet identifier="ruinintroduction" allowatstart="true" minleveldifficulty="25" locationtype="settlement,colony,city,study,research,huskchurch">
         <ScriptedEvent identifier="badvibrations1" />
+      </EventSet>      
+      <!--Always trigger when past difficulty 50, unless completed. Foreshadows Dr. af Grann. -->
+      <EventSet identifier="outpostevent.nowayout" minleveldifficulty="50" locationtype="settlement,colony,city,study,research,huskchurch">
+        <ScriptedEvent identifier="nowayout" />
       </EventSet>
       
       <!-- Vanilla Mission Event sets -->
@@ -773,6 +794,8 @@
           <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1" commonness="50" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="50" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_pirateparty" commonness="3" />
+          <ScriptedEvent identifier="missionevent_piratestrange" commonness="3" />
         </EventSet>
       </EventSet>
 
@@ -820,6 +843,8 @@
           <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_pirateparty" commonness="5" />
+          <ScriptedEvent identifier="missionevent_piratestrange" commonness="5" />
         </EventSet>
       </EventSet>
 
@@ -871,6 +896,8 @@
           <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_pirateparty" commonness="5" />
+          <ScriptedEvent identifier="missionevent_piratestrange" commonness="5" />
         </EventSet>
       </EventSet>
 
@@ -919,6 +946,8 @@
           <ScriptedEvent identifier="missionevent_jailbreak_coalition" commonness="25" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1" commonness="100" faction="coalition" />
           <ScriptedEvent identifier="missionevent_pirate1separatists" commonness="100" faction="separatists" />
+          <ScriptedEvent identifier="missionevent_pirateparty" commonness="5" />
+          <ScriptedEvent identifier="missionevent_piratestrange" commonness="5" />
         </EventSet>
       </EventSet>
 
@@ -995,6 +1024,7 @@
       <EventSet identifier="de_outpostevents.pirate.events" minleveldifficulty="0" maxleveldifficulty="100" locationtype="pirateoutpost" allowatstart="true" chooserandom="true" onceperoutpost="false" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="piratediversoutpost" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="piratebodybag" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="orangecombat" commonness="100" probability="0.5" />
       </EventSet>
       <!-- MissionEvents specific to pirate outposts 
       <EventSet identifier="outpostevents.basic.pirate.missionevents" minleveldifficulty="0" maxleveldifficulty="35" allowatstart="true" chooserandom="true" eventcount="3" exhaustible="true">
@@ -1044,11 +1074,13 @@
   <Override>
     <EventSet identifier="transitevents" leveltype="LocationConnection" allowatstart="true" chooserandom="false" campaign="true" ignoreintensity="true" additive="true">
       <!-- All Biomes -->
-      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="90" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="stowaway22" commonness="100" probability="0.1" triggercooldown="false" />
-        <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
         <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
+        <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
+      </EventSet>
+      <EventSet identifier="DEtransitevents.reputation.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="oxygenfluidleak" commonness="100" probability="0.02" triggercooldown="false" />
@@ -1061,7 +1093,8 @@
     </EventSet>
   </Override>
 
-  <!-- TODO: fine tune monster spawns with difficulties to "match" the lair type, OR create more locationtypes to match -->
+  <!-- Spawns more monsters in outerlair caves
+       TODO: fine tune difficulties, create more locationtypes to make monster types match - we currently only have 1 outerlair type  -->
   <EventSet identifier="GotoLairEventSet" leveltype="LocationConnection" locationtype="OuterLair" allowatstart="true" campaign="true" ignoreintensity="true" additive="true">
   
     <EventSet identifier="Difficulty0-30" minleveldifficulty="0" maxleveldifficulty="30" allowatstart="false" ignorecooldown="true">

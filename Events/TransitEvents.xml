@@ -30,7 +30,8 @@
       </ConversationAction>
     </ScriptedEvent> -->
     
-    <!--TRIGGERED AT A WRECK TO ALERT YOU-->
+    <!--TRIGGERED AT A WRECK TO ALERT YOU
+    displays the location of the wreck on sonar -->
     <ScriptedEvent identifier="commsrelay_wreck">
       <TagAction criteria="hull" tag="wreck" submarinetype="wreck" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -60,7 +61,8 @@
       </ConversationAction>
     </ScriptedEvent>
 
-    <!--TRIGGERED AT A RUIN TO ALERT YOU-->
+    <!--TRIGGERED AT A RUIN TO ALERT YOU
+    displays the location of the ruin on sonar -->
     <ScriptedEvent identifier="commsrelay_ruin" commonness="100">
       <TagAction criteria="hull" tag="ruin" submarinetype="ruin" ContinueIfNoTargetsFound="false" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
@@ -88,7 +90,7 @@
       </ConversationAction>
     </ScriptedEvent> 
     
-    <!-- TODO: rework this, including stealingintel -->
+    <!-- TODO: rework this, including stealingintel. Completely forgot what this does -->
 <!--     <ScriptedEvent identifier="factionseparatist" commonness="100">
       <TagAction criteria="itemtag:hidden" tag="deaddrop" ContinueIfNoTargetsFound="true" />
       <Label name="deaddropreturn" />
@@ -103,7 +105,8 @@
       </ConversationAction>
     </ScriptedEvent> -->
 
-   <!--Stowaway 2, reworked version of the unused vanilla event-->
+   <!-- "Stowaway 2", functional version of the unused vanilla event
+   NPC hides in one of your lockers, can join your crew. Sometimes it's a clown -->
     <ScriptedEvent identifier="stowaway22" commonness="50" >
       <!-- requires a cargo mission. note: not all cargo missions are tagged "cargo" -->
       <CheckMissionAction missiontag="cargo" Type="Current">
@@ -222,7 +225,7 @@
       
       
     <!-- Husk Encounter -->
-    <!-- Unused. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
+    <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
     <ScriptedEvent identifier="huskencounter">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:oxygengenerator" tag="oxygengenerator" submarinetype="BeaconStation" />
@@ -300,7 +303,8 @@
       </CheckConditionalAction>
     </ScriptedEvent>
     
-    <!-- Troubled Engine -->
+    <!-- "Troubled Engine" 
+    Engine randomly starts malfunctioning and taking damage until you roll a mechanic skill check -->
     <ScriptedEvent identifier="troubledengine" >
       <Label name="delay" />
       <WaitAction time="30" />
@@ -368,7 +372,7 @@
                       <Sound file="Content/Items/MechanicalRepairFail.ogg" range="500" />
                     </StatusEffect>
                   </StatusEffectAction>
-                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="officeinside"/>
+                  <ConversationAction targettag="te_player" text="eventtext.troubledengine.engine.smack.failure" endconversation="true" eventsprite="ScrapMetal"/>
                 </Failure>
               </RNGAction>
             </Failure>
@@ -380,7 +384,8 @@
       </ConversationAction>
     </ScriptedEvent>    
       
-    <!-- Reactor Malfunction -->
+    <!-- Reactor Malfunction 
+    The reactor malfunctions and switches to manual mode for 2 minutes  -->
     <ScriptedEvent identifier="reactormalfunction" >
       <Label name="delay" />
       <WaitAction time="30" />
@@ -433,7 +438,8 @@
       <ConversationAction targettag="rm_player" text="eventtext.reactormalfunction.backtonormal" continueautomatically="true" endconversation="true" eventsprite="officeinside" dialogtype="Small" />
     </ScriptedEvent>
     
-    <!-- Oxygen generator leak -->
+    <!-- Oxygen generator leak 
+    Oxygen generator malfunctions and the vents leak a toxic, flammable gas. You can wait it out or purge it. -->
     <ScriptedEvent identifier="oxygenfluidleak" >
       <Label name="delay" />
       <WaitAction time="30" />
@@ -548,6 +554,7 @@
       </CheckDataAction>  
     </ScriptedEvent>
     
+    <!-- spawns the toxic gas from the event above -->
     <ScriptedEvent identifier="oxygenfluidleakloopevent" >
       <SetDataAction identifier="oxygenfluidleakloopcount" operation="set" value="0" />
       <Label name="pickavent" />
@@ -580,7 +587,8 @@
       <Label name="end" />
     </ScriptedEvent>
     
-    <!-- jams your headsets if you activate the beacon -->
+    <!-- "Beacon comms jam"
+    Beacon malfunctions when turned on, jams your headsets for the rest of the mission -->
     <ScriptedEvent identifier="beaconcommsjam">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
@@ -624,7 +632,8 @@
   </EventPrefabs>
   
   
-  <!-- SPAWNS WASTEYARD ENEMIES WITH BIG COMMONNESS -->
+  <!-- SPAWNS WASTEYARD ENEMIES WITH VERY HIGH COMMONNESS SO REGULAR ENEMIES DONT SPAWN. 
+  TODO: This shouldn't be here? -->
   <EventSet identifier="Wasteyard" biome="hydrothermalwastes" chooserandom="false" allowatstart="true" campaign="true">
   
   <Commonness commonness="0">
@@ -670,8 +679,9 @@
   </EventSet>
 
       
-<!--   UNUSED - can't match an eventset to a specific mission (to spawn the right creatures) unless we have different locations for each lair
-  also mainpath/nearmainsub/abyss spawns arent great -->
+  <!-- UNUSED - Supposed to spawn more enemies outside the lair so they attack the submarine.
+        can't trigger an eventset using a mission (to spawn the creatures properly) 
+        mainpath/nearmainsub/abyss spawns are very bad in outpost levels and will sometime get lost or spawn in your sub -->
 <!--   <EventSet identifier="laircrawlersoutside" leveltype="outpost" locationtype="lair" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" ignorecooldown="true"  campaign="true" chooserandom="false" commonness="100" >
     <EventSet identifier="first" minmissiontime="10" >
       <MonsterEvent characterfile="mudraptor" minamount="1" maxamount="2" spawntype="mainpath" /> 

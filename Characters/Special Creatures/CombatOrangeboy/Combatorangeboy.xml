@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Charactervariant inherit="orangeboy" speciesname="orangeboy_combat" stunimmunity="true" >
+  <health vitality="30" />
+  <ragdoll color="255,255,255,255" scalemultiplier="1.25" draggable="false" CanBeDragged="false" />
+  <ai combatstrength="20" sight="10" hearing="1" fleehealththreshold="0" aggressiveboarding="True" aggressiongreed="20" aggressionhurt="300" attackwhenprovoked="True" avoidgunfire="False" randomattack="True">
+    <petbehavior maxhappiness="100" unhappythreshold="100" happythreshold="100" happinessdecreaserate="100" hungerincreaserate="0.03" playforce="6.0" playcooldown="0" playtimer="0" ToggleOwner="false" HideStatusIndicators="true" >
+    </petbehavior>
+    <target Tag="orangeboy_combat" State="Attack" Priority="99" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" >
+      <Conditional strengthen="gte 1" />
+    </target>
+    <target Tag="hostile" State="Aggressive" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
+    <target Tag="equal" State="Aggressive" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
+    <target tag="owner" state="Protect" threshold="3" priority="60" reactdistance="200" attackdistance="0" timer="0" />
+    <target tag="stronger" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" />
+    <target tag="weaker" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" />
+  </ai>
+  <Inventory Slots="Any, Any" AccessibleWhenAlive="false" Commonness="1" >
+    <Item identifier="petnametag" />
+  </Inventory>
+  <attack damagemultiplier="3" impactmultiplier="0.5" />
+  
+</Charactervariant>
+
+<!-- 
+<Character speciesname="orangeboy_combat" speciestranslationoverride="orangeboy" humanoid="False" blooddecal="blood" group="human" husk="False" needsair="False" canspeak="False" noise="100" visiblity="100" eatingspeed="5" displayname="" visibility="100" pathfinderpriority="1" hasinfo="False" usehuskappendage="False" needswater="False" bleedparticleair="blooddrop" bleedparticlewater="waterblood" hideinsonar="False" sonardisruption="0" soundinterval="30">
+  <ragdolls folder="Content/Characters/Orangeboy/Ragdolls" />
+  <animations folder="Content/Characters/Orangeboy/Animations" />
+  <damageemitter particle="gib" drawontop="True" particleamount="10" velocitymin="50" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+  <bloodemitter particle="blood" particleamount="10" anglemin="0" anglemax="0" scalemin="1" scalemax="1" velocitymin="0" velocitymax="0" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+  <bloodemitter particle="waterblood" particleamount="1" anglemin="0" anglemax="0" scalemin="1" scalemax="1" velocitymin="0" velocitymax="0" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+  <gibemitter particle="gib" particleamount="20" velocitymin="200" velocitymax="700" anglemin="0" anglemax="360" scalemin="1" scalemax="1" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+  <health vitality="30" doesbleed="True" crushdepth="Infinity" usehealthwindow="False" bleedingreduction="0.2" burnreduction="0" constanthealthregeneration="0" healthregenerationwheneating="10" poisonvulnerability="3">
+    <Limb name="Torso" />
+  </health>
+  <Inventory Slots="Any, Any" AccessibleWhenAlive="true" Commonness="1" >
+    <Item identifier="petnametag" />
+  </Inventory>
+  <ai combatstrength="20" sight="2" hearing="2" fleehealththreshold="0" aggressiveboarding="False" aggressiongreed="20" aggressionhurt="300" attackwhenprovoked="True" avoidgunfire="True" enforceaggressivebehaviorformissions="False" targetouterwalls="False" randomattack="True" avoidtime="3" minfleetime="0">
+    <target Tag="orangeboy_combat" State="Attack" Priority="99" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" >
+      <Conditional strengthen="gte 1" />
+    </target>
+    <target Tag="hostile" State="Attack" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
+    <target Tag="equal" State="Aggressive" Priority="90" IgnoreIfNotInSameSub="True" IgnoreIncapacitated="True" />
+    <target tag="stronger" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" />
+    <target tag="weaker" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" />
+  </ai>
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_idle1.ogg" state="Idle" range="1000" volume="1" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_idle2.ogg" state="Idle" range="1000" volume="1" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_idle2.ogg" state="Idle" range="1000" volume="1" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_takeDamage1.ogg" state="Damage" range="1000" volume="1" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_takeDamage2.ogg" state="Damage" range="1000" volume="1" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_takeDamage1.ogg" state="Die" range="2000" volume="1" frequencymultiplier="1.5" />
+  <sound file="Content/Characters/Orangeboy/ORANGEBOY_takeDamage2.ogg" state="Die" range="2000" volume="1" frequencymultiplier="1.5" />
+  <attack damagemultiplier="3" impactmultiplier="0.1" />
+</Character> -->

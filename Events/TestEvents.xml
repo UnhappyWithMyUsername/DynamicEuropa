@@ -154,11 +154,14 @@
       <MissionAction missionidentifier="hostagesituation" locationtype="settlement,colony,research,hospital,hydroponics,factory,shipyard" requiredfaction="Coalition" minlocationdistance="1"/>
     </ScriptedEvent>
 
-    <ScriptedEvent identifier="eventiconstest" >
+    <ScriptedEvent identifier="eventiconsTEST" >
       <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryWoman" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan2" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" eventsprite="ScrapMetal" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
-      <ConversationAction targettag="player" text="Testing" eventsprite="piratehaven" endconversation="true"/>
-      <ConversationAction targettag="player" text="Testing" eventsprite="pirateoutpost" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="bandittalk" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="radiocall" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="sonar" endconversation="true"/>
@@ -171,6 +174,18 @@
       <ConversationAction targettag="player" text="Testing" eventsprite="huskoutbreak" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="brokenmachinery" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
+    </ScriptedEvent>
+  
+  
+    <ScriptedEvent identifier="operateTEST"> 
+        <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="scrapdealer" targettag="controllernpc" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" targetmoduletags="crewmodule"/>
+        <WaitAction time="1" />
+        <SpawnAction itemidentifier="rum" SpawnPointTag="controllernpc" targettag="controlleditem" offset="100" />
+        <WaitAction time="1" />
+        <NPCOperateItemAction npctag="controllernpc" targettag="controlleditem" ItemComponentName="Holdable" operate="true" OrderOption="" RequireEquip="true"/>
+        <WaitAction time="1" />
+        <!-- <NPCOperateItemAction npctag="controllernpc" targettag="controlleditem" ItemComponentName="Holdable" operate="false" OrderOption="" RequireEquip="true"/> -->
+        <!-- <NPCWaitAction npctag="controllernpc" wait="true" priority="50"/> -->
     </ScriptedEvent>
   
   </EventPrefabs>  

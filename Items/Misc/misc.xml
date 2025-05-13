@@ -2,6 +2,7 @@
 <Items>
   <Override>
   
+    <!-- An invisible holder that deletes itself after taking an item from it -->
     <Item name="Take Item" identifier="invisibleholder" description="An invisible item holder that deletes itself when interacted with. Good for making items hold in place without using platforms" SpriteColor="195,136,60,100" IntentoryIconColor="255,255,255,255" category="misc" tags="holder" canflipx="true" canflipy="true" scale="0.5" noninteractable="False">
       <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="716,951,70,70" />
       <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
@@ -85,8 +86,9 @@
       </ItemComponent>
     </Item>
     
-    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched. "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
-    <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
+    <!-- TODO: if barodevs ever ACCEPT MY FUCKING PR, no need for the unbundle jank, just use deconstruction -->
+    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched that needs to be "unbundled", we only do that to avoid stuff falling on the floor because research tables only have 1 output slot IT'S SO STUPID -->
+    <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
       <Upgrade gameversion="2.0.0.0" noninteractable="false" />
       <Body radius="30" width="20" density="10.5" />
       <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
@@ -108,8 +110,8 @@
       </Holdable>
     </Item>
     
-    <!-- Gives random medical plants when "untagled". "unidentifiedgeneticmaterial" tag is used to be able to place it in the research station without having to create an override for that. -->
-    <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,unidentifiedgeneticmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
+    <!-- Gives random medical plants when "untangled".  -->
+    <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
       <Body radius="30" width="20" density="10.5" />
       <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
       <Deconstruct time="3" requireddeconstructor="deconstructor" />
@@ -179,7 +181,7 @@
     </Item>
     
     
-      
+    <!-- A railgun shell that allows shooting clowns inside it (people wearing clowngear), much like a boarding pod -->
     <Item name="Clown Delivery System" identifier="railgunshellclown" tags="railgunequipment,railgunammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="">
       <PreferredContainer secondary="wreckrailgunammocontainer" amount="1" spawnprobability="0.01" />
       <Price baseprice="500">
@@ -280,8 +282,22 @@
       <Sprite texture="Content/Map/Outposts/Art/AdminResidentAssets.png" sourcerect="856,0,21,63" depth="0.6" origin="0.5,0.5" />
     </Item>
   
-  
-  
+  <!-- TEST item that instantly heals and gives more health -->
+  <Item name="SUPERHEALINGSYRINGE" identifier="SUPERHEALINGSYRINGE" description="FOR TESTING PURPOSES ONLY, IF YOU SOMEHOW GET THIS IN CAMPAIGN THROW IT OUT AND REPORT IT" category="Medical" maxstacksize="32" maxstacksizecharacterinventory="8" Tags="cheatitem" allowasextracargo="false" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light" colormultiplier="255,0,255,255" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/Medical/Medicines.png" sourcerect="448,256,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Medical/Medicines.png" sourcerect="303,310,35,67" depth="0.6" origin="0.5,0.5" />
+    <Body width="35" height="65" density="10.2" waterdragcoefficient="1"/>
+    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+      <StatusEffect type="Onuse" target="UseTarget">
+        <GiveTalentInfo giverandom="true" talentidentifiers="crustyseaman,exampleofhealth,swole,genetampering" />
+          <Affliction identifier="healdamage" amount="100" />
+          <Affliction identifier="husksymbiosis" amount="100" />
+          <ReduceAffliction type="damage" amount="100" />
+          <ReduceAffliction type="burn" amount="100" />
+          <ReduceAffliction type="poison" amount="100" />
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>  
     
     <!-- Hazmat Suit - Spawned on reactoroperator NPC for Enhanced Reactors compatibility - Does nothing and removes itself if Enhanced Reactors is not installed and loaded above DE -->
     <Item hideinmenus="true" name="Hazmat Suit" identifier="hazmatsuit1" aliases="orangejumpsuit" category="Equipment" tags="smallitem,clothing,radiationproof,deepdiving,divinggear_wearableindoors" fireproof="true" cargocontaineridentifier="metalcrate" description="ONLY EXISTS FOR 'ENHANCED REACTORS' COMPATIBILITY" scale="0.5" impactsoundtag="impact_soft">
@@ -294,5 +310,187 @@
       </Wearable>
       <Holdable slots="LeftHand,RightHand" holdpos="0,-30" handle1="0,-30" aimable="false" pickkey="Use" msg="ItemMsgPickUpUse" />
     </Item>
+    
+<!-- 
+  RUBBER DUCKS
+  RUBBER DUCKS
+  RUBBER DUCKS -->
+
+  <Item name="Rubber Duck" identifier="rubberduck" category="Material" maxstacksize="8" Tags="toy,smallitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,768,37,35" depth="0.55" origin="0.5,0.5" />
+    <Body width="5" radius="15" density="0.75" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="1" />
+    </Deconstruct>
+    <Throwable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item>  
+  
+  <Item name="Rubber Duck" identifier="piraterubberduck" category="Material" maxstacksize="8" Tags="toy,smallitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="38,763,37,40" depth="0.55" origin="0.5,0.5" />
+    <Body width="5" radius="15" density="0.75" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="1" />
+    </Deconstruct>
+    <Throwable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item>  
+  
+  <Item name="Big Rubber Duck" identifier="bigrubberduck" category="Material" maxstacksize="8" Tags="toy,mediumitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,804,107,102" depth="0.55" origin="0.5,0.5" />
+    <Body width="20" radius="45" density="0.6" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="3" />
+    </Deconstruct>
+    <Throwable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item> 
+  
+  <Item name="Big Rubber Duck" identifier="bigpiraterubberduck" category="Material" maxstacksize="8" Tags="toy,mediumitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,907,107,116" depth="0.55" origin="0.5,0.5" />
+    <Body width="20" radius="45" density="0.6" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="3" />
+    </Deconstruct>
+    <Throwable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item>  
+  
+  <Item name="Giant Rubber Duck" identifier="giantrubberduck" category="Material" maxstacksize="8" Tags="toy,largeitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="108,733,303,290" depth="0.55" origin="0.5,0.5" />
+    <Body width="50" radius="138" density="0.3" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="6" />
+    </Deconstruct>
+    <Throwable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" canBeCombined="true" removeOnCombined="true" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item>
+  
+  <Item name="Giant Rubber Duck" identifier="giantpiraterubberduck" category="Material" maxstacksize="8" Tags="toy,largeitem" canbepicked="true" scale="0.5" impactsoundtag="impact_rubberduck">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="412,694,303,329" depth="0.55" origin="0.5,0.5" />
+    <Body width="50" radius="138" density="0.3" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="6" />
+    </Deconstruct>
+    <Throwable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" canBeCombined="true" removeOnCombined="true" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnUse" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="1000" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="1000" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Throwable>
+  </Item>
+    
+
+  <!--Mudraptor race tickets-->
+  <Item maxstacksize="10" identifier="raceticket_red" nameidentifier="raceticket" cargocontaineridentifier="metalcrate" tags="smallitem,raceticket" scale="0.35" impactsoundtag="impact_soft" hideinmenus="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="138,448,66,32" origin="0.5,0.5" />
+    <Body width="66" height="32" density="11" gravityscale="0.75" />
+    <Throwable slots="Any,RightHand,LeftHand" throwforce="2.0" holdangle="0" handle1="-8,0" aimpos="35,-200" msg="ItemMsgPickUpSelect" />
+  </Item>
+  <Item maxstacksize="10" identifier="raceticket_blue" nameidentifier="raceticket" cargocontaineridentifier="metalcrate" tags="smallitem,raceticket" scale="0.35" impactsoundtag="impact_soft" hideinmenus="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="138,480,66,32" origin="0.5,0.5" />
+    <Body width="66" height="32" density="11" gravityscale="0.75" />
+    <Throwable slots="Any,RightHand,LeftHand" throwforce="2.0" holdangle="0" handle1="-8,0" aimpos="35,-200" msg="ItemMsgPickUpSelect" />
+  </Item>
+  <Item maxstacksize="10" identifier="raceticket_green" nameidentifier="raceticket" cargocontaineridentifier="metalcrate" tags="smallitem,raceticket" scale="0.35" impactsoundtag="impact_soft" hideinmenus="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="138,512,66,32" origin="0.5,0.5" />
+    <Body width="66" height="32" density="11" gravityscale="0.75" />
+    <Throwable slots="Any,RightHand,LeftHand" throwforce="2.0" holdangle="0" handle1="-8,0" aimpos="35,-200" msg="ItemMsgPickUpSelect" />
+  </Item>
+
+  <!-- only used in raptor race -->
+  <Item name="Raptor rubber duck" identifier="raptorrubberduck" category="Material" maxstacksize="1" Tags="toy,mediumitem,monsterfood,bait" scale="0.35" impactsoundtag="impact_rubberduck" noninteractable="false" hideinmenus="true" impacttolerance="0.2" health="50" damagedbymonsters="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,804,107,102" depth="0.55" origin="0.5,0.5" />
+    <Body width="20" radius="45" density="0.6" />
+    <Deconstruct time="10">
+      <Item identifier="rubber" amount="3" />
+    </Deconstruct>
+    <Throwable slots="Any,RightHand,LeftHand" handle1="0,0" throwforce="4.0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnImpact" target="This" setvalue="true" soundrange="10000" sightrange="6000">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck4.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck5.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck1.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck2.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/Rubberduck3.ogg" selectionmode="Random" range="700" dontmuffle="true" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+        <particleemitter particleamount="20" particle="brownchunks" drawontop="true" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" copyentitangle="false" distancemin="0" distancemax="30" scalemin="0.35" scalemax="0.6" colormultiplier="255,255,0,255"  />
+        <Sound file="%ModDir:2532991202%/Sounds/Impact/NovevaSqueak.ogg" range="1000" dontmuffle="true" />
+      </StatusEffect>
+    </Throwable>
+    <AiTarget sightrange="2000" soundrange="2000" static="True" />
+    <ItemComponent isactive="true">
+    </ItemComponent>
+  </Item> 
+
   </Override>
 </Items>

@@ -3,7 +3,7 @@
   <!-- Coalition -->
   <npcset identifier="de_coalitioncombat">
     <!-- enemy on takeover mission -->
-    <npc identifier="soldiercoalition" job="cosoldier" tags="coalitionsoldier" faction="coalition" behavior="Patrol" healthmultiplier="0.75" healthmultiplierinmultiplayer="1.25" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
+    <npc identifier="soldiercoalition" job="cosoldier" tags="coalitionsoldier" faction="coalition" behavior="Patrol" healthmultiplier="0.75" healthmultiplierinmultiplayer="1.25" aimspeed="0.8" aimaccuracy="0.75" reportrange="250" hearing="0.6" >
       <ItemSet commonness="1">
         <Item identifier="securityuniform1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
@@ -119,7 +119,7 @@
   <npcset identifier="de_separatistscombat">
   
     <!-- enemy on takeover mission -->
-    <npc identifier="soldierseparatists" job="sepsoldier" tags="separatistssoldier" faction="separatists" behavior="Patrol" healthmultiplier="0.75" healthmultiplierinmultiplayer="1.25" aimspeed="0.8" aimaccuracy="0.75" reportrange="250">
+    <npc identifier="soldierseparatists" job="sepsoldier" tags="separatistssoldier" faction="separatists" behavior="Patrol" healthmultiplier="0.75" healthmultiplierinmultiplayer="1.25" aimspeed="0.8" aimaccuracy="0.75" reportrange="250" hearing="0.6">
       <ItemSet commonness="0.5">
         <Item identifier="securityseparatistsuniform1" equip="true" />
         <Item identifier="pressurestabilizersecurity" equip="true" />
@@ -471,11 +471,7 @@
         <Item identifier="smgmagazine" />
         <Item identifier="smgmagazine" />
         <Item identifier="exosuitPA" equip="true">
-          <Item identifier="oxygentank" />
-          <Item identifier="fulguriumbatterycell" />
         </Item>
-        <Item identifier="fulguriumbatterycell" />
-        <Item identifier="fulguriumbatterycell" />
         <Item identifier="exosuitpartsPA" />
       </ItemSet>
       <ItemSet commonness="0.5">
@@ -495,11 +491,7 @@
         <Item identifier="smgmagazine" />
         <Item identifier="smgmagazine" />
         <Item identifier="exosuitPA" equip="true">
-          <Item identifier="oxygentank" />
-          <Item identifier="fulguriumbatterycell" />
         </Item>
-        <Item identifier="fulguriumbatterycell" />
-        <Item identifier="fulguriumbatterycell" />
         <Item identifier="exosuitpartsPA" />
       </ItemSet>
       <ItemSet commonness="0.3">
@@ -514,11 +506,7 @@
         <Item identifier="hmgmagazine" />
         <Item identifier="divingknife" />
         <Item identifier="exosuitPA" equip="true">
-          <Item identifier="oxygentank" />
-          <Item identifier="fulguriumbatterycell" />
         </Item>
-        <Item identifier="fulguriumbatterycell" />
-        <Item identifier="fulguriumbatterycell" />
         <Item identifier="exosuitpartsPA" />
       </ItemSet>
       <ItemSet commonness="0.3">
@@ -532,11 +520,7 @@
         <Item identifier="fuelrod" />
         <Item identifier="divingknife" />
         <Item identifier="exosuitPA" equip="true">
-          <Item identifier="oxygentank" />
-          <Item identifier="fulguriumbatterycell" />
         </Item>
-        <Item identifier="fulguriumbatterycell" />
-        <Item identifier="fulguriumbatterycell" />
         <Item identifier="exosuitpartsPA" />
       </ItemSet>
       <ItemSet commonness="0.5">
@@ -550,11 +534,7 @@
         <Item identifier="fulguriumbatterycell" />
         <Item identifier="divingknife" />
         <Item identifier="exosuitPA" equip="true">
-          <Item identifier="oxygentank" />
-          <Item identifier="fulguriumbatterycell" />
         </Item>
-        <Item identifier="fulguriumbatterycell" />
-        <Item identifier="fulguriumbatterycell" />
         <Item identifier="exosuitpartsPA" />
       </ItemSet>
     </npc>
@@ -1041,6 +1021,22 @@
           <Item identifier="weldingfueltank" />
         </Item>
         <Item identifier="rum" />
+      </ItemSet>
+    </npc>
+
+    <npc identifier="partypirateclown" moduleflags="none" job="assistant" healthmultiplier="0.5" >
+      <ItemSet commonness="99">
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="banditclothes1" equip="true"/>
+        <Item identifier="clownmask" equip="true"/>
+        <Item identifier="oxygentank" />
+        <Item identifier="pressurestabilizer" />
+        <Item identifier="divingknife" equip="true"/>
+        <Item identifier="bikehorn" equip="true"/>
+        <Item identifier="toyhammer" equip="false"/>
+        <Item identifier="weldingtool">
+          <Item identifier="weldingfueltank" />
+        </Item>
       </ItemSet>
     </npc>
   </npcset>

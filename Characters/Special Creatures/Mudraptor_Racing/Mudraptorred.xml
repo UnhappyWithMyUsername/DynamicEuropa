@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Charactervariant inherit="Mudraptor" speciesname="Mudraptorred" speciestranslationoverride="Mudraptor" group="human" texture="Content/Characters/Mudraptor/Mudraptor.png">
+  <health vitality="180" />
+  <ragdolls folder="%ModDir:2532991202%/Characters/Special Creatures/Mudraptor_Racing/Ragdolls"/>
+  <animations folder="Content/Characters/Mudraptor/Animations/"/> 
+  <ai combatstrength="210" sight="3.0" hearing="1" aggressiveboarding="False" fleehealththreshold="0" aggressiongreed="20" aggressionhurt="300" attackwhenprovoked="False" avoidgunfire="False" enforceaggressivebehaviorformissions="true" targetouterwalls="False" randomattack="true">
+    <target tag="bait" state="Attack" priority="100" reactdistance="5000" attackdistance="0" />
+    <target tag="petfood" state="Eat" priority="50" reactdistance="5000" attackdistance="0" />
+    <target tag="mudraptor" state="Idle" priority="1" />
+    <target tag="human" state="Idle" priority="1" />
+    <target tag="door" state="Idle" priority="1" />
+  </ai>
+  <StatusEffect type="OnSpawn" target="this" disabledeltatime="true" >
+    <Affliction identifier="stun" strength="3" />
+  </StatusEffect>
+  
+</Charactervariant>

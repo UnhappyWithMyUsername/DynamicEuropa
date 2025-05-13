@@ -221,6 +221,9 @@
           <MissionAction missionidentifier="alcoholcontraband" locationtype="settlement,colony,hospital,factory,shipyard,hydroponics" />
           <SpawnAction itemidentifier="metalcrate" targettag="contrabandcrate" targetinventory="triggerer_player" />
           <SpawnAction itemidentifier="contrabandrum" targetinventory="contrabandcrate" amount="10" />
+          <StatusEffectAction targettag="contrabandcrate" >
+            <StatusEffect target="this" spritecolor="200,160,120" setvalue="true" />
+          </StatusEffectAction>
         </Option>
         <Option text="EventText.generic.refuse" endconversation="true" />
       </ConversationAction>
@@ -251,12 +254,12 @@
    
       <!--HUSK MANAGER MISSIONS-->
       
-      <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_huskmedicalcargo" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskmedicalcargo.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskmedicalcargo" />
       </ScriptedEvent>
       
-      <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_huskeggsmuggling" commonness="125" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <ConversationAction text="EventText.missionevent_huskeggsmuggling.c1" speakertag="outpostmanager" endeventifinterrupted="false" dialogtype="Small" />
         <MissionAction missionidentifier="huskeggsmuggling" />
       </ScriptedEvent>
@@ -311,7 +314,7 @@
         </CheckDataAction>
       </ScriptedEvent>
       
-      <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="20" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
+      <ScriptedEvent identifier="missionevent_escorthuskterrorist" commonness="25" requiredDestinationTypes="construction,outpost,settlement,colony,city,camp,base,military,blockade,mine,study,research,clinic,hospital,hydroponics,factory,shipyard">
         <!-- only get this if husk reputation is low -->
         <CheckReputationAction targettype="faction" identifier="huskcult" condition="lte -15">
           <Failure>
@@ -499,8 +502,18 @@
           </ConversationAction>
         </Success>
       </CheckDataAction>
-    </ScriptedEvent>  
+    </ScriptedEvent>
 
+    <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="20" >
+      <ConversationAction text="Eventtext.missionevent_destroybigalienturret" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="ancient1">
+        <Option text="EventText.missionevent_destroybigalienturret.accept" >
+          <ConversationAction text="Eventtext.missionevent_destroybigalienturret.explosives" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="ancient1" endconversation="true" />
+          <MissionAction missionidentifier="destroybigalienturret" />
+        </Option>
+        <Option text="EventText.generic.refuse" endconversation="true">
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
 
       <!-- Unused TODO: custom husk beacon/probe, still no way to spawn specific beacons/wrecks in missions... -->
       <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
@@ -583,7 +596,8 @@
       </RNGAction>
     </ScriptedEvent>
     
-    <!-- Coalition Cargo Vessel -->
+    <!-- "Coalition Cargo Broadcast" 
+    Talk with the coalition cargo submarine you're supposed to intercept, you can trick them into boarding their submarine-->
     <ScriptedEvent identifier="cocargobroadcast">
       <TagAction criteria="humanprefabidentifier:coalitioncaptain" tag="transmitter" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:coalitioncaptainlord" tag="transmitter" ContinueIfNoTargetsFound="true" />
@@ -689,7 +703,7 @@
       <Label name="end" />
     </ScriptedEvent>    
 
-    <!-- TODO test: jettison cargo -->
+    <!-- UNUSED TODO: enemy cargo sub jettisons cargo pod and flees? specific to Possum submarine -->
     <ScriptedEvent identifier="cocargojettison">
       <SpawnAction NPCSetIdentifier="combatmissioncoalitionnpcs" NPCIdentifier="coalitioncaptain" TeamID="FriendlyNPC" />
       <TagAction criteria="player" tag="player" />
@@ -713,10 +727,9 @@
       </StatusEffectAction>
       <Label name="end" />
     </ScriptedEvent>    
-
-    
-    
-    <!-- Coalition Civilian Transport -->
+ 
+    <!-- "Coalition Civilian Transport" 
+    Rob, hire or execute civilians in the mission -->
     <ScriptedEvent identifier="cocivtransport">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="humanprefabidentifier:coalition_civilian_medic" tag="civilian" ContinueIfNoTargetsFound="true" />
@@ -848,6 +861,7 @@
       </ConversationAction>
     </ScriptedEvent>
           
+    <!-- spawns the nuclear bomb for lair missions -->
     <ScriptedEvent identifier="lairbombspawn">
       <SpawnAction itemidentifier="de_nuclearbomb" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="lairbomb" offset="0" />
       <TagAction criteria="player" tag="player" />
@@ -870,6 +884,7 @@
       </CheckConditionalAction>
     </ScriptedEvent>
     
+    <!-- event for vipnapping -->
     <ScriptedEvent identifier="vipnappingevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="submarinehull" submarinetype="Player" />
@@ -894,7 +909,8 @@
       <Label name="end" />
     </ScriptedEvent>
 
-    <!-- hostage situation-->
+    <!-- Hostage situation 
+    Allows you to pay the ransom to free the outpost, intimidate bandits, if enemies spot a gun they will turn hostile and start executing civilians -->
     <ScriptedEvent identifier="hostagesituationevent">
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:banditleader" submarinetype="Outpost" tag="leader" />
@@ -1201,6 +1217,7 @@
       </CountTargetsAction>
     </ScriptedEvent>
 
+    <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
     <ScriptedEvent identifier="killhostages">
       <WaitAction time="2" />
       <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="Team2" tag="bandit" />
@@ -1213,7 +1230,7 @@
     </ScriptedEvent>
     
     <!-- Prototype of an event that spawns enemies outside in lair levels
-    TODO - figure out an outpostlevel configuration that doesnt make enemies spawn inside big subs... -->
+    TODO: figure out an outpostlevel configuration: mainpath will sometimes intersect with the sub and enemies spawn in it, but with nearmainsub, enemies can spawn spontaneously inside the outpost (above the sub) -->
     
     <ScriptedEvent identifier="laircrawlersoutside">
       <WaitAction time="5" />
@@ -1257,16 +1274,26 @@
       <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
     </ScriptedEvent> -->
    
+    <!-- check if mutated crawler is inside the sub. CONCEAL Loop for crawler so it doesnt die??-->
     <ScriptedEvent identifier="capturelivecrawlerevent">
       <SetDataAction identifier="capturedlivetarget" operation="set" value="0" />
       <SpawnAction speciesname="Crawler_capture" TargetTag="capturetarget" amount="3" SpawnLocation="MainPath" offset="500" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
-      <TriggerAction target1tag="capturetarget" target2tag="playerhull" radius="50" waitforinteraction="false" />
-      <!-- jank way of making a message popup when crawler gets inside -->
-      <MissionStateAction missionidentifier="capturelivecrawler" operation="set" value="1" />
+      <Label name="checkcrawlerinside" />
+      <WaitAction time="1" />
+      <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
+        <Conditional IsDead="false" />
+        <Success>
+          <MissionStateAction missionidentifier="capturelivecrawler" operation="set" value="1" />
+        </Success>
+        <Failure>
+          <ClearTagAction name="crawlerinside" />
+          <Goto name="checkcrawlerinside" />
+        </Failure>
+      </CountTargetsAction>
       <OnRoundEndAction>
-        <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="1">
+        <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
           <Conditional IsDead="false" />
           <Success>
             <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
@@ -1278,6 +1305,33 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+   
+    <!-- killmonsters will validate this if crawlers are far enough from the sub (they will get despawned)-->
+    <ScriptedEvent identifier="capturelivecrawlereventBUGGED">
+      <SpawnAction speciesname="crawler" TargetTag="capturetarget" amount="3" SpawnLocation="MainPath" offset="500" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
+      <Label name="checkcrawlerinside" />
+      <WaitAction time="1" />
+      <!-- check if a crawler is inside the sub, I also tried  <Conditional InPlayerSubmarine="true" />  -->
+      <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
+        <Conditional IsDead="false" />
+        <Success>
+          <ConversationAction targettag="player" text="Big success, there's a crawler in your ship. UNLESS THEY ARE ALL DEAD AND IT'S A BUG!" eventsprite="guywithalcohol" />
+        </Success>
+        <Failure>
+          <StatusEffectAction targettag="player">
+            <StatusEffect target="This" >
+              <Sound file="Content/Items/Weapons/honk.ogg" range="500" volume="1" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="checkcrawlerinside" />
+        </Failure>
+      </CountTargetsAction>
+    </ScriptedEvent>
+
+
+    <!-- check if outpost is repaired -->
     <ScriptedEvent identifier="industrialincidentevent" commonness="50">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:junctionbox" tag="breakthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" chooserandom="true" ChoosePercentage="66" />
@@ -1294,6 +1348,8 @@
       <TagAction criteria="itemtag:fireextinguisher" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:mechanicalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemtag:electricalrepairtool" tag="removethis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
+      <!-- highlight all items that need to be repaired to succeed the mission -->
+      <HighlightAction targettag="repairthis" state="true" />
       <!-- keep O2 gen running, destroy JBs/Decon/Fabricator, damage O2 generator and reactor, start fires, lock wires, remove extinguishers and repair tools -->
       <StatusEffectAction targettag="breakthis">
         <StatusEffect target="This" indestructible="false" condition="0" setvalue="true" />
@@ -1306,6 +1362,7 @@
       </StatusEffectAction>
       <StatusEffectAction targettag="outpostoxygenerator">
         <StatusEffect target="This" indestructible="false" NonInteractable="false" NonPlayerTeamInteractable="false" setvalue="true" />
+        <StatusEffect target="This" targetitemcomponent="PowerContainer" GeneratedAmount="10000" setvalue="true" />
       </StatusEffectAction>
       <StatusEffectAction targettag="burnthis">
         <StatusEffect target="This" >
@@ -1320,9 +1377,17 @@
           <Remove />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- check for all damaged items repaired -->
-      <Waitaction time="1" />
+      <!-- check for all damaged items repaired -->      
+      <ClearTagAction tag="breakthis" />
+      <ClearTagAction tag="damagethis" />
+      <ClearTagAction tag="burnthis" />
       <Label name="checkforrepaired" />
+      <Waitaction time="1" />
+      <!-- tag repaired items with "isrepaired" and remove the highlight from items with the tag "isrepaired" -->
+      <CheckConditionalAction targettag="repairthis" ApplyTagToTarget="isrepaired" condition="gte 80">
+      </CheckConditionalAction>
+      <HighlightAction targettag="isrepaired" state="false" />
+      <!-- mission succeeds if all items are over 80 condition -->
       <CountTargetsAction targettag="repairthis" CompareToTarget="repairthis" MinPercentageRelativeToTarget="100">
         <Conditional condition="gte 80" />
         <Failure>
@@ -1332,20 +1397,17 @@
               <StatusEffectAction targettag="outpostoxygenerator">
                 <StatusEffect target="This" condition="1" disabledeltatime="true" >
                   <Conditional condition="gt 90" />
-                </StatusEffect>                
+                </StatusEffect>
               </StatusEffectAction>
               <StatusEffectAction targettag="ventthis">
-                <StatusEffect target="This" duration="2" OxygenFlow="500000" disabledeltatime="true" setvalue="true" />
-                <StatusEffect target="This" duration="2" targetitemcomponent="oxygengenerator" GeneratedAmount="10000" setvalue="true" />
+                <StatusEffect target="This" duration="1" OxygenFlow="500000" disabledeltatime="true" stackable="false" setvalue="true" />
               </StatusEffectAction>
-              <Waitaction time="1" />
               <GoTo name="checkforrepaired" />
             </Success>
-            <Failure>                 
+            <Failure> 
               <StatusEffectAction targettag="ventthis">
-                <StatusEffect target="This" duration="2" OxygenFlow="0" disabledeltatime="true" setvalue="true" />
-              </StatusEffectAction>         
-              <Waitaction time="1" />
+                <StatusEffect target="This" duration="1" OxygenFlow="0" disabledeltatime="true" stackable="false" setvalue="true" />
+              </StatusEffectAction>
               <GoTo name="checkforrepaired" />
             </Failure>
           </CheckConditionalAction>
@@ -1359,6 +1421,8 @@
       </CountTargetsAction>
     </ScriptedEvent>
     
+    
+    <!-- check if orangeboys arent dead -->
     <ScriptedEvent identifier="escortorangeboysevent">
       <SetDataAction identifier="escortedorangeboys" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
@@ -1402,6 +1466,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <!-- I forgot about this event entirely -->
     <ScriptedEvent identifier="hiddenandclowngerous" commonness="10">
       <TagAction criteria="player" tag="player"/>
       <TagAction criteria="hull" tag="anyhull" submarinetype="outpost" />
@@ -1579,6 +1645,8 @@
       <Label name="end" />
     </ScriptedEvent>
 
+
+    <!-- check if samples have been collected -->
     <ScriptedEvent identifier="chimerasamplesmissionevent" commonness="50">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
@@ -1614,6 +1682,8 @@
       </OnRoundEndAction>
     </ScriptedEvent>
 
+
+    <!-- interact with prisoners to find out who is the target witness and a bunch of other stuff I forgot about -->
     <ScriptedEvent identifier="silencewitnessevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:airlock" tag="airlock" submarinetype="Outpost" />
@@ -1678,7 +1748,7 @@
       </ConversationAction>
     </ScriptedEvent>
     
-    <!-- BARTENDER -->
+    <!-- Deliver crates of alcohol to bartender  -->
     <ScriptedEvent identifier="alcoholcontrabandevent" commonness="100">
       <SetDataAction identifier="alcoholdelivered" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
@@ -1947,8 +2017,8 @@
       <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
     </ScriptedEvent> -->  
       
-    <!-- UNUSED, can't get the mission to accept the state as completed and succeed-->
-<!--     <ScriptedEvent identifier="findhiddenpylonsevent" commonness="50">
+    <!-- UNUSED, can't get the mission to accept the state as completed and succeed -->
+    <ScriptedEvent identifier="findhiddenpylonsevent" commonness="50">
       <SetDataAction identifier="pylonsdestroyed" operation="set" value="0" />
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:hiddenalienpylon" tag="breakthis" />
@@ -1966,8 +2036,27 @@
           <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
         </Success>
       </CountTargetsAction>
-    </ScriptedEvent>  -->
-      
+    </ScriptedEvent> 
+    
+    <!-- UNUSED, can't get the mission to accept the state as completed and succeed -->
+    <ScriptedEvent identifier="destroybigalienturretevent" commonness="50">
+      <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="0" />
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:bigalienturret" tag="breakthis" />
+      <Waitaction time="1" />
+      <Label name="checkfordestroyed" />
+      <CountTargetsAction targettag="breakthis" CompareToTarget="breakthis" MinPercentageRelativeToTarget="100">
+        <Conditional condition="lte 0" />
+        <Failure>
+          <Waitaction time="1" />
+          <GoTo name="checkfordestroyed" />
+        </Failure>
+        <Success>
+          <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="1" />
+          <MissionStateAction missionidentifier="destroybigalienturret" operation="Set" value="4" />
+        </Success>
+      </CountTargetsAction>
+    </ScriptedEvent> 
       
      <!-- TODO: stranded divers mission, still doesnt spawn the divers on the proper spawnlocation + it's jank + bots are stupid (they refuse waitaction so I'm stunning them in a loop) also needs a proper NPC not just pirate divers -->
     <!-- <ScriptedEvent identifier="rescuestrandeddiversevent">

@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Randomevents>
   
+  <!-- DO NOT GIVE ANY SUBMARINE/PVP MISSION, if players take two pirate missions the game cannot handle spawning 2 enemy subs -->
+  <!-- DO NOT GIVE ANY SUBMARINE/PVP MISSION, if players take two pirate missions the game cannot handle spawning 2 enemy subs -->
+  <!-- DO NOT GIVE ANY SUBMARINE/PVP MISSION, if players take two pirate missions the game cannot handle spawning 2 enemy subs -->
+  
   <EventPrefabs>
     <!-- Legacy Job Board: Provides all options regardless of your current location type. -->
     <ScriptedEvent identifier="jobboardde" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <Label name="start_jobboard_regular" />
@@ -14,7 +19,6 @@
             </Success>
             <Failure>
               <TagAction criteria="player" tag="player" />
-              <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
               <SetDataAction identifier="jobboardempty" operation="set" value="0" />
               <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" radius="500" />
               <StatusEffectAction targettag="potentialjobboard">
@@ -26,7 +30,7 @@
                 <Success>
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" applytotarget2="jb_trig_player" waitforinteraction="true" />
                   <ConversationAction targettag="jb_trig_player" text="eventtext.jobboardde.interact" eventsprite="noticeboard" dialogtype="Regular">
-                    <Option text="eventtext.jobboardde.option.piratemission">
+                    <!-- <Option text="eventtext.jobboardde.option.piratemission">
                       <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.piratemission.info" eventsprite="noticeboard">
                         <Option text="eventtext.option.accept">
                           <ConversationAction text="eventtext.jobboardde.option.piratemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
@@ -55,7 +59,7 @@
                           <GoTo name="waitforinput" />
                         </Option>
                       </ConversationAction>
-                    </Option>
+                    </Option> -->
                     <Option text="eventtext.jobboardde.option.monstermission">
                       <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.monstermission.info" eventsprite="noticeboard">
                         <Option text="eventtext.option.accept">
@@ -157,10 +161,31 @@
           </RNGAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
+    
+    <ScriptedEvent identifier="jobboardTEST" commonness="100">
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" />
+      <TagAction criteria="player" tag="player" />
+      <StatusEffectAction targettag="potentialjobboard">
+        <StatusEffect target="This" noninteractable="false" setvalue="true" />
+      </StatusEffectAction>
+      <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="true" radius="500" />
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+    
     <!-- JOB BOARD - Habitation -->
     <ScriptedEvent identifier="jobboardhabitation" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <CheckDataAction identifier="jobboard_all_options" condition="true">
@@ -175,7 +200,6 @@
                 </Success>
                 <Failure>
                   <TagAction criteria="player" tag="player" />
-                  <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" radius="500" />
                   <StatusEffectAction targettag="potentialjobboard">
@@ -359,10 +383,17 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
+    
     <!-- JOB BOARD - INDUSTRIAL -->
     <ScriptedEvent identifier="jobboardindustrial" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <CheckDataAction identifier="jobboard_all_options" condition="true">
@@ -377,7 +408,6 @@
                 </Success>
                 <Failure>
                   <TagAction criteria="player" tag="player" />
-                  <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" radius="500" />
                   <StatusEffectAction targettag="potentialjobboard">
@@ -562,10 +592,17 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
+    
     <!-- JOB BOARD - Military -->
     <ScriptedEvent identifier="jobboardmilitary" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <CheckDataAction identifier="jobboard_all_options" condition="true">
@@ -580,7 +617,6 @@
                 </Success>
                 <Failure>
                   <TagAction criteria="player" tag="player" />
-                  <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" radius="500" />
                   <StatusEffectAction targettag="potentialjobboard">
@@ -592,31 +628,27 @@
                     <Success>
                       <TriggerAction target1tag="potentialjobboard" target2tag="player" applytotarget2="jb_trig_player" waitforinteraction="true" />
                       <ConversationAction targettag="jb_trig_player" text="eventtext.jobboardde.interact" eventsprite="noticeboard" dialogtype="Regular">
-                        <Option text="eventtext.jobboardde.option.piratemission">
-                          <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.piratemission.info" eventsprite="noticeboard">
+                        <Option text="eventtext.jobboardde.option.salvagemission">
+                          <ConversationAction targettag="jb_trig_player" dialogtype="Small" text="eventtext.jobboardde.option.salvagemission.info" eventsprite="noticeboard">
                             <Option text="eventtext.option.accept">
-                              <ConversationAction text="eventtext.jobboardde.option.piratemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
-                              <RNGAction chance="0.65">
+                              <ConversationAction text="eventtext.jobboardde.option.salvagemission.accept" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
+                              <RNGAction chance="0.9">
                                 <Success>
-                                  <RNGAction chance="0.8">
-                                    <Success>
-                                      <MissionAction missionidentifier="pirate_heavy" />
-                                    </Success>
-                                    <Failure>
-                                      <MissionAction missionidentifier="pirate_piezo" />
-                                    </Failure>
-                                  </RNGAction>
+                                  <MissionAction missiontag="salvagewreck" />
+                                  <ClearTagAction tag="jb_trig_player" />
+                                  <SetDataAction identifier="jobboardempty" operation="add" value="1" />
+                                  <GoTo name="waitforinput" />
                                 </Success>
                                 <Failure>
-                                  <MissionAction missionidentifier="pirate_party" />
+                                  <MissionAction missiontag="salvageartifact" />
+                                  <ClearTagAction tag="jb_trig_player" />
+                                  <SetDataAction identifier="jobboardempty" operation="add" value="1" />
+                                  <GoTo name="waitforinput" />
                                 </Failure>
                               </RNGAction>
-                              <ClearTagAction tag="jb_trig_player" />
-                              <SetDataAction identifier="jobboardempty" operation="add" value="1" />
-                              <GoTo name="waitforinput" />
                             </Option>
                             <Option text="eventtext.option.decline">
-                              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="jb_trig_player" />
+                              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="jb_trig_player" eventsprite="noticeboard" />
                               <ClearTagAction tag="jb_trig_player" />
                               <GoTo name="waitforinput" />
                             </Option>
@@ -764,10 +796,17 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
+    
     <!-- JOB BOARD - Research -->
     <ScriptedEvent identifier="jobboardresearch" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <CheckDataAction identifier="jobboard_all_options" condition="true">
@@ -782,7 +821,6 @@
                 </Success>
                 <Failure>
                   <TagAction criteria="player" tag="player" />
-                  <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardempty" operation="set" value="0" />
                   <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="false" radius="500" />
                   <StatusEffectAction targettag="potentialjobboard">
@@ -906,10 +944,18 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
+    
+    <!-- I am VERY confused about all those jobboardpicked things that only exist here -->
     <!-- JOB BOARD - Medical -->
     <ScriptedEvent identifier="jobboardmedical" commonness="100">
       <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
           <CheckDataAction identifier="jobboard_all_options" condition="true">
@@ -924,7 +970,6 @@
                 </Success>
                 <Failure>
                   <TagAction criteria="player" tag="player" />
-                  <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
                   <SetDataAction identifier="jobboardpicked1" operation="set" value="0" />
                   <SetDataAction identifier="jobboardpicked2" operation="set" value="0" />
                   <SetDataAction identifier="jobboardpicked3" operation="set" value="0" />
@@ -1129,6 +1174,11 @@
           </CheckDataAction>
         </Failure>
       </CheckDataAction>
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
     </ScriptedEvent>
 
    

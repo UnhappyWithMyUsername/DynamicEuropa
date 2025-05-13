@@ -131,12 +131,14 @@
         <TriggerEvent identifier="nuclearbombexplosion" />
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This" delay="0.2" sonardisruption="1.0" disabledeltatime="true" stackable="false">
-        <Explosion range="5000" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" camerashake="5000" flashrange="10000" flashduration="5.0" screencolor="195,255,170,255" screencolorrange="5000" screencolorduration="3.0" decal="explosion" decalsize="5" ignorecover="true" DistanceFalloff="false">
+        <Explosion range="5000" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" ignorecover="true" DistanceFalloff="false">
           <Affliction identifier="explosiondamage" strength="1000" />
           <Affliction identifier="radiationsickness" strength="1000" />
           <Affliction identifier="burn" strength="800" />
           <Affliction identifier="stun" strength="20" />
         </Explosion>
+        <!-- second explosion for visuals -->
+        <Explosion range="10" camerashake="1000" camerashakerange="100000" flashrange="100000" flashduration="5.0" screencolor="195,255,170,255" screencolorrange="100000" screencolorduration="3.0" decal="explosion" decalsize="5" ignorecover="true"/>
         <Sound file="%ModDir:2532991202%/Sounds/Explosions/ExplosionMassive2.ogg" volume="4.0" range="20000" loop="false" />
         <ParticleEmitter particle="underwaterexplosion" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="0" scalemin="15" scalemax="15" />
         <Remove />
@@ -183,6 +185,7 @@
     </ItemComponent>
   </Item>
 
+  <!-- the thing you have to blow up inside lairs -->
   <Item name="Heart of the lair" noninteractable="false" identifier="laircore" tags="laircore" scale="1.2" category="Misc" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2000" sonarsize="30">
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
     <!-- add more scum with offset if needed -->
@@ -655,12 +658,8 @@
   </Item>
   <!-- Job Board -->
   <Item name="Job Board" identifier="de-jobboard" tags="potentialjobboard" scale="0.5" category="Decorative" noninteractable="true">
-    <sprite texture="Content/Map/Outposts/Art/HumanResourcesAssets.png" sourcerect="576,416,320,235" depth="0.78" premultiplyalpha="false" origin="0.5,0.5" />
-    <ItemComponent>
-      <!--<StatusEffect target="This" type="OnSpawn" evententitytag="potentialjobboard">
-        <TriggerEvent identifier="jobboardde"/>
-      </StatusEffect>-->
-    </ItemComponent>
+    <sprite texture="Content/Map/Outposts/Art/HumanResourcesAssets.png" sourcerect="576,416,320,235" depth="0.78" />
+    <Brokensprite texture="%ModDir:2532991202%/Items/eventitems/jobboardempty.png" sourcerect="0,0,320,235" depth="0.78" maxcondition="0" />    
     <Upgrade gameversion="2.0.0.0" noninteractable="true" />
   </Item>
   <!-- Classified Documents -->
@@ -775,6 +774,7 @@
     <Holdable canBeCombined="false" removeOnCombined="false" slots="Any" aimpos="0,0" holdpos="0,0" holdangle="0" aimangle="0" aimable="false" swingwhenaiming="false" msg="ItemMsgPickUpSelect" />
   </Item>
 
+  <!-- WE TRY TO AVOID EVENT TRIGGER ITEMS AS MUCH AS POSSIBLE NOW, MOST OF THESE ARE UNUSED -->
   <!-- PLACEABLE EVENT TRIGGERS -->
   <!-- generic events -->
   <Item name="Triggered Event - Bartender" identifier="eventtrigger_bartender" tags="eventtrigger" description="DO NOT PLACE MULITPLE IN ONE MODULE AND SET THE MODULE TO ONLY SPAWN ONCE PER OUTPOST" scale="0.25" spritecolor="231,0,202,255" health="100" hiddeningame="true" invulnerabletodamage="true" damagedbyrepairtools="false" damagedbyexplosions="false" allowrotatingineditor="false" allowedlinks="gap,door" linkable="true">
@@ -851,7 +851,7 @@
     </LightComponent>
   </Item>  
   
-  <!-- only used for locating crawlers -->
+  <!-- item that only exists for locating targets, spawned in their inventory -->
   <Item hideinmenus="true" name="Alien liver" identifier="monsterlocatoritem" category="Misc" tags="alien,capturetargetitem" noninteractable="true" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
     <Body radius="50" density="10" />
@@ -865,6 +865,7 @@
     <AiTarget soundrange="5000000" sonarlabel="entityname.livecapture" sight="500" TargetType="Humanonly" static="true" NeedsUpdate="true" />
   </Item>
   
+  <!-- custom item for pirate outpost event -->
   <Item hideinmenus="true" name="Suspicious package" identifier="huskbodybag" category="Misc" tags="bodybag" scale="0.6" health="100" impactsoundtag="impact_soft" flipx="true" >
     <sprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,409,283,27" depth="0.55" origin="0.5,0.5" />
     <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/HumanEnemyA.png" sourcerect="741,436,283,76" depth="0.54" origin="0.5,0.5" offset="5,12" offsetanim="noise" rotation="2" offsetanimspeed="50.0">
@@ -895,6 +896,7 @@
     </ItemComponent>
   </Item>
   
+  <!-- radioactive barrel for the salvage mission -->
   <Item hideinmenus="true" name="Radioactive Waste" identifier="radioactivewaste" tags="radioactive" category="Misc" Scale="0.5" sonarsize="30" >
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,269,144,85" depth="0.65" origin="0.5,0.5" />
     <Body width="144" height="78" density="25" friction="0.8" />
@@ -933,7 +935,7 @@
     <AiTarget Soundrange="5000" sonardisruption="0.1" />
   </Item>
 
-
+  <!-- event item that allows you to harvest piezo chunks -->
   <Item name="Old pick-chisel" identifier="piezochipper" description="Chip at piezo crystals with this" hideinmenus="false" category="Misc" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Tags="mediumitem" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="engcab" spawnprobability="0"/>
     <PreferredContainer secondary="wreckstoragecab,wreckengcab" spawnprobability="0.01" />
@@ -944,8 +946,8 @@
       <RequiredSkill identifier="mechanical" level="40" />
       <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
       <StatusEffect type="OnUse" target="This" reload="1.1" setvalue="true" delay="1.4"/>
-      <Attack targetimpulse="2" structuredamage="15" itemdamage="12">
-        <Affliction identifier="blunttrauma" strength="25" />
+      <Attack targetimpulse="1" structuredamage="15" itemdamage="12">
+        <Affliction identifier="blunttrauma" strength="20" />
         <Affliction identifier="stun" strength="1" />
         <StatusEffect type="OnUse" target="UseTarget">
           <Conditional entitytype="eq Character"/>
@@ -969,7 +971,7 @@
       <StatusEffect type="OnUse" target="UseTarget,This" comparison="and" >
         <Conditional hastag="piezocrystal" />
         <Conditional condition="lt 30" />
-        <SpawnItem identifier="piezochunk" spawnposition="This" spread="10" />
+        <SpawnItem identifier="piezochunk" spawnposition="This" spread="60" aimspread="60"  />
         <particleemitter particle="iceshards" particleamount="10" velocitymin="200" velocitymax="500" anglemin="0" anglemax="360" scalemin="2.0" scalemax="3.0" drawontop="true" colormultiplier="120,150,225,200" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="1000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="1000" selectionmode="Random" />
@@ -1045,7 +1047,7 @@
     </LightComponent>
   </Item>
   
-  
+  <!-- cargo for transport mission, you have to keep it wet and powered or something -->
   <Item name="Biological Cargo" identifier="biocrate" tags="largeitem,poweredcontainer" category="Electrical,Machine" Scale="0.5" description=""  damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Items/Containers/containers2.png" depth="0.54" sourcerect="0,29,147,56" origin="0.5,0.5" />
     <DecorativeSprite texture="%ModDir:2532991202%/Items/Alien/Caveworms.png" depth="0.54" sourcerect="190,101,258,128" origin="0.5,-0.38" rotation="180" offset="0,-5" offsetanim="Noise" offsetanimspeed="0.25" scale="0.55">
@@ -1124,7 +1126,7 @@
     </ItemContainer>
   </Item>
   
-  
+  <!-- gas cloud spawned by vents in malfunction event -->
   <Item name="ventleakcloud" identifier="ventleakcloud" Scale="1" tags="gas" sonarsize="0" hideinmenus="true" health="10" depth="0.1" isdangerous="true" damagedbyrepairtools="true" noninteractable="true">
     <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,0,2,2" depth="0.55" origin="0.5,0.5" />
     <Body radius="30" bodytype="static"/>
@@ -1156,7 +1158,7 @@
     </ItemComponent>
   </Item>
   
-  
+  <!-- cargo defense bot you have to keep repaired for the mission -->
   <Item name="Inactive Defense Bot" identifier="cargodefensebot" tags="largeitem,mechanical,crate" category="Misc" Scale="0.4" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,96" origin="0.5,0.5" />
     <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
@@ -1208,19 +1210,31 @@
     </Repairable>
   </Item>
   
+  <!-- defective version of defense bot cargo that turns into a hostile bot -->
   <Item name="Inactive Defense Bot" identifier="cargodefensebot_defective" tags="largeitem,mechanical,crate" category="Misc" Scale="0.4" description="" damagedbyprojectiles="true" damagedbyexplosions="true" explosiondamagemultiplier="0.2" impactsoundtag="impact_metal_heavy" hideconditionbar="false" allowstealingalways="true" hideinmenus="true" health="50">
     <Sprite texture="Content/Characters/Defensebot/DefenseBot.png" depth="0.54" sourcerect="1,8,149,96" origin="0.5,0.5" />
-    <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" />
+    <!-- <BrokenSprite texture="Content/Map/Outposts/AbandonedOutpost/RustedDecalItem.png" scale="0.5" sourcerect="127,469,131,94" depth="0.53" maxcondition="100" fadein="true" /> -->
     <Body width="149" height="96" density="18" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" holdangle="10" handle1="-50,14" handle2="70,45" aimable="false" msg="ItemMsgPickUpSelect" swingamount="10,10" swingspeed="0.2" swingwhenholding="True" />
     <!-- This only exists to trigger deterioration... -->
     <Powered powerconsumption="0" currpowerconsumption="0" isactive="true" />
-    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="100000" mindeteriorationdelay="240" maxdeteriorationdelay="540" mindeteriorationcondition="0" RepairThreshold="0" msg="ItemMsgRepairWrench" hudpriority="10">
+    <Repairable selectkey="Action" header="mechanicalrepairsheader" deteriorationspeed="20" mindeteriorationdelay="120" maxdeteriorationdelay="240" mindeteriorationcondition="0" RepairThreshold="0" msg="ItemMsgRepairWrench" hudpriority="10">
       <GuiFrame relativesize="0.2,0.16" minsize="400,200" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
       <RequiredItem items="wrench" type="equipped" />
       <StatusEffect type="InWater" target="This" Condition="-0.5" interval="1" disabledeltatime="true">
         <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" scalemin="0.5" scalemax="0.75" velocitymin="50" velocitymax="150" copyentityangle="true" />
         <ParticleEmitter particle="bubbles" particleamount="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" >
+        <Conditional condition="lte 40" />
+        <ParticleEmitter particle="weldspark" particlespersecond="5" anglemin="0" anglemax="360" scalemin="0.75" scalemax="1" distancemin="0" distancemax="20" velocitymin="100" velocitymax="200" copyentityangle="true" />
+        <ParticleEmitter particle="bubbles" particlespersecond="2" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" velocitymin="20" velocitymax="100" copyentityangle="true" />
+        <ParticleEmitter particle="ElectricShock" particlespersecond="1" anglemin="0" anglemax="360" scalemin="0.05" scalemax="0.1" />
+        <sound file="Content/Items/Electricity/zap1.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap2.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap3.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap4.ogg" range="800.0" selectionmode="Random" loop="true" />
+        <sound file="Content/Items/Electricity/zap5.ogg" range="800.0" selectionmode="Random" loop="true" />
       </StatusEffect>
       <!-- visuals -->
       <LightComponent lightcolor="150,150,30,220" castshadows="false" pulseamount="0.5" pulsefrequency="0.5" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
@@ -1237,7 +1251,7 @@
     </Repairable>
   </Item>  
   
-
+  <!-- sample vial used to stab the chimera in the mission -->
   <Item name="" identifier="husksamplevial" hideinmenus="true" category="Medical" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="mediccrate" Tags="smallitem,missionitem" description="" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="medcab" secondary="medcontainer"/>
     <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
@@ -1252,7 +1266,7 @@
     </MeleeWeapon>
   </Item>
   
-  <!-- UNUSED, BUGGED. INTERACT DONT WORK -->
+  <!-- UNUSED, BUGGED. INTERACT DONT WORK https://github.com/FakeFishGames/Barotrauma/discussions/14489 -->
   <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
     <Body width="210" height="210" bodytype="Static" />
     <StaticBody width="210" height="210" />
@@ -1303,12 +1317,12 @@
     <TriggerComponent triggeredby="Human" force="0" radius="500" allowingameediting="false">
     </TriggerComponent>
     <AiTarget Soundrange="2000" sonardisruption="3" />
-    <Controller direction="None" canbepicked="true" istoggle="true" msg="ItemMsgPressSelect">
-      <sound file="Content/Items/Button/Switch1.ogg" type="OnUse" range="250.0" />
-      <sound file="Content/Items/Button/Switch2.ogg" type="OnUse" range="250.0" />
+    <Controller direction="None" canbepicked="true" canbeselected="true" msg="ItemMsgPressSelect">
+      <sound file="Content/Items/Alien/AlienButton.ogg" type="OnUse" range="500.0" volume="3" />
     </Controller>
   </Item>
 
+  <!-- ball of goop that spawns hammerhead babies guarding it for the mission -->
   <Item name="" identifier="hammerheadmucus" tags="hammerhead,hammerheadmucus" description="Spawn fishes for missions, to name" scale="0.5" category="Electrical" spritecolor="255,255,150,255" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="20" sonarsize="15">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="430,257,115,117" origin="0.5,0.5" />
     <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.53" sourcerect="421,376,124,58" origin="0.5,0.5" rotation="0" offset="0,-50">
