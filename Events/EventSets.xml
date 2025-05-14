@@ -28,6 +28,17 @@
         </EventSet>
       </EventSet>
     </EventSet>
+        
+    <EventSet identifier="campaignstartevents" leveltype="outpost" locationtype="starteroutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="0" chooserandom="false" ignorecooldown="true">
+      <EventSet identifier="starteroutpostfirsttimeevents" locationtype="starteroutpost" eventcount="1" chooserandom="false">
+        <ScriptedEvent identifier="starteroutpostelevatorteleport" commonness="100" />
+      </EventSet>
+      <EventSet identifier="starteroutpostmissions" locationtype="starteroutpost" eventcount="3" chooserandom="false" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_cargoany" />
+        <ScriptedEvent identifier="missionevent_killmonster_set1" />
+        <ScriptedEvent identifier="missionevent_collectminerals_mainpath" />
+      </EventSet>
+    </EventSet>
     
     <EventSet identifier="outpostevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
 

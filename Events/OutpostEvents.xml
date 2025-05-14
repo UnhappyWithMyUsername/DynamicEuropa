@@ -51,7 +51,22 @@
   </EventSprites>
   
     
-  <EventPrefabs>
+  <EventPrefabs>  
+
+    <!-- This is not satisfying, the game zooms in the sub and THEN teleports you -->
+    <ScriptedEvent identifier="starteroutpostelevatorteleport" >
+      <CheckDataAction identifier="visitedstarteroutpost" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction>      
+      <WaitAction time="1" />
+      <TagAction criteria="player" SubmarineType="player" tag="teleportme" team="Team1"/>
+      <TagAction criteria="crew" SubmarineType="player" tag="teleportme" team="Team1"/>
+      <TeleportAction targettag="teleportme" Position="Outpost" SpawnPointTag="elevatorteleport" /> 
+      <SetDataAction identifier="visitedstarteroutpost" operation="set" value="1" />
+      <Label name="end" />
+    </ScriptedEvent>
   
     <!-- spawns NPCs in the fake militaryforces subs, not a fan of this one -->
     <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
