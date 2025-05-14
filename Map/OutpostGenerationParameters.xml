@@ -100,14 +100,6 @@
       </npcs>
     </OutpostConfig> -->
 
-      <OutpostConfig
-      identifier="StarterOutpost"
-      totalmodulecount="2" 
-      minhallwaylength="0"
-      spawncrewinsideoutpost="True">
-      <modulecount flag="StarterOutpost_main" count="1"/>
-      <modulecount flag="Starteroutpost_Docking" count="1"/>
-    </OutpostConfig>
 
     <!-- ABANDONED STATION -->  
       <!-- unused for now -->
@@ -177,61 +169,33 @@
       <modulecount flag="AbandonedSecurityModule" count="2"/>
     </OutpostConfig>
 
-    <!-- CHURCH OF HUSK -->
-    <OutpostConfig identifier="huskchurch"
-      replaceinradiation=""
-      totalmodulecount="5"
-      appendtoreachtotalmodulecount="false"
-      minhallwaylength="400"
-      allowedlocationtypes="HuskChurch"
-      spawncrewinsideoutpost="false">
-      <modulecount flag="DockingChurch" count="1"/>
-      <modulecount flag="EngineeringChurch" count="1"/>
-      <modulecount flag="AdminChurch" count="1"/>
-      <modulecount flag="ResearchChurch" count="1"/>
-      <modulecount flag="MedicalChurch" count="1"/>
-      <npcs>
-        <npc from="husknpcs" identifier="outpostmanagerhusk" />
-        <npc from="husknpcs" identifier="huskresearcher"/>
-        <npc from="husknpcs" identifier="huskcultistsecurity"/>
-        <npc from="husknpcs" identifier="huskcultistsecurity"/> 
-        <npc from="husknpcs" identifier="huskcultistsecurity"/>
-
-        <npc from="outpostnpcs1" identifier="reactoroperator"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-
-        <!-- Services -->
-        <npc from="outpostnpcs1" identifier="hrmanager"/>
-        <npc from="husknpcs" identifier="merchanthusk"/>
-        <npc from="husknpcs" identifier="outposthuskdoctor"/>
-        <npc from="outpostnpcs1" identifier="merchantmedical"/>
-        <npc from="outpostnpcs1" identifier="merchantresearch" />
-        <!-- <npc from="husknpcs" identifier="merchanthuskmedical"/> -->
-        <!-- <npc from="husknpcs" identifier="merchanthuskengineering"/> -->
-      </npcs>
-    </OutpostConfig>
-
-    <!-- CLOWNS -->
-    <OutpostConfig identifier="sinkingcircus"
-      replaceinradiation="none"
-      totalmodulecount="2"
-      appendtoreachtotalmodulecount="false"
+    
+    <OutpostConfig
+      identifier="StarterOutpost"
+      totalmodulecount="2" 
       minhallwaylength="0"
-      allowedlocationtypes="SinkingCircus"
-      spawncrewinsideoutpost="false">
-      <modulecount flag="DockingCircus" count="1"/>
-      <modulecount flag="CircusModule" count="1"/>
+      spawncrewinsideoutpost="True">
+      <modulecount flag="StarterOutpost_main" count="1"/>
+      <modulecount flag="Starteroutpost_Docking" count="1"/>
       <npcs>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="merchantclown" faction="clowns"/>
+        <!-- Coalition -->
+        <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <!-- Separatists -->
+        <npc from="outpostnpcs1" identifier="outpostmanagerseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <!-- Generic -->
+        <npc from="outpostnpcs1" identifier="reactoroperator"/>
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <!-- Services -->
+        <npc from="outpostnpcs1" identifier="hrmanager" />
+        <npc from="outpostnpcs1" identifier="merchantoutpost" />
       </npcs>
     </OutpostConfig>
-
+    
     <!-- HABITATION OUTPOSTS -->
     <OutpostConfig identifier="outpost" 
       replaceinradiation="" 
@@ -1059,6 +1023,63 @@
         <npc from="outpostnpcspirate" identifier="subsalesnpcpirate" />
       </npcs>
     </OutpostConfig>
+
+
+    <!-- CHURCH OF HUSK -->
+    <OutpostConfig identifier="huskchurch"
+      replaceinradiation=""
+      totalmodulecount="5"
+      appendtoreachtotalmodulecount="false"
+      minhallwaylength="400"
+      allowedlocationtypes="HuskChurch"
+      spawncrewinsideoutpost="false">
+      <modulecount flag="DockingChurch" count="1"/>
+      <modulecount flag="EngineeringChurch" count="1"/>
+      <modulecount flag="AdminChurch" count="1"/>
+      <modulecount flag="ResearchChurch" count="1"/>
+      <modulecount flag="MedicalChurch" count="1"/>
+      <npcs>
+        <npc from="husknpcs" identifier="outpostmanagerhusk" />
+        <npc from="husknpcs" identifier="huskresearcher"/>
+        <npc from="husknpcs" identifier="huskcultistsecurity"/>
+        <npc from="husknpcs" identifier="huskcultistsecurity"/> 
+        <npc from="husknpcs" identifier="huskcultistsecurity"/>
+
+        <npc from="outpostnpcs1" identifier="reactoroperator"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+
+        <!-- Services -->
+        <npc from="outpostnpcs1" identifier="hrmanager"/>
+        <npc from="husknpcs" identifier="merchanthusk"/>
+        <npc from="husknpcs" identifier="outposthuskdoctor"/>
+        <npc from="outpostnpcs1" identifier="merchantmedical"/>
+        <npc from="outpostnpcs1" identifier="merchantresearch" />
+        <!-- <npc from="husknpcs" identifier="merchanthuskmedical"/> -->
+        <!-- <npc from="husknpcs" identifier="merchanthuskengineering"/> -->
+      </npcs>
+    </OutpostConfig>
+
+    <!-- CLOWNS -->
+    <OutpostConfig identifier="sinkingcircus"
+      replaceinradiation="none"
+      totalmodulecount="2"
+      appendtoreachtotalmodulecount="false"
+      minhallwaylength="0"
+      allowedlocationtypes="SinkingCircus"
+      spawncrewinsideoutpost="false">
+      <modulecount flag="DockingCircus" count="1"/>
+      <modulecount flag="CircusModule" count="1"/>
+      <npcs>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="merchantclown" faction="clowns"/>
+      </npcs>
+    </OutpostConfig>
+
 
     <!-- LAIRS -->
     <OutpostConfig identifier="SmallLair" 
