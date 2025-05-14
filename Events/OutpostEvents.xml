@@ -59,12 +59,51 @@
         <Failure>
           <Goto name="end" />
         </Failure> 
-      </CheckDataAction>      
+      </CheckDataAction>
       <WaitAction time="1" />
       <TagAction criteria="player" SubmarineType="player" tag="teleportme" team="Team1"/>
       <TagAction criteria="crew" SubmarineType="player" tag="teleportme" team="Team1"/>
       <TeleportAction targettag="teleportme" Position="Outpost" SpawnPointTag="elevatorteleport" /> 
       <SetDataAction identifier="visitedstarteroutpost" operation="set" value="1" />
+      <Label name="end" />
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="firstmission" commonness="100" requiredDestinationTypes="anyoutpost">
+      <CheckDataAction identifier="visitedfirstmission" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction>
+      <ConversationAction text="EventText.firstmission.justarrived" speakertag="outpostmanager" invokertag="firstmission_player" eventsprite="heartofgold" >
+        <Option text="EventText.firstmission.ready" >
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notready"  eventsprite="heartofgold" >
+            <Option text="eventtext.generic.continue">
+              <Label name="restofconvo" />
+              <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.anyway"  eventsprite="JacovSubra1" >
+                <Option text="EventText.firstmission.timetodive" >                
+                  <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.mission"  eventsprite="instructor" endconversation="true" />
+                  <MissionAction missiontag="cargo" />
+                </Option>
+              </ConversationAction>
+            </Option>  
+          </ConversationAction>
+        </Option>
+        <Option text="EventText.firstmission.thebest" >  
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="heartofgold" >
+            <Option text="eventtext.generic.continue">
+              <Goto name="restofconvo" endconversation="false"/>
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="EventText.firstmission.donebefore" >
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="heartofgold" >
+            <Option text="eventtext.generic.continue">
+              <Goto name="restofconvo" endconversation="false"/>
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+      <SetDataAction identifier="visitedfirstmission" operation="set" value="1" />
       <Label name="end" />
     </ScriptedEvent>
   
