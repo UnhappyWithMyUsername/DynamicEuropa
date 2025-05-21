@@ -1695,7 +1695,7 @@
       <ClearTagAction tag="speaker_player" />
       <WaitAction time="1" />
       <TriggerAction target1tag="potentialprisoner" target2tag="player" applytotarget1="chosen_prisoner" applytotarget2="speaker_player" disableiftargetincapacitated="false" radius="50" waitforinteraction="true" AllowMultipleTargets="true" />
-      <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" >
+      <ConversationAction text="EventText.silencewitnessevent.whoareyou" targettag="speaker_player" dialogtype="Small" eventsprite="mysteryman" >
         <Option text="EventText.silencewitnessevent.regards">
           <CheckConditionalAction targettag="chosen_prisoner" nastyscar="gt 0">
             <Success>
@@ -1709,7 +1709,7 @@
               <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="speaker_player" isinstigator="false" witnessreaction="none" />
             </Success>
             <Failure>
-              <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="silhouette" endconversation="true" />
+              <ConversationAction text="EventText.silencewitnessevent.wrongtarget" targettag="speaker_player" dialogtype="Small" eventsprite="mysteryman2" endconversation="true" />
               <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
               <StatusEffectAction targettag="alarmbutton">
                 <StatusEffect State="true" target="This" />
