@@ -3547,60 +3547,6 @@
       </CheckDataAction>      
     </ScriptedEvent>
     
-
-    <ScriptedEvent identifier="mudraptorracing_TEST">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
-          <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
-          <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher"/>
-          <StatusEffectAction targettag="raptorracelever" >
-            <StatusEffect target="this" duration="10" >
-              <Sound file="Content/Sounds/ClubMusic_transitionScratch.ogg" range="1500" volume="3" frequencymultiplier="0.5" loop="true" dontmuffle="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <StatusEffectAction targettag="confettilauncher" >
-            <StatusEffect target="this" duration="10" >
-              <ParticleEmitter particle="whitespark" particlespersecond="10" velocitymin="250" velocitymax="400" anglemin="70" anglemax="110" scalemin="1" scalemax="2" distancemin="5" distancemax="250" colormultiplier="30,30,255,255" lifetimemultiplier="2" HighQualityCollisionDetection="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <StatusEffectAction targettag="confettilauncher" >
-            <StatusEffect target="this" duration="10" >
-              <ParticleEmitter particle="steamspray" particlespersecond="5" velocitymin="50" velocitymax="100" anglemin="260" anglemax="280" scalemin="0.8" scalemax="1.2" distancemin="0" distancemax="0" colormultiplier="30,30,255,255" lifetimemultiplier="2" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <WaitAction time="10" />      
-<!--       <SpawnAction speciesname="Mudraptorred" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <SpawnAction speciesname="Mudraptorgreen" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <SpawnAction speciesname="Mudraptorblue" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <WaitAction time="3" />
-      <StatusEffectAction targettag="petfoodgun">
-        <StatusEffect target="This" offset="30,0"> 
-          <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
-          <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
-          <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1.1" />
-        </StatusEffect>
-      </StatusEffectAction>
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
-      <StatusEffectAction targettag="slowerraptor">
-        <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true">
-          <Affliction identifier="psychosis" strength="100" />
-          <Affliction identifier="burn" strength="20" />
-        </StatusEffect>
-      </StatusEffectAction> -->
-    </ScriptedEvent>
-     
-    <!-- literally just spawns a merchant for the 1st outpost in campaign, doesnt work rn -->
-    <ScriptedEvent identifier="startermerchant" commonness="100">
-      <!-- <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" oneshot="true">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction> -->
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="merchantoutpost" targettag="startermerchant" spawnlocation="Outpost" spawnpointtag="shop_outpost" teamid="FriendlyNPC" />
-    </ScriptedEvent>
-     
   </EventPrefabs>
 </Randomevents>
 </Override>

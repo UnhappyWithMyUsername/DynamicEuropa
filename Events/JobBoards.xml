@@ -168,20 +168,6 @@
       </StatusEffectAction>
     </ScriptedEvent>
     
-    <ScriptedEvent identifier="jobboardTEST" commonness="100">
-      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" />
-      <TagAction criteria="player" tag="player" />
-      <StatusEffectAction targettag="potentialjobboard">
-        <StatusEffect target="This" noninteractable="false" setvalue="true" />
-      </StatusEffectAction>
-      <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="true" radius="500" />
-      <StatusEffectAction targettag="potentialjobboard" >
-        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
-          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
-        </StatusEffect>
-      </StatusEffectAction>
-    </ScriptedEvent>
-    
     <!-- JOB BOARD - Habitation -->
     <ScriptedEvent identifier="jobboardhabitation" commonness="100">
       <WaitAction time="1" />
