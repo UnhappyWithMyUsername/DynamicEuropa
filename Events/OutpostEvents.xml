@@ -1447,7 +1447,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_coldcaverns_separatists_unlocked" condition="true">
@@ -1501,7 +1501,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_europanridge_separatists_unlocked" condition="true">
@@ -1555,7 +1555,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_aphoticplateau_separatists_unlocked" condition="true">
@@ -1609,7 +1609,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_greatsea_separatists_unlocked" condition="true">
@@ -2559,6 +2559,7 @@
               <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
               <Label name="combatrefresh" />
               <TagAction criteria="player" tag="player" />
+              <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
               <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
               <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
               <WaitAction time="5" />
