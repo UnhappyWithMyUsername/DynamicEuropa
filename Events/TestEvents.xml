@@ -176,12 +176,17 @@
       <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
     </ScriptedEvent>
   
-    <ScriptedEvent identifier="dialogtypeTEST" >
+    <ScriptedEvent identifier="traitorlikeeventTEST" >
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,0,256,256" color="200,150,0,255" />
       <TagAction criteria="player" tag="player" />
       <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" dialogtype="Regular" endconversation="true"/>
-      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryWoman" dialogtype="small" endconversation="true"/>
-      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan" dialogtype="Regular" endconversation="true"/>
-      <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan2" dialogtype="small" endconversation="true"/>
+      <EventLogAction targettag="player" id="initialinfo" text="EventText.bakingstation.objective1" />
+      <EventObjectiveAction targettag="player" type="add" id="traitorobjective.bakingstation.meltdown" />
+      <OnRoundEndAction>
+        <GiveExpAction targettag="player" amount="5000" />
+        <EventLogAction targettag="player" id="success" text="EventText.bakingstation.objective2" />
+        <EventObjectiveAction targettag="player" type="remove" id="traitorobjective.bakingstation.meltdown" />
+      </OnRoundEndAction>
     </ScriptedEvent>
   
     <ScriptedEvent identifier="operateTEST"> 
