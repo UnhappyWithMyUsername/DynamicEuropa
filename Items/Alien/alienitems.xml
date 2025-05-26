@@ -182,18 +182,18 @@
           </StatusEffect>
         </Containable>
       </SubContainer>
-    </ItemContainer>
-        
+    </ItemContainer> 
     <!-- Triggercomponent allows making alien turret damageable while allowing them to be rotated -->
     <TriggerComponent triggeredby="Human" radius="1000" force="-50" forcefluctuationstrength="0.25" forcefluctuationinterval="10" distancebasedforce="true" >
     </TriggerComponent>
-    <Turret autooperate="true" AIrange="10000" friendlytag="ancientalien" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="true" targetmonsters="false" targethumans="true" targetsubmarines="true" targetitems="false" canbeselected="false" firingoffset="0,-200" characterusable="false" linkable="true" barrelpos="125,127" rotationlimits="180,360" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="50" reload="4" springstiffnesslowskill="1" springstiffnesshighskill="1" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="1" rotationspeedhighskill="1">
+    <!-- AIrange seems hard capped -->
+    <Turret autooperate="true" maxdistance="30000" AIrange="30000" friendlytag="ancientalien" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="true" targetmonsters="false" targethumans="true" targetsubmarines="true" targetitems="false" canbeselected="false" firingoffset="0,-200" characterusable="false" linkable="true" barrelpos="125,127" rotationlimits="180,360" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="50" reload="4" springstiffnesslowskill="1" springstiffnesshighskill="1" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="1" rotationspeedhighskill="1">
       <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
       <sound file="Content/Items/Alien/AlienTurret2.ogg" range="10000" type="OnUse" />
       <RailSprite name="alienturret_rail" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="2,0,184,316" origin="0.5,0.83" />
-      <RailSpriteBroken name="alienturret_rail_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="254,0,184,316" origin="0.5,0.83" />      
+      <RailSpriteBroken name="alienturret_rail_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="254,0,184,316" origin="0.5,0.83" /> 
       <BarrelSprite name="alienturret_barrel" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="188,2,66,184" origin="0.5,1.57" />
-      <BarrelSpriteBroken name="alienturret_barrel_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="442,2,66,184" origin="0.5,1.57" />      
+      <BarrelSpriteBroken name="alienturret_barrel_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="442,2,66,184" origin="0.5,1.57" />
       <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="2000" directional="true" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true" ignorecontinuoustoggle="false" InheritParentIsActive="false" canbeselected="false" characterusable="false">
         <LightTexture texture="Content/Lights/lightcone.png" origin="-0.055,0.5" size="1.0,0.3" />
       </LightComponent>
@@ -213,7 +213,7 @@
       <StatusEffect type="OnBroken" target="This,Contained" delay="10" > 
         <ParticleEmitter particle="shrapnel" particleamount="30" anglemin="-20" anglemax="200" distancemin="0" distancemax="50" velocitymin="200" velocitymax="800" scalemin="4" scalemax="6" lifetimemultiplier="2" />
         <ParticleEmitter particle="sonarflorawave" particleamount="2" scalemin="30" scalemax="30" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" lifetimemultiplier="4" />
-        <Explosion range="500.0" ballastfloradamage="300" structuredamage="300" itemdamage="1000" force="20" severlimbsprobability="0.75" debris="true" decal="explosion" decalsize="0.75" penetration="0.5"
+        <Explosion range="1500.0" ballastfloradamage="300" structuredamage="300" itemdamage="1000" force="20" severlimbsprobability="0.75" debris="true" decal="explosion" decalsize="0.75" penetration="0.5"
                    camerashake="200" camerashakerange="10000"
                    flashrange="1000" flashduration="2.0"
                    screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
@@ -228,11 +228,7 @@
       <StatusEffect type="Always" target="This" condition="10000">
         <Conditional condition="gt 0" />
       </StatusEffect>
-    </Turret>
-    <!-- <LevelResource deattachduration="Infinity">
-      <Commonness commonness="0" cavecommonness="0" abysscommonness="5" fixedquantity="true" clusterquantity="23" clustersize="1" allowatstart="false" leveltype="europanridge" />
-      <RequiredItem items="nonexistentitem" type="Equipped" />
-    </LevelResource>    -->   
+    </Turret>  
     <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="1000" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
     </LightComponent> 
   </Item>
@@ -240,7 +236,7 @@
   <Item name="BIGalienturretammo" identifier="BIGalienturretammo" category="Alien" tags="alien,alienturretammo" scale="0.5" noninteractable="true" hideinmenus="true">
     <Sprite texture="Content/Items/Alien/EndRuin_Items.png" depth="0.7" sourcerect="839,768,71,256" origin="0.5,0.5" />
     <Body radius="25" density="10" />
-    <Projectile characterusable="false" launchimpulse="30.0" launchrotation="90" >
+    <Projectile characterusable="false" launchimpulse="40.0" launchrotation="90" >
       <Attack structuredamage="0" severlimbsprobability="0.5">
         <Affliction identifier="psychosis" strength="5" />
       </Attack>
@@ -254,14 +250,14 @@
       <!-- reduce condition to give the bolt a 10 second lifetime -->
       <StatusEffect type="OnNotContained" target="This" condition="-10" />
       <StatusEffect type="OnBroken" target="This">
-        <Explosion range="300.0" structuredamage="30" force="25.0" empstrength="0.5">
-          <Affliction identifier="explosiondamage" strength="50" />
+        <Explosion range="300.0" structuredamage="40" force="25.0" empstrength="0.5">
+          <Affliction identifier="explosiondamage" strength="60" />
           <Affliction identifier="stun" strength="0.5" />
         </Explosion>
         <Remove />
       </StatusEffect>
     </Projectile> 
-    <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="400" rangemultiplierinwalls="1">
+    <ElectricalDischarger duration="0.2" outdoorsonly="false" powerconsumption="0" range="500" rangemultiplierinwalls="1">
       <Attack targetimpulse="50">
         <Affliction identifier="stun" strength="1" />
         <Affliction identifier="burn" strength="5" />

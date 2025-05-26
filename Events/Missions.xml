@@ -1676,40 +1676,31 @@
     <CompleteCheckDataAction identifier="alcoholdelivered" condition="eq 1"/>
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="150,80,50"/>
   </GotoMission>
-
+  
   <!-- destroy a large alien turret -->
-  <SalvageMission
+  <NestMission
     identifier="destroybigalienturret"
     tags="killalienthing"
     name="missionname.bigalienturret"
     description="missiondescription.bigalienturret"
     successmessage="missionsuccess.bigalienturret"
     failuremessage="missionfailure.bigalienturret"
-    type="Salvage"
+    type="Nest"
     difficulty="3"
     commonness="50"
     reward="2000"
-    requireddeliveryamount="0"
-    PartiallyRetrievedMessage="missionmessage.bigalienturret.partiallyretrieved"
-    AllRetrievedMessage="missionmessage.bigalienturret.allretrieved">
+    spawntype="mainpath"
+    itemspawnradius="20000"
+    nestobjectamount="1">
     <Reputation identifier="location" amount="3" />
     <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
     <LocationType from="Any" to="Any" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,512,256,256" color="120,20,130"/>
-    <TriggerEvent state="0" delay="5" eventidentifier="destroybigalienturretevent" />
-    <CompleteCheckDataAction identifier="bigalienturretdestroyed" condition="eq 1"/>
-    <Metadata identifier="bigalienturretdestroyed" value="0"/>    
-
-    <target
-      spawntype="mainpath"
-      itemidentifier="bigalienturret"
-      requireretrieval="PickedUp"
-      hidelabelafterretrieved="true"
-      sonarlabel="" >
-    </target> 
-    <message header="objectivedone" text="objectivedone"/>
-
-  </SalvageMission>
+    <Items>
+      <Item identifier="bigalienturret" />
+    </Items>
+    <message header="missionheader0.destroybigalienturret" text="missionmessage0.destroybigalienturret"/>
+  </NestMission>
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->

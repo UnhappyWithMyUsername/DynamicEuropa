@@ -2034,25 +2034,6 @@
       </CountTargetsAction>
     </ScriptedEvent> 
     
-    <!-- UNUSED, can't get the mission to accept the state as completed and succeed -->
-    <ScriptedEvent identifier="destroybigalienturretevent" commonness="50">
-      <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="0" />
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:bigalienturret" tag="breakthis" />
-      <Waitaction time="1" />
-      <Label name="checkfordestroyed" />
-      <CountTargetsAction targettag="breakthis" CompareToTarget="breakthis" MinPercentageRelativeToTarget="100">
-        <Conditional condition="lte 0" />
-        <Failure>
-          <Waitaction time="1" />
-          <GoTo name="checkfordestroyed" />
-        </Failure>
-        <Success>
-          <SetDataAction identifier="bigalienturretdestroyed" operation="set" value="1" />
-          <MissionStateAction missionidentifier="destroybigalienturret" operation="Set" value="4" />
-        </Success>
-      </CountTargetsAction>
-    </ScriptedEvent> 
       
      <!-- TODO: stranded divers mission, still doesnt spawn the divers on the proper spawnlocation + it's jank + bots are stupid (they refuse waitaction so I'm stunning them in a loop) also needs a proper NPC not just pirate divers -->
     <!-- <ScriptedEvent identifier="rescuestrandeddiversevent">
