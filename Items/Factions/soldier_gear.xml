@@ -2,7 +2,33 @@
 <Items>
   <Override>
   
-    <!-- "BROKEN" weapons, prevents players from using them and get endgame weapons from NPCs too early. TODO: variantof, make sure you can't buy, loot or fabricate -->
+    <!-- "BROKEN" weapons, prevents players from using them and get endgame weapons from NPCs too early. TODO: NEXTUPDATE variantof, make sure you can't buy, loot or fabricate -->
+  
+    <!-- THIS IS A PROPER VARIANT. THE WEAPON TAKES DAMAGE WHEN SHOT. 
+    ADJUST THE -CONDITION BASED ON HOW MUCH IT SHOOTS.
+    If a pirate has 20 bullets in its loadout, -5 condition per shot will allow it to shoot all of its bullets  -->
+    <Item name="Rusty Revolver" identifier="revolverbroken2" variantof="revolver" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+      <ClearAll>
+        <PreferredContainer />
+        <Price />
+        <Fabricate />
+      </ClearAll>
+      <RangedWeapon >
+        <StatusEffect type="OnUse" target="This" condition="-5" disabledeltatime="true" >
+          <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight4.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <ParticleEmitter particle="weldspark" anglemin="190" anglemax="350" distancemin="0" distancemax="0" particleamount="2" velocitymin="50" velocitymax="100" scalemin="0.35" scalemax="0.65" />
+        </StatusEffect>
+        <StatusEffect type="OnBroken" target="This" >
+          <ParticleEmitter particle="shrapnel" anglemin="190" anglemax="350" distancemin="0" distancemax="50" particleamount="10" velocitymin="20" velocitymax="50" scalemin="0.25" scalemax="0.5" />
+          <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="5" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="1" />
+          <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="300" frequencymultiplier="1.5" />
+          <Remove />
+        </StatusEffect>
+      </RangedWeapon>
+    </Item>
   
     <Item name="Revolver (Broken)" identifier="revolverbroken" category="Weapon" cargocontaineridentifier="metalcrate" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
       <PreferredContainer secondary="outpostsecarmcab" amount="0" spawnprobability="0.0" />
