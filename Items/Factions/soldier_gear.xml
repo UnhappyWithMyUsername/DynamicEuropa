@@ -2,19 +2,20 @@
 <Items>
   <Override>
   
-    <!-- "BROKEN" weapons, prevents players from using them and get endgame weapons from NPCs too early. TODO: NEXTUPDATE variantof, make sure you can't buy, loot or fabricate -->
+    <!-- "BROKEN" weapons, prevents players from using them and get endgame weapons from NPCs too early. 
+    TODO: NEXTUPDATE variantof, make sure you can't buy, loot or fabricate -->
   
     <!-- THIS IS A PROPER VARIANT. THE WEAPON TAKES DAMAGE WHEN SHOT. 
     ADJUST THE -CONDITION BASED ON HOW MUCH IT SHOOTS.
     If a pirate has 20 bullets in its loadout, -5 condition per shot will allow it to shoot all of its bullets  -->
-    <Item name="Rusty Revolver" identifier="revolverbroken2" variantof="revolver" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+    <Item name="" identifier="revolverbroken" variantof="revolver" nameidentifier="brokenweapon" descriptionidentifier="brokenweapon" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
       <ClearAll>
         <PreferredContainer />
         <Price />
         <Fabricate />
       </ClearAll>
       <RangedWeapon >
-        <StatusEffect type="OnUse" target="This" condition="-5" disabledeltatime="true" >
+        <StatusEffect type="OnUse" target="This" condition="-7" disabledeltatime="true" >
           <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
           <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
           <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
@@ -30,300 +31,97 @@
       </RangedWeapon>
     </Item>
   
-    <Item name="Revolver (Broken)" identifier="revolverbroken" category="Weapon" cargocontaineridentifier="metalcrate" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer secondary="outpostsecarmcab" amount="0" spawnprobability="0.0" />
-      <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="0" spawnprobability="0.0" />
-      <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder" />
-      <Price baseprice="15" canbespecial="false" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" />
-        <Price storeidentifier="merchantresearch" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.9" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.9" />
-      </Price>
-      <Deconstruct time="10" chooserandom="true" amount="1">
-        <Item identifier="steel" />
-        <Item identifier="plastic" />
-      </Deconstruct>
-      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,64,64,64" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
-      <Body width="72" height="40" density="25" />
-      <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect">
-        <StatusEffect type="OnActive" target="This" condition="0" setvalue="true" oneshot="true">
-          <Conditional IsPlayer="true" targetcontainer="true" />
+    <Item name="" identifier="smgbroken" variantof="smg" nameidentifier="brokenweapon" descriptionidentifier="brokenweapon" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+      <ClearAll>
+        <PreferredContainer />
+        <Price />
+        <Fabricate />
+      </ClearAll>
+      <RangedWeapon >
+        <StatusEffect type="OnUse" target="This" condition="-2" disabledeltatime="true" >
+          <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight4.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <ParticleEmitter particle="weldspark" anglemin="190" anglemax="350" distancemin="0" distancemax="0" particleamount="2" velocitymin="50" velocitymax="100" scalemin="0.35" scalemax="0.65" />
         </StatusEffect>
-      </Holdable>
-      <RangedWeapon barrelpos="29,11" spread="0.1" unskilledspread="6" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="0.5" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
-        <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-        <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
-        <Sound file="Content/Items/Weapons/Revolver1.ogg" type="OnUse" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Weapons/Revolver2.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/Revolver3.ogg" type="OnUse" range="3000" />
-        <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
-        <StatusEffect type="OnUse" target="This">
-          <Explosion range="150.0" force="1.5" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="6.0" />
-          <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+        <StatusEffect type="OnBroken" target="This" >
+          <ParticleEmitter particle="shrapnel" anglemin="190" anglemax="350" distancemin="0" distancemax="50" particleamount="10" velocitymin="20" velocitymax="50" scalemin="0.25" scalemax="0.5" />
+          <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="5" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="1" />
+          <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="300" frequencymultiplier="1.5" />
+          <Remove />
         </StatusEffect>
-        <RequiredItems items="revolverammo" type="Contained" msg="ItemMsgAmmoRequired" />
-        <RequiredSkill identifier="weapons" level="40" />
       </RangedWeapon>
-      <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet">
-        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-        <Containable items="revolverammo" />
-      </ItemContainer>
-      <aitarget sightrange="2000" soundrange="5000" fadeouttime="5" />
-      <Quality>
-        <QualityStat stattype="FirepowerMultiplier" value="0.1" />
-      </Quality>
-      <Upgrade gameversion="0.10.0.0" scale="0.5" />
-      <SkillRequirementHint identifier="weapons" level="40" />
     </Item>
-    <Item name="SMG (Broken)" identifier="smgbroken" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" category="Weapon" cargocontaineridentifier="metalcrate" tags="smallautoweapon,smallitem,weapon,gun,gunsmith,provocativetohumanai,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="secarmcab" amount="0" spawnprobability="0" notcampaign="true" />
-      <PreferredContainer secondary="outpostsecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="armcab,weaponholder" />
-      <Price baseprice="39" minleveldifficulty="30" canbespecial="false" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" />
-        <Price storeidentifier="merchantresearch" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.9" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.9" />
-      </Price>
-      <Deconstruct time="10" chooserandom="true" amount="1">
-        <Item identifier="plastic" />
-        <Item identifier="plastic" />
-        <Item identifier="titanium" />
-        <Item identifier="aluminium" />
-        <Item identifier="titaniumaluminiumalloy" />
-      </Deconstruct>
-      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="832,830,64,64" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,121,144,80" depth="0.55" origin="0.5,0.5" />
-      <Body width="140" height="60" density="25" />
-      <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="45,-10" handle1="-30,-15" handle2="26,5" holdangle="-35" msg="ItemMsgPickUpSelect">
-        <StatusEffect type="OnActive" target="This" condition="0" setvalue="true" oneshot="true">
-          <Conditional IsPlayer="true" targetcontainer="true" />
+    
+    <Item name="" identifier="shotgunbroken" variantof="shotgun" nameidentifier="brokenweapon" descriptionidentifier="brokenweapon" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+      <ClearAll>
+        <PreferredContainer />
+        <Price />
+        <Fabricate />
+      </ClearAll>
+      <RangedWeapon >
+        <StatusEffect type="OnUse" target="This" condition="-7" disabledeltatime="true" >
+          <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight4.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <ParticleEmitter particle="weldspark" anglemin="190" anglemax="350" distancemin="0" distancemax="0" particleamount="2" velocitymin="50" velocitymax="100" scalemin="0.35" scalemax="0.65" />
         </StatusEffect>
-      </Holdable>
-      <RangedWeapon reload="0.19" weapondamagemodifier="1.3" penetration="0.15" holdtrigger="true" barrelpos="64,9" spread="10" unskilledspread="16" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.2">
-        <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-        <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
-        <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot1.ogg" type="OnUse" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot2.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot3.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot4.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot5.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/SMGsingleShot6.ogg" type="OnUse" range="3000" />
-        <StatusEffect type="OnUse" target="This">
-          <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
-          <Explosion range="150.0" force="1.5" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="12.0" />
+        <StatusEffect type="OnBroken" target="This" >
+          <ParticleEmitter particle="shrapnel" anglemin="190" anglemax="350" distancemin="0" distancemax="50" particleamount="10" velocitymin="20" velocitymax="50" scalemin="0.25" scalemax="0.5" />
+          <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="5" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="1" />
+          <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="300" frequencymultiplier="1.5" />
+          <Remove />
         </StatusEffect>
-        <!--"Use" contained magazine to spawn projectiles.-->
-        <StatusEffect type="OnUse" target="Contained">
-          <Use />
-        </StatusEffect>
-        <RequiredItems items="smgammo" type="Contained" msg="ItemMsgAmmoRequired" />
-        <RequiredSkill identifier="weapons" level="50" />
       </RangedWeapon>
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
-        <Containable items="smgammo" hide="false" itempos="4,-10" rotation="-30" />
-        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
-        <SubContainer capacity="1" maxstacksize="1">
-          <Containable items="flashlight" hide="false" itempos="22,-1" setactive="true" />
-        </SubContainer>
-      </ItemContainer>
-      <aitarget sightrange="2000" soundrange="4000" fadeouttime="5" />
-      <Quality>
-        <QualityStat stattype="FirepowerMultiplier" value="0.1" />
-      </Quality>
-      <Upgrade gameversion="0.10.0.0" scale="0.5" />
-      <SkillRequirementHint identifier="weapons" level="50" />
     </Item>
-    <Item name="Riot Shotgun (Broken)" identifier="shotgunbroken" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gun,gunsmith,provocativetohumanai,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="secarmcab" amount="0" spawnprobability="0" notcampaign="true" />
-      <PreferredContainer secondary="outpostsecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="wreckweaponholder" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="armcab" />
-      <Price baseprice="50" minleveldifficulty="30" canbespecial="false" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" />
-        <Price storeidentifier="merchantresearch" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.9" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.9" />
-      </Price>
-      <Deconstruct time="10" chooserandom="true" amount="1">
-        <Item identifier="titanium" />
-        <Item identifier="aluminium" />
-        <Item identifier="titaniumaluminiumalloy" />
-        <Item identifier="plastic" />
-        <Item identifier="plastic" />
-      </Deconstruct>
-      <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,830,64,64" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,65,185,54" depth="0.55" origin="0.5,0.25" />
-      <Body width="180" height="30" density="25" />
-      <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="55,5" handle1="-25,-16" handle2="26,0" holdangle="-40" msg="ItemMsgPickUpSelect">
-        <StatusEffect type="OnActive" target="This" condition="0" setvalue="true" oneshot="true">
-          <Conditional IsPlayer="true" targetcontainer="true" />
+    
+    <Item name="" identifier="assaultriflebroken" variantof="assaultrifle" nameidentifier="brokenweapon" descriptionidentifier="brokenweapon" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+      <ClearAll>
+        <PreferredContainer />
+        <Price />
+        <Fabricate />
+      </ClearAll>
+      <RangedWeapon >
+        <StatusEffect type="OnUse" target="This" condition="-3" disabledeltatime="true" >
+          <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight4.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <ParticleEmitter particle="weldspark" anglemin="190" anglemax="350" distancemin="0" distancemax="0" particleamount="2" velocitymin="50" velocitymax="100" scalemin="0.35" scalemax="0.65" />
         </StatusEffect>
-      </Holdable>
-      <RangedWeapon barrelpos="80,5" spread="0.1" unskilledspread="3" combatPriority="80" reload="1" drawhudwhenequipped="true" crosshairscale="0.2">
-        <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-        <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
-        <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
-        <Sound file="Content/Items/Weapons/ShotgunShot1.ogg" type="OnUse" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Weapons/ShotgunShot2.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/ShotgunShot3.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/ShotgunShot4.ogg" type="OnUse" range="3000" />
-        <StatusEffect type="OnUse" target="This">
-          <Explosion range="150.0" force="2.5" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" />
+        <StatusEffect type="OnBroken" target="This" >
+          <ParticleEmitter particle="shrapnel" anglemin="190" anglemax="350" distancemin="0" distancemax="50" particleamount="10" velocitymin="20" velocitymax="50" scalemin="0.25" scalemax="0.5" />
+          <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="5" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="1" />
+          <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="300" frequencymultiplier="1.5" />
+          <Remove />
         </StatusEffect>
-        <!-- Cocking sound, delayed by 1.0 seconds. -->
-        <StatusEffect type="OnUse" target="This" delay="1.0">
-          <Sound file="Content/Items/Weapons/ShotgunLoad1.ogg" type="OnUse" range="500" selectionmode="Random" />
-          <Sound file="Content/Items/Weapons/ShotgunLoad2.ogg" type="OnUse" range="500" />
-          <Sound file="Content/Items/Weapons/ShotgunLoad3.ogg" type="OnUse" range="500" />
-          <ParticleEmitter particle="casingfirearm" colormultiplier="0.5,0.5,0.5,1" ScaleMultiplier="1.5,1.5" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
-        </StatusEffect>
-        <RequiredItems items="shotgunammo" type="Contained" msg="ItemMsgAmmoRequired" />
-        <RequiredSkill identifier="weapons" level="50" />
       </RangedWeapon>
-      <ItemContainer capacity="1" maxstacksize="6" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
-        <Containable items="shotgunammo" hide="true" />
-        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
-        <SubContainer capacity="1" maxstacksize="1">
-          <Containable items="flashlight" hide="false" itempos="26,-3" setactive="true" />
-        </SubContainer>
-      </ItemContainer>
-      <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
-      <Quality>
-        <QualityStat stattype="FirepowerMultiplier" value="0.1" />
-      </Quality>
-      <Upgrade gameversion="0.10.0.0" scale="0.5" />
-      <SkillRequirementHint identifier="weapons" level="50" />
     </Item>
-    <Item name="Assault Rifle (Broken)" identifier="assaultriflebroken" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" category="Weapon" cargocontaineridentifier="metalcrate" allowasextracargo="true" tags="mediumitem,weapon,gun,gunsmith,mountableweapon,provocativetohumanai" Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
-      <Price baseprice="72" canbespecial="false" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" />
-        <Price storeidentifier="merchantresearch" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.9" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" />
-      </Price>
-      <Deconstruct time="35" chooserandom="true" amount="2">
-        <Item identifier="physicorium" />
-        <Item identifier="titanium" />
-        <Item identifier="aluminium" />
-        <Item identifier="titaniumaluminiumalloy" />
-        <Item identifier="rubber" />
-        <Item identifier="rubber" />
-      </Deconstruct>
-      <InventoryIcon texture="Content/Items/JobGear/TalentGear.png" sourcerect="276,63,233,62" origin="0.5,0.5" />
-      <Sprite texture="Content/Items/JobGear/TalentGear.png" sourcerect="276,63,233,62" depth="0.55" origin="0.5,0.5" />
-      <Body width="220" height="50" density="25" />
-      <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="45,-20" aimpos="57,-5" handle1="-35,-10" handle2="26,10" holdangle="-30">
-        <StatusEffect type="OnActive" target="This" condition="0" setvalue="true" oneshot="true">
-          <Conditional IsPlayer="true" targetcontainer="true" />
+    
+    <Item name="" identifier="machinepistolbroken" variantof="machinepistol" nameidentifier="brokenweapon" descriptionidentifier="brokenweapon" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255">
+      <ClearAll>
+        <PreferredContainer />
+        <Price />
+        <Fabricate />
+      </ClearAll>
+      <RangedWeapon >
+        <StatusEffect type="OnUse" target="This" condition="-2" disabledeltatime="true" >
+          <sound file="Content/Sounds/Impact/MetalimpactLight1.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight2.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight3.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <sound file="Content/Sounds/Impact/MetalimpactLight4.ogg" range="250.0" frequencymultiplier="2" volume="3" selectionmode="Random"/>
+          <ParticleEmitter particle="weldspark" anglemin="190" anglemax="350" distancemin="0" distancemax="0" particleamount="2" velocitymin="50" velocitymax="100" scalemin="0.35" scalemax="0.65" />
         </StatusEffect>
-        <StatValue stattype="MovementSpeed" value="-0.1" />
-      </Holdable>
-      <Wearable slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select">
-        <sprite name="Assault Rifle Worn" texture="Content/Items/JobGear/TalentGear.png" canbehiddenbyotherwearables="false" rotation="90" depth="0.6" sourcerect="276,63,233,62" limb="Torso" depthlimb="LeftArm" scale="0.5" origin="0.5,0.8" />
-      </Wearable>
-      <RangedWeapon reload="0.24" holdtrigger="true" barrelpos="100,20" spread="4" unskilledspread="16" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.2">
-        <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-        <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
-        <ParticleEmitter particle="impactfirearm" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="4.0,4.0" colormultiplier="255,200,200,200" />
-        <Sound file="Content/Items/JobGear/Security/WEAPONS_assaultRifle_1.ogg" type="OnUse" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/JobGear/Security/WEAPONS_assaultRifle_2.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/JobGear/Security/WEAPONS_assaultRifle_3.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/JobGear/Security/WEAPONS_assaultRifle_4.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/JobGear/Security/WEAPONS_assaultRifle_5.ogg" type="OnUse" range="3000" />
-        <StatusEffect type="OnUse" target="This">
-          <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
-          <Explosion range="150.0" force="1" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="12.0" />
+        <StatusEffect type="OnBroken" target="This" >
+          <ParticleEmitter particle="shrapnel" anglemin="190" anglemax="350" distancemin="0" distancemax="50" particleamount="10" velocitymin="20" velocitymax="50" scalemin="0.25" scalemax="0.5" />
+          <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="5" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="1" />
+          <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="300" frequencymultiplier="1.5" />
+          <Remove />
         </StatusEffect>
-        <StatusEffect type="OnUse" target="Contained">
-          <Use />
-        </StatusEffect>
-        <RequiredItems items="assaultriflemagazine" type="Contained" msg="ItemMsgAmmoRequired" />
-        <RequiredSkill identifier="weapons" level="50" />
       </RangedWeapon>
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
-        <Containable items="assaultrifleammo" itempos="4,-12" />
-        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-        <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />   
-        <SubContainer capacity="1" maxstacksize="1">
-          <Containable items="flashlight" hide="false" itempos="24,4" setactive="true"/>
-        </SubContainer>
-      </ItemContainer> 
-      <aitarget sightrange="2000" soundrange="4000" fadeouttime="5" />
-      <Quality>
-        <QualityStat stattype="FirepowerMultiplier" value="0.1" />
-      </Quality>
-      <SkillRequirementHint identifier="weapons" level="50" />
     </Item>
-    <Item name="Machine Pistol (Broken)" identifier="machinepistolbroken" hideconditionbar="true" spritecolor="240,180,140,255" InventoryIconColor="240,180,140,255" category="Weapon" cargocontaineridentifier="metalcrate" tags="smallautoweapon,smallitem,weapon,gun,gunsmith,provocativetohumanai,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="secarmcab" amount="0" spawnprobability="0" notcampaign="true" />
-      <PreferredContainer secondary="outpostsecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="0" spawnprobability="0" />
-      <PreferredContainer secondary="armcab,weaponholder" />
-      <Price baseprice="20" minleveldifficulty="15" canbespecial="false" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.5" />
-        <Price storeidentifier="merchantcity" multiplier="1.25" />
-        <Price storeidentifier="merchantresearch" multiplier="1.25" />
-        <Price storeidentifier="merchantmilitary" multiplier="0.9" />
-        <Price storeidentifier="merchantmine" multiplier="1.25" />
-        <Price storeidentifier="merchantarmory" multiplier="0.9" />
-      </Price>
-      <Deconstruct time="10" chooserandom="true" amount="1">
-        <Item identifier="steel" />
-        <Item identifier="plastic" />
-      </Deconstruct>
-      <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="270,295,107,49" depth="0.55" origin="0.5,0.5" />
-      <Body width="100" height="44" density="25" />
-      <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect">
-        <StatusEffect type="OnActive" target="This" condition="0" setvalue="true" oneshot="true">
-          <Conditional IsPlayer="true" targetcontainer="true" />
-        </StatusEffect>
-      </Holdable>
-      <RangedWeapon reload="0.175" weapondamagemodifier="0.8" holdtrigger="true" barrelpos="54,9" spread="10" unskilledspread="18" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" DualWieldAccuracyPenalty="10">
-        <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-        <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
-        <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot1.ogg" type="OnUse" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot2.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot3.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot4.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot5.ogg" type="OnUse" range="3000" />
-        <Sound file="Content/Items/Weapons/WEAPON_machinePistolShot6.ogg" type="OnUse" range="3000" />
-        <StatusEffect type="OnUse" target="This">
-          <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
-          <Explosion range="150.0" force="1" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="6.0" />
-        </StatusEffect>
-        <!--"Use" contained magazine to spawn projectiles.-->
-        <StatusEffect type="OnUse" target="Contained">
-          <Use />
-        </StatusEffect>
-        <RequiredItems items="smgammo" type="Contained" msg="ItemMsgAmmoRequired" />
-        <RequiredSkill identifier="weapons" level="50" />
-      </RangedWeapon>
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
-        <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
-        <Containable items="smgammo" hide="false" itempos="3,-5" rotation="-5" />
-      </ItemContainer>
-      <aitarget sightrange="2000" soundrange="4000" fadeouttime="5" />
-      <Quality>
-        <QualityStat stattype="FirepowerMultiplier" value="0.1" />
-      </Quality>
-      <SkillRequirementHint identifier="weapons" level="60" />
-    </Item>
+    
   </Override>
 </Items>
