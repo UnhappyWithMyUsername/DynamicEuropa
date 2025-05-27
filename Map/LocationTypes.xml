@@ -84,11 +84,9 @@
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="0" />
       </ChangeTo>
       <ChangeTo type="Construction" disallowedadjacentlocations="Lair,OuterLair,HuskgroundsDE,OuterHuskLair,LairMudraptor,LairThresher" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.outpost">
-        <!-- May be settled if within 5 steps of a colony, with an increasing chance should it be within 3 or less steps -->
-        <Requirement function="Add" requiredlocations="City" probability="0.1" requiredproximity="5" requiredproximityforprobabilityincrease="3" proximityprobabilityincrease="0.1" />
-        <Requirement function="Add" requiredlocations="Outpost,Blockade" probability="0.1" requiredproximity="3" requiredproximityforprobabilityincrease="3" proximityprobabilityincrease="0.1" />
-        <Requirement function="Add" requiredlocations="Settlement" probability="0.1" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-        <Requirement function="Add" requiredlocations="Colony" probability="0.1" requiredproximity="1" />
+        <!-- May be settled if within 5 steps of a colony, with an increasing chance should it be within 2 or less steps -->
+        <Requirement function="Add" requiredlocations="City" probability="0.1" requiredproximity="5" requiredproximityforprobabilityincrease="2" proximityprobabilityincrease="0.1" />
+        <Requirement function="Add" requiredlocations="Outpost,Settlement,Colony" probability="0.1" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
         <!-- if near a beacon station, increase the probability -->
         <Requirement function="Add" requirebeaconstation="true" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.25" />
         <!-- multiply probability by 0 if next to hunting grounds-->
@@ -113,6 +111,7 @@
       </ChangeTo>
       <!-- Pirates may settle here if a city is nearby, but no military or fauna threats are nearby -->
       <ChangeTo type="PirateOutpost" probability="0" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,Blockade,Military,Base,Camp,PirateOutpost" messagetag="locationchange.none.changeto.pirateoutpost">
+        <Requirement requiredlocations="PirateOutpost" function="Multiply" probability="0" requiredproximity="4" />
         <Requirement function="Add" requiredlocations="City" probability="0.15" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.2" />
         <Requirement function="Multiply" requirebeaconstation="true" probability="0" requiredproximity="2" />
         <Requirement function="Multiply" requirehuntinggrounds="true" probability="0" requiredproximity="0" />
