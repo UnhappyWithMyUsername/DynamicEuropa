@@ -1700,6 +1700,33 @@
       <Item identifier="bigalienturret" />
     </Items>
   </NestMission>
+  
+  <SalvageMission
+    identifier="retrievesecretdocuments"
+    tags="Salvage"
+    type="Salvage"
+    difficulty="3"
+    commonness="100"
+    reward="5000"
+    allowretry="true"
+    BlockLocationTypeChanges="true">
+    <Reputation identifier="separatists" amount="10" />
+    <Reputation identifier="coalition" amount="-10" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
+    <!-- <Characters>
+      <Character from="customnpcs" identifier="briefcaseNPC" spawnlocation="Outpost" teamid="FriendlyNpc"/>
+    </Characters> -->
+    <TriggerEvent state="0" delay="0" eventidentifier="spawnbriefcaseNPC" />
+    <target
+      spawntype="Outpost"
+      existingitemtag="classifieddocuments"  
+      requireretrieval="RetrievedToSub"
+      hidelabelwhennotfound="true"
+      hidelabelafterretrieved="true">
+    </target>
+    <LocationType identifier="AnyOutpost" />
+    <Metadata identifier="retrievesecretdocuments_norepeat" value="1" operation="Add" />
+  </SalvageMission>
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->

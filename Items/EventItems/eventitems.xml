@@ -1379,15 +1379,18 @@
     </Deconstruct>
   </Item>
  
-  <Item name="" identifier="securebriefcase" category="Equipment" tags="mediumitem,mobilecontainer,tool" Scale="0.5" fireproof="true" impactsoundtag="impact_metal_heavy" canflipx="false">
+  <Item name="" identifier="securebriefcase" category="Equipment" tags="securebriefcase,mediumitem,mobilecontainer" Scale="0.5" fireproof="true" impactsoundtag="impact_metal_heavy" canflipx="false">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="767,330,86,68" depth="0.65" origin="0.5,0.5" />
+    <Body width="86" height="68" density="20" />
+    <Holdable slots="RightHand,LeftHand" handle1="0,48" holdangle="87" msg="ItemMsgPickUpSelect" />
+    <PreferredContainer primary="none" />
     <Deconstruct time="10">
       <Item identifier="steel" />
     </Deconstruct>
-    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="767,330,86,68" depth="0.65" origin="0.5,0.5" />
-    <Body width="86" height="68" density="20" />
-    <Holdable slots="RightHand,LeftHand" handle1="0,42" holdangle="90" msg="ItemMsgPickUpSelect" />
     <ItemContainer capacity="4" maxstacksize="1" drawinventory="false" canbeselected="false" keepopenwhenequipped="true" movableframe="true" QuickUseMovesItemsInside="false" autofill="false" allowdraganddrop="false" showcontainedstateindicator="false">
       <Containable items="smallitem" />
+      <!-- make sure the displayed code is 9999, after the event sets the random code -->
+      <StatusEffect type="Always" target="This" delay="10" Modulus="9999" setvalue="true" oneshot="true" />
     </ItemContainer>
     <ModuloComponent Modulus="9999" canbeselected="true" />
     <CustomInterface canbeselected="true" pickkey="Use" drawhudwhenequipped="true" allowuioverlap="false">
