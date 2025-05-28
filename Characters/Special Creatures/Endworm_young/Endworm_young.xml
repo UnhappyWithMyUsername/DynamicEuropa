@@ -42,17 +42,7 @@
     <target Tag="room" State="Attack" Priority="80"  IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreTargetInside="False" IgnoreTargetOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" PerceptionDistanceMultiplier="1" MaxPerceptionDistance="-1" AttackPattern="Straight" />
     <target Tag="sonar" State="Attack" Priority="10"  IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreTargetInside="False" IgnoreTargetOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" PerceptionDistanceMultiplier="1" MaxPerceptionDistance="-1" AttackPattern="Straight" />
   </ai>
-    
-  <StatusEffect type="OnActive" target="this" delay="1" disabledeltatime="true">
-    <Affliction identifier="paralysis" strength="9999"/>
-    <Conditional AIState="neq Attack" />
-  </StatusEffect>  
-  
-  <StatusEffect type="OnActive" target="this" disabledeltatime="true" >
-    <ReduceAffliction identifier="paralysis" strength="9999"/>
-    <Conditional AIState="Attack" />
-  </StatusEffect>
-  
+
   <StatusEffect type="OnActive" target="this">
     <Sound file="Content/Sounds/MONSTER_farLayer.ogg" loop="true" range="6000" dontmuffle="true" volume="0.5" />
   </StatusEffect>
