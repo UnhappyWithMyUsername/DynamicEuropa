@@ -1748,13 +1748,12 @@
               </StatusEffectAction>
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
-              <WaitAction time="1" />              
-              <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
+              <WaitAction time="1" />
               <Label name="tagcombatloop" />              
-              <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
-              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="triggerer_player" isinstigator="false" witnessreaction="retreat" />
+              <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="trespasser_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
+              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="trespasser_player" isinstigator="false" witnessreaction="retreat" cooldown="10" AbandonOnReset="false" />
               <WaitAction time="5" />
-              <ClearTagAction tag="triggerer_player" />
+              <ClearTagAction tag="trespasser_player" />
               <Goto name="tagcombatloop" />
             </Failure>
           </CheckDataAction>
@@ -2205,7 +2204,6 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction> 
-          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
           <ConversationAction targettag="player" text="eventtext.piratearmoryalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <ReputationAction targettype="Location" increase="-35" />
           <StatusEffectAction targettag="armorydoor">
@@ -2341,9 +2339,8 @@
                   <!-- I am giving those idiots a genetic affliction to trigger their attack in their AI. It's an absurd roundabout way of doing it -->
                   <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
                   <AfflictionAction targettag="fighters" affliction="strengthen" strength="100" />
-                  <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset="false" and cooldown on CombatAction NEXTUPDATE -->
-                  <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" />
-                  <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" />
+                  <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" AbandonOnReset="false"/>
+                  <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" AbandonOnReset="false"/>
                   <SetDataAction identifier="betontyler" operation="set" value="1" />
                   <GoTo name="checkorangedeadloop"/>
                 </Success>
@@ -2556,10 +2553,8 @@
               <NPCChangeTeamAction npctag="pirateambusher" teamtag="Team2" />
               <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
               <Label name="combatrefresh" />
-              <TagAction criteria="player" tag="player" />
-              <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
-              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" AbandonOnReset="false"/>
+              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" AbandonOnReset="false"/>
               <WaitAction time="5" />
               <GoTo name="combatrefresh" />
             </Success>
