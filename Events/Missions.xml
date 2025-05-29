@@ -1701,6 +1701,7 @@
     </Items>
   </NestMission>
   
+  <!-- UNUSED, take documents from briefcase, idk how to do this one -->
   <SalvageMission
     identifier="retrievesecretdocuments"
     tags="Salvage"
@@ -1713,14 +1714,14 @@
     <Reputation identifier="separatists" amount="10" />
     <Reputation identifier="coalition" amount="-10" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
-    <!-- <Characters>
+    <Characters>
       <Character from="customnpcs" identifier="briefcaseNPC" spawnlocation="Outpost" teamid="FriendlyNpc"/>
-    </Characters> -->
+    </Characters>
     <TriggerEvent state="0" delay="0" eventidentifier="spawnbriefcaseNPC" />
     <target
       spawntype="Outpost"
       existingitemtag="classifieddocuments"  
-      requireretrieval="RetrievedToSub"
+      requireretrieval="Interact"
       hidelabelwhennotfound="true"
       hidelabelafterretrieved="true">
     </target>
