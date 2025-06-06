@@ -1411,6 +1411,19 @@
       <sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="767,256,86,68" depth="0.1" origin="0.35,0.5" />
       <IsActive targetitemcomponent="ItemContainer" drawinventory="False" />
     </LightComponent>
+  </Item>  
+  
+  <Item name="huskeggsterrorist" identifier="huskeggsterrorist" description="Only used by NPC in a mission, instantly gives 70 husk. SHOULD NOT BE SEEN BY PLAYERS" category="Medical" Tags="smallitem" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="832,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" sourcerect="0,186,38,70" depth="0.6" origin="0.5,0.5" />
+    <Body width="35" height="70" density="20" />
+    <Holdable slots="Any,RightHand,LeftHand" >
+      <StatusEffect type="OnContained" target="This,Character" setvalue="true">
+        <Sound file="Content/Characters/Husk/Husk_Idle1.ogg" range="1000" volume="2" dontmuffle="true" />
+        <Affliction identifier="huskinfection" amount="90" />
+        <Removeitem />
+      </StatusEffect>
+    </Holdable>
   </Item>
 
     <!-- UNUSED. For sabotaging deconstructors -->
