@@ -36,25 +36,6 @@
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
         
-    <Tutorial identifier="TutorialOutpost" replaceinradiation="" nameidentifiers="generic,city" forceoutpostgenerationparams="tutorialoutpost" allowinrandomlevels="false" ignoregenericevents="true">
-      <Symbol texture="Content/Map/MapAtlas.png" sourcerect="256,512,128,128" color="128,206,175,255"/>
-      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
-      </ChangeTo>
-      <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requiredlocations="OuterHuskLair,HuskgroundsDE" probability="0.45" requireddurationrange="1,5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="DestroyedStation" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
-        <Requirement requirehuntinggrounds="true" probability="0.5" requiredproximity="0" />
-      </ChangeTo>
-      <Store
-        sellpricemodifier="0.3"
-        pricemodifierrange="5"
-        dailyspecialscount="0"
-        requestedgoodscount="0" />
-    </Tutorial>
-
     <None identifier="None" namefile="Content/Map/locationNames.txt" hasoutpost="false" Biomegate="Deny" beaconstationchance="0.5">
       <AreaSettings zone="1" commonness="3.0" />
       <AreaSettings zone="2" commonness="3.0" />
