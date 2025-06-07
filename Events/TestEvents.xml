@@ -176,6 +176,18 @@
       <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
     </ScriptedEvent>
   
+    <ScriptedEvent identifier="traitorlikeeventTEST" >
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,0,256,256" color="200,150,0,255" />
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" dialogtype="Regular" endconversation="true"/>
+      <EventLogAction targettag="player" id="initialinfo" text="EventText.bakingstation.objective1" />
+      <EventObjectiveAction targettag="player" type="add" id="traitorobjective.bakingstation.meltdown" />
+      <OnRoundEndAction>
+        <GiveExpAction targettag="player" amount="5000" />
+        <EventLogAction targettag="player" id="success" text="EventText.bakingstation.objective2" />
+        <EventObjectiveAction targettag="player" type="remove" id="traitorobjective.bakingstation.meltdown" />
+      </OnRoundEndAction>
+    </ScriptedEvent>
   
     <ScriptedEvent identifier="operateTEST"> 
         <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="scrapdealer" targettag="controllernpc" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" targetmoduletags="crewmodule"/>
@@ -187,6 +199,81 @@
         <!-- <NPCOperateItemAction npctag="controllernpc" targettag="controlleditem" ItemComponentName="Holdable" operate="false" OrderOption="" RequireEquip="true"/> -->
         <!-- <NPCWaitAction npctag="controllernpc" wait="true" priority="50"/> -->
     </ScriptedEvent>
+  
+    <ScriptedEvent identifier="jobboardTEST" commonness="100">
+      <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" />
+      <TagAction criteria="player" tag="player" />
+      <StatusEffectAction targettag="potentialjobboard">
+        <StatusEffect target="This" noninteractable="false" setvalue="true" />
+      </StatusEffectAction>
+      <TriggerAction target1tag="potentialjobboard" target2tag="player" waitforinteraction="true" radius="500" />
+      <StatusEffectAction targettag="potentialjobboard" >
+        <StatusEffect target="This" noninteractable="true" condition="-100" setvalue="true" >
+          <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+  
     
+    <ScriptedEvent identifier="huskinfectionTEST">
+      <TagAction criteria="player" tag="player" />
+      <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="player" />
+      <AfflictionAction affliction="huskinfection" strength="90" targettag="player" />
+    </ScriptedEvent>
+      
+
+    <ScriptedEvent identifier="mudraptorracing_TEST">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
+          <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
+          <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher"/>
+          <StatusEffectAction targettag="raptorracelever" >
+            <StatusEffect target="this" duration="10" >
+              <Sound file="Content/Sounds/ClubMusic_transitionScratch.ogg" range="1500" volume="3" frequencymultiplier="0.5" loop="true" dontmuffle="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <StatusEffectAction targettag="confettilauncher" >
+            <StatusEffect target="this" duration="10" >
+              <ParticleEmitter particle="whitespark" particlespersecond="10" velocitymin="250" velocitymax="400" anglemin="70" anglemax="110" scalemin="1" scalemax="2" distancemin="5" distancemax="250" colormultiplier="30,30,255,255" lifetimemultiplier="2" HighQualityCollisionDetection="true" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <StatusEffectAction targettag="confettilauncher" >
+            <StatusEffect target="this" duration="10" >
+              <ParticleEmitter particle="steamspray" particlespersecond="5" velocitymin="50" velocitymax="100" anglemin="260" anglemax="280" scalemin="0.8" scalemax="1.2" distancemin="0" distancemax="0" colormultiplier="30,30,255,255" lifetimemultiplier="2" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <WaitAction time="10" />      
+<!--       <SpawnAction speciesname="Mudraptorred" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorgreen" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <SpawnAction speciesname="Mudraptorblue" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
+      <WaitAction time="3" />
+      <StatusEffectAction targettag="petfoodgun">
+        <StatusEffect target="This" offset="30,0"> 
+          <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
+          <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
+          <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1.1" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
+      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
+      <StatusEffectAction targettag="slowerraptor">
+        <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true">
+          <Affliction identifier="psychosis" strength="100" />
+          <Affliction identifier="burn" strength="20" />
+        </StatusEffect>
+      </StatusEffectAction> -->
+    </ScriptedEvent>
+    
+   
+  
+    <ScriptedEvent identifier="npcspawnerTEST">
+        <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="suitcaseman" LootingIsStealing="True" TargetTag="suitcaseman" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
+        <WaitAction time="1" />
+    </ScriptedEvent> 
+    
+    <!-- <ScriptedEvent identifier="laircrawlersoutsideTEST">
+      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
+    </ScriptedEvent> -->
+  
   </EventPrefabs>  
 </Randomevents>
