@@ -79,150 +79,79 @@
 
     <!-- ============================================================================================================================================================================================= OUTPOSTS START HERE ============================================================================ -->
 
-    <!-- STARTER OUTPOST | If Regalis ever allows us to force this outpost at the start we can make a cool custom starter here -->
-<!--     <OutpostConfig identifier="tutorialoutpost" 
-      allowedlocationtypes="tutorialoutpost" 
-      replaceinradiation="" 
-      totalmodulecount="5" 
-      minhallwaylength="400" 
-      spawncrewinsideoutpost="true">
-      <modulecount flag="DockingOutpost" count="1" />
-      <modulecount flag="DE_EngineeringModule" count="1" />
-      <modulecount flag="DE_AdminModule" count="1" />
-      <modulecount flag="DE_CrewModule" count="1" />
-      <modulecount flag="CafeteriaMedium" count="1" />
-      <npcs>
-        <npc from="outpostnpcs1" identifier="outpostmanagercoalition"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="securitynpccoalition"/>
-        <npc from="tutorialnpcs" identifier="merchanttutorial"/>
-      </npcs>
-    </OutpostConfig> -->
-
-    <!-- ABANDONED STATION -->  
-      <!-- unused for now -->
-      <OutpostConfig
-      identifier="AbandonedIrradiated"
-      totalmodulecount="6" minhallwaylength="0"
-      spawncrewinsideoutpost="false"
-      alwaysdestructible="true"
-      alwaysrewireable="true"
-      allowstealing="true">
-      <modulecount flag="AbandonedAirlock" count="1"/>
-      <modulecount flag="AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="AbandonedAdminModule" count="1"/>
-      <modulecount flag="AbandonedCrewModule" count="1"/>
-      <modulecount flag="AbandonedResearchModule" count="1"/>
-      <modulecount flag="AbandonedSecurityModule" count="1"/>
-    </OutpostConfig>
+    
+    <!-- STARTER OUTPOST -->
     <OutpostConfig
-      identifier="abandonedoutpostregular"
-      totalmodulecount="6" minhallwaylength="0"
-      allowedlocationtypes="Abandoned"
-      spawncrewinsideoutpost="false"
-      alwaysdestructible="true"
-      alwaysrewireable="true"
-      allowstealing="true"
-      appendtoreachtotalmodulecount="false"
-      PreferredDifficulty="20">
-      <modulecount flag="AbandonedAirlock" count="1"/>
-      <modulecount flag="AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="AbandonedAdminModule" count="1"/>
-      <modulecount flag="AbandonedCrewModule" count="1"/>
-      <modulecount flag="AbandonedResearchModule" count="1"/>
-      <modulecount flag="AbandonedSecurityModule" count="1"/>
-    </OutpostConfig>
-    <OutpostConfig
-      identifier="abandonedoutpostlarge"
-      totalmodulecount="8" minhallwaylength="0"
-      allowedlocationtypes="Abandoned"
-      spawncrewinsideoutpost="false"
-      alwaysdestructible="true"
-      alwaysrewireable="true"
-      allowstealing="true"
-      appendtoreachtotalmodulecount="false"
-      PreferredDifficulty="40">
-      <modulecount flag="AbandonedAirlock" count="1"/>
-      <modulecount flag="AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="AbandonedAdminModule" count="2"/>
-      <modulecount flag="AbandonedCrewModule" count="3"/>
-      <modulecount flag="AbandonedResearchModule" count="1"/>
-      <modulecount flag="AbandonedSecurityModule" count="1"/>
-    </OutpostConfig>
-    <OutpostConfig
-      identifier="abandonedoutposthuge"
-      totalmodulecount="10" minhallwaylength="0"
-      allowedlocationtypes="Abandoned"
-      spawncrewinsideoutpost="false"
-      alwaysdestructible="true"
-      alwaysrewireable="true"
-      allowstealing="true"
-      appendtoreachtotalmodulecount="false"
-      PreferredDifficulty="60">
-      <modulecount flag="AbandonedAirlock" count="1"/>
-      <modulecount flag="AbandonedEngineeringModule" count="1"/>
-      <modulecount flag="AbandonedAdminModule" count="2"/>
-      <modulecount flag="AbandonedCrewModule" count="3"/>
-      <modulecount flag="AbandonedResearchModule" count="1"/>
-      <modulecount flag="AbandonedSecurityModule" count="2"/>
-    </OutpostConfig>
-
-    <!-- CHURCH OF HUSK -->
-    <OutpostConfig identifier="huskchurch"
-      replaceinradiation=""
-      totalmodulecount="5"
-      appendtoreachtotalmodulecount="false"
-      minhallwaylength="400"
-      allowedlocationtypes="HuskChurch"
-      spawncrewinsideoutpost="false">
-      <modulecount flag="DockingChurch" count="1"/>
-      <modulecount flag="EngineeringChurch" count="1"/>
-      <modulecount flag="AdminChurch" count="1"/>
-      <modulecount flag="ResearchChurch" count="1"/>
-      <modulecount flag="MedicalChurch" count="1"/>
-      <npcs>
-        <npc from="husknpcs" identifier="outpostmanagerhusk" />
-        <npc from="husknpcs" identifier="huskresearcher"/>
-        <npc from="husknpcs" identifier="huskcultistsecurity"/>
-        <npc from="husknpcs" identifier="huskcultistsecurity"/> 
-        <npc from="husknpcs" identifier="huskcultistsecurity"/>
-
-        <npc from="outpostnpcs1" identifier="reactoroperator"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-        <npc from="outpostnpcs1" identifier="commoner"/>
-
-        <!-- Services -->
-        <npc from="outpostnpcs1" identifier="hrmanager"/>
-        <npc from="husknpcs" identifier="merchanthusk"/>
-        <npc from="husknpcs" identifier="outposthuskdoctor"/>
-        <npc from="outpostnpcs1" identifier="merchantmedical"/>
-        <npc from="outpostnpcs1" identifier="merchantresearch" />
-        <!-- <npc from="husknpcs" identifier="merchanthuskmedical"/> -->
-        <!-- <npc from="husknpcs" identifier="merchanthuskengineering"/> -->
-      </npcs>
-    </OutpostConfig>
-
-    <!-- CLOWNS -->
-    <OutpostConfig identifier="sinkingcircus"
-      replaceinradiation="none"
-      totalmodulecount="2"
-      appendtoreachtotalmodulecount="false"
+      identifier="StarterOutpostSPAWN"
+      allowedlocationtypes="StarterOutpostSPAWN" 
+      totalmodulecount="2" 
       minhallwaylength="0"
-      allowedlocationtypes="SinkingCircus"
-      spawncrewinsideoutpost="false">
-      <modulecount flag="DockingCircus" count="1"/>
-      <modulecount flag="CircusModule" count="1"/>
+      spawncrewinsideoutpost="true"
+      appendtoreachtotalmodulecount="false"
+      alwaysgeneratehallways="false">
+      <modulecount flag="StarterOutpost_Docking" count="1" order="0" />
+      <modulecount flag="StarterOutpost_Main" count="1" order="1" />
       <npcs>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
-        <npc from="outpostnpcs1" identifier="merchantclown" faction="clowns"/>
+        <!-- Coalition -->
+        <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <!-- Separatists -->
+        <npc from="outpostnpcs1" identifier="outpostmanagerseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <!-- Generic -->
+        <npc from="outpostnpcs1" identifier="reactoroperator"/>
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="miner"/>
+        <npc from="outpostnpcs1" identifier="miner"/>
+        <!-- Services -->
+        <npc from="outpostnpcs1" identifier="hrmanager" />
+        <npc from="outpostnpcs1" identifier="merchantoutpost" />
       </npcs>
     </OutpostConfig>
-
+    
+    <OutpostConfig
+      identifier="StarterOutpostAFTER"
+      allowedlocationtypes="StarterOutpostAFTER" 
+      totalmodulecount="2" 
+      minhallwaylength="0"
+      spawncrewinsideoutpost="true"
+      appendtoreachtotalmodulecount="false"
+      alwaysgeneratehallways="false">
+      <modulecount flag="StarterOutpost_Docking" count="1" order="0" />
+      <modulecount flag="StarterOutpost_Main" count="1" order="1" />
+      <npcs>
+        <!-- Coalition -->
+        <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <npc from="outpostnpcs1" identifier="securitynpccoalition" faction="coalition" />
+        <!-- Separatists -->
+        <npc from="outpostnpcs1" identifier="outpostmanagerseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <npc from="outpostnpcs1" identifier="securitynpcseparatists" faction="separatists" />
+        <!-- Generic -->
+        <npc from="outpostnpcs1" identifier="reactoroperator"/>
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="miner"/>
+        <npc from="outpostnpcs1" identifier="miner"/>
+        <!-- Services -->
+        <npc from="outpostnpcs1" identifier="hrmanager" />
+        <npc from="outpostnpcs1" identifier="merchantoutpost" />
+      </npcs>
+    </OutpostConfig>
+      
+    
     <!-- HABITATION OUTPOSTS -->
     <OutpostConfig identifier="outpost" 
       replaceinradiation="" 
@@ -1049,6 +978,134 @@
         <npc from="outpostnpcspirate" identifier="subupgradenpcpirate" />
         <npc from="outpostnpcspirate" identifier="subsalesnpcpirate" />
       </npcs>
+    </OutpostConfig>
+
+
+    <!-- CHURCH OF HUSK -->
+    <OutpostConfig identifier="huskchurch"
+      replaceinradiation=""
+      totalmodulecount="5"
+      appendtoreachtotalmodulecount="false"
+      minhallwaylength="400"
+      allowedlocationtypes="HuskChurch"
+      spawncrewinsideoutpost="false">
+      <modulecount flag="DockingChurch" count="1"/>
+      <modulecount flag="EngineeringChurch" count="1"/>
+      <modulecount flag="AdminChurch" count="1"/>
+      <modulecount flag="ResearchChurch" count="1"/>
+      <modulecount flag="MedicalChurch" count="1"/>
+      <npcs>
+        <npc from="husknpcs" identifier="outpostmanagerhusk" />
+        <npc from="husknpcs" identifier="huskresearcher"/>
+        <npc from="husknpcs" identifier="huskcultistsecurity"/>
+        <npc from="husknpcs" identifier="huskcultistsecurity"/> 
+        <npc from="husknpcs" identifier="huskcultistsecurity"/>
+
+        <npc from="outpostnpcs1" identifier="reactoroperator"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+        <npc from="outpostnpcs1" identifier="commoner"/>
+
+        <!-- Services -->
+        <npc from="outpostnpcs1" identifier="hrmanager"/>
+        <npc from="husknpcs" identifier="merchanthusk"/>
+        <npc from="husknpcs" identifier="outposthuskdoctor"/>
+        <npc from="outpostnpcs1" identifier="merchantmedical"/>
+        <npc from="outpostnpcs1" identifier="merchantresearch" />
+        <!-- <npc from="husknpcs" identifier="merchanthuskmedical"/> -->
+        <!-- <npc from="husknpcs" identifier="merchanthuskengineering"/> -->
+      </npcs>
+    </OutpostConfig>
+
+    <!-- CLOWNS -->
+    <OutpostConfig identifier="sinkingcircus"
+      replaceinradiation="none"
+      totalmodulecount="2"
+      appendtoreachtotalmodulecount="false"
+      minhallwaylength="0"
+      allowedlocationtypes="SinkingCircus"
+      spawncrewinsideoutpost="false">
+      <modulecount flag="DockingCircus" count="1"/>
+      <modulecount flag="CircusModule" count="1"/>
+      <npcs>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="clown" faction="clowns"/>
+        <npc from="outpostnpcs1" identifier="merchantclown" faction="clowns"/>
+      </npcs>
+    </OutpostConfig>
+
+    <!-- ABANDONED STATION --> 
+
+      <!-- unused for now -->    
+      <OutpostConfig
+      identifier="AbandonedIrradiated"
+      totalmodulecount="6" minhallwaylength="0"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="1"/>
+      <modulecount flag="AbandonedCrewModule" count="1"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
+    
+    <OutpostConfig
+      identifier="abandonedoutpostregular"
+      totalmodulecount="6" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="20">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="1"/>
+      <modulecount flag="AbandonedCrewModule" count="1"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
+    
+    <OutpostConfig
+      identifier="abandonedoutpostlarge"
+      totalmodulecount="8" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="40">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="2"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="1"/>
+    </OutpostConfig>
+    
+    <OutpostConfig
+      identifier="abandonedoutposthuge"
+      totalmodulecount="10" minhallwaylength="0"
+      allowedlocationtypes="Abandoned"
+      spawncrewinsideoutpost="false"
+      alwaysdestructible="true"
+      alwaysrewireable="true"
+      allowstealing="true"
+      appendtoreachtotalmodulecount="false"
+      PreferredDifficulty="60">
+      <modulecount flag="AbandonedAirlock" count="1"/>
+      <modulecount flag="AbandonedEngineeringModule" count="1"/>
+      <modulecount flag="AbandonedAdminModule" count="2"/>
+      <modulecount flag="AbandonedCrewModule" count="3"/>
+      <modulecount flag="AbandonedResearchModule" count="1"/>
+      <modulecount flag="AbandonedSecurityModule" count="2"/>
     </OutpostConfig>
 
     <!-- LAIRS -->
