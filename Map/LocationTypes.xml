@@ -35,6 +35,41 @@
     
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
+    
+    
+    <!-- STARTER OUTPOST
+    TODO: NEXTUPDATE THIS NEEDS FIXING BEFORE BEING USED. 
+    -FIGURE OUT A WAY TO MAKE PLAYERS SPAWN ON THE LEFT
+    -AFTER LEAVING FOR THE 1ST TIME, REPLACE THIS WITH ANOTHER VERSION OF THE OUTPOST THAT SPAWNS CREW INSIDE SUBMARINE -->
+    <StarterOutpost
+      identifier="StarterOutpost"
+      nameidentifiers="StarterOutpost"
+      namefile="Content/Map/locationNames.txt" 
+      ForceAsStartOutpost="false"
+      ignoregenericevents="true"
+      Biomegate="Deny"
+      beaconstationchance="0">
+      <AreaSettings zone="1" commonness="0" />
+      <AreaSettings zone="2" commonness="0" />
+      <AreaSettings zone="3" commonness="0" />
+      <AreaSettings zone="4" commonness="0" />
+      <AreaSettings zone="5" commonness="0" />
+      <AreaSettings zone="6" commonness="0" /> 
+      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="896,256,128,128" color="162,213,220,255"/>
+      <ChangeTo type="StarterOutpostAFTER" probability="1" messagetag="locationchange.StarterOutpostSPAWN.changeto.StarterOutpostAFTER" />
+      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Hireable identifier="captain" commonness="1" />
+      <Hireable identifier="securityofficer" commonness="1" />
+      <Hireable identifier="medicaldoctor" commonness="1" />
+      <Hireable identifier="engineer" commonness="1" />
+      <Hireable identifier="mechanic" commonness="1" />
+      <Hireable identifier="assistant" commonness="1" />
+      <Store
+        sellpricemodifier="0.3"
+        pricemodifierrange="5"
+        dailyspecialscount="0"
+        requestedgoodscount="0" />
+    </StarterOutpost>  
         
     <None identifier="None" namefile="Content/Map/locationNames.txt" hasoutpost="false" Biomegate="Deny" beaconstationchance="0.5">
       <AreaSettings zone="1" commonness="3.0" />
