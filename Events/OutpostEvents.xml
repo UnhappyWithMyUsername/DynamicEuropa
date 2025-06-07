@@ -51,10 +51,10 @@
   </EventSprites>
   
     
-  <EventPrefabs>  
-
-    <!-- This is not satisfying, the game zooms in the sub and THEN teleports you -->
-    <ScriptedEvent identifier="starteroutpostelevatorteleport" >
+  <EventPrefabs>
+  
+    <!-- Starter outpost teleport bullshit TODO: this doesn't work, camera is hard zoomed on characters when level loads -->
+    <!-- <ScriptedEvent identifier="starteroutpostelevatorteleport" >
       <CheckDataAction identifier="visitedstarteroutpost" condition="eq 0" >
         <Failure>
           <Goto name="end" />
@@ -66,8 +66,10 @@
       <TeleportAction targettag="teleportme" Position="Outpost" SpawnPointTag="elevatorteleport" /> 
       <SetDataAction identifier="visitedstarteroutpost" operation="set" value="1" />
       <Label name="end" />
-    </ScriptedEvent>
-
+    </ScriptedEvent> -->
+      
+    <!-- Starter outpost event, introduction to campaign. Very WIP
+    TODO: NEXTUPDATE finish  this shit -->
     <ScriptedEvent identifier="firstmission" commonness="100" requiredDestinationTypes="anyoutpost">
       <CheckDataAction identifier="visitedfirstmission" condition="eq 0" >
         <Failure>
@@ -105,6 +107,10 @@
       </ConversationAction>
       <SetDataAction identifier="visitedfirstmission" operation="set" value="1" />
       <Label name="end" />
+    </ScriptedEvent>
+    
+    <ScriptedEvent identifier="removestarteroutpostice">
+      <LayerAction layer="RemoveIce" enabled="false" />
     </ScriptedEvent>
   
     <!-- spawns NPCs in the fake militaryforces subs, not a fan of this one -->
@@ -1501,7 +1507,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathcoldcavernsseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="30" faction="separatists" biome="coldcaverns">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_coldcaverns_separatists_unlocked" condition="true">
@@ -1555,7 +1561,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpatheuropanridgeseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="40" faction="separatists" biome="europanridge">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_europanridge_separatists_unlocked" condition="true">
@@ -1609,7 +1615,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathaphoticplateauseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="50" faction="separatists" biome="theaphoticplateau">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_aphoticplateau_separatists_unlocked" condition="true">
@@ -1663,7 +1669,7 @@
     </ScriptedEvent>
 
     <ScriptedEvent identifier="unlockpathgreatseaseparatists" commonness="1" unlockpathevent="true" unlockpathtooltip="lockedpathtooltipseparatistreputation" unlockpathreputation="75" faction="separatists" biome="thegreatsea">
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchmanseparatist" targettag="unlockpathnpc" spawnlocation="Outpost" spawnpointtag="unlockpath" />
       <TriggerEventAction identifier="blockadealarm" />
       <TriggerEventAction identifier="openblockade" />
       <CheckDataAction identifier="blockade_greatsea_separatists_unlocked" condition="true">
@@ -1802,13 +1808,12 @@
               </StatusEffectAction>
               <ReputationAction targettype="Location" increase="-25" />
               <SetDataAction identifier="blockadeopened" value="0" />
-              <WaitAction time="1" />              
-              <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
+              <WaitAction time="1" />
               <Label name="tagcombatloop" />              
-              <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="triggerer_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
-              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="triggerer_player" isinstigator="false" witnessreaction="retreat" />
+              <TriggerAction target1tag="player" target2tag="blockadehull" applytotarget1="trespasser_player" radius="10" disableincombat="false" disableiftargetincapacitated="false" waitforinteraction="false" />
+              <CombatAction combatmode="Offensive" npctag="securitynpc" enemytag="trespasser_player" isinstigator="false" witnessreaction="retreat" cooldown="10" AbandonOnReset="false" />
               <WaitAction time="5" />
-              <ClearTagAction tag="triggerer_player" />
+              <ClearTagAction tag="trespasser_player" />
               <Goto name="tagcombatloop" />
             </Failure>
           </CheckDataAction>
@@ -1873,7 +1878,7 @@
           <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="dockingguard" SpawnPointTag="dockingguard" />
           <NPCOperateItemAction npctag="guard" targettag="piratechair" ItemComponentName="Controller" operate="true" />
           <TriggerEventAction identifier="piratehavenalarm" />
-          <!-- Toll part, reuse triggerer_player if this is bugged -->
+          <!-- Toll part -->
           <Label name="tolloptions" />
           <ClearTagAction tag="pso_trig_player" />
           <TriggerAction target1tag="guard" target2tag="player" applytotarget2="pso_trig_player" radius="250" disableincombat="true" disableiftargetincapacitated="true" waitforinteraction="true" allowmultipletargets="true" />
@@ -2145,7 +2150,7 @@
                       <WaitAction time="2" />
                       <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
                       <CombatAction combatmode="Arrest" npctag="dockingguard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
-                      <WaitAction time="30" />
+                      <WaitAction time="11" />
                       <GoTo name="tolloptions" />
                     </Option>
                   </ConversationAction>
@@ -2183,7 +2188,6 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction>
-          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
           <ConversationAction targettag="player" text="eventtext.piratehavenalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <StatusEffectAction targettag="piratehull">
             <StatusEffect target="this" duration="3" oneshot="true" >
@@ -2245,7 +2249,6 @@
       </ConversationAction>
     </ScriptedEvent>
     
-    <!-- NEXTUPDATE TODO: for combat loops, use AbandonOnReset and cooldown on CombatAction NEXTUPDATE -->
     <!-- triggers an alarm if you break into the armory stash -->
     <ScriptedEvent identifier="piratearmoryalarm">
       <TagAction criteria="player" tag="player" />
@@ -2261,7 +2264,6 @@
           <StatusEffectAction targettag="alarm">
             <StatusEffect IsOn="true" target="This" setvalue="true" />
           </StatusEffectAction> 
-          <!-- TODO: NEXTUPDATE use Forcesay to make NPCs speak instead of dialog box? -->
           <ConversationAction targettag="player" text="eventtext.piratearmoryalarm.breakin" dialogtype="small" eventsprite="firefight" ContinueAutomatically="true" />
           <ReputationAction targettype="Location" increase="-35" />
           <StatusEffectAction targettag="armorydoor">
@@ -2397,8 +2399,8 @@
                   <!-- I am giving those idiots a genetic affliction to trigger their attack in their AI. It's an absurd roundabout way of doing it -->
                   <TagAction criteria="speciesname:orangeboy_combat" tag="fighters" />
                   <AfflictionAction targettag="fighters" affliction="strengthen" strength="100" />
-                  <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" />
-                  <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" />
+                  <CombatAction combatmode="Offensive" npctag="orangetyler" enemytag="orangedurden" isinstigator="true" witnessreaction="none" AbandonOnReset="false"/>
+                  <CombatAction combatmode="Offensive" npctag="orangedurden" enemytag="orangetyler" isinstigator="true" witnessreaction="none" AbandonOnReset="false"/>
                   <SetDataAction identifier="betontyler" operation="set" value="1" />
                   <GoTo name="checkorangedeadloop"/>
                 </Success>
@@ -2611,9 +2613,8 @@
               <NPCChangeTeamAction npctag="pirateambusher" teamtag="Team2" />
               <NPCChangeTeamAction npctag="piratediver" teamtag="Team2" />
               <Label name="combatrefresh" />
-              <TagAction criteria="player" tag="player" />
-              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
-              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+              <CombatAction combatmode="Offensive" npctag="pirateambusher" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" AbandonOnReset="false"/>
+              <CombatAction combatmode="Offensive" npctag="piratediver" enemytag="crew" isinstigator="true" guardreaction="none" witnessreaction="retreat" AbandonOnReset="false"/>
               <WaitAction time="5" />
               <GoTo name="combatrefresh" />
             </Success>
@@ -3249,9 +3250,9 @@
               </CheckMoneyAction>  
             </Option>
             <Option text="EventText.mudraptorracing.300">
-              <CheckMoneyAction targettag="gambler_player" amount="500">
+              <CheckMoneyAction targettag="gambler_player" amount="300">
                 <Success>
-                  <MoneyAction targettag="gambler_player" amount="-500" />
+                  <MoneyAction targettag="gambler_player" amount="-300" />
                   <ConversationAction targettag="gambler_player" text="EventText.mudraptorracing.yourticket" eventsprite="gambler" endconversation="true"/>
                   <SpawnAction itemidentifier="raceticket_red" amount="3" targetinventory="gambler_player" targettag="raceticket"/>
                   <SetDataAction identifier="betonraptorcounter" operation="add" value="1" />
@@ -3601,64 +3602,6 @@
       </CheckDataAction>      
     </ScriptedEvent>
     
-
-    <ScriptedEvent identifier="mudraptorracing_TEST">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
-          <TagAction criteria="itemtag:raptorracelever" tag="raptorracelever" />
-          <TagAction criteria="itemtag:confettilauncher" tag="confettilauncher"/>
-          <StatusEffectAction targettag="raptorracelever" >
-            <StatusEffect target="this" duration="10" >
-              <Sound file="Content/Sounds/ClubMusic_transitionScratch.ogg" range="1500" volume="3" frequencymultiplier="0.5" loop="true" dontmuffle="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <StatusEffectAction targettag="confettilauncher" >
-            <StatusEffect target="this" duration="10" >
-              <ParticleEmitter particle="whitespark" particlespersecond="10" velocitymin="250" velocitymax="400" anglemin="70" anglemax="110" scalemin="1" scalemax="2" distancemin="5" distancemax="250" colormultiplier="30,30,255,255" lifetimemultiplier="2" HighQualityCollisionDetection="true" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <StatusEffectAction targettag="confettilauncher" >
-            <StatusEffect target="this" duration="10" >
-              <ParticleEmitter particle="steamspray" particlespersecond="5" velocitymin="50" velocitymax="100" anglemin="260" anglemax="280" scalemin="0.8" scalemax="1.2" distancemin="0" distancemax="0" colormultiplier="30,30,255,255" lifetimemultiplier="2" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <WaitAction time="10" />      
-<!--       <SpawnAction speciesname="Mudraptorred" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <SpawnAction speciesname="Mudraptorgreen" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <SpawnAction speciesname="Mudraptorblue" targettag="raceraptor" spawnlocation="Outpost" spawnpointtag="raceraptors" offset="50" />
-      <WaitAction time="3" />
-      <StatusEffectAction targettag="petfoodgun">
-        <StatusEffect target="This" offset="30,0"> 
-          <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
-          <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
-          <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1.1" />
-        </StatusEffect>
-      </StatusEffectAction>
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
-      <TagAction criteria="eventtag:raceraptor" tag="slowerraptor" submarinetype="Outpost" ChooseRandomExcludingTag="slowerraptor"  chooserandom="true"/>
-      <StatusEffectAction targettag="slowerraptor">
-        <StatusEffect target="This" speedmultiplier="0.7" duration="4" setvalue="true">
-          <Affliction identifier="psychosis" strength="100" />
-          <Affliction identifier="burn" strength="20" />
-        </StatusEffect>
-      </StatusEffectAction> -->
-    </ScriptedEvent>
-     
-    <!-- literally just spawns a merchant for the 1st outpost in campaign, doesnt work rn -->
-    <ScriptedEvent identifier="startermerchant" commonness="100">
-      <!-- <TagAction criteria="humanprefabidentifier:merchantoutpost" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <StatusEffectAction targettag="removenpc">
-        <StatusEffect type="Always" target="Character" oneshot="true">
-          <RemoveCharacter />
-        </StatusEffect>
-      </StatusEffectAction> -->
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="merchantoutpost" targettag="startermerchant" spawnlocation="Outpost" spawnpointtag="shop_outpost" teamid="FriendlyNPC" />
-    </ScriptedEvent>    
-
-    <ScriptedEvent identifier="removestarteroutpostice">
-      <LayerAction layer="RemoveIce" enabled="false" />
-    </ScriptedEvent>
-     
   </EventPrefabs>
 </Randomevents>
 </Override>
