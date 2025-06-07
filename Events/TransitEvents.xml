@@ -111,8 +111,8 @@
       <!-- requires a cargo mission. note: not all cargo missions are tagged "cargo" -->
       <CheckMissionAction missiontag="cargo" Type="Current">
         <Success>
-          <WaitAction time="50" />
-          <CheckDataAction identifier="stowaway2_complete" condition="eq true">
+          <WaitAction time="5" />
+          <CheckDataAction identifier="stowaway2_complete" condition="gt 0">
             <Success>
               <!--Don't repeat event-->
             </Success>
@@ -136,7 +136,7 @@
                   <CheckReputationAction targettype="faction" identifier="clowns" condition="gte 20">
                     <Success>
                       <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="clownmessenger" targettag="messenger" spawnpointtag="triggerer_player"/>
-                      <SetDataAction identifier="stowaway2_complete" value="true"/>
+                      <SetDataAction identifier="stowaway2_complete" value="1"/>
                       <StatusEffectAction targettag="triggered_cabinet">
                         <StatusEffect target="this" >
                           <Sound file="Content/Items/Jobgear/Clown/ITEM_bananaSlip1.ogg" range="800" volume="2" frequencymultiplier="1"  />
@@ -162,22 +162,14 @@
                                     <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.c1" dialogtype="Regular" targettag="triggerer_player">
                                       <Option text="EventText.stowaway2.o1.o2.o1.o1.o2">
                                         <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="stowaway" spawnpointtag="triggerer_player" targettag="stowaway"/>
-                                        <SetDataAction identifier="stowaway2_complete" value="true"/>
+                                        <SetDataAction identifier="stowaway2_complete" value="2"/>
                                         <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.o1.c1" dialogtype="Regular" targettag="triggerer_player"/>
-                                        <!-- currently triggers immediately, bug?  -->
-                                        <OnRoundEndAction>
-                                          <CheckConditionalAction targettag="Stowaway" IsDead="False">
-                                            <Success>
-                                              <ReputationAction targettype="Location" increase="3" />
-                                            </Success>
-                                            <Failure>
-                                            </Failure>
-                                          </CheckConditionalAction>
-                                        </OnRoundEndAction>
+                                        <EventLogAction targettag="player" id="initialinfo" text="EventDescription.stowaway2.snuckin" />
+                                        <EventObjectiveAction targettag="player" type="add" id="EventObjective.stowaway2.escort" />
                                       </Option>
                                       <Option text="EventText.stowaway2.o1.o2.o1.o1.o3">
                                         <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="stowaway" spawnpointtag="triggerer_player" targettag="stowaway"/>
-                                        <SetDataAction identifier="stowaway2_complete" value="true"/>
+                                        <SetDataAction identifier="stowaway2_complete" value="1"/>
                                         <ConversationAction text="EventText.stowaway2.o1.o2.o1.o1.o3.c1" dialogtype="Regular" targettag="triggerer_player"/>
                                         <NPCChangeTeamAction npctag="stowaway" teamid="Team1" addtocrew="true" />
                                       </Option>
@@ -211,6 +203,26 @@
           <!-- End -->
         </Failure>
       </CheckMissionAction>
+      <OnRoundEndAction>
+        <CheckDataAction identifier="stowaway2_complete" condition="eq 2">
+          <Success>
+            <CheckConditionalAction targettag="Stowaway" IsDead="False">
+              <Success>
+                <GiveExpAction targettag="player" amount="200" />
+                <EventLogAction targettag="player" id="success" text="EventDescription.stowaway2.Success" />
+                <EventObjectiveAction targettag="player" type="remove" id="EventObjective.stowaway2.escort" />
+                <ReputationAction targettype="Location" increase="2" />
+                <SetTraitorEventStateAction state="Completed" />
+              </Success>
+              <Failure>
+                <EventLogAction targettag="player" id="failure" text="EventDescription.stowaway2.Failure" />
+                <EventObjectiveAction targettag="player" type="remove" id="EventObjective.stowaway2.escort" />
+                <SetTraitorEventStateAction state="Failed" />
+              </Failure>
+            </CheckConditionalAction>
+          </Success>
+        </CheckDataAction>
+      </OnRoundEndAction>
     </ScriptedEvent>
         
     <ScriptedEvent identifier="stowaway2clownmission">

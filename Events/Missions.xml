@@ -1855,34 +1855,34 @@
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
     
-    <!-- UNUSED TODO: NEXTUPDATE reenable this by adding missionevent_escorthuskterrorist to escort eventsets if barodevs fix https://github.com/FakeFishGames/Barotrauma/discussions/16019 -->
-    <!-- escort mission but with a husk fanatic armed with unique knife and unstable compound N -->
+    <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
     <EscortMission
-      identifier="escorthuskterrorist"
-      tags="escortterrorists,escortterroristshusk,escort"
+      identifier="escortterroristhusk"
+      tags="escortterrorists,escortterroristshusk,escortcommonerscoalition,escortcommonersseparatists,escort"
       type="Escort"
       difficulty="2"
-      commonness="100"
+      commonness="5"
       reward="2000"
       achievementidentifier="escortmission"
-      baseescortedcharacters="1"
-      scalingescortedcharacters="0.35"
-      terroristchance="0.01"
+      baseescortedcharacters="3"
+      scalingescortedcharacters="0.25"
+      terroristchance="0.25"
       terroristannouncedialogtag="huskterroristannounce">
       <Characters>
-        <Character from="escortnpcs1" identifier="commoner" />
+        <Character from="escortnpcs1" identifier="commoner" >
+          <StatusEffect target="Character" delay="240" disabledeltatime="true">
+            <Affliction identifier="huskinfection" probability="0.25" strength="20" />
+          </StatusEffect>
+        </Character>
       </Characters>
       <TerroristItems>
-        <Item identifier="cultistrobes" equip="true" />    
-        <Item identifier="divingknife" mindifficulty="0"/>      
-        <Item identifier="syringegun" equip="true" mindifficulty="20">
-          <Item identifier="sulphuricacidsyringe" />
-          <Item identifier="sulphuricacidsyringe" />
-          <Item identifier="sulphuricacidsyringe" />
-          <Item identifier="sulphuricacidsyringe" />
-        </Item>
-        <Item identifier="volatilecompoundn" mindifficulty="30"/>
-        <Item identifier="divingknifeunique" mindifficulty="50"/>
+        <Item identifier="cultistrobes" equip="true" />
+        <Item identifier="huskeggsterrorist" equip="true" />
+        <Item identifier="huskfigurine" />
+        <!-- <Item identifier="syringegun" mindifficulty="20">
+          <Item identifier="sulphuricacidsyringe" amount="4" />
+        </Item> -->
+        <Item identifier="divingknifeunique" equip="true" mindifficulty="30"/>
       </TerroristItems>
       <Reputation identifier="location" amount="3" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="768,512,256,256" color="243,146,55" />

@@ -187,17 +187,13 @@
 
   <!-- the thing you have to blow up inside lairs -->
   <Item name="Heart of the lair" noninteractable="false" identifier="laircore" tags="laircore" scale="1.2" category="Misc" damagedbyexplosions="true" damagedbyprojectiles="true" damagedbyrepairtools="true" damagedbymeleeweapons="true" health="2000" sonarsize="30">
-    <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" />
-    <!-- add more scum with offset if needed -->
-    <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="124,153,251,157" depth="0.52" origin="0.5,0.5" offset="0,0" />
+    <sprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="0,0,50,50" depth="0.52" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="20,752,235,248" depth="0.51" origin="0.5,0.5" 
+                      ScaleAnim="Sine" ScaleAnimAmount="0.05,0.05" ScaleAnimSpeed="0.75"/>                      
+    <DecorativeSprite texture="Content/Map/Outposts/AbandonedOutpost/MonsterScumsA.png" sourcerect="124,153,251,157" depth="0.52" origin="0.5,0.5" offset="0,0"
+                      ScaleAnim="Sine" ScaleAnimAmount="0.1,0.1" ScaleAnimSpeed="1"/>  
     <Body radius="50" bodytype="Static" />
     <ItemComponent>
-      <StatusEffect type="Always" target="This" Scale="0.05" >
-        <Conditional Scale="lt 1.3" />
-      </StatusEffect>
-      <StatusEffect type="Always" target="This" Scale="-0.1" duration="2" interval="2">
-        <Conditional Scale="gte 1.3" />
-      </StatusEffect>
       <StatusEffect type="OnDamaged" target="This">
         <ParticleEmitter particle="heavygib" drawontop="true" particleamount="1" scalemin="1" scalemax="1" distancemin="25" distancemax="100" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" />
         <ParticleEmitter particle="gib" particleamount="10" scalemin="0.25" scalemax="1" distancemin="25" distancemax="50" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" />
@@ -1415,6 +1411,19 @@
       <sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="767,256,86,68" depth="0.1" origin="0.35,0.5" />
       <IsActive targetitemcomponent="ItemContainer" drawinventory="False" />
     </LightComponent>
+  </Item>  
+  
+  <Item name="huskeggsterrorist" identifier="huskeggsterrorist" description="Only used by NPC in a mission, instantly gives 70 husk. SHOULD NOT BE SEEN BY PLAYERS" category="Medical" Tags="smallitem" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="832,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/CreatureLoot/CreatureLoot.png" sourcerect="0,186,38,70" depth="0.6" origin="0.5,0.5" />
+    <Body width="35" height="70" density="20" />
+    <Holdable slots="Any,RightHand,LeftHand" >
+      <StatusEffect type="OnContained" target="This,Character" setvalue="true">
+        <Sound file="Content/Characters/Husk/Husk_Idle1.ogg" range="1000" volume="2" dontmuffle="true" />
+        <Affliction identifier="huskinfection" amount="90" />
+        <Removeitem />
+      </StatusEffect>
+    </Holdable>
   </Item>
 
     <!-- UNUSED. For sabotaging deconstructors -->
