@@ -3,44 +3,51 @@
   
   <Override>
   
-  <!-- TODO: NEXTUPDATE merge animated-shock branch, replace this with vanilla electricshock? vomit is bad though -->
-  <!--Shocked-->
-    <Affliction name="Shocked" identifier="shocked" description="Bzzzzt" type="debuff" maxstrength="20" limbspecific="false" indicatorlimb="Head" showiconthreshold="1000" showicontoothersthreshold="1000" showinhealthscannerthreshold="1000" healableinmedicalclinic="false">
-      <Effect minstrength="0" maxstrength="20" strengthchange="-1">
-        <StatusEffect target="Character" interval="0.1" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-          <Affliction identifier="shock1" strength="100" probability="0.3" />
-          <Affliction identifier="shock2" strength="100" probability="0.3" />
-          <Affliction identifier="shock3" strength="100" probability="0.3" />
-          <Affliction identifier="shock4" strength="100" probability="0.3" />
-        </StatusEffect>
-        <StatusEffect target="Character" interval="1" duration="1.1">
-          <Conditional IsLocalPlayer="true" />
-          <Sound file="%ModDir:2532991202%/Sounds/Ambient/ShockLoop.ogg" volume="5" loop="true" dontmuffle="true" />
-        </StatusEffect>
-      </Effect>
-      <icon texture="%ModDir:2532991202%/UI/DE-IconsAtlas.png" sourcerect="0,160,171,171" color="100,255,180,255" origin="0,0" />
-    </Affliction>
-    
-    <Affliction identifier="shock1" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
-      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
-      <AfflictionOverlay texture="%ModDir:2532991202%/UI/Shock1.png" />
-    </Affliction>
-    
-    <Affliction identifier="shock2" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
-      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
-      <AfflictionOverlay texture="%ModDir:2532991202%/UI/Shock2.png" />
-    </Affliction>
-    
-    <Affliction identifier="shock3" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
-      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
-      <AfflictionOverlay texture="%ModDir:2532991202%/UI/Shock3.png" />
-    </Affliction>
-    
-    <Affliction identifier="shock4" showiconthreshold="1000" showinhealthscannerthreshold="1000" maxstrength="100" afflictionoverlayalphaislinear="true">
-      <Effect minstrength="0" maxstrength="100" strengthchange="-300" />
-      <AfflictionOverlay texture="%ModDir:2532991202%/UI/Shock4.png" />
-    </Affliction>
-    
+  <!-- TODO: NEXTUPDATE update the vomit thing to match vanilla -->
+  
+  <!--Adds a animated overlay to electric shock wearoff-->  
+  <Affliction
+    name="Woozy"
+    identifier="electricshockwearoff"
+    limbspecific="false"
+    type="debuff"
+    activationthreshold="0"
+    showiconthreshold="1000"
+    showicontoothersthreshold="1000"
+    showinhealthscannerthreshold="1000"
+    affectmachines="false"
+    maxstrength="10">
+    <Effect minstrength="0" maxstrength="3" MinAfflictionOverlayAlphaMultiplier="0" MaxAfflictionOverlayAlphaMultiplier="0.8"
+      minscreendistort="0.0"
+      maxscreendistort="0.1"
+      minscreenblur="0.0"
+      maxscreenblur="0.1"
+      convulseamount="0.5"
+      strengthchange="-1.0"
+      minspeedmultiplier="1"
+      maxspeedmultiplier="0.35">
+    </Effect>
+    <Effect minstrength="3" maxstrength="10" MinAfflictionOverlayAlphaMultiplier="0.8" MaxAfflictionOverlayAlphaMultiplier="1"
+      minscreendistort="0.1"
+      maxscreendistort="0.2"
+      minscreenblur="0.1"
+      maxscreenblur="0.2"
+      convulseamount="0.8"
+      strengthchange="-1.0"
+      minspeedmultiplier="0.35"
+      maxspeedmultiplier="0.1">
+      <StatusEffect target="Character" >
+        <Conditional IsLocalPlayer="true" />
+        <Sound file="%ModDir:2532991202%/Sounds/Ambient/ShockLoop.ogg" volume="5" loop="true" dontmuffle="true" />
+      </StatusEffect>
+      <StatusEffect target="Character">
+        <Affliction identifier="nausea" amount="3" />
+      </StatusEffect>
+    </Effect>
+    <AfflictionOverlayAnimated texture="%ModDir:2532991202%/Afflictions/ShockAnimation2.png" sourcerect="0,0,2048,1280" origin="0.5,0.5" alpha="1.0" animspeed="12" columns="2" rows="2"/>
+    <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="256,640,128,128" color="150,26,26,255" origin="0,0"/>
+  </Affliction>
+        
   <!--Temporary Crewmember-->
   <Affliction name="Temporary Crewmember" identifier="temporarycrew" description="Will leave your crew after 6 hours from the moment they joined." type="temporarycrew" hideiconafterdelay="true" limbspecific="false" maxstrength="21601" showiconthreshold="0" iconcolors="100,255,180,255;100,255,180,255" treatmentthreshold="100000" showicontoothersthreshold="0" showinhealthscannerthreshold="0" healableinmedicalclinic="false">
     <Description textidentifier="afflictiondescription.temporarycrew.self" target="Self" minstrength="0" maxstrength="21601" />
