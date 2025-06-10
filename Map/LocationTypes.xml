@@ -166,7 +166,7 @@
       <Hireable identifier="mechanic" commonness="1" />
       <!-- remove the construction if a lair is nearby -->
       <ChangeTo type="None" messagetag="locationchange.construction.changeto.none">
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" requireddurationrange="1,3" probability="0.1" requiredproximity="1" />
         <Requirement requirehuntinggrounds="true" probability="0.25" function="Add" requiredproximity="0" />
       </ChangeTo>
       <ChangeTo type="Outpost" disallowedadjacentlocations="Outpost,Settlement,Colony,City" probability="0" disallowedproximity="2" locationtypechangecooldown="2" messagetag="locationchange.construction.changeto.settlement">
@@ -525,7 +525,7 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="896,128,128,128" color="50,255,148,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
-      <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,OuterHuskLair,HuskgroundsDE,WasteyardDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,2" messagetag="locationchange.militaryforces.changeto.None" />
+      <ChangeTo type="None" disallowedadjacentlocations="Lair,LairMudraptor,LairThresher,OuterHuskLair,HuskgroundsDE,PirateOutpost,UnderAttack" disallowedproximity="1" probability="0.5" requireddurationrange="1,2" messagetag="locationchange.militaryforces.changeto.None" />
       <Store
         initialbalance="1000"
         pricemodifierrange="5"
@@ -919,7 +919,7 @@
       <Hireable identifier="assistant" commonness="1"/>
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
         <!-- May be infested if within 1 steps of a lair. -->
-        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE,WasteyardDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
+        <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
       </ChangeTo>
       <ChangeTo type="DestroyedStation" requireddurationrange="1,2" messagetag="locationchange.outpost.changeto.abandoned">
         <Requirement requirehuntinggrounds="true" probability="0.35" requiredproximity="0" />
