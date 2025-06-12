@@ -1278,7 +1278,7 @@
       <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
       <Label name="checkcrawlerinside" />
       <WaitAction time="1" />
-      <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
+      <CountTargetsAction targettag="capturetarget" hulltag="playerhull" minamount="1" >
         <Conditional IsDead="false" />
         <Success>
           <MissionStateAction missionidentifier="capturelivecrawler" operation="set" value="1" />
@@ -1289,7 +1289,7 @@
         </Failure>
       </CountTargetsAction>
       <OnRoundEndAction>
-        <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
+        <CountTargetsAction targettag="capturetarget" hulltag="playerhull" minamount="1" >
           <Conditional IsDead="false" />
           <Success>
             <SetDataAction identifier="capturedlivetarget" operation="set" value="1" />
@@ -1300,32 +1300,6 @@
         </CountTargetsAction>
       </OnRoundEndAction>
     </ScriptedEvent>
-
-   
-    <!-- killmonsters will validate this if crawlers are far enough from the sub (they will get despawned)-->
-    <ScriptedEvent identifier="capturelivecrawlereventBUGGED">
-      <SpawnAction speciesname="crawler" TargetTag="capturetarget" amount="3" SpawnLocation="MainPath" offset="500" />
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hull" tag="playerhull" submarinetype="Player" />
-      <Label name="checkcrawlerinside" />
-      <WaitAction time="1" />
-      <!-- check if a crawler is inside the sub, I also tried  <Conditional InPlayerSubmarine="true" />  -->
-      <CountTargetsAction targettag="capturetarget" hulltag="playerhull" CompareToTarget="capturetarget" MinPercentageRelativeToTarget="30" >
-        <Conditional IsDead="false" />
-        <Success>
-          <ConversationAction targettag="player" text="Big success, there's a crawler in your ship. UNLESS THEY ARE ALL DEAD AND IT'S A BUG!" eventsprite="guywithalcohol" />
-        </Success>
-        <Failure>
-          <StatusEffectAction targettag="player">
-            <StatusEffect target="This" >
-              <Sound file="Content/Items/Weapons/honk.ogg" range="500" volume="1" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="checkcrawlerinside" />
-        </Failure>
-      </CountTargetsAction>
-    </ScriptedEvent>
-
 
     <!-- check if outpost is repaired -->
     <ScriptedEvent identifier="industrialincidentevent" commonness="50">
