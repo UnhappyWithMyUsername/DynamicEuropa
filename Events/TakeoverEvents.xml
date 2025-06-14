@@ -269,9 +269,10 @@
       <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <!-- tag and remove outpost manager (mission giver NPC) since they will not move at all and if the player positions themselves inside of them, the player becomes invincible to enemy AI -->
-      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <!-- kill the outpostmanager so you can loot its ID card to access the cabinet. I kind of hate it but spawning a new one didnt work, and if you take control of the outpost the manager casually gives you missions which is stupid -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <AfflictionAction targettag="killmanager" affliction="gunshotwound" strength="999" />
       <!-- tag and remove watchman (unlock path NPC) since the doors to control room will open automatically -->
       <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
@@ -326,9 +327,10 @@
       <TagAction criteria="humanprefabidentifier:securitynpccoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:sergeantseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:sergeantcoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <!-- tag and remove outpost manager (mission giver NPC) since they will not move at all and if the player positions themselves inside of them, the player becomes invincible to enemy AI -->
-      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="removenpc" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="removenpc" ContinueIfNoTargetsFound="true" />
+      <!-- kill the outpostmanager so you can loot its ID card to access the cabinet. I kind of hate it but spawning a new one didnt work, and if you take control of the outpost the manager casually gives you missions which is stupid -->
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <AfflictionAction targettag="killmanager" affliction="gunshotwound" strength="999" />
       <!-- tag and remove watchman (unlock path NPC) since the doors to control room will open automatically -->
       <TagAction criteria="humanprefabidentifier:watchman" tag="removenpc" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="humanprefabidentifier:watchmanseparatist" tag="removenpc" ContinueIfNoTargetsFound="true" />
