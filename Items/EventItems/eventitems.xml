@@ -666,11 +666,14 @@
     <Body width="45" height="65" density="8" />
     <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
   </Item>
+  
+
+  <!-- Signal Source for Wrecks & Ruins -->
   <Item name="SIGNAL SOURCE" identifier="broadcasterwreck" category="Misc" scale="1" hideinmenus="true">
     <Sprite texture="Content/UI/MainIconsAtlas.png" depth="0.6" sourcerect="0,0,1,1" origin="0.5,0.5" />
     <InventoryIcon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,0,1,1" origin="0.5,0.6" />
     <Body radius="100" density="10" friction="100" />
-    <AiTarget sonarlabel="SIGNAL SOURCE" soundrange="1000000" sight="0" staticsight="true" />
+    <AiTarget sonarlabel="broadcasterwreck" soundrange="1000000" sight="0" staticsight="true" />
     <MotionSensor range="1000" target="Human" minimumvelocity="1" ignoredead="true" detectownmotion="false" canbeselected="false">
       <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" conditionalcomparison="And">
         <Conditional Speed="lt 0.1" />
@@ -684,12 +687,12 @@
       <StatusEffect type="OnActive" targettype="This" SoundRange="1000000" setvalue="true" />
     </LightComponent>
   </Item>
-  <!-- Signal Source for Wrecks & Ruins -->
+  
   <Item name="SIGNAL SOURCE" identifier="broadcasterruin" category="Misc" scale="1" hideinmenus="true">
     <Sprite texture="Content/UI/MainIconsAtlas.png" depth="0.6" sourcerect="0,0,1,1" origin="0.5,0.5" />
     <InventoryIcon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,0,1,1" origin="0.5,0.6" />
     <Body radius="100" density="10" friction="100" />
-    <AiTarget sonarlabel="SIGNAL SOURCE" soundrange="1000000" sight="0" staticsight="true" />
+    <AiTarget sonarlabel="broadcasterruin" soundrange="1000000" sight="0" staticsight="true" />
     <MotionSensor range="1000" target="Human" minimumvelocity="1" ignoredead="true" detectownmotion="false" canbeselected="false">
       <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" conditionalcomparison="And">
         <Conditional Speed="lt 0.1" />
