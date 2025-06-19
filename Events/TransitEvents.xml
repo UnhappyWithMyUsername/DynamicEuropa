@@ -111,7 +111,7 @@
       <!-- requires a cargo mission. note: not all cargo missions are tagged "cargo" -->
       <CheckMissionAction missiontag="cargo" Type="Current">
         <Success>
-          <WaitAction time="5" />
+          <WaitAction time="25" />
           <CheckDataAction identifier="stowaway2_complete" condition="gt 0">
             <Success>
               <!--Don't repeat event-->
@@ -206,18 +206,19 @@
       <OnRoundEndAction>
         <CheckDataAction identifier="stowaway2_complete" condition="eq 2">
           <Success>
+            <!-- TODO: reenable the state action when barodevs fix https://github.com/FakeFishGames/Barotrauma/discussions/16160 -->
             <CheckConditionalAction targettag="Stowaway" IsDead="False">
               <Success>
                 <GiveExpAction targettag="player" amount="200" />
                 <EventLogAction targettag="player" id="success" text="EventDescription.stowaway2.Success" />
                 <EventObjectiveAction targettag="player" type="remove" id="EventObjective.stowaway2.escort" />
                 <ReputationAction targettype="Location" increase="2" />
-                <SetTraitorEventStateAction state="Completed" />
+                <!-- <SetTraitorEventStateAction state="Completed" /> -->
               </Success>
               <Failure>
                 <EventLogAction targettag="player" id="failure" text="EventDescription.stowaway2.Failure" />
                 <EventObjectiveAction targettag="player" type="remove" id="EventObjective.stowaway2.escort" />
-                <SetTraitorEventStateAction state="Failed" />
+                <!-- <SetTraitorEventStateAction state="Failed" /> -->
               </Failure>
             </CheckConditionalAction>
           </Success>
