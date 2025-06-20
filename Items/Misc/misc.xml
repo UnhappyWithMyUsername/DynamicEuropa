@@ -494,8 +494,18 @@
     <Body width="250" height="120" density="30" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect" >
       <StatusEffect type="OnPicked" target="This" canbepicked="false" setvalue="true" oneshot="true" >
+        <Sound file="Content/Characters/Husk/Husk_Idle1.ogg" type="OnUse" range="500" />
         <Dropitem />        
         <SpawnCharacter speciesname="husk" count="1" />
+      </StatusEffect>
+      <StatusEffect type="OnPicked" target="This" delay="5" stackable="false" oneshot="true" >        
+        <Explosion range="150" force="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="true" underwaterbubble="true" structuredamage="10" itemdamage="0" decal="explosion" >
+        </Explosion>
+        <ParticleEmitter particle="shrapnel" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="30" velocitymin="100" velocitymax="500" scalemin="1" scalemax="2" />
+        <ParticleEmitter particle="weldspark" anglemin="0" anglemax="360" distancemin="0" distancemax="50" particleamount="10" velocitymin="100" velocitymax="500" scalemin="1" scalemax="2" />
+        <sound file="Content/Items/Door/DoorBreak1.ogg" selectionmode="Random" range="800" frequencymultiplier="0.7" />
+        <sound file="Content/Items/Door/DoorBreak2.ogg" selectionmode="Random" range="800" frequencymultiplier="0.7" />
+        <Remove />
       </StatusEffect>
       <StatusEffect type="OnNotContained" target="This" interval="25" >
         <Conditional targetitemcomponent="Holdable" Attached="eq true" />
