@@ -484,6 +484,73 @@
     <ItemComponent isactive="true">
     </ItemComponent>
   </Item> 
+  
+
+  <Item name="Boarding pod (husk)" identifier="boardingpodhusk" nameidentifier="boardingpod" descriptionidentifier="boardingpod" tags="depthchargeammo,autointeractabledepthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false">
+    <PreferredContainer primary="depthchargeloader" />
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.55" origin="0.5,0.5" />
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
+    <Body width="250" height="120" density="30" />
+    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect" >
+      <StatusEffect type="OnPicked" target="This" canbepicked="false" setvalue="true" oneshot="true" >
+        <Dropitem />        
+        <SpawnCharacter speciesname="husk" count="1" />
+      </StatusEffect>
+      <StatusEffect type="OnNotContained" target="This" interval="25" >
+        <Conditional targetitemcomponent="Holdable" Attached="eq true" />
+        <particleemitter particle="shockwavesmall" particleamount="1" scalemin="0.5" scalemax="0.5" />
+        <Sound file="Content/Characters/Husk/Husk_Idle1.ogg" type="OnUse" range="300" selectionmode="Random" />
+        <Sound file="Content/Characters/Husk/Husk_Idle2.ogg" type="OnUse" range="300" />
+        <Sound file="Content/Characters/Husk/Husk_Idle3.ogg" type="OnUse" range="300" />
+        <Sound file="Content/Characters/Husk/Husk_Idle4.ogg" type="OnUse" range="300" />
+      </StatusEffect>
+    </Holdable>    
+    <Projectile characterusable="false" launchimpulse="20" maxtargetstohit="3" damagedoors="true">
+      <Attack structuredamage="300" itemdamage="100" severlimbsprobability="5" penetration="0.6" targetforce="1000">
+        <Affliction identifier="lacerations" strength="40" />
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="This">
+        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This" Condition="-34.0">
+        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" selectionmode="Random" range="50000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" selectionmode="Random" range="50000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" selectionmode="Random" range="50000" />
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particleamount="50" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
+      </StatusEffect>
+      <!-- break immediately (instead of going through) if the wall has very high durability or is indestructible-->
+      <StatusEffect type="OnImpact" target="UseTarget,This" condition="0" setvalue="true" comparison="Or">
+        <Conditional Health="gte 3000"/>
+        <Conditional Indestructible="true"/>
+      </StatusEffect>
+      <!-- break (and throw the character out) when inside a hull, with a very brief delay -->
+      <StatusEffect type="OnActive" target="This" OnlyInside="true" Condition="0" setvalue="true" delay="0.1"/>
+      <!-- Trigger explosions on contained items -->
+      <StatusEffect type="OnBroken" target="Contained">
+        <Use />
+      </StatusEffect>
+      <!-- Remove the item after exploding -->
+      <StatusEffect type="OnBroken" target="This">
+        <!-- short-range explosion to destroy walls immediately around the pod, making it less likely for the character to get stuck e.g. between multiple walls or inside some weird wall setup -->
+        <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+        <SpawnCharacter speciesname="husk" count="1" />
+        <Remove />
+      </StatusEffect>
+    </Projectile>
+      <!-- child of the Controller = active when someone's using it -->
+    <!-- <LightComponent range="100" PowerConsumption="0" lightcolor="255,100,80,0" lightoffset="0,-15" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+      <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.5,0.5" alpha="1.0" />
+      <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
+    </LightComponent> -->
+    <LightComponent range="100" PowerConsumption="0" lightcolor="255,100,80,0" lightoffset="0,-15" scale="0.12" pulsefrequency="1" pulseamount="0.5" AllowInGameEditing="false" IsOn="true">
+      <Sprite texture="Content/Map/Outposts/Art/GenericAssets2.png" sourcerect="1250,299,175,163" depth="0.54" origin="0.5,0.5" alpha="1.0" />
+      <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
+    </LightComponent>
+  </Item>
+  
 
   </Override>
 </Items>
