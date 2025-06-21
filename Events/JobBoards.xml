@@ -30,6 +30,11 @@
     <!-- Legacy Job Board: Provides all options regardless of your current location type. -->
     <ScriptedEvent identifier="jobboardde" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -187,11 +192,17 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     <!-- JOB BOARD - Habitation -->
     <ScriptedEvent identifier="jobboardhabitation" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -395,11 +406,17 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     <!-- JOB BOARD - INDUSTRIAL -->
     <ScriptedEvent identifier="jobboardindustrial" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -604,11 +621,17 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     <!-- JOB BOARD - Military -->
     <ScriptedEvent identifier="jobboardmilitary" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -808,11 +831,17 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     <!-- JOB BOARD - Research -->
     <ScriptedEvent identifier="jobboardresearch" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -956,12 +985,18 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
     
     <!-- I am VERY confused about all those jobboardpicked things that only exist here -->
     <!-- JOB BOARD - Medical -->
     <ScriptedEvent identifier="jobboardmedical" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="itemidentifier:de-jobboard" tag="potentialjobboard" submarinetype="outpost" />
       <CheckDataAction identifier="jobboard_always" condition="true">
         <Success>
@@ -1186,11 +1221,17 @@
           <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="500" volume="1.5" frequencymultiplier="0.7" />
         </StatusEffect>
       </StatusEffectAction>
+      <Label name="end" />
     </ScriptedEvent>
 
    
     <ScriptedEvent identifier="surveymissions" commonness="100">
       <WaitAction time="1" />
+      <CheckReputationAction targettype="Location" condition="gt -20" >
+        <Failure>
+          <Goto name="end" />
+        </Failure>
+      </CheckReputationAction>
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:sonarmonitor" tag="surveymonitor" submarinetype="outpost" />
       <SetDataAction identifier="surveymissioncount" operation="set" value="0" />
@@ -1228,6 +1269,7 @@
           <!-- End -->
         </Failure>
       </CheckDataAction>
+      <Label name="end" />
     </ScriptedEvent>
     
   </EventPrefabs>
