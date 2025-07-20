@@ -2302,6 +2302,23 @@
         </Failure>
       </CountTargetsAction>
     </ScriptedEvent>
+     
+    <!-- spawns one exosuit pirate in armory if hostile reputation (includes high coalition rep) -->
+    <ScriptedEvent identifier="spawnexopiratelowrep_bandits">
+      <TagAction criteria="player" tag="player" />
+      <CheckReputationAction TargetType="Faction" identifier="bandits" condition="lte -13">
+        <Success>
+          <SpawnAction NPCSetIdentifier="pirate_npcs" NPCIdentifier="pirateannihilator" teamid="Team2" SpawnLocation="Outpost" targetmoduletags="ArmoryPirate" spawnpointtag="piratesecurity" TargetTag="extrapirate" />
+        </Success>
+        <Failure>
+          <CheckReputationAction TargetType="Faction" identifier="coalition" condition="gte 60">
+            <Success>
+              <SpawnAction NPCSetIdentifier="pirate_npcs" NPCIdentifier="pirateannihilator" teamid="Team2" SpawnLocation="Outpost" targetmoduletags="ArmoryPirate" spawnpointtag="piratesecurity" TargetTag="extrapirate" />
+            </Success>
+          </CheckReputationAction>
+        </Failure>
+      </CheckReputationAction>
+    </ScriptedEvent>          
           
     <!-- Pirate informant
     You can pay the pirate manager to access a cargo robbing mission -->
