@@ -181,7 +181,8 @@
       <!-- removes itself if not worn-->
       <StatusEffect type="OnNotContained" target="This" condition="-100" setvalue="true"/>
       <StatusEffect type="OnWearing" target="Character,This" delay="1" condition="-100" setvalue="true">
-        <Conditional IsDead="true" />
+        <Conditional HealthPercentage="lte 0"/>
+        <Affliction identifier="explosiondamage" strength="200" />        
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This" >
         <Explosion range="150" force="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="true" underwaterbubble="true" structuredamage="10" itemdamage="0" decal="explosion" >
