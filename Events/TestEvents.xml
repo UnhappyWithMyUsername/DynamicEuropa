@@ -125,8 +125,18 @@
       <SetDataAction identifier="completedseparatiststakeover" operation="Add" value="1" />
     </ScriptedEvent>
   
+    <!-- Change mission ID. Runs a spectrum of mission actions to find out which one does what -->
     <ScriptedEvent identifier="MISSIONSTATEACTIONTEST">
+      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="1" />
+      <ConversationAction targettag="player" text="1" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
+      <ConversationAction targettag="player" text="2" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="3" />
+      <ConversationAction targettag="player" text="3" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="4" />
+      <ConversationAction targettag="player" text="4" eventsprite="GuyWithAlcohol" endconversation="true"/>
       <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" />
+      <ConversationAction targettag="player" text="5" eventsprite="GuyWithAlcohol" endconversation="true"/>
     </ScriptedEvent>
   
     <ScriptedEvent identifier="soldierspawnTEST">
