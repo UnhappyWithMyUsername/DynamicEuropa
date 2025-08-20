@@ -1855,6 +1855,25 @@
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
     
+    <!-- Husk research beacon - NPCs turn into husk when power is on -->
+    <BeaconMission
+      identifier="beaconhusk"
+      textidentifier="beaconhusk"
+      achievementidentifier="beaconmission"
+      tags="beaconhusk"
+      type="Beacon"
+      difficulty="1"
+      reward="1500"
+      sideobjective="false"
+      beacontags="huskbeacon">
+      <Reputation identifier="huskcult" amount="5" />
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconhuskevent" campaignonly="true"/>
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
+      <message text="Husked beacon" />
+      <Metadata identifier="huskbeacon_active" value="true"/>
+    </BeaconMission>
+    
+    
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
     <EscortMission
       identifier="escorthuskterrorist"
@@ -2347,28 +2366,6 @@
     <message header="missionheader0.titanitecollection" text="missionmessage0.titanitecollection"/>
   </MineralMission> -->
   
-    
-
-    <!-- Unused. TODO: enable this + create mission event if devs ever allow  specifying custom beacons in missions -->
-  <!--   <BeaconMission
-      identifier="huskbeaconmission"
-      textidentifier="beaconmission"
-      achievementidentifier="beaconmission"
-      tags="huskbeaconmission"
-      type="Beacon"
-      difficulty="1"
-      reward="1500"
-      sideobjective="false">
-      <Reputation identifier="huskcult" amount="5" />
-      <SubmarineTypes>
-        <Submarine path="%ModDir:2532991202%/Beacons/BeaconHusk.sub" faction="huskcult" />
-      </SubmarineTypes>
-      <TriggerEvent state="1" delay="5" eventidentifier="huskencounter" campaignonly="true"/>
-      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
-      <message text="Husked beacon" />
-      <Metadata identifier="huskbeacon_active" value="true"/>
-    </BeaconMission> -->
-    
 
       <!-- not possible to spawn custom beacons, maybe do custom shuttle-->
   <!--   <BeaconMission

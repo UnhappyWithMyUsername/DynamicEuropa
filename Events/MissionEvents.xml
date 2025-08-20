@@ -516,11 +516,9 @@
       </ConversationAction>
     </ScriptedEvent>
 
-      <!-- Unused TODO: custom husk beacon/probe, still no way to spawn specific beacons/wrecks in missions... -->
-      <!-- <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+      <!-- TODO: NEXTUPDATE add this to an eventset -->
+      <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
         <CheckDataAction identifier="beaconhusknorepeat" condition="true">
-          <Success>
-          </Success>
           <Failure>
             <NPCWaitAction npctag="huskresearcher" wait="true" />
             <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
@@ -528,7 +526,7 @@
             <SetDataAction identifier="beaconhusknorepeat" value="1"/>
           </Failure>
         </CheckDataAction>
-      </ScriptedEvent> -->
+      </ScriptedEvent>
 
   
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
@@ -1786,6 +1784,86 @@
       <Label name="end" />
     </ScriptedEvent>
    
+
+    <!-- Husk Encounter -->
+    <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
+    <ScriptedEvent identifier="beaconhuskevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="oxygengenerator" submarinetype="BeaconStation" />
+      <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhuskresearcher" targettag="dormanthusk" spawnpointtag="huskencounter1" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
+      <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter2" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
+      <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter3" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
+      <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="dormanthusk" />
+      <AfflictionAction affliction="huskinfection" strength="90" targettag="dormanthusk" />
+      <Label name="oxygencheck" />     
+      <CheckConditionalAction targettag="oxygengenerator" targetitemcomponent="OxygenGenerator" LogicalOperator="And" >
+        <Conditional targetitemcomponent="OxygenGenerator" voltage="gt 0.5" />
+        <Conditional condition="gt 0" />
+        <Failure>
+          <WaitAction time="1" />
+          <AfflictionAction affliction="stun" strength="100" targettag="dormanthusk" />
+          <Goto name="oxygencheck" /> 
+        </Failure>
+        <Success>
+          <Waitaction time="3" />
+          <ConversationAction text="EventText.beaconhusk.smell" dialogtype="Small" targettag="player" eventsprite="brokenmachinery" endconversation="true" continueautomatically="true" />
+          <StatusEffectAction targettag="oxygengenerator">
+            <StatusEffect target="This" duration="5">
+              <ParticleEmitter particle="fixfoam" particlespersecond="3" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.2" scalemax="0.4" Spread="50" distancemin="0" distancemax="50" colormultiplier="150,255,150,40" lifetimemultiplier="3"/>
+              <Sound file="Content/Items/Diving/ITEMS_divingSuitOxygenLeakLoop.ogg" range="800" loop="true" frequencymultiplier="0.5" volume="1" />
+            </StatusEffect>
+          </StatusEffectAction>
+        </Success>
+      </CheckConditionalAction>
+      <!-- Remove and readd husk infection. Hacky way of putting husk affliction at 100, game is hardcoded to make affliction not go over 80 via SEs... -->
+      <AfflictionAction affliction="huskinfection" strength="-100" targettag="dormanthusk" />
+      <AfflictionAction affliction="husktransformimmunity" strength="-100" targettag="dormanthusk" />
+      <WaitAction time="1" />
+      <AfflictionAction affliction="huskinfection" strength="100" targettag="dormanthusk" />
+      <TagAction criteria="humanprefabidentifier:beaconhusk" tag="turninghusk" />
+      <StatusEffectAction targettag="turninghusk">
+        <StatusEffect target="This" duration="20">
+        <Affliction identifier="internaldamage" amount="5" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TagAction criteria="humanprefabidentifier:beaconhuskresearcher" tag="dormanthuskresearcher" /> 
+      <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="dormanthuskresearcher" />
+      <!-- check if any NPC is still human after being unstunned -->
+      <Waitaction time="20" />
+      <Label name="unstunned" /> 
+      <CheckConditionalAction targettag="dormanthuskresearcher" IsHuman="true" LogicalOperator="And">
+        <Conditional stun="lte 0" />
+        <Success>
+          <ConversationAction text="EventText.beaconhusk.savedresearcher" speakertag="dormanthuskresearcher" invokertag="talker_player" endeventifinterrupted="false" dialogtype="Small" >
+            <Option text="EventText.beaconhusk.whathappened">
+              <ConversationAction text="EventText.beaconhusk.taintedgenes" targettag="talker_player" >
+                <Option text="EventText.beaconhusk.whynotransform">
+                  <ConversationAction text="EventText.beaconhusk.explanation" targettag="talker_player" >
+                    <Option text="EventText.beaconhusk.sabotaged">
+                      <ConversationAction text="EventText.beaconhusk.reward" endconversation="true" targettag="talker_player"/>
+                      <ReputationAction targettype="Faction" identifier="huskcult" increase="5" />
+                    </Option>
+                  </ConversationAction >
+                </Option>
+              </ConversationAction >
+            </Option>
+          </ConversationAction >
+        </Success>
+        <Failure>
+          <!-- check if dead, if not loop -->
+          <CheckConditionalAction targettag="dormanthuskresearcher" isdead="false">
+            <Success>  
+              <Waitaction time="1" />
+              <Goto name="unstunned" />      
+            </Success> 
+            <Failure>
+              <!-- end event if dead -->
+            </Failure>
+          </CheckConditionalAction>
+        </Failure>
+      </CheckConditionalAction>
+    </ScriptedEvent>
+ 
  
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
@@ -1800,6 +1878,10 @@
         <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
       </ScriptedEvent>
  -->  
+  
+  
+  
+  
   
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
