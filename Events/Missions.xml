@@ -1855,12 +1855,12 @@
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
     
-    <!-- Husk research beacon - NPCs turn into husk when power is on -->
+    <!-- Husk research beacon - NPCs turn into husk when power is on TODO: change identifier it's too vague -->
     <BeaconMission
       identifier="beaconhusk"
       textidentifier="beaconhusk"
       achievementidentifier="beaconmission"
-      tags="beaconhusk"
+      tags="beaconmissioncustom"
       type="Beacon"
       difficulty="1"
       reward="1500"
@@ -1872,8 +1872,32 @@
       <message text="Husked beacon" />
       <Metadata identifier="huskbeacon_active" value="true"/>
     </BeaconMission>
-    
-    
+  
+    <SalvageMission
+      identifier="MISSIONWRECKTEST"
+      tags="salvagemissioncustom"
+      type="SalvageWreck"
+      difficulty="2"
+      commonness="100"
+      reward="2000"
+      achievementidentifier="salvagewreckmission"
+      spawntype="wreck"
+      itemidentifier="handheldterminal"
+      containertag="locker"
+      requirewreck="true"
+      maxleveldifficulty="35"
+      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
+      wrecktags="WreckMissionTest">
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+      <chooserandom>
+        <StatusEffect target="This" showmessage="Receiving encrypted transmission: cbspusbvnbhbnf.dpn/efsfmjdu/[ERR:_INSERT_PASS].htm"/>
+      </chooserandom>
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
+      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+    </SalvageMission>
+  
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
     <EscortMission
       identifier="escorthuskterrorist"
