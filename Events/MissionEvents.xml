@@ -517,17 +517,30 @@
     </ScriptedEvent>
 
       <!-- TODO: NEXTUPDATE add this to an eventset -->
-      <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
-        <CheckDataAction identifier="beaconhusknorepeat" condition="true">
+      <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="0">
+        <CheckDataAction identifier="beaconfloodedrescuenorepeat" condition="1">
           <Failure>
-            <NPCWaitAction npctag="huskresearcher" wait="true" />
+            <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor">
+              <Option text="EventText.missionevent_beaconfloodedrescue.whatdo" >
+                <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.rescue" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
+                  <MissionAction missionidentifier="beaconfloodedrescue" />
+                  <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
+              </Option>
+            </ConversationAction>
+          </Failure>
+        </CheckDataAction>
+      </ScriptedEvent>
+
+      <!-- TODO: NEXTUPDATE add this to an eventset -->
+      <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+        <CheckDataAction identifier="beaconhusknorepeat" condition="1">
+          <Failure>
             <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
             <MissionAction missionidentifier="beaconhusk" />
             <SetDataAction identifier="beaconhusknorepeat" value="1"/>
           </Failure>
         </CheckDataAction>
       </ScriptedEvent>
-
   
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
@@ -1783,7 +1796,23 @@
       <TagAction criteria="itemtag:securebriefcase" tag="securebriefcase" />
       <Label name="end" />
     </ScriptedEvent>
-   
+            
+    <ScriptedEvent identifier="beaconfloodedrescueevent">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
+      <Label name="foundoperatorcheck" />
+      <WaitAction time="1" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="beaconoperator" MaxDistance="500" AllowSameEntity="false">
+        <Success>        
+          <TriggerAction target1tag="player" target2tag="beaconoperator" applytotarget1="triggerer_player" waitforinteraction="true" />
+          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibrations2" />          
+          <NPCChangeTeamAction npctag="beaconoperator" teamid="Team1" />
+        </Success>
+        <Failure>
+          <GoTo name="foundoperatorcheck" />
+        </Failure>
+      </CheckVisibilityAction>
+    </ScriptedEvent>
 
     <!-- Husk Encounter -->
     <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->

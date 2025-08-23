@@ -126,17 +126,30 @@
     </ScriptedEvent>
   
     <!-- Change mission ID. Runs a spectrum of mission actions to find out which one does what -->
-    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST">
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="1" />
-      <ConversationAction targettag="player" text="1" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
-      <ConversationAction targettag="player" text="2" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="3" />
-      <ConversationAction targettag="player" text="3" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="4" />
-      <ConversationAction targettag="player" text="4" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" />
-      <ConversationAction targettag="player" text="5" eventsprite="GuyWithAlcohol" endconversation="true"/>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST1">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="1" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="1"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST2">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="2" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="2"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST3">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="3" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="3"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST4">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="4" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="4"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST5">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="5" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="5"/>
     </ScriptedEvent>
   
     <ScriptedEvent identifier="soldierspawnTEST">
@@ -166,7 +179,7 @@
 
     <ScriptedEvent identifier="eventiconsTEST" >
       <TagAction criteria="player" tag="player" />
-      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryWoman" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan2" endconversation="true"/>
@@ -189,7 +202,7 @@
     <ScriptedEvent identifier="traitorlikeeventTEST" >
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,0,256,256" color="200,150,0,255" />
       <TagAction criteria="player" tag="player" />
-      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" dialogtype="Regular" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" dialogtype="Regular" endconversation="true"/>
       <EventLogAction targettag="player" id="initialinfo" text="EventText.bakingstation.objective1" />
       <EventObjectiveAction targettag="player" type="add" id="traitorobjective.bakingstation.meltdown" />
       <OnRoundEndAction>
