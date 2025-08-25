@@ -1818,15 +1818,15 @@
     <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
     <ScriptedEvent identifier="beaconhuskevent">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:oxygengenerator" tag="oxygengenerator" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="oxygengeneratorbeacon" submarinetype="BeaconStation" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhuskresearcher" targettag="dormanthusk" spawnpointtag="huskencounter1" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter2" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter3" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="dormanthusk" />
       <AfflictionAction affliction="huskinfection" strength="90" targettag="dormanthusk" />
       <Label name="oxygencheck" />     
-      <CheckConditionalAction targettag="oxygengenerator" targetitemcomponent="OxygenGenerator" LogicalOperator="And" >
-        <Conditional targetitemcomponent="OxygenGenerator" voltage="gt 0.5" />
+      <CheckConditionalAction targettag="oxygengeneratorbeacon" targetitemcomponent="oxygengeneratorbeacon" LogicalOperator="And" >
+        <Conditional targetitemcomponent="oxygengeneratorbeacon" voltage="gt 0.5" />
         <Conditional condition="gt 0" />
         <Failure>
           <WaitAction time="1" />
@@ -1836,7 +1836,7 @@
         <Success>
           <Waitaction time="3" />
           <ConversationAction text="EventText.beaconhusk.smell" dialogtype="Small" targettag="player" eventsprite="brokenmachinery" endconversation="true" continueautomatically="true" />
-          <StatusEffectAction targettag="oxygengenerator">
+          <StatusEffectAction targettag="oxygengeneratorbeacon">
             <StatusEffect target="This" duration="5">
               <ParticleEmitter particle="fixfoam" particlespersecond="3" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.2" scalemax="0.4" Spread="50" distancemin="0" distancemax="50" colormultiplier="150,255,150,40" lifetimemultiplier="3"/>
               <Sound file="Content/Items/Diving/ITEMS_divingSuitOxygenLeakLoop.ogg" range="800" loop="true" frequencymultiplier="0.5" volume="1" />
