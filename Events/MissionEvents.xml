@@ -1799,19 +1799,43 @@
             
     <ScriptedEvent identifier="beaconfloodedrescueevent">
       <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="BeaconStation" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
       <Label name="foundoperatorcheck" />
       <WaitAction time="1" />
+      <CountTargetsAction targettag="beaconoperator" minamount="1" >
+        <Conditional IsDead="false" />
+        <Failure>
+          <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="2" />
+          <SetDataAction identifier="beaconoperatorsaved" operation="set" value="0" />
+        </Failure>
+      </CountTargetsAction>
       <CheckVisibilityAction EntityTag="player" TargetTag="beaconoperator" MaxDistance="500" AllowSameEntity="false">
-        <Success>        
-          <TriggerAction target1tag="player" target2tag="beaconoperator" applytotarget1="triggerer_player" waitforinteraction="true" />
-          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibrations2" />          
+        <Success>
+        <StatusEffectAction targettag="beaconoperator">
+            <StatusEffect target="this">
+              <Forcesay message="eventtext.beaconfloodedrescueevent.thankjove1" sayinradio="true" />
+            </StatusEffect>
+        </StatusEffectAction>
+        <TriggerAction target1tag="player" target2tag="beaconoperator" applytotarget1="triggerer_player" waitforinteraction="true" />
+          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove2" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibration2" />          
           <NPCChangeTeamAction npctag="beaconoperator" teamid="Team1" />
         </Success>
         <Failure>
           <GoTo name="foundoperatorcheck" />
         </Failure>
       </CheckVisibilityAction>
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="beaconoperator" hulltag="playerhull" minamount="1" >
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="beaconoperatorsaved" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="beaconoperatorsaved" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>   
     </ScriptedEvent>
 
     <!-- Husk Encounter -->
