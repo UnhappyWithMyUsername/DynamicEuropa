@@ -1921,6 +1921,26 @@
     </ScriptedEvent>
  
  
+ 
+    <ScriptedEvent identifier="Cargopodsalvageevent">
+      <WaitAction time="5" />
+      <SetDataAction identifier="Cargopodsalvaged" operation="set" value="0" />
+      <TagAction criteria="itemtag:salvageobjective" tag="salvageobjective" />
+      <TagAction criteria="itemidentifier:outpostterminal" tag="outpostterminal" />
+      <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" radius="5000" waitforinteraction="false" />
+      <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
+      <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="0" />
+      <OnRoundEndAction>
+        <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" applytotarget1="podreachedend" radius="5000" waitforinteraction="false" />
+        <CountTargetsAction targettag="podreachedend" minamount="1">
+          <Success>
+            <SetDataAction identifier="Cargopodsalvaged" operation="set" value="1" />
+            <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
+          </Success>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
+ 
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
         <NPCFollowAction npctag="triggerer_prisoner" targettag="triggerer_securitynpc" follow="true" />
