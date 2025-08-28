@@ -1721,7 +1721,7 @@
     <TriggerEvent state="0" delay="0" eventidentifier="retrievesecretdocumentsevent" />
     <target
       spawntype="Outpost"
-      existingitemtag="classifieddocuments"  
+      existingitemtag="administratorclothes"  
       requireretrieval="Interact"
       hidelabelwhennotfound="true"
       hidelabelafterretrieved="true">
@@ -1891,6 +1891,7 @@
       <CompleteCheckDataAction identifier="beaconoperatorsaved" condition="eq 1"/>
     </BeaconMission>  
   
+    <!-- test to spawn custom wreck in mission, make sure to not have vanilla spawnpoints or thalamus if you don't want to deal with random events -->
     <SalvageMission
       identifier="MISSIONWRECKTEST"
       tags="salvagemissioncustom"
@@ -1916,6 +1917,7 @@
       <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
     </SalvageMission>
     
+    <!-- TODO: add success check to event itself? proximity with the submarine selection terminal (should be present in every docking module)? Too many shitty workarounds I'm tired -->
     <SalvageMission
       identifier="Cargopodsalvage"
       tags="salvagepod"
@@ -1928,15 +1930,14 @@
       requirewreck="true"
       minleveldifficulty="35"
       PickedUpMessage="missionmessage.wrecksalvage.pickedup"
-      ContainerTag="duffeljank"
       wrecktags="CargopodsalvageWreck">
       
       <target
         spawntype="None"
-        itemidentifier="handheldterminal"
+        existingitemtag="salvageobjective"
         sonarlabel="missionsonarlabel.lostcargo"
         allowcontinuebeforeretrieved="false"
-        requireretrieval="RetrievedToSub"
+        requireretrieval="None"
         hidelabelafterretrieved="false">
       </target>
       
@@ -1944,6 +1945,7 @@
       <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
       <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
       <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+      <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
     </SalvageMission>
   
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
