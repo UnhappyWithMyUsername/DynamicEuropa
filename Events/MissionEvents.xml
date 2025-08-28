@@ -1790,11 +1790,14 @@
       <GoTo name="recheck" />
     </ScriptedEvent>
          
-    <ScriptedEvent identifier="spawnbriefcaseNPC">
-      <TagAction criteria="player" tag="player" />
-      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="briefcaseNPC" targettag="briefcaseholder" spawnlocation="Outpost" teamid="FriendlyNPC"/>
+    <ScriptedEvent identifier="retrievesecretdocumentsevent">
+      <WaitAction time="5" />
       <TagAction criteria="itemtag:securebriefcase" tag="securebriefcase" />
-      <Label name="end" />
+      <StatusEffectAction targettag="securebriefcase">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securitybriefcase" spawnlocation="Outpost" />
+      <NPCFollowAction npctag="securitybriefcase" targettag="securebriefcase" follow="true" priority="30"/>
     </ScriptedEvent>
             
     <ScriptedEvent identifier="beaconfloodedrescueevent">
