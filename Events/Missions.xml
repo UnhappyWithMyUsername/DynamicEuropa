@@ -1915,6 +1915,35 @@
       <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
       <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
     </SalvageMission>
+    
+    <SalvageMission
+      identifier="Cargopodsalvage"
+      tags="salvagepod"
+      type="SalvageWreck"
+      difficulty="2"
+      commonness="100"
+      reward="2500"
+      achievementidentifier="salvagewreckmission"
+      spawntype="wreck"
+      requirewreck="true"
+      minleveldifficulty="35"
+      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
+      wrecktags="CargopodsalvageWreck">
+      
+      <target
+        spawntype="None"
+        existingitemtag="salvageobjective"
+        sonarlabel="missionsonarlabel.lostcargo"
+        allowcontinuebeforeretrieved="false"
+        requireretrieval="RetrievedToSub"
+        hidelabelafterretrieved="false">
+      </target>
+      
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
+      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+    </SalvageMission>
   
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
     <EscortMission

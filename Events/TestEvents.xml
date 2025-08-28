@@ -243,6 +243,17 @@
       <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="player" />
       <AfflictionAction affliction="huskinfection" strength="90" targettag="player" />
     </ScriptedEvent>
+    
+    <!-- check if player sub has a docking hatch with "bottom" force direction, enables carrying transport pods to outpost? -->
+    <ScriptedEvent identifier="checkbottomportTEST">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="bottomport" submarinetype="Player"/>
+      <CheckConditionalAction targettag="bottomport" targetitemcomponent="DockingPort" ForceDockingDirection="Bottom">
+        <Success>
+          <ConversationAction targettag="player" text="bottom port detected" eventsprite="MysteryWoman" endconversation="true"/>
+        </Success>
+      </CheckConditionalAction>
+    </ScriptedEvent>
       
 
     <ScriptedEvent identifier="mudraptorracing_TEST">
