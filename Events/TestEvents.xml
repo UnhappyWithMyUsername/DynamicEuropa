@@ -9,6 +9,21 @@
     <!-- CHEAT COMMANDS -->
     <!-- CHEAT COMMANDS -->
     
+    <!-- GENERIC TEST EVENT, USED TO COPY PASTE THINGS FOR QUICK TESTING -->
+    <ScriptedEvent identifier="genericTESTevent" commonness="0">
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />      
+      <StatusEffectAction targettag="beaconmonitor">
+        <StatusEffect target="this" nonplayerteaminteractable="true" mode="active" targetitemcomponent="Sonar" setvalue="true" spritecolor="255,0,0,255" />
+      </StatusEffectAction>
+      <WaitAction time="3" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
+      <NPCOperateItemAction npctag="beaconoperator" targettag="beaconmonitor" ItemComponentName="Sonar" Operate="true" /> 
+      <StatusEffectAction targettag="beaconmonitor">
+        <StatusEffect target="this" IsActive="True" nonplayerteaminteractable="false" mode="active" targetitemcomponent="Sonar" setvalue="true" spritecolor="255,2,255,255" />
+      </StatusEffectAction>
+    </ScriptedEvent>     
+    
+    
     <!-- ONLY EXISTS FOR EASY UNLOCKING OF PATH IF PEOPLE BROKE THEIR MAP AND THERE'S NO BLOCKADE -->
     <ScriptedEvent identifier="blockade_unstuck" commonness="0">
       <TagAction criteria="player" tag="player" />

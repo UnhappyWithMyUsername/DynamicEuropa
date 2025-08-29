@@ -1816,6 +1816,7 @@
     <ScriptedEvent identifier="beaconfloodedrescueevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
       <Label name="foundoperatorcheck" />
       <WaitAction time="1" />
@@ -1833,9 +1834,12 @@
               <Forcesay message="eventtext.beaconfloodedrescueevent.thankjove1" sayinradio="true" />
             </StatusEffect>
         </StatusEffectAction>
-        <TriggerAction target1tag="player" target2tag="beaconoperator" applytotarget1="triggerer_player" waitforinteraction="true" />
-          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove2" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibration2" />          
-          <NPCChangeTeamAction npctag="beaconoperator" teamid="Team1" />
+          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove2" speakertag="beaconoperator" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibration2" />          
+          <NPCOperateItemAction npctag="beaconoperator" targettag="beaconmonitor" ItemComponentName="Sonar" Operate="true" /> 
+          <TriggerAction target1tag="beaconoperator" target2tag="beaconmonitor" radius="50" />
+          <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" NonPlayerTeamInteractable="false" setvalue="true" />
+          </StatusEffectAction>
         </Success>
         <Failure>
           <GoTo name="foundoperatorcheck" />
