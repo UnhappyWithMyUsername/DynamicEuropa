@@ -516,31 +516,31 @@
       </ConversationAction>
     </ScriptedEvent>
 
-      <!-- TODO: NEXTUPDATE add this to an eventset -->
-      <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="0">
-        <CheckDataAction identifier="beaconfloodedrescuenorepeat" condition="1">
-          <Failure>
-            <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="shockjock">
-              <Option text="EventText.missionevent_beaconfloodedrescue.whatdo" >
-                <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.rescue" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
-                  <MissionAction missionidentifier="beaconfloodedrescue" />
-                  <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
-              </Option>
-            </ConversationAction>
-          </Failure>
-        </CheckDataAction>
-      </ScriptedEvent>
+    <!-- rescue beacon operator -->
+    <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="0">
+      <CheckDataAction identifier="beaconfloodedrescuenorepeat" condition="1">
+        <Failure>
+          <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="shockjock">
+            <Option text="EventText.missionevent_beaconfloodedrescue.whatdo" >
+              <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.rescue" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
+                <MissionAction missionidentifier="beaconfloodedrescue" />
+                <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
 
-      <!-- TODO: NEXTUPDATE add this to an eventset -->
-      <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
-        <CheckDataAction identifier="beaconhusknorepeat" condition="1">
-          <Failure>
-            <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Ecclesiast" />
-            <MissionAction missionidentifier="beaconhusk" />
-            <SetDataAction identifier="beaconhusknorepeat" value="1"/>
-          </Failure>
-        </CheckDataAction>
-      </ScriptedEvent>
+    <!-- turn on husk beacon -->
+    <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+      <CheckDataAction identifier="beaconhusknorepeat" condition="1">
+        <Failure>
+          <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Ecclesiast" />
+          <MissionAction missionidentifier="beaconhusk" />
+          <SetDataAction identifier="beaconhusknorepeat" value="1"/>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
 
     <!-- recover cargo pod mission -->
     <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">

@@ -1873,7 +1873,7 @@
       <Metadata identifier="huskbeacon_active" value="true"/>
     </BeaconMission>  
     
-    <!-- Husk research beacon - NPCs turn into husk when power is on TODO: change identifier it's too vague -->
+    <!-- Rescue a beacon operator from a flooded beacon. Time sensitive -->
     <BeaconMission
       identifier="beaconfloodedrescue"
       textidentifier="beaconfloodedrescue"
@@ -1917,7 +1917,8 @@
       <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
     </SalvageMission>
     
-    <!-- TODO: add success check to event itself? proximity with the submarine selection terminal (should be present in every docking module)? Too many shitty workarounds I'm tired -->
+    <!-- Recover cargo pod
+    It's super jank: spawns a wreck with a pod attached to it, the pod is pre-tagged and uses a conditional check to verify if the pod is within 5000 units of the "submarine switching terminal" which should be present in every docking module. The mission itself requires the event to work -->
     <SalvageMission
       identifier="Cargopodsalvage"
       tags="salvagepod"
