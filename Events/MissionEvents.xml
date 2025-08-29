@@ -1927,9 +1927,18 @@
       <SetDataAction identifier="Cargopodsalvaged" operation="set" value="0" />
       <TagAction criteria="itemtag:salvageobjective" tag="salvageobjective" />
       <TagAction criteria="itemidentifier:outpostterminal" tag="outpostterminal" />
-      <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" radius="5000" waitforinteraction="false" />
-      <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
-      <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="0" />
+      <TagAction criteria="itemtag:poddockingport" tag="poddockingport" />      
+      <Label name="checkifdocked" />
+      <WaitAction time="2" />
+      <CheckConditionalAction targettag="poddockingport" targetitemcomponent="DockingPort" Docked="true">
+        <Success>
+          <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
+          <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="-1" />
+        </Success>
+        <Failure>
+          <Goto name="checkifdocked" />
+        </Failure>
+      </CheckConditionalAction>
       <OnRoundEndAction>
         <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" applytotarget1="podreachedend" radius="5000" waitforinteraction="false" />
         <CountTargetsAction targettag="podreachedend" minamount="1">
