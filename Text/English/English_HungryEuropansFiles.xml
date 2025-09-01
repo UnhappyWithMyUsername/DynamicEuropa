@@ -1,1389 +1,659 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- TO MAKE IT EASIER FOR TRANSLATORS TO FIND NEW ADDITIONS OR CHANGES, I'LL PUT COMMENTS BEHIND EVERYTHING FROM THE CORRESPONDING PATCH
 SEARCH FOR THE FOLLOWING:                                                                                                                      -->
-<!--Patch patchnumber--> <!--FOR EXAMPLE "Patch 8" TO VIEW THE CHANGES OF THE CORRESPONDING PATCH-->
-<!--Changed as of Patch patchnumber--> <!--TO VIEW ANY CHANGES FROM OLDER VERSIONS IN THIS PATCH-->
-
-<!-- Keep in mind: The patch comments are behind/below the changed/added lines -->
-
-
-<!-- TODO: ANNOTATE EVERY TEXT CHANGE WHEN MERGING THE UPDATE FOR THE PROPER PATCH NUMBER, I DID NOT ADD A SINGLE PATCH NOT ANYWHERE, SO I WILL DO IT ON EVERY LINE THAT WAS ADDED OR MODIFIED IN THE DIFF INSTEAD -->
-
-<!-- /////// //////// -->
-<!-- LATEST PATCH: 18 -->
-<!-- /////// //////// -->
-
+<!--Patch patchnumber-->
+<!--FOR EXAMPLE "Patch 8" TO VIEW THE CHANGES OF THE CORRESPONDING PATCH-->
+<!--Changed as of Patch patchnumber-->
+<!--TO VIEW ANY CHANGES FROM OLDER VERSIONS IN THIS PATCH-->
+<!-- LATEST PATCH: 11 -->
 <infotexts language="English" nowhitespace="false" translatedname="English">
-<!-- Display names -->
-<displayname.returnitem>[itemname] (Return Item)</displayname.returnitem>
-<displayname.clean>[itemname] (Clean)</displayname.clean>
-<displayname.fill>[itemname] (Fill)</displayname.fill>
-<displayname.empty>[itemname] (Empty)</displayname.empty>
-<displayname.vegetarian>[itemname] (Vegetarian)</displayname.vegetarian>
-<displayname.humanfooditem>[itemname] (Human)</displayname.humanfooditem>
-<displayname.crawlerfooditem>[itemname] (Crawler)</displayname.crawlerfooditem>
-<displayname.mudraptorfooditem>[itemname] (Mudraptor)</displayname.mudraptorfooditem>
-<displayname.hammerheadfooditem>[itemname] (Hammerhead)</displayname.hammerheadfooditem>
-<displayname.thresherfooditem>[itemname] (Thresher)</displayname.thresherfooditem>
-<displayname.endwormfooditem>[itemname] (Endworm)</displayname.endwormfooditem>
-<displayname.spinelingfooditem>[itemname] (Spineling)</displayname.spinelingfooditem><!--Patch 13-->
-<displayname.molochfooditem>[itemname] (Moloch)</displayname.molochfooditem><!--Patch 13-->
-<displayname.huskfooditem>[itemname] (Husk)</displayname.huskfooditem><!--Patch 13-->
-<displayname.watcherfooditem>[itemname] (Watcher)</displayname.watcherfooditem><!--Patch 13-->
-<displayname.alternative>[itemname] (Alternative)</displayname.alternative><!--Patch 13-->
-
-<!-- Food Items -->
-<entityname.he-proteinbar1>Protein Bar</entityname.he-proteinbar1>
-<entitydescription.he-proteinbar1>A somewhat tasty protein bar. Helps to speed up the healing process a bit.</entitydescription.he-proteinbar1>
-<entityname.he-chips1>Bag of Pomegrenade Chips</entityname.he-chips1>
-<entitydescription.he-chips1>Dried pomegrenade chips. A popular little snack to watch the annual 'DUNWICE FACE-OFF' to.</entitydescription.he-chips1>
-<entityname.he-chips2>Bag of Mutated Pomegrenade Chips</entityname.he-chips2>
-<entitydescription.he-chips2>Dried mutated pomegrenade chips. A popular little snack. It is said to speed up the healing of burns a bit.</entitydescription.he-chips2>
-<entityname.he-bread>Bread</entityname.he-bread>
-<entitydescription.he-bread>A loaf of bread.</entitydescription.he-bread>
-<entityname.he-burgerbun>Burger Bun</entityname.he-burgerbun>
-<entitydescription.he-burgerbun>Used in the making of burgers.</entitydescription.he-burgerbun>
-<entityname.he-hotdogbun>Hotdog Bun</entityname.he-hotdogbun>
-<entitydescription.he-hotdogbun>Stick a sausage in it.</entitydescription.he-hotdogbun>
-<entityname.he-breadslices>Bread Slices</entityname.he-breadslices><!--Patch 10-->
-<entitydescription.he-breadslices>Two slices of bread. Great for making sandwiches!</entitydescription.he-breadslices><!--Patch 10-->
-<entityname.he-sandwichbbjam>Bubbleberry Jam Sandwich</entityname.he-sandwichbbjam><!--Patch 10-->
-<entitydescription.he-sandwichbbjam>A tasty sandwich with bubbleberry jam.</entitydescription.he-sandwichbbjam><!--Patch 10-->
-<entityname.he-sandwichpgjam>Pomegrenade Jam Sandwich</entityname.he-sandwichpgjam><!--Patch 13-->
-<entitydescription.he-sandwichpgjam>A tasty sandwich with pomegrenade jam.</entitydescription.he-sandwichpgjam><!--Patch 13-->
-<entityname.he-cookedjerky>Jerky</entityname.he-cookedjerky><!--Patch 13-->
-<entitydescription.he-cookedjerky>Dried jerky may taste like leather, but it cannot spoil.</entitydescription.he-cookedjerky><!--Patch 13-->
-
-<!--spineling-->
-<entityname.he-spinelingmeatchunk>Spineling Meat Chunk</entityname.he-spinelingmeatchunk><!--Patch 13-->
-<entitydescription.he-spinelingmeatchunk>A piece of spineling meat. Spoils if not refrigerated.</entitydescription.he-spinelingmeatchunk><!--Patch 13-->
-<entityname.he-rawspinelingmeat>Raw Spineling Meat</entityname.he-rawspinelingmeat><!--Patch 13-->
-<entitydescription.he-rawspinelingmeat>Spoils if not refrigerated.</entitydescription.he-rawspinelingmeat><!--Patch 13-->
-<entityname.he-rawspinelingsteak>Raw Spineling Steak</entityname.he-rawspinelingsteak><!--Patch 13-->
-<entitydescription.he-rawspinelingsteak>Spoils if not refrigerated.</entitydescription.he-rawspinelingsteak><!--Patch 13-->
-<entityname.he-cookedspinelingkebab>Spineling Kebab</entityname.he-cookedspinelingkebab><!--Patch 13-->
-<entitydescription.he-cookedspinelingkebab>Eating it leaves a stinging sensation.</entitydescription.he-cookedspinelingkebab><!--Patch 13-->
-
-<!--husk-->
-<entityname.he-huskmeatchunk>Husk Meat Chunk</entityname.he-huskmeatchunk><!--Patch 13-->
-<entitydescription.he-huskmeatchunk>A piece of meat cut from a husk. Spoils if not refrigerated.</entitydescription.he-huskmeatchunk><!--Patch 13-->
-<entityname.he-rawhuskmeat>Raw Husk Meat</entityname.he-rawhuskmeat><!--Patch 13-->
-<entitydescription.he-rawhuskmeat>Spoils if not refrigerated.</entitydescription.he-rawhuskmeat><!--Patch 13-->
-<entityname.he-cookedhuskfilet>Husk Lump and Omelette</entityname.he-cookedhuskfilet><!--Patch 18-->
-<entitydescription.he-cookedhuskfilet>A boiled lump of husk meat and omelette on the side. Safe to eat.</entitydescription.he-cookedhuskfilet><!--Patch 18-->
-
-<!--watcher-->
-<entityname.he-watchermeatchunk>Watcher Meat Chunk</entityname.he-watchermeatchunk><!--Patch 13-->
-<entitydescription.he-watchermeatchunk>A piece of watcher meat. Spoils if not refrigerated.</entitydescription.he-watchermeatchunk><!--Patch 13-->
-<entityname.he-rawwatchermeat>Raw Watcher Meat</entityname.he-rawwatchermeat><!--Patch 13-->
-<entitydescription.he-rawwatchermeat>Spoils if not refrigerated.</entitydescription.he-rawwatchermeat><!--Patch 13-->
-<entityname.he-rawwatchersteak>Raw Watcher Steak</entityname.he-rawwatchersteak><!--Patch 13-->
-<entitydescription.he-rawwatchersteak>Spoils if not refrigerated.</entitydescription.he-rawwatchersteak><!--Patch 13-->
-<entityname.he-preparedwatchersteak>Prepared Watcher Steaks</entityname.he-preparedwatchersteak><!--Patch 18-->
-<entitydescription.he-preparedwatchersteak>The taste leaves you staring holes into the air.</entitydescription.he-preparedwatchersteak><!--Patch 18-->
-<entityname.he-cookedwatchersteak>Watcher's Graze Plate</entityname.he-cookedwatchersteak><!--Patch 18-->
-<entitydescription.he-cookedwatchersteak>An ink-black watcher steak and vegetables for color. Eat it slowly, or go insane.</entitydescription.he-cookedwatchersteak><!--Patch 18-->
-
-<!--moloch-->
-<entityname.he-molochmeatchunk>Moloch Meat Chunk</entityname.he-molochmeatchunk><!--Patch 13-->
-<entitydescription.he-molochmeatchunk>A piece of moloch meat. Spoils if not refrigerated.</entitydescription.he-molochmeatchunk><!--Patch 13-->
-<entityname.he-rawmolochmeat>Raw Moloch Meat</entityname.he-rawmolochmeat><!--Patch 13-->
-<entitydescription.he-rawmolochmeat>Spoils if not refrigerated.</entitydescription.he-rawmolochmeat><!--Patch 13-->
-<entityname.he-rawmolochsteak>Raw Moloch Steak</entityname.he-rawmolochsteak><!--Patch 13-->
-<entitydescription.he-rawmolochsteak>Spoils if not refrigerated.</entitydescription.he-rawmolochsteak><!--Patch 13-->
-<entityname.he-cookedmolochsteak>Moloch Steak and Fries</entityname.he-cookedmolochsteak><!--Patch 18-->
-<entitydescription.he-cookedmolochsteak>A chewy Moloch steak and its fries, a roadhouse classic.</entitydescription.he-cookedmolochsteak><!--Patch 18-->
-<entityname.he-molochsushi>Moloch Sushi</entityname.he-molochsushi><!--Patch 13-->
-<entitydescription.he-molochsushi>Seasoned Moloch bits rolled in a leaf of Nori.</entitydescription.he-molochsushi><!--Patch 13-->
-
-<!--crawler-->
-<entityname.he-cookedcrawlerfilet>Crawler Brisket</entityname.he-cookedcrawlerfilet>
-<entitydescription.he-cookedcrawlerfilet>Despite being the tastiest part of a crawler, it's still quite awful and chewy.</entitydescription.he-cookedcrawlerfilet>
-<entityname.he-crawlermeatchunk>Crawler Half</entityname.he-crawlermeatchunk>
-<entitydescription.he-crawlermeatchunk>A Crawler cut in half. Spoils if not refrigerated.</entitydescription.he-crawlermeatchunk>
-<entityname.he-crawlermeatchunkspecial>Crawler Meat Chunk</entityname.he-crawlermeatchunkspecial>
-<entitydescription.he-crawlermeatchunkspecial>A chunk of Crawler meat.</entitydescription.he-crawlermeatchunkspecial>
-<entityname.he-rawcrawlermeat>Raw Crawler Meat</entityname.he-rawcrawlermeat>
-<entitydescription.he-rawcrawlermeat>Spoils if not refrigerated.</entitydescription.he-rawcrawlermeat>
-
-<!--human-->
-<entityname.he-cookedhumanfilet>Cannibal's platter</entityname.he-cookedhumanfilet>
-<entitydescription.he-cookedhumanfilet>A meal of choice, made for and from starving sailors.</entitydescription.he-cookedhumanfilet>
-<entityname.he-cookedhumanlimbs>Boiled Human Limbs</entityname.he-cookedhumanlimbs>
-<entitydescription.he-cookedhumanlimbs>Make sure these are not your own crew...</entitydescription.he-cookedhumanlimbs>
-
-<!--mudraptor-->
-<entityname.he-mudraptormeatchunk>Mudraptor Meat Chunk</entityname.he-mudraptormeatchunk>
-<entitydescription.he-mudraptormeatchunk>A nice chunk of meat cut from a Mudraptor. Spoils if not refrigerated.</entitydescription.he-mudraptormeatchunk>
-<entityname.he-rawmudraptormeat>Raw Mudraptor Meat</entityname.he-rawmudraptormeat>
-<entitydescription.he-rawmudraptormeat>Spoils if not refrigerated.</entitydescription.he-rawmudraptormeat>
-<entityname.he-rawmudraptorroast>Raw Mudraptor Roast</entityname.he-rawmudraptorroast>
-<entitydescription.he-rawmudraptorroast>Time to put it in the oven! Spoils if not refrigerated.</entitydescription.he-rawmudraptorroast><!--Patch 13-->
-<entityname.he-preparedmudraptorroast>Prepared Mudraptor Roast</entityname.he-preparedmudraptorroast>
-<entitydescription.he-preparedmudraptorroast>A big slice of Mudraptor roast.</entitydescription.he-preparedmudraptorroast>
-<entityname.he-cookedmudraptorroast>Cold Raptor Roast</entityname.he-cookedmudraptorroast>
-<entitydescription.he-cookedmudraptorroast>Cold Mudraptor roast slices with a side of popnut and bubbleberry salad.</entitydescription.he-cookedmudraptorroast>
-
-<!--hammerhead-->
-<entityname.he-hammerheadmeatchunk>Hammerhead Meat Chunk</entityname.he-hammerheadmeatchunk>
-<entitydescription.he-hammerheadmeatchunk>A nice chunk of meat cut from a Hammerhead. Spoils if not refrigerated.</entitydescription.he-hammerheadmeatchunk>
-<entityname.he-rawhammerheadmeat>Raw Hammerhead Meat</entityname.he-rawhammerheadmeat>
-<entitydescription.he-rawhammerheadmeat>Spoils if not refrigerated.</entitydescription.he-rawhammerheadmeat>
-<entityname.he-rawhammerheadspareribs>Raw Hammerhead Spare Ribs</entityname.he-rawhammerheadspareribs>
-<entitydescription.he-rawhammerheadspareribs>Cut from a massive ribcage. Spoils if not refrigerated.</entitydescription.he-rawhammerheadspareribs>
-<entityname.he-rawhammerheadroast>Raw Hammerhead Roast</entityname.he-rawhammerheadroast>
-<entitydescription.he-rawhammerheadroast>Time to put it in the oven. Spoils if not refrigerated.</entitydescription.he-rawhammerheadroast>
-<entityname.he-hammerheadspawnmeatchunk>Hammerhead Spawn</entityname.he-hammerheadspawnmeatchunk>
-<entitydescription.he-hammerheadspawnmeatchunk>A Hammerhead baby. Spoils if not refrigerated.</entitydescription.he-hammerheadspawnmeatchunk><!--Patch 13-->
-<entityname.he-preparedhammerheadroast>Prepared Hammerhead Roast</entityname.he-preparedhammerheadroast>
-<entitydescription.he-preparedhammerheadroast>A big slice of Hammerhead roast.</entitydescription.he-preparedhammerheadroast>
-<entityname.he-cookedhammerheadroast>Hammer And Omelette</entityname.he-cookedhammerheadroast>
-<entitydescription.he-cookedhammerheadroast>Roasted hammerhead with a side of omelette tenderly lying on a bed of sea weed.</entitydescription.he-cookedhammerheadroast>
-<entityname.he-cookedhammerheadspawnpickled>Pickled Hammerhead Spawn</entityname.he-cookedhammerheadspawnpickled>
-<entitydescription.he-cookedhammerheadspawnpickled>While fried hammerhead is the more popular food on stations, seasoned sailors prefer the stronger sweet and sour taste of pickled fish.</entitydescription.he-cookedhammerheadspawnpickled>
-<entityname.he-cookedhammerheadspawnfried>Fried Hammerhead Spawn</entityname.he-cookedhammerheadspawnfried>
-<entitydescription.he-cookedhammerheadspawnfried>Crunchy on the outside and soft on the inside, it makes you feel like the top of the food chain, if only for a moment.</entitydescription.he-cookedhammerheadspawnfried>
-<entityname.he-cookedhammerheadspareribs>Spare Ribs</entityname.he-cookedhammerheadspareribs>
-<entitydescription.he-cookedhammerheadspareribs>Sweet and tender Hammerhead ribs, best eaten around the bone.</entitydescription.he-cookedhammerheadspareribs><!--Patch 13-->
-
-<!--tresher-->
-<entityname.he-threshermeatchunk>Thresher Meat Chunk</entityname.he-threshermeatchunk>
-<entitydescription.he-threshermeatchunk>A piece of meat cut from a Thresher. Spoils if not refrigerated.</entitydescription.he-threshermeatchunk>
-<entityname.he-rawthreshermeat>Raw Thresher Meat</entityname.he-rawthreshermeat>
-<entitydescription.he-rawthreshermeat>Spoils if not refrigerated.</entitydescription.he-rawthreshermeat>
-<entityname.he-cookedthresherfilet>Thresher Filet and Fries</entityname.he-cookedthresherfilet><!--Patch 18-->
-<entitydescription.he-cookedthresherfilet>A thresher filet, served with fries and some sea weed for freshness.</entitydescription.he-cookedthresherfilet><!--Patch 18-->
-
-<!--endworm-->
-<entityname.he-endwormmeatchunk>Endworm Meat Chunk</entityname.he-endwormmeatchunk>
-<entitydescription.he-endwormmeatchunk>A fat chunk of meat from an Endworm. Spoils if not refrigerated.</entitydescription.he-endwormmeatchunk>
-<entityname.he-rawendwormmeat>Raw Endworm Meat</entityname.he-rawendwormmeat>
-<entitydescription.he-rawendwormmeat>Spoils if not refrigerated.</entitydescription.he-rawendwormmeat>
-<entityname.he-humanmeatchunk>Human Meat</entityname.he-humanmeatchunk>
-<entitydescription.he-humanmeatchunk>Parts of a human. Spoils if not refrigerated.</entitydescription.he-humanmeatchunk>
-<entityname.he-rawhumanmeat>Raw Human Meat</entityname.he-rawhumanmeat>
-<entitydescription.he-rawhumanmeat>Spoils if not refrigerated.</entitydescription.he-rawhumanmeat>
-<entityname.he-endwormhotdog>Hotdog</entityname.he-endwormhotdog>
-<entitydescription.he-endwormhotdog>Abandon your religion and prepare for culinary annihilation.</entitydescription.he-endwormhotdog>
-
-
-<!--plants-->
-<entityname.bubbleberries>Bubbleberries</entityname.bubbleberries><!--Patch 10-->
-<entitydescription.bubbleberries>Very tasty and juicy, they pop under the tongue.</entitydescription.bubbleberries><!--Patch 10-->
-<entityname.badbubbleberries>Mutated Bubbleberries</entityname.badbubbleberries><!--Patch 10-->
-<entityname.popnut>Popnut</entityname.popnut><!--Patch 10-->
-<entitydescription.popnut>Kids love to play with them. Needs to be put in water to pop it open and be able to consume it.</entitydescription.popnut>
-
-<!--Patch 10-->
-<entityname.popnutpopped>Popped Popnut</entityname.popnutpopped><!--Patch 10-->
-<entitydescription.popnutpopped>It's popped open, ready to be consumed. Used in some recipes.</entitydescription.popnutpopped><!--Patch 10-->
-<entityname.badpopnutpopped>Popped Mutated Popnut</entityname.badpopnutpopped><!--Patch 10-->
-<entitydescription.badpopnutpopped>It's popped open, ready to be consumed. Used in some recipes. Might be dangerous to leave it in the water.</entitydescription.badpopnutpopped><!--Patch 10-->
-<entityname.badpopnut>Mutated Popnut</entityname.badpopnut><!--Patch 18-->
-<entitydescription.badpopnut>This nut has more "pop" to it than you'd wish.</entitydescription.badpopnut><!--Patch 18-->
-<entityname.badtobaccobud>Mutated Tobacco Bud</entityname.badtobaccobud><!--Patch 18-->
-<entitydescription.badtobaccobud>A mutated variant of a tobacco bud, growing a gelatinous eye-like protrusion full of psychoactive elements.</entitydescription.badtobaccobud><!--Patch 18-->
-<entityname.badsaltbulb>Mutated Salt Bulb</entityname.badsaltbulb><!--Patch 18-->
-<entitydescription.badsaltbulb>A mutated variant of a salt bulb. Highly unstable.</entitydescription.badsaltbulb><!--Patch 18-->
-
-<!-- SEEDS -->
-<entityname.bubbleberryvineseed>Bubbleberry Vine Seed</entityname.bubbleberryvineseed><!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-bubbleberryvineseed>-->
-<entitydescription.bubbleberryvineseed>Plant it in a planter to grow bubbleberries.</entitydescription.bubbleberryvineseed><!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-bubbleberryvineseed>-->
-<entityname.popnutvineseed>Popnut Vine Seed</entityname.popnutvineseed><!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-popnutvineseed>-->
-<entitydescription.popnutvineseed>Plant it in a planter to grow Popnuts.</entitydescription.popnutvineseed><!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-popnutvineseed>-->
-
-<!-- Drinks -->
-<entityname.he-energydrink1>Energy Drink</entityname.he-energydrink1>
-<entitydescription.he-energydrink1>A refreshing energy drink. Good for when you're absolutely shit-faced and need to sober up a bit.</entitydescription.he-energydrink1>
-
-<entityname.rum>Rum</entityname.rum>
-<entitydescription.rum>A strong alcoholic beverage. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Heal Damage |Increase Psychosis Resistance</entitydescription.rum>
-
-<entityname.he-rum>Pirate Rum</entityname.he-rum>
-<entitydescription.he-rum>A very strong rum enriched with uranium for extra spice. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Healing Properties |Increase Psychosis Resistance |Increase Radiation Sickness (Slightly)</entitydescription.he-rum>
-
-<entityname.he-whiskey>Doc's Whiskey</entityname.he-whiskey>
-<entitydescription.he-whiskey>Doctor Michael's original whiskey. Approved by Doctors europa-wide. |Alcoholic Beverage |Reduce Hallucinations |Reduce Effects of Halucinova |Reduce Chem Addiction |Increase Psychosis Resistance |Slight Healing Properties</entitydescription.he-whiskey><!--Changed as of Patch 10-->
-
-<entityname.he-halucinova>Halucinova</entityname.he-halucinova>
-<entitydescription.he-halucinova>Keep away from &quot;Sadashi Kira&quot; at all cost! |Alcoholic Beverage |Increase Hallucinations | Slight Healing Properties</entitydescription.he-halucinova>
-
-<entityname.he-beer>Coalition Premium Lager Beer</entityname.he-beer>
-<entitydescription.he-beer>A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beer>
-
-<entityname.he-water>Water</entityname.he-water>
-<entitydescription.he-water>Tastes fresh.</entitydescription.he-water><!--Changed as of Patch 15 | Simplified description to just state it tastes fresh-->
-<entityname.he-waterbeer>Water</entityname.he-waterbeer><!--Patch 10-->
-<entitydescription.he-waterbeer>Tastes fresh.</entitydescription.he-waterbeer><!--Changed as of Patch 15 | Simplified description to just state it tastes fresh-->
-<entityname.he-waterrum>Water</entityname.he-waterrum><!--Patch 10-->
-<entitydescription.he-waterrum>Tastes fresh.</entitydescription.he-waterrum><!--Changed as of Patch 15 | Simplified description to just state it tastes fresh-->
-<entityname.he-waterwhiskey>Water</entityname.he-waterwhiskey><!--Patch 10-->
-<entitydescription.he-waterwhiskey>Tastes fresh.</entitydescription.he-waterwhiskey><!--Changed as of Patch 15 | Simplified description to just state it tastes fresh-->
-<entityname.he-waterhalucinova>Water</entityname.he-waterhalucinova><!--Patch 10-->
-<entitydescription.he-waterhalucinova>Tastes fresh.</entitydescription.he-waterhalucinova><!--Changed as of Patch 15 | Simplified description to just state it tastes fresh-->
-
-<entityname.he-milk>Moloch Milk</entityname.he-milk>
-<entitydescription.he-milk>A bottle of Moloch Milk. Tastes a bit funny. Don't ask how they get milk from a Moloch! May help a bit when you're shit-faced.</entitydescription.he-milk>
-
-<entityname.he-seawaterrum>Water</entityname.he-seawaterrum><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water"-->
-<entitydescription.he-seawaterrum>Tastes salty.</entitydescription.he-seawaterrum><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water" and simplified the description to just state it tastes salty-->
-<entityname.he-seawaterwhiskey>Water</entityname.he-seawaterwhiskey><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water"-->
-<entitydescription.he-seawaterwhiskey>Tastes salty.</entitydescription.he-seawaterwhiskey><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water" and simplified the description to just state it tastes salty-->
-<entityname.he-seawaterhalucinova>Water</entityname.he-seawaterhalucinova><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water"-->
-<entitydescription.he-seawaterhalucinova>Tastes salty.</entitydescription.he-seawaterhalucinova><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water" and simplified the description to just state it tastes salty-->
-<entityname.he-seawater>Water</entityname.he-seawater><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water"-->
-<entitydescription.he-seawater>Tastes salty.</entitydescription.he-seawater><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water" and simplified the description to just state it tastes salty-->
-<entityname.he-seawaterbeer>Water</entityname.he-seawaterbeer><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water"-->
-<entitydescription.he-seawaterbeer>Tastes salty.</entitydescription.he-seawaterbeer><!--Changed as of Patch 15 | Previously referred to "Sea Water" instead of just "Water" and simplified the description to just state it tastes salty-->
-
-<entityname.he-toiletwater>Water</entityname.he-toiletwater><!--Patch 15-->
-<entitydescription.he-toiletwater>Tastes funny.</entitydescription.he-toiletwater><!--Patch 15-->
-<entityname.he-toiletwaterbeer>Water</entityname.he-toiletwaterbeer><!--Patch 15-->
-<entitydescription.he-toiletwaterbeer>Tastes funny.</entitydescription.he-toiletwaterbeer><!--Patch 15-->
-<entityname.he-toiletwaterrum>Water</entityname.he-toiletwaterrum><!--Patch 15-->
-<entitydescription.he-toiletwaterrum>Tastes funny.</entitydescription.he-toiletwaterrum><!--Patch 15-->
-<entityname.he-toiletwaterwhiskey>Water</entityname.he-toiletwaterwhiskey><!--Patch 15-->
-<entitydescription.he-toiletwaterwhiskey>Tastes funny.</entitydescription.he-toiletwaterwhiskey><!--Patch 15-->
-<entityname.he-toiletwaterhalucinova>Water</entityname.he-toiletwaterhalucinova><!--Patch 15-->
-<entitydescription.he-toiletwaterhalucinova>Tastes funny.</entitydescription.he-toiletwaterhalucinova><!--Patch 15-->
-
-<entityname.he-beercoalitionpremium>Coalition Premium</entityname.he-beercoalitionpremium><!--Changed as of Patch 10 | Identifier changed. Previous identifier <entityname.he-beer>-->
-<entitydescription.he-beercoalitionpremium>A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beercoalitionpremium><!--Changed as of Patch 10 | Identifier changed. Previous identifier <entityname.he-beer>-->
-<entityname.he-beerjovianforce>Jovian Force</entityname.he-beerjovianforce><!--Patch 10-->
-<entitydescription.he-beerjovianforce>A beer most popular amongst the Separatists. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beerjovianforce><!--Patch 10-->
-<entityname.he-beerliquidascension>Liquid Ascension</entityname.he-beerliquidascension><!--Patch 10-->
-<entitydescription.he-beerliquidascension>A popular beer amongst members of the church of husk on their way to ascension! |Alcoholic Beverage |Increase Psychosis Resistance |Increase Pressure Immunity |Oxygen Not Included |May contain traces of husk parasites</entitydescription.he-beerliquidascension><!--Patch 10-->
-<entityname.he-beerclownjuice>Clown Juice</entityname.he-beerclownjuice><!--Patch 10-->
-<entitydescription.he-beerclownjuice>A popular beer amongst pranksters. Praise the honkmother! |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beerclownjuice><!--Patch 10-->
-<entityname.he-beerreaperstribute>Reaper's Tribute</entityname.he-beerreaperstribute><!--Patch 10-->
-<entitydescription.he-beerreaperstribute>A strong beer to pay tribute to the reaper. |Alcoholic Beverage |Clear Reaper's Tax |Clears your mind of embarrassment |Increase Psychosis Resistance</entitydescription.he-beerreaperstribute><!--Patch 13-->
-
-<entityname.he-cupbubbleberrytea>Cup of Bubbleberry Tea</entityname.he-cupbubbleberrytea><!--Patch 13-->
-<entitydescription.he-cupbubbleberrytea>People claim they didn't get thirsty for quite a while after drinking it.</entitydescription.he-cupbubbleberrytea><!--Patch 13-->
-<entityname.he-cuppopnuttea>Cup of Popnut Tea</entityname.he-cuppopnuttea><!--Patch 13-->
-<entitydescription.he-cuppopnuttea>People claim they didn't get thirsty for quite a while after drinking it.</entitydescription.he-cuppopnuttea><!--Patch 13-->
-
-<entityname.he-colacan>Can of Couwola Cola</entityname.he-colacan><!--Patch 13-->
-<entitydescription.he-colacan>A can of Couwola Cola. Good for when you need to sober up.</entitydescription.he-colacan><!--Patch 13-->
-<entityname.he-colazerocan>Can of Couwola Cola Zero</entityname.he-colazerocan><!--Patch 13-->
-<entitydescription.he-colazerocan>A can of Couwola Cola Zero. No sugar, but full flavor! Good for when you need to sober up.</entitydescription.he-colazerocan><!--Patch 13-->
-<entityname.he-colabottle>Couwola Cola</entityname.he-colabottle><!--Patch 13-->
-<entitydescription.he-colabottle>A bottle of Couwola Cola. Good for when you need to sober up.</entitydescription.he-colabottle><!--Patch 13-->
-<entityname.he-colazerobottle>Couwola Cola Zero</entityname.he-colazerobottle><!--Patch 13-->
-<entitydescription.he-colazerobottle>A bottle of Couwola Cola Zero. Zero sugar, but full flavor! Good for when you need to sober up.</entitydescription.he-colazerobottle><!--Patch 13-->
-<!-- Kegs -->
-<entityname.he-kegempty>Empty Keg</entityname.he-kegempty><!--Patch 10-->
-<entitydescription.he-kegempty>An empty keg used for some recipes. Can be used in water to collect dirty water.</entitydescription.he-kegempty><!--Patch 10-->
-<entityname.he-kegseawater>Keg of Sea Water</entityname.he-kegseawater><!--Patch 10-->
-<entitydescription.he-kegseawater>A keg full of sea water. Can be used to refill bottles at a refill station. Can be cooked into clean water at a stove or brewing kettle. Also used in hydroponic planters.</entitydescription.he-kegseawater><!--Patch 10-->
-<entityname.he-kegwater>Keg of Water</entityname.he-kegwater><!--Patch 10-->
-<entitydescription.he-kegwater>A keg full of water. Can be used to refill bottles at a refill station.</entitydescription.he-kegwater><!--Patch 10-->
-<entityname.he-kegcoalitionpremium>Keg of Coalition Premium Beer</entityname.he-kegcoalitionpremium><!--Patch 10-->
-<entitydescription.he-kegcoalitionpremium>A keg full of Coalition Premium beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegcoalitionpremium><!--Patch 10-->
-<entityname.he-kegjovianforce>Keg of Jovian Force Beer</entityname.he-kegjovianforce><!--Patch 10-->
-<entitydescription.he-kegjovianforce>A keg full of Jovian Force beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegjovianforce><!--Patch 10-->
-<entityname.he-kegliquidascension>Keg of Liquid Ascension Beer</entityname.he-kegliquidascension><!--Patch 10-->
-<entitydescription.he-kegliquidascension>A keg full of Liquid Ascension beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegliquidascension><!--Patch 10-->
-<entityname.he-kegclownjuice>Keg of Clown Juice Beer</entityname.he-kegclownjuice><!--Patch 10-->
-<entitydescription.he-kegclownjuice>A keg full of Clown Juice beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegclownjuice><!--Patch 10-->
-<entityname.he-kegreaperstribute>Keg of Reaper's Tribute Beer</entityname.he-kegreaperstribute><!--Patch 10-->
-<entitydescription.he-kegreaperstribute>A keg full of Reaper's Tribute beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegreaperstribute><!--Patch 10-->
-<entityname.he-kegrum>Keg of Rum</entityname.he-kegrum><!--Patch 10-->
-<entitydescription.he-kegrum>A keg full of rum. Can be used to refill bottles at a refill station.</entitydescription.he-kegrum><!--Patch 10-->
-<entityname.he-kegpiraterum>Keg of Pirate Rum</entityname.he-kegpiraterum><!--Patch 10-->
-<entitydescription.he-kegpiraterum>A keg full of pirate rum. Can be used to refill bottles at a refill station.</entitydescription.he-kegpiraterum><!--Patch 10-->
-<entityname.he-kegwhiskey>Keg of Whiskey</entityname.he-kegwhiskey><!--Patch 10-->
-<entitydescription.he-kegwhiskey>A keg full of whiskey. Can be used to refill bottles at a refill station.</entitydescription.he-kegwhiskey><!--Patch 10-->
-<entityname.he-keghalucinova>Keg of Halucinova</entityname.he-keghalucinova><!--Patch 10-->
-<entitydescription.he-keghalucinova>A keg full of halucinova. Can be used to refill bottles at a refill station.</entitydescription.he-keghalucinova><!--Patch 10-->
-<!-- Blueprints -->
-<entityname.he-blueprintbottle>Bottle Blueprint</entityname.he-blueprintbottle><!--Patch 11-->
-<entitydescription.he-blueprintbottle>A blueprint of a regular bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottle><!--Patch 11-->
-<entityname.he-blueprintbottlebeer>Beer Bottle Blueprint</entityname.he-blueprintbottlebeer><!--Patch 11-->
-<entitydescription.he-blueprintbottlebeer>A blueprint of a beer bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlebeer><!--Patch 11-->
-<entityname.he-blueprintbottlerum>Rum Bottle Blueprint</entityname.he-blueprintbottlerum><!--Patch 11-->
-<entitydescription.he-blueprintbottlerum>A blueprint of a rum bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlerum><!--Patch 11-->
-<entityname.he-blueprintbottlewhiskey>Whiskey Bottle Blueprint</entityname.he-blueprintbottlewhiskey><!--Patch 11-->
-<entitydescription.he-blueprintbottlewhiskey>A blueprint of a Whiskey bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlewhiskey><!--Patch 11-->
-<entityname.he-blueprintbottlehalucinova>Halucinova Bottle Blueprint</entityname.he-blueprintbottlehalucinova><!--Patch 11-->
-<entitydescription.he-blueprintbottlehalucinova>A blueprint of a Halucinova bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlehalucinova><!--Patch 11-->
-<entityname.he-blueprintjar>Jar Blueprint</entityname.he-blueprintjar><!--Patch 11-->
-<entitydescription.he-blueprintjar>A blueprint of a Jar. Can be used in a bottle printer.</entitydescription.he-blueprintjar><!--Patch 11-->
-<entityname.he-blueprintshaker>Shaker Blueprint</entityname.he-blueprintshaker><!--Patch 11-->
-<entitydescription.he-blueprintshaker>A blueprint of a Shaker. Can be used in a bottle printer.</entitydescription.he-blueprintshaker><!--Patch 11-->
-<entityname.he-blueprintcup>Cup Blueprint</entityname.he-blueprintcup><!--Patch 13-->
-<entitydescription.he-blueprintcup>A blueprint of a Cup. Can be used in a bottle printer.</entitydescription.he-blueprintcup><!--Patch 13-->
-<!-- Ingredients -->
-<entityname.he-emptybottlerum>Empty Rum Bottle</entityname.he-emptybottlerum>
-<entitydescription.he-emptybottlerum>An empty Rum bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlerum>
-<entityname.he-emptybottlewhiskey>Empty Whiskey Bottle</entityname.he-emptybottlewhiskey>
-<entitydescription.he-emptybottlewhiskey>An empty Whiskey bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlewhiskey>
-<entityname.he-emptybottlehalucinova>Empty Halucinova Bottle</entityname.he-emptybottlehalucinova>
-<entitydescription.he-emptybottlehalucinova>An empty Halucinova bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlehalucinova>
-<entityname.he-emptybottlebeer>Empty Beer Bottle</entityname.he-emptybottlebeer><!--Patch 10-->
-<entitydescription.he-emptybottlebeer>An empty beer bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlebeer><!--Patch 10-->
-<entityname.he-emptybottle>Empty Bottle</entityname.he-emptybottle>
-<entitydescription.he-emptybottle>An empty bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottle>
-<entityname.he-emptyjar>Empty Jar</entityname.he-emptyjar>
-<entitydescription.he-emptyjar>An empty jar used for some recipes. Can be thrown.</entitydescription.he-emptyjar>
-<entityname.he-emptyshaker>Empty Shaker</entityname.he-emptyshaker><!--Patch 11-->
-<entitydescription.he-emptyshaker>An empty shaker ready to be filled with salt! Can be thrown.</entitydescription.he-emptyshaker><!--Patch 11-->
-<entityname.he-emptycup>Empty Cup</entityname.he-emptycup><!--Patch 13-->
-<entityname.he-emptybottlerum2>Empty Rum Bottle</entityname.he-emptybottlerum2><!--Patch 11-->
-<entitydescription.he-emptybottlerum2>An empty Rum bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlerum2><!--Patch 11-->
-<entityname.he-emptybottlewhiskey2>Empty Whiskey Bottle</entityname.he-emptybottlewhiskey2><!--Patch 11-->
-<entitydescription.he-emptybottlewhiskey2>An empty Whiskey bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlewhiskey2><!--Patch 11-->
-<entityname.he-emptybottlehalucinova2>Empty Halucinova Bottle</entityname.he-emptybottlehalucinova2><!--Patch 11-->
-<entitydescription.he-emptybottlehalucinova2>An empty Halucinova bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlehalucinova2><!--Patch 11-->
-<entityname.he-emptybottlebeer2>Empty Beer Bottle</entityname.he-emptybottlebeer2><!--Patch 11-->
-<entitydescription.he-emptybottlebeer2>An empty beer bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlebeer2><!--Patch 11-->
-<entityname.he-emptybottle2>Empty Bottle</entityname.he-emptybottle2><!--Patch 11-->
-<entitydescription.he-emptybottle2>An empty bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottle2><!--Patch 11-->
-<entityname.he-emptyjar2>Empty Jar</entityname.he-emptyjar2><!--Patch 11-->
-<entitydescription.he-emptyjar2>An empty jar used for some recipes. Can be thrown.</entitydescription.he-emptyjar2><!--Patch 11-->
-<entityname.he-emptyshaker2>Empty Shaker</entityname.he-emptyshaker2><!--Patch 11-->
-<entitydescription.he-emptyshaker2>An empty shaker ready to be filled with salt! Can be thrown.</entitydescription.he-emptyshaker2><!--Patch 11-->
-<entityname.he-emptycup2>Empty Cup</entityname.he-emptycup2><!--Patch 13-->
-<entitydescription.he-emptycup2>An empty cup for drinks. Can be thrown or filled with tea.</entitydescription.he-emptycup2><!--Patch 13-->
-
-
-
-
-<entityname.he-rawjerky>Jerky (Raw)</entityname.he-rawjerky><!--Patch 13-->
-<entitydescription.he-rawjerky>A pile of salty, raw jerky. Drying it can save even the foulest of meats. Put it in an oven.</entitydescription.he-rawjerky><!--Patch 13-->
-<entityname.he-salt>Salt</entityname.he-salt>
-<entitydescription.he-salt>Don't get salty now!</entitydescription.he-salt>
-<entityname.he-pepper>Pepper</entityname.he-pepper>
-<entitydescription.he-pepper>Made out of dried out poppy seeds. Pepper be prepared!</entitydescription.he-pepper>
-<entityname.he-sugar>Sugar</entityname.he-sugar>
-<entitydescription.he-sugar>Oh so sweet!</entitydescription.he-sugar>
-<entityname.he-ketchup>Ketchup</entityname.he-ketchup>
-<entitydescription.he-ketchup>Made from pomegrenades.</entitydescription.he-ketchup>
-<entityname.he-vinegar>Vinegar</entityname.he-vinegar>
-<entitydescription.he-vinegar>That smell...</entitydescription.he-vinegar>
-<entityname.he-cookingoil>Cooking Oil</entityname.he-cookingoil>
-<entitydescription.he-cookingoil>This one is not used in engines.</entitydescription.he-cookingoil>
-<entityname.he-flour>Flour</entityname.he-flour>
-<entitydescription.he-flour>All natural Europan flour made from crushed seeds treated with a drop of acid.</entitydescription.he-flour>
-<entityname.he-glassfragments>Glass Fragments</entityname.he-glassfragments><!--Patch 10-->
-<entitydescription.he-glassfragments>Shattered glass. Can be obtained through smashing bottles or crafting them from quartz at a fabricator. Used for crafting at a fabricator or bottle printer.</entitydescription.he-glassfragments><!--Patch 10-->
-<entityname.he-jambubbleberry>Bubbleberry Jam</entityname.he-jambubbleberry><!--Patch 10-->
-<entitydescription.he-jambubbleberry>Tasty jam made out of bubbleberries. Known to quench a bit of thirst.</entitydescription.he-jambubbleberry><!--Patch 10-->
-<entityname.he-jampomegrenade>Pomegrenade Jam</entityname.he-jampomegrenade><!--Patch 13-->
-<entitydescription.he-jampomegrenade>Tasty jam made out of pomegrenade. Known to be slightly more filling.</entitydescription.he-jampomegrenade><!--Patch 13-->
-<entityname.he-seaweedstrip>Sea Weed Strips</entityname.he-seaweedstrip><!--Patch 13-->
-<entitydescription.he-seaweedstrip>Sea weed pressed and sliced into strips. Let it dry into Nori.</entitydescription.he-seaweedstrip><!--Patch 13-->
-<entityname.he-nori>Nori</entityname.he-nori><!--Patch 13-->
-<entitydescription.he-nori>Dried and prepared sea weed used for sushi.</entitydescription.he-nori><!--Patch 13-->
-
-<!-- Dairy Products -->
-<entityname.he-icecreambasemilky>Box of Milky Ice Cream Base</entityname.he-icecreambasemilky><!--Patch 13-->
-<entitydescription.he-icecreambasemilky>The base for Milky Ice Cream. Store it in a refrigerated container to make edible ice cream.</entitydescription.he-icecreambasemilky><!--Patch 13-->
-<entityname.he-icecreamboxmilky>Box of Milky Ice Cream</entityname.he-icecreamboxmilky><!--Patch 13-->
-<entitydescription.he-icecreamboxmilky>A box of Milky Ice Cream. People say they feel more resilient for a longer period of time after eating it. A full box can yield up to 16 scoops of ice cream.</entitydescription.he-icecreamboxmilky><!--Patch 13-->
-<entityname.he-icecreamballmilky>Ball of Milky Ice Cream</entityname.he-icecreamballmilky><!--Patch 13-->
-<entitydescription.he-icecreamballmilky>A scoop of Milky Ice Cream. People say they feel more resilient for a longer period of time after eating it.</entitydescription.he-icecreamballmilky><!--Patch 13-->
-<entityname.he-icecreambasepomegrenade>Box of Pomegrenade Ice Cream Base</entityname.he-icecreambasepomegrenade><!--Patch 13-->
-<entitydescription.he-icecreambasepomegrenade>The base for Pomegrenade Ice Cream. Store it in a refrigerated container to make edible ice cream.</entitydescription.he-icecreambasepomegrenade><!--Patch 13-->
-<entityname.he-icecreamboxpomegrenade>Box of Pomegrenade Ice Cream</entityname.he-icecreamboxpomegrenade><!--Patch 13-->
-<entitydescription.he-icecreamboxpomegrenade>A box of Pomegrenade Ice Cream. A tasty snack that apparently reduces a bit of pain and makes more resilient. A full box can yield up to 16 scoops of ice cream.</entitydescription.he-icecreamboxpomegrenade><!--Patch 13-->
-<entityname.he-icecreamballpomegrenade>Ball of Pomegrenade Ice Cream</entityname.he-icecreamballpomegrenade><!--Patch 13-->
-<entitydescription.he-icecreamballpomegrenade>A scoop of Pomegrenade Ice Cream. A tasty snack that apparently reduces a bit of pain and makes more resilient.</entitydescription.he-icecreamballpomegrenade><!--Patch 13-->
-<entityname.he-icecreambasepopnut>Box of Pop Nut Ice Cream Base</entityname.he-icecreambasepopnut><!--Patch 13-->
-<entitydescription.he-icecreambasepopnut>The base for Pop Nut Ice Cream. Store it in a refrigerated container to make edible ice cream.</entitydescription.he-icecreambasepopnut><!--Patch 13-->
-<entityname.he-icecreamboxpopnut>Box of Pop Nut Ice Cream</entityname.he-icecreamboxpopnut><!--Patch 13-->
-<entitydescription.he-icecreamboxpopnut>A box of Pop Nut Ice Cream. Tastes kind of similar to what chocolate tasted like back on earth. Apparently reduces a bit of pain and makes more resilient. A full box can yield up to 16 scoops of ice cream.</entitydescription.he-icecreamboxpopnut><!--Patch 13-->
-<entityname.he-icecreamballpopnut>Ball of Pop Nut Ice Cream</entityname.he-icecreamballpopnut><!--Patch 13-->
-<entitydescription.he-icecreamballpopnut>A scoop of Pop Nut Ice Cream. Tastes kind of similar to what chocolate tasted like back on earth. Apparently reduces a bit of pain, makes more resilient and quenches thirst quite good.</entitydescription.he-icecreamballpopnut><!--Patch 13-->
-<entityname.he-icecreambasebubbleberry>Box of Bubble Berry Ice Cream Base</entityname.he-icecreambasebubbleberry><!--Patch 13-->
-<entitydescription.he-icecreambasebubbleberry>The base for Bubble Berry Ice Cream. Store it in a refrigerated container to make edible ice cream.</entitydescription.he-icecreambasebubbleberry><!--Patch 13-->
-<entityname.he-icecreamboxbubbleberry>Box of Bubble Berry Ice Cream</entityname.he-icecreamboxbubbleberry><!--Patch 13-->
-<entitydescription.he-icecreamboxbubbleberry>A box of Bubble Berry Ice Cream. A very refreshing taste similar to how strawberries tasted like back on earth. Apparently reduces a bit of pain and makes more resilient. A full box can yield up to 16 scoops of ice cream.</entitydescription.he-icecreamboxbubbleberry><!--Patch 13-->
-<entityname.he-icecreamballbubbleberry>Ball of Bubble Berry Ice Cream</entityname.he-icecreamballbubbleberry><!--Patch 13-->
-<entitydescription.he-icecreamballbubbleberry>A scoop of Bubble Berry Ice Cream. Tastes kind of similar to what chocolate tasted like back on earth. Apparently reduces a bit of pain, makes more resilient and quenches thirst a little bit.</entitydescription.he-icecreamballbubbleberry><!--Patch 13-->
-<entityname.he-molochcheesecurd>Moloch Cheese Curd</entityname.he-molochcheesecurd><!--Patch 13-->
-<entitydescription.he-molochcheesecurd>Slowly turns into cheese.</entitydescription.he-molochcheesecurd><!--Patch 13-->
-<entityname.he-molochcheese>Moloch Cheese</entityname.he-molochcheese><!--Patch 13-->
-<entitydescription.he-molochcheese>Cheese made from moloch milk. Can be cut into cheese slices.</entitydescription.he-molochcheese><!--Patch 13-->
-<entityname.he-molochcheeseslice>Slice of Moloch Cheese</entityname.he-molochcheeseslice><!--Patch 13-->
-<entitydescription.he-molochcheeseslice>A slice of moloch cheese.</entitydescription.he-molochcheeseslice><!--Patch 13-->
-<entityname.he-wafflecone>Waffle Cone</entityname.he-wafflecone><!--Patch 13-->
-<entitydescription.he-wafflecone>A cone shaped waffle for ice cream. Contained ice cream will melt if not contained within a refrigerated container.</entitydescription.he-wafflecone><!--Patch 13-->
-
-<!-- Tools -->
-<entityname.he-enableneeds>Enable Hungry Europan</entityname.he-enableneeds>
-<entitydescription.he-enableneeds>[RMB+E] Enables the hunger and thirst afflictions for the user, causing them to have to eat and drink regularly. This is completely optional and is NOT required to gain buffs from eating or drinking. Warning: Can't be disabled for your current character once it is enabled. DO NOT USE WHEN PLAYING WITH 'NEEDS' BY 'LeDoux'!</entitydescription.he-enableneeds>
-<entityname.he-enableextraneeds>Enable Filthy Europan</entityname.he-enableextraneeds><!--Patch 18-->
-<entitydescription.he-enableextraneeds>[RMB + E] Enables the bladder and defecate afflictions for the user, causing them to have to pee and poop depending on what or how much they eat and drink. This is completely optional and is NOT required to gain buffs from eating or drinking. Warning: Can't be disabled for your current character once it is enabled.</entitydescription.he-enableextraneeds><!--Patch 18-->
-
-<entityname.he-cleaver>Meat Cleaver</entityname.he-cleaver>
-<entitydescription.he-cleaver>Time is up! Chop chop!\n\nCan harvest meat from the corpses of creatures.</entitydescription.he-cleaver>
-<entityname.he-skillbooktheeuropan>The Europan Volume 66</entityname.he-skillbooktheeuropan>
-<entitydescription.he-skillbooktheeuropan>"... Peek behind the curtain of time. Is that you, Robert? No, I am Robert. But I am also Doris. I am the meat. Eat of me and become one with the Worm. ..."</entitydescription.he-skillbooktheeuropan>
-<entityname.he-skillbookauntdoris>THE ART OF DEEP SEA COOKING by Aunt Doris</entityname.he-skillbookauntdoris>
-<entitydescription.he-skillbookauntdoris>The europan way of cooking.</entitydescription.he-skillbookauntdoris>
-<entityname.he-genesaw>Genetics Extractor</entityname.he-genesaw>
-<entitydescription.he-genesaw>Can extract a random gene from a corpse.</entitydescription.he-genesaw>
-<entityname.extractedgene>Extracted Gene</entityname.extractedgene>
-<entitydescription.extractedgene>An unidentified extracted gene.</entitydescription.extractedgene>
-
-<!-- Medical -->
-<entityname.he-antistarve>Starvation Conciousness Regainer</entityname.he-antistarve>
-<entitydescription.he-antistarve>Used to wake up a patient that lost conciousness due to starvation or thirst.</entitydescription.he-antistarve>
-
-<!-- Misc -->
-<entityname.punchgun>Punch-Gun</entityname.punchgun><!--Patch 13-->
-<entitydescription.punchgun>Literally throwing punches!</entitydescription.punchgun><!--Patch 13-->
-<entityname.he-toilet>Toilet</entityname.he-toilet><!--Patch 13-->
-<entitydescription.he-toilet>Relieve yourself or get rid of something by flushing it down.</entitydescription.he-toilet><!--Patch 13-->
-<entityname.he-outposttoilet>Toilet</entityname.he-outposttoilet><!--Patch 16-->
-<entitydescription.he-outposttoilet>Variant of the toilet to be used on outpost modules that can't be picked up and moved by the player.</entitydescription.he-outposttoilet><!--Patch 16-->
-<entityname.he-cafeteriatable>Cafeteria Table</entityname.he-cafeteriatable><!--Patch 13-->
-<entitydescription.he-cafeteriatable>A moveable table that is commonly used in cafeterias.</entitydescription.he-cafeteriatable><!--Patch 13-->
-<entityname.he-diningtable1>Dining Table</entityname.he-diningtable1><!--Patch 13-->
-<entityname.he-diningtable1large>Dining Table (Large)</entityname.he-diningtable1large><!--Patch 13-->
-<entityname.he-diningtable2>Dining Table</entityname.he-diningtable2><!--Patch 13-->
-<entityname.he-cafeteriachair>Cafeteria Chair</entityname.he-cafeteriachair><!--Patch 13-->
-<entitydescription.he-cafeteriachair>A moveable chair that is commonly used in cafeterias.</entitydescription.he-cafeteriachair><!--Patch 13-->
-<entityname.he-chair>Chair</entityname.he-chair><!--Patch 13-->
-<entityname.he-emptycantonic>Empty Can</entityname.he-emptycantonic><!--Patch 13-->
-<entitydescription.he-emptycantonic>An empty aluminium can. Can be deconstructed into aluminium or thrown around.</entitydescription.he-emptycantonic><!--Patch 13-->
-<entityname.he-emptycanenergy1>Empty Can</entityname.he-emptycanenergy1><!--Patch 13-->
-<entitydescription.he-emptycanenergy1>An empty aluminium can. Can be deconstructed into aluminium or thrown around.</entitydescription.he-emptycanenergy1><!--Patch 13-->
-<entityname.he-emptycancola>Empty Can</entityname.he-emptycancola><!--Patch 13-->
-<entitydescription.he-emptycancola>An empty aluminium can. Can be deconstructed into aluminium or thrown around.</entitydescription.he-emptycancola><!--Patch 13-->
-<entityname.he-emptycancolazero>Empty Can</entityname.he-emptycancolazero><!--Patch 13-->
-<entitydescription.he-emptycancolazero>An empty aluminium can. Can be deconstructed into aluminium or thrown around.</entitydescription.he-emptycancolazero><!--Patch 13-->
-<entityname.he-couwolaexosuit>Limited Edition Couwola Cola Exosuit</entityname.he-couwolaexosuit><!--Patch 13-->
-<entitydescription.he-couwolaexosuit>A limited edition Exosuit produced by Couwola Cola. It is more fuel efficient and allows the wearer to breath oxygen from their surroundings while only using the oxygen tanks when needed.</entitydescription.he-couwolaexosuit><!--Patch 13-->
-
-<!-- Gear -->
-<entityname.he-chefscap1>Chef's Hat</entityname.he-chefscap1>
-<entitydescription.he-chefscap1>Show them whose kitchen this is!</entitydescription.he-chefscap1>
-<entityname.he-chefscap2>Chef's Hat</entityname.he-chefscap2>
-<entitydescription.he-chefscap2>Show them whose kitchen this is!</entitydescription.he-chefscap2>
-
-<entityname.he-chefsuniform1>Chef's Uniform</entityname.he-chefsuniform1>
-<entitydescription.he-chefsuniform1>Worn by chefs all across europa!</entitydescription.he-chefsuniform1>
-<entityname.he-chefsuniform2>Chef's Uniform</entityname.he-chefsuniform2>
-<entitydescription.he-chefsuniform2>Worn by chefs all across europa!</entitydescription.he-chefsuniform2>
-
-<entityname.he-chefscapmaster1>Master Chef's Hat</entityname.he-chefscapmaster1>
-<entitydescription.he-chefscapmaster1>Only for the kitchen elite!</entitydescription.he-chefscapmaster1>
-<entityname.he-chefsuniformmaster1>Master Chef's Uniform</entityname.he-chefsuniformmaster1>
-<entitydescription.he-chefsuniformmaster1>Worn by the master chefs!</entitydescription.he-chefsuniformmaster1>
-
-<!-- Fabricators and Containers -->
-<entityname.he-kitchencounter>Kitchen Counter</entityname.he-kitchencounter><!--Changed as of Patch 10-->
-<entitydescription.he-kitchencounter>Can store up to 18 different small or medium items. Has built-in power outlets for all your kitchen devices.</entitydescription.he-kitchencounter><!--Changed -->
-<entityname.he-kitchencounter2>Kitchen Pantry</entityname.he-kitchencounter2><!--Changed as of Patch 11 | New identifier-->
-<entitydescription.he-kitchencounter2>Can store up to 30 different small or medium items.</entitydescription.he-kitchencounter2><!--Changed -->
-<entityname.he-refrigerator>Refrigerator</entityname.he-refrigerator>
-<entitydescription.he-refrigerator>Prevents spoilage. Can only store food and drinks. Needs power.</entitydescription.he-refrigerator><!--Changed as of Patch 10-->
-
-<entityname.he-stove>Stove</entityname.he-stove>
-<entitydescription.he-stove>Used for cooking. Needs power.</entitydescription.he-stove>
-<entityname.he-oven>Oven</entityname.he-oven>
-<entitydescription.he-oven>Used for baking. Needs power.</entitydescription.he-oven>
-<entityname.he-cuttingboard>Cutting Board</entityname.he-cuttingboard>
-<entitydescription.he-cuttingboard>Used to prepare ingredients.</entitydescription.he-cuttingboard>
-<entityname.he-fryer>Fryer</entityname.he-fryer><!--Patch 10-->
-<entitydescription.he-fryer>Used for frying stuff. Needs power.</entitydescription.he-fryer><!--Patch 10-->
-<entityname.he-electricgrill>Electric Grill</entityname.he-electricgrill><!--Patch 10-->
-<entitydescription.he-electricgrill>Used for grilling meat. Needs power.</entitydescription.he-electricgrill><!--Patch 10-->
-<entityname.he-distiller>Disti-Fermenter</entityname.he-distiller><!--Patch 18-->
-<entitydescription.he-distiller>Can be used to either distill ethanol or ferment foods using a natural adjuvant. Needs power.</entitydescription.he-distiller><!--Patch 18-->
-<entityname.he-brewkettle>Brewing Kettle</entityname.he-brewkettle><!--Patch 10-->
-<entitydescription.he-brewkettle>Used to brew kegs of almost any kind of beverage. Needs power.</entitydescription.he-brewkettle><!--Patch 10-->
-<entityname.he-bottleprinter>Bottle Printer</entityname.he-bottleprinter><!--Patch 10-->
-<entitydescription.he-bottleprinter>Used to mass produce bottles. Needs power.</entitydescription.he-bottleprinter><!--Patch 10-->
-<entityname.he-refillstation>Refill Station</entityname.he-refillstation><!--Patch 10-->
-<entitydescription.he-refillstation>Used to refill empty bottles from a keg.</entitydescription.he-refillstation><!--Patch 10-->
-<entityname.he-coolercrate>Cooler Crate</entityname.he-coolercrate><!--Patch 10-->
-<entitydescription.he-coolercrate>Used to prevent meat from spoiling. Needs a battery.</entitydescription.he-coolercrate><!--Patch 10-->
-<entityname.he-liquorcrate>Liquor Crate</entityname.he-liquorcrate><!--Patch 10-->
-<entitydescription.he-liquorcrate>Used to store and transport up to 20 bottles of any kind.</entitydescription.he-liquorcrate><!--Patch 10-->
-<entityname.he-jarcrate>Jar Crate</entityname.he-jarcrate><!--Patch 11-->
-<entitydescription.he-jarcrate>Used to store and transport up to 8 jars.</entitydescription.he-jarcrate><!--Patch 11-->
-<entityname.he-colacrate>Couwola Cola Crate</entityname.he-colacrate><!--Patch 13-->
-<entitydescription.he-colacrate>A crate from Couwola Cola to store and carry your bottles. Jars don't fit.</entitydescription.he-colacrate><!--Patch 13-->
-<entityname.he-liquorcrateshelf>Liquor Crate Shelf</entityname.he-liquorcrateshelf><!--Patch 10-->
-<entitydescription.he-liquorcrateshelf>A shelf to store up to 4 of your liquor and jar crates.</entitydescription.he-liquorcrateshelf><!--Patch 10-->
-<entityname.he-liquorcrateshelfsmall>Liquor Crate Shelf (Small)</entityname.he-liquorcrateshelfsmall><!--Patch 10-->
-<entitydescription.he-liquorcrateshelfsmall>A small shelf to store up to 2 of your liquor and jar crates.</entitydescription.he-liquorcrateshelfsmall><!--Patch 10-->
-<entityname.he-liquordisplayshelf>Liquor Display Shelf</entityname.he-liquordisplayshelf><!--Patch 10-->
-<entitydescription.he-liquordisplayshelf>A shelf to display and store your bottles. Jars don't fit.</entitydescription.he-liquordisplayshelf><!--Patch 10-->
-<entityname.he-toolbeltlunch>Tool Belt with Lunch Box</entityname.he-toolbeltlunch><!--Patch 10-->
-<entitydescription.he-toolbeltlunch>A Tool Belt with a Lunch Box attached to it to always carry your food with you. Slows you down.</entitydescription.he-toolbeltlunch><!--Patch 10-->
-<entityname.he-lunchbox>Lunch Box</entityname.he-lunchbox><!--Patch 10-->
-<entitydescription.he-lunchbox>It's a box with a handle to carry your food around. Can be attached to a toolbelt at a fabricator.</entitydescription.he-lunchbox><!--Patch 10-->
-<entityname.he-hydroponicplanter>Hydroponic Planter</entityname.he-hydroponicplanter><!--Patch 10-->
-<entitydescription.he-hydroponicplanter>A device providing perfect conditions for europas underwater plants to grow. Yields a plant every 15 minutes. Needs power.</entitydescription.he-hydroponicplanter><!--Patch 10-->
-<entityname.he-cafeteriacart>Cafeteria Cart</entityname.he-cafeteriacart><!--Patch 10-->
-<entitydescription.he-cafeteriacart>Used to transport a lot of food and drinks around and or store it in a more accessible area for the crew. Holds up to 30 different foods or drinks. Can be placed.</entitydescription.he-cafeteriacart><!--Patch 10-->
-<entityname.he-teakettle>Tea Kettle</entityname.he-teakettle><!--Patch 13-->
-<entitydescription.he-teakettle>Used to refill cups with tea. Requires to be brewed on a stove with a tea mix contained in it.</entitydescription.he-teakettle><!--Patch 13-->
-<entityname.he-sprinkler>Gardening Sprinkler</entityname.he-sprinkler><!--Patch 14-->
-<entitydescription.he-sprinkler>Automatically waters nearby plants with an adjustable timer. Needs power.</entitydescription.he-sprinkler><!--Patch 14-->
-
-<!-- Skills -->
-<skillname.cooking>Cooking</skillname.cooking>
-<skillname.butchery>Butchery</skillname.butchery>
-
-<!-- Jobs -->
-<jobname.he-chef>Chef</jobname.he-chef>
-<jobdescription.he-chef>The chef is responsible for butchering creatures and preparing meals to eat for the crew to ensure that everyone is saturated and happy.</jobdescription.he-chef>
-
-<!-- Talent trees -->
-<talenttree.butcher>Butcher</talenttree.butcher><!--Patch 13-->
-<talenttree.entertainer>Entertainer</talenttree.entertainer><!--Patch 13-->
-<talenttree.chef>Cook</talenttree.chef><!--Patch 13-->
-
-<!-- Talents -->
-<talentname.he-hungryeuropan>Hungry Europan</talentname.he-hungryeuropan>
-<talentdescription.he-hungryeuropan>You're a hungry europan and need to eat and drink regularly.</talentdescription.he-hungryeuropan>
-
-<talentname.he-filthyeuropan>Filthy Europan</talentname.he-filthyeuropan><!--Patch 13-->
-<talentdescription.he-filthyeuropan>You're a special europan and need to urinate and defecate regularly, depending on what you eat and drink.</talentdescription.he-filthyeuropan><!--Patch 13-->
-
-<talentname.he-poacher>Poacher</talentname.he-poacher>
-<talentdescription.he-poacher>Gain an additional [xpbonus]% bonus XP and [moneybonus]% bonus marks in [missiontype1] and [missiontype2] missions.</talentdescription.he-poacher>
-<talentname.he-saltybusiness>Salty Business</talentname.he-saltybusiness>
-<talentdescription.he-saltybusiness>The first time you open a container, you have a chance of [probability]% to find some extra salt in it.</talentdescription.he-saltybusiness>
-<talentname.he-fastfood>Fast Food</talentname.he-fastfood>
-<talentdescription.he-fastfood>Move [value]% faster.\nIncrease the speed of kitchen related fabricators by [amount]%.\nDoes not affect [itemname1] and [itemname2].</talentdescription.he-fastfood><!--Patch 17-->
-<talentname.he-chefattire>Master Chef Attire</talentname.he-chefattire>
-<talentdescription.he-chefattire>Unlock the crafting recipes for [itemname1] and [itemname2].</talentdescription.he-chefattire>
-<talentname.he-frenzy>Frenzy</talentname.he-frenzy>
-<talentdescription.he-frenzy>Deal [powerincrease]% more damage with ‖color:gui.orange‖Meat Cleavers‖end‖.\nIncrease your working speed on the cutting board by [amount]%.</talentdescription.he-frenzy>
-<talentname.he-butchershop>Butcher Shop</talentname.he-butchershop>
-<talentdescription.he-butchershop>You're a talented butcher and it shows!\nGet [amount]% more money when selling meat!</talentdescription.he-butchershop>
-<talentname.he-coldblood>Cold Blood</talentname.he-coldblood><!--Patch 13-->
-<talentdescription.he-coldblood>You're the coolest person around.\n‖color:gui.orange‖Meat‖end‖ no longer spoils and ‖color:gui.orange‖Ice Cream‖end‖ no longer melts in your inventory.</talentdescription.he-coldblood><!--Patch 13-->
-<talentname.he-masterchef>Master Chef</talentname.he-masterchef>
-<talentdescription.he-masterchef>You've become a master of your work and learned how to save some ingredients for later when cooking.\nYou have a [chance]% chance to not consume a random ingredient while preparing a meal.</talentdescription.he-masterchef>
-<talentname.he-lifesaver>Life Saver</talentname.he-lifesaver>
-<talentdescription.he-lifesaver>Gain a bonus of [amount] to [skill].</talentdescription.he-lifesaver><!--Patch 17-->
-<talentname.he-delicacies>Delicacies</talentname.he-delicacies>
-<talentdescription.he-delicacies>Unlock the following recipes of europan delicacies:\n[itemname1]\n[itemname2]</talentdescription.he-delicacies><!--Patch 13 | added \n[itemname2] at the end-->
-<talentname.he-huskfood>Husk Food</talentname.he-huskfood><!--Patch 13-->
-<talentdescription.he-huskfood>You can now turn the meat of a [itemname1] into edible food.</talentdescription.he-huskfood><!--Patch 13-->
-<talentname.he-masterbrewer>Master Brewer</talentname.he-masterbrewer><!--Patch 10-->
-<talentdescription.he-masterbrewer>Unlock the following recipes of europan beverages:\n[itemname1]\n[itemname2]\n[itemname3]</talentdescription.he-masterbrewer><!--Patch 10-->
-<talentname.he-tastyfood>Tasty Food</talentname.he-tastyfood><!--Patch 13-->
-<talentdescription.he-tastyfood>Your food is known to be amongst the best. If they are not hungry, crewmates gain ‖color:gui.orange‖High Morale‖end‖. If they are stuffed, they gain ‖color:gui.orange‖Excellent Morale‖end‖ instead, doubling the following bonuses:</talentdescription.he-tastyfood><!--Patch 13-->
-<talentname.he-favorite>Everyone's Favorite</talentname.he-favorite><!--Patch 13-->
-<talentname.he-piper>Piper</talentname.he-piper><!--Patch 13-->
-<talentdescription.he-piper>Playing the bagpipes near your crew grants them the following bonuses for the duration you're playing:\n‖color:gui.orange‖20 to Weapons\n20% Increased Walking Speed\n25% Increased Melee Damage\n25% Damage Resistance ‖end‖.</talentdescription.he-piper><!--Patch 13-->
-<talentname.he-lazygardener>Lazy Gardener</talentname.he-lazygardener><!--Patch 14-->
-<talentdescription.he-lazygardener>The time spent watering your plants was just too much for you.</talentdescription.he-lazygardener><!--Patch 14-->
-<talentname.he-farmersmarket>Farmers' Market</talentname.he-farmersmarket><!--Patch 17-->
-<talentdescription.he-farmersmarket>You can sell prepared food for [amount]% more.</talentdescription.he-farmersmarket><!--Patch 17-->
-<talentdescription.fooditemscostless>‖color:gui.orange‖Food‖end‖ items can be bought [amount]% cheaper.</talentdescription.fooditemscostless>
-<talentname.he-anatomystudy>Anatomy Study</talentname.he-anatomystudy><!--Patch 17-->
-<talentname.he-thirstforknowledge>Thirst For Knowledge</talentname.he-thirstforknowledge><!--Patch 17-->
-<talentname.he-steadyhands>Steady Hands</talentname.he-steadyhands><!--Patch 17-->
-<talentdescription.he-steadyhands>While aiming with a melee weapon, gain [amount]% stun resistance.</talentdescription.he-steadyhands><!--Patch 17-->
-<talentname.he-foodtrucking>Food Trucking</talentname.he-foodtrucking><!--Patch 17-->
-<talentdescription.he-foodtrucking>Gain a bonus of [helmbonus] ‖color:gui.orange‖Helm‖end‖ skill.\nWhen entering a friendly habitation outpost, gain [outpost]mk.</talentdescription.he-foodtrucking><!--Patch 17-->
-<talentname.he-smellslikeabrewery>Smells Like a Brewery</talentname.he-smellslikeabrewery><!--Patch 17-->
-<talentname.he-dietarypreference>Dietary Preference</talentname.he-dietarypreference><!--Patch 17-->
-<talentdescription.he-dietarypreferencebase>Choose one type of enemy and gain a [amount]% damage boost against it. \nYou gain [percent]% more food buffs when eating.</talentdescription.he-dietarypreferencebase><!--Patch 17-->
-<talentdescription.he-dietarypreferencemudraptor>Choose ‖color:gui.orange‖Mudraptors‖end‖ as your preference and gain [amount]% increased damage dealt against them.</talentdescription.he-dietarypreferencemudraptor><!--Patch 17-->
-<talentdescription.he-dietarypreferencecrawler>Choose ‖color:gui.orange‖Crawlers‖end‖ as your preference and gain [amount]% increased damage dealt against them.</talentdescription.he-dietarypreferencecrawler><!--Patch 17-->
-<talentdescription.he-dietarypreferencethresher>Choose ‖color:gui.orange‖Threshers‖end‖ as your preference and gain [amount]% increased damage dealt against them.</talentdescription.he-dietarypreferencethresher><!--Patch 17-->
-<talentdescription.he-dietarypreferencespineling>Choose ‖color:gui.orange‖Spinelings‖end‖ as your preference and gain [amount]% increased damage dealt against them.</talentdescription.he-dietarypreferencespineling><!--Patch 17-->
-<talentdescription.he-dietarypreferencehusk>Choose ‖color:gui.orange‖Husks‖end‖ as your preference and gain [amount]% increased damage dealt against them.</talentdescription.he-dietarypreferencehusk><!--Patch 17-->
-<talentname.he-culinaryschool>Culinary School</talentname.he-culinaryschool><!--Patch 17-->
-<talentdescription.he-culinaryschool>After completing a mission, the first ‖color:gui.orange‖Gourmet‖end‖ meal you cook earns you a ‖color:gui.orange‖Commendation‖end‖.</talentdescription.he-culinaryschool>
-<!--Patch 17-->
-<talentname.he-thinnerslices>Thinner Slices</talentname.he-thinnerslices><!--Patch 17-->
-<talentdescription.he-thinnerslices>Gain a [chance]% chance to not consume raw meat when cooking.</talentdescription.he-thinnerslices><!--Patch 17-->
-<talentname.he-dryaging>Dry-Aging</talentname.he-dryaging><!--Patch 17-->
-<talentname.he-slaughterhouse>Slaughterhouse</talentname.he-slaughterhouse><!--Patch 17-->
-<talentname.he-seafoodsamurai>Seafood Samurai</talentname.he-seafoodsamurai><!--Patch 17-->
-<talentdescription.he-seafoodsamurai>If you are in the open sea, gain an additional [amount]% [stattype].</talentdescription.he-seafoodsamurai><!--Patch 17-->
-<talentname.he-parttimejob>Part-Time Job</talentname.he-parttimejob><!--Patch 17-->
-<talentname.he-dinnertheater>Dinner Theater</talentname.he-dinnertheater><!--Patch 17-->
-<talentdescription.he-dinnertheater>Playing the bagpipes prolongs the duration of food and drink buffs for you and nearby allies.</talentdescription.he-dinnertheater><!--Patch 17-->
-<talentname.he-teppanyaki>Teppanyaki</talentname.he-teppanyaki><!--Patch 17-->
-<talentdescription.he-teppanyaki>Whenever you gain a [skillname1] or [skillname2] skill point, your crew gains a point as well.\nDeal [powerincrease]% more damage with ‖color:gui.orange‖Pans‖end‖.</talentdescription.he-teppanyaki><!--Patch 17-->
-<talentname.he-workpromotion>Work Promotion</talentname.he-workpromotion><!--Patch 17-->
-<talentname.he-headchef>Head Chef</talentname.he-headchef><!--Patch 17-->
-<talentdescription.he-headchef>Allies in the same room gain [amount]% [stattype].</talentdescription.he-headchef><!--Patch 17-->
-<talentname.he-huskegghunt>Husk Egg Hunt</talentname.he-huskegghunt><!--Patch 17-->
-<talentdescription.he-huskegghunt>Husks drop one extra [item].</talentdescription.he-huskegghunt><!--Patch 17-->
-<talentname.he-creamery>Creamery</talentname.he-creamery>
-<talentdescription.he-creamery>Recipes that consume [item] have a [chance]% chance to not consume one.\n‖color:gui.orange‖Molochs‖end‖ are less aggressive towards you.</talentdescription.he-creamery>
-<talentname.he-shortorderchef>Short-Order Chef</talentname.he-shortorderchef>
-<talentdescription.he-shortorderchef>Cooking ‖color:gui.orange‖Fast-Food‖end‖ has a [chance]% chance to cook a second one for free.\nAfter cooking fast-food, you gain [amount]% physical damage resistance and cannot be ‖color:gui.orange‖unconscious‖end‖ for 10 seconds.</talentdescription.he-shortorderchef>
-<afflictionname.he-shortorderflow>Short Order</afflictionname.he-shortorderflow>
-<afflictiondescription.he-shortorderflow>Must. Keep. Cooking.</afflictiondescription.he-shortorderflow>
-<!-- Afflictions -->
-<afflictionname.hunger>Hunger</afflictionname.hunger><!--Patch 10-->
-<afflictionname.he-hunger>Hunger</afflictionname.he-hunger>
-<afflictiondescription.he-hunger>The stomach is happy.</afflictiondescription.he-hunger>
-<afflictioncauseofdeath.he-hunger>Died of starvation.</afflictioncauseofdeath.he-hunger>
-<afflictioncauseofdeathself.he-hunger>You have died of starvation.</afflictioncauseofdeathself.he-hunger>
-<afflictiondescription.he-hunger.self>The stomach growls!</afflictiondescription.he-hunger.self>
-<afflictiondescription.he-hunger.lethal.self>Close to starving...</afflictiondescription.he-hunger.lethal.self>
-<afflictiondescription.he-hunger.other.low>The patient is starting to get a small appetite.</afflictiondescription.he-hunger.other.low>
-<afflictiondescription.he-hunger.other>The patient is hungry.</afflictiondescription.he-hunger.other>
-<afflictiondescription.he-hunger.lethal.other>The patient is starting to starve.</afflictiondescription.he-hunger.lethal.other>
-
-<afflictionname.thirst>Thirst</afflictionname.thirst><!--Patch 10-->
-<afflictionname.he-thirst>Thirst</afflictionname.he-thirst>
-<afflictiondescription.he-thirst>You feel refreshed.</afflictiondescription.he-thirst>
-<afflictioncauseofdeath.he-thirst>Died of thirst.</afflictioncauseofdeath.he-thirst>
-<afflictioncauseofdeathself.he-thirst>You have died of thirst.</afflictioncauseofdeathself.he-thirst>
-<afflictiondescription.he-thirst.self>The throat feels dry.</afflictiondescription.he-thirst.self>
-<afflictiondescription.he-thirst.lethal.self>Starting to die of thirst...</afflictiondescription.he-thirst.lethal.self>
-<afflictiondescription.he-thirst.other.low>The patient is starting to get thirsty.</afflictiondescription.he-thirst.other.low>
-<afflictiondescription.he-thirst.other>The patient is thirsty.</afflictiondescription.he-thirst.other>
-<afflictiondescription.he-thirst.lethal.other>The patient is starting to die of thirst.</afflictiondescription.he-thirst.lethal.other>
-
-<afflictionname.quenched>Quenched</afflictionname.quenched><!--Patch 13-->
-<afflictiondescription.quenched>You don't get thirsty.</afflictiondescription.quenched><!--Patch 13-->
-<afflictiondescription.quenched.other>The patient's thirst is quenched. They won't get thirsty for awhile.</afflictiondescription.quenched.other><!--Patch 13-->
-
-<afflictionname.bladder>Bladder</afflictionname.bladder><!--Patch 13-->
-<afflictiondescription.bladder>No pressure.</afflictiondescription.bladder><!--Patch 13-->
-<afflictiondescription.bladder.self>You could take a piss.</afflictiondescription.bladder.self><!--Patch 13-->
-<afflictiondescription.bladder.self.high>Your bladder is too full! You might leak out at any moment!</afflictiondescription.bladder.self.high><!--Patch 13-->
-<afflictiondescription.bladder.other.low>The patient's bladder is fine.</afflictiondescription.bladder.other.low><!--Patch 13-->
-<afflictiondescription.bladder.other>The patient could take a piss.</afflictiondescription.bladder.other><!--Patch 13-->
-<afflictiondescription.bladder.other.high>The patient's bladder is almost bursting! They should take a piss!</afflictiondescription.bladder.other.high><!--Patch 13-->
-
-<afflictionname.defecate>Need to defecate</afflictionname.defecate><!--Patch 13-->
-<afflictiondescription.defecate>What goes in must come out.</afflictiondescription.defecate><!--Patch 13-->
-<afflictiondescription.defecate.self>Your colon is pristine.</afflictiondescription.defecate.self><!--Patch 13-->
-<afflictiondescription.defecate.self.high>You are struggling to hold it in! Seek the nearest toilet!</afflictiondescription.defecate.self.high><!--Patch 13-->
-<afflictiondescription.defecate.other.low>The patient has good bowel movement.</afflictiondescription.defecate.other.low><!--Patch 13-->
-<afflictiondescription.defecate.other>The patient looks sweating and constipated.</afflictiondescription.defecate.other><!--Patch 13-->
-<afflictiondescription.defecate.other.high>The patient's sphincter is about to give out!</afflictiondescription.defecate.other.high><!--Patch 13-->
-
-<afflictionname.embarrassment>Embarrassed</afflictionname.embarrassment><!--Patch 13-->
-<afflictiondescription.embarrassment>You feel embarrassed and can't focus on your work.</afflictiondescription.embarrassment><!--Patch 13-->
-<afflictiondescription.embarrassment.other>The patient seems embarrassed and can't focus on anything.</afflictiondescription.embarrassment.other><!--Patch 13-->
-
-<afflictionname.he-starvation>Starvation</afflictionname.he-starvation>
-<afflictiondescription.he-starvation>Starving...</afflictiondescription.he-starvation>
-<afflictioncauseofdeath.he-starvation>Starved.</afflictioncauseofdeath.he-starvation>
-<afflictioncauseofdeathself.he-starvation>You have starved to death.</afflictioncauseofdeathself.he-starvation>
-<afflictiondescription.he-starvation.self>Starving...</afflictiondescription.he-starvation.self>
-<afflictiondescription.he-starvation.other>The patient is starving.</afflictiondescription.he-starvation.other>
-
-<afflictionname.he-dieofthirst>Dying of thirst</afflictionname.he-dieofthirst>
-<afflictiondescription.he-dieofthirst>Dying of thirst...</afflictiondescription.he-dieofthirst>
-<afflictioncauseofdeath.he-dieofthirst>Died of thirst.</afflictioncauseofdeath.he-dieofthirst>
-<afflictioncauseofdeathself.he-dieofthirst>You dried out.</afflictioncauseofdeathself.he-dieofthirst>
-<afflictiondescription.he-dieofthirst.self>Dying of thirst...</afflictiondescription.he-dieofthirst.self>
-<afflictiondescription.he-dieofthirst.other>The patient is dying of thirst.</afflictiondescription.he-dieofthirst.other>
-
-<afflictionname.he-increasedswimmingspeedcrawler10>Increased Swimming Speed (Food)</afflictionname.he-increasedswimmingspeedcrawler10><!--Patch 13-->
-<afflictiondescription.he-increasedswimmingspeedcrawler10>You swim 10% faster.</afflictiondescription.he-increasedswimmingspeedcrawler10><!--Patch 13-->
-<afflictionname.he-increasedswimmingspeedcrawler25>Increased Swimming Speed (Food)</afflictionname.he-increasedswimmingspeedcrawler25><!--Patch 13-->
-<afflictiondescription.he-increasedswimmingspeedcrawler25>You swim 25% faster.</afflictiondescription.he-increasedswimmingspeedcrawler25><!--Patch 13-->
-<afflictionname.he-increasedswimmingspeedcrawler>Increased Swimming Speed (Food)</afflictionname.he-increasedswimmingspeedcrawler>
-<afflictiondescription.he-increasedswimmingspeedcrawler>You swim 50% faster.</afflictiondescription.he-increasedswimmingspeedcrawler>
-
-<afflictionname.he-damageresistancemudraptor>Damage Resistance (Food)</afflictionname.he-damageresistancemudraptor>
-<afflictiondescription.he-damageresistancemudraptor>You take 25% less damage.</afflictiondescription.he-damageresistancemudraptor>
-
-<afflictionname.he-increasedwalkingspeedmudraptor>Increased Walking Speed (Food)</afflictionname.he-increasedwalkingspeedmudraptor>
-<afflictiondescription.he-increasedwalkingspeedmudraptor>You walk 20% faster.</afflictiondescription.he-increasedwalkingspeedmudraptor>
-
-<afflictionname.he-damageresistancemoloch25>Damage Resistance (Food)</afflictionname.he-damageresistancemoloch25><!--Patch 13-->
-<afflictiondescription.he-damageresistancemoloch25>You take 25% less damage.</afflictiondescription.he-damageresistancemoloch25><!--Patch 13-->
-<afflictionname.he-damageresistancemoloch>Damage Resistance (Food)</afflictionname.he-damageresistancemoloch>
-<afflictiondescription.he-damageresistancemoloch>You take 50% less damage.</afflictiondescription.he-damageresistancemoloch>
-
-<afflictionname.he-increasedmeleedamagehammerhead>Increased Melee Damage (Food)</afflictionname.he-increasedmeleedamagehammerhead>
-<afflictiondescription.he-increasedmeleedamagehammerhead>You deal 25% more melee damage.</afflictiondescription.he-increasedmeleedamagehammerhead>
-
-<afflictionname.he-decreasedoxygenconsumption>Decreased Oxygen Consumption (Food)</afflictionname.he-decreasedoxygenconsumption>
-<afflictiondescription.he-decreasedoxygenconsumption>You don't need to breath.</afflictiondescription.he-decreasedoxygenconsumption>
-
-<afflictionname.he-pressureresistance>Pressure Resistance (Food)</afflictionname.he-pressureresistance>
-<afflictiondescription.he-pressureresistance>You're immune to pressure.</afflictiondescription.he-pressureresistance>
-
-<afflictionname.he-cannibalskillincrease>Increased Skills (Food)</afflictionname.he-cannibalskillincrease><!--Patch 9-->
-<afflictiondescription.he-cannibalskillincrease>All your skills are increased by 20%</afflictiondescription.he-cannibalskillincrease><!--Patch 9-->
-
-<afflictionname.he-disguisedashusk>Husk Stench (Food)</afflictionname.he-disguisedashusk><!--Patch 13-->
-<afflictiondescription.he-disguisedashusk.self>Ugh... you reek of husk infected flesh! Husks will probably accept you as one of their own.</afflictiondescription.he-disguisedashusk.self><!--Patch 13-->
-<afflictiondescription.he-disguisedashusk.others>Ugh... The patient reeks of husk infected flesh!</afflictiondescription.he-disguisedashusk.others><!--Patch 13-->
-
-<afflictionname.he-alcoholism>Alcoholic</afflictionname.he-alcoholism>
-<afflictiondescription.he-alcoholism>The patient is happy enough... so long as they get what they need.</afflictiondescription.he-alcoholism>
-<advancedafflictiondescription.self.he-alcoholism>It's time for a booze cruise! You're addicted to alcohol.</advancedafflictiondescription.self.he-alcoholism>
-<advancedafflictiondescription.others.he-alcoholism>The patient suffers from alcoholism.</advancedafflictiondescription.others.he-alcoholism>
-
-<afflictionname.he-alcoholwithdrawal>Alcohol withdrawal</afflictionname.he-alcoholwithdrawal>
-<afflictiondescription.he-alcoholwithdrawal>Agitation and a tremor are obvious, as are the signs of nausea.</afflictiondescription.he-alcoholwithdrawal>
-<afflictioncauseofdeath.he-alcoholwithdrawal>Died of alcohol withdrawal</afflictioncauseofdeath.he-alcoholwithdrawal>
-<afflictioncauseofdeathself.he-alcoholwithdrawal>You have died of alcohol withdrawal.</afflictioncauseofdeathself.he-alcoholwithdrawal>
-<advancedafflictiondescription.self.he-alcoholwithdrawal>You have the feeling it's time to open up another cold one with the boys!</advancedafflictiondescription.self.he-alcoholwithdrawal><!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.self.he-alcoholwithdrawal"-->
-<advancedafflictiondescription.others.he-alcoholwithdrawal>The Patient shows light signs of alcohol withdrawal.</advancedafflictiondescription.others.he-alcoholwithdrawal><!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.others.he-alcoholwithdrawal"-->
-<advancedafflictiondescription.self.he-alcoholwithdrawal.2>A cold beer or a bottle of rum... Anything to quench this horrible thirst for alcohol!</advancedafflictiondescription.self.he-alcoholwithdrawal.2><!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.self.he-alcoholwithdrawal.2"-->
-<advancedafflictiondescription.others.he-alcoholwithdrawal.2>The Patient shows heavy signs of alcohol withdrawal.</advancedafflictiondescription.others.he-alcoholwithdrawal.2><!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.others.he-alcoholwithdrawal.2"-->
-
-<afflictionname.he-cannibalism>Cannibalism</afflictionname.he-cannibalism><!--Patch 8-->
-<afflictiondescription.he-cannibalism>The patient is happy enough... so long as they get what they need.</afflictiondescription.he-cannibalism><!--Patch 8-->
-<advancedafflictiondescription.self.he-cannibalism>Uh oh! Seems like you like the taste of your fellow crewmates.</advancedafflictiondescription.self.he-cannibalism><!--Patch 8-->
-<advancedafflictiondescription.others.he-cannibalism>The patient certainly likes a special type of meat.</advancedafflictiondescription.others.he-cannibalism><!--Patch 8-->
-
-<afflictionname.he-hungryforhumanmeat>Hungry for Human Meat</afflictionname.he-hungryforhumanmeat><!--Patch 8-->
-<afflictiondescription.he-hungryforhumanmeat>Agitation and a tremor are obvious, the eyes stare empty.</afflictiondescription.he-hungryforhumanmeat><!--Patch 8-->
-<afflictioncauseofdeath.he-hungryforhumanmeat>Lost their mind over human meat.</afflictioncauseofdeath.he-hungryforhumanmeat><!--Patch 8-->
-<afflictioncauseofdeathself.he-hungryforhumanmeat>You lost your mind over human meat.</afflictioncauseofdeathself.he-hungryforhumanmeat><!--Patch 8-->
-<advancedafflictiondescription.self.he-hungryforhumanmeat>Your crewmates are starting to look quite tasty!</advancedafflictiondescription.self.he-hungryforhumanmeat><!--Patch 8-->
-<advancedafflictiondescription.others.he-hungryforhumanmeat>The Patient gives you a cold stare.</advancedafflictiondescription.others.he-hungryforhumanmeat><!--Patch 8-->
-<advancedafflictiondescription.self.he-hungryforhumanmeat.2>You are struggling to focus on anything. You crave for human flesh. You want to murder. Your arms grow stronger just by thinking about it.</advancedafflictiondescription.self.he-hungryforhumanmeat.2><!--Patch 8-->
-<advancedafflictiondescription.others.he-hungryforhumanmeat.2>The Patient gives you a cold stare and is severly twitching.</advancedafflictiondescription.others.he-hungryforhumanmeat.2><!--Patch 8-->
-<advancedafflictiondescription.self.he-hungryforhumanmeat.3>You have an irresistible desire to bite into your crewmates. It's the only way to appease the craving.</advancedafflictiondescription.self.he-hungryforhumanmeat.3><!--Patch 8-->
-<advancedafflictiondescription.others.he-hungryforhumanmeat.3>The Patient has acquired a craving for human meat. Do not approach your hand if you want to keep your fingers.</advancedafflictiondescription.others.he-hungryforhumanmeat.3><!--Patch 8-->
-
-<afflictionname.he-drunkinvertcontrols>Disoriented</afflictionname.he-drunkinvertcontrols>
-<afflictiondescription.he-drunkinvertcontrols>Up is down and left is... right? Where am I?</afflictiondescription.he-drunkinvertcontrols>
-
-<afflictionname.he-stuffed>Stuffed</afflictionname.he-stuffed>
-<afflictiondescription.he-stuffed>The stomach is full.</afflictiondescription.he-stuffed>
-<afflictioncauseofdeath.he-stuffed>Choked of vomit.</afflictioncauseofdeath.he-stuffed>
-<afflictioncauseofdeathself.he-stuffed>You have choked on your own vomit.</afflictioncauseofdeathself.he-stuffed>
-<advancedafflictiondescription.self.he-stuffed>The stomach is full.</advancedafflictiondescription.self.he-stuffed>
-<advancedafflictiondescription.self.he-stuffed.2>The stomach is at its limit. Eating more might cause you to vomit.</advancedafflictiondescription.self.he-stuffed.2>
-<advancedafflictiondescription.self.he-stuffed.3>The stomach is too full. You feel the need to vomit.</advancedafflictiondescription.self.he-stuffed.3>
-<advancedafflictiondescription.others.he-stuffed>The stomach is full. The patient had enough to eat.</advancedafflictiondescription.others.he-stuffed>
-<advancedafflictiondescription.others.he-stuffed.2>The stomach is very full. The patient had almost too much to eat.</advancedafflictiondescription.others.he-stuffed.2>
-<advancedafflictiondescription.others.he-stuffed.3>The stomach is too full. The patient might vomit.</advancedafflictiondescription.others.he-stuffed.3>
-
-<afflictiondescription.self.he-internalburn.low>Your throat feels irritated and giving off a slight burning sensation.</afflictiondescription.self.he-internalburn.low><!--Patch 13-->
-<afflictiondescription.self.he-internalburn>Your throat is giving off a very painful burning sensation. Swallowing hurts.</afflictiondescription.self.he-internalburn><!--Patch 13-->
-<afflictiondescription.self.he-internalburn.high>Your throat burns like an open fire. You can barely speak.</afflictiondescription.self.he-internalburn.high><!--Patch 13-->
-<afflictiondescription.others.he-internalburn.low>The throat is red and irritated. The patient must've consumed a highly alcoholic beverage.</afflictiondescription.others.he-internalburn.low><!--Patch 13-->
-<afflictiondescription.others.he-internalburn>The throat is severely irritated from drinking strong alcoholic beverages. The patient should probably stop drinking for a while.</afflictiondescription.others.he-internalburn><!--Patch 13-->
-<afflictiondescription.others.he-internalburn.high>The throat is growing blisters. The patient must be in agony and should stop further alcohol consumption immediately!</afflictiondescription.others.he-internalburn.high><!--Patch 13-->
-<afflictioncauseofdeath.he-internalburn>Succumbed to inner burns</afflictioncauseofdeath.he-internalburn><!--Patch 13-->
-<afflictioncauseofdeathself.he-internalburn>You succumbed to inner burns.</afflictioncauseofdeathself.he-internalburn><!--Patch 13-->
-
-<afflictionname.he-stomachache>Stomach Ache</afflictionname.he-stomachache>
-<afflictiondescription.he-stomachache>The stomach hurts.</afflictiondescription.he-stomachache>
-<afflictioncauseofdeath.he-stomachache>Choked on vomit.</afflictioncauseofdeath.he-stomachache>
-<afflictioncauseofdeathself.he-stomachache>You have choked on your own vomit.</afflictioncauseofdeathself.he-stomachache>
-<advancedafflictiondescription.self.he-stomachache>The stomach hurts and you feel slightly nauseous.</advancedafflictiondescription.self.he-stomachache>
-<advancedafflictiondescription.self.he-stomachache.2>The stomach hurts a lot and you're feeling very nauseous.</advancedafflictiondescription.self.he-stomachache.2>
-<advancedafflictiondescription.others.he-stomachache>The patient suffers from abdominal pain. They must have ingested something unsafe for consumption.</advancedafflictiondescription.others.he-stomachache>
-
-<afflictionname.he-geneticextraction>Genetic Extraction</afflictionname.he-geneticextraction>
-<afflictiondescription.he-geneticextraction>Genes are being extracted.</afflictiondescription.he-geneticextraction>
-
-<afflictionname.he-butchered>Butchered</afflictionname.he-butchered>
-<afflictiondescription.he-butchered>The corpse is being butchered for meat.</afflictiondescription.he-butchered>
-
-<afflictionname.he-halucinova>Halucinova</afflictionname.he-halucinova>
-<afflictiondescription.he-halucinova.self>You feel like traveling to a different plane of existence.</afflictiondescription.he-halucinova.self>
-<afflictiondescription.he-halucinova.others>The person is clearly zoning out.</afflictiondescription.he-halucinova.others>
-
-
-<afflictionname.he-drankpaint>High on Paint</afflictionname.he-drankpaint><!-- Patch 18 -->
-<afflictiondescription.he-drankpaint.self>Oooooh that's some strong paint right there!</afflictiondescription.he-drankpaint.self><!-- Patch 18 -->
-<afflictiondescription.he-drankpaint.others>For some reason the patient thought it would be a good idea to inhale industrial paint. They are, for lack of a better term, out of their gourd.</afflictiondescription.he-drankpaint.others><!-- Patch 18 -->
-
-<afflictionname.he-drankredpaint>High on Red Paint</afflictionname.he-drankredpaint><!--Patch 13-->
-<afflictiondescription.he-drankredpaint.self>Bruh... That's some strong paint right there! Kind of tastes like... pomegrenade?</afflictiondescription.he-drankredpaint.self><!--Patch 13-->
-<afflictiondescription.he-drankredpaint.others>The patient consumed and is high on red paint. You can tell by the stains around the mouth.</afflictiondescription.he-drankredpaint.others><!--Patch 13-->
-<afflictionname.he-drankgreenpaint>High on Green Paint</afflictionname.he-drankgreenpaint><!--Patch 13-->
-<afflictiondescription.he-drankgreenpaint.self>Wooooow... That's some strong paint right here! Do I taste salt bulb?</afflictiondescription.he-drankgreenpaint.self><!--Patch 13-->
-<afflictiondescription.he-drankgreenpaint.others>The patient consumed and is high on green paint. You can tell by the stains around the mouth.</afflictiondescription.he-drankgreenpaint.others><!--Patch 13-->
-<afflictionname.he-drankbluepaint>High on Blue Paint</afflictionname.he-drankbluepaint><!--Patch 13-->
-<afflictiondescription.he-drankbluepaint.self>Huh?!? Wha? Water! No? Yeah... This water tastes weeeeiiiiiirrrrd!</afflictiondescription.he-drankbluepaint.self><!--Patch 13-->
-<afflictiondescription.he-drankbluepaint.others>The patient consumed and is high on blue paint. You can tell by the stains around the mouth.</afflictiondescription.he-drankbluepaint.others><!--Patch 13-->
-<afflictionname.he-drankblackpaint>High on Black Paint</afflictionname.he-drankblackpaint><!--Patch 13-->
-<afflictiondescription.he-drankblackpaint.self>Blyat! That definitely wasn't Couwola Cola! Though it tastes a little bit like it...</afflictiondescription.he-drankblackpaint.self><!--Patch 13-->
-<afflictiondescription.he-drankblackpaint.others>The patient consumed and is high on black paint. You can tell by the stains around the mouth.</afflictiondescription.he-drankblackpaint.others><!--Patch 13-->
-<afflictionname.he-drankwhitepaint>High on White Paint</afflictionname.he-drankwhitepaint><!--Patch 13-->
-<afflictiondescription.he-drankwhitepaint.self>My teeth probably never looked better! I bet they're the shiniest on all of Europa!</afflictiondescription.he-drankwhitepaint.self><!--Patch 13-->
-<afflictiondescription.he-drankwhitepaint.others>The patient consumed and is high on white paint. You can tell by the stains around the mouth. The teeth look very good though! Probably the best looking teeth you've ever seen.</afflictiondescription.he-drankwhitepaint.others><!--Patch 13-->
-
-<afflictionname.he-battlemusic>Battle Music</afflictionname.he-battlemusic><!--Patch 13-->
-<afflictiondescription.he-battlemusic>This music get's you going. You feel tougher, stronger, faster and more skilled with weapons. You're ready for battle!</afflictiondescription.he-battlemusic><!--Patch 13-->
-
-<afflictionname.he-apprenticechef>Apprentice Chef</afflictionname.he-apprenticechef><!--Patch 17-->
-<afflictiondescription.he-apprenticechef>You are prepared to cook under the guidance of a skilled chef.</afflictiondescription.he-apprenticechef><!--Patch 17-->
-<afflictionname.he-steadyhands>Steady Hands</afflictionname.he-steadyhands><!--Patch 17-->
-<afflictiondescription.he-steadyhands>Your hands are steady and your nerve is unflinching.</afflictiondescription.he-steadyhands><!--Patch 17-->
-<!-- MESSAGES -->
-<msg.pickup.interact>[E] Pick Up</msg.pickup.interact><!--Patch 10-->
-<bottleprinter.infotext.bottle.regular>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT REGULAR BOTTLES.</bottleprinter.infotext.bottle.regular><!--Patch 10-->
-<bottleprinter.infotext.bottle.beer>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT BEER BOTTLES.</bottleprinter.infotext.bottle.beer><!--Patch 10-->
-<bottleprinter.infotext.bottle.rum>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT RUM BOTTLES.</bottleprinter.infotext.bottle.rum><!--Patch 10-->
-<bottleprinter.infotext.bottle.whiskey>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT WHISKEY BOTTLES.</bottleprinter.infotext.bottle.whiskey><!--Patch 10-->
-<bottleprinter.infotext.bottle.halucinova>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT HALUCINOVA BOTTLES.</bottleprinter.infotext.bottle.halucinova><!--Patch 10-->
-<bottleprinter.infotext.jar>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT JARS.</bottleprinter.infotext.jar><!--Patch 10-->
-<bottleprinter.infotext.shaker>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT SHAKERS.</bottleprinter.infotext.shaker><!--Patch 10-->
-<bottleprinter.infotext.cup>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT CUPS.</bottleprinter.infotext.cup><!--Patch 13-->
-<bottleprinter.print>PRINT</bottleprinter.print><!--Patch 10-->
-<bottleprinter.missingitem.blueprint>MATERIAL INSERTED\nERROR: NO BLUEPRINT FOUND! PLEASE INSERT A BLUEPRINT.</bottleprinter.missingitem.blueprint><!--Patch 10-->
-<bottleprinter.missingitem.glassfragments>BLUEPRINT INSERTED\nERROR: NO GLASS FRAGMENTS FOUND! PLEASE INSERT GLASS FRAGMENTS.</bottleprinter.missingitem.glassfragments><!--Patch 10-->
-<bottleprinter.empty>INSERT GLASS FRAGMENTS AND PICK A BLUEPRINT TO BEGIN FABRICATION\n------------------------------------------\nINSERT CRATE IN OUTPUT SLOT</bottleprinter.empty><!-- patch 18-->
-
-<bottleprinter.blueprintselection>Select Blueprint Model</bottleprinter.blueprintselection>
-<bottleprinter.pickblueprint>Pick Blueprint</bottleprinter.pickblueprint>
-
-
-<he-bottleprinter.output>Possible prints:</he-bottleprinter.output><!--Patch 10-->
-
-<distiller.distill>DISTILL</distiller.distill><!--Patch 10-->
-<distiller.ethanol>READY TO DISTILL ETHANOL</distiller.ethanol><!--Patch 10-->
-<distiller.flourmixture>READY TO DISTILL SYNTHETIC FLOUR MIXTURE</distiller.flourmixture><!--Patch 17-->
-<distiller.empty>PLEASE INSERT ONE OF THE FOLLOWING:\n-PACK OF SUGAR</distiller.empty><!--Patch 17-->
-<distiller.missingitem.yeastshroom>SUGAR INSERTED\nERROR: NO YEAST SHROOM FOUND! PLEASE INSERT 1X YEASTSHROOM.</distiller.missingitem.yeastshroom><!--Patch 17-->
-<distiller.missingitem.sulphuricacid>PULVERIZED SEEDS PACK INSERTED\nERROR: NO ACID FOUND! PLEASE INSERT 1X SULPHURIC ACID.</distiller.missingitem.sulphuricacid><!--Patch 17-->
-<he-distiller.output>Output:</he-distiller.output><!--Patch 10-->
-
-<interaction.emptybottle>Empty the Bottle</interaction.emptybottle><!--Patch 11-->
-<interaction.emptykeg>Empty the Keg</interaction.emptykeg><!--Patch 12-->
-<interaction.emptycup>Empty the Cup</interaction.emptycup><!--Patch 13-->
-<interaction.refillcup>Refill a Cup</interaction.refillcup><!--Patch 13-->
-<interaction.flushtoilet>Flush Toilet</interaction.flushtoilet><!--Patch 13-->
-<interaction.breakbottle>Break Bottle</interaction.breakbottle><!--Patch 13-->
-<interaction.sleep>Sleep | Wake Up</interaction.sleep><!--Patch 13-->
-<interaction.onoff>ON/OFF</interaction.onoff><!--Patch 13-->
-<interaction.refill>Refill</interaction.refill><!--Patch 13-->
-<interaction.open>Open</interaction.open><!--Patch 13-->
-<!-- ROOM NAMES -->
-<roomname.kitchen>Kitchen</roomname.kitchen><!--Patch 10-->
-<roomname.cafeteria>Cafeteria</roomname.cafeteria><!--Patch 10-->
-<roomname.brewery>Brewery</roomname.brewery><!--Patch 10-->
-<roomname.restroom>Restroom</roomname.restroom><!--Patch 13-->
-
-
-
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING -->
-<!-- NEW ADDITIONS UNDER THIS NEEDS TRANSLATING
-
- TODO: sort this text in proper places when done  -->
-
-<itemmsgnomeatleft>No meat left on this corpse...</itemmsgnomeatleft> 
-
-<!-- RESEARCH STATION -->
-<researchstation.crossbreed>Cross-breed</researchstation.crossbreed>
-<researchstation.crossbreed.infotext>Possible cross-breeding detected.</researchstation.crossbreed.infotext>
-<researchstation.crossbreed.missingitem>Invalid combination. Try another plant.</researchstation.crossbreed.missingitem>
-
-<!-- fruits and plants -->
-<entityname.popnutleaf>Popnut Leaf</entityname.popnutleaf>
-<entitydescription.popnutleaf>Can be used to make tea.</entitydescription.popnutleaf>
-<entityname.bubbleberryleaf>Bubbleberry Leaf</entityname.bubbleberryleaf>
-<entitydescription.bananaseed>Can be used to make tea.</entitydescription.bananaseed>
-
-<entityname.bananaseed>Banana Slice</entityname.bananaseed>
-<entitydescription.bananaseed>A slice of a regular, plain europan banana. Can be planted.</entitydescription.bananaseed>
-
-<entityname.pomacco>Pomacco</entityname.pomacco>
-<entitydescription.pomacco>A somewhat disgusting but addictive cross between a pomegrenade and tobacco. Soothes the nerves and the stomach.</entitydescription.pomacco>
-<entityname.pomaccoseed>Pomacco Seed</entityname.pomaccoseed>
-<entitydescription.pomaccoseed>A genetically engineered seed of the hybrid plant Pomacco.</entitydescription.pomaccoseed>
- 
-<entityname.saltgrenade>Saltgrenade</entityname.saltgrenade>
-<entitydescription.saltgrenade>Salty and juicy, this pomegrenade and salt bulb hybrid helps dealing with blood loss when consumed. Keep away from water.</entitydescription.saltgrenade>
-<entityname.saltgrenadeseed>Saltgrenade Seed</entityname.saltgrenadeseed>
-<entitydescription.saltgrenadeseed>A genetically engineered seed of the hybrid plant Saltgrenade.</entitydescription.saltgrenadeseed>
-
-<entityname.raptorpom>Raptor Bait</entityname.raptorpom>
-<entitydescription.raptorpom>Has the juiciness of a pomegrenade, but also the toxicity of raptor bane. The stench attracts monsters and drives them crazy.</entitydescription.raptorpom>
-<entityname.raptorpomseed>Raptor Bait Seed</entityname.raptorpomseed>
-<entitydescription.raptorpomseed>A genetically engineered seed of the hybrid plant known as Raptor Bait.</entitydescription.raptorpomseed>
-
-<entityname.raptorbacco>Raptor Nip</entityname.raptorbacco>
-<entitydescription.raptorbacco>Combining the toxic properties of raptor's bane and tobacco, this psychoactive fruit enhances physical performance at the cost of your sanity.</entitydescription.raptorbacco>
-<entityname.raptorbaccoseed>Raptor Nip Seed</entityname.raptorbaccoseed>
-<entitydescription.raptorbaccoseed>A genetically engineered seed of the hybrid plant Raptor Nip.</entitydescription.raptorbaccoseed>
-
-<entityname.bananacigar>Banana Cigar</entityname.bananacigar>
-<entitydescription.bananacigar>A hollow banana sprouting dry tobacco leaves which can be smoked directly. Makes you look cool among clowns, and like a clown among others...</entitydescription.bananacigar>
-<entityname.bananacigarseed>Bananacco Slice</entityname.bananacigarseed>
-<entitydescription.bananacigarseed>A genetically engineered slice of the hybrid plant Bananacco. Can be planted.</entitydescription.bananacigarseed>  
-
-<entityname.bananagun>Bananabulb</entityname.bananagun>
-<entitydescription.bananagun>Packed with potent sodium, this banana can be squeezed to let out a volley of fruity shrapnel.</entitydescription.bananagun>
-<entityname.bananagunseed>Bananabulb Slice</entityname.bananagunseed>
-<entitydescription.bananagunseed>A genetically engineered slice of the hybrid plant Bananabulb. Can be planted.</entitydescription.bananagunseed>  
-
-<entityname.bananafuelrod>Radioactive Banana</entityname.bananafuelrod>
-<entitydescription.bananafuelrod>This inexplicably irradiated banana is warm to the touch, and hard to the tooth. Clowns are known to use these as emergency reactor fuel...</entitydescription.bananafuelrod>
-
-<fabricationheader.fertilizeringredient>Fertilizer ingredient</fabricationheader.fertilizeringredient>
-<fabricationdescription.fertilizeringredient>Organic waste that can be recycled as fertilizer ingredients.</fabricationdescription.fertilizeringredient>
-<fabricationheader.tobaccoingredient>Tobacco ingredient</fabricationheader.tobaccoingredient>
-<fabricationdescription.tobaccoingredient>Plants that can contain tobacco.</fabricationdescription.tobaccoingredient>
-
- 
-<!-- afflictions (needs) -->
-<afflictionname.mood>Stress</afflictionname.mood>
-<afflictiondescription.mood.goodmood>Relaxed and focused.</afflictiondescription.mood.goodmood>
-<afflictiondescription.mood.mediummood>Overworked, but still hanging on.</afflictiondescription.mood.mediummood>
-<afflictiondescription.mood.badmood>One angry europan.</afflictiondescription.mood.badmood>
-<afflictiondescription.mood.awfulmood>Depressed and without motivation.</afflictiondescription.mood.awfulmood>
-  
-<afflictionname.hygiene>Personal Hygiene</afflictionname.hygiene>
-<afflictiondescription.hygiene>Don't be a filthy Europan.</afflictiondescription.hygiene>
-<afflictiondescription.hygiene.self.medium>You feel grimy.</afflictiondescription.hygiene.self.medium>
-<afflictiondescription.hygiene.self.high>You stink, and your skin has a layer of muck.</afflictiondescription.hygiene.self.high>
-<afflictiondescription.hygiene.other.low>The patient is as clean a sailor can be.</afflictiondescription.hygiene.other.low>
-<afflictiondescription.hygiene.other.medium>The patient could use a good scrub.</afflictiondescription.hygiene.other.medium>
-<afflictiondescription.hygiene.other.high>An foul odor emanates from the patient due to their execrable hygiene.</afflictiondescription.hygiene.other.high>
-
-<afflictionname.fatigue>Fatigue</afflictionname.fatigue>
-<afflictiondescription.fatigue>A tired worker is a bad worker.</afflictiondescription.fatigue>
-<afflictiondescription.fatigue.self.medium>You feel physically strained.</afflictiondescription.fatigue.self.medium>
-<afflictiondescription.fatigue.self.high>You might fall asleep at any time.</afflictiondescription.fatigue.self.high>
-<afflictiondescription.fatigue.other.low>The patient is well awake.</afflictiondescription.fatigue.other.low>
-<afflictiondescription.fatigue.other.medium>The patient could probably use some rest.</afflictiondescription.fatigue.other.medium>
-<afflictiondescription.fatigue.other.high>The patient suffers from acute sleep deprivation.</afflictiondescription.fatigue.other.high>
-
-<!-- afflictions (foodbuffs) -->
-<afflictionname.he-calciumrich>Calcium Rich Diet</afflictionname.he-calciumrich>
-<afflictiondescription.he-calciumrich>Strengthens the bones and helps with digestion.</afflictiondescription.he-calciumrich>
-
-<afflictionname.he-fatrich>Fat Rich Diet</afflictionname.he-fatrich>
-<afflictiondescription.he-fatrich>Healthy fat greases your joints! You move faster.</afflictiondescription.he-fatrich>
-
-<afflictionname.he-proteinrich>Protein Rich Diet</afflictionname.he-proteinrich>
-<afflictiondescription.he-proteinrich>Bulk up! You swing harder and feel like holding a gun.</afflictiondescription.he-proteinrich>
-
-<afflictionname.he-vitaminrich>Vitamin Rich Diet</afflictionname.he-vitaminrich>
-<afflictiondescription.he-vitaminrich>Stimulates red blood cells. Hold your breath for longer and reduce bleed less.</afflictiondescription.he-vitaminrich>
-
-<afflictionname.he-sugarrich>Sugar Rich Diet</afflictionname.he-sugarrich>
-<afflictiondescription.he-sugarrich>The sugar rush keeps you focused. Learn faster, improves the mood and fatigue. </afflictiondescription.he-sugarrich>
-
-<afflictionname.he-fiberrich>Fiber Rich Diet</afflictionname.he-fiberrich>
-<afflictiondescription.he-fiberrich>Fibers help with digestion and stomachache. </afflictiondescription.he-fiberrich>
-
-<afflictionname.he-watchermindsense>Watcher Senses</afflictionname.he-watchermindsense>
-<afflictiondescription.he-watchermindsense>Watcher juices flow through you. Learn faster and see the hidden truth of the world.</afflictiondescription.he-watchermindsense>
- 
-<afflictionname.he-tobaccoaddiction>Tobacco addiction</afflictionname.he-tobaccoaddiction>
-<afflictiondescription.he-tobaccoaddiction>It's bad for your lungs. You feel short of breath.</afflictiondescription.he-tobaccoaddiction>
-
-<afflictionname.caffeinated>Caffeinated</afflictionname.caffeinated>
-<afflictiondescription.caffeinated>You feel less tired, and a bit faster.</afflictiondescription.caffeinated>
-
-<afflictionname.worminfection>Parasitic Worms</afflictionname.worminfection>
-<afflictiondescription.worminfection>You ate some bad food and can now feel worms wriggling in your stomach. Treat with antibiotics.</afflictiondescription.worminfection>
-<afflictionname.tapeworminfection>Tapeworm Infection</afflictionname.tapeworminfection>
-<afflictiondescription.tapeworminfection>A very hungry tapeworm lodged itself inside your bowels, and it's making you peckish. Treat with antibiotics.</afflictiondescription.tapeworminfection>
- 
-<!-- Fabrication tags -->
-<fabricationheader.sugary>Sugary Ingredient.</fabricationheader.sugary>
-<fabricationdescription.sugary>Any ingredient of sugary taste.</fabricationdescription.sugary>
-<fabricationheader.salty>Salty Ingredient.</fabricationheader.salty>
-<fabricationdescription.salty>Any ingredient of salty taste.</fabricationdescription.salty>
-<fabricationheader.smallegg>Small Egg</fabricationheader.smallegg>
-<fabricationdescription.smallegg>Any alien egg of small caliber.</fabricationdescription.smallegg> 
- 
-<!-- misc -->
-<entityname.money_5mk>5mk</entityname.money_5mk>
-<entitydescription.money_5mk>Adds 5mk to your bank account.</entitydescription.money_5mk>
-<entityname.money_25mk>25mk</entityname.money_25mk>
-<entitydescription.money_25mk>Adds 25mk to your bank account.</entitydescription.money_25mk>
-<entityname.money_50mk>50mk</entityname.money_50mk>
-<entitydescription.money_50mk>Adds 50mk to your bank account.</entitydescription.money_50mk>
-<entityname.money_75mk>75mk</entityname.money_75mk>
-<entitydescription.money_75mk>Adds 75mk to your bank account.</entitydescription.money_75mk>
-
-<entityname.shotgunshellsalt>Shotgun Salt Shell</entityname.shotgunshellsalt>
-<entitydescription.shotgunshellsalt>A makeshift shotgun shell containing good old sodium chloride. Ought to put salt in the wound.</entitydescription.shotgunshellsalt>
-
-<entityname.he-omelette>Omelette</entityname.he-omelette>
-<entitydescription.he-omelette>Protein-rich and hatchling-free.</entitydescription.he-omelette>
-
-<entityname.he-popnutbubblesalad>Pop-Berry Salad</entityname.he-popnutbubblesalad>
-<entitydescription.he-popnutbubblesalad>A healthy and colorful Popnut-Bubbleberry fruit salad.</entitydescription.he-popnutbubblesalad>
-
-<entityname.he-huskcaviarnori>Husk Caviar with Nori</entityname.he-huskcaviarnori>
-<entitydescription.he-huskcaviarnori>Husk eggs gently laying on nori leaves. You were told a splash of vinegar sterilizes the parasite.</entitydescription.he-huskcaviarnori>
-
-<entityname.he-potcrawyum>Craw Yum Pot</entityname.he-potcrawyum>
-<entitydescription.he-potcrawyum>A starchy soup made of boiled crawler parts. Sometimes eyeballs float up.</entitydescription.he-potcrawyum>
-<entityname.he-crawyumsoup>Craw Yum</entityname.he-crawyumsoup>
-<entitydescription.he-crawyumsoup>A starchy soup made of boiled crawler parts. Sometimes eyeballs float up.</entitydescription.he-crawyumsoup>
-
-<entityname.he-potbonebroth>Bone Broth Pot</entityname.he-potbonebroth>
-<entitydescription.he-potbonebroth>Moloch Meat boiled with its bone. The perfect remedy for hangovers.</entitydescription.he-potbonebroth>
-<entityname.he-bonebroth>Bone Broth</entityname.he-bonebroth>
-<entitydescription.he-bonebroth>Moloch Meat boiled with its bone. The perfect remedy for hangovers.</entitydescription.he-bonebroth>
-
-<entityname.he-potseaweedsoup>Seaweed Soup Pot</entityname.he-potseaweedsoup>
-<entitydescription.he-potseaweedsoup>A vegetarian soup with boiled nori and seeds. Quenches thirst nicely.</entitydescription.he-potseaweedsoup>
-<entityname.he-seaweedsoup>Seaweed Soup</entityname.he-seaweedsoup>
-<entitydescription.he-seaweedsoup>A vegetarian soup with boiled nori and seeds. Quenches thirst nicely.</entitydescription.he-seaweedsoup>
-
-<entityname.he-potfondue>Fondue Pot</entityname.he-potfondue>
-<entitydescription.he-potfondue>A rich dish, savored by dipping cubes of bread into a pool of melted cheese.</entitydescription.he-potfondue>
-<entityname.he-fondue>Fondue</entityname.he-fondue>
-<entitydescription.he-fondue>A rich dish, savored by dipping cubes of bread into a pool of melted cheese.</entitydescription.he-fondue>
-
-<entityname.he-mrepacket>MRE - Packet</entityname.he-mrepacket>
-<entitydescription.he-mrepacket>Open it up to get 2 MRE rations.</entitydescription.he-mrepacket>
-<entityname.he-mreration>MRE - Dehydrated Ration</entityname.he-mreration>
-<entitydescription.he-mreration>A ready-to-eat meal of uncertain composition that does not spoil. Just pour water in and enjoy the moist gruel.</entitydescription.he-mreration>
-
-<entityname.he-fermentedcabbage>Fermented Cabbage</entityname.he-fermentedcabbage>
-<entitydescription.he-fermentedcabbage>Vegetable leaves bleached and fermented gain an especially sour taste. </entitydescription.he-fermentedcabbage>
-
-<entityname.he-fermentedraptorbane>Fermented Raptor's Bane</entityname.he-fermentedraptorbane>
-<entitydescription.he-fermentedraptorbane>When fermented, Raptor's Bane loses its toxicity, becoming tender and bitter. Even a raptor could eat it. </entitydescription.he-fermentedraptorbane>
-
-<entityname.he-fermentedsaltbulb>Fermented Salt Bulb</entityname.he-fermentedsaltbulb>
-<entitydescription.he-fermentedsaltbulb>Bacteria decomposes Salt Bulbs in the right environment, removing all its deadly saltiness and giving it a subtle touch of acidity.</entitydescription.he-fermentedsaltbulb>
-
-<entityname.he-molochefort>Molochefort</entityname.he-molochefort>
-<entitydescription.he-molochefort>Half-rotten Moloch blue cheese exposed to bacteria; the result is surprisingly not deadly. Boosts your immune system.</entitydescription.he-molochefort>
-
-<entityname.he-sauerkraut>Sauerkraut</entityname.he-sauerkraut>
-<entitydescription.he-sauerkraut>Sausages and fermented cabbage. Best enjoyed with a beer and some yodeling.</entitydescription.he-sauerkraut>
-
-<entityname.he-molochtartare>Moloch Tartare</entityname.he-molochtartare><!--Patch 18-->
-<entitydescription.he-molochtartare>Ground Moloch meat served raw with a cracked egg on top.</entitydescription.he-molochtartare><!--Patch 18-->
-
-<entityname.he-preparedmolochsteak>Seared Moloch Steak</entityname.he-preparedmolochsteak>
-<entitydescription.he-preparedmolochsteak>Moloch steak, seared with the largest pan you have. Spoils if not refrigerated.</entitydescription.he-preparedmolochsteak>
-
-<entityname.he-rawoffal>Raw Offal</entityname.he-rawoffal>
-<entitydescription.he-rawoffal>Small bits and pieces of organ meats. Spoils if not refrigerated.</entitydescription.he-rawoffal>
-
-<entityname.he-blender>Blender</entityname.he-blender>
-<entitydescription.he-blender>A blender that can be used for juices and smoothies. Requires Power.</entitydescription.he-blender>
-
-<entityname.he-emptyglass>Empty Glass</entityname.he-emptyglass>
-<entitydescription.he-emptyglass>Stay hydrated.</entitydescription.he-emptyglass>
-<entityname.he-waterglass>Water Glass</entityname.he-waterglass>
-<entitydescription.he-waterglass>A glass of fresh water.</entitydescription.he-waterglass>
-<entityname.he-pomberryjuiceglass>Glass of Pom-Berry Juice</entityname.he-pomberryjuiceglass>
-<entitydescription.he-pomberryjuiceglass>A glass of fresh Pomegrenade-Bubbleberry juice.</entitydescription.he-pomberryjuiceglass>
-
-<forcesay.eatingsound>*Om nom nom...*</forcesay.eatingsound>
-<forcesay.eatingsound>*Gulp...*</forcesay.eatingsound>
-<forcesay.eatingsound>*Hmmmf...*</forcesay.eatingsound>
-
-<displayname.boil>[itemname] (Boil)</displayname.boil>
-
-<interaction.emptypot>Empty the pot</interaction.emptypot>
-
-<!-- Tools -->
-<entityname.he-spoon>Spoon</entityname.he-spoon>
-<entitydescription.he-spoon>For scooping things.</entitydescription.he-spoon>
-<entityname.he-fork>Fork</entityname.he-fork>
-<entitydescription.he-fork>It's like a little trident.</entitydescription.he-fork>
-<entityname.he-dirtyspoon>Dirty Spoon</entityname.he-dirtyspoon>
-<entitydescription.he-dirtyspoon>Wash it in the sink.</entitydescription.he-dirtyspoon>
-<entityname.he-dirtyfork>Dirty Fork</entityname.he-dirtyfork>
-<entitydescription.he-dirtyfork>Wash it in the sink.</entitydescription.he-dirtyfork>
-
-<entityname.he-pot>Pot</entityname.he-pot>
-<entitydescription.he-pot>A stainless steel pot.</entitydescription.he-pot>
-<entityname.he-dirtypot>Dirty Pot</entityname.he-dirtypot>
-<entitydescription.he-dirtypot>This pot is stained with gunk. Clean it in a sink.</entitydescription.he-dirtypot>
-<entityname.he-potwithwater>Pot with water</entityname.he-potwithwater>
-<entitydescription.he-potwithwater>A pot, with water.</entitydescription.he-potwithwater>
-
-<entityname.he-emptybowl>Bowl</entityname.he-emptybowl>
-<entitydescription.he-emptybowl>A ceramic bowl. Don't drop it.</entitydescription.he-emptybowl>
-<entityname.he-dirtybowl>Dirty Bowl</entityname.he-dirtybowl>
-<entitydescription.he-dirtybowl>This bowl is stained with gunk. Clean it in a sink.</entitydescription.he-dirtybowl>
-<entityname.he-emptyplate>Plate</entityname.he-emptyplate>
-<entitydescription.he-emptyplate>A ceramic plate. Don't throw it.</entitydescription.he-emptyplate>
-<entityname.he-dirtyplate>Dirty Plate</entityname.he-dirtyplate>
-<entitydescription.he-dirtyplate>This plate is stained with gunk. Clean it in a sink.</entitydescription.he-dirtyplate>
-
-<entityname.he-pan>Cooking Pan</entityname.he-pan>
-<entitydescription.he-pan>Use on the stove to cook food, use on crewmates to discipline them.</entitydescription.he-pan>
-
-<entityname.he-milkingtool>Moloch Milk Harvester</entityname.he-milkingtool>
-<entitydescription.he-milkingtool>A tool with a pacifying effect used by divers to extract lactic secretions from live Molochs. Infamous among lone beacon keepers...</entitydescription.he-milkingtool>
-
-
-<!-- Fast food -->
-<entityname.he-rawfries>Raw Fries</entityname.he-rawfries>
-<entitydescription.he-rawfries>Out of the pom, into the fryer.</entitydescription.he-rawfries>
-
-<entityname.he-fries>Fries</entityname.he-fries>
-<entitydescription.he-fries>Crunchy and salty pomegrenade fries.</entitydescription.he-fries>
-
-<entityname.he-poutine>Poutine</entityname.he-poutine>
-<entitydescription.he-poutine>Fries topped with melted cheese and a thick sauce. As greasy as it is delicious.</entitydescription.he-poutine>
-
-<entityname.he-rawnuggets>Pile of Raw Nuggets</entityname.he-rawnuggets>
-<entitydescription.he-rawnuggets>A pile of raw nuggets. Put it in a fryer.</entitydescription.he-rawnuggets>
-
-<entityname.he-cookednugget>Nugget</entityname.he-cookednugget>
-<entitydescription.he-cookednugget>Meaty slosh, battered and deep-fried.</entitydescription.he-cookednugget>
-
-<entityname.he-burger>Burger</entityname.he-burger>
-<entitydescription.he-burger>A culinary classic, the building brick of space colonization. Some say a healthy Europan is half water, half burger.</entitydescription.he-burger>
-
-<entityname.he-hotdog>Hotdog</entityname.he-hotdog>
-<entitydescription.he-hotdog>Grab a bite while watching mudraptor races.</entitydescription.he-hotdog>
-
-<entityname.he-pizza>Pizza</entityname.he-pizza>
-<entitydescription.he-pizza>A flat base of dough, a good dose of cheese, flakes of meat and most important of all, sweet sliced fruit to honor the old earthian recipe. Cut yourself a piece!</entitydescription.he-pizza>
-<entityname.he-pizzaslice>Pizza Slice</entityname.he-pizzaslice>
-<entitydescription.he-pizzaslice>Kowabunga!</entitydescription.he-pizzaslice>
-
-<entityname.he-madnessmeal>Meal of Madness</entityname.he-madnessmeal>
-<entitydescription.he-madnessmeal>Contents:\n - 1x Burger\n - 8x Nuggets\n - 1x Can of Couwola Cola\n - 1x Random Toy</entitydescription.he-madnessmeal>
-
-<!-- other ingredients -->
-<entityname.he-rawsausage>Raw Sausage</entityname.he-rawsausage>
-<entitydescription.he-rawsausage>Expect the wurst! Grill it or boil it. Spoils if not refrigerated.</entitydescription.he-rawsausage>
-<entityname.he-sausage>Cooked Sausage</entityname.he-sausage>
-<entitydescription.he-sausage>Expect the wurst!</entitydescription.he-sausage>
-<entityname.he-burnedsausage>Burnt Sausage</entityname.he-burnedsausage>
-<entitydescription.he-burnedsausage>Cooked to incineration.</entitydescription.he-burnedsausage>
-
-<entityname.he-rawendwormsausage>Raw Endworm Sausage</entityname.he-rawendwormsausage>
-<entitydescription.he-rawendwormsausage>Expect the endwurst! Grill it or boil it. Spoils if not refrigerated.</entitydescription.he-rawendwormsausage>
-<entityname.he-endwormsausage>Endworm Sausage</entityname.he-endwormsausage>
-<entitydescription.he-endwormsausage>Expect the endwurst!</entitydescription.he-endwormsausage>
-<entityname.he-burnedendwormsausage>Burnt Sausage</entityname.he-burnedendwormsausage>
-<entitydescription.he-burnedendwormsausage>Cooked to incineration.</entitydescription.he-burnedendwormsausage>
-
-<entityname.he-rawmeatpatty>Raw Meat Patty</entityname.he-rawmeatpatty>
-<entitydescription.he-rawmeatpatty>Cook it on the grill. Spoils if not refrigerated.</entitydescription.he-rawmeatpatty>
-<entityname.he-meatpatty>Cooked Meat Patty</entityname.he-meatpatty>
-<entitydescription.he-meatpatty>Seared to perfection.</entitydescription.he-meatpatty>
-<entityname.he-burnedmeatpatty>Burnt Meat Patty</entityname.he-burnedmeatpatty>
-<entitydescription.he-burnedmeatpatty>Cooked to incineration.</entitydescription.he-burnedmeatpatty>
-
-<entityname.he-rawspinelingslices>Raw Spineling Slices</entityname.he-rawspinelingslices>
-<entitydescription.he-rawspinelingslices>Chopped up Spineling. Grill it or sear it. Spoils if not refrigerated.</entitydescription.he-rawspinelingslices>
-<entityname.he-spinelingslices>Cooked Spineling Slices</entityname.he-spinelingslices>
-<entitydescription.he-spinelingslices>Cooked up Spineling. Spoils if not refrigerated.</entitydescription.he-spinelingslices>
-<entityname.he-burnedspinelingslices>Burnt Spineling Slices</entityname.he-burnedspinelingslices>
-<entitydescription.he-burnedspinelingslices>Cooked to incineration.</entitydescription.he-burnedspinelingslices>
-
-<entityname.he-proteinalgaecake>Protein Algae Cake</entityname.he-proteinalgaecake>
-<entitydescription.he-proteinalgaecake>There is way more algae than protein in these. You could say the cake is a lie.</entitydescription.he-proteinalgaecake>
-
-<!-- beverages -->
-<entityname.he-teamixbubbleberry>Bubbleberry Tea Mix</entityname.he-teamixbubbleberry>
-<entitydescription.he-teamixbubbleberry>Finely chopped Bubbleberry leaves. Brew it in a kettle.</entitydescription.he-teamixbubbleberry>
-
-<entityname.he-teamixpopnut>Popnut Tea Mix</entityname.he-teamixpopnut>
-<entitydescription.he-teamixpopnut>Finely chopped Popnut leaves. Brew it in a kettle.</entitydescription.he-teamixpopnut>
-
-<entityname.he-coffeemix>Coffee Mix</entityname.he-coffeemix>
-<entitydescription.he-coffeemix>Coffee was said to be so addictive back on earth, it was replaced with the more healthy alternative of crushed tobacco buds.</entitydescription.he-coffeemix>
-
-<entityname.he-chocolatemix>Chocolate Mix</entityname.he-chocolatemix>
-<entitydescription.he-chocolatemix>Add lots of milk and sugar to forget the fact that Europa ran out of real cocoa half a century ago.</entitydescription.he-chocolatemix>
-
-<entityname.he-cupcoffee>Cup of Coffee</entityname.he-cupcoffee>
-<entitydescription.he-cupcoffee>To the bitter end. Prevents thirst.</entitydescription.he-cupcoffee>
-
-<entityname.he-mugcoffee>Mug of Coffee</entityname.he-mugcoffee>
-<entitydescription.he-mugcoffee>To the bitter end. Prevents thirst.</entitydescription.he-mugcoffee>
-
-<entityname.he-coffeetogo>Coffee-to-go</entityname.he-coffeetogo>
-<entitydescription.he-coffeetogo>To the bitter end. Prevents thirst.</entitydescription.he-coffeetogo>
-
-<entityname.he-cuphotchocolate>Cup of Hot Chocolate</entityname.he-cuphotchocolate>
-<entitydescription.he-cuphotchocolate>Warms up the coldest of sailors. Prevents thirst.</entitydescription.he-cuphotchocolate>
-
-<entityname.he-mughotchocolate>Mug of Hot Chocolate</entityname.he-mughotchocolate>
-<entitydescription.he-mughotchocolate>Warms up the coldest of sailors. Prevents thirst.</entitydescription.he-mughotchocolate>
-
-<!-- filets -->
-<entityname.he-rawcrawlerfilets>Raw Crawler Filets</entityname.he-rawcrawlerfilets>
-<entitydescription.he-rawcrawlerfilets>Slices of Crawler meat. Spoils if not refrigerated.</entitydescription.he-rawcrawlerfilets>
-
-<entityname.he-preparedcrawlerfilets>Prepared Crawler Filets</entityname.he-preparedcrawlerfilets>
-<entitydescription.he-preparedcrawlerfilets>Crawler filets, roasted in an oven.</entitydescription.he-preparedcrawlerfilets>
-
-<entityname.he-rawhumanfilets>Raw Human Filets</entityname.he-rawhumanfilets>
-<entitydescription.he-rawhumanfilets>Slices of human meat. Spoils if not refrigerated.</entitydescription.he-rawhumanfilets>
-
-<entityname.he-preparedhumanfilets>Prepared Human Filets</entityname.he-preparedhumanfilets>
-<entitydescription.he-preparedhumanfilets>Human filets, roasted in an oven.</entitydescription.he-preparedhumanfilets>
-
-<entityname.he-rawthresherfilets>Raw Thresher Filets</entityname.he-rawthresherfilets>
-<entitydescription.he-rawthresherfilets>Slices of Thresher meat. Spoils if not refrigerated.</entitydescription.he-rawthresherfilets>
-
-<entityname.he-preparedthresherfilets>Prepared Thresher Filets</entityname.he-preparedthresherfilets>
-<entitydescription.he-preparedthresherfilets>Thresher filets, roasted in an oven.</entitydescription.he-preparedthresherfilets>
-
-<entityname.he-rawhuskfilets>Raw Husk Lump</entityname.he-rawhuskfilets>
-<entitydescription.he-rawhuskfilets>Select Husk morsels, does not include stingers. Spoils if not refrigerated.</entitydescription.he-rawhuskfilets>
-
-<entityname.he-preparedhuskfilets>Boiled Husk Lump</entityname.he-preparedhuskfilets>
-<entitydescription.he-preparedhuskfilets>Boil until it stops wriggling.</entitydescription.he-preparedhuskfilets>
-
-
-
-
-
-<!-- TRAITS -->
-
-<talentname.he-sleepyeuropan>Sleepy Europan</talentname.he-sleepyeuropan>
-<talentdescription.he-sleepyeuropan>Make sure to take a rest in a bed from time to time.</talentdescription.he-sleepyeuropan>
-
-<talentname.he-moodyeuropan>Moody Europan</talentname.he-moodyeuropan>
-<talentdescription.he-moodyeuropan>Keep your stress low by enjoying foods and drinks you like.</talentdescription.he-moodyeuropan>
-
-<seleectpreferredfood>Select your preferred food:</seleectpreferredfood>
-<seleectpreferreddrink>Select your preferred drink:</seleectpreferreddrink>
-<randomizelikedfood>Randomize (Will pick 2 random foods)</randomizelikedfood>
-<randomizelikeddrink>Randomize (Will pick 1 random drink)</randomizelikeddrink>
-
-<talentname.he-trait_likes_friedfoods>Likes Fried Food</talentname.he-trait_likes_friedfoods>
-<talentdescription.he-trait_likes_burgers>You like eating Fried Food.</talentdescription.he-trait_likes_burgers>
-<talentname.he-trait_likes_burgers>Likes Burgers</talentname.he-trait_likes_burgers>
-<talentdescription.he-trait_likes_hotdogs>You like eating Hotdogs.</talentdescription.he-trait_likes_hotdogs>
-<talentname.he-trait_likes_hotdogs>Likes Hotdogs</talentname.he-trait_likes_hotdogs>
-<talentdescription.he-trait_likes_pizzas>You like eating Pizzas.</talentdescription.he-trait_likes_pizzas>
-<talentname.he-trait_likes_pizzas>Likes Pizzas</talentname.he-trait_likes_pizzas>
-<talentdescription.he-trait_likes_filets>You like eating Filets.</talentdescription.he-trait_likes_filets>
-<talentname.he-trait_likes_filets>Likes Filets</talentname.he-trait_likes_filets>
-<talentdescription.he-trait_likes_roasts>You like eating Roasts.</talentdescription.he-trait_likes_roasts>
-<talentname.he-trait_likes_roasts>Likes Roasts</talentname.he-trait_likes_roasts>
-<talentdescription.he-trait_likes_sandwiches>You like eating Sandwiches.</talentdescription.he-trait_likes_sandwiches>
-<talentname.he-trait_likes_sandwiches>Likes Sandwiches</talentname.he-trait_likes_sandwiches>
-<talentdescription.he-trait_likes_omelettes>You like eating Omelette.</talentdescription.he-trait_likes_omelettes>
-<talentname.he-trait_likes_omelettes>Likes Omelette</talentname.he-trait_likes_omelettes>
-<talentdescription.he-trait_likes_soups>You like eating Soup.</talentdescription.he-trait_likes_soups>
-<talentname.he-trait_likes_soups>Likes Soup</talentname.he-trait_likes_soups>
-<talentdescription.he-trait_likes_salads>You like eating Salad.</talentdescription.he-trait_likes_salads>
-<talentname.he-trait_likes_salads>Likes Salad</talentname.he-trait_likes_salads>
-<talentdescription.he-trait_likes_sweets>You like eating Sweets.</talentdescription.he-trait_likes_sweets>
-<talentname.he-trait_likes_sweets>Likes Sweets</talentname.he-trait_likes_sweets>
-
-<talentname.he-trait_likes_beer>Likes Beer</talentname.he-trait_likes_beer>
-<talentdescription.he-trait_likes_beer>You like drinking Beer.</talentdescription.he-trait_likes_beer>
-<talentname.he-trait_likes_rum>Likes Rum</talentname.he-trait_likes_rum>
-<talentdescription.he-trait_likes_rum>You like drinking Rum.</talentdescription.he-trait_likes_rum>
-<talentname.he-trait_likes_whiskey>Likes Whiskey</talentname.he-trait_likes_whiskey>
-<talentdescription.he-trait_likes_whiskey>You like drinking Whiskey.</talentdescription.he-trait_likes_whiskey>
-<talentname.he-trait_likes_tea>Likes Tea</talentname.he-trait_likes_tea>
-<talentdescription.he-trait_likes_tea>You like drinking Tea.</talentdescription.he-trait_likes_tea>
-<talentname.he-trait_likes_cola>Likes Cola</talentname.he-trait_likes_cola>
-<talentdescription.he-trait_likes_cola>You like drinking Cola.</talentdescription.he-trait_likes_cola>
-
-
-<eventtext.he-hirechef.freechef>"Oh hello! You're from that submarine that just docked, aren't you? You don't happen to be in need of a new chef? I'm looking for work, but I'm not needed on this station."</eventtext.he-hirechef.freechef>
-<eventtext.he-hirechef.expensivechef>"Hey, you're from that submarine that just docked, right? This shithole of a station just terminated my contract, and I'm looking for a crew."</eventtext.he-hirechef.expensivechef>
-<eventtext.he-hirechef.howmuch>"We could use a cook. How much is this going to cost?"</eventtext.he-hirechef.howmuch>
-<eventtext.he-hirechef.joinfree>"I'll join your crew for free! Just get me out of this hole, all I need are kitchen tools and I'll start cooking."</eventtext.he-hirechef.joinfree>
-<eventtext.he-hirechef.joinexpensive>"A mere 1250mk. That should cover my gambling debts and any future drinking expenses."</eventtext.he-hirechef.joinexpensive>
-<eventtext.he-hirechef.welcome>"Welcome on board."</eventtext.he-hirechef.welcome>
-<eventtext.he-hirechef.thinkaboutit>"I'll think about it."</eventtext.he-hirechef.thinkaboutit>
-<eventtext.he-hirechef.chefhired>"Great, I'll get my knives sharpened!"</eventtext.he-hirechef.chefhired>
-<eventtext.he-hirechef.givemoney>Give 1250mk</eventtext.he-hirechef.givemoney>
-<eventtext.he-hirechef.nomoney>"Sorry but I don't work for free. Feel free to come back when you can afford my services."</eventtext.he-hirechef.nomoney>
-<eventtext.he-hirechef.nothiring>"We're not currently hiring."</eventtext.he-hirechef.nothiring>
-<eventtext.he-hirechef.changeyourmind>"Really now? Man I was hoping to finally get away from this place... Well, I'm here if you change your mind."</eventtext.he-hirechef.changeyourmind>
-<eventtext.he-hirechef.nokitchen>"Our submarine doesn't have a kitchen."</eventtext.he-hirechef.nokitchen>
-<eventtext.he-hirechef.buykitchen>"Too bad. See if you can check the store, they might have the basics: a cutting board, a sink..."</eventtext.he-hirechef.buykitchen>
-<eventtext.he-hirechef.nevermind>"Nevermind."</eventtext.he-hirechef.nevermind>
-
-
-
-<entityname.he-enablesleep>Enable Sleepy Europan</entityname.he-enablesleep>
-<entitydescription.he-enablesleep>[RMB + E] EXTRA OPTIONAL: Enables tiredness affliction for the user, causing them to have to sleep regularly. Warning: Can't be disabled for your current character once it is enabled.</entitydescription.he-enablesleep>
-<entityname.he-enablemood>Enable Moody Europan</entityname.he-enablemood><!--Patch 18-->
-<entitydescription.he-enablemood>[RMB + E] EXTRA OPTIONAL: Enables the mood affliction for the user, causing them to get stressed from working. Reduce your stress by eating food of choice, drinking, using drugs or relaxing. Warning: Can't be disabled for your current character once it is enabled.</entitydescription.he-enablemood><!--Patch 18-->
-
-<entityname.sink>Sink</entityname.sink><!--Patch 18-->
-<entitydescription.sink>Provides fresh water and cleans tableware.</entitydescription.sink><!--Patch 18-->
-
-<entityname.coffeemachine>Coffee Machine</entityname.coffeemachine><!--Patch 18-->
-<entitydescription.coffeemachine>Brews a nice cup of coffee.</entitydescription.coffeemachine><!--Patch 18-->
-
-<entitydescription.he-emptycup>An empty cup for drinks. Can be thrown or filled with a hot beverage.</entitydescription.he-emptycup><!--Patch 13-->
-<entityname.he-dirtycup>Dirty Cup</entityname.he-dirtycup>
-<entitydescription.he-dirtycup>Dirty. Wash it in the sink.</entitydescription.he-dirtycup>
-
-<entityname.he-emptymug>Empty Mug</entityname.he-emptymug>
-<entitydescription.he-emptymug>An empty mug for drinks. Can be thrown or filled with a hot beverage.</entitydescription.he-emptymug>
-<entityname.he-dirtymug>Dirty Mug</entityname.he-dirtymug>
-<entitydescription.he-dirtymug>Dirty. Wash it in the sink.</entitydescription.he-dirtymug>
-
-<entityname.he-emptycocktailglass>Empty Cocktail Glass</entityname.he-emptycocktailglass>
-<entitydescription.he-emptycocktailglass>Could use a drink.</entitydescription.he-emptycocktailglass>
-<entityname.he-dirtycocktailglass>Dirty Cocktail Glass</entityname.he-dirtycocktailglass>
-<entitydescription.dirtycocktailglass>Wash it in the sink.</entitydescription.dirtycocktailglass>
-
-
-
-<entityname.he-canopener>Can Opener</entityname.he-canopener>
-<entitydescription.he-canopener>Can open a can open.</entitydescription.he-canopener>
-
-<entityname.he-cannedcorn>Canned Corn</entityname.he-cannedcorn>
-<entitydescription.he-cannedcorn>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedcorn>
-<entityname.he-cannedcornopen>Canned Corn</entityname.he-cannedcornopen>
-<entitydescription.he-cannedcornopen>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedcornopen>
-<entityname.he-cannedmushrooms>Canned Mushrooms</entityname.he-cannedmushrooms>
-<entitydescription.he-cannedmushrooms>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedmushrooms>
-<entityname.he-cannedmushroomssopen>Canned Mushrooms</entityname.he-cannedmushroomssopen>
-<entitydescription.he-cannedmushroomssopen>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedmushroomssopen>
-<entityname.he-cannedpotatoes>Canned Potatoes</entityname.he-cannedpotatoes>
-<entitydescription.he-cannedpotatoes>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedpotatoes>
-<entityname.he-cannedpotatoesopen>Canned Potatoes</entityname.he-cannedpotatoesopen>
-<entitydescription.he-cannedpotatoesopen>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedpotatoesopen>
-<entityname.he-cannedtomatoes>Canned Tomatoes</entityname.he-cannedtomatoes>
-<entitydescription.he-cannedtomatoes>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedtomatoes>
-<entityname.he-cannedtomatoesopen>Canned Tomatoes</entityname.he-cannedtomatoesopen>
-<entitydescription.he-cannedtomatoesopen>A rare can of old Earthian vegetables, when supplies were still being delivered from outer space.</entitydescription.he-cannedtomatoesopen>
-
-<entityname.he-colaradiantbottle>Couwola Cola Radiant</entityname.he-colaradiantbottle>
-<entitydescription.he-colaradiantbottle>Feeling Overcharged! A special edition bottle of Couwola Cola, enriched with fulgurium.</entitydescription.he-colaradiantbottle>
-
-<entityname.he-dough>Dough</entityname.he-dough>
-<entitydescription.he-dough>A ball of dough, rolled by hopefully clean hands.</entitydescription.he-dough>
-
-<entityname.he-fishtailcocktail>Fishtail Cocktail</entityname.he-fishtailcocktail>
-<entitydescription.he-fishtailcocktail>A festive alcoholic drink to forget your troubles.</entitydescription.he-fishtailcocktail>
-
-<entityname.he-nuggetpack>Nugget Pack</entityname.he-nuggetpack>
-<entitydescription.he-nuggetpack>A box containing 8 nuggets.</entitydescription.he-nuggetpack>
-
-<entityname.he-seaweed>Sea Weed</entityname.he-seaweed>
-<entitydescription.he-seaweed>Common algae found around Europa.</entitydescription.he-seaweed>
-
-<entityname.he-shivcommon>Glass Shiv</entityname.he-shivcommon>
-<entitydescription.he-shivcommon>A sharp, broken bottle used as a weapon in bar fights.</entitydescription.he-shivcommon>
-
-<entityname.he-whoopeecushion>Whoope Cushion</entityname.he-whoopeecushion>
-<entitydescription.he-whoopeecushion>Embarass your friends!</entitydescription.he-whoopeecushion>
-
-<entityname.he-bagpipes>Bagpipes</entityname.he-bagpipes>
-<entitydescription.he-bagpipes>An ancient instrument from earth consisting of an inflatable bladder, a mouthpiece and several metal pipes that produce haunting melodies.</entitydescription.he-bagpipes>
-
-
-<itemmsgopenuse>[[Use]] Open</itemmsgopenuse>
-
-<!-- DO NOT TRANSLATE THE COMMANDS THEMSELVES -->
-<eventtext.manualenforceinfo>List of enforce manual needs commands
-(only applies to PLAYERS, not bots):
-
-‖color:gui.yellow‖manualenforcehungry‖end‖ (Hunger and Thirst)
-
-‖color:gui.yellow‖manualenforcefilthy‖end‖ (Bladder, Poop, Hygiene)
-
-‖color:gui.yellow‖manualenforcesleepy‖end‖ (Fatigue, Sleep)
-
-‖color:gui.yellow‖manualenforcemoody‖end‖ (Stress. NOT RECOMMENDED. Use syringe instead)
-
-‖color:gui.red‖manualenforceallneeds‖end‖ (all of the above)
-</eventtext.manualenforceinfo>
-
-
-
+  <interaction.open>Open</interaction.open>
+  <interaction.flushtoilet>Flush Toilet</interaction.flushtoilet>
+  <!-- Display names -->
+  <displayname.humanfooditem>[itemname] (Human)</displayname.humanfooditem>
+  <displayname.crawlerfooditem>[itemname] (Crawler)</displayname.crawlerfooditem>
+  <displayname.mudraptorfooditem>[itemname] (Mudraptor)</displayname.mudraptorfooditem>
+  <displayname.hammerheadfooditem>[itemname] (Hammerhead)</displayname.hammerheadfooditem>
+  <displayname.thresherfooditem>[itemname] (Thresher)</displayname.thresherfooditem>
+  <displayname.endwormfooditem>[itemname] (Endworm)</displayname.endwormfooditem>
+  <!-- Food Items -->
+  <entityname.he-proteinbar1>Protein Bar</entityname.he-proteinbar1>
+  <entitydescription.he-proteinbar1>A somewhat tasty protein bar. Helps to speed up the healing process a bit.</entitydescription.he-proteinbar1>
+  <entityname.he-chips1>Bag of Pomegrenade Chips</entityname.he-chips1>
+  <entitydescription.he-chips1>Dried pomegrenade chips. A popular little snack to watch the annual 'DUNWICE FACE-OFF' to.</entitydescription.he-chips1>
+  <entityname.he-chips2>Bag of Mutated Pomegrenade Chips</entityname.he-chips2>
+  <entitydescription.he-chips2>Dried mutated pomegrenade chips. A popular little snack. It is said to speed up the healing of burns a bit.</entitydescription.he-chips2>
+  <entityname.he-bread>Bread</entityname.he-bread>
+  <entitydescription.he-bread>A loaf of bread.</entitydescription.he-bread>
+  <entityname.he-burgerbun>Burger Bun</entityname.he-burgerbun>
+  <entitydescription.he-burgerbun>Used in the making of burgers.</entitydescription.he-burgerbun>
+  <entityname.he-hotdogbun>Hotdog Bun</entityname.he-hotdogbun>
+  <entitydescription.he-hotdogbun>Stick a sausage in it.</entitydescription.he-hotdogbun>
+  <entityname.he-breadslices>Bread Slices</entityname.he-breadslices>
+  <!--Patch 10-->
+  <entitydescription.he-breadslices>Two slices of bread. Great for making sandwiches!</entitydescription.he-breadslices>
+  <!--Patch 10-->
+  <entityname.he-sandwichbbjam>Bubble Berry Jam Sandwich</entityname.he-sandwichbbjam>
+  <!--Patch 10-->
+  <entitydescription.he-sandwichbbjam>A tasty sandwich with bubble berry jam.</entitydescription.he-sandwichbbjam>
+  <!--Patch 10-->
+  <!--crawler-->
+  <entityname.he-crawlerburger>Burger</entityname.he-crawlerburger>
+  <entitydescription.he-crawlerburger>A somewhat tasty burger.</entitydescription.he-crawlerburger>
+  <entityname.he-crawlerhotdog>Hotdog</entityname.he-crawlerhotdog>
+  <entitydescription.he-crawlerhotdog>A somewhat tasty hotdog.</entitydescription.he-crawlerhotdog>
+  <entityname.he-cookedcrawlerfilet>Cooked Filet</entityname.he-cookedcrawlerfilet>
+  <entitydescription.he-cookedcrawlerfilet>The taste is awful, but that's not unusual on Europa.</entitydescription.he-cookedcrawlerfilet>
+  <!--human-->
+  <entityname.he-cookedhumanfilet>Cooked Filet</entityname.he-cookedhumanfilet>
+  <entitydescription.he-cookedhumanfilet>Tastes like pork, a little bit more bitter, stronger.</entitydescription.he-cookedhumanfilet>
+  <entityname.he-humanburger>Burger</entityname.he-humanburger>
+  <entitydescription.he-humanburger>Has a slight bitter taste to it.</entitydescription.he-humanburger>
+  <entityname.he-humanhotdog>Hotdog</entityname.he-humanhotdog>
+  <entitydescription.he-humanhotdog>Has a slight bitter taste to it.</entitydescription.he-humanhotdog>
+  <!--mudraptor-->
+  <entityname.he-cookedmudraptorroast>Roast</entityname.he-cookedmudraptorroast>
+  <entitydescription.he-cookedmudraptorroast>A big slice of roast.</entitydescription.he-cookedmudraptorroast>
+  <entityname.he-mudraptorburger>Burger</entityname.he-mudraptorburger>
+  <entitydescription.he-mudraptorburger>Tastes like chicken.</entitydescription.he-mudraptorburger>
+  <entityname.he-mudraptorhotdog>Hotdog</entityname.he-mudraptorhotdog>
+  <entitydescription.he-mudraptorhotdog>Tastes like chicken.</entitydescription.he-mudraptorhotdog>
+  <!--hammerhead-->
+  <entityname.he-cookedhammerheadroast>Roast</entityname.he-cookedhammerheadroast>
+  <entitydescription.he-cookedhammerheadroast>A big slice of roast.</entitydescription.he-cookedhammerheadroast>
+  <entityname.he-cookedhammerheadspawnpickled>Pickled Hammerhead Spawn</entityname.he-cookedhammerheadspawnpickled>
+  <entitydescription.he-cookedhammerheadspawnpickled>A delicacy.</entitydescription.he-cookedhammerheadspawnpickled>
+  <entityname.he-cookedhammerheadspawnfried>Fried Hammerhead Spawn</entityname.he-cookedhammerheadspawnfried>
+  <entitydescription.he-cookedhammerheadspawnfried>Expensive fast food.</entitydescription.he-cookedhammerheadspawnfried>
+  <entityname.he-hammerheadburger>Burger</entityname.he-hammerheadburger>
+  <entitydescription.he-hammerheadburger>Mhhh it's so tasty, you'd like to smash your head in disbelief!</entitydescription.he-hammerheadburger>
+  <entityname.he-hammerheadhotdog>Hotdog</entityname.he-hammerheadhotdog>
+  <entitydescription.he-hammerheadhotdog>Mhhh it's so tasty, you'd like to smash your head in disbelief!</entitydescription.he-hammerheadhotdog>
+  <entityname.he-cookedhammerheadspareribs>Spareribs</entityname.he-cookedhammerheadspareribs>
+  <entitydescription.he-cookedhammerheadspareribs>A delicious meal with a strong taste.</entitydescription.he-cookedhammerheadspareribs>
+  <!--tresher-->
+  <entityname.he-cookedthresherfilet>Cooked Filet</entityname.he-cookedthresherfilet>
+  <entitydescription.he-cookedthresherfilet>It's flabby and a bit slimey.</entitydescription.he-cookedthresherfilet>
+  <entityname.he-thresherburger>Burger</entityname.he-thresherburger>
+  <entitydescription.he-thresherburger>The taste leaves you breathless.</entitydescription.he-thresherburger>
+  <entityname.he-thresherhotdog>Hotdog</entityname.he-thresherhotdog>
+  <entitydescription.he-thresherhotdog>The taste leaves you breathless.</entitydescription.he-thresherhotdog>
+  <!--endworm-->
+  <entityname.he-endwormhotdog>Hotdog</entityname.he-endwormhotdog>
+  <entitydescription.he-endwormhotdog>The taste is insane!</entitydescription.he-endwormhotdog>
+  <entityname.he-endwormburger>Burger</entityname.he-endwormburger>
+  <entitydescription.he-endwormburger>The taste is insane!</entitydescription.he-endwormburger>
+  <!--plants-->
+  <entityname.bubbleberries>Bubble Berries</entityname.bubbleberries>
+  <!--Patch 10-->
+  <entitydescription.bubbleberries>Very tasty and juicy.</entitydescription.bubbleberries>
+  <!--Patch 10-->
+  <entityname.badbubbleberries>Mutated Bubble Berries</entityname.badbubbleberries>
+  <!--Patch 10-->
+  <entityname.popnut>Pop Nut</entityname.popnut>
+  <!--Patch 10-->
+  <entitydescription.popnut>Kids love to play with them. Needs to be put in water to pop it open and be able to consume it.</entitydescription.popnut>
+  <!--Patch 10-->
+  <entityname.popnutpopped>Popped Pop Nut</entityname.popnutpopped>
+  <!--Patch 10-->
+  <entitydescription.popnutpopped>It's popped open, ready to be consumed. Used in some recipes.</entitydescription.popnutpopped>
+  <!--Patch 10-->
+  <entityname.badpopnutpopped>Popped Mutated Pop Nut</entityname.badpopnutpopped>
+  <!--Patch 10-->
+  <entitydescription.badpopnutpopped>It's popped open, ready to be consumed. Used in some recipes. Might be dangerous to leave it in the water.</entitydescription.badpopnutpopped>
+  <!--Patch 10-->
+  <entityname.badpopnut>Mutated Pop Nut</entityname.badpopnut>
+  <!--Patch 10-->
+  <entityname.badtobaccobud>Mutated Tobacco Bud</entityname.badtobaccobud>
+  <!--Patch 10-->
+  <entityname.badsaltbulb>Mutated Salt Bulb</entityname.badsaltbulb>
+  <!--Patch 10-->
+  <!-- SEEDS -->
+  <entityname.bubbleberryvineseed>Bubble Berry Vine Seed</entityname.bubbleberryvineseed>
+  <!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-bubbleberryvineseed>-->
+  <entitydescription.bubbleberryvineseed>Plant it in a planter to grow bubble berries.</entitydescription.bubbleberryvineseed>
+  <!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-bubbleberryvineseed>-->
+  <entityname.popnutvineseed>Pop Nut Vine Seed</entityname.popnutvineseed>
+  <!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-popnutvineseed>-->
+  <entitydescription.popnutvineseed>Plant it in a planter to grow pop nuts.</entitydescription.popnutvineseed>
+  <!--Changed as of Patch 11 | Identifier changed. Previous identifier <entityname.he-popnutvineseed>-->
+  <!-- Drinks -->
+  <entityname.he-energydrink1>Energy Drink</entityname.he-energydrink1>
+  <entitydescription.he-energydrink1>A refreshing energy drink. Good for when you're absolutely shit-faced and need to sober up a bit.</entitydescription.he-energydrink1>
+  <entityname.rum>Rum</entityname.rum>
+  <entitydescription.rum>A strong alcoholic beverage. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Heal Damage |Increase Psychosis Resistance</entitydescription.rum>
+  <entityname.he-rum>Pirate Rum</entityname.he-rum>
+  <entitydescription.he-rum>A very strong rum enriched with uranium for extra spice. |Alcoholic Beverage |Decrease Psychosis |Decrease Hallucinations |Decrease Husk Infection (If below 90%) |Healing Properties |Increase Psychosis Resistance |Increase Radiation Sickness (Slightly)</entitydescription.he-rum>
+  <entityname.he-whiskey>Doc's Whiskey</entityname.he-whiskey>
+  <entitydescription.he-whiskey>Doctor Michael's original whiskey. Approved by Doctors europa-wide. |Alcoholic Beverage |Reduce Hallucinations |Reduce Effects of Halucinova |Reduce Chem Addiction |Increase Psychosis Resistance |Slight Healing Properties</entitydescription.he-whiskey>
+  <!--Changed as of Patch 10-->
+  <entityname.he-halucinova>Halucinova</entityname.he-halucinova>
+  <entitydescription.he-halucinova>Keep away from "Sadashi Kira" at all cost! |Alcoholic Beverage |Increase Hallucinations | Slight Healing Properties</entitydescription.he-halucinova>
+  <entityname.he-beer>Coalition Premium Lager Beer</entityname.he-beer>
+  <entitydescription.he-beer>A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beer>
+  <entityname.he-water>Water</entityname.he-water>
+  <entitydescription.he-water>Tastes fresh..</entitydescription.he-water>
+  <entityname.he-waterbeer>Water</entityname.he-waterbeer>
+  <!--Patch 10-->
+  <entitydescription.he-waterbeer>Tastes fresh.</entitydescription.he-waterbeer>
+  <!--Patch 10-->
+  <entityname.he-waterrum>Water</entityname.he-waterrum>
+  <!--Patch 10-->
+  <entitydescription.he-waterrum>Tastes fresh.</entitydescription.he-waterrum>
+  <!--Patch 10-->
+  <entityname.he-waterwhiskey>Water</entityname.he-waterwhiskey>
+  <!--Patch 10-->
+  <entitydescription.he-waterwhiskey>Tastes fresh.</entitydescription.he-waterwhiskey>
+  <!--Patch 10-->
+  <entityname.he-waterhalucinova>Water</entityname.he-waterhalucinova>
+  <!--Patch 10-->
+  <entitydescription.he-waterhalucinova>Tastes fresh.</entitydescription.he-waterhalucinova>
+  <!--Patch 10-->
+  <entityname.he-milk>Moloch Milk</entityname.he-milk>
+  <entitydescription.he-milk>A bottle of Moloch Milk. Tastes a bit funny. Don't ask how they get milk from a Moloch! May help a bit when you're shit-faced or hungry.</entitydescription.he-milk>
+  <entityname.he-seawater>Sea Water</entityname.he-seawater>
+  <entitydescription.he-seawater>Tastes salty.</entitydescription.he-seawater>
+  <!--Patch 11-->
+  <entitydescription.he-seawaterbeer>Tastes salty.</entitydescription.he-seawaterbeer>
+  <!--Patch 11-->
+  <entityname.he-beercoalitionpremium>Coalition Premium</entityname.he-beercoalitionpremium>
+  <!--Changed as of Patch 10 | Identifier changed. Previous identifier <entityname.he-beer>-->
+  <entitydescription.he-beercoalitionpremium>A popular beer amongst coalition station inhabitants. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beercoalitionpremium>
+  <!--Changed as of Patch 10 | Identifier changed. Previous identifier <entityname.he-beer>-->
+  <entityname.he-beerjovianforce>Jovian Force</entityname.he-beerjovianforce>
+  <!--Patch 10-->
+  <entitydescription.he-beerjovianforce>A beer most popular amongst the Separatists. |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beerjovianforce>
+  <!--Patch 10-->
+  <entityname.he-beerliquidascension>Liquid Ascension</entityname.he-beerliquidascension>
+  <!--Patch 10-->
+  <entitydescription.he-beerliquidascension>A popular beer amongst members of the church of husk on their way to ascension! |Alcoholic Beverage |Increase Psychosis Resistance |Increase Pressure Immunity |Oxygen Not Included |May contain traces of husk parasites</entitydescription.he-beerliquidascension>
+  <!--Patch 10-->
+  <entityname.he-beerclownjuice>Clown Juice</entityname.he-beerclownjuice>
+  <!--Patch 10-->
+  <entitydescription.he-beerclownjuice>A popular beer amongst pranksters. Praise the honkmother! |Alcoholic Beverage |Increase Psychosis Resistance</entitydescription.he-beerclownjuice>
+  <!--Patch 10-->
+  <entityname.he-beerreaperstribute>Reaper's Tribute</entityname.he-beerreaperstribute>
+  <!--Patch 10-->
+  <entitydescription.he-beerreaperstribute>A strong beer to pay tribute to the reaper. |Alcoholic Beverage |Clear Reaper's Tax |Increase Psychosis Resistance</entitydescription.he-beerreaperstribute>
+  <!--Patch 10-->
+  <!-- Kegs -->
+  <entityname.he-kegempty>Empty Keg</entityname.he-kegempty>
+  <!--Patch 10-->
+  <entitydescription.he-kegempty>An empty keg used for some recipes. Can be used in water to collect dirty water.</entitydescription.he-kegempty>
+  <!--Patch 10-->
+  <entityname.he-kegseawater>Keg of Sea Water</entityname.he-kegseawater>
+  <!--Patch 10-->
+  <entitydescription.he-kegseawater>A keg full of sea water. Can be used to refill bottles at a refill station. Can be cooked into clean water at a stove or brewing kettle. Also used in hydroponic planters.</entitydescription.he-kegseawater>
+  <!--Patch 10-->
+  <entityname.he-kegwater>Keg of Water</entityname.he-kegwater>
+  <!--Patch 10-->
+  <entitydescription.he-kegwater>A keg full of water. Can be used to refill bottles at a refill station.</entitydescription.he-kegwater>
+  <!--Patch 10-->
+  <entityname.he-kegcoalitionpremium>Keg of Coalition Premium Beer</entityname.he-kegcoalitionpremium>
+  <!--Patch 10-->
+  <entitydescription.he-kegcoalitionpremium>A keg full of Coalition Premium beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegcoalitionpremium>
+  <!--Patch 10-->
+  <entityname.he-kegjovianforce>Keg of Jovian Force Beer</entityname.he-kegjovianforce>
+  <!--Patch 10-->
+  <entitydescription.he-kegjovianforce>A keg full of Jovian Force beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegjovianforce>
+  <!--Patch 10-->
+  <entityname.he-kegliquidascension>Keg of Liquid Ascension Beer</entityname.he-kegliquidascension>
+  <!--Patch 10-->
+  <entitydescription.he-kegliquidascension>A keg full of Liquid Ascension beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegliquidascension>
+  <!--Patch 10-->
+  <entityname.he-kegclownjuice>Keg of Clown Juice Beer</entityname.he-kegclownjuice>
+  <!--Patch 10-->
+  <entitydescription.he-kegclownjuice>A keg full of Clown Juice beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegclownjuice>
+  <!--Patch 10-->
+  <entityname.he-kegreaperstribute>Keg of Reaper's Tribute Beer</entityname.he-kegreaperstribute>
+  <!--Patch 10-->
+  <entitydescription.he-kegreaperstribute>A keg full of Reaper's Tribute beer. Can be used to refill bottles at a refill station.</entitydescription.he-kegreaperstribute>
+  <!--Patch 10-->
+  <entityname.he-kegrum>Keg of Rum</entityname.he-kegrum>
+  <!--Patch 10-->
+  <entitydescription.he-kegrum>A keg full of rum. Can be used to refill bottles at a refill station.</entitydescription.he-kegrum>
+  <!--Patch 10-->
+  <entityname.he-kegpiraterum>Keg of Pirate Rum</entityname.he-kegpiraterum>
+  <!--Patch 10-->
+  <entitydescription.he-kegpiraterum>A keg full of pirate rum. Can be used to refill bottles at a refill station.</entitydescription.he-kegpiraterum>
+  <!--Patch 10-->
+  <entityname.he-kegwhiskey>Keg of Whiskey</entityname.he-kegwhiskey>
+  <!--Patch 10-->
+  <entitydescription.he-kegwhiskey>A keg full of whiskey. Can be used to refill bottles at a refill station.</entitydescription.he-kegwhiskey>
+  <!--Patch 10-->
+  <entityname.he-keghalucinova>Keg of Halucinova</entityname.he-keghalucinova>
+  <!--Patch 10-->
+  <entitydescription.he-keghalucinova>A keg full of halucinova. Can be used to refill bottles at a refill station.</entitydescription.he-keghalucinova>
+  <!--Patch 10-->
+  <!-- Blueprints -->
+  <entityname.he-blueprintbottle>Bottle Blueprint</entityname.he-blueprintbottle>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintbottle>A blueprint of a regular bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottle>
+  <!--Patch 11-->
+  <entityname.he-blueprintbottlebeer>Beer Bottle Blueprint</entityname.he-blueprintbottlebeer>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintbottlebeer>A blueprint of a beer bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlebeer>
+  <!--Patch 11-->
+  <entityname.he-blueprintbottlerum>Rum Bottle Blueprint</entityname.he-blueprintbottlerum>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintbottlerum>A blueprint of a rum bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlerum>
+  <!--Patch 11-->
+  <entityname.he-blueprintbottlewhiskey>Whiskey Bottle Blueprint</entityname.he-blueprintbottlewhiskey>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintbottlewhiskey>A blueprint of a Whiskey bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlewhiskey>
+  <!--Patch 11-->
+  <entityname.he-blueprintbottlehalucinova>Halucinova Bottle Blueprint</entityname.he-blueprintbottlehalucinova>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintbottlehalucinova>A blueprint of a Halucinova bottle. Can be used in a bottle printer.</entitydescription.he-blueprintbottlehalucinova>
+  <!--Patch 11-->
+  <entityname.he-blueprintjar>Jar Blueprint</entityname.he-blueprintjar>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintjar>A blueprint of a Jar. Can be used in a bottle printer.</entitydescription.he-blueprintjar>
+  <!--Patch 11-->
+  <entityname.he-blueprintshaker>Shaker Blueprint</entityname.he-blueprintshaker>
+  <!--Patch 11-->
+  <entitydescription.he-blueprintshaker>A blueprint of a Shaker. Can be used in a bottle printer.</entitydescription.he-blueprintshaker>
+  <!--Patch 11-->
+  <!-- Ingredients -->
+  <entityname.he-emptybottlerum>Empty Rum Bottle</entityname.he-emptybottlerum>
+  <entitydescription.he-emptybottlerum>An empty Rum bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlerum>
+  <entityname.he-emptybottlewhiskey>Empty Whiskey Bottle</entityname.he-emptybottlewhiskey>
+  <entitydescription.he-emptybottlewhiskey>An empty Whiskey bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlewhiskey>
+  <entityname.he-emptybottlehalucinova>Empty Halucinova Bottle</entityname.he-emptybottlehalucinova>
+  <entitydescription.he-emptybottlehalucinova>An empty Halucinova bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlehalucinova>
+  <entityname.he-emptybottlebeer>Empty Beer Bottle</entityname.he-emptybottlebeer>
+  <!--Patch 10-->
+  <entitydescription.he-emptybottlebeer>An empty beer bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottlebeer>
+  <!--Patch 10-->
+  <entityname.he-emptybottle>Empty Bottle</entityname.he-emptybottle>
+  <entitydescription.he-emptybottle>An empty bottle used for some recipes. Can be thrown or used in water to collect sea water.</entitydescription.he-emptybottle>
+  <entityname.he-emptyjar>Empty Jar</entityname.he-emptyjar>
+  <entitydescription.he-emptyjar>An empty jar used for some recipes. Can be thrown.</entitydescription.he-emptyjar>
+  <entityname.he-emptyshaker>Empty Shaker</entityname.he-emptyshaker>
+  <!--Patch 11-->
+  <entitydescription.he-emptyshaker>An empty shaker ready to be filled with salt!.</entitydescription.he-emptyshaker>
+  <!--Patch 11-->
+  <entityname.he-endwormmeatchunk>Endworm Meat Chunk</entityname.he-endwormmeatchunk>
+  <entitydescription.he-endwormmeatchunk>A fat chunk of meat from an Endworm. Spoils if not contained inside a refrigerated container.</entitydescription.he-endwormmeatchunk>
+  <entityname.he-rawendwormmeat>Raw Endworm Meat</entityname.he-rawendwormmeat>
+  <entitydescription.he-rawendwormmeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawendwormmeat>
+  <entityname.he-rawendwormsausage>Raw Endworm Sausage</entityname.he-rawendwormsausage>
+  <entitydescription.he-rawendwormsausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawendwormsausage>
+  <entityname.he-rawendwormmeatpatty>Raw Endworm Meat Patty</entityname.he-rawendwormmeatpatty>
+  <entitydescription.he-rawendwormmeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawendwormmeatpatty>
+  <entityname.he-humanmeatchunk>Human Meat</entityname.he-humanmeatchunk>
+  <entitydescription.he-humanmeatchunk>Parts of a human. Spoils if not contained inside a refrigerated container.</entitydescription.he-humanmeatchunk>
+  <entityname.he-rawhumanmeat>Raw Human Meat</entityname.he-rawhumanmeat>
+  <entitydescription.he-rawhumanmeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhumanmeat>
+  <entityname.he-rawhumansausage>Raw Human Sausage</entityname.he-rawhumansausage>
+  <entitydescription.he-rawhumansausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhumansausage>
+  <entityname.he-rawhumanmeatpatty>Raw Human Meat Patty</entityname.he-rawhumanmeatpatty>
+  <entitydescription.he-rawhumanmeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhumanmeatpatty>
+  <entityname.he-crawlermeatchunk>Crawler Half</entityname.he-crawlermeatchunk>
+  <entitydescription.he-crawlermeatchunk>A Crawler cut in half. Spoils if not contained inside a refrigerated container.</entitydescription.he-crawlermeatchunk>
+  <entityname.he-crawlermeatchunkspecial>Crawler Meat Chunk</entityname.he-crawlermeatchunkspecial>
+  <entitydescription.he-crawlermeatchunkspecial>A chunk of Crawler meat.</entitydescription.he-crawlermeatchunkspecial>
+  <entityname.he-rawcrawlermeat>Raw Crawler Meat</entityname.he-rawcrawlermeat>
+  <entitydescription.he-rawcrawlermeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawcrawlermeat>
+  <entityname.he-rawcrawlersausage>Raw Crawler Sausage</entityname.he-rawcrawlersausage>
+  <entitydescription.he-rawcrawlersausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawcrawlersausage>
+  <entityname.he-rawcrawlermeatpatty>Raw Crawler Meat Patty</entityname.he-rawcrawlermeatpatty>
+  <entitydescription.he-rawcrawlermeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawcrawlermeatpatty>
+  <entityname.he-mudraptormeatchunk>Mudraptor Meat Chunk</entityname.he-mudraptormeatchunk>
+  <entitydescription.he-mudraptormeatchunk>A nice chunk of meat cut from a Mudraptor. Spoils if not contained inside a refrigerated container.</entitydescription.he-mudraptormeatchunk>
+  <entityname.he-rawmudraptormeat>Raw Mudraptor Meat</entityname.he-rawmudraptormeat>
+  <entitydescription.he-rawmudraptormeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawmudraptormeat>
+  <entityname.he-rawmudraptorsausage>Raw Mudraptor Sausage</entityname.he-rawmudraptorsausage>
+  <entitydescription.he-rawmudraptorsausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawmudraptorsausage>
+  <entityname.he-rawmudraptormeatpatty>Raw Mudraptor Meat Patty</entityname.he-rawmudraptormeatpatty>
+  <entitydescription.he-rawmudraptormeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawmudraptormeatpatty>
+  <entityname.he-rawmudraptorroast>Raw Mudraptor Roast</entityname.he-rawmudraptorroast>
+  <entitydescription.he-rawmudraptorroast>Time to put it in the oven! Spoils if not contained inside a refrigerated container.</entitydescription.he-rawmudraptorroast>
+  <entityname.he-hammerheadmeatchunk>Hammerhead Meat Chunk</entityname.he-hammerheadmeatchunk>
+  <entitydescription.he-hammerheadmeatchunk>A nice chunk of meat cut from a Hammerhead. Spoils if not contained inside a refrigerated container.</entitydescription.he-hammerheadmeatchunk>
+  <entityname.he-rawhammerheadmeat>Raw Hammerhead Meat</entityname.he-rawhammerheadmeat>
+  <entitydescription.he-rawhammerheadmeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhammerheadmeat>
+  <entityname.he-rawhammerheadsausage>Raw Hammerhead Sausage</entityname.he-rawhammerheadsausage>
+  <entitydescription.he-rawhammerheadsausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhammerheadsausage>
+  <entityname.he-rawhammerheadmeatpatty>Raw Hammerhead Meat Patty</entityname.he-rawhammerheadmeatpatty>
+  <entitydescription.he-rawhammerheadmeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhammerheadmeatpatty>
+  <entityname.he-rawhammerheadspareribs>Raw Hammerhead Spareribs</entityname.he-rawhammerheadspareribs>
+  <entitydescription.he-rawhammerheadspareribs>Cut from a massive ripcage. Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhammerheadspareribs>
+  <entityname.he-rawhammerheadroast>Raw Hammerhead Roast</entityname.he-rawhammerheadroast>
+  <entitydescription.he-rawhammerheadroast>Time to put it in the oven. Spoils if not contained inside a refrigerated container.</entitydescription.he-rawhammerheadroast>
+  <entityname.he-hammerheadspawnmeatchunk>Hammerhead Spawn</entityname.he-hammerheadspawnmeatchunk>
+  <entitydescription.he-hammerheadspawnmeatchunk>A Hammerhead baby. Spoils if not contained inside a refrigerated container.</entitydescription.he-hammerheadspawnmeatchunk>
+  <entityname.he-threshermeatchunk>Thresher Meat Chunk</entityname.he-threshermeatchunk>
+  <entitydescription.he-threshermeatchunk>A piece of meat cut from a Thresher. Spoils if not contained inside a refrigerated container.</entitydescription.he-threshermeatchunk>
+  <entityname.he-rawthreshermeat>Raw Thresher Meat</entityname.he-rawthreshermeat>
+  <entitydescription.he-rawthreshermeat>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawthreshermeat>
+  <entityname.he-rawthreshersausage>Raw Thresher Sausage</entityname.he-rawthreshersausage>
+  <entitydescription.he-rawthreshersausage>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawthreshersausage>
+  <entityname.he-rawthreshermeatpatty>Raw Thresher Meat Patty</entityname.he-rawthreshermeatpatty>
+  <entitydescription.he-rawthreshermeatpatty>Spoils if not contained inside a refrigerated container.</entitydescription.he-rawthreshermeatpatty>
+  <entityname.he-salt>Salt</entityname.he-salt>
+  <entitydescription.he-salt>Don't get salty now!</entitydescription.he-salt>
+  <entityname.he-pepper>Synthetic Pepper</entityname.he-pepper>
+  <entitydescription.he-pepper>Pepper be prepared!</entitydescription.he-pepper>
+  <entityname.he-sugar>Sugar</entityname.he-sugar>
+  <entitydescription.he-sugar>Oh so sweet!</entitydescription.he-sugar>
+  <entityname.he-ketchup>Ketchup</entityname.he-ketchup>
+  <entitydescription.he-ketchup>Made from pomegrenades.</entitydescription.he-ketchup>
+  <entityname.he-vinegar>Vinegar</entityname.he-vinegar>
+  <entitydescription.he-vinegar>That smell...</entitydescription.he-vinegar>
+  <entityname.he-cookingoil>Cooking Oil</entityname.he-cookingoil>
+  <entitydescription.he-cookingoil>This one is not used in engines.</entitydescription.he-cookingoil>
+  <entityname.he-flour>Synthetiflour</entityname.he-flour>
+  <entitydescription.he-flour>Original Europan Synthetic flour</entitydescription.he-flour>
+  <entityname.he-glassfragments>Glass Fragments</entityname.he-glassfragments>
+  <!--Patch 10-->
+  <entitydescription.he-glassfragments>Shattered glass. Can be obtained through smashing bottles or crafting them from quartz at a fabricator. Used for crafting at a fabricator or bottle printer.</entitydescription.he-glassfragments>
+  <!--Patch 10-->
+  <entityname.he-jambubbleberry>Bubble Berry Jam</entityname.he-jambubbleberry>
+  <!--Patch 10-->
+  <entitydescription.he-jambubbleberry>Tasty jam made out of bubble berries. Known to quench a bit of thirst.</entitydescription.he-jambubbleberry>
+  <!--Patch 10-->
+  <!-- Tools -->
+  <entityname.he-enableneeds>Hungry Europan (Enable Needs)</entityname.he-enableneeds>
+  <entitydescription.he-enableneeds>[RMB+E] Enables the hunger and thirst afflictions for the user, causing them to have to eat and drink regularly. This is completely optional and is NOT required to gain buffs from eating or drinking. Warning: Can't be disabled for your current character once it is enabled. DO NOT USE WHEN PLAYING WITH 'NEEDS' BY 'LeDoux'!</entitydescription.he-enableneeds>
+  <entityname.he-cleaver>Meat Cleaver</entityname.he-cleaver>
+  <entitydescription.he-cleaver>Time is up! Chop chop!\n\nCan chop up:\n-Crawlers\n-Mudraptors\n-Threshers\n-Hammerheads\n-Hammerhead Spawns\n-Endworms\n-Humans\n</entitydescription.he-cleaver>
+  <entityname.he-skillbooktheeuropan>The Europan Volume 66</entityname.he-skillbooktheeuropan>
+  <entitydescription.he-skillbooktheeuropan>"... Peek behind the curtain of time. Is that you, Robert? No, I am Robert. But I am also Doris. I am the meat. Eat of me and become one with the Worm. ..."</entitydescription.he-skillbooktheeuropan>
+  <entityname.he-skillbookauntdoris>THE ART OF DEEP SEA COOKING by Aunt Doris</entityname.he-skillbookauntdoris>
+  <entitydescription.he-skillbookauntdoris>The europan way of cooking.</entitydescription.he-skillbookauntdoris>
+  <entityname.he-genesaw>Genetics Extractor</entityname.he-genesaw>
+  <entitydescription.he-genesaw>Can extract a random gene from a corpse.</entitydescription.he-genesaw>
+  <entityname.extractedgene>Extracted Gene</entityname.extractedgene>
+  <entitydescription.extractedgene>An unidentified extracted gene.</entitydescription.extractedgene>
+  <!-- Medical -->
+  <entityname.he-antistarve>Starvation Conciousness Regainer</entityname.he-antistarve>
+  <entitydescription.he-antistarve>Used to wake up a patient that lost conciousness due to starvation or thirst.</entitydescription.he-antistarve>
+  <!-- Gear -->
+  <entityname.he-chefscap1>Chef's Hat</entityname.he-chefscap1>
+  <entitydescription.he-chefscap1>Show them whose kitchen this is!</entitydescription.he-chefscap1>
+  <entityname.he-chefscap2>Chef's Hat</entityname.he-chefscap2>
+  <entitydescription.he-chefscap2>Show them whose kitchen this is!</entitydescription.he-chefscap2>
+  <entityname.he-chefsuniform1>Chef's Uniform</entityname.he-chefsuniform1>
+  <entitydescription.he-chefsuniform1>Worn by chefs all across europa!</entitydescription.he-chefsuniform1>
+  <entityname.he-chefsuniform2>Chef's Uniform</entityname.he-chefsuniform2>
+  <entitydescription.he-chefsuniform2>Worn by chefs all across europa!</entitydescription.he-chefsuniform2>
+  <entityname.he-chefscapmaster1>Master Chef's Hat</entityname.he-chefscapmaster1>
+  <entitydescription.he-chefscapmaster1>Only for the kitchen elite!</entitydescription.he-chefscapmaster1>
+  <entityname.he-chefsuniformmaster1>Master Chef's Uniform</entityname.he-chefsuniformmaster1>
+  <entitydescription.he-chefsuniformmaster1>Worn by the master chefs!</entitydescription.he-chefsuniformmaster1>
+  <!-- Fabricators and Containers -->
+  <entityname.he-kitchencounter>Kitchen Sink</entityname.he-kitchencounter>
+  <!--Changed as of Patch 10-->
+  <entitydescription.he-kitchencounter>Can store up to 18 different small or medium items and refill empty bottles and kegs with sea water.</entitydescription.he-kitchencounter>
+  <!--Changed as of Patch 10-->
+  <entityname.he-kitchencounter2>Kitchen Counter</entityname.he-kitchencounter2>
+  <!--Changed as of Patch 11 | New identifier-->
+  <entitydescription.he-kitchencounter2>Can store up to 30 different small or medium items.</entitydescription.he-kitchencounter2>
+  <!--Changed as of Patch 11 | New identifier-->
+  <entityname.he-refrigerator>Refrigerator</entityname.he-refrigerator>
+  <entitydescription.he-refrigerator>Prevents spoilage. Can only store food and drinks. Needs power.</entitydescription.he-refrigerator>
+  <!--Changed as of Patch 10-->
+  <entityname.he-stove>Stove</entityname.he-stove>
+  <entitydescription.he-stove>Used for cooking. Needs power.</entitydescription.he-stove>
+  <entityname.he-oven>Oven</entityname.he-oven>
+  <entitydescription.he-oven>Used for baking. Needs power.</entitydescription.he-oven>
+  <entityname.he-cuttingboard>Cutting Board</entityname.he-cuttingboard>
+  <entitydescription.he-cuttingboard>Used to prepare ingredients.</entitydescription.he-cuttingboard>
+  <entityname.he-fryer>Fryer</entityname.he-fryer>
+  <!--Patch 10-->
+  <entitydescription.he-fryer>Used for frying stuff. Needs power.</entitydescription.he-fryer>
+  <!--Patch 10-->
+  <entityname.he-distiller>Distiller</entityname.he-distiller>
+  <!--Patch 10-->
+  <entitydescription.he-distiller>Used to distill ethanol from sugar and sea yeast shrooms. Needs power.</entitydescription.he-distiller>
+  <!--Patch 10-->
+  <entityname.he-brewkettle>Brewing Kettle</entityname.he-brewkettle>
+  <!--Patch 10-->
+  <entitydescription.he-brewkettle>Used to brew kegs of almost any kind of beverage. Needs power.</entitydescription.he-brewkettle>
+  <!--Patch 10-->
+  <entityname.he-bottleprinter>Bottle Printer</entityname.he-bottleprinter>
+  <!--Patch 10-->
+  <entitydescription.he-bottleprinter>Used to mass produce bottles. Needs power.</entitydescription.he-bottleprinter>
+  <!--Patch 10-->
+  <entityname.he-refillstation>Refill Station</entityname.he-refillstation>
+  <!--Patch 10-->
+  <entitydescription.he-refillstation>Used to refill empty bottles from a keg.</entitydescription.he-refillstation>
+  <!--Patch 10-->
+  <entityname.he-coolercrate>Cooler Crate</entityname.he-coolercrate>
+  <!--Patch 10-->
+  <entitydescription.he-coolercrate>Used to prevent meat from spoiling. Needs a battery.</entitydescription.he-coolercrate>
+  <!--Patch 10-->
+  <entityname.he-liquorcrate>Liquor Crate</entityname.he-liquorcrate>
+  <!--Patch 10-->
+  <entitydescription.he-liquorcrate>Used to store and transport up to 20 bottles of any kind.</entitydescription.he-liquorcrate>
+  <!--Patch 10-->
+  <entityname.he-jarcrate>Jar Crate</entityname.he-jarcrate>
+  <!--Patch 11-->
+  <entitydescription.he-jarcrate>Used to store and transport up to 8 jars.</entitydescription.he-jarcrate>
+  <!--Patch 11-->
+  <entityname.he-liquorcrateshelf>Liquor Crate Shelf</entityname.he-liquorcrateshelf>
+  <!--Patch 10-->
+  <entitydescription.he-liquorcrateshelf>A shelf to store up to 4 of your liquor and jar crates.</entitydescription.he-liquorcrateshelf>
+  <!--Patch 10-->
+  <entityname.he-liquorcrateshelfsmall>Liquor Crate Shelf (Small)</entityname.he-liquorcrateshelfsmall>
+  <!--Patch 10-->
+  <entitydescription.he-liquorcrateshelfsmall>A small shelf to store up to 2 of your liquor and jar crates.</entitydescription.he-liquorcrateshelfsmall>
+  <!--Patch 10-->
+  <entityname.he-liquordisplayshelf>Liquor Display Shelf</entityname.he-liquordisplayshelf>
+  <!--Patch 10-->
+  <entitydescription.he-liquordisplayshelf>A shelf to display and store your bottles. Jars don't fit.</entitydescription.he-liquordisplayshelf>
+  <!--Patch 10-->
+  <entityname.he-toolbeltlunch>Tool Belt with Lunch Box</entityname.he-toolbeltlunch>
+  <!--Patch 10-->
+  <entitydescription.he-toolbeltlunch>A Tool Belt with a Lunch Box attached to it to always carry your food with you.</entitydescription.he-toolbeltlunch>
+  <!--Patch 10-->
+  <entityname.he-lunchbox>Lunch Box</entityname.he-lunchbox>
+  <!--Patch 10-->
+  <entitydescription.he-lunchbox>It's a box with a handle to carry your food around. Can be attached to a toolbelt at a fabricator.</entitydescription.he-lunchbox>
+  <!--Patch 10-->
+  <entityname.he-hydroponicplanter>Hydroponic Planter</entityname.he-hydroponicplanter>
+  <!--Patch 10-->
+  <entitydescription.he-hydroponicplanter>A device providing perfect conditions for europas underwater plants to grow. Yields a plant every 15 minutes. Needs power.</entitydescription.he-hydroponicplanter>
+  <!--Patch 10-->
+  <entityname.he-cafeteriacart>Cafeteria Cart</entityname.he-cafeteriacart>
+  <!--Patch 10-->
+  <entitydescription.he-cafeteriacart>Used to transport a lot of food and drinks around and or store it in a more accessible area for the crew. Holds up to 30 different foods or drinks. Can be placed.</entitydescription.he-cafeteriacart>
+  <!--Patch 10-->
+  <!-- Skills -->
+  <skillname.cooking>Cooking</skillname.cooking>
+  <skillname.butchery>Butchery</skillname.butchery>
+  <!-- Jobs -->
+  <jobname.he-chef>Chef</jobname.he-chef>
+  <jobdescription.he-chef>The chef is responsible for butchering creatures and preparing meals to eat for the crew to ensure that everyone is saturated and happy.</jobdescription.he-chef>
+  <!-- Talents -->
+  <talentname.he-hungryeuropan>Hungry Europan</talentname.he-hungryeuropan>
+  <talentdescription.he-hungryeuropan>You're a hungry europan and need to eat and drink regularly.</talentdescription.he-hungryeuropan>
+  <talentname.he-poacher>Poacher</talentname.he-poacher>
+  <talentdescription.he-poacher>Gain an additional [xpbonus]% bonus XP in [missiontype1] and [missiontype2] missions.</talentdescription.he-poacher>
+  <talentname.he-saltybusiness>Salty Business</talentname.he-saltybusiness>
+  <talentdescription.he-saltybusiness>The first time you open a container, you have a chance of [probability]% to find some extra salt in it.</talentdescription.he-saltybusiness>
+  <talentname.he-fastfood>Fast Food</talentname.he-fastfood>
+  <talentdescription.he-fastfood>Increase the speed of kitchen related fabricators by [amount]%.</talentdescription.he-fastfood>
+  <talentname.he-chefattire>Master Chef Attire</talentname.he-chefattire>
+  <talentdescription.he-chefattire>Unlock the crafting recipes for [itemname1] and [itemname2].</talentdescription.he-chefattire>
+  <talentname.he-frenzy>Frenzy</talentname.he-frenzy>
+  <talentdescription.he-frenzy>Increase your attack strength with butcher related knives by [powerincrease]%.</talentdescription.he-frenzy>
+  <talentname.he-butchershop>Butcher Shop</talentname.he-butchershop>
+  <talentdescription.he-butchershop>You're a talented butcher and it shows!\nGet [amount]% more money when selling meat!</talentdescription.he-butchershop>
+  <talentname.he-coldblood>Cold Blood</talentname.he-coldblood>
+  <talentdescription.he-coldblood>You're the coolest person around.\nMeat no longer spoils in your inventory.</talentdescription.he-coldblood>
+  <talentname.he-masterchef>Master Chef</talentname.he-masterchef>
+  <talentdescription.he-masterchef>You've become a master of your work and learned how to save some ingredients for later when cooking.\nYou have a [chance]% chance to not consume a random ingredient while preparing a meal.</talentdescription.he-masterchef>
+  <talentname.he-lifesaver>Life Saver</talentname.he-lifesaver>
+  <talentdescription.he-lifesaver>Gain a bonus of [amount] to [skill].\nUnlock the crafting recipe for [itemname1].</talentdescription.he-lifesaver>
+  <talentname.he-delicacies>Delicacies</talentname.he-delicacies>
+  <talentdescription.he-delicacies>Unlock the following recipes of europan delicacies:\n[itemname1]</talentdescription.he-delicacies>
+  <talentname.he-masterbrewer>Master Brewer</talentname.he-masterbrewer>
+  <!--Patch 10-->
+  <talentdescription.he-masterbrewer>Unlock the following recipes of europan beverages:\n[itemname1]\n[itemname2]\n[itemname3]</talentdescription.he-masterbrewer>
+  <!--Patch 10-->
+  <!-- Afflictions -->
+  <afflictionname.hunger>Hunger</afflictionname.hunger>
+  <!--Patch 10-->
+  <afflictionname.he-hunger>Hunger</afflictionname.he-hunger>
+  <afflictiondescription.he-hunger>The stomach is happy.</afflictiondescription.he-hunger>
+  <afflictioncauseofdeath.he-hunger>Died of starvation.</afflictioncauseofdeath.he-hunger>
+  <afflictioncauseofdeathself.he-hunger>You have died of starvation.</afflictioncauseofdeathself.he-hunger>
+  <afflictiondescription.he-hunger.self>The stomach growls!</afflictiondescription.he-hunger.self>
+  <afflictiondescription.he-hunger.lethal.self>Close to starving...</afflictiondescription.he-hunger.lethal.self>
+  <afflictiondescription.he-hunger.other.low>The patient is starting to get a small appetite.</afflictiondescription.he-hunger.other.low>
+  <afflictiondescription.he-hunger.other>The patient is hungry.</afflictiondescription.he-hunger.other>
+  <afflictiondescription.he-hunger.lethal.other>The patient is starting to starve.</afflictiondescription.he-hunger.lethal.other>
+  <afflictionname.thirst>Thirst</afflictionname.thirst>
+  <!--Patch 10-->
+  <afflictionname.he-thirst>Thirst</afflictionname.he-thirst>
+  <afflictiondescription.he-thirst>You feel refreshed.</afflictiondescription.he-thirst>
+  <afflictioncauseofdeath.he-thirst>Died of thirst.</afflictioncauseofdeath.he-thirst>
+  <afflictioncauseofdeathself.he-thirst>You have died of thirst.</afflictioncauseofdeathself.he-thirst>
+  <afflictiondescription.he-thirst.self>The throat feels dry.</afflictiondescription.he-thirst.self>
+  <afflictiondescription.he-thirst.lethal.self>Starting to die of thirst...</afflictiondescription.he-thirst.lethal.self>
+  <afflictiondescription.he-thirst.other.low>The patient is starting to get thirsty.</afflictiondescription.he-thirst.other.low>
+  <afflictiondescription.he-thirst.other>The patient is thirsty.</afflictiondescription.he-thirst.other>
+  <afflictiondescription.he-thirst.lethal.other>The patient is starting to die of thirst.</afflictiondescription.he-thirst.lethal.other>
+  <afflictionname.he-starvation>Starvation</afflictionname.he-starvation>
+  <afflictiondescription.he-starvation>Starving...</afflictiondescription.he-starvation>
+  <afflictioncauseofdeath.he-starvation>Starved.</afflictioncauseofdeath.he-starvation>
+  <afflictioncauseofdeathself.he-starvation>You have starved to death.</afflictioncauseofdeathself.he-starvation>
+  <afflictiondescription.he-starvation.self>Starving...</afflictiondescription.he-starvation.self>
+  <afflictiondescription.he-starvation.other>The patient is starving.</afflictiondescription.he-starvation.other>
+  <afflictionname.he-dieofthirst>Dying of thirst</afflictionname.he-dieofthirst>
+  <afflictiondescription.he-dieofthirst>Dying of thirst...</afflictiondescription.he-dieofthirst>
+  <afflictioncauseofdeath.he-dieofthirst>Died of thirst.</afflictioncauseofdeath.he-dieofthirst>
+  <afflictioncauseofdeathself.he-dieofthirst>You dried out.</afflictioncauseofdeathself.he-dieofthirst>
+  <afflictiondescription.he-dieofthirst.self>Dying of thirst...</afflictiondescription.he-dieofthirst.self>
+  <afflictiondescription.he-dieofthirst.other>The patient is dying of thirst.</afflictiondescription.he-dieofthirst.other>
+  <afflictionname.he-increasedswimmingspeedcrawler>Increased Swimming Speed (Food)</afflictionname.he-increasedswimmingspeedcrawler>
+  <afflictiondescription.he-increasedswimmingspeedcrawler>You swim 50% faster.</afflictiondescription.he-increasedswimmingspeedcrawler>
+  <afflictionname.he-damageresistancemudraptor>Damage Resistance (Food)</afflictionname.he-damageresistancemudraptor>
+  <afflictiondescription.he-damageresistancemudraptor>You take 25% less damage.</afflictiondescription.he-damageresistancemudraptor>
+  <afflictionname.he-increasedwalkingspeedmudraptor>Increased Walking Speed (Food)</afflictionname.he-increasedwalkingspeedmudraptor>
+  <afflictiondescription.he-increasedwalkingspeedmudraptor>You walk 20% faster.</afflictiondescription.he-increasedwalkingspeedmudraptor>
+  <afflictionname.he-damageresistancemoloch>Damage Resistance (Food)</afflictionname.he-damageresistancemoloch>
+  <afflictiondescription.he-damageresistancemoloch>You take 50% less damage.</afflictiondescription.he-damageresistancemoloch>
+  <afflictionname.he-increasedmeleedamagehammerhead>Increased Melee Damage (Food)</afflictionname.he-increasedmeleedamagehammerhead>
+  <afflictiondescription.he-increasedmeleedamagehammerhead>You deal 25% more melee damage.</afflictiondescription.he-increasedmeleedamagehammerhead>
+  <afflictionname.he-decreasedoxygenconsumption>Decreased Oxygen Consumption (Food)</afflictionname.he-decreasedoxygenconsumption>
+  <afflictiondescription.he-decreasedoxygenconsumption>You don't need to breath.</afflictiondescription.he-decreasedoxygenconsumption>
+  <afflictionname.he-pressureresistance>Pressure Resistance (Food)</afflictionname.he-pressureresistance>
+  <afflictiondescription.he-pressureresistance>You're immune to pressure.</afflictiondescription.he-pressureresistance>
+  <afflictionname.he-cannibalskillincrease>Increased Skills (Food)</afflictionname.he-cannibalskillincrease>
+  <!--Patch 9-->
+  <afflictiondescription.he-cannibalskillincrease>All your skills are increased by 20%</afflictiondescription.he-cannibalskillincrease>
+  <!--Patch 9-->
+  <afflictionname.he-alcoholism>Alcoholic</afflictionname.he-alcoholism>
+  <afflictiondescription.he-alcoholism>The patient is happy enough... so long as they get what they need.</afflictiondescription.he-alcoholism>
+  <advancedafflictiondescription.self.he-alcoholism>It's time for a booze cruise! You're addicted to alcohol.</advancedafflictiondescription.self.he-alcoholism>
+  <advancedafflictiondescription.others.he-alcoholism>The patient suffers from alcoholism.</advancedafflictiondescription.others.he-alcoholism>
+  <afflictionname.he-alcoholwithdrawal>Alcohol withdrawal</afflictionname.he-alcoholwithdrawal>
+  <afflictiondescription.he-alcoholwithdrawal>Agitation and a tremor are obvious, as are the signs of nausea.</afflictiondescription.he-alcoholwithdrawal>
+  <afflictioncauseofdeath.he-alcoholwithdrawal>Died of alcohol withdrawal</afflictioncauseofdeath.he-alcoholwithdrawal>
+  <afflictioncauseofdeathself.he-alcoholwithdrawal>You have died of alcohol withdrawal.</afflictioncauseofdeathself.he-alcoholwithdrawal>
+  <advancedafflictiondescription.self.he-alcoholwithdrawal>You have the feeling it's time to open up another cold one with the boys!</advancedafflictiondescription.self.he-alcoholwithdrawal>
+  <!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.self.he-alcoholwithdrawal"-->
+  <advancedafflictiondescription.others.he-alcoholwithdrawal>The Patient shows light signs of alcohol withdrawal.</advancedafflictiondescription.others.he-alcoholwithdrawal>
+  <!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.others.he-alcoholwithdrawal"-->
+  <advancedafflictiondescription.self.he-alcoholwithdrawal.2>A cold beer or a bottle of rum... Anything to quench this horrible thirst for alcohol!</advancedafflictiondescription.self.he-alcoholwithdrawal.2>
+  <!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.self.he-alcoholwithdrawal.2"-->
+  <advancedafflictiondescription.others.he-alcoholwithdrawal.2>The Patient shows heavy signs of alcohol withdrawal.</advancedafflictiondescription.others.he-alcoholwithdrawal.2>
+  <!--Changed as of Patch 8 | identifier was previously "advancedafflictiondescription.others.he-alcoholwithdrawal.2"-->
+  <afflictionname.he-cannibalism>Cannibalism</afflictionname.he-cannibalism>
+  <!--Patch 8-->
+  <afflictiondescription.he-cannibalism>The patient is happy enough... so long as they get what they need.</afflictiondescription.he-cannibalism>
+  <!--Patch 8-->
+  <advancedafflictiondescription.self.he-cannibalism>Uh oh! Seems like you like the taste of your fellow crewmates.</advancedafflictiondescription.self.he-cannibalism>
+  <!--Patch 8-->
+  <advancedafflictiondescription.others.he-cannibalism>The patient certainly likes a special type of meat.</advancedafflictiondescription.others.he-cannibalism>
+  <!--Patch 8-->
+  <afflictionname.he-hungryforhumanmeat>Hungry for Human Meat</afflictionname.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <afflictiondescription.he-hungryforhumanmeat>Agitation and a tremor are obvious, the eyes stare empty.</afflictiondescription.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <afflictioncauseofdeath.he-hungryforhumanmeat>Lost their mind over human meat.</afflictioncauseofdeath.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <afflictioncauseofdeathself.he-hungryforhumanmeat>You lost your mind over human meat.</afflictioncauseofdeathself.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <advancedafflictiondescription.self.he-hungryforhumanmeat>Your crewmates are starting to look quite tasty!</advancedafflictiondescription.self.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <advancedafflictiondescription.others.he-hungryforhumanmeat>The Patient gives you a cold stare.</advancedafflictiondescription.others.he-hungryforhumanmeat>
+  <!--Patch 8-->
+  <advancedafflictiondescription.self.he-hungryforhumanmeat.2>Your struggling to focus on anything. You crave for human flesh. You want to murder. Your arms grow stronger just by thinking about it.</advancedafflictiondescription.self.he-hungryforhumanmeat.2>
+  <!--Patch 8-->
+  <advancedafflictiondescription.others.he-hungryforhumanmeat.2>The Patient gives you a cold stare and is severly twitching.</advancedafflictiondescription.others.he-hungryforhumanmeat.2>
+  <!--Patch 8-->
+  <afflictionname.he-drunkinvertcontrols>Disoriented</afflictionname.he-drunkinvertcontrols>
+  <afflictiondescription.he-drunkinvertcontrols>Up is down and left is... right? Where am I?</afflictiondescription.he-drunkinvertcontrols>
+  <afflictionname.he-stuffed>Stuffed</afflictionname.he-stuffed>
+  <afflictiondescription.he-stuffed>The stomach is full.</afflictiondescription.he-stuffed>
+  <afflictioncauseofdeath.he-stuffed>Choked of vomit.</afflictioncauseofdeath.he-stuffed>
+  <afflictioncauseofdeathself.he-stuffed>You have choked on your own vomit.</afflictioncauseofdeathself.he-stuffed>
+  <advancedafflictiondescription.self.he-stuffed>The stomach is full.</advancedafflictiondescription.self.he-stuffed>
+  <advancedafflictiondescription.self.he-stuffed.2>The stomach is at its limit. Eating more might cause you to vomit.</advancedafflictiondescription.self.he-stuffed.2>
+  <advancedafflictiondescription.self.he-stuffed.3>The stomach is too full. You feel the need to vomit.</advancedafflictiondescription.self.he-stuffed.3>
+  <advancedafflictiondescription.others.he-stuffed>The stomach is full. The patient had enough to eat.</advancedafflictiondescription.others.he-stuffed>
+  <advancedafflictiondescription.others.he-stuffed.2>The stomach is very full. The patient had almost too much to eat.</advancedafflictiondescription.others.he-stuffed.2>
+  <advancedafflictiondescription.others.he-stuffed.3>The stomach is too full. The patient might vomit.</advancedafflictiondescription.others.he-stuffed.3>
+  <afflictionname.he-stomachache>Stomach Ache</afflictionname.he-stomachache>
+  <afflictiondescription.he-stomachache>The stomach hurts.</afflictiondescription.he-stomachache>
+  <afflictioncauseofdeath.he-stomachache>Choked on vomit.</afflictioncauseofdeath.he-stomachache>
+  <afflictioncauseofdeathself.he-stomachache>You have choked on your own vomit.</afflictioncauseofdeathself.he-stomachache>
+  <advancedafflictiondescription.self.he-stomachache>The stomach hurts and you feel slightly nauseous.</advancedafflictiondescription.self.he-stomachache>
+  <advancedafflictiondescription.self.he-stomachache.2>The stomach hurts a lot and you're feeling very nauseous.</advancedafflictiondescription.self.he-stomachache.2>
+  <advancedafflictiondescription.others.he-stomachache>The patient's stomach hurts from drinking too much sea water.</advancedafflictiondescription.others.he-stomachache>
+  <afflictionname.he-geneticextraction>Genetic Extraction</afflictionname.he-geneticextraction>
+  <afflictiondescription.he-geneticextraction>Genes are being extracted.</afflictiondescription.he-geneticextraction>
+  <afflictionname.he-butchered>Butchered</afflictionname.he-butchered>
+  <afflictiondescription.he-butchered>The corpse is being butchered for meat.</afflictiondescription.he-butchered>
+  <afflictionname.he-halucinova>Halucinova</afflictionname.he-halucinova>
+  <afflictiondescription.he-halucinova.self>You feel like traveling to a different plane of existence.</afflictiondescription.he-halucinova.self>
+  <afflictiondescription.he-halucinova.others>The person is clearly zoning out.</afflictiondescription.he-halucinova.others>
+  <!-- MESSAGES -->
+  <msg.pickup.interact>[E] Pick Up</msg.pickup.interact>
+  <!--Patch 10-->
+  <bottleprinter.infotext.bottle.regular>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT REGULAR BOTTLES.</bottleprinter.infotext.bottle.regular>
+  <!--Patch 10-->
+  <bottleprinter.infotext.bottle.beer>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT BEER BOTTLES.</bottleprinter.infotext.bottle.beer>
+  <!--Patch 10-->
+  <bottleprinter.infotext.bottle.rum>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT RUM BOTTLES.</bottleprinter.infotext.bottle.rum>
+  <!--Patch 10-->
+  <bottleprinter.infotext.bottle.whiskey>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT WHISKEY BOTTLES.</bottleprinter.infotext.bottle.whiskey>
+  <!--Patch 10-->
+  <bottleprinter.infotext.bottle.halucinova>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT HALUCINOVA BOTTLES.</bottleprinter.infotext.bottle.halucinova>
+  <!--Patch 10-->
+  <bottleprinter.infotext.jar>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT JARS.</bottleprinter.infotext.jar>
+  <!--Patch 10-->
+  <bottleprinter.infotext.shaker>MATERIAL INSERTED\nBLUEPRINT INSERTED\nREADY TO PRINT SHAKERS.</bottleprinter.infotext.shaker>
+  <!--Patch 10-->
+  <bottleprinter.print>PRINT</bottleprinter.print>
+  <!--Patch 10-->
+  <bottleprinter.missingitem.blueprint>MATERIAL INSERTED\nERROR: NO BLUEPRINT FOUND! PLEASE INSERT A BLUEPRINT.</bottleprinter.missingitem.blueprint>
+  <!--Patch 10-->
+  <bottleprinter.missingitem.glassfragments>BLUEPRINT INSERTED\nERROR: NO GLASS FRAGMENTS FOUND! PLEASE INSERT GLASS FRAGMENTS.</bottleprinter.missingitem.glassfragments>
+  <!--Patch 10-->
+  <bottleprinter.empty>BOTTLE PRINTER READY\nPLEASE INSERT THE FOLLOWING:\nA MATERIAL -INTO- INPUT\nA BLUEPRINT -INTO- INPUT\nA SUITABLE CRATE -INTO- OUTPUT</bottleprinter.empty>
+  <!--Patch 10-->
+  <he-bottleprinter.output>Possible prints:</he-bottleprinter.output>
+  <!--Patch 10-->
+  <distiller.distill>DISTILL</distiller.distill>
+  <!--Patch 10-->
+  <distiller.ethanol>READY TO DISTILL ETHANOL</distiller.ethanol>
+  <!--Patch 10-->
+  <distiller.empty>DISTILLER READY\nPLEASE INSERT THE FOLLOWING:\nA PACK OF SUGAR -INTO- INPUT\nA YEAST SHROOM -INTO- INPUT</distiller.empty>
+  <!--Patch 10-->
+  <distiller.missingitem.yeastshroom>SUGAR INSERTED\nERROR: NO YEAST SHROOM FOUND! PLEASE INSERT A YEASTSHROOM.</distiller.missingitem.yeastshroom>
+  <!--Patch 10-->
+  <he-distiller.output>Output:</he-distiller.output>
+  <!--Patch 10-->
+  <!-- ROOM NAMES -->
+  <roomname.kitchen>Kitchen</roomname.kitchen>
+  <!--Patch 10-->
+  <roomname.cafeteria>Cafeteria</roomname.cafeteria>
+  <!--Patch 10-->
+  <roomname.brewery>Brewery</roomname.brewery>
+  <!--Patch 10-->
 </infotexts>
