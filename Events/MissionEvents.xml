@@ -1857,9 +1857,106 @@
         </CountTargetsAction>
       </OnRoundEndAction>   
     </ScriptedEvent>
+    
+     
+    <ScriptedEvent identifier="beaconrearmevent">
+      <TagAction criteria="player" tag="player" />
+      <!-- <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" /> -->
+      <TagAction criteria="itemtag:beaconloader1" tag="beaconloader1" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconloader2" tag="beaconloader2" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconsupercap" tag="beaconsupercap" submarinetype="BeaconStation" />
+      <SetDataAction identifier="beaconrearmstate" operation="set" value="0" />
+      <Label name="beaconrearmedloop" />
+      <WaitAction time="1" />       
+      <CheckItemAction targettag="beaconloader1" itemtags="ammobox" ApplyTagToItem="ammobox1" >
+        <Conditional conditionpercentage="gte 100" />
+        <Conditional NonInteractable="False" />
+        <Success>
+          <StatusEffectAction targettag="ammobox1">
+            <StatusEffect target="this" NonInteractable="true" oneshot="true" >
+              <ParticleEmitter particle="weldspark" particleamount="5" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="50" colormultiplier="255,255,255,255" lifetimemultiplier="1"/>
+              <Sound file="Content/Items/Door/Duct1.ogg" range="400" frequencymultiplier="2" volume="2" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckItemAction>   
+      <CheckItemAction targettag="beaconloader2" itemtags="ammobox" ApplyTagToItem="ammobox2" >
+        <Conditional conditionpercentage="gte 100" />
+        <Conditional NonInteractable="False" />
+        <Success>
+          <StatusEffectAction targettag="ammobox2">
+            <StatusEffect target="this" NonInteractable="true" oneshot="true" >
+              <ParticleEmitter particle="weldspark" particleamount="5" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="50" colormultiplier="255,255,255,255" lifetimemultiplier="1"/>
+              <Sound file="Content/Items/Door/Duct1.ogg" range="400" frequencymultiplier="2" volume="2" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckItemAction>
+      <CheckConditionalAction targettag="beaconbattery" ApplyTagToTarget="charged" hasstatustag="neq charged" logicaloperator="And">
+        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Success>
+          <StatusEffectAction targettag="beaconbattery">
+            <StatusEffect target="this" statuseffecttags="charged" setvalue="true" />
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckConditionalAction> 
+      <CheckConditionalAction targettag="beaconsupercap" ApplyTagToTarget="charged" hasstatustag="neq charged" logicaloperator="And">
+        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Success>
+          <StatusEffectAction targettag="beaconsupercap">
+            <StatusEffect target="this" statuseffecttags="charged" setvalue="true" />
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckConditionalAction>
+      <CheckDataAction identifier="beaconrearmstate" condition="eq 4" >
+        <Failure>
+          <Goto name="beaconrearmedloop" />
+        </Failure>
+        <Success>
+          <MissionStateAction missionidentifier="beaconrearmTEST" operation="Set" value="1" />    
+        </Success>  
+      </CheckDataAction>
+ 
+    </ScriptedEvent>
 
-    <!-- Husk Encounter -->
-    <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
+
+
+    <ScriptedEvent identifier="beaconrearmevent2222">
+      <TagAction criteria="player" tag="player" />
+      <!-- <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" /> -->
+      <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconsupercap" tag="beaconsupercap" submarinetype="BeaconStation" />
+      <SetDataAction identifier="beaconrearmstate" operation="set" value="0" />
+      <Label name="beaconrearmedloop" />
+      <WaitAction time="2" /> 
+      <CheckConditionalAction targettag="beaconbattery" hasstatustag="neq charged" logicaloperator="And" >
+        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Success>
+          <ConversationAction targettag="player" text="beaconbattery" eventsprite="MysteryMan" endconversation="true"/>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+        <Failure>
+          <Goto name="beaconrearmedloop" />
+        </Failure>
+      </CheckConditionalAction> 
+      
+      
+      <!-- <CheckConditionalAction targettag="beaconsupercap" targetitemcomponent="PowerContainer" chargepercentage="gte 99" ApplyTagToTarget="charged">
+        <Success>
+          <ConversationAction targettag="player" text="beaconsupercap" eventsprite="MysteryWoman" endconversation="true"/>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckConditionalAction> -->
+ 
+    </ScriptedEvent>
+
+    <!-- Beaconn Husk Event -->
+    <!-- Husk research beacon - NPCs turn into husk when power is on -->
     <ScriptedEvent identifier="beaconhuskevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:oxygengenerator" tag="oxygengeneratorbeacon" submarinetype="BeaconStation" />

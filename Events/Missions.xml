@@ -1891,7 +1891,26 @@
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="140,155,120"/>
       <Metadata identifier="beaconfloodedrescue_complete" value="true"/>
       <CompleteCheckDataAction identifier="beaconoperatorsaved" condition="eq 1"/>
-    </BeaconMission>  
+    </BeaconMission>
+        
+    <!-- Rescue a beacon operator from a flooded beacon. Time sensitive -->
+    <BeaconMission
+      identifier="beaconrearmTEST"
+      textidentifier="beaconrearmmission"
+      achievementidentifier="beaconmission"
+      tags="beaconmissionrearm"
+      type="Beacon"
+      difficulty="1"
+      reward="2000"
+      sideobjective="false"
+      beacontags="BeaconRearm"
+      sonarlabel="beaconstationsonarlabel">
+      <Reputation identifier="location" amount="3" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,155,120"/>
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconrearmevent" campaignonly="true"/>
+      <Metadata identifier="beaconrearm_complete" value="true"/>
+      <CompleteCheckDataAction identifier="beaconrearmcheck" condition="eq 1"/>
+    </BeaconMission>
   
     <!-- test to spawn custom wreck in mission, make sure to not have vanilla spawnpoints or thalamus if you don't want to deal with random events -->
     <SalvageMission
