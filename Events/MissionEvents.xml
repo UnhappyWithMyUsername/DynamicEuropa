@@ -523,14 +523,24 @@
           <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="shockjock">
             <Option text="EventText.missionevent_beaconfloodedrescue.whatdo" >
               <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.rescue" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
-                <MissionAction missionidentifier="beaconfloodedrescue" />
-                <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
+              <MissionAction missionidentifier="beaconfloodedrescue" />
+              <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
             </Option>
           </ConversationAction>
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
 
+    <!-- rearm beacon weapons platform -->
+    <ScriptedEvent identifier="missionevent_beaconrearmmission" commonness="0">
+      <ConversationAction text="Eventtext.missionevent_beaconrearmmission.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor">
+        <Option text="EventText.missionevent_beaconrearmmission.willdo" >
+          <ConversationAction text="Eventtext.missionevent_beaconrearmmission.checkyourammo" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
+          <MissionAction missiontag="beaconrearmmissiontag" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    
     <!-- turn on husk beacon -->
     <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
       <CheckDataAction identifier="beaconhusknorepeat" condition="1">
