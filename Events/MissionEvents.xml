@@ -1813,6 +1813,7 @@
       <NPCFollowAction npctag="securitybriefcase" targettag="securebriefcase" follow="true" priority="30"/>
     </ScriptedEvent>
             
+    <!-- make sure NPC is alive -->
     <ScriptedEvent identifier="beaconfloodedrescueevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="playerhull" submarinetype="BeaconStation" />
@@ -1858,10 +1859,10 @@
       </OnRoundEndAction>   
     </ScriptedEvent>
     
-     
+    <!-- check if beacon has full ammo boxes + powered battery and supercap -->
     <ScriptedEvent identifier="beaconrearmevent">
       <TagAction criteria="player" tag="player" />
-      <!-- <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" /> -->
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:beaconloader1" tag="beaconloader1" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:beaconloader2" tag="beaconloader2" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
@@ -1895,20 +1896,22 @@
           <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
         </Success>
       </CheckItemAction>
-      <CheckConditionalAction targettag="beaconbattery" ApplyTagToTarget="charged" hasstatustag="neq charged" logicaloperator="And">
+      <CheckConditionalAction targettag="beaconbattery" ApplyTagToTarget="charged" logicaloperator="And">
         <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Conditional hastag="neq charged" />
         <Success>
           <StatusEffectAction targettag="beaconbattery">
-            <StatusEffect target="this" statuseffecttags="charged" setvalue="true" />
+            <StatusEffect target="this" tags="charged" setvalue="true" />
           </StatusEffectAction>
           <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
         </Success>
       </CheckConditionalAction> 
-      <CheckConditionalAction targettag="beaconsupercap" ApplyTagToTarget="charged" hasstatustag="neq charged" logicaloperator="And">
+      <CheckConditionalAction targettag="beaconsupercap" ApplyTagToTarget="charged" logicaloperator="And">
         <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Conditional hastag="neq charged" />
         <Success>
           <StatusEffectAction targettag="beaconsupercap">
-            <StatusEffect target="this" statuseffecttags="charged" setvalue="true" />
+            <StatusEffect target="this" tags="charged" setvalue="true" />
           </StatusEffectAction>
           <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
         </Success>
@@ -1918,42 +1921,15 @@
           <Goto name="beaconrearmedloop" />
         </Failure>
         <Success>
+          <!-- "complete" the mission  jank -->
+          <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" duration="999999" />
+          </StatusEffectAction>
           <MissionStateAction missionidentifier="beaconrearmTEST" operation="Set" value="1" />    
         </Success>  
-      </CheckDataAction>
- 
+      </CheckDataAction> 
     </ScriptedEvent>
-
-
-
-    <ScriptedEvent identifier="beaconrearmevent2222">
-      <TagAction criteria="player" tag="player" />
-      <!-- <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" /> -->
-      <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
-      <TagAction criteria="itemtag:beaconsupercap" tag="beaconsupercap" submarinetype="BeaconStation" />
-      <SetDataAction identifier="beaconrearmstate" operation="set" value="0" />
-      <Label name="beaconrearmedloop" />
-      <WaitAction time="2" /> 
-      <CheckConditionalAction targettag="beaconbattery" hasstatustag="neq charged" logicaloperator="And" >
-        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
-        <Success>
-          <ConversationAction targettag="player" text="beaconbattery" eventsprite="MysteryMan" endconversation="true"/>
-          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
-        </Success>
-        <Failure>
-          <Goto name="beaconrearmedloop" />
-        </Failure>
-      </CheckConditionalAction> 
       
-      
-      <!-- <CheckConditionalAction targettag="beaconsupercap" targetitemcomponent="PowerContainer" chargepercentage="gte 99" ApplyTagToTarget="charged">
-        <Success>
-          <ConversationAction targettag="player" text="beaconsupercap" eventsprite="MysteryWoman" endconversation="true"/>
-          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
-        </Success>
-      </CheckConditionalAction> -->
- 
-    </ScriptedEvent>
 
     <!-- Beaconn Husk Event -->
     <!-- Husk research beacon - NPCs turn into husk when power is on -->
