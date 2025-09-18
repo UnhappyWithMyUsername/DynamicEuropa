@@ -1848,9 +1848,11 @@
           <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove2" speakertag="beaconoperator" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibration2" />          
           <NPCOperateItemAction npctag="beaconoperator" targettag="beaconmonitor" ItemComponentName="Sonar" Operate="true" /> 
           <TriggerAction target1tag="beaconoperator" target2tag="beaconmonitor" radius="50" />
+          <!-- "complete" the mission  jank -->
           <StatusEffectAction targettag="beaconmonitor">
-            <StatusEffect target="this" NonPlayerTeamInteractable="false" setvalue="true" />
+            <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" duration="999999" />
           </StatusEffectAction>
+          <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="1" />    
         </Success>
         <Failure>
           <GoTo name="foundoperatorcheck" />
