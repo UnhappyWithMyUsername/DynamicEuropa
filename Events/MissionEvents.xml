@@ -516,18 +516,54 @@
       </ConversationAction>
     </ScriptedEvent>
 
-      <!-- TODO: NEXTUPDATE add this to an eventset -->
-      <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
-        <CheckDataAction identifier="beaconhusknorepeat" condition="true">
-          <Failure>
-            <NPCWaitAction npctag="huskresearcher" wait="true" />
-            <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" />
-            <MissionAction missionidentifier="huskbeaconmission" />
-            <SetDataAction identifier="beaconhusknorepeat" value="1"/>
-          </Failure>
-        </CheckDataAction>
-      </ScriptedEvent>
+    <!-- rescue beacon operator -->
+    <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="0">
+      <CheckDataAction identifier="beaconfloodedrescuenorepeat" condition="1">
+        <Failure>
+          <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="shockjock">
+            <Option text="EventText.missionevent_beaconfloodedrescue.whatdo" >
+              <ConversationAction text="Eventtext.missionevent_beaconfloodedrescue.rescue" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
+              <MissionAction missionidentifier="beaconfloodedrescue" />
+              <SetDataAction identifier="beaconfloodedrescuenorepeat" value="1"/>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
 
+    <!-- rearm beacon weapons platform -->
+    <ScriptedEvent identifier="missionevent_beaconrearmmission" commonness="0">
+      <ConversationAction text="Eventtext.missionevent_beaconrearmmission.briefing" speakertag="outpostmanager" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor">
+        <Option text="EventText.missionevent_beaconrearmmission.willdo" >
+          <ConversationAction text="Eventtext.missionevent_beaconrearmmission.checkyourammo" targettag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="instructor" endconversation="true" />
+          <MissionAction missiontag="beaconrearmmissiontag" />
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
+    
+    <!-- turn on husk beacon -->
+    <ScriptedEvent identifier="missionevent_beaconhusk" commonness="0">
+      <CheckDataAction identifier="beaconhusknorepeat" condition="1">
+        <Failure>
+          <ConversationAction text="EventText.missionevent_beaconhusk.quest" speakertag="huskresearcher" endeventifinterrupted="false" dialogtype="Small" eventsprite="Ecclesiast" />
+          <MissionAction missionidentifier="beaconhusk" />
+          <SetDataAction identifier="beaconhusknorepeat" value="1"/>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!-- recover cargo pod mission -->
+    <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
+      <ConversationAction text="Eventtext.missionevent_Cargopodsalvage.briefing" speakertag="outpostmanager" invokertag="triggerer_player" eventsprite="instructor" >
+        <Option text="EventText.generic.continue" >
+          <ConversationAction text="Eventtext.missionevent_Cargopodsalvage.equipment" targettag="triggerer_player" eventsprite="instructor">
+            <Option text="EventText.generic.gotit" endconversation="true" >
+              <MissionAction missionidentifier="Cargopodsalvage" />
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>  
   
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
@@ -1777,27 +1813,149 @@
       <GoTo name="recheck" />
     </ScriptedEvent>
          
-    <ScriptedEvent identifier="spawnbriefcaseNPC">
-      <TagAction criteria="player" tag="player" />
-      <SpawnAction npcsetidentifier="customnpcs" npcidentifier="briefcaseNPC" targettag="briefcaseholder" spawnlocation="Outpost" teamid="FriendlyNPC"/>
+    <ScriptedEvent identifier="retrievesecretdocumentsevent">
+      <WaitAction time="5" />
       <TagAction criteria="itemtag:securebriefcase" tag="securebriefcase" />
-      <Label name="end" />
+      <StatusEffectAction targettag="securebriefcase">
+        <StatusEffect target="This" SpawnedInCurrentOutpost="true" AllowStealing="false" setvalue="true"/>
+      </StatusEffectAction>
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securitybriefcase" spawnlocation="Outpost" />
+      <NPCFollowAction npctag="securitybriefcase" targettag="securebriefcase" follow="true" priority="30"/>
     </ScriptedEvent>
-   
+            
+    <!-- make sure NPC is alive -->
+    <ScriptedEvent identifier="beaconfloodedrescueevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="hull" tag="playerhull" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
+      <Label name="foundoperatorcheck" />
+      <WaitAction time="1" />
+      <CountTargetsAction targettag="beaconoperator" minamount="1" >
+        <Conditional IsDead="false" />
+        <Failure>
+          <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="2" />
+          <SetDataAction identifier="beaconoperatorsaved" operation="set" value="0" />
+        </Failure>
+      </CountTargetsAction>
+      <CheckVisibilityAction EntityTag="player" TargetTag="beaconoperator" MaxDistance="500" AllowSameEntity="false">
+        <Success>
+        <StatusEffectAction targettag="beaconoperator">
+            <StatusEffect target="this">
+              <Forcesay message="eventtext.beaconfloodedrescueevent.thankjove1" sayinradio="true" />
+            </StatusEffect>
+        </StatusEffectAction>
+          <ConversationAction text="EventText.beaconfloodedrescueevent.thankjove2" speakertag="beaconoperator" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="Small" endconversation="true" eventsprite="badvibration2" />          
+          <NPCOperateItemAction npctag="beaconoperator" targettag="beaconmonitor" ItemComponentName="Sonar" Operate="true" /> 
+          <TriggerAction target1tag="beaconoperator" target2tag="beaconmonitor" radius="50" />
+          <!-- "complete" the mission  jank -->
+          <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" duration="999999" />
+          </StatusEffectAction>
+          <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="1" />    
+        </Success>
+        <Failure>
+          <GoTo name="foundoperatorcheck" />
+        </Failure>
+      </CheckVisibilityAction>
+      <OnRoundEndAction>
+        <CountTargetsAction targettag="beaconoperator" hulltag="playerhull" minamount="1" >
+          <Conditional IsDead="false" />
+          <Success>
+            <SetDataAction identifier="beaconoperatorsaved" operation="set" value="1" />
+          </Success>
+          <Failure>
+            <SetDataAction identifier="beaconoperatorsaved" operation="set" value="0" />
+          </Failure>
+        </CountTargetsAction>
+      </OnRoundEndAction>   
+    </ScriptedEvent>
+    
+    <!-- check if beacon has full ammo boxes + powered battery and supercap -->
+    <ScriptedEvent identifier="beaconrearmevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconloader1" tag="beaconloader1" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconloader2" tag="beaconloader2" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconsupercap" tag="beaconsupercap" submarinetype="BeaconStation" />
+      <SetDataAction identifier="beaconrearmstate" operation="set" value="0" />
+      <Label name="beaconrearmedloop" />
+      <WaitAction time="1" />       
+      <CheckItemAction targettag="beaconloader1" itemtags="ammobox" ApplyTagToItem="ammobox1" >
+        <Conditional conditionpercentage="gte 100" />
+        <Conditional NonInteractable="False" />
+        <Success>
+          <StatusEffectAction targettag="ammobox1">
+            <StatusEffect target="this" NonInteractable="true" oneshot="true" >
+              <ParticleEmitter particle="weldspark" particleamount="5" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="50" colormultiplier="255,255,255,255" lifetimemultiplier="1"/>
+              <Sound file="Content/Items/Door/Duct1.ogg" range="400" frequencymultiplier="2" volume="2" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckItemAction>   
+      <CheckItemAction targettag="beaconloader2" itemtags="ammobox" ApplyTagToItem="ammobox2" >
+        <Conditional conditionpercentage="gte 100" />
+        <Conditional NonInteractable="False" />
+        <Success>
+          <StatusEffectAction targettag="ammobox2">
+            <StatusEffect target="this" NonInteractable="true" oneshot="true" >
+              <ParticleEmitter particle="weldspark" particleamount="5" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="50" colormultiplier="255,255,255,255" lifetimemultiplier="1"/>
+              <Sound file="Content/Items/Door/Duct1.ogg" range="400" frequencymultiplier="2" volume="2" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckItemAction>
+      <CheckConditionalAction targettag="beaconbattery" ApplyTagToTarget="charged" logicaloperator="And">
+        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Conditional hastag="neq charged" />
+        <Success>
+          <StatusEffectAction targettag="beaconbattery">
+            <StatusEffect target="this" tags="charged" setvalue="true" />
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckConditionalAction> 
+      <CheckConditionalAction targettag="beaconsupercap" ApplyTagToTarget="charged" logicaloperator="And">
+        <Conditional targetitemcomponent="PowerContainer" chargepercentage="gte 99" />
+        <Conditional hastag="neq charged" />
+        <Success>
+          <StatusEffectAction targettag="beaconsupercap">
+            <StatusEffect target="this" tags="charged" setvalue="true" />
+          </StatusEffectAction>
+          <SetDataAction identifier="beaconrearmstate" operation="add" value="1" />
+        </Success>
+      </CheckConditionalAction>
+      <CheckDataAction identifier="beaconrearmstate" condition="eq 4" >
+        <Failure>
+          <Goto name="beaconrearmedloop" />
+        </Failure>
+        <Success>
+          <!-- "complete" the mission  jank -->
+          <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" duration="999999" />
+          </StatusEffectAction>
+          <MissionStateAction missionidentifier="beaconrearmTEST" operation="Set" value="1" />    
+        </Success>  
+      </CheckDataAction> 
+    </ScriptedEvent>
+      
 
-    <!-- Husk Encounter -->
-    <!-- Unused, part of husk beacon mission. TODO: enable huskbeaconmission if devs allow spawning specific beacons. also move to missionevents /> -->
+    <!-- Beaconn Husk Event -->
+    <!-- Husk research beacon - NPCs turn into husk when power is on -->
     <ScriptedEvent identifier="beaconhuskevent">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:oxygengenerator" tag="oxygengenerator" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:oxygengenerator" tag="oxygengeneratorbeacon" submarinetype="BeaconStation" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhuskresearcher" targettag="dormanthusk" spawnpointtag="huskencounter1" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter2" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <SpawnAction npcsetidentifier="husknpcsmission" npcidentifier="beaconhusk" targettag="dormanthusk" spawnpointtag="huskencounter3" spawnlocation="BeaconStation" TeamID="FriendlyNPC" />
       <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="dormanthusk" />
       <AfflictionAction affliction="huskinfection" strength="90" targettag="dormanthusk" />
       <Label name="oxygencheck" />     
-      <CheckConditionalAction targettag="oxygengenerator" targetitemcomponent="OxygenGenerator" LogicalOperator="And" >
-        <Conditional targetitemcomponent="OxygenGenerator" voltage="gt 0.5" />
+      <CheckConditionalAction targettag="oxygengeneratorbeacon" targetitemcomponent="oxygengeneratorbeacon" LogicalOperator="And" >
+        <Conditional targetitemcomponent="oxygengeneratorbeacon" voltage="gt 0.5" />
         <Conditional condition="gt 0" />
         <Failure>
           <WaitAction time="1" />
@@ -1807,7 +1965,7 @@
         <Success>
           <Waitaction time="3" />
           <ConversationAction text="EventText.beaconhusk.smell" dialogtype="Small" targettag="player" eventsprite="brokenmachinery" endconversation="true" continueautomatically="true" />
-          <StatusEffectAction targettag="oxygengenerator">
+          <StatusEffectAction targettag="oxygengeneratorbeacon">
             <StatusEffect target="This" duration="5">
               <ParticleEmitter particle="fixfoam" particlespersecond="3" velocitymin="20" velocitymax="50" anglemin="50" anglemax="130" scalemin="0.2" scalemax="0.4" Spread="50" distancemin="0" distancemax="50" colormultiplier="150,255,150,40" lifetimemultiplier="3"/>
               <Sound file="Content/Items/Diving/ITEMS_divingSuitOxygenLeakLoop.ogg" range="800" loop="true" frequencymultiplier="0.5" volume="1" />
@@ -1864,6 +2022,35 @@
       </CheckConditionalAction>
     </ScriptedEvent>
  
+ 
+ 
+    <ScriptedEvent identifier="Cargopodsalvageevent">
+      <WaitAction time="5" />
+      <SetDataAction identifier="Cargopodsalvaged" operation="set" value="0" />
+      <TagAction criteria="itemtag:salvageobjective" tag="salvageobjective" />
+      <TagAction criteria="itemidentifier:outpostterminal" tag="outpostterminal" />
+      <TagAction criteria="itemtag:poddockingport" tag="poddockingport" />      
+      <Label name="checkifdocked" />
+      <WaitAction time="2" />
+      <CheckConditionalAction targettag="poddockingport" targetitemcomponent="DockingPort" Docked="true">
+        <Success>
+          <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
+          <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="-1" />
+        </Success>
+        <Failure>
+          <Goto name="checkifdocked" />
+        </Failure>
+      </CheckConditionalAction>
+      <OnRoundEndAction>
+        <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" applytotarget1="podreachedend" radius="5000" waitforinteraction="false" />
+        <CountTargetsAction targettag="podreachedend" minamount="1">
+          <Success>
+            <SetDataAction identifier="Cargopodsalvaged" operation="set" value="1" />
+            <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="2" />
+          </Success>
+        </CountTargetsAction>
+      </OnRoundEndAction>
+    </ScriptedEvent>
  
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />

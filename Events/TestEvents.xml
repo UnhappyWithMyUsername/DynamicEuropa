@@ -9,6 +9,16 @@
     <!-- CHEAT COMMANDS -->
     <!-- CHEAT COMMANDS -->
     
+    <!-- GENERIC TEST EVENT, USED TO COPY PASTE THINGS FOR QUICK TESTING -->
+    <ScriptedEvent identifier="genericTESTevent" commonness="0">
+      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" /> 
+      <Label name="loop" />
+      <StatusEffectAction targettag="beaconmonitor">
+        <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" spritecolor="0,255,0,255" duration="999999" />
+      </StatusEffectAction>
+    </ScriptedEvent>     
+    
+    
     <!-- ONLY EXISTS FOR EASY UNLOCKING OF PATH IF PEOPLE BROKE THEIR MAP AND THERE'S NO BLOCKADE -->
     <ScriptedEvent identifier="blockade_unstuck" commonness="0">
       <TagAction criteria="player" tag="player" />
@@ -126,17 +136,30 @@
     </ScriptedEvent>
   
     <!-- Change mission ID. Runs a spectrum of mission actions to find out which one does what -->
-    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST">
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="1" />
-      <ConversationAction targettag="player" text="1" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="2" />
-      <ConversationAction targettag="player" text="2" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="3" />
-      <ConversationAction targettag="player" text="3" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="4" />
-      <ConversationAction targettag="player" text="4" eventsprite="GuyWithAlcohol" endconversation="true"/>
-      <MissionStateAction missionidentifier="hostagesituation" operation="Set" value="5" />
-      <ConversationAction targettag="player" text="5" eventsprite="GuyWithAlcohol" endconversation="true"/>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST1">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="1" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="1"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST2">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="2" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="2"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST3">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="3" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="3"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST4">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="4" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="4"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="MISSIONSTATEACTIONTEST5">
+      <TagAction criteria="player" tag="player" />
+      <MissionStateAction missionidentifier="beaconfloodedrescue" operation="Set" value="5" />
+      <ConversationAction targettag="player" eventsprite="GuyWithAlcohol" text="5"/>
     </ScriptedEvent>
   
     <ScriptedEvent identifier="soldierspawnTEST">
@@ -148,7 +171,11 @@
     
     <ScriptedEvent identifier="missionevent_industrialincidentTEST" requiredDestinationTypes="factory,shipyard">
       <MissionAction missionidentifier="industrialincident" locationtype="factory,shipyard" />
-    </ScriptedEvent>    
+    </ScriptedEvent>  
+    
+    <ScriptedEvent identifier="missionevent_retrievesecretdocumentsTEST" requiredDestinationTypes="colony,city,base,military">
+      <MissionAction missionidentifier="retrievesecretdocuments" locationtype="colony,city,base,military" />
+    </ScriptedEvent>   
     
     <ScriptedEvent identifier="pinkindustrialsTEST" commonness="50">
       <TagAction criteria="itemtag:junctionbox" tag="pinkthis" SubmarineType="Outpost" ContinueIfNoTargetsFound="true" />
@@ -166,7 +193,7 @@
 
     <ScriptedEvent identifier="eventiconsTEST" >
       <TagAction criteria="player" tag="player" />
-      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryWoman" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="MysteryMan2" endconversation="true"/>
@@ -189,7 +216,7 @@
     <ScriptedEvent identifier="traitorlikeeventTEST" >
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,0,256,256" color="200,150,0,255" />
       <TagAction criteria="player" tag="player" />
-      <ConversationAction targettag="player" text="Testing" eventsprite="GuyWithAlcohol" dialogtype="Regular" endconversation="true"/>
+      <ConversationAction targettag="player" text="Testing" dialogtype="Regular" endconversation="true"/>
       <EventLogAction targettag="player" id="initialinfo" text="EventText.bakingstation.objective1" />
       <EventObjectiveAction targettag="player" type="add" id="traitorobjective.bakingstation.meltdown" />
       <OnRoundEndAction>
@@ -229,6 +256,17 @@
       <TagAction criteria="player" tag="player" />
       <AfflictionAction affliction="husktransformimmunity" strength="100" targettag="player" />
       <AfflictionAction affliction="huskinfection" strength="90" targettag="player" />
+    </ScriptedEvent>
+    
+    <!-- check if player sub has a docking hatch with "bottom" force direction, enables carrying transport pods to outpost? -->
+    <ScriptedEvent identifier="checkbottomportTEST">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:dockinghatch" tag="bottomport" submarinetype="Player"/>
+      <CheckConditionalAction targettag="bottomport" targetitemcomponent="DockingPort" ForceDockingDirection="Bottom">
+        <Success>
+          <ConversationAction targettag="player" text="bottom port detected" eventsprite="MysteryWoman" endconversation="true"/>
+        </Success>
+      </CheckConditionalAction>
     </ScriptedEvent>
       
 

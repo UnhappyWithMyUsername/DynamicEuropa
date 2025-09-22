@@ -138,6 +138,12 @@
         <EventSet identifier="outpostevent.dynamiceuropa.hostagesituation" leveltype="outpost" locationtype="outpost,settlement,colony,city,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
           <ScriptedEvent identifier="missionevent_hostagesituation" commonness="50" probability="0.25" />
         </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.cargopodsalvage" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="50" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.beaconfloodedrescue" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="50" probability="0.25" />
+        </EventSet>
       </EventSet>
 
       <!-- CHURCH OF HUSK EVENT SETS --><!-- Events for outpost manager missions. Mix of regular missions and new husk missions  -->
@@ -349,6 +355,11 @@
         </EventSet>
       </EventSet>
 
+      <!-- Events that only occur in husk temples, could be anything. TODO: add more -->
+      <EventSet identifier="outpostevent.dynamiceuropa.huskchurchevents" leveltype="outpost" locationtype="huskchurch" allowatstart="true" minleveldifficulty="10" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+        <ScriptedEvent identifier="missionevent_beaconhusk" commonness="50" probability="0.25" />
+      </EventSet>
+
       <!-- Event set for missions that have husk outposts as a destination or husks as a target-->
       <!-- TODO add more church missions -->
       <EventSet identifier="huskoutpostmissiondestination" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
@@ -364,7 +375,6 @@
         <EventSet identifier="missionevents.researchhuskoutpostmission.repeatable" minleveldifficulty="20" maxleveldifficulty="100" allowatstart="true" eventcount="1" chooserandom="true" exhaustible="true">
           <ScriptedEvent identifier="missionevent_escorthuskvip" commonness="100" probability="0.25" />
           <ScriptedEvent identifier="missionevent_keepwetcargo" commonness="100" probability="0.25" />
-          <!-- <ScriptedEvent identifier="missionevent_beaconspecialhusk" /> -->
         </EventSet>
       </EventSet>
       <!-- RUIN/LORE EVENTS, those require a research outpost, disabled them because it needs preplaced layer bullshit, will be reenabled if I'm bothered -->
@@ -529,6 +539,7 @@
       </EventSet>
       <EventSet identifier="outpostevents.habitation.randomevents" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" eventcount="1" onceperoutpost="false">
         <ScriptedEvent identifier="orangePETA" commonness="100" probability="1" />
+        <ScriptedEvent identifier="methformeds" commonness="50" probability="0.25" />
         <ScriptedEvent identifier="methformeds" commonness="50" probability="0.25" />
       </EventSet>
       
@@ -1083,13 +1094,13 @@
   <Override>
     <EventSet identifier="transitevents" leveltype="LocationConnection" allowatstart="true" chooserandom="false" campaign="true" ignoreintensity="true" additive="true">
       <!-- All Biomes -->
-      <EventSet identifier="DEtransitevents.reputation.randomevents" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.randomevents" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="stowaway1" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="stowaway22" commonness="100" probability="0.1" triggercooldown="false" />
         <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
         <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
       </EventSet>
-      <EventSet identifier="DEtransitevents.reputation.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
         <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="oxygenfluidleak" commonness="100" probability="0.02" triggercooldown="false" />
