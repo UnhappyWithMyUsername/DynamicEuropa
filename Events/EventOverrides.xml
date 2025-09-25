@@ -288,12 +288,12 @@
                 <Forcesay message="EventText.shockjock2.ramble" sayinradio="false" />
               </StatusEffect>
           </StatusEffectAction>
+          <WaitAction time="10" />
           <CheckVisibilityAction EntityTag="okelly" TargetTag="player" MaxDistance="500" AllowSameEntity="false">
             <Success>
               <GoTo name="okellyconversation" />
             </Success>
             <Failure>
-              <WaitAction time="10" />
               <GoTo name="okellyramblingloop" />
             </Failure>
           </CheckVisibilityAction>  
@@ -313,8 +313,8 @@
             <StatusEffect target="this" noninteractable="false" setvalue="true" />
             <SpawnItem identifier="banditprop7" spawnposition="This" Offset="0,-10"/>
           </StatusEffectAction> -->
-          <CombatAction combatmode="Offensive" npctag="okelly" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none"/>
-          <NPCChangeTeamAction npctag="okelly" teamid="None" />
+          <CombatAction combatmode="Offensive" npctag="okelly" enemytag="triggerer_player" isinstigator="true" guardreaction="none" witnessreaction="none"/>
+          <CombatAction combatmode="Offensive" npctag="maurice" enemytag="triggerer_player" isinstigator="true" guardreaction="none" witnessreaction="none"/>
         </Success>
       </CheckDataAction>
     </ScriptedEvent>
