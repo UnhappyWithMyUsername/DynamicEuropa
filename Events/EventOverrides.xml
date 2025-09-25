@@ -256,6 +256,69 @@
       <Label name="end" />
     </ScriptedEvent>
 
+    <!--Reworked shockjock2 to add power to the damn beacon and some dialog -->
+    <ScriptedEvent identifier="shockjock2" commonness="50">
+      <TagAction criteria="player" tag="player"/>
+      <CheckDataAction identifier="shockjock_broadcast" condition="eq 0">
+        <Success>
+          <TagAction criteria="submarine:BeaconStation" tag="beaconstation" />
+          <TagAction criteria="itemtag:reactor" submarinetype="BeaconStation" tag="beaconreactor" />
+          <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+          <!-- Wait with spawning until a player is close enough to the beacon station-->
+          <TriggerAction target1tag="player" target2tag="beaconstation" radius="4000" />
+          <SetDataAction identifier="shockjock_broadcast" value="2"/>
+          <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" condition="-100" setvalue="true" />
+            <SpawnItem identifier="banditprop7" spawnposition="This" Offset="0,-10"/>
+          </StatusEffectAction>
+          <SpawnAction itemidentifier="fuelrod" targetinventory="beaconreactor" condition="37" />
+          <StatusEffectAction targettag="beaconreactor">
+            <StatusEffect target="this" targetitemcomponent="Reactor" PowerOn="true" AutoTemp="true"/>
+          </StatusEffectAction>
+          <SpawnAction npcsetidentifier="customnpcs1" npcidentifier="shockjock" targettag="okelly" spawnpointtag="saferoom" spawnlocation="beaconstation" requirespawnpointtag="true"/>
+          <SpawnAction speciesname="orangeboy" spawnpointtag="saferoom" targettag="maurice" spawnlocation="beaconstation" requirespawnpointtag="true"/>
+          <SpawnAction itemidentifier="petnametag" targetinventory="maurice" targettag="mauricenametag"/>
+          <StatusEffectAction targettag="mauricenametag">
+            <StatusEffect target="This" writtenname="Maurice"/>
+          </StatusEffectAction>
+          <TriggerAction target1tag="player" target2tag="okelly" radius="700" />        
+          <Label name="okellyramblingloop" />
+          <StatusEffectAction targettag="okelly">
+              <StatusEffect target="this">
+                <Forcesay message="EventText.shockjock2.ramble" sayinradio="false" />
+              </StatusEffect>
+          </StatusEffectAction>
+          <CheckVisibilityAction EntityTag="okelly" TargetTag="player" MaxDistance="500" AllowSameEntity="false">
+            <Success>
+              <GoTo name="okellyconversation" />
+            </Success>
+            <Failure>
+              <WaitAction time="10" />
+              <GoTo name="okellyramblingloop" />
+            </Failure>
+          </CheckVisibilityAction>  
+          <Label name="okellyconversation" />
+          <ConversationAction text="EventText.shockjock2.whoareyou" speakertag="okelly" invokertag="triggerer_player" endeventifinterrupted="false" dialogtype="regular" eventsprite="badvibration2" >
+            <Option text="EventText.shockjock2.preach" >
+              <ConversationAction text="EventText.shockjock2.getlost" targettag="triggerer_player" endconversation="true"/>
+            </Option>
+            <Option text="EventText.shockjock2.crazy" >
+              <ConversationAction text="EventText.shockjock2.getlost" targettag="triggerer_player" endconversation="true"/>
+            </Option>
+            <Option text="EventText.shockjock2.repair" >              
+              <ConversationAction text="EventText.shockjock2.getlost" targettag="triggerer_player" endconversation="true"/>
+            </Option>
+          </ConversationAction>  
+          <!-- <StatusEffectAction targettag="beaconmonitor">
+            <StatusEffect target="this" noninteractable="false" setvalue="true" />
+            <SpawnItem identifier="banditprop7" spawnposition="This" Offset="0,-10"/>
+          </StatusEffectAction> -->
+          <CombatAction combatmode="Offensive" npctag="okelly" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="none"/>
+          <NPCChangeTeamAction npctag="okelly" teamid="None" />
+        </Success>
+      </CheckDataAction>
+    </ScriptedEvent>
+
   </EventPrefabs>
 </Randomevents>
 </Override>
