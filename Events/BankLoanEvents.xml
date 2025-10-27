@@ -1,0 +1,952 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+  <EventPrefabs>
+    <!-- TODO: Fix SpawnAction not spawning the NPC inside admin module -->
+    <!-- TODO: Localization -->
+    <!-- TODO: Once event is finalized, make a copy and adjust for separatist variant -->
+    <!-- TODO: Implement in EventSets.xml | Need to decide at what locations a banker should spawn and adjust location descriptions accordingly -->
+    <!--GET COALITION BANK LOAN | Triggered on coalition outposts -->
+    <ScriptedEvent identifier="getcoalitionbankloan">
+      <WaitAction time="1" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <WaitAction time="1" />
+      <TagAction criteria="humanprefabidentifier:bankercoalition" tag="banker" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:coalitionloancalendar" tag="targetcalendar" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="player" tag="player" />
+      <Label name="restart" />
+      <WaitAction time="1" />
+      <ClearTagAction tag="bc_player" />
+      <!-- check if player needs to repay an active loan first -->
+      <CheckDataAction identifier="co_loan_active" value="eq 1">
+        <Success>
+          <GoTo name="has_active_loan" />
+        </Success>
+        <Failure>
+          <!-- continue to next check -->
+        </Failure>
+      </CheckDataAction>
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 20">
+        <Success>
+          <GoTo name="loan_interest_50" />
+        </Success>
+        <Failure>
+          <!-- continue to next check -->
+        </Failure>
+      </CheckReputationAction>
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 40">
+        <Success>
+          <GoTo name="loan_interest_30" />
+        </Success>
+        <Failure>
+          <!-- continue to next check -->
+        </Failure>
+      </CheckReputationAction>
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 60">
+        <Success>
+          <GoTo name="loan_interest_10" />
+        </Success>
+        <Failure>
+          <!-- continue to next check -->
+        </Failure>
+      </CheckReputationAction>
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="gte 60">
+        <Success>
+          <GoTo name="loan_interest_0" />
+        </Success>
+        <Failure>
+          <GoTo name="end" />
+        </Failure>
+      </CheckReputationAction>
+
+      <!-- interaction to repay a loan | loads of checks x_x -->
+      <Label name="has_active_loan" />
+      <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
+        <!-- checking which type of loan is active | we can't check for reputation instead since the reputation might've changed since the loan was taken -->
+        <!-- CHECK FOR 20K loan - 50% interest -->
+        <CheckDataAction identifier="co_20000_i50" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.50" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="30000">
+                  <Success>
+                    <MoneyAction amount="-30000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_20000_i50" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 20K loan - 30% interest -->
+        <CheckDataAction identifier="co_20000_i30" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.30" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="26000">
+                  <Success>
+                    <MoneyAction amount="-26000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_20000_i30" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 20K loan - 10% interest -->
+        <CheckDataAction identifier="co_20000_i10" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.10" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="22000">
+                  <Success>
+                    <MoneyAction amount="-22000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_20000_i10" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 20K loan - 0% interest -->
+        <CheckDataAction identifier="co_20000_i0" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.0" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="20000">
+                  <Success>
+                    <MoneyAction amount="-20000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_20000_i0" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+
+        <!-- CHECK FOR 10K loan - 50% interest -->
+        <CheckDataAction identifier="co_10000_i50" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.50" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="15000">
+                  <Success>
+                    <MoneyAction amount="-15000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_10000_i50" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 10K loan - 30% interest -->
+        <CheckDataAction identifier="co_10000_i30" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.30" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="13000">
+                  <Success>
+                    <MoneyAction amount="-13000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_10000_i30" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 10K loan - 10% interest -->
+        <CheckDataAction identifier="co_10000_i10" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.10" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="11000">
+                  <Success>
+                    <MoneyAction amount="-11000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_10000_i10" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 10K loan - 0% interest -->
+        <CheckDataAction identifier="co_10000_i0" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.0" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="10000">
+                  <Success>
+                    <MoneyAction amount="-10000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_10000_i0" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+
+        <!-- CHECK FOR 5K loan - 50% interest -->
+        <CheckDataAction identifier="co_5000_i50" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.50" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="7500">
+                  <Success>
+                    <MoneyAction amount="-7500" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_5000_i50" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 5K loan - 30% interest -->
+        <CheckDataAction identifier="co_5000_i30" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.30" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="6500">
+                  <Success>
+                    <MoneyAction amount="-6500" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_5000_i30" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 5K loan - 10% interest -->
+        <CheckDataAction identifier="co_5000_i10" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.10" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="5500">
+                  <Success>
+                    <MoneyAction amount="-5500" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_5000_i10" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 5K loan - 0% interest -->
+        <CheckDataAction identifier="co_5000_i0" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.0" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="5000">
+                  <Success>
+                    <MoneyAction amount="-5000" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_5000_i0" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+
+        <!-- CHECK FOR 2.5K loan - 50% interest -->
+        <CheckDataAction identifier="co_2500_i50" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.50" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="3750">
+                  <Success>
+                    <MoneyAction amount="-3750" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_2500_i50" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 2.5K loan - 30% interest -->
+        <CheckDataAction identifier="co_2500_i30" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.30" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="3250">
+                  <Success>
+                    <MoneyAction amount="-3250" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_2500_i30" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 2.5K loan - 10% interest -->
+        <CheckDataAction identifier="co_2500_i10" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.10" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="2750">
+                  <Success>
+                    <MoneyAction amount="-2750" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_2500_i10" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <!-- continue to next check -->
+          </Failure>
+        </CheckDataAction>
+
+        <!-- CHECK FOR 2.5K loan - 0% interest -->
+        <CheckDataAction identifier="co_2500_i0" value="eq 1">
+          <Success>
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.0" eventsprite="separatists" >
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
+                <CheckMoneyAction amount="2500">
+                  <Success>
+                    <MoneyAction amount="-2500" />
+                    <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
+                    <SetDataAction identifier="co_2500_i0" operation="Set" value="0" />
+                    <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <StatusEffectAction targettag="targetcalendar">
+                      <StatusEffect target="This" disabledeltatime="true">
+                        <Remove />
+                      </StatusEffect>
+                    </StatusEffectAction>
+                    <GoTo name="restart" />
+                  </Success>
+                  <Failure>
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <GoTo name="restart" />
+                  </Failure>
+                </CheckMoneyAction>
+              </Option>
+              <Option text="eventtext.banker.coalition.loan.player.option.loan.dontpay" endconversation="true">
+                <GoTo name="restart" />
+              </Option>
+            </ConversationAction>
+          </Success>
+          <Failure>
+            <GoTo name="restart" />
+          </Failure>
+        </CheckDataAction>
+
+      <!-- interaction to take a loan with 50% interest -->
+      <Label name="loan_interest_50" />
+      <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.50" eventsprite="separatists" >
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="20000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_20000_i50" operation="Set" value="1" />
+          <!-- set your desired value + 1 higher to account for the last day as a valid day to repay the loan (10 days duration = value of 11) -->
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <!--  spawn item inside player inventory with max condition of days (levels) within the loan has to be paid back.
+                condition will be reduced by 1 every round to track time past.
+                if loan is not repaid within this time, reduce reputation by 1 each day (level) -->
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.10000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="10000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_10000_i50" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.5000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="5000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_5000_i50" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.2500.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="2500" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_2500_i50" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.decline" endconversation="true">
+          <GoTo name="restart" />
+        </Option>
+      </ConversationAction>
+      <!-- interaction to take a loan with 30% interest -->
+      <Label name="loan_interest_30" />
+      <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="separatists" >
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="20000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_20000_i30" operation="Set" value="1" />
+          <!-- set your desired value + 1 higher to account for the last day as a valid day to repay the loan (10 days duration = value of 11) -->
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <!--  spawn item inside player inventory with max condition of days (levels) within the loan has to be paid back.
+                condition will be reduced by 1 every round to track time past.
+                if loan is not repaid within this time, reduce reputation by 1 each day (level) -->
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.10000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="10000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_10000_i30" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.5000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="5000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_5000_i30" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.2500.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="2500" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_2500_i30" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.decline" endconversation="true">
+          <GoTo name="restart" />
+        </Option>
+      </ConversationAction>
+      <!-- interaction to take a loan with 10% interest -->
+      <Label name="loan_interest_10" />
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.10" eventsprite="separatists" >
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="20000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_20000_i10" operation="Set" value="1" />
+          <!-- set your desired value + 1 higher to account for the last day as a valid day to repay the loan (10 days duration = value of 11) -->
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <!--  spawn item inside player inventory with max condition of days (levels) within the loan has to be paid back.
+                condition will be reduced by 1 every round to track time past.
+                if loan is not repaid within this time, reduce reputation by 1 each day (level) -->
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.10000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="10000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_10000_i10" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.5000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="5000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_5000_i10" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.2500.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="2500" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_2500_i10" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.decline" endconversation="true">
+          <GoTo name="restart" />
+        </Option>
+      </ConversationAction>
+      <!-- interaction to take a loan with 0% interest -->
+      <Label name="loan_interest_0" />
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="separatists" >
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="20000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_20000_i0" operation="Set" value="1" />
+          <!-- set your desired value + 1 higher to account for the last day as a valid day to repay the loan (10 days duration = value of 11) -->
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <!--  spawn item inside player inventory with max condition of days (levels) within the loan has to be paid back.
+                condition will be reduced by 1 every round to track time past.
+                if loan is not repaid within this time, reduce reputation by 1 each day (level) -->
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.10000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="10000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_10000_i0" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.5000.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="5000" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_5000_i0" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.2500.take">
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
+          <MoneyAction amount="2500" />
+          <SetDataAction identifier="co_loan_active" operation="Set" value="1" />
+          <SetDataAction identifier="co_2500_i0" operation="Set" value="1" />
+          <SetDataAction identifier="co_loan_duration" operation="Set" value="11" />
+          <StatusEffectAction targettag="bc_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <GoTo name="restart" />
+        </Option>
+        <Option text="eventtext.banker.coalition.loan.player.option.loan.decline" endconversation="true">
+          <GoTo name="restart" />
+        </Option>
+      </ConversationAction>
+      <Label name="end" />
+    </ScriptedEvent>
+
+    <!-- TODO: Implement in EventSets.xml | Should always trigger in LocationConnection level type, but not in Outpost level type -->
+    <!-- LOAN TIMER | COUNTS DOWN THE DAYS UNTIL LOANS NEED TO BE REPAID | REDUCES FACTION REP EACH LEVEL FOR OVERDUE LOANS -->
+    <ScriptedEvent identifier="bankloantimer">
+      <TagAction criteria="itemidentifier:coalitionloancalendar" tag="targetcalendar" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="itemidentifier:separatistloancalendar" tag="targetcalendar" ContinueIfNoTargetsFound="true" />
+
+      <!-- check if coalition loan is active-->
+      <CheckDataAction identifier="co_loan_active" value="eq 1">
+        <Success>
+          <GoTo name="coalition_loan_active" />
+        </Success>
+        <Failure>
+          <!-- contine to next check -->
+        </Failure>
+      </CheckDataAction>
+      <!-- check if separatist loan is active | this check if skipped if coalition loan is active -->
+      <CheckDataAction identifier="sep_loan_active" value="eq 1">
+        <Success>
+          <GoTo name="separatist_loan_active" />
+        </Success>
+        <Failure>
+          <GoTo name="timer_end" />
+        </Failure>
+      </CheckDataAction>
+
+      <Label name="coalition_loan_active" />
+      <!-- check if coalition loan is overdue -->
+      <CheckDataAction identifier="co_loan_duration" value="eq 0">
+        <!-- if overdue: reduce reputation by 1 each level -->
+        <Success>
+          <ReputationAction targettype="Faction" identifier="coalition" increase="-1" />
+        </Success>
+        <!-- is not overdue: reduce days (levels) left until overdue by 1 -->
+        <Failure>
+          <SetDataAction identifier="co_loan_duration" operation="Add" value="-1" />
+        </Failure>
+      </CheckDataAction>
+      <!-- 2nd check if separatist loan is active since first one might got skipped -->
+      <CheckDataAction identifier="sep_loan_active" value="eq 1">
+        <Success>
+          <GoTo name="separatist_loan_active" />
+        </Success>
+        <Failure>
+          <GoTo name="timer_end" />
+        </Failure>
+      </CheckDataAction>
+
+      <Label name="separatist_loan_active" />
+      <!-- check if separatist loan is overdue -->
+      <CheckDataAction identifier="sep_loan_duration" value="eq 0">
+        <!-- if overdue: reduce reputation by 1 each level -->
+        <Success>
+          <ReputationAction targettype="Faction" identifier="coalition" increase="-1" />
+        </Success>
+        <!-- is not overdue: reduce days (levels) left until overdue by 1 -->
+        <Failure>
+          <SetDataAction identifier="sep_loan_duration" operation="Add" value="-1" />
+        </Failure>
+      </CheckDataAction>
+
+      <Label name="timer_end" />
+      <!-- reduce condition of all loan calendars by 1 -->
+      <StatusEffectAction targettag="targetcalendar">
+        <StatusEffect target="This" condition="-1" disabledeltatime="true" />
+      </StatusEffectAction>
+    </ScriptedEvent>
+  </EventPrefabs>
+</Randomevents>
