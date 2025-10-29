@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Randomevents>
   <EventPrefabs>
-    <!-- TODO: Fix SpawnAction not spawning the NPC inside admin module -->
     <!-- TODO: Localization -->
     <!-- TODO: Once event is finalized, make a copy and adjust for separatist variant -->
     <!-- TODO: Implement in EventSets.xml | Need to decide at what locations a banker should spawn and adjust location descriptions accordingly -->
     <!--GET COALITION BANK LOAN | Triggered on coalition outposts -->
     <ScriptedEvent identifier="getcoalitionbankloan">
       <WaitAction time="1" />
-      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="AdminModule" />
       <WaitAction time="1" />
       <TagAction criteria="humanprefabidentifier:bankercoalition" tag="banker" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:coalitionloancalendar" tag="targetcalendar" ContinueIfNoTargetsFound="true" />
@@ -25,7 +24,19 @@
           <!-- continue to next check -->
         </Failure>
       </CheckDataAction>
-      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 20">
+      <!-- check if player is affiliated (friendly) with coalition (reputation = 20+) -->
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="gte 20">
+        <Success>
+          <!-- continue to next check -->
+        </Success>
+        <Failure>
+          <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
+          <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.refuse.info" eventsprite="coalition" dialogtype="Small" />
+          <Goto name="restart" />
+        </Failure>
+      </CheckReputationAction>
+      <!-- check player reputation with coalition to determine the interest rate -->
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 30">
         <Success>
           <GoTo name="loan_interest_50" />
         </Success>
@@ -33,7 +44,7 @@
           <!-- continue to next check -->
         </Failure>
       </CheckReputationAction>
-      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 40">
+      <CheckReputationAction TargetType="Faction" identifier="Coalition" condition="lt 45">
         <Success>
           <GoTo name="loan_interest_30" />
         </Success>
@@ -65,7 +76,7 @@
         <!-- CHECK FOR 20K loan - 50% interest -->
         <CheckDataAction identifier="co_20000_i50" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.50" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.50" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="30000">
                   <Success>
@@ -73,7 +84,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_20000_i50" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -82,7 +93,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -100,7 +111,7 @@
         <!-- CHECK FOR 20K loan - 30% interest -->
         <CheckDataAction identifier="co_20000_i30" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.30" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.30" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="26000">
                   <Success>
@@ -108,7 +119,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_20000_i30" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -117,7 +128,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -135,7 +146,7 @@
         <!-- CHECK FOR 20K loan - 10% interest -->
         <CheckDataAction identifier="co_20000_i10" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.10" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.10" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="22000">
                   <Success>
@@ -143,7 +154,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_20000_i10" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -152,7 +163,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -170,7 +181,7 @@
         <!-- CHECK FOR 20K loan - 0% interest -->
         <CheckDataAction identifier="co_20000_i0" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.0" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.20000.interest.0" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="20000">
                   <Success>
@@ -178,7 +189,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_20000_i0" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -187,7 +198,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -206,7 +217,7 @@
         <!-- CHECK FOR 10K loan - 50% interest -->
         <CheckDataAction identifier="co_10000_i50" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.50" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.50" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="15000">
                   <Success>
@@ -214,7 +225,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_10000_i50" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -223,7 +234,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -241,7 +252,7 @@
         <!-- CHECK FOR 10K loan - 30% interest -->
         <CheckDataAction identifier="co_10000_i30" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.30" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.30" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="13000">
                   <Success>
@@ -249,7 +260,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_10000_i30" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -258,7 +269,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -276,7 +287,7 @@
         <!-- CHECK FOR 10K loan - 10% interest -->
         <CheckDataAction identifier="co_10000_i10" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.10" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.10" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="11000">
                   <Success>
@@ -284,7 +295,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_10000_i10" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -293,7 +304,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -311,7 +322,7 @@
         <!-- CHECK FOR 10K loan - 0% interest -->
         <CheckDataAction identifier="co_10000_i0" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.0" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.10000.interest.0" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="10000">
                   <Success>
@@ -319,7 +330,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_10000_i0" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -328,7 +339,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -347,7 +358,7 @@
         <!-- CHECK FOR 5K loan - 50% interest -->
         <CheckDataAction identifier="co_5000_i50" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.50" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.50" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="7500">
                   <Success>
@@ -355,7 +366,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_5000_i50" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -364,7 +375,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -382,7 +393,7 @@
         <!-- CHECK FOR 5K loan - 30% interest -->
         <CheckDataAction identifier="co_5000_i30" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.30" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.30" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="6500">
                   <Success>
@@ -390,7 +401,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_5000_i30" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -399,7 +410,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -417,7 +428,7 @@
         <!-- CHECK FOR 5K loan - 10% interest -->
         <CheckDataAction identifier="co_5000_i10" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.10" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.10" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="5500">
                   <Success>
@@ -425,7 +436,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_5000_i10" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -434,7 +445,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -452,7 +463,7 @@
         <!-- CHECK FOR 5K loan - 0% interest -->
         <CheckDataAction identifier="co_5000_i0" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.0" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.5000.interest.0" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="5000">
                   <Success>
@@ -460,7 +471,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_5000_i0" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -469,7 +480,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -488,7 +499,7 @@
         <!-- CHECK FOR 2.5K loan - 50% interest -->
         <CheckDataAction identifier="co_2500_i50" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.50" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.50" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="3750">
                   <Success>
@@ -496,7 +507,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_2500_i50" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -505,7 +516,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -523,7 +534,7 @@
         <!-- CHECK FOR 2.5K loan - 30% interest -->
         <CheckDataAction identifier="co_2500_i30" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.30" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.30" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="3250">
                   <Success>
@@ -531,7 +542,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_2500_i30" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -540,7 +551,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -558,7 +569,7 @@
         <!-- CHECK FOR 2.5K loan - 10% interest -->
         <CheckDataAction identifier="co_2500_i10" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.10" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.10" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="2750">
                   <Success>
@@ -566,7 +577,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_2500_i10" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -575,7 +586,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -593,7 +604,7 @@
         <!-- CHECK FOR 2.5K loan - 0% interest -->
         <CheckDataAction identifier="co_2500_i0" value="eq 1">
           <Success>
-            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.0" eventsprite="separatists" >
+            <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.askforpayment.2500.interest.0" eventsprite="coalition" >
               <Option text="eventtext.banker.coalition.loan.player.option.loan.pay">
                 <CheckMoneyAction amount="2500">
                   <Success>
@@ -601,7 +612,7 @@
                     <SetDataAction identifier="co_loan_active" operation="Set" value="0" />
                     <SetDataAction identifier="co_2500_i0" operation="Set" value="0" />
                     <SetDataAction identifier="co_loan_duration" operation="Set" value="0" />
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.success" eventsprite="coalition" />
                     <StatusEffectAction targettag="targetcalendar">
                       <StatusEffect target="This" disabledeltatime="true">
                         <Remove />
@@ -610,7 +621,7 @@
                     <GoTo name="restart" />
                   </Success>
                   <Failure>
-                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="separatists" />
+                    <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.payment.failure" eventsprite="coalition" />
                     <GoTo name="restart" />
                   </Failure>
                 </CheckMoneyAction>
@@ -628,7 +639,7 @@
       <!-- interaction to take a loan with 50% interest -->
       <Label name="loan_interest_50" />
       <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
-      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.50" eventsprite="separatists" >
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.50" eventsprite="coalition" >
         <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
           <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
           <MoneyAction amount="20000" />
@@ -692,7 +703,7 @@
       <!-- interaction to take a loan with 30% interest -->
       <Label name="loan_interest_30" />
       <TriggerAction target1tag="player" target2tag="banker" applytotarget1="bc_player" waitforinteraction="true" />
-      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="separatists" >
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="coalition" >
         <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
           <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
           <MoneyAction amount="20000" />
@@ -755,7 +766,7 @@
       </ConversationAction>
       <!-- interaction to take a loan with 10% interest -->
       <Label name="loan_interest_10" />
-      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.10" eventsprite="separatists" >
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.10" eventsprite="coalition" >
         <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
           <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
           <MoneyAction amount="20000" />
@@ -818,7 +829,7 @@
       </ConversationAction>
       <!-- interaction to take a loan with 0% interest -->
       <Label name="loan_interest_0" />
-      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="separatists" >
+      <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.offer.interest.30" eventsprite="coalition" >
         <Option text="eventtext.banker.coalition.loan.player.option.loan.20000.take">
           <ConversationAction targettag="bc_player" text="eventtext.banker.coalition.loan.reminder" />
           <MoneyAction amount="20000" />
@@ -912,7 +923,7 @@
       <CheckDataAction identifier="co_loan_duration" value="eq 0">
         <!-- if overdue: reduce reputation by 1 each level -->
         <Success>
-          <ReputationAction targettype="Faction" identifier="coalition" increase="-1" />
+          <ReputationAction targettype="Faction" identifier="coalition" increase="-3" />
         </Success>
         <!-- is not overdue: reduce days (levels) left until overdue by 1 -->
         <Failure>
@@ -934,7 +945,7 @@
       <CheckDataAction identifier="sep_loan_duration" value="eq 0">
         <!-- if overdue: reduce reputation by 1 each level -->
         <Success>
-          <ReputationAction targettype="Faction" identifier="coalition" increase="-1" />
+          <ReputationAction targettype="Faction" identifier="separatists" increase="-3" />
         </Success>
         <!-- is not overdue: reduce days (levels) left until overdue by 1 -->
         <Failure>
@@ -962,7 +973,7 @@
       </CheckMoneyAction>
       <WaitAction time="1" />
       <TagAction criteria="player" tag="player" />
-      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="AdminModule" />
       <TriggerAction target1tag="banker" target2tag="player" radius="150" />
       <SetDataAction identifier="loanshark1norepeat" operation="set" value="1" />      
       <Label name="retry" />
@@ -1003,7 +1014,7 @@
       </CheckMoneyAction>
       <WaitAction time="1" />
       <TagAction criteria="player" tag="player" />
-      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="loanshark" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="loanshark" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="AdminModule" />
       <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="thug" SpawnPointTag="loanshark" />
       <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="thug" SpawnPointTag="loanshark" />
       <NPCFollowAction npctag="thug" targettag="loanshark" follow="true" priority="10"/>
