@@ -948,5 +948,99 @@
         <StatusEffect target="This" condition="-1" disabledeltatime="true" />
       </StatusEffectAction>
     </ScriptedEvent>
+    
+    <ScriptedEvent identifier="loanshark1">
+      <CheckDataAction identifier="loanshark1norepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction>
+      <CheckMoneyAction Amount="1000">
+        <Success>
+          <Goto name="end" />
+        </Success>       
+      </CheckMoneyAction>
+      <WaitAction time="1" />
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="banker" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <TriggerAction target1tag="banker" target2tag="player" radius="150" />
+      <SetDataAction identifier="loanshark1norepeat" operation="set" value="1" />      
+      <Label name="retry" />
+      <ClearTagAction tag="triggerer_player" />
+      <ConversationAction text="You look like you're a bit short on coin pal. Money?" speakertag="banker" invokertag="triggerer_player" dialogtype="Regular" eventsprite="captain">
+        <Option text="Yes money">
+          <MoneyAction amount="2000" />
+          <SetDataAction identifier="tookloan" value="1" />
+          <StatusEffectAction targettag="triggerer_player">
+            <StatusEffect target="This" disabledeltatime="true">
+              <SpawnItem identifier="coalitionloancalendar" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" condition="10" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <ConversationAction targettag="triggerer_player" text="Here's money. Pay with interest in 5 days." eventsprite="captain" />
+        </Option>
+        <Option text="I dont want money">
+          <Goto name="end" />
+        </Option>      
+        <Option text="eventtext.option.ignore" endconversation="true">
+          <WaitAction time="2" />
+          <GoTo name="retry" />
+        </Option>      
+      </ConversationAction>      
+      <Label name="end" />      
+    </ScriptedEvent>
+    
+
+    <ScriptedEvent identifier="loanshark2">
+      <CheckDataAction identifier="loanshark2norepeat" condition="eq 0" >
+        <Failure>
+          <Goto name="end" />
+        </Failure> 
+      </CheckDataAction>
+      <CheckMoneyAction Amount="1000">
+        <Success>
+          <Goto name="end" />
+        </Success>       
+      </CheckMoneyAction>
+      <WaitAction time="1" />
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction NPCSetIdentifier="DE_outpostnpcs" NPCIdentifier="bankercoalition" LootingIsStealing="true" targettag="loanshark" SpawnLocation="Outpost" SpawnPointType="Human" TeamID="FriendlyNPC" TargetModuleTags="admin" />
+      <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="thug" SpawnPointTag="loanshark" />
+      <SpawnAction NPCSetIdentifier="outpostnpcspirate" NPCIdentifier="securitynpcpirate" TargetTag="thug" SpawnPointTag="loanshark" />
+      <NPCFollowAction npctag="thug" targettag="loanshark" follow="true" priority="10"/>
+      <TriggerAction target1tag="banker" target2tag="player" applytotarget2="triggerer_player" radius="150" />
+      <SetDataAction identifier="loanshark2norepeat" operation="set" value="1" />
+      <ConversationAction text="You owe us money. 3000mk" speakertag="banker" invokertag="triggerer_player" dialogtype="Regular" eventsprite="captain">
+        <Option text="Repay">
+          <CheckMoneyAction Amount="3000">
+            <Success>
+              <MoneyAction amount="-3000" />
+              <SetDataAction identifier="repaidloan" value="1" />
+              <TagAction criteria="itemidentifier:coalitionloancalendar" tag="targetcalendar" ContinueIfNoTargetsFound="true" />
+              <StatusEffectAction targettag="targetcalendar">
+                <StatusEffect target="This" disabledeltatime="true">
+                  <Remove />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ConversationAction targettag="triggerer_player" text="You repaid the loan" eventsprite="captain" endconversation="true" />
+            </Success>     
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="You have no money" eventsprite="captain" endconversation="true" />
+              <Goto name="fightloansharks" />
+            </Failure>  
+          </CheckMoneyAction>
+        </Option>
+        <Option text="I'm not paying you back.">
+          <ConversationAction targettag="triggerer_player" text="We will break your legs." eventsprite="captain" endconversation="true" />
+          <Goto name="fightloansharks" />
+        </Option>      
+        <Option text="Run" endconversation="true">
+          <Label name="fightloansharks" />
+          <CombatAction combatmode="Offensive" npctag="loanshark" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+          <CombatAction combatmode="Offensive" npctag="thug" enemytag="player" isinstigator="true" guardreaction="none" witnessreaction="retreat" />
+        </Option>      
+      </ConversationAction>
+      <Label name="end" />      
+    </ScriptedEvent>
+    
   </EventPrefabs>
 </Randomevents>
