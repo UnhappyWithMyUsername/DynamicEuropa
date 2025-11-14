@@ -554,6 +554,9 @@
 
     <!-- recover cargo pod mission -->
     <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
+      <!-- make sure the player sub has 2 docking hatches -->
+      <TagAction criteria="itemidentifier:dockinghatch" tag="potentialdockinghatch" submarinetype="player" chooserandom="true"/>
+      <TagAction criteria="itemidentifier:dockinghatch" tag="potentialdockinghatch" submarinetype="player" ChooseRandomExcludingTag="potentialdockinghatch"  chooserandom="true"/>
       <ConversationAction text="Eventtext.missionevent_Cargopodsalvage.briefing" speakertag="outpostmanager" invokertag="triggerer_player" eventsprite="instructor" >
         <Option text="EventText.generic.continue" >
           <ConversationAction text="Eventtext.missionevent_Cargopodsalvage.equipment" targettag="triggerer_player" eventsprite="instructor">
