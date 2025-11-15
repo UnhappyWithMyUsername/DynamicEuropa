@@ -561,6 +561,30 @@
     </LightComponent>
   </Item>
   
+    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" health="100" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true">
+      <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
+      <Body width="500" height="500" density="25" bodytype="Static" />
+      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true" >
+      </LightComponent>
+      <ItemContainer hideitems="false" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
+        <Containable items="smallitem,mediumitem,bigitem" />
+        <StatusEffect type="OnBroken" target="This">
+          <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
+          <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+          <DropContainedItems />
+          <Remove />
+        </StatusEffect>
+      </ItemContainer>
+      <ItemComponent isactive="false">
+        <StatusEffect type="OnDamaged" target="This" isactive="true" setvalue="true" />
+        <StatusEffect type="OnActive" target="This" delay="2" isactive="false" stackable="false" setvalue="true" />
+        <StatusEffect type="OnActive" target="This" SoundRange="950000" setvalue="true">
+          <ParticleEmitter particle="nasonovfx" anglemax="360" particleamount="3" />
+          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="1000.0" loop="true" volume="3" />
+        </StatusEffect>
+      </ItemComponent>
+      <aitarget soundrange="10000" fadeouttime="5"/>
+    </Item>
 
   </Override>
 </Items>

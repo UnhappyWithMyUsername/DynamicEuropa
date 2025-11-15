@@ -2284,6 +2284,60 @@
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   
+  
+
+  <SalvageMission
+    identifier="salvageLOCKERTEST"
+    tags="salvage,salvagewreck"
+    type="SalvageWreck"
+    difficulty="2"
+    commonness="100"
+    reward="2000"
+    achievementidentifier="salvagewreckmission"
+    spawntype="mainpath"
+    itemidentifier="handheldterminal"
+    containertag="locker"
+    requirewreck="false"
+    maxleveldifficulty="35"
+    PickedUpMessage="missionmessage.wrecksalvage.pickedup">
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
+    <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+  </SalvageMission>
+
+  <SalvageMission
+    identifier="lostlockerTEST"
+    tags="salvage,salvagewreckcargo"
+    type="SalvageWreck"
+    difficulty="3"
+    commonness="100"
+    reward="2000"
+    PartiallyRetrievedMessage="missionmessage.lostcargo.partiallyretrieved"    
+    AllRetrievedMessage="missionmessage.lostcargo.allretrieved"
+    PickedUpMessage="missionmessage.lostcargo.pickedup"
+    requireddeliveryamount="1"
+    requirewreck="false">
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+    <chooserandom>
+      <target
+        spawntype="mainpath"
+        itemidentifier="drilltargetTEST"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <target
+          itemidentifier="datapad" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.lostcargo" removeitem="true" />
+      </target>
+    </chooserandom>
+  </SalvageMission>
 
   <!-- UNUSED. TODO: rework, find a way to make sabotaging interesting somehow, put an item in deconstructor and it starts a fire or something -->
   <!-- <AbandonedOutpostMission
