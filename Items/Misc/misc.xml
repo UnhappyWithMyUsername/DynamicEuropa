@@ -640,7 +640,7 @@
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
     <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
-    <Body width="250" height="120" density="30" />
+    <Body width="140" radius="60" density="30" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect">
       <!-- slow down the character when holding the item -->
       <StatValue stattype="MovementSpeed" value="-0.4" />
@@ -667,8 +667,10 @@
       <!-- damage to drillingpod if stuck -->
       <StatusEffect type="Always" target="This" interval="6" condition="-20" disabledeltatime="true" >
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
-        <Use />
       </StatusEffect>
+      <StatusEffect type="OnImpact" target="This,UseTarget" condition="0" setvalue="true">
+        <Conditional entitytype="eq Structure"/>
+      </StatusEffect>      
       <!-- Remove the item after exploding -->
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="150.0" structuredamage="100" force="10.0" debris="true" decalsize="1.0" />
