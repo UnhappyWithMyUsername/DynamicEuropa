@@ -1491,6 +1491,184 @@
       </StatusEffect>
     </Holdable>
   </Item>
+  
+
+  <!-- TODO: Localization -->
+  <Item name="" identifier="aliencore" category="Alien" Tags="mediumitem,alien,core" description="" health="100" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" impacttolerance="5" sonarsize="30" scale="0.5" impactsoundtag="impact_metal_heavy" allowsellingwhenbroken="true" hideconditionbar="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.6" sourcerect="768,398,84,83" origin="0.5,0.5" />
+    <Body radius="40" density="12.5" friction="0.95" />
+    <PreferredContainer primary="artifactcontainer" />
+    <Price baseprice="1500" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="0.85" />
+      <Price storeidentifier="merchantcity" multiplier="0.85" />
+      <Price storeidentifier="merchantresearch" multiplier="2" />
+      <Price storeidentifier="merchantmilitary" multiplier="1.25 "/>
+      <Price storeidentifier="merchantmine" />
+    </Price>
+    <Deconstruct time="30" chooserandom="false" requireddeconstructor="deconstructor">
+      <Item identifier="aliencircuitry" amount="3" />
+    </Deconstruct>
+    <LightComponent lightcolor="50,150,255,150" range="100.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" />
+    <Throwable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,-5" handle2="0,-10" throwforce="1.5" msg="ItemMsgPickUpSelect" DisableWhenRangedWeaponEquipped="true">
+      <StatusEffect type="OnNotContained" target="This">
+        <Conditional hastag="neq artifactcontainer" targetcontainer="true" />
+        <Conditional voltage="lte 0" targetcontainer="true" />
+        <ParticleEmitter particle="faradayfx" scalemin="0.1" scalemax="0.2" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="10" />
+        <ParticleEmitter particle="faradayfx" scalemin="0.2" scalemax="0.8" anglemax="360" distancemin="0" distancemax="0" particlespersecond="2" />
+        <sound file="Content/Items/Alien/AlienArtifactLoop1.ogg" range="500.0" loop="true" frequencymultiplier="0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This" condition="-10" />
+      <StatusEffect type="OnBroken" target="This" forceplaysounds="true" condition="10" disabledeltatime="true">
+        <Explosion range="300.0" itemdamage="10" empstrength="1.0" structuredamage="10" force="10.0" debris="true" flames="false" shockwave="false" decalsize="1.0" playtinnitus="false" ignorecover="false">
+          <Affliction identifier="stun" amount="2" />
+          <Affliction identifier="electricshock" amount="110" />
+          <Affliction identifier="burn" amount="10" />
+        </Explosion>
+        <Sound file="Content/Items/Weapons/EMP.ogg" range="1500" loop="false" frequencymultiplier="0.8" />
+        <ParticleEmitter particle="faradayfx" scalemin="0.1" scalemax="0.6" anglemax="360" distancemin="0" distancemax="0" velocitymin="200" velocitymax="600" particlespersecond="1000" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Items/Weapons/ExplosionDebris1.ogg" range="2000" loop="false" frequencymultiplier="1.0" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" loop="false" volume="1.5" frequencymultiplier="0.9" />
+      </StatusEffect>
+    </Throwable>
+  </Item>
+
+  <Item name="" identifier="drilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500" SpriteColor="200,255,240,255">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
+    <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
+      <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
+    </DecorativeSprite>
+    <!-- Alien rocks -->
+    <DecorativeSprite name="rock1" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.49" sourcerect="500,352,528,519" origin="0.5,0.2" scale="0.3" />
+    <DecorativeSprite name="rock2" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.491" sourcerect="1047,336,574,600" origin="0.9,0.0" scale="0.2" />
+    <DecorativeSprite name="rock3" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.492" rotation="45" sourcerect="562,881,584,749" origin="0.2,0.0" scale="0.3" />
+    <DecorativeSprite name="rock4" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.521" rotation="80" sourcerect="562,881,584,749" origin="0.5,0.3" scale="0.2" />
+    <DecorativeSprite name="rock5" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.522" sourcerect="1047,336,574,600" origin="0.4,0.4" scale="0.2" />
+    <Body radius="250" density="25" bodytype="Static" />
+    <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
+      <Containable items="smallitem,mediumitem,bigitem" />
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="100" velocitymax="1200" scalemin="1.2" scalemax="2" />
+        <DropContainedItems />
+        <Remove />
+      </StatusEffect>
+    </ItemContainer>
+    <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-300,-300" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="true" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
+    </TriggerComponent>
+    <TriggerComponent Force="0" DistanceBasedForce="true" Radius="700" >
+      <Attack >
+        <Affliction identifier="burn" strength="5" />
+      </Attack>
+    </TriggerComponent>
+    <aitarget soundrange="99999" sonardisruption="2" fadeouttime="3"/>
+    <LightComponent lightcolor="178,80,50,150" range="2000.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" />
+    <LightComponent lightcolor="178,80,50,255" range="1.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" >      
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" alpha="0.5" />
+    </LightComponent>
+
+    <!-- trigger the stone at different health thresholds, it's all copied and pasted -->
+    <ItemComponent isactive="false">
+      <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
+      <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+      
+      <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+        <Conditional conditionpercentage="lt 85" />
+        <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+        <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+        <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+        <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+        <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+        <Conditional conditionpercentage="lt 55" />
+        <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+        <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+        <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+        <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+        <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+        <Conditional conditionpercentage="lt 25" />
+        <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+        <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+        <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+        <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+        <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        </Explosion>
+      </StatusEffect>
+    </ItemComponent>
+    
+  </Item>
+
+  <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo,autointeractabledepthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500">
+    <PreferredContainer primary="depthchargeloader" />
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.505" origin="0.5,0.5" />
+    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="821,34,86,74" depth="0.504" origin="-0.65,0.5" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
+      <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+      <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+    </DecorativeSprite>
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
+    <Body width="140" radius="60" density="30" />
+    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect">
+      <!-- slow down the character when holding the item -->
+      <StatValue stattype="MovementSpeed" value="-0.4" />
+      <StatusEffect type="OnActive" target="Character" DisableRunning="true" />
+    </Holdable>
+    <Projectile characterusable="false" launchimpulse="5" sticktocharacters="false" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="false" sticktolighttargets="false">
+      <Attack structuredamage="200" itemdamage="100" severlimbsprobability="5" penetration="0.6" targetforce="1000">
+        <Affliction identifier="lacerations" strength="40" />
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="This">
+        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" target="This" >
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+        <ParticleEmitter particle="shrapnel" anglemin="70" anglemax="110" distancemin="0" distancemax="100" particlespersecond="20" velocitymin="600" velocitymax="1200" scalemin="1.0" scalemax="1.5" drawontop="true" />
+        <ParticleEmitter particle="fleshsmoke" copyentityangle="true" anglemin="0" anglemax="0" distancemin="60" distancemax="70" particlespersecond="5"  scalemin="2" scalemax="3" drawontop="true" />
+        <Use />
+      </StatusEffect>
+      <!-- damage to drillingtarget if stuck -->
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-100" disabledeltatime="true">
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
+      </StatusEffect>
+      <!-- damage to drillingpod if stuck -->
+      <StatusEffect type="Always" target="This" interval="6" condition="-20" disabledeltatime="true" >
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This,UseTarget" condition="0" setvalue="true">
+        <Conditional entitytype="eq Structure"/>
+      </StatusEffect>      
+      <!-- Remove the item after exploding -->
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="150.0" structuredamage="100" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+        <Remove />
+      </StatusEffect>
+      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
+        <IsActiveConditional ContainerIdentifier="! depthchargeloader"/>
+      </LightComponent>
+      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
+        <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
+      </LightComponent>
+    </Projectile>
+  </Item>
+
+
 
     <!-- UNUSED. For sabotaging deconstructors -->
 <!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
