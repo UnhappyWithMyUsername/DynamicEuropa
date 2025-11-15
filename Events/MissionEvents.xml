@@ -565,6 +565,35 @@
       </ConversationAction>
     </ScriptedEvent>  
   
+    <!-- recover alien core mission -->
+    <ScriptedEvent identifier="missionevent_aliendrillsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
+      <ConversationAction text="Eventtext.missionevent_aliendrillsalvage.briefing" speakertag="outpostmanager" invokertag="triggerer_player" eventsprite="instructor" >
+        <Option text="EventText.generic.continue" >
+          <ConversationAction text="Eventtext.missionevent_aliendrillsalvage.equipment" targettag="triggerer_player" eventsprite="instructor">
+            <Option text="EventText.generic.buydrill" endconversation="true" >
+              
+              
+              <CheckMoneyAction Amount="500">
+                <Success>
+                  <MoneyAction amount="-500" />
+                  <SpawnAction itemidentifier="drillingpod" targetinventory="triggerer_player" />
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.givedrill" endeventifinterrupted="True" eventsprite="instructor" />
+                  <Goto name="end" />
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.nomoney" endconversation="true"/>
+                  <Goto name="dealoff" />
+                </Failure>
+              </CheckMoneyAction>
+              <MissionAction missionidentifier="aliendrillsalvage" />
+            </Option>
+            <Option text="EventText.generic.nodrill" endconversation="true" >
+              <MissionAction missionidentifier="aliendrillsalvage" />
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent> 
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
