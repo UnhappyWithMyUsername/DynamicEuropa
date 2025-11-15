@@ -1571,7 +1571,7 @@
       <Containable items="smallitem,mediumitem,bigitem" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
-        <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
+        <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="100" velocitymax="1200" scalemin="1.2" scalemax="2" />
         <DropContainedItems />
         <Remove />
@@ -1579,6 +1579,15 @@
       <StatusEffect type="Always" target="This" offset="0,50">
         <ParticleEmitter particle="faradayfx" scalemin="0.3" scalemax="0.5" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
         <ParticleEmitter particle="faradayfx" scalemin="0.5" scalemax="1" anglemax="360" distancemin="0" distancemax="0" particlespersecond="2" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
+        <ParticleEmitter particle="plasmaspark" drawontop="true" particleamount="10" scalemin="0.3" scalemax="0.5" velocitymin="300" velocitymax="800" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
       </StatusEffect>
     </ItemContainer>
     <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-300,-300" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="true" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
@@ -1660,7 +1669,7 @@
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
         <ParticleEmitter particle="shrapnel" anglemin="70" anglemax="110" distancemin="0" distancemax="100" particlespersecond="20" velocitymin="600" velocitymax="1200" scalemin="1.0" scalemax="1.5" drawontop="true" />
         <ParticleEmitter particle="fleshsmoke" copyentityangle="true" anglemin="0" anglemax="0" distancemin="60" distancemax="70" particlespersecond="5"  scalemin="2" scalemax="3" drawontop="true" />
-        <sound file="Content/Items/Engine/Engine.ogg" range="2000.0" loop="true" frequencymultiplier="2.5" volume="2" dontmuffle="true" />
+        <sound file="Content/Items/Engine/Engine.ogg" range="2000.0" loop="true" frequencymultiplier="2.5" volume="1.5" dontmuffle="true" />
         <Use />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
