@@ -578,7 +578,7 @@
     </Deconstruct>
     <LightComponent lightcolor="50,150,255,150" range="100.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" />
     <Throwable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,-5" handle2="0,-10" throwforce="1.5" msg="ItemMsgPickUpSelect" DisableWhenRangedWeaponEquipped="true">
-      <StatusEffect type="Always" target="This">
+      <StatusEffect type="OnNotContained" target="This">
         <Conditional hastag="neq artifactcontainer" targetcontainer="true" />
         <Conditional voltage="lte 0" targetcontainer="true" />
         <ParticleEmitter particle="faradayfx" scalemin="0.1" scalemax="0.2" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="10" />
@@ -605,13 +605,19 @@
     </Throwable>
   </Item>
 
-  <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500" SpriteColor="200,255,240,255">
+  <Item name="" identifier="drilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500" SpriteColor="200,255,240,255">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
     <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
     </DecorativeSprite>
+    <!-- Alien rocks -->
+    <DecorativeSprite name="rock1" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.49" sourcerect="500,352,528,519" origin="0.5,0.2" scale="0.3" />
+    <DecorativeSprite name="rock2" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.491" sourcerect="1047,336,574,600" origin="0.9,0.0" scale="0.2" />
+    <DecorativeSprite name="rock3" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.492" rotation="45" sourcerect="562,881,584,749" origin="0.2,0.0" scale="0.3" />
+    <DecorativeSprite name="rock4" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.521" rotation="80" sourcerect="562,881,584,749" origin="0.5,0.3" scale="0.2" />
+    <DecorativeSprite name="rock5" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.522" sourcerect="1047,336,574,600" origin="0.4,0.4" scale="0.2" />
     <Body radius="250" density="25" bodytype="Static" />
-    <ItemContainer hideitems="false" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
+    <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
@@ -631,7 +637,7 @@
     <aitarget soundrange="99999" sonardisruption="2" fadeouttime="3"/>
     <LightComponent lightcolor="178,80,50,150" range="2000.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" />
     <LightComponent lightcolor="178,80,50,255" range="1.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" >      
-      <Sprite texture="Content/Items/Materials/Crystal.png" depth="0.51" sourcerect="0,4,1024,1020" origin="0.5,0.6" alpha="0.5" />
+      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" alpha="0.5" />
     </LightComponent>
 
     <!-- trigger the stone at different health thresholds, it's all copied and pasted -->
