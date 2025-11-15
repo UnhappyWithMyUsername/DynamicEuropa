@@ -634,9 +634,10 @@
   <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo,autointeractabledepthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500">
     <PreferredContainer primary="depthchargeloader" />
     <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
-    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.48" origin="0.5,0.5" />
-    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.49" origin="0.5,0.6" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.49" origin="0.5,0.5" />
+    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.48" origin="0.5,0.6" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+      <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
     <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
     <Body width="250" height="120" density="30" />
@@ -654,11 +655,11 @@
         <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="5" condition="-100" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-100" disabledeltatime="true">
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
-      <StatusEffect type="Always" target="This" interval="5" condition="-20" disabledeltatime="true" >
+      <StatusEffect type="Always" target="This" interval="6" condition="-20" disabledeltatime="true" >
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
         <Use />
       </StatusEffect>
