@@ -634,8 +634,8 @@
   <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo,autointeractabledepthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500">
     <PreferredContainer primary="depthchargeloader" />
     <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
-    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.49" origin="0.5,0.5" />
-    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.48" origin="0.5,0.6" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.505" origin="0.5,0.5" />
+    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="821,34,86,74" depth="0.504" origin="-0.65,0.5" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
@@ -653,6 +653,12 @@
       </Attack>
       <StatusEffect type="OnActive" target="This">
         <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" target="This" >
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+        <ParticleEmitter particle="shrapnel" anglemin="70" anglemax="110" distancemin="0" distancemax="100" particlespersecond="20" velocitymin="600" velocitymax="1200" scalemin="1.0" scalemax="1.5" drawontop="true" />
+        <ParticleEmitter particle="fleshsmoke" copyentityangle="true" anglemin="0" anglemax="0" distancemin="60" distancemax="70" particlespersecond="5"  scalemin="2" scalemax="3" drawontop="true" />
+        <Use />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
       <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-100" disabledeltatime="true">
