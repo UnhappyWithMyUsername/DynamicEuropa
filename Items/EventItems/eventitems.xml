@@ -1538,7 +1538,7 @@
   </Item>
 
   <Item name="" identifier="aliendrilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="1500" SpriteColor="200,255,240,255">
-    <Body height="140" radius="40" density="25" bodytype="Static" />
+    <Body height="140" radius="40" density="10" bodytype="Dynamic" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
     <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
@@ -1569,6 +1569,8 @@
     <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.712" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
     <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
