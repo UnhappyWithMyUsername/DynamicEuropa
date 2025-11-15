@@ -1703,34 +1703,74 @@
       <Item identifier="bigalienturret" />
     </Items>
   </NestMission>
-  
-  <!-- UNUSED, take documents from briefcase, idk how to do this one -->
-  <SalvageMission
-    identifier="retrievesecretdocuments"
-    tags="Salvage"
-    type="Salvage"
-    difficulty="3"
-    commonness="100"
-    reward="5000"
-    allowretry="true"
-    BlockLocationTypeChanges="true">
-    <Reputation identifier="separatists" amount="10" />
-    <Reputation identifier="coalition" amount="-10" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
-    <Characters>
-      <Character from="customnpcs" identifier="briefcaseNPC" spawnlocation="Outpost" teamid="FriendlyNpc"/>
-    </Characters>
-    <TriggerEvent state="0" delay="0" eventidentifier="retrievesecretdocumentsevent" />
-    <target
-      spawntype="Outpost"
-      existingitemtag="administratorclothes"  
-      requireretrieval="Interact"
-      hidelabelwhennotfound="true"
-      hidelabelafterretrieved="true">
-    </target>
-    <LocationType identifier="AnyOutpost" />
-    <Metadata identifier="retrievesecretdocuments_norepeat" value="1" operation="Add" />
-  </SalvageMission>
+
+    <!-- Recover cargo pod
+    It's super jank: spawns a wreck with a pod attached to it, the pod is pre-tagged and uses a conditional check to verify if the pod is within 5000 units of the "submarine switching terminal" which should be present in every docking module. The mission itself requires the event to work -->
+    <SalvageMission
+      identifier="Cargopodsalvage"
+      tags="salvagepod"
+      type="SalvageWreck"
+      difficulty="2"
+      commonness="100"
+      reward="2500"
+      achievementidentifier="salvagewreckmission"
+      spawntype="wreck"
+      requirewreck="true"
+      minleveldifficulty="35"
+      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
+      wrecktags="CargopodsalvageWreck"
+      issideobjective="true"
+      allowretry="true" >
+      <Reputation identifier="location" amount="3" />
+      
+      <target
+        spawntype="None"
+        existingitemtag="salvageobjective"
+        sonarlabel="missionsonarlabel.lostcargo"
+        allowcontinuebeforeretrieved="false"
+        requireretrieval="None"
+        hidelabelafterretrieved="false">
+      </target>
+      
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="120,200,90"/>
+      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+      <TriggerEvent state="0" delay="5" eventidentifier="Cargopodsalvageevent" campaignonly="true"/>
+      <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
+    </SalvageMission>  
+
+    <SalvageMission
+      identifier="aliendrillsalvage"
+      tags="salvage,salvagewreckcargo"
+      type="SalvageWreck"
+      difficulty="3"
+      commonness="100"
+      reward="2000"
+      PartiallyRetrievedMessage="missionmessage.lostcargo.partiallyretrieved"    
+      AllRetrievedMessage="missionmessage.lostcargo.allretrieved"
+      PickedUpMessage="missionmessage.lostcargo.pickedup"
+      requireddeliveryamount="1"
+      requirewreck="false">
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+      <chooserandom>
+        <target
+          spawntype="mainpath"
+          itemidentifier="drilltarget"
+          sonarlabel="missionsonarlabel.drilltarget"
+          allowcontinuebeforeretrieved="true"
+          requireretrieval="None"
+          minamount="1"
+          maxamount="1"
+          hidelabelafterretrieved="false">
+          <target
+            itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.lostcargo" removeitem="true" />
+        </target>
+      </chooserandom>
+    </SalvageMission>
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
@@ -1857,128 +1897,7 @@
       <Reputation identifier="huskcult" amount="3" />
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
-    
-    <!-- Husk research beacon - NPCs turn into husk when power is on TODO: change identifier it's too vague -->
-    <BeaconMission
-      identifier="beaconhusk"
-      textidentifier="beaconhusk"
-      achievementidentifier="beaconmission"
-      tags="beaconmissioncustom"
-      type="Beacon"
-      difficulty="1"
-      reward="1500"
-      sideobjective="false"
-      beacontags="huskbeacon"
-      sonarlabel="beaconstationsonarlabel">
-      <Reputation identifier="huskcult" amount="5" />
-      <TriggerEvent state="0" delay="5" eventidentifier="beaconhuskevent" campaignonly="true"/>
-      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
-      <Metadata identifier="huskbeacon_active" value="true"/>
-    </BeaconMission>  
-    
-    <!-- Rescue a beacon operator from a flooded beacon. Time sensitive -->
-    <BeaconMission
-      identifier="beaconfloodedrescue"
-      textidentifier="beaconfloodedrescue"
-      achievementidentifier="beaconmission"
-      tags="beaconmissioncustom"
-      type="Beacon"
-      difficulty="1"
-      reward="1800"
-      sideobjective="false"
-      beacontags="BeaconBrokenValves"
-      sonarlabel="beaconstationsonarlabel">
-      <Reputation identifier="location" amount="3" />
-      <TriggerEvent state="0" delay="5" eventidentifier="beaconfloodedrescueevent" campaignonly="true"/>
-      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="140,155,120"/>
-      <Metadata identifier="beaconfloodedrescue_complete" value="true"/>
-      <CompleteCheckDataAction identifier="beaconoperatorsaved" condition="eq 1"/>
-    </BeaconMission>
-        
-    <!-- Rearm a beacon weapons platform with power and ammunition -->
-    <BeaconMission
-      identifier="beaconrearmLASER"
-      description="missiondescription.beaconrearmmissionLASER"
-      textidentifier="beaconrearmmission"
-      achievementidentifier="beaconmission"
-      tags="beaconrearmmissiontag"
-      type="Beacon"
-      difficulty="1"
-      reward="2500"
-      beacontags="BeaconRearmLASER"
-      sonarlabel="beaconstationsonarlabel"
-      allowretry="false"
-      issideobjective="false">
-      <Reputation identifier="location" amount="3" />
-      <LocationType from="Any" to="Any" />
-      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,155,120"/>
-      <TriggerEvent state="0" delay="5" eventidentifier="beaconrearmevent" campaignonly="true"/>
-      <Metadata identifier="beaconrearm_complete" value="true"/>
-      <CompleteCheckDataAction identifier="beaconrearmstate" condition="eq 4"/>
-    </BeaconMission>
-  
-    <!-- test to spawn custom wreck in mission, make sure to not have vanilla spawnpoints or thalamus if you don't want to deal with random events -->
-    <SalvageMission
-      identifier="MISSIONWRECKTEST"
-      tags="salvagemissioncustom"
-      type="SalvageWreck"
-      difficulty="2"
-      commonness="100"
-      reward="2000"
-      achievementidentifier="salvagewreckmission"
-      spawntype="wreck"
-      itemidentifier="handheldterminal"
-      containertag="locker"
-      requirewreck="true"
-      maxleveldifficulty="35"
-      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
-      wrecktags="WreckMissionTest">
-      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
-      <chooserandom>
-        <StatusEffect target="This" showmessage="Receiving encrypted transmission: cbspusbvnbhbnf.dpn/efsfmjdu/[ERR:_INSERT_PASS].htm"/>
-      </chooserandom>
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
-      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
-    </SalvageMission>
-    
-    <!-- Recover cargo pod
-    It's super jank: spawns a wreck with a pod attached to it, the pod is pre-tagged and uses a conditional check to verify if the pod is within 5000 units of the "submarine switching terminal" which should be present in every docking module. The mission itself requires the event to work -->
-    <SalvageMission
-      identifier="Cargopodsalvage"
-      tags="salvagepod"
-      type="SalvageWreck"
-      difficulty="2"
-      commonness="100"
-      reward="2500"
-      achievementidentifier="salvagewreckmission"
-      spawntype="wreck"
-      requirewreck="true"
-      minleveldifficulty="35"
-      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
-      wrecktags="CargopodsalvageWreck"
-      issideobjective="true"
-      allowretry="true" >
-      <Reputation identifier="location" amount="3" />
-      
-      <target
-        spawntype="None"
-        existingitemtag="salvageobjective"
-        sonarlabel="missionsonarlabel.lostcargo"
-        allowcontinuebeforeretrieved="false"
-        requireretrieval="None"
-        hidelabelafterretrieved="false">
-      </target>
-      
-      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="120,200,90"/>
-      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
-      <TriggerEvent state="0" delay="5" eventidentifier="Cargopodsalvageevent" campaignonly="true"/>
-      <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
-    </SalvageMission>
-  
+       
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
     <EscortMission
       identifier="escorthuskterrorist"
@@ -2284,59 +2203,118 @@
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   
+
+    <!-- Husk research beacon - NPCs turn into husk when power is on TODO: change identifier it's too vague -->
+    <BeaconMission
+      identifier="beaconhusk"
+      textidentifier="beaconhusk"
+      achievementidentifier="beaconmission"
+      tags="beaconmissioncustom"
+      type="Beacon"
+      difficulty="1"
+      reward="1500"
+      sideobjective="false"
+      beacontags="huskbeacon"
+      sonarlabel="beaconstationsonarlabel">
+      <Reputation identifier="huskcult" amount="5" />
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconhuskevent" campaignonly="true"/>
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
+      <Metadata identifier="huskbeacon_active" value="true"/>
+    </BeaconMission>  
+    
+    <!-- Rescue a beacon operator from a flooded beacon. Time sensitive -->
+    <BeaconMission
+      identifier="beaconfloodedrescue"
+      textidentifier="beaconfloodedrescue"
+      achievementidentifier="beaconmission"
+      tags="beaconmissioncustom"
+      type="Beacon"
+      difficulty="1"
+      reward="1800"
+      sideobjective="false"
+      beacontags="BeaconBrokenValves"
+      sonarlabel="beaconstationsonarlabel">
+      <Reputation identifier="location" amount="3" />
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconfloodedrescueevent" campaignonly="true"/>
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="140,155,120"/>
+      <Metadata identifier="beaconfloodedrescue_complete" value="true"/>
+      <CompleteCheckDataAction identifier="beaconoperatorsaved" condition="eq 1"/>
+    </BeaconMission>
+        
+    <!-- Rearm a beacon weapons platform with power and ammunition -->
+    <BeaconMission
+      identifier="beaconrearmLASER"
+      description="missiondescription.beaconrearmmissionLASER"
+      textidentifier="beaconrearmmission"
+      achievementidentifier="beaconmission"
+      tags="beaconrearmmissiontag"
+      type="Beacon"
+      difficulty="1"
+      reward="2500"
+      beacontags="BeaconRearmLASER"
+      sonarlabel="beaconstationsonarlabel"
+      allowretry="false"
+      issideobjective="false">
+      <Reputation identifier="location" amount="3" />
+      <LocationType from="Any" to="Any" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,155,120"/>
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconrearmevent" campaignonly="true"/>
+      <Metadata identifier="beaconrearm_complete" value="true"/>
+      <CompleteCheckDataAction identifier="beaconrearmstate" condition="eq 4"/>
+    </BeaconMission>
   
+    <!-- test to spawn custom wreck in mission, make sure to not have vanilla spawnpoints or thalamus if you don't want to deal with random events -->
+    <SalvageMission
+      identifier="MISSIONWRECKTEST"
+      tags="salvagemissioncustom"
+      type="SalvageWreck"
+      difficulty="2"
+      commonness="100"
+      reward="2000"
+      achievementidentifier="salvagewreckmission"
+      spawntype="wreck"
+      itemidentifier="handheldterminal"
+      containertag="locker"
+      requirewreck="true"
+      maxleveldifficulty="35"
+      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
+      wrecktags="WreckMissionTest">
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+      <chooserandom>
+        <StatusEffect target="This" showmessage="Receiving encrypted transmission: cbspusbvnbhbnf.dpn/efsfmjdu/[ERR:_INSERT_PASS].htm"/>
+      </chooserandom>
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
+      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+    </SalvageMission>
 
+  <!-- UNUSED, take documents from briefcase, idk how to do this one -->
   <SalvageMission
-    identifier="salvageLOCKERTEST"
-    tags="salvage,salvagewreck"
-    type="SalvageWreck"
-    difficulty="2"
-    commonness="100"
-    reward="2000"
-    achievementidentifier="salvagewreckmission"
-    spawntype="mainpath"
-    itemidentifier="handheldterminal"
-    containertag="locker"
-    requirewreck="false"
-    maxleveldifficulty="35"
-    PickedUpMessage="missionmessage.wrecksalvage.pickedup">
-    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
-    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
-    <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
-  </SalvageMission>
-
-  <SalvageMission
-    identifier="aliendrillsalvage"
-    tags="salvage,salvagewreckcargo"
-    type="SalvageWreck"
+    identifier="retrievesecretdocuments"
+    tags="Salvage"
+    type="Salvage"
     difficulty="3"
     commonness="100"
-    reward="2000"
-    PartiallyRetrievedMessage="missionmessage.lostcargo.partiallyretrieved"    
-    AllRetrievedMessage="missionmessage.lostcargo.allretrieved"
-    PickedUpMessage="missionmessage.lostcargo.pickedup"
-    requireddeliveryamount="1"
-    requirewreck="false">
+    reward="5000"
+    allowretry="true"
+    BlockLocationTypeChanges="true">
+    <Reputation identifier="separatists" amount="10" />
+    <Reputation identifier="coalition" amount="-10" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="49,93,233"/>
-    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
-    <chooserandom>
-      <target
-        spawntype="mainpath"
-        itemidentifier="drilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <target
-          itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.lostcargo" removeitem="true" />
-      </target>
-    </chooserandom>
+    <Characters>
+      <Character from="customnpcs" identifier="briefcaseNPC" spawnlocation="Outpost" teamid="FriendlyNpc"/>
+    </Characters>
+    <TriggerEvent state="0" delay="0" eventidentifier="retrievesecretdocumentsevent" />
+    <target
+      spawntype="Outpost"
+      existingitemtag="administratorclothes"  
+      requireretrieval="Interact"
+      hidelabelwhennotfound="true"
+      hidelabelafterretrieved="true">
+    </target>
+    <LocationType identifier="AnyOutpost" />
+    <Metadata identifier="retrievesecretdocuments_norepeat" value="1" operation="Add" />
   </SalvageMission>
 
   <!-- UNUSED. TODO: rework, find a way to make sabotaging interesting somehow, put an item in deconstructor and it starts a fire or something -->
