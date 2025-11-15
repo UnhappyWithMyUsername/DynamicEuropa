@@ -554,7 +554,7 @@
 
     <!-- recover cargo pod mission -->
     <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
-      <!-- make sure the player sub has 2 docking hatches -->
+      <!-- make sure the player sub has 2 docking hatches, does not guarantee that the sub can actually dock to the pod -->
       <TagAction criteria="itemidentifier:dockinghatch" tag="potentialdockinghatch" submarinetype="player" chooserandom="true"/>
       <TagAction criteria="itemidentifier:dockinghatch" tag="potentialdockinghatch" submarinetype="player" ChooseRandomExcludingTag="potentialdockinghatch"  chooserandom="true"/>
       <ConversationAction text="Eventtext.missionevent_Cargopodsalvage.briefing" speakertag="outpostmanager" invokertag="triggerer_player" eventsprite="instructor" >
@@ -2037,6 +2037,7 @@
       <WaitAction time="2" />
       <CheckConditionalAction targettag="poddockingport" targetitemcomponent="DockingPort" Docked="true">
         <Success>
+          <!-- change state to display message and revert it until pod is delivered -->
           <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="1" />
           <MissionStateAction missionidentifier="Cargopodsalvage" operation="set" value="-1" />
         </Success>
@@ -2045,6 +2046,7 @@
         </Failure>
       </CheckConditionalAction>
       <OnRoundEndAction>
+        <!-- check if pod is in proximity to the change submarine terminal, there should be one in every docking module... -->
         <TriggerAction target1tag="salvageobjective" target2tag="outpostterminal" applytotarget1="podreachedend" radius="5000" waitforinteraction="false" />
         <CountTargetsAction targettag="podreachedend" minamount="1">
           <Success>
