@@ -561,48 +561,71 @@
     </LightComponent>
   </Item>
   
-    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="100">
+    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500">
       <Sprite texture="Content/Items/Materials/Crystal.png" depth="0.51" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
       <DecorativeSprite name="shake" texture="Content/Items/Materials/Crystal.png" depth="0.52" sourcerect="0,4,1024,1020" origin="0.5,0.6" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
         <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
       </DecorativeSprite>
-      <Body width="500" height="500" density="25" bodytype="Static" />
-      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" >
-      </LightComponent>
+      <Body radius="250" density="25" bodytype="Static" />
       <ItemContainer hideitems="false" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
         <Containable items="smallitem,mediumitem,bigitem" />
         <StatusEffect type="OnBroken" target="This">
           <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
-          <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+          <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="100" velocitymax="1200" scalemin="1.2" scalemax="2" />
           <DropContainedItems />
           <Remove />
         </StatusEffect>
       </ItemContainer>
-      <ItemComponent isactive="false">
-        <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
-          <Conditional conditionpercentage="lt 90" />
-          <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
-          <ParticleEmitter particle="nasonovfx" particlespersecond="10" />
-          <ParticleEmitter particle="lavasplash" particlespersecond="15" anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
-          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
-          <Explosion range="2000.0" camerashake="12" stun="0" force="35.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" >
-            <Affliction identifier="stun" strength="1.5" />
-            <Affliction identifier="burn" strength="10" />
-          </Explosion>
-        </StatusEffect>
-      </ItemComponent>
-      <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-200,-200" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="False" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
-        <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
-        <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+      <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-300,-300" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="true" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
       </TriggerComponent>
-      <TriggerComponent Force="0" DistanceBasedForce="true" Radius="500" >
-        <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
-        <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+      <TriggerComponent Force="0" DistanceBasedForce="true" Radius="700" >
         <Attack >
           <Affliction identifier="burn" strength="5" />
         </Attack>
       </TriggerComponent>
-      <aitarget soundrange="99999" fadeouttime="5"/>
+      <aitarget soundrange="99999" sonardisruption="2" fadeouttime="3"/>
+      <LightComponent lightcolor="178,80,50,150" range="2000.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" />
+      <LightComponent lightcolor="178,80,50,255" range="1.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" >      
+        <Sprite texture="Content/Items/Materials/Crystal.png" depth="0.51" sourcerect="0,4,1024,1020" origin="0.5,0.6" alpha="0.5" />
+      </LightComponent>
+
+      <!-- trigger the stone at different health thresholds, it's all copied and pasted -->
+      <ItemComponent isactive="false">
+        <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
+        <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+        
+        <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+          <Conditional conditionpercentage="lt 85" />
+          <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+          <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+          <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+          <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+          <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+          </Explosion>
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+          <Conditional conditionpercentage="lt 55" />
+          <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+          <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+          <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+          <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+          <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+          </Explosion>
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+          <Conditional conditionpercentage="lt 25" />
+          <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+          <ParticleEmitter particle="nasonovfx" particlespersecond="8" />
+          <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+          <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
+          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+          <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+          </Explosion>
+        </StatusEffect>
+      </ItemComponent>
+      
     </Item>
 
   </Override>
