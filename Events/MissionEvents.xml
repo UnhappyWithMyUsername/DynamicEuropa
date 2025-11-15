@@ -570,27 +570,33 @@
   
     <!-- recover alien core mission -->
     <ScriptedEvent identifier="missionevent_aliendrillsalvage" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
+      <TagAction criteria="itemidentifier:depthchargetube" tag="potentialdepthchargetube" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <ConversationAction text="Eventtext.missionevent_aliendrillsalvage.briefing" speakertag="outpostmanager" invokertag="triggerer_player" eventsprite="instructor" >
         <Option text="EventText.generic.continue" >
           <ConversationAction text="Eventtext.missionevent_aliendrillsalvage.equipment" targettag="triggerer_player" eventsprite="instructor">
-            <Option text="EventText.generic.buydrill" endconversation="true" >
-              
-              
-              <CheckMoneyAction Amount="500">
+            <Option text="EventText.missionevent_aliendrillsalvage.buydrill" >
+              <CountTargetsAction targettag="potentialdepthchargetube" minamount="1" >
                 <Success>
-                  <MoneyAction amount="-500" />
-                  <SpawnAction itemidentifier="drillingpod" targetinventory="triggerer_player" />
-                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.givedrill" endeventifinterrupted="True" eventsprite="instructor" />
-                  <Goto name="end" />
+                  <CheckMoneyAction Amount="500">
+                    <Success>
+                      <MoneyAction amount="-500" />
+                      <SpawnAction itemidentifier="drillingpod" targetinventory="triggerer_player" />
+                      <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.givedrill" endeventifinterrupted="True" eventsprite="instructor"  endconversation="true" />
+                      <MissionAction missionidentifier="aliendrillsalvage" />
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.nomoney" endconversation="true"/>
+                      <MissionAction missionidentifier="aliendrillsalvage" />
+                    </Failure>
+                  </CheckMoneyAction>
                 </Success>
                 <Failure>
-                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.nomoney" endconversation="true"/>
-                  <Goto name="dealoff" />
+                  <ConversationAction targettag="triggerer_player" text="EventText.missionevent_aliendrillsalvage.nodepthtube" endconversation="true"/>
+                  <MissionAction missionidentifier="aliendrillsalvage" />
                 </Failure>
-              </CheckMoneyAction>
-              <MissionAction missionidentifier="aliendrillsalvage" />
+              </CountTargetsAction>              
             </Option>
-            <Option text="EventText.generic.nodrill" endconversation="true" >
+            <Option text="EventText.missionevent_aliendrillsalvage.nodrill" endconversation="true" >
               <MissionAction missionidentifier="aliendrillsalvage" />
             </Option>
           </ConversationAction>
