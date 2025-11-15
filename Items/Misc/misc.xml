@@ -561,7 +561,7 @@
     </LightComponent>
   </Item>
   
-    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500">
+    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500" SpriteColor="200,255,240,255">
       <Sprite texture="Content/Items/Materials/Crystal.png" depth="0.51" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
       <DecorativeSprite name="shake" texture="Content/Items/Materials/Crystal.png" depth="0.52" sourcerect="0,4,1024,1020" origin="0.5,0.6" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
         <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
@@ -569,6 +569,7 @@
       <Body radius="250" density="25" bodytype="Static" />
       <ItemContainer hideitems="false" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
         <Containable items="smallitem,mediumitem,bigitem" />
+        <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
         <StatusEffect type="OnBroken" target="This">
           <Explosion range="150.0" structuredamage="600" force="10.0" debris="true" decalsize="1.0" />
           <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="100" velocitymax="1200" scalemin="1.2" scalemax="2" />
@@ -627,6 +628,57 @@
       </ItemComponent>
       
     </Item>
+
+
+
+  <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo,autointeractabledepthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500">
+    <PreferredContainer primary="depthchargeloader" />
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.48" origin="0.5,0.5" />
+    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.49" origin="0.5,0.6" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
+      <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+    </DecorativeSprite>
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
+    <Body width="250" height="120" density="30" />
+    <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect">
+      <!-- slow down the character when holding the item -->
+      <StatValue stattype="MovementSpeed" value="-0.4" />
+      <StatusEffect type="OnActive" target="Character" DisableRunning="true" />
+    </Holdable>
+    <Projectile characterusable="false" launchimpulse="5" sticktocharacters="false" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="false" sticktolighttargets="false">
+      <Attack structuredamage="200" itemdamage="100" severlimbsprobability="5" penetration="0.6" targetforce="1000">
+        <Affliction identifier="lacerations" strength="40" />
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="This">
+        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="5" velocitymin="0" velocitymax="50" scalemin="1" scalemax="3" />
+      </StatusEffect>
+      <!-- damage to drillingtarget if stuck -->
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="5" condition="-100" disabledeltatime="true">
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
+      </StatusEffect>
+      <!-- damage to drillingpod if stuck -->
+      <StatusEffect type="Always" target="This" interval="5" condition="-20" disabledeltatime="true" >
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+        <Use />
+      </StatusEffect>
+      <!-- Remove the item after exploding -->
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="150.0" structuredamage="100" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
+        <Remove />
+      </StatusEffect>
+      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
+        <IsActiveConditional ContainerIdentifier="! depthchargeloader"/>
+      </LightComponent>
+      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
+        <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
+      </LightComponent>
+    </Projectile>
+  </Item>
+
 
   </Override>
 </Items>
