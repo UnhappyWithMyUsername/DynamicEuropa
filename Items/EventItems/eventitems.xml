@@ -1658,7 +1658,7 @@
       <StatusEffect type="OnActive" target="Character" DisableRunning="true" />
     </Holdable>
     <Projectile characterusable="false" launchimpulse="5" sticktocharacters="false" sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="false" sticktolighttargets="false">
-      <Attack structuredamage="200" itemdamage="100" severlimbsprobability="5" penetration="0.6" targetforce="1000">
+      <Attack structuredamage="200" itemdamage="50" severlimbsprobability="5" penetration="0.6" targetforce="1000">
         <Affliction identifier="lacerations" strength="40" />
         <Affliction identifier="stun" strength="1" />
       </Attack>
@@ -1673,11 +1673,11 @@
         <Use />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-300" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-150" disabledeltatime="true">
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
-      <StatusEffect type="Always" target="This" interval="6" condition="-10" disabledeltatime="true" >
+      <StatusEffect type="Always" target="This" interval="3" condition="-10" disabledeltatime="true" >
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
       </StatusEffect>
       <StatusEffect type="OnImpact" target="This,UseTarget" condition="0" setvalue="true">
