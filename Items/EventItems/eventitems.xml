@@ -1537,9 +1537,10 @@
     </Throwable>
   </Item>
 
-  <Item name="" identifier="aliendrilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.0" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="100" SpriteColor="200,255,240,255">
+  <Item name="" identifier="aliendrilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="1500" SpriteColor="200,255,240,255">
+    <Body height="140" radius="40" density="25" bodytype="Static" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
-    <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
+    <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
     </DecorativeSprite>
     <!-- Alien rocks -->
@@ -1564,9 +1565,8 @@
     <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.708" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
     <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
     <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
-    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
-    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
-    <Body radius="250" density="25" bodytype="Static" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.711" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.712" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
     <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
@@ -1575,6 +1575,10 @@
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="100" velocitymax="1200" scalemin="1.2" scalemax="2" />
         <DropContainedItems />
         <Remove />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" offset="0,50">
+        <ParticleEmitter particle="faradayfx" scalemin="0.3" scalemax="0.5" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
+        <ParticleEmitter particle="faradayfx" scalemin="0.5" scalemax="1" anglemax="360" distancemin="0" distancemax="0" particlespersecond="2" />
       </StatusEffect>
     </ItemContainer>
     <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-300,-300" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="true" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
@@ -1602,7 +1606,7 @@
         <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
         <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
         <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
-        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        <Explosion range="2000.0" structuredamage="20.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
         </Explosion>
       </StatusEffect>
       <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
@@ -1612,7 +1616,7 @@
         <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
         <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
         <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
-        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        <Explosion range="2000.0" structuredamage="20.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
         </Explosion>
       </StatusEffect>
       <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
@@ -1622,7 +1626,7 @@
         <ParticleEmitter particle="lavasplash" particlespersecond="15" copyentityangle="true"  anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
         <ParticleEmitter particle="risingbubbles" copyentityangle="true" anglemin="-45" anglemax="225" distancemin="80" distancemax="120" particlespersecond="5" velocitymin="80" velocitymax="120" scalemin="1.2" scalemax="2" />
         <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
-        <Explosion range="2000.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
+        <Explosion range="2000.0" structuredamage="20.0" camerashake="99" camerashakerange="5000" force="12.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" playtinnitus="false" empstrength="0.1" ignorecover="true" >
         </Explosion>
       </StatusEffect>
     </ItemComponent>
@@ -1633,7 +1637,7 @@
     <PreferredContainer primary="depthchargeloader" />
     <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.505" origin="0.5,0.5" />
-    <DecorativeSprite name="shake" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="821,34,86,74" depth="0.504" origin="-0.65,0.5" offset="10,5" offsetanim="Noise" offsetanimspeed="5" >
+    <DecorativeSprite name="shakebody" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.504" origin="0.5,0.5" offset="8,10" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
@@ -1656,14 +1660,15 @@
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
         <ParticleEmitter particle="shrapnel" anglemin="70" anglemax="110" distancemin="0" distancemax="100" particlespersecond="20" velocitymin="600" velocitymax="1200" scalemin="1.0" scalemax="1.5" drawontop="true" />
         <ParticleEmitter particle="fleshsmoke" copyentityangle="true" anglemin="0" anglemax="0" distancemin="60" distancemax="70" particlespersecond="5"  scalemin="2" scalemax="3" drawontop="true" />
+        <sound file="Content/Items/Engine/Engine.ogg" range="2000.0" loop="true" frequencymultiplier="2.5" volume="2" dontmuffle="true" />
         <Use />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-100" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="6" condition="-300" disabledeltatime="true">
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
-      <StatusEffect type="Always" target="This" interval="6" condition="-20" disabledeltatime="true" >
+      <StatusEffect type="Always" target="This" interval="6" condition="-10" disabledeltatime="true" >
         <Conditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
       </StatusEffect>
       <StatusEffect type="OnImpact" target="This,UseTarget" condition="0" setvalue="true">
