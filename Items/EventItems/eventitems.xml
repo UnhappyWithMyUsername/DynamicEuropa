@@ -1537,17 +1537,35 @@
     </Throwable>
   </Item>
 
-  <Item name="" identifier="drilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="500" SpriteColor="200,255,240,255">
+  <Item name="" identifier="drilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.0" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="100" SpriteColor="200,255,240,255">
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
     <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
       <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
     </DecorativeSprite>
     <!-- Alien rocks -->
-    <DecorativeSprite name="rock1" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.49" sourcerect="500,352,528,519" origin="0.5,0.2" scale="0.3" />
-    <DecorativeSprite name="rock2" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.491" sourcerect="1047,336,574,600" origin="0.9,0.0" scale="0.2" />
-    <DecorativeSprite name="rock3" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.492" rotation="45" sourcerect="562,881,584,749" origin="0.2,0.0" scale="0.3" />
-    <DecorativeSprite name="rock4" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.521" rotation="80" sourcerect="562,881,584,749" origin="0.5,0.3" scale="0.2" />
-    <DecorativeSprite name="rock5" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.522" sourcerect="1047,336,574,600" origin="0.4,0.4" scale="0.2" />
+    <DecorativeSprite name="rock1" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.49" sourcerect="500,352,528,519" origin="0.5,0.2" scale="0.3" >
+      <IsActiveConditional conditionpercentage="gt 85" />
+    </DecorativeSprite>
+    <DecorativeSprite name="rock2" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.491" sourcerect="1047,336,574,600" origin="0.9,0.0" scale="0.2" >
+      <IsActiveConditional conditionpercentage="gt 55" />
+    </DecorativeSprite>
+    <DecorativeSprite name="rock3" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.492" rotation="45" sourcerect="562,881,584,749" origin="0.2,0.0" scale="0.3" >
+      <!-- <IsActiveConditional conditionpercentage="gt 25" /> -->
+    </DecorativeSprite>
+    <DecorativeSprite name="rock4" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.521" rotation="80" sourcerect="562,881,584,749" origin="0.5,0.3" scale="0.2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite name="rock5" texture="Content/Map/AlienRuins_CornerWebbing.png" depth="0.522" sourcerect="1047,336,574,600" origin="0.4,0.4" scale="0.2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.61" sourcerect="0,344,506,338" origin="0.4,0.4" scale="0.35" offset="50,-100" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.707" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.708" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" />
     <Body radius="250" density="25" bodytype="Static" />
     <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
