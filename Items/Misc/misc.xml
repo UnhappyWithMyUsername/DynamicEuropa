@@ -561,10 +561,13 @@
     </LightComponent>
   </Item>
   
-    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" health="100" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true">
-      <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
+    <Item name="" identifier="drilltargetTEST" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="0.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="100">
+      <Sprite texture="Content/Items/Materials/Crystal.png" depth="0.51" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
+      <DecorativeSprite name="shake" texture="Content/Items/Materials/Crystal.png" depth="0.52" sourcerect="0,4,1024,1020" origin="0.5,0.6" offset="100,80" offsetanim="Noise" offsetanimspeed="5" >
+        <AnimationConditional IsActive="True" targetitemcomponent="ItemComponent" />
+      </DecorativeSprite>
       <Body width="500" height="500" density="25" bodytype="Static" />
-      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true" >
+      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="true" >
       </LightComponent>
       <ItemContainer hideitems="false" drawinventory="true" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
         <Containable items="smallitem,mediumitem,bigitem" />
@@ -576,14 +579,30 @@
         </StatusEffect>
       </ItemContainer>
       <ItemComponent isactive="false">
-        <StatusEffect type="OnDamaged" target="This" isactive="true" setvalue="true" />
-        <StatusEffect type="OnActive" target="This" delay="2" isactive="false" stackable="false" setvalue="true" />
-        <StatusEffect type="OnActive" target="This" SoundRange="950000" setvalue="true">
-          <ParticleEmitter particle="nasonovfx" anglemax="360" particleamount="3" />
-          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="1000.0" loop="true" volume="3" />
+        <StatusEffect type="Always" target="This" duration="5" interval="0.1" isactive="true" setvalue="true" oneshot="true" >          
+          <Conditional conditionpercentage="lt 90" />
+          <particleemitter particle="shockwave" particlespersecond="5" scalemin="25" scalemax="75" drawontop="false"/>
+          <ParticleEmitter particle="nasonovfx" particlespersecond="10" />
+          <ParticleEmitter particle="lavasplash" particlespersecond="15" anglemin="-45" anglemax="225" distancemin="50" distancemax="100" velocitymin="500" velocitymax="800" />
+          <sound file="Content/Items/Alien/Alien_ArtifactHolderLoop.ogg" range="3500.0" loop="true" volume="3" dontmuffle="true"/>
+          <Explosion range="2000.0" camerashake="12" stun="0" force="35.0" flames="false" shockwave="true" sparks="True" underwaterbubble="false" >
+            <Affliction identifier="stun" strength="1.5" />
+            <Affliction identifier="burn" strength="10" />
+          </Explosion>
         </StatusEffect>
       </ItemComponent>
-      <aitarget soundrange="10000" fadeouttime="5"/>
+      <TriggerComponent isactive="true" updatewhenbroken="true" Force="0" DirectionalForce="-200,-200" RelativeDirectionalForce="True" VerticalForce="True" HorizontalForce="True" DistanceBasedForce="False" ForceFluctuation="True" ForceFluctuationStrength="0.75" ForceFluctuationInterval="1" Radius="1700" Width="0" Height="0" BodyOffset="0,0" >
+        <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
+        <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+      </TriggerComponent>
+      <TriggerComponent Force="0" DistanceBasedForce="true" Radius="500" >
+        <StatusEffect type="OnSpawn" target="This" delay="5" isactive="false" setvalue="true" oneshot="true" />
+        <StatusEffect type="OnActive" target="This" delay="0.1" isactive="false" stackable="false" setvalue="true" />
+        <Attack >
+          <Affliction identifier="burn" strength="5" />
+        </Attack>
+      </TriggerComponent>
+      <aitarget soundrange="99999" fadeouttime="5"/>
     </Item>
 
   </Override>
