@@ -121,6 +121,7 @@
       <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
       <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
       <!-- DYNAMIC EUROPA - SPECIAL MISSION EVENTS -->
+      <!-- These missions are usually 1-time missions -->
 
       <EventSet identifier="specialmissionevents" leveltype="outpost" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,survey,mine,study,research,clinic,hospital,hydroponics,factory,shipyard,huskchurch,sinkingcircus,PirateOutpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="80" chooserandom="true" ignorecooldown="true">
         <EventSet identifier="outpostevents.dynamiceuropa.medivac" minleveldifficulty="30" maxleveldifficulty="80" locationtype="outpost,settlement,colony,camp,base,military,study,research,hydroponics,factory,shipyard" allowatstart="true" chooserandom="false" onceperoutpost="true">
@@ -138,9 +139,9 @@
         <EventSet identifier="outpostevent.dynamiceuropa.hostagesituation" leveltype="outpost" locationtype="outpost,settlement,colony,city,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
           <ScriptedEvent identifier="missionevent_hostagesituation" commonness="50" probability="0.25" />
         </EventSet>
-        <!-- <EventSet identifier="outpostevent.dynamiceuropa.cargopodsalvage" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+        <EventSet identifier="outpostevent.dynamiceuropa.cargopodsalvage" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
           <ScriptedEvent identifier="missionevent_Cargopodsalvage" commonness="50" probability="0.25" />
-        </EventSet> -->
+        </EventSet>
         <!-- <EventSet identifier="outpostevent.dynamiceuropa.beaconfloodedrescue" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
           <ScriptedEvent identifier="missionevent_beaconfloodedrescue" commonness="50" probability="0.25" />
         </EventSet> -->
@@ -484,23 +485,23 @@
       
       <!-- Pirate mission events, only appear in military outposts, scale difficulty? -->
       <EventSet identifier="outpostevent.military.missionevents.europanridge" minleveldifficulty="15" maxleveldifficulty="35" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.25" />
       </EventSet>
       <EventSet identifier="outpostevent.military.missionevents.aphoticplateau" minleveldifficulty="35" maxleveldifficulty="50" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_piratestrange" commonness="50" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="50" probability="0.25" />
       </EventSet>
       <EventSet identifier="outpostevent.military.missionevents.thegreatsea" minleveldifficulty="50" maxleveldifficulty="65" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_pirateparty" commonness="50" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="50" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.25" />
       </EventSet>
       <EventSet identifier="outpostevent.military.missionevents.hydrothermalwastes" minleveldifficulty="65" maxleveldifficulty="90" locationtype="military,base,camp" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
-        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.5" />
+        <ScriptedEvent identifier="missionevent_pirateheavy" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_pirateparty" commonness="100" probability="0.25" />
+        <ScriptedEvent identifier="missionevent_piratestrange" commonness="100" probability="0.25" />
       </EventSet>
       
       <!-- Events specific to military outposts -->
@@ -526,7 +527,10 @@
         <ScriptedEvent identifier="explosivemishap" commonness="50" probability="0.5" />
         <ScriptedEvent identifier="tastetest" commonness="150" probability="0.5" />
         <ScriptedEvent identifier="psychovisions" commonness="50" probability="0.5" />
-        <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="200" />
+      </EventSet>
+      <EventSet identifier="outpostevent.research.missionevents.medium" minleveldifficulty="15" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
+        <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="200" probability="0.35" />
+        <ScriptedEvent identifier="missionevent_aliendrillsalvage" commonness="200" probability="0.35" />
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
@@ -700,7 +704,17 @@
         <ScriptedEvent identifier="nowayout" />
       </EventSet>
       
+      
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
       <!-- Vanilla Mission Event sets -->
+      <!-- Vanilla Mission Event sets -->
+      <!-- Vanilla Mission Event sets -->
+      <!-- Vanilla Mission Event sets -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
       <EventSet identifier="missionevents.coldcaverns.start" minleveldifficulty="0" maxleveldifficulty="1" locationtype="construction,outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" eventcount="3" chooserandom="false" exhaustible="true">
         <ScriptedEvent identifier="missionevent_cargoany" />
         <ScriptedEvent identifier="missionevent_killmonster_set1" />
@@ -1030,6 +1044,18 @@
         <ScriptedEvent identifier="waytoascension5" commonness="100" />
       </EventSet>
     </EventSet>
+              
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
+      <!-- END OF Vanilla Mission Event sets -->
+      <!-- END OF Vanilla Mission Event sets -->
+      <!-- END OF Vanilla Mission Event sets -->
+      <!-- END OF Vanilla Mission Event sets -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// -->
+      <!-- ////////////////////////// --> 
+        
         
   </Override>
   
