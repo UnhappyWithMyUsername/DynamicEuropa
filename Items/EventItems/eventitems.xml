@@ -1537,7 +1537,7 @@
     </Throwable>
   </Item>
 
-  <Item name="" identifier="aliendrilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="1500" SpriteColor="200,255,240,255">
+  <Item name="" identifier="aliendrilltarget" category="Material" Tags="drilltarget,watcher" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="5000" SpriteColor="200,255,240,255">
     <Body height="140" radius="40" density="10" bodytype="Dynamic" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.51" sourcerect="625,227,139,240" origin="0.5,0.5" />
     <DecorativeSprite name="shake" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.52" sourcerect="625,227,139,240" origin="0.5,0.5" offset="10,10" offsetanim="Noise" offsetanimspeed="5" >
@@ -1675,7 +1675,7 @@
         <Use />
       </StatusEffect>
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-150" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-550" disabledeltatime="true">
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
@@ -1691,17 +1691,16 @@
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="100" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.5" />
         <Remove />
       </StatusEffect>
-      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
-        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
-        <IsActiveConditional ContainerIdentifier="! depthchargeloader"/>
-      </LightComponent>
-      <LightComponent range="100" PowerConsumption="0" lightcolor="150,255,150,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
-        <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
-        <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
-      </LightComponent>
     </Projectile>
+    <LightComponent range="200" PowerConsumption="0" lightcolor="255,30,0,255" pulsefrequency="3" pulseamount="0.3" AllowInGameEditing="false" IsOn="true">
+      <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
+      <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
+    </LightComponent>
+    <LightComponent range="100" PowerConsumption="0" lightcolor="255,30,0,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
+      <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
+      <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
+    </LightComponent>
   </Item>
-
 
 
     <!-- UNUSED. For sabotaging deconstructors -->
