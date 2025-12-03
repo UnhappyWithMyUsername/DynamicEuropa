@@ -1,7 +1,521 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
   <Override>
-  
+    <!-- \\\\\ SLOT MACHINE EFFECT ITEM ///// -->
+    <!-- this item is used to trigger some SEs when it is removed from the slot machine | needs to be done this way due to CustomInterface Button not supporting removing and spawning items within OnUse effect triggered by the same button press (spawning items in will trigger only if the button is pressed twice) -->
+    <Item name="" identifier="slotmachine_active" Category="Hidden" Tags="" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnNotContained" target="This" oneshot="true">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+
+    <!-- \\\\\ PRIZE ITEMS ///// -->
+    <Item name="100.000 mk" identifier="prize_100000" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give100000mk" />
+          <EventTarget eventidentifier="give100000mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="50.000 mk" identifier="prize_50000" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give50000mk" />
+          <EventTarget eventidentifier="give50000mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="25.000 mk" identifier="prize_25000" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give25000mk" />
+          <EventTarget eventidentifier="give25000mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="12.500 mk" identifier="prize_12500" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give12500mk" />
+          <EventTarget eventidentifier="give12500mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="6.250 mk" identifier="prize_6250" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give6250mk" />
+          <EventTarget eventidentifier="give6250mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="3.125 mk" identifier="prize_3125" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give3125mk" />
+          <EventTarget eventidentifier="give3125mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <Item name="1.562 mk" identifier="prize_1562" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="give1562mk" />
+          <EventTarget eventidentifier="give1562mk" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" spritecolor="255,255,255,255" setvalue="true" oneshot="true" />
+      </Holdable>
+    </Item>
+    <!-- empty prize to trigger OnInserted effects and let the machine reset if no actual prize has been won -->
+    <Item name="" identifier="prize_none" description="" Category="Hidden" Tags="smallitem,prize" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,255" noninteractable="false" hideinmenus="true">
+      <!-- TODO: copy sprite to DE ModDir -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" depth="0.55" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="This" delay="0.1" stackable="false">
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+    <!--
+          seven:  100.000 mk
+          king:   50.000 mk
+          queen:  25.000 mk
+          spade:  12.500 mk
+          heart:  6.250 mk
+        diamond:  3.125 mk
+          club:   1.562 mk
+    -->
+    <!-- \\\\\ SLOT MACHINE ///// -->
+    <Item name="Slot Machine" identifier="slotmachine" tags="slotmachine" scale="0.5">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="0,0,141,250" origin="0.5,0.5" depth="0.599" />
+      <Controller canbeselected="true" selectkey="Select" hidehud="false" issecondaryitem="false" drawuserbehind="false">
+        <!-- at the start of the round, spawn random symbols into the machine and tag it with "disabled" to prevent prices from spawning in by this action | "disabled" tag gets replaced when the button is pressed so prizes can spawn in on actual usage -->
+        <StatusEffect type="Always" target="This" SetTags="disabled" setvalue="true" oneshot="true" />
+        <StatusEffect type="Always" target="This" disabledeltatime="true" oneshot="true" stackable="false" spawnitemrandomly="true">
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" disabledeltatime="true" oneshot="true" stackable="false" spawnitemrandomly="true">
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" disabledeltatime="true" oneshot="true" stackable="false" spawnitemrandomly="true">
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+      </Controller>
+      <ItemComponent canbeselected="false" allowingameediting="false" characterusable="false">
+        <!-- \\\\\ WINNINGS ///// | WIP | prizes currently spawn regardless of conditionals -->
+        <!-- win - jackpot (100.000) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_seven" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_seven" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_seven" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_100000" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - king (50.000) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_king" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_king" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_king" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_50000" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - queen (25.000) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_queen" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_queen" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_queen" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_25000" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - spade (12.500) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_spade" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_spade" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_spade" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_12500" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - heart (6.250) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_heart" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_heart" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_heart" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_6250" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - diamond (3.125) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_diamond" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_diamond" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_diamond" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_3125" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- win - club (1.562) -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" comparison="And">
+          <Conditional HasTag="neq disabled" />
+          <Conditional HasTag="sm_symbol_club" targetcontaineditem="true" targetslot="0" />
+          <Conditional HasTag="sm_symbol_club" targetcontaineditem="true" targetslot="1" />
+          <Conditional HasTag="sm_symbol_club" targetcontaineditem="true" targetslot="2" />
+          <SpawnItem identifier="prize_1562" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- spawn an empty item that removes itself after a short delay in case no prize has been won to reset the machine and allow playing again -->
+        <StatusEffect type="OnUse" target="This" disabledeltatime="true" delay="0.2">
+          <Conditional HasTag="neq disabled" />
+          <SpawnItem identifier="prize_none" spawnposition="ThisInventory" spawnifcantbecontained="false" spawnifinventoryfull="false" />
+        </StatusEffect>
+      </ItemComponent>
+      <CustomInterface canbeselected="true" selectkey="Select">
+        <GuiFrame style="ItemUI" absoluteoffset="0,0" anchor="BottomCenter" relativesize="0.12,0.08"/>
+        <Button text="Play (100mk)">
+          <!-- on button pressed, disable access to the button interface to prevent the player from breaking the machine or deleting a previous prize by pressing it again while the machine is running or a prize hasn't been collected | gets re-enabled when the prize item is removed -->
+          <StatusEffect type="OnUse" target="This" targetitemcomponent="CustomInterface" canbeselected="false" drawhud="false" setvalue="true" />
+          <!-- on button pressed, remove all currently contained items to allow the rotating slot items to spawn in -->
+          <StatusEffect type="OnUse" target="Contained" disabledeltatime="true">
+            <Remove />
+          </StatusEffect>
+          <!-- on button pressed, apply "killslot1" tag to the slot machine after 1 second delay to let the first rotating slot item remove itself and spawn a locked-in symbol in its place -->
+          <StatusEffect type="OnUse" target="This" SetTags="killslot1" delay="1" stackable="false" disabledeltatime="true" setvalue="true">
+            <Sound file="Content/Items/Weapons/ToyHammerHit1.ogg" range="300" />
+          </StatusEffect>
+          <!-- on button pressed, apply "killslot2" tag to the slot machine after 2 seconds delay to let the second rotating slot item remove itself and spawn a locked-in symbol in its place -->
+          <StatusEffect type="OnUse" target="This" SetTags="killslot2" delay="2" stackable="false" disabledeltatime="true" setvalue="true">
+            <Sound file="Content/Items/Weapons/ToyHammerHit1.ogg" range="300" />
+          </StatusEffect>
+          <!-- on button pressed, apply "killslot3" tag to the slot machine after 3 seconds delay to let the third rotating slot item remove itself and spawn a locked-in symbol in its place -->
+          <StatusEffect type="OnUse" target="This" SetTags="killslot3" delay="3" stackable="false" disabledeltatime="true" setvalue="true">
+            <Sound file="Content/Items/Weapons/ToyHammerHit1.ogg" range="300" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+      <ItemContainer canbeselected="false" allowaccess="false" capacity="0" hideitems="false" maxstacksize="1" itempos="-30,4" iteminterval="26,1" itemrotation="0" itemsperrow="4" containedspritedepths="0.55,0.55,0.55,0.55" spawnwithid="slotmachine_active">
+        <SubContainer capacity="1">
+          <Containable items="slot1,anyslot">
+          </Containable>
+        </SubContainer>
+        <SubContainer capacity="1">
+          <Containable items="slot2,anyslot">
+          </Containable>
+        </SubContainer>
+        <SubContainer capacity="1">
+          <Containable items="slot3,anyslot">
+            <!-- trigger "Use" on the slot machine when the last locked-in symbol item spawned in to trigger the SEs inside ItemComponent to determine the winnings. Also spawn in the "slotmachine_active" item so it can be removed via the next button press and trigger the defined effects -->
+            <StatusEffect type="OnInserted" target="This" stackable="false">
+              <RequiredItem items="anyslot" type="Contained" />
+              <Use />
+              <SpawnItem identifier="slotmachine_active" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+        <SubContainer capacity="1">
+          <Containable identifier="slotmachine_active">
+            <!-- when the item is removed, spawn in the rotating slot items | this triggers when the CustomInterface Button was pressed | had to put the spawning effects here due to not working within the button if the button also removes items... -->
+            <StatusEffect type="OnRemoved" target="This" disabledeltatime="true">
+              <SpawnItem identifier="slotmachine_slot1" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+            </StatusEffect>
+            <StatusEffect type="OnRemoved" target="This" disabledeltatime="true">
+              <SpawnItem identifier="slotmachine_slot2" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+            </StatusEffect>
+            <StatusEffect type="OnRemoved" target="This" disabledeltatime="true">
+              <SpawnItem identifier="slotmachine_slot3" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+            </StatusEffect>
+          </Containable>
+        </SubContainer>
+      </ItemContainer>
+      <ItemContainer canbeselected="true" selectkey="Select" capacity="1" maxstacksize="1">
+        <GuiFrame style="ItemUI" relativeoffset="0,-100" anchor="BottomCenter" relativesize="0.08,0.16"/>
+        <Containable items="prize">
+          <!-- when the prize has been taken from the slot, re-enable the interface button so the machine can be used again -->
+          <StatusEffect type="OnRemoved" target="This" SetTags="ready" targetitemcomponent="CustomInterface" canbeselected="true" drawhud="true" setvalue="true">
+            <RequiredItem items="anyslot" type="Contained" />
+          </StatusEffect>
+        </Containable>
+      </ItemContainer>
+    </Item>
+    
+    <!-- \\\\\ ROTATING SLOT ITEMS ///// -->
+    <Item name="" identifier="slotmachine_slot1" tags="slot1" scale="0.5" noninteractable="false" health="7" hideconditionbar="false" isshootable="false" requireaimtouse="false">
+      <!-- seven -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <Body width="22" height="36" />
+      <!-- BrokenSprite used to cycle through different symbols while the slot machine is "spinning" -->
+      <!-- king -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="165,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="90" fadein="false" />
+      <!-- queen -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="188,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="75" fadein="false" />
+      <!-- spade -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="211,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="60" fadein="false" />
+      <!-- heart -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="234,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="45" fadein="false" />
+      <!-- diamond -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="257,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="30" fadein="false" />
+      <!-- club -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="280,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="15" fadein="false" />
+      <ItemComponent characterusable="false">
+        <!-- reset the condition if condition reached a value of 1 to let the item cycle through the broken sprites again -->
+        <StatusEffect type="Always" target="This" condition="7" setvalue="true" delay="0.1" stackable="false" checkconditionalalways="true">
+          <Conditional condition="eq 1" />
+        </StatusEffect>
+        <!-- while the condition value is greater than 1, reduce the condition by 1 every 100ms to cycle through the broken sprites -->
+        <StatusEffect type="Always" target="This" condition="-1" disabledeltatime="true" interval="0.1">
+          <Conditional condition="gt 1" />
+        </StatusEffect>
+        <!-- if the slot machine has the tag "killslot1", remove this item and spawn a random symbol item in its place -->
+        <StatusEffect type="Always" target="This" disabledeltatime="true" interval="0.1" spawnitemrandomly="true">
+          <Conditional HasTag="killslot1" targetcontainer="true" />
+          <Remove />
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- remove this item if not contained -->
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="slotmachine_slot2" tags="slot2" scale="0.5" noninteractable="true" health="7" hideconditionbar="true" isshootable="false" requireaimtouse="false">
+      <!-- queen -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="188,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <!-- BrokenSprite used to cycle through different symbols while the slot machine is "spinning" -->
+      <!-- spade -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="211,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="90" fadein="false" />
+      <!-- heart -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="234,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="75" fadein="false" />
+      <!-- diamond -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="257,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="60" fadein="false" />
+      <!-- club -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="280,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="45" fadein="false" />
+      <!-- seven -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="30" fadein="false" />
+      <!-- king -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="165,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="15" fadein="false" />
+      <ItemComponent characterusable="false">
+        <!-- reset the condition if condition reached a value of 1 to let the item cycle through the broken sprites again -->
+        <StatusEffect type="Always" target="This" condition="7" setvalue="true" delay="0.1" stackable="false" checkconditionalalways="true">
+          <Conditional condition="eq 1" />
+        </StatusEffect>
+        <!-- while the condition value is greater than 1, reduce the condition by 1 every 100ms to cycle through the broken sprites -->
+        <StatusEffect type="Always" target="This" condition="-1" disabledeltatime="true" interval="0.1">
+          <Conditional condition="gt 1" />
+        </StatusEffect>
+        <!-- if the slot machine has the tag "killslot2", remove this item and spawn a random symbol item in its place -->
+        <StatusEffect type="Always" target="This" disabledeltatime="true" interval="0.1" spawnitemrandomly="true">
+          <Conditional HasTag="killslot2" targetcontainer="true" />
+          <Remove />
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- remove this item if not contained -->
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="slotmachine_slot3" tags="slot3" scale="0.5" noninteractable="true" health="7" hideconditionbar="true" isshootable="false" requireaimtouse="false">
+      <!-- heart -->
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="234,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <!-- BrokenSprite used to cycle through different symbols while the slot machine is "spinning" -->
+      <!-- diamond -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="257,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="90" fadein="false" />
+      <!-- club -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="280,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="75" fadein="false" />
+      <!-- seven -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="60" fadein="false" />
+      <!-- king -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="165,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="45" fadein="false" />
+      <!-- queen -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="188,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="30" fadein="false" />
+      <!-- spade -->
+      <BrokenSprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="211,0,22,36" origin="0.5,0.5" depth="0.6" maxcondition="15" fadein="false" />
+      <ItemComponent characterusable="false">
+        <!-- reset the condition if condition reached a value of 1 to let the item cycle through the broken sprites again -->
+        <StatusEffect type="Always" target="This" condition="7" setvalue="true" delay="0.1" stackable="false" checkconditionalalways="true">
+          <Conditional condition="eq 1" />
+        </StatusEffect>
+        <!-- while the condition value is greater than 1, reduce the condition by 1 every 100ms to cycle through the broken sprites -->
+        <StatusEffect type="Always" target="This" condition="-1" disabledeltatime="true" interval="0.1">
+          <Conditional condition="gt 1" />
+        </StatusEffect>
+        <!-- if the slot machine has the tag "killslot3", remove this item and spawn a random symbol item in its place -->
+        <StatusEffect type="Always" target="This" disabledeltatime="true" interval="0.1" spawnitemrandomly="true">
+          <Conditional HasTag="killslot3" targetcontainer="true" />
+          <Remove />
+          <SpawnItem identifier="sm_symbol_seven" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_king" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_queen" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_spade" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_heart" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_diamond" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+          <SpawnItem identifier="sm_symbol_club" spawnposition="SameInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
+        </StatusEffect>
+        <!-- remove this item if not contained -->
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+
+    <!-- \\\\\ LOCKED-IN SYMBOL ITEMS ///// -->
+    <Item name="" identifier="sm_symbol_seven" tags="anyslot,sm_symbol_seven" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="142,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_king" tags="anyslot,sm_symbol_king" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="165,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_queen" tags="anyslot,sm_symbol_queen" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="188,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_spade" tags="anyslot,sm_symbol_spade" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="211,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_heart" tags="anyslot,sm_symbol_heart" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="234,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_diamond" tags="anyslot,sm_symbol_diamond" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="257,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+    <Item name="" identifier="sm_symbol_club" tags="anyslot,sm_symbol_club" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/SlotMachine.png" sourcerect="280,0,22,36" origin="0.5,0.5" depth="0.6" />
+      <ItemComponent characterusable="false">
+        <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
+          <Remove />
+        </StatusEffect>
+      </ItemComponent>
+    </Item>
+
     <!-- An invisible holder that deletes itself after taking an item from it -->
     <Item name="Take Item" identifier="invisibleholder" description="An invisible item holder that deletes itself when interacted with. Good for making items hold in place without using platforms" SpriteColor="195,136,60,100" IntentoryIconColor="255,255,255,255" category="misc" tags="holder" canflipx="true" canflipy="true" scale="0.5" noninteractable="False">
       <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="716,951,70,70" />
