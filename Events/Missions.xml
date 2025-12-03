@@ -670,7 +670,7 @@
     tags="pirateattack"
     showinmenus="false"
     showstartmessage="false"
-    issideobjective="true"
+    sideobjective="true"
     difficulty="4"
     commonness="0"
     reward="0"
@@ -1719,7 +1719,7 @@
       minleveldifficulty="35"
       PickedUpMessage="missionmessage.wrecksalvage.pickedup"
       wrecktags="CargopodsalvageWreck"
-      issideobjective="true"
+      sideobjective="true"
       allowretry="true" >
       <Reputation identifier="location" amount="3" />
       
@@ -1991,7 +1991,7 @@
       tags="huskcultattack"
       showinmenus="false"
       showstartmessage="false"
-      issideobjective="true"
+      sideobjective="true"
       achievementidentifier="combatmissionseparatistsvscoalition"
       difficulty="4"
       commonness="0"
@@ -2209,13 +2209,14 @@
       identifier="beaconhusk"
       textidentifier="beaconhusk"
       achievementidentifier="beaconmission"
-      tags="beaconmissioncustom"
+      tags="beaconmissioncustomhusk"
       type="Beacon"
       difficulty="1"
       reward="1500"
-      sideobjective="false"
       beacontags="huskbeacon"
-      sonarlabel="beaconstationsonarlabel">
+      sonarlabel="beaconstationsonarlabel"
+      sideobjective="true"
+      Commonness="0">
       <Reputation identifier="huskcult" amount="5" />
       <TriggerEvent state="0" delay="5" eventidentifier="beaconhuskevent" campaignonly="true"/>
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="50,150,120"/>
@@ -2227,13 +2228,14 @@
       identifier="beaconfloodedrescue"
       textidentifier="beaconfloodedrescue"
       achievementidentifier="beaconmission"
-      tags="beaconmissioncustom"
+      tags="beaconmissioncustomflooded"
       type="Beacon"
       difficulty="1"
       reward="1800"
-      sideobjective="false"
       beacontags="BeaconBrokenValves"
-      sonarlabel="beaconstationsonarlabel">
+      sonarlabel="beaconstationsonarlabel"
+      sideobjective="true"
+      Commonness="0">
       <Reputation identifier="location" amount="3" />
       <TriggerEvent state="0" delay="5" eventidentifier="beaconfloodedrescueevent" campaignonly="true"/>
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="140,155,120"/>
@@ -2254,7 +2256,8 @@
       beacontags="BeaconRearmLASER"
       sonarlabel="beaconstationsonarlabel"
       allowretry="false"
-      issideobjective="false">
+      sideobjective="true"
+      Commonness="0">
       <Reputation identifier="location" amount="3" />
       <LocationType from="Any" to="Any" />
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,155,120"/>

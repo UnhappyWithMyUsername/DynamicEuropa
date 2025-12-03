@@ -1917,6 +1917,7 @@
       <TagAction criteria="itemtag:beaconloader2" tag="beaconloader2" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:beaconbattery" tag="beaconbattery" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:beaconsupercap" tag="beaconsupercap" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconturret" tag="beaconturret" submarinetype="BeaconStation" />
       <SetDataAction identifier="beaconrearmstate" operation="set" value="0" />
       <Label name="beaconrearmedloop" />
       <WaitAction time="1" />       
@@ -1974,6 +1975,9 @@
           <!-- "complete" the mission  jank -->
           <StatusEffectAction targettag="beaconmonitor">
             <StatusEffect target="this" IsActive="True" currentmode="Active" voltage="1" targetitemcomponent="Sonar" setvalue="true" duration="999999" />
+          </StatusEffectAction>
+          <StatusEffectAction targettag="beaconturret">
+            <StatusEffect target="this" AIrange="30000" autooperate="true" targetitemcomponent="Turret" setvalue="true" />
           </StatusEffectAction>
           <MissionStateAction missionidentifier="beaconrearmTEST" operation="Set" value="1" />    
         </Success>  
