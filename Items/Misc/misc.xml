@@ -99,6 +99,24 @@
         </StatusEffect>
       </Holdable>
     </Item>
+    <Item name="" identifier="prize_yellows" description="" Category="Hidden" Tags="smallitem,prize,money" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,0,255" noninteractable="false" hideinmenus="true">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" depth="0.55" sourcerect="142,37,143,122" />
+      <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="142,37,143,122" />
+      <Body radius="2" density="10" />
+      <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+        <StatusEffect type="OnContained" target="Character" eventtargettag="moneyrecipient" disabledeltatime="true" setvalue="true" oneshot="true">
+          <Conditional IsPlayer="true" />
+          <TriggerEvent identifier="givecolorsprize" />
+          <EventTarget eventidentifier="givecolorsprize" tag="moneyrecipient"/>
+        </StatusEffect>
+        <StatusEffect type="OnContained" target="This">
+          <Conditional IsPlayer="true" targetcontainer="true" />
+          <Remove />
+        </StatusEffect>
+      </Holdable>
+    </Item>
+
+
     <!-- empty prize to trigger OnInserted effects and let the machine reset if no actual prize has been won -->
     <Item name="Literally Nothing" identifier="prize_none" description="" Category="Hidden" Tags="smallitem,prize" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,255" noninteractable="true" hideinmenus="true">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" depth="0.55" sourcerect="0,0,1,1" />
@@ -223,7 +241,7 @@
         </StatusEffect>
       </ItemComponent>
     </Item>
-    <Item name="" identifier="sm_symbol_king" tags="anyslot,sm_symbol_king" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+    <Item name="" identifier="sm_symbol_king" tags="anyslot,sm_symbol_king,sm_symbol_yellow" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="165,0,22,36" origin="0.5,0.5" depth="0.6" />
       <ItemComponent characterusable="false">
         <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">
@@ -231,7 +249,7 @@
         </StatusEffect>
       </ItemComponent>
     </Item>
-    <Item name="" identifier="sm_symbol_queen" tags="anyslot,sm_symbol_queen" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
+    <Item name="" identifier="sm_symbol_queen" tags="anyslot,sm_symbol_queen,sm_symbol_yellow" scale="0.5" noninteractable="true" health="1" hideinmenus="true">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="188,0,22,36" origin="0.5,0.5" depth="0.6" />
       <ItemComponent characterusable="false">
         <StatusEffect type="OnNotContained" target="This" disabledeltatime="true">

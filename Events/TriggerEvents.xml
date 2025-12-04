@@ -1253,6 +1253,16 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_yellow" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_yellows" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
       <WaitAction Time="0.1" />
       <CheckItemAction targettag="slotmachine" itemtags="prize" amount="1">        
         <Failure>
