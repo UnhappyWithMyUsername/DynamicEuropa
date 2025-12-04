@@ -15,4 +15,18 @@
       <sprite texture="%ModDir:2532991202%/Items/Fabricators/Storemachineblink.png" depth="0.025" sourcerect="0,0,360,360" origin="0.5,0.5" alpha="1.0" />
     </LightComponent>
   </Item>
+  <Item name="Token Exchange" identifier="tokenexchange" tags="tokenexchange" width="50" height="50" texturescale="0.5,0.5" scale="0.5" category="Misc" subcategory="Gambling">
+    <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="402,0,188,180" depth="0.610" premultiplyalpha="false" origin="0.5,0.5" />
+    <Fabricator canbeselected="true" powerconsumption="0.0" msg="ItemMsgInteractSelect" createbuttontext="campaignstoretab.buy">
+      <GuiFrame relativesize="0.4,0.5" style="ItemUI" anchor="Center" />
+      <sound file="%ModDir:2532991202%/Sounds/Items/Fabricators/Vendingmachine.ogg" type="OnActive" range="200.0" loop="true" volume="3.0" />
+    </Fabricator>
+    <ItemContainer capacity="0" maxstacksize="50" canbeselected="false" hideitems="true" slotsperrow="1" uilabel="" allowuioverlap="true" />
+    <ItemContainer capacity="1" maxstacksize="50" canbeselected="true" hideitems="true" slotsperrow="1" uilabel="" allowuioverlap="true">
+      <Containable items="casinotoken" />
+    </ItemContainer>
+    <LightComponent range="60.0" lightcolor="152,152,152,75" IsOn="true" castshadows="false" allowingameediting="false">
+      <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="591,0,188,180" depth="0.609" origin="0.5,0.5" alpha="1.0" />
+    </LightComponent>
+  </Item>
 </Items>
