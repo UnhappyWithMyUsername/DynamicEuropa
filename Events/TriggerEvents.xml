@@ -6,6 +6,7 @@
   <!-- Events defined in <EventPrefabs> can only be triggered via a console command or with a TriggerEventAction -->
   <EventPrefabs>
     <!-- ITEM EVENTS -->
+    
     <ScriptedEvent identifier="nuclearbombexplosion" commonness="0">
       <TagAction criteria="itemtag:mudraptoregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:crawleregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -1148,33 +1149,143 @@
       <SetDataAction identifier="calledkumo" operation="Set" value="0" />
     </ScriptedEvent>
 
+
+
+
+
+    <!-- SLOT MACHINE -->
+    <ScriptedEvent identifier="slotmachinewinnings" commonness="100">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:slotmachine" tag="slotmachine" />
+      <TagAction criteria="itemtag:anyslot" tag="slottarget" />
+      <CountTargetsAction targettag="slottarget" MinAmount="3">
+        <Failure >
+          <Goto name="end" />
+        </Failure>
+      </CountTargetsAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_seven" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_sevens" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_kings" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_kings" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_queens" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_queens" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_spade" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_heart" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_diamond" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_club" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_red" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_reds" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_black" amount="3">
+        <Success>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_blacks" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <WaitAction Time="0.1" />
+      <CheckItemAction targettag="slotmachine" itemtags="prize" amount="1">        
+        <Failure>
+          <StatusEffectAction targettag="slotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_none" spawnposition="ThisInVentory" />
+            </StatusEffect>
+          </StatusEffectAction>
+        </Failure>
+      </CheckItemAction>
+      <Label name="end" />
+    </ScriptedEvent>
+        
+
     <!-- MONEY -->
-    <ScriptedEvent identifier="give100000mk">
-      <MoneyAction targettag="moneyrecipient" amount="100000" />
+    <ScriptedEvent identifier="givesevensprize">
+      <MoneyAction targettag="moneyrecipient" amount="10000" />
       <ClearTagAction tag="moneyrecipient" />
     </ScriptedEvent>
-    <ScriptedEvent identifier="give50000mk">
-      <MoneyAction targettag="moneyrecipient" amount="50000" />
+    <ScriptedEvent identifier="givekingsprize">
+      <MoneyAction targettag="moneyrecipient" amount="5000" />
       <ClearTagAction tag="moneyrecipient" />
     </ScriptedEvent>
-    <ScriptedEvent identifier="give25000mk">
-      <MoneyAction targettag="moneyrecipient" amount="25000" />
+    <ScriptedEvent identifier="givequeensprize">
+      <MoneyAction targettag="moneyrecipient" amount="2500" />
       <ClearTagAction tag="moneyrecipient" />
     </ScriptedEvent>
-    <ScriptedEvent identifier="give12500mk">
-      <MoneyAction targettag="moneyrecipient" amount="12500" />
+    <ScriptedEvent identifier="giveregularsprize">
+      <MoneyAction targettag="moneyrecipient" amount="1000" />
       <ClearTagAction tag="moneyrecipient" />
     </ScriptedEvent>
-    <ScriptedEvent identifier="give6250mk">
-      <MoneyAction targettag="moneyrecipient" amount="6250" />
-      <ClearTagAction tag="moneyrecipient" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="give3125mk">
-      <MoneyAction targettag="moneyrecipient" amount="3125" />
-      <ClearTagAction tag="moneyrecipient" />
-    </ScriptedEvent>
-    <ScriptedEvent identifier="give1562mk">
-      <MoneyAction targettag="moneyrecipient" amount="1562" />
+    <ScriptedEvent identifier="givecolorsprize">
+      <MoneyAction targettag="moneyrecipient" amount="300" />
       <ClearTagAction tag="moneyrecipient" />
     </ScriptedEvent>
   </EventPrefabs>
