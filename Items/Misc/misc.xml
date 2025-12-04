@@ -137,7 +137,6 @@
       </Holdable>
     </Item>
 
-
     <!-- empty prize to trigger OnInserted effects and let the machine reset if no actual prize has been won -->
     <Item name="Literally Nothing" identifier="prize_none" description="" Category="Hidden" Tags="smallitem,prize,lose" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" scale="0.1" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" depth="0.55" sourcerect="0,0,1,1" />
@@ -153,13 +152,19 @@
       </Holdable>
     </Item>
 
-    <!-- TODO: localization -->
-    <Item name="Chip" identifier="gamblingchip" description="" Category="Hidden" Tags="smallitem,chip" maxstacksize="50" cargocontaineridentifier="metalcrate" scale="0.2" spritecolor="255,255,255,255" noninteractable="false" hideinmenus="false">
+    <Item name="Casino Token" identifier="gamblingchip" description="Let's go gambling!" Tags="smallitem,casinotoken" category="Misc" subcategory="Gambling" maxstacksize="50" cargocontaineridentifier="metalcrate" scale="0.15" spritecolor="255,255,255,255" noninteractable="false" hideinmenus="false">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" depth="0.55" sourcerect="344,76,57,11" />
       <InventoryIcon texture="%ModDir:2532991202%/Items/Misc/Gambling.png" depth="0.55" sourcerect="286,76,57,57" />
       <!-- invisible sprite when contained inside slot machine -->
       <ContainedSprite allowedcontainertags="slotmachine" texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="0,0,1,1" depth="0.55" origin="0.5,0.5"  />
+      <PreferredContainer primary="crewcab" />
+      <PreferredContainer secondary="outposttrashcan" />
       <Body width="45" radius="5" density="11" />
+      <Fabricate suitablefabricators="tokenexchange" amount="1" requiredtime="0" requiredmoney="100" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="5" requiredtime="0" requiredmoney="500" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="10" requiredtime="0" requiredmoney="1000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="20" requiredtime="0" requiredmoney="2000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="50" requiredtime="0" requiredmoney="5000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
       <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect" />
     </Item>
 
@@ -172,9 +177,8 @@
           red/blacks: 300 mk
     -->
     
-    <!-- TODO: localization -->
     <!-- \\\\\ SLOT MACHINE ///// -->
-    <Item name="Slot Machine" identifier="slotmachine" tags="slotmachine" scale="0.5">
+    <Item name="Slot Machine" identifier="slotmachine" tags="slotmachine" category="Misc" subcategory="Gambling" scale="0.5">
       <Sprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="0,0,141,235" origin="0.5,0.5" depth="0.600" />
       <!-- front panel -->
       <DecorativeSprite texture="%ModDir:2532991202%/Items/Misc/Gambling.png" sourcerect="0,236,141,235" origin="0.5,0.5" depth="0.597" />
