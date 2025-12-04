@@ -160,17 +160,6 @@
           <SpawnItem identifier="sm_symbol_spade" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
         </StatusEffect>
       </Controller>
-      <ItemComponent canbeselected="false" allowingameediting="false" characterusable="false">
-        <!-- \\\\\ WINNINGS ///// | WIP | prizes currently spawn regardless of conditionals -->
-        <!-- win - jackpot (100.000) -->
-
-        <!-- spawn an empty item that removes itself after a short delay in case no prize has been won to reset the machine and allow playing again -->
-        <StatusEffect type="OnUse" target="This" disabledeltatime="true" delay="0.2">
-          <Conditional HasTag="neq disabled" />
-          <SpawnItem identifier="prize_none" spawnposition="ThisInventory" spawnifcantbecontained="false" spawnifinventoryfull="false" />
-        </StatusEffect>
-      </ItemComponent>
-      <GreaterComponent canbeselected="false" canbepicked="false" allowingameediting="false" timeframe="0" />
       <CustomInterface canbeselected="true" selectkey="Select">
         <GuiFrame style="ItemUI" absoluteoffset="0,0" anchor="BottomCenter" relativesize="0.12,0.12"/>
         <Button text="Play (100mk)">
