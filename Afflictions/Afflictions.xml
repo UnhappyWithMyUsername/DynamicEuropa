@@ -2,6 +2,23 @@
 <Afflictions>  
   
   <Override>
+  <!-- Hungry Europans compatibility | Invisible affliction that does nothing and only exists to have an affliction of type "mood" exist when playing without Hungry Europans to prevent errors -->
+  <Affliction name=""
+    identifier="ii_moodtype"
+    description=""
+    type="mood"
+    limbspecific="false"
+    indicatorlimb="Head"
+    maxstrength="100"
+    affectmachines="true"
+    showiconthreshold="1000"
+    showicontoothersthreshold="1000"
+    showinhealthscannerthreshold="1000"
+    healableinmedicalclinic="false"
+    iconcolors="0,100,0,255;100,0,0,255">
+    <Effect minstrength="0" maxstrength="100" strengthchange="-100" />
+    <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="256,640,128,128" color="150,26,26,255" origin="0,0"/>
+  </Affliction>
     
   <!--Adds a animated overlay to electric shock wearoff-->  
   <Affliction
