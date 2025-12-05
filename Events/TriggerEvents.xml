@@ -1155,17 +1155,9 @@
 
     <!-- SLOT MACHINE -->
     <ScriptedEvent identifier="slotmachinewinnings" commonness="100">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemtag:slotmachine" tag="slotmachine" />
-      <TagAction criteria="itemtag:anyslot" tag="slottarget" />
-      <CountTargetsAction targettag="slottarget" MinAmount="3">
-        <Failure >
-          <Goto name="end" />
-        </Failure>
-      </CountTargetsAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_seven" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_seven" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_sevens" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1173,9 +1165,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_kings" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_kings" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_kings" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1183,9 +1175,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_queens" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_queens" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_queens" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1193,9 +1185,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_spade" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_spade" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1203,9 +1195,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_heart" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_heart" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1213,9 +1205,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_diamond" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_diamond" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1223,9 +1215,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_club" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_club" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1233,9 +1225,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_red" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_red" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_reds" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1243,9 +1235,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_black" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_black" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_blacks" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1253,9 +1245,9 @@
           <Goto name="end" />
         </Success>
       </CheckItemAction>
-      <CheckItemAction targettag="slotmachine" itemtags="sm_symbol_yellow" amount="3">
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_yellow" amount="3">
         <Success>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_yellows" spawnposition="ThisInventory" />
             </StatusEffect>
@@ -1264,9 +1256,9 @@
         </Success>
       </CheckItemAction>
       <WaitAction Time="0.1" />
-      <CheckItemAction targettag="slotmachine" itemtags="prize" amount="1">        
+      <CheckItemAction targettag="targetslotmachine" itemtags="prize" amount="1">        
         <Failure>
-          <StatusEffectAction targettag="slotmachine">
+          <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_none" spawnposition="ThisInventory" />
             </StatusEffect>

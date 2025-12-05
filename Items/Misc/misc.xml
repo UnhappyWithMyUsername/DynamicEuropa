@@ -270,7 +270,7 @@
             <SpawnItem identifier="sm_symbol_club" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
           </StatusEffect>
           <!-- on button pressed and gambling chip is contained, trigger the winnings event to spawn prize -->
-          <StatusEffect type="OnUse" target="This" delay="3" stackable="false" SetTags="NotRolling" setvalue="true" evententitytag="slotmachine">
+          <StatusEffect type="OnUse" target="This" delay="3" stackable="false" SetTags="NotRolling" setvalue="true" eventtargettag="targetslotmachine">
             <RequiredItem items="gamblingchip" type="Contained" />
             <TriggerEvent identifier="slotmachinewinnings" />
           </StatusEffect>
