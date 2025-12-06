@@ -2242,7 +2242,7 @@
       tags="beaconrearmmissiontag"
       type="Beacon"
       difficulty="1"
-      reward="2500"
+      reward="1500"
       beacontags="BeaconRearmLASER"
       sonarlabel="beaconstationsonarlabel"
       allowretry="false"
@@ -2255,7 +2255,28 @@
       <Metadata identifier="beaconrearm_complete" value="true"/>
       <CompleteCheckDataAction identifier="beaconrearmstate" condition="eq 4"/>
     </BeaconMission>
- 
+    
+     <BeaconMission
+      identifier="beaconrearmFLAK"
+      description="missiondescription.beaconrearmmissionFLAK"
+      textidentifier="beaconrearmmission"
+      achievementidentifier="beaconmission"
+      tags="beaconrearmmissiontag"
+      type="Beacon"
+      difficulty="1"
+      reward="1500"
+      beacontags="BeaconRearmFLAK"
+      sonarlabel="beaconstationsonarlabel"
+      allowretry="false"
+      sideobjective="true"
+      Commonness="0">
+      <Reputation identifier="location" amount="3" />
+      <LocationType from="Any" to="Any" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,155,120"/>
+      <TriggerEvent state="0" delay="5" eventidentifier="beaconrearmevent" campaignonly="true"/>
+      <Metadata identifier="beaconrearm_complete" value="true"/>
+      <CompleteCheckDataAction identifier="beaconrearmstate" condition="eq 4"/>
+    </BeaconMission>
  
  
   
