@@ -1746,7 +1746,7 @@
       type="SalvageWreck"
       difficulty="3"
       commonness="100"
-      reward="2100"
+      reward="2500"
       requireddeliveryamount="1"
       requirewreck="false"
       PartiallyRetrievedMessage="missionmessage.aliendrillsalvage.partiallyretrieved"
@@ -1767,9 +1767,84 @@
           maxamount="1"
           hidelabelafterretrieved="false">
           <target
-            itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.lostcargo" removeitem="true" />
+            itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.aliencore" removeitem="true" />
         </target>
       </chooserandom>
+    </SalvageMission>
+
+
+    <SalvageMission
+      identifier="mineraldrillsalvage"
+      tags="salvage,salvagewreckcargo"
+      type="SalvageWreck"
+      difficulty="1"
+      commonness="100"
+      reward="2100"
+      requireddeliveryamount="1"
+      requirewreck="false"
+      PartiallyRetrievedMessage="missionmessage.mineraldrillsalvage.partiallyretrieved"
+      AllRetrievedMessage="missionmessage.mineraldrillsalvage.allretrieved">
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="110,90,200"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+      <LocationType from="AnyOutpost" to="Outpost"/>
+      <!-- multiple targets, only 1 has the geode -->
+      <target
+        spawntype="mainpath"
+        itemidentifier="mineraldrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" />
+      </target>
+      <target
+        spawntype="mainpath"
+        itemidentifier="mineraldrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+      </target>
+      <target
+        spawntype="mainpath"
+        itemidentifier="mineraldrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+      </target>
+      <target
+        spawntype="mainpath"
+        itemidentifier="mineraldrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+      </target>
+      <target
+        spawntype="mainpath"
+        itemidentifier="mineraldrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+      </target>
     </SalvageMission>
 
     <!-- CULT OF HUSK RELATED missions -->

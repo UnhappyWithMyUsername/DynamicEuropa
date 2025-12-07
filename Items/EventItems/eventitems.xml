@@ -1528,6 +1528,8 @@
       <StatusEffect type="OnBroken" target="This">
         <Sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="2000" loop="false" volume="1.5" frequencymultiplier="0.9" />
       </StatusEffect>
+      <StatValue stattype="SwimmingSpeed" value="-0.4" />
+      <StatValue stattype="WalkingSpeed" value="-0.4" />
     </Throwable>
   </Item>
 
@@ -1707,6 +1709,89 @@
       <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
       <IsActiveConditional ContainerIdentifier="depthchargeloader"/>
     </LightComponent>
+  </Item>
+
+
+  <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="2000" SpriteColor="255,255,255,255">
+    <Body radius="200" density="10" bodytype="Dynamic" />
+    <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.61" sourcerect="0,344,506,338" origin="0.4,0.4" scale="0.35" offset="50,-100" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.707" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.708" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.711" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.712" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <ItemContainer hideitems="false" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="0,0" containedspritedepth="0.65" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
+      <Containable items="smallitem,mediumitem,bigitem" />
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <DropContainedItems />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" offset="0,60">
+        <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
+        <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
+      </StatusEffect>   
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="8" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+      </StatusEffect>
+    </ItemContainer>    
+  </Item>
+
+  
+  <Item name="" identifier="mineralcore" category="Alien" Tags="mediumitem,core" description="" health="100" impacttolerance="5" sonarsize="30" scale="0.5" impactsoundtag="impact_metal_heavy" hideconditionbar="true">
+    <Body radius="45" density="12.5" friction="0.95" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.6" sourcerect="699,487,86,91" origin="0.5,0.5" />    
+    <ContainedSprite allowedcontainertags="drilltarget" texture="Content/Map/Biomes/CrystalCave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.8" origin="0.5,0.5" />  
+    <LightComponent lightcolor="50,150,255,150" range="300.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" >
+      <sprite texture="Content/Map/Biomes/CrystalCave/WallEdgeChunks.png" sourcerect="0,0,512,512" origin="0.5,0.5" alpha="1.0" comparison="and"/>
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+      <IsActiveConditional ContainerIdentifier="mineraldrilltarget" />   
+      <IsActiveConditional targetcontainer="true" conditionpercentage="lte 25" />
+    </LightComponent>
+    <LightComponent lightcolor="150,110,230,150" range="45.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" >
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>
+    <Price baseprice="1600" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="0.1" />
+      <Price storeidentifier="merchantcity" multiplier="0.15" />
+      <Price storeidentifier="merchantresearch" multiplier="2" />
+      <Price storeidentifier="merchantmilitary" multiplier="0.8 "/>
+      <Price storeidentifier="merchantmine" multiplier="0.8" />
+    </Price>    
+    <Holdable slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,-5" handle2="0,-10" msg="ItemMsgPickUpSelect" >
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="nasonovsparkles" scalemin="0.2" scalemax="0.5" anglemax="360" distancemin="0" distancemax="15" particlespersecond="3" colormultiplier="180,180,255,255" />
+      </StatusEffect>
+      <StatValue stattype="SwimmingSpeed" value="-0.4" />
+      <StatValue stattype="WalkingSpeed" value="-0.4" />
+    </Holdable>
   </Item>
 
 
