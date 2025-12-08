@@ -485,8 +485,7 @@
       </ItemComponent>
     </Item>
     
-    <!-- TODO: if barodevs ever ACCEPT MY FUCKING PR, no need for the unbundle jank, just use deconstruction -->
-    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event. Gives plantclusterresearched when researched that needs to be "unbundled", we only do that to avoid stuff falling on the floor because research tables only have 1 output slot IT'S SO STUPID -->
+    <!-- Pre-placed in pools of water or flooded cave modules and unlocked and randomized by an event, need to be researched -->
     <Item name="Plant Cluster" identifier="plantcluster" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It might be possible to untangle them when stabilizing them with stabilozine at a research table." scale="0.5" spritecolor="255,255,255,255" noninteractable="false" allowstealingalways="true" >
       <Upgrade gameversion="2.0.0.0" noninteractable="false" />
       <Body radius="30" width="20" density="10.5" />
@@ -495,8 +494,14 @@
         <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
       </LightComponent>
       <Deconstruct time="3" requireddeconstructor="deconstructor" />
-      <Deconstruct time="8" chooserandom="true" amount="1" requireddeconstructor="geneticresearchstation">
-        <Item identifier="plantclusterresearched" requiredotheritem="stabilozine" outcondition="1.0" activatebuttontext="researchstation.research" infotext="researchstation.research.infotext" />
+      <Deconstruct time="8" chooserandom="true" amount="3" requireddeconstructor="geneticresearchstation">
+        <Item identifier="fiberplant" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="elastinplant" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="aquaticpoppy" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="yeastshroom" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="slimebacteria" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="effect_none" activatebuttontext="untangle" infotext="researchstation.research" infotextonotheritemmissing="researchstation.research" />
+        <Item identifier="effect_none" activatebuttontext="untangle" infotext="Untangle.research" infotextonotheritemmissing="researchstation.research" />
       </Deconstruct>
       <LevelResource deattachduration="1" randomoffsetfromwall="40">
         <Commonness commonness="0.0" abysscommonness="0" />
@@ -507,58 +512,6 @@
           <Remove />
         </StatusEffect>
       </Holdable>
-    </Item>
-    
-    <!-- Gives random medical plants when "untangled".  -->
-    <Item hideinmenus="true" name="Stabilized Plant Cluster" identifier="plantclusterresearched" category="Material" Tags="mediumitem,plantspawner,researchmaterial" maxstacksize="8" description="A cluster of entangled plants. It has been stabilized and can be untangled without harming all of the plants." scale="0.5" spritecolor="255,255,255,255">
-      <Body radius="30" width="20" density="10.5" />
-      <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.71" sourcerect="130,139,108,118" origin="0.5,0.5" />
-      <Deconstruct time="3" requireddeconstructor="deconstructor" />
-      <Holdable canBeCombined="true" slots="RightHand+LeftHand" holdpos="30,-30" handle1="0,0" pickingtime="5.0">
-        <!-- Remove the item when fully used -->
-        <StatusEffect type="OnBroken" target="This">
-          <Remove />
-        </StatusEffect>
-      </Holdable>
-      <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-        <GuiFrame style="ItemUI" absoluteoffset="0,0" anchor="BottomCenter" relativesize="0.12,0.08"/>
-        <Button text="GUI.button.untangle">
-          <!-- Generate a random serum inside this artifact when it was researched again -->
-          <StatusEffect type="OnUse" target="This" spawnitemrandomly="true">
-            <!-- spawn a random medical plant -->
-            <SpawnItem identifier="fiberplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="elastinplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="aquaticpoppy" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="yeastshroom" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="slimebacteria" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          </StatusEffect>
-          <StatusEffect type="OnUse" target="This" spawnitemrandomly="true">
-            <!-- ~70% chance to spawn another random medical plant -->
-            <SpawnItem identifier="fiberplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="elastinplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="aquaticpoppy" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="yeastshroom" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="slimebacteria" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          </StatusEffect>
-          <StatusEffect type="OnUse" target="This" spawnitemrandomly="true">
-            <!-- 50% chance to spawn another random medical plant -->
-            <SpawnItem identifier="fiberplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="elastinplant" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="aquaticpoppy" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="yeastshroom" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="slimebacteria" spawnposition="SameInventory" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-            <SpawnItem identifier="effect_none" spawnposition="This" spawnifinventoryfull="true" spawnifcantbecontained="true" />
-          </StatusEffect>
-          <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" />
-        </Button>
-      </CustomInterface>
     </Item>
     
     <!-- Pressure Stabilizer for Outpost Security | Non-Player-Team-Interactable -->
