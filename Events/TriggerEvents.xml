@@ -1257,11 +1257,23 @@
       </CheckItemAction>
       <WaitAction Time="0.1" />
       <CheckItemAction targettag="targetslotmachine" itemtags="prize" amount="1">        
-        <Failure>
+        <Failure>     
           <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_none" spawnposition="ThisInventory" />
             </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <!-- <StatusEffect target="This" duration="5">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="casingfirearm" scalemin="0.8" scalemax="1.2" anglemin="-45" anglemax="225" distancemin="15" distancemax="30" emitinterval="0.25" particleamount="8" velocitymin="50" velocitymax="200" colormultiplier="255,255,0,255" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.35" scalemax="0.65" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.5" scalemax="0.8" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="15" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.5" scalemax="0.8" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="15" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect> -->
           </StatusEffectAction>
         </Failure>
       </CheckItemAction>
