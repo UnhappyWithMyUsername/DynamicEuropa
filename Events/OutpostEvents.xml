@@ -848,38 +848,19 @@
           <AfflictionAction targettag="psychoresearcher" affliction="psychosis" strength="100" />
           <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.ghosts" eventsprite="MentalBreakdown" >
             <Option text="eventtext.psychovisions.noghosts">
-              <Goto name="skiplooptrigger" />
-              <Label name="talktomadman" />          
-              <AfflictionAction targettag="psychoresearcher" affliction="psychosis" strength="100" />
-              <TriggerAction target1tag="psychoresearcher" target2tag="player" applytotarget2="triggerer_player" radius="150" waitforinteraction="true" />
-              <Label name="skiplooptrigger" />
-                <SkillCheckAction targettag="triggerer_player" requiredskill="Medical" requiredlevel="50">
-                  <Success>
-                    <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.insidemyhead" eventsprite="MentalBreakdown">
-                      <Option text="eventtext.psychovisions.psychotic">                  
-                        <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.panic" ContinueAutomatically="true" endconversation="true" eventsprite="MentalBreakdown"/>
-                        <CombatAction combatmode="Retreat" npctag="psychoresearcher" enemytag="potentialresearchterminal" isinstigator="false" witnessreaction="none" cooldown="10" />
-                      </Option>                
-                      <Option text="eventtext.psychovisions.leave" endconversation="true">
-                        <!-- ends event  -->
-                        <ClearTagAction tag="triggerer_player" />
-                      </Option>
-                    </ConversationAction>  
-                  </Success>
-                  <Failure>
-                    <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.insidemyhead" eventsprite="MentalBreakdown">
-                      <Option text="eventtext.psychovisions.leave" endconversation="true">
-                        <!-- ends event  -->
-                        <ClearTagAction tag="triggerer_player" />
-                      </Option>
-                    </ConversationAction>  
-                  </Failure>
-                </SkillCheckAction>
+              <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.insidemyhead" eventsprite="MentalBreakdown">
+                <Option text="eventtext.psychovisions.psychotic">                  
+                  <ConversationAction targettag="triggerer_player" text="eventtext.psychovisions.panic" ContinueAutomatically="true" endconversation="true" eventsprite="MentalBreakdown"/>
+                  <CombatAction combatmode="Retreat" npctag="psychoresearcher" enemytag="triggerer_player" isinstigator="false" witnessreaction="none" cooldown="10" />
+                </Option>                
+                <Option text="eventtext.psychovisions.leave" endconversation="true">
+                </Option>
+              </ConversationAction>  
             </Option>
           </ConversationAction>
           <Label name="checkpsychosisloop" />
           <WaitAction time="2" />
-          <TriggerAction target1tag="potentialresearchterminal" target2tag="triggerer_player" applytotarget2="psychoplayer" radius="150" waitforinteraction="false" />
+          <TriggerAction target1tag="potentialresearchterminal" target2tag="player" applytotarget2="psychoplayer" radius="150" waitforinteraction="false" />
           <CheckAfflictionAction identifier="psychosis" targettag="psychoplayer" minstrength="20">
             <Success>
               <TriggerAction target1tag="potentialresearchterminal" target2tag="triggerer_player" applytotarget2="psychoplayer" radius="150" waitforinteraction="true" />
@@ -900,9 +881,9 @@
                 </Success>
                 <Failure>
                   <SetDataAction identifier="psychovisionsnorepeat" operation="set" value="1" />
-                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.listenalien" eventsprite="Ancient1" />
+                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.listenalien" eventsprite="Ancient1" dialogtype="small" />
                     <WaitAction time="2" />              
-                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.paranoid" endconversation="true" />
+                  <ConversationAction targettag="psychoplayer" text="eventtext.psychovisions.paranoid" endconversation="true" dialogtype="small" />
                   <GiveSkillEXPAction skill="helm" amount="5" targettag="psychoplayer" />
                   <GiveSkillEXPAction skill="weapons" amount="2" targettag="psychoplayer" />
                 </Failure>
