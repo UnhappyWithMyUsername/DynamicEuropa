@@ -1161,6 +1161,18 @@
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_sevens" spawnposition="ThisInventory" />
             </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
           </StatusEffectAction>
           <Goto name="end" />
         </Success>
@@ -1170,97 +1182,6 @@
           <StatusEffectAction targettag="targetslotmachine">
             <StatusEffect target="This" targetslot="3">
               <SpawnItem identifier="prize_kings" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_queens" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_queens" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_spades" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_hearts" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_diamonds" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_clubs" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_reds" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_reds" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_blacks" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_blacks" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_yellows" amount="3">
-        <Success>
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_yellows" spawnposition="ThisInventory" />
-            </StatusEffect>
-          </StatusEffectAction>
-          <Goto name="end" />
-        </Success>
-      </CheckItemAction>
-      <WaitAction Time="0.1" />
-      <CheckItemAction targettag="targetslotmachine" itemtags="prize" amount="1">        
-        <Failure>     
-          <StatusEffectAction targettag="targetslotmachine">
-            <StatusEffect target="This" targetslot="3">
-              <SpawnItem identifier="prize_none" spawnposition="ThisInventory" />
             </StatusEffect>
             <!-- JACKPOT VFX -->
             <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
@@ -1273,6 +1194,207 @@
             <StatusEffect target="This" duration="5" offset="-29,55">
               <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
             </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_queens" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_queens" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_spades" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_hearts" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_diamonds" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_clubs" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_regulars" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_reds" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_reds" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_accordion.ogg" loop="true" range="300" volume="1.6" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_blacks" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_blacks" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="5" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_accordion.ogg" loop="true" range="300" volume="1.6" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <CheckItemAction targettag="targetslotmachine" itemtags="sm_symbol_yellows" amount="3">
+        <Success>
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_yellows" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+            <StatusEffect target="This" duration="2" voltage="1" setvalue="true">
+              <Sound file="Content/Sounds/ClubMusic_accordion.ogg" loop="true" range="300" volume="1.6" frequencymultiplier="1.35" />
+            </StatusEffect>
+            <StatusEffect target="This" duration="2" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="2" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <!-- JACKPOT VFX -->
+          </StatusEffectAction>
+          <Goto name="end" />
+        </Success>
+      </CheckItemAction>
+      <WaitAction Time="0.1" />
+      <CheckItemAction targettag="targetslotmachine" itemtags="prize" amount="1">        
+        <Failure>     
+          <StatusEffectAction targettag="targetslotmachine">
+            <StatusEffect target="This" targetslot="3">
+              <SpawnItem identifier="prize_none" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <!-- JACKPOT VFX TESTING ONLY -->
+            <!-- JACKPOT VFX -->
+            <!-- <StatusEffect target="This" duration="5" voltage="1" setvalue="true" forceplaysounds="true" >
+              <Sound file="Content/Sounds/ClubMusic_alien.ogg" loop="true" range="300" volume="2" frequencymultiplier="1.35" />
+              <ParticleEmitter particle="nasonovsparkles" scalemin="0.5" scalemax="0.8" anglemin="0" anglemax="360" distancemin="5" distancemax="40" particlespersecond="20" colormultiplier="255,255,255,255" lifetimemultiplier="1" />  
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect>
+            <StatusEffect target="This" duration="5" offset="-29,55">
+              <ParticleEmitter particle="weldspark" scalemin="0.75" scalemax="1" anglemin="75" anglemax="105" distancemin="0" distancemax="10" particlespersecond="25" colormultiplier="255,255,255,255" lifetimemultiplier="2" velocitymin="120" velocitymax="200" />   
+            </StatusEffect> -->
+            <!-- JACKPOT VFX -->
+            <!-- JACKPOT VFX TESTING ONLY -->
           </StatusEffectAction>
         </Failure>
       </CheckItemAction>
