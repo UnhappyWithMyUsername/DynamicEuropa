@@ -167,11 +167,11 @@
       <PreferredContainer primary="crewcab" />
       <PreferredContainer secondary="outposttrashcan" />
       <Body width="45" radius="5" density="11" />
-      <Fabricate suitablefabricators="tokenexchange" amount="1" requiredtime="0" requiredmoney="100" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
-      <Fabricate suitablefabricators="tokenexchange" amount="5" requiredtime="0" requiredmoney="500" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
-      <Fabricate suitablefabricators="tokenexchange" amount="10" requiredtime="0" requiredmoney="1000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
-      <Fabricate suitablefabricators="tokenexchange" amount="20" requiredtime="0" requiredmoney="2000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
-      <Fabricate suitablefabricators="tokenexchange" amount="50" requiredtime="0" requiredmoney="5000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="1" requiredtime="0" requiredmoney="20" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="5" requiredtime="0" requiredmoney="100" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="10" requiredtime="0" requiredmoney="200" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="20" requiredtime="0" requiredmoney="400" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
+      <Fabricate suitablefabricators="tokenexchange" amount="50" requiredtime="0" requiredmoney="1000" fabricationlimitmin="9999999999" fabricationlimitmax="9999999999" />
       <Holdable handle1="0,0" slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect" />
     </Item>
 
@@ -243,6 +243,10 @@
             <Remove />
           </StatusEffect>
           <!-- on button pressed and gambling chip is contained, spawn locked-in slot items after some delay -->
+          <!-- PROBABILITIES:
+          There are seven possible symbols
+          rolling a specific 3x has a 1/7/7/7 chance of occuring if all symbols
+          with red/black/yellow colors, there are 9 possible successful combinations -->
           <StatusEffect type="OnUse" target="This" delay="1" stackable="false" disabledeltatime="true" setvalue="true" spawnitemrandomly="true">
             <RequiredItem items="gamblingchip" type="Contained" />
             <Sound file="Content/Sounds/UI/UI_labelCart.ogg" frequencymultiplier="1.2" loop="false" range="200" volume="1" />
