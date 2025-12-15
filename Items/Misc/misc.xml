@@ -207,13 +207,8 @@
         <IsActiveConditional HasTag="Rolling" />
       </DecorativeSprite>
       <Controller canbeselected="true" selectkey="Select" hidehud="false" issecondaryitem="false" drawuserbehind="false" AllowSelectingWhenSelectedByOther="false">
-        <!-- at the start of the round, spawn random symbols into the machine and tag it with "disabled" to prevent prices from spawning in by this action | "disabled" tag gets replaced when the button is pressed so prizes can spawn in on actual usage -->
+        <!-- at the start of the round, tag it with "disabled" to prevent prices from spawning in by this action | "disabled" tag gets replaced when the button is pressed so prizes can spawn in on actual usage -->
         <StatusEffect type="Always" target="This" SetTags="disabled" setvalue="true" oneshot="true" />
-        <StatusEffect type="Always" target="This" disabledeltatime="true" oneshot="true" stackable="false" >
-          <SpawnItem identifier="sm_symbol_club" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
-          <SpawnItem identifier="sm_symbol_diamond" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
-          <SpawnItem identifier="sm_symbol_spade" spawnposition="ThisInventory" spawnifcantbecontained="true" spawnifinventoryfull="true" />
-        </StatusEffect>
         <!-- while interacting, disable the button UI if no gambling chip is contained -->
         <StatusEffect type="OnActive" target="This" targetitemcomponent="CustomInterface" canbeselected="false" drawhud="false" setvalue="true">
           <Conditional HasStatusTag="neq haschip" />
