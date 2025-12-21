@@ -1151,6 +1151,22 @@
     <message header="missionheader0.coalitiontakeover" text="missionmessage0.coalitiontakeover" />
     <!-- <Metadata identifier="completedcoalitiontakeover" operation="Add" value="1"/> -->
   </OutpostDestroyMission>
+  
+
+  <!-- for GoTo missions in outposts, you need to use a maxprogressstate that is >1, otherwise it will show up as completed in the menu! -->
+  <GotoMission
+    name=""
+    identifier="gettakeoverdudes"
+    type="GoTo"
+    difficulty="2"
+    commonness="0"
+    maxprogressstate="2" 
+    reward="3000"
+    BlockLocationTypeChanges="true">
+    <LocationType identifier="AnyOutpost"/>
+    <CompleteCheckDataAction identifier="outpostfixed" condition="eq 1"/>
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="512,256,256,256" color="230,230,50"/>
+  </GotoMission>
 
   <OutpostDestroyMission name="Separatist Station-Takeover" identifier="septakeover_coalitionoutpost" tags="outposttakeovermission" type="OutpostDestroy" requireCorrectLocationType="true" locations="city,research,military,colony,base,blockade,hospital,factory,shipyard" reward="5000" difficulty="4" commonness="0" allowretry="true" BlockLocationTypeChanges="true">
     <Reputation identifier="coalition" amount="-200" />
