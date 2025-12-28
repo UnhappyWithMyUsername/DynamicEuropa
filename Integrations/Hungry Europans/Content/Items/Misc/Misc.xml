@@ -288,5 +288,25 @@
         </StatusEffect>
       </MotionSensor>
     </Item>
-  </Items>
+    
+    ERROR ITEM - shows a big red error if load order is messed up
+    <Item name="Meat Cleaver" identifier="he-cleaver" description="IF YOU SEE THIS, YOU HAVE A LOAD ORDER ERROR. Place Hungry Europans ABOVE Dynamic Europa" category="Weapon" Tags="smallitem,weapon,gunsmith,mountableweapon,sharptool,butcheritem,cleaver" scale="0.5" RequireAimToUse="True" hideinmenus="true">
+      <!-- ERROR SPRITE -->
+      <Sprite texture="%ModDir:2532991202%/UI/Error.png" sourcerect="0,0,156,40" depth="0.55" origin="0.5,0.5" />
+      <Body width="156" height="40" density="10" />
+      <MeleeWeapon slots="RightHand+LeftHand,Any" controlpose="true" aimpos="45,10" handle1="-20,0" handle2="-10,5" holdangle="60" reload="1" range="100" combatpriority="1" msg="ItemMsgPickUpSelect">
+        <Attack targetimpulse="2">
+          <Affliction identifier="stun" strength="0.2" />
+        </Attack>
+        <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+          <Sound type="OnUse" file="Content/Items/Weapons/ToyHammerHit1.ogg" range="800" selectionmode="Random"/>
+        </StatusEffect>
+      </MeleeWeapon>
+      <Fabricate suitablefabricators="none" requiredtime="99999" requiresrecipe="true" hideifnorecipe="true">
+        <RequiredSkill identifier="weapons" level="30" />
+        <RequiredItem identifier="plastic" amount="1" />
+        <RequiredItem identifier="steel" amount="3"/>
+      </Fabricate>
+    </Item>
+  </Items>  
 </Override>
