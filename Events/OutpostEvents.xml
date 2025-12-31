@@ -3100,11 +3100,16 @@
     <!-- remove lithomorphs in outpost levels, I hate it. repeated once because it sometimes fail -->
     <ScriptedEvent identifier="removelithomorphsoutpost" commonness="100">
       <Label name="removelithosagain" />
-      <TagAction criteria="itemtag:lithomorphspawner" tag="lithomorphspawner" />
-      <TagAction criteria="speciesname:Lithomorph" submarinetype="Outpost" team="Team2" tag="bandit" />
+      <TagAction criteria="itemtag:lithomorphspawner" tag="lithomorphspawner" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="speciesname:Lithomorph" tag="Lithomorph" ContinueIfNoTargetsFound="true"/>
       <StatusEffectAction targettag="lithomorphspawner">
         <StatusEffect target="This" >
-          <Remove/>
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
+      <StatusEffectAction targettag="Lithomorph">
+        <StatusEffect target="This" >
+          <RemoveCharacter />
         </StatusEffect>
       </StatusEffectAction>
       <WaitAction time="10" />
