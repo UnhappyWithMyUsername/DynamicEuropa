@@ -1764,19 +1764,20 @@
     </ItemContainer>    
   </Item>
 
-  
+  <!-- Geode -->
   <Item name="" identifier="mineralcore" category="Alien" Tags="mediumitem,core" description="" health="100" impacttolerance="5" sonarsize="30" scale="0.5" impactsoundtag="impact_metal_heavy" hideconditionbar="true">
     <Body radius="45" density="12.5" friction="0.95" />
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.6" sourcerect="699,487,86,91" origin="0.5,0.5" />    
     <ContainedSprite allowedcontainertags="drilltarget" texture="Content/Map/Biomes/CrystalCave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.8" origin="0.5,0.5" />  
     <LightComponent lightcolor="50,150,255,150" range="300.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" >
-      <sprite texture="Content/Map/Biomes/CrystalCave/WallEdgeChunks.png" sourcerect="0,0,512,512" origin="0.5,0.5" alpha="1.0" comparison="and"/>
+      <sprite texture="Content/Map/Biomes/CrystalCave/WallEdgeChunks.png" sourcerect="0,0,512,512" origin="0.5,0.5" alpha="1.0" />
       <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
       <IsActiveConditional ContainerIdentifier="mineraldrilltarget" />   
       <IsActiveConditional targetcontainer="true" conditionpercentage="lte 25" />
     </LightComponent>
     <LightComponent lightcolor="150,110,230,150" range="45.0" powerconsumption="0" flicker="0.5" flickerspeed="0.5" pulsefrequency="4" pulseamount="0.3" ison="true" drawbehindsubs="false" >
       <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+      <IsActiveConditional ContainerIdentifier="neq mineraldrilltarget" />
     </LightComponent>
     <Price baseprice="1600" sold="false">
       <Price storeidentifier="merchantoutpost" multiplier="0.1" />
