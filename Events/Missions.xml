@@ -664,6 +664,7 @@
   <!-- PIRATE MISSIONS -->  
   <!-- TODO: change the wall health on submarines back to normal if devs ever add hull upgrades for the poor pirates -->
   
+  <!-- pirate ambush -->
   <PirateMission     
     type="Pirate"
     identifier="pirateattack1"
@@ -674,9 +675,7 @@
     difficulty="4"
     commonness="0"
     reward="0"
-    addedmissiondifficultyperplayer="8">
-    <Reputation identifier="coalition" amount="7" />
-    <Reputation identifier="separatists" amount="7" />
+    addedmissiondifficultyperplayer="3">
 		<Reputation identifier="bandits" amount="-2" />
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" />
@@ -718,17 +717,18 @@
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
   </PirateMission>
   
-  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
-    <Reputation identifier="coalition" amount="7" />
-    <Reputation identifier="separatists" amount="7" />
+  <!-- pirate eradication -->
+  <!-- TODO: change pirate missions - some pirate subs are so big it causes perfomrance issues. -->
+  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="3">
+    <Reputation identifier="location" amount="5" />
 		<Reputation identifier="bandits" amount="-2" />
     <SubmarineTypes>
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="3000" />
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="3500" />
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="3500" />
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="2000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="2250" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="2500" />
+      <!-- <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="4500" />
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="5000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="5000" /> -->
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
