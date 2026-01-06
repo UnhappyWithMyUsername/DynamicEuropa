@@ -1896,7 +1896,7 @@
     <!-- make sure NPC is alive -->
     <ScriptedEvent identifier="beaconfloodedrescueevent">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="hull" tag="playerhull" submarinetype="BeaconStation" />
+      <TagAction criteria="hull" tag="beaconhull" submarinetype="BeaconStation" />
       <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
       <Label name="foundoperatorcheck" />
@@ -1929,7 +1929,7 @@
         </Failure>
       </CheckVisibilityAction>
       <OnRoundEndAction>
-        <CountTargetsAction targettag="beaconoperator" hulltag="playerhull" minamount="1" >
+        <CountTargetsAction targettag="beaconoperator" hulltag="beaconhull" minamount="1" >
           <Conditional IsDead="false" />
           <Success>
             <SetDataAction identifier="beaconoperatorsaved" operation="set" value="1" />
