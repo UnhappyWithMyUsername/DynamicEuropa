@@ -12,11 +12,11 @@
         </StatusEffect>
         <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="3000.0" setvalue="true" stackable="false" duration="1" interval="1" extraload="500" />
       </TriggerComponent>
-      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true" >
+      <LightComponent lightcolor="148,166,207,255" range="2000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true" >
         <IsActive targetitemcomponent="TriggerComponent" triggeractive="true" />
       </LightComponent>
-      <LightComponent lightcolor="178,196,207,255" range="2000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0.2" ison="true" drawbehindsubs="true" >
-        <IsActive targetitemcomponent="TriggerComponent" triggeractive="true" />
+      <LightComponent lightcolor="178,196,207,255" range="800.0" powerconsumption="0" flicker="0.0" flickerspeed="0.0" pulsefrequency="0.4" pulseamount="0.2" ison="true" drawbehindsubs="true" >
+        <!-- <IsActive targetitemcomponent="TriggerComponent" triggeractive="true" /> -->
         <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
       </LightComponent>
       <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="6000" rangemultiplierinwalls="1">
@@ -27,18 +27,19 @@
         </Attack>
         <!-- explode when the item is destroyed | applies severe damage within a 20m range and a lower amount of damage within a 50m range -->
         <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
-          <particleemitter particle="iceshards" particleamount="200" velocitymin="100" velocitymax="3000" anglemin="0" anglemax="360" scalemin="0.5" scalemax="3.0" />
-          <Explosion range="2000.0" ballastfloradamage="1000" structuredamage="600" itemdamage="1000" force="50.0" severlimbsprobability="1.5" decal="explosion" decalsize="1.0" camerashake="500" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
+          <particleemitter particle="iceshards" particleamount="30" velocitymin="100" velocitymax="3000" anglemin="0" anglemax="360" scalemin="8" scalemax="10.0" lifetimemultiplier="3" colormultiplier="220,220,255,200" />
+          <Explosion range="2000.0" ballastfloradamage="1000" structuredamage="600" itemdamage="1000" force="50.0" severlimbsprobability="1.5" decal="explosion" decalsize="1.0" camerashake="500" camerashakerange="2500" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
             <Affliction identifier="explosiondamage" strength="600" />
             <Affliction identifier="burn" strength="450" />
             <Affliction identifier="stun" strength="30" />
           </Explosion>
-          <Explosion range="5000.0" ballastfloradamage="250" structuredamage="150" itemdamage="250" force="25.0" decalsize="1.0" camerashake="500" camerashakerange="50000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0">
-            <Affliction identifier="explosiondamage" strength="50" />
-            <Affliction identifier="burn" strength="50" />
+          <Explosion range="5000.0" ballastfloradamage="250" structuredamage="150" itemdamage="250" force="5.0" decalsize="1.0" camerashake="10" camerashakerange="5000" flashrange="10000" flashduration="5.0" screencolor="255,255,255,255" screencolorrange="5000" screencolorduration="3.0" underwaterbubble="false">
+            <Affliction identifier="explosiondamage" strength="40" />
+            <Affliction identifier="burn" strength="30" />
             <Affliction identifier="stun" strength="10" />
             <Affliction identifier="blind" strength="30" />
           </Explosion>
+          <ParticleEmitter particle="sonarflorawave" particleamount="3" scalemin="50" scalemax="60" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" lifetimemultiplier="8" />
           <Sound file="%ModDir:2532991202%/Sounds/Explosions/ExplosionMassive1.ogg" selectionmode="Random" volume="5" range="10000" />
           <Sound file="%ModDir:2532991202%/Sounds/Explosions/ExplosionMassive2.ogg" selectionmode="Random" volume="5" range="10000" />
           <Sound file="%ModDir:2532991202%/Sounds/Explosions/ExplosionMassive3.ogg" selectionmode="Random" volume="5" range="10000" />
@@ -46,14 +47,16 @@
         </StatusEffect>
         <!-- trigger a random sound when the electrical discharger was triggered and cause a camera shake effect to all players within 70m -->
         <StatusEffect type="OnUse" target="This">
-          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose.ogg" range="10000" volume="3" selectionmode="random" />
-          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose2.ogg" range="10000" volume="3" />
-          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose3.ogg" range="10000" volume="3" />
-          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose4.ogg" range="10000" volume="3" />
-          <Explosion range="7000.0" camerashake="3" stun="0" force="0.0" flames="false" shockwave="false" sparks="false" underwaterbubble="false" />
+          <Conditional targetitemcomponent="TriggerComponent" triggeractive="true" />
+          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose.ogg" range="8000" volume="3" selectionmode="random" />
+          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose2.ogg" range="8000" volume="3" />
+          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose3.ogg" range="8000" volume="3" />
+          <sound file="%ModDir:2532991202%/Sounds/Explosions/Piezo_ReallyClose4.ogg" range="8000" volume="3" />
+          <Explosion range="7000.0" camerashakerange="7000" camerashake="5" stun="0" force="0.0" flames="false" shockwave="false" sparks="false" underwaterbubble="false" ignorecover="true" />
         </StatusEffect>
-        <!-- trigger an additional random explosion sound alongside the piezo sound when the electrical discharger was triggered -->
+        <!-- trigger an explosion sound intermittently if sub is not near -->
         <StatusEffect type="OnUse" target="This">
+          <Conditional targetitemcomponent="TriggerComponent" triggeractive="false" />
           <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="10000" selectionmode="Random" />
           <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="10000" />
           <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="10000" />
