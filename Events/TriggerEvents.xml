@@ -1077,44 +1077,7 @@
         <Failure></Failure>
       </RNGAction>
     </ScriptedEvent>
- 
-    <!--TRIGGERED VIA SIGNAL LOCATOR IF A WRECK IS FOUND TO ALERT YOU-->
-    <ScriptedEvent identifier="de-triggerevents-wreck">
-      <WaitAction time="30" />
-      <TagAction criteria="hullname:airlock" tag="activewreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="hullname:command" tag="activewreck" submarinetype="wreck" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="itemidentifier:signallocator" tag="signallocator" submarinetype="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TriggerAction target1tag="activewreck" target2tag="signallocator" applytotarget1="wreckfound" waitforinteraction="false" radius="500000" />
-      <Label name="checkeventstate" />
-      <CheckDataAction identifier="commsrelay_ruin_triggered" condition="neq 1">
-        <Success>
-          <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-          <TagAction criteria="itemtag:navterminal" tag="commsrelay" submarinetype="player" ContinueIfNoTargetsFound="true" />
-          <TriggerAction target1tag="commsrelay" target2tag="player" applytotarget2="crw_trig_player" radius="100" waitforinteraction="true" />
-          <ConversationAction text="eventtext.commsrelay.wreck" dialogtype="Small" targettag="crw_trig_player">
-            <Option text="eventtext.option.investigate">
-              <StatusEffectAction targettag="crw_trig_player">
-                <StatusEffect target="NearbyItems" tags="commsrelay" duration="10.5">
-                  <Sound file="%ModDir:2532991202%/Sounds/Events/SOSBroadcast.ogg" volume="1" loop="true" />
-                </StatusEffect>
-              </StatusEffectAction>
-              <ConversationAction text="eventtext.commsrelay.wreck.answer" dialogtype="Small" targettag="crw_trig_player" />
-              <SpawnAction itemidentifier="broadcasterwreck" spawnlocation="wreck" />
-              <ClearTagAction tag="crw_trig_player" />
-            </Option>
-            <Option text="eventtext.option.ignore">
-              <ConversationAction text="eventtext.general.decline" dialogtype="Small" targettag="crw_trig_player" />
-              <ClearTagAction tag="crw_trig_player" />
-            </Option>
-          </ConversationAction>
-        </Success>
-        <Failure>
-          <WaitAction time="5" />
-          <GoTo name="checkeventstate" />
-        </Failure>
-      </CheckDataAction>
-    </ScriptedEvent>
+
     <!--SPECIAL CHARACTER EVENTS-->
     <!--jokster death-->
     <ScriptedEvent identifier="jokerdeath">
