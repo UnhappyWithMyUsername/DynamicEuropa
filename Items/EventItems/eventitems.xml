@@ -1566,7 +1566,8 @@
     <ItemContainer hideitems="true" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="40,-40" containedspritedepth="0.831" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
       <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
-      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
@@ -1713,7 +1714,7 @@
 
 
   <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="2000" SpriteColor="255,255,255,255">
-    <Body radius="200" density="10" bodytype="Dynamic" />
+    <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.61" sourcerect="0,344,506,338" origin="0.4,0.4" scale="0.35" offset="50,-100" />
@@ -1738,7 +1739,8 @@
     <ItemContainer hideitems="false" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="0,0" containedspritedepth="0.65" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
       <Containable items="smallitem,mediumitem,bigitem" />
       <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
-      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
@@ -1746,10 +1748,10 @@
         <DropContainedItems />
         <Remove />
       </StatusEffect>
-      <StatusEffect type="Always" target="This" offset="0,60">
+      <!-- <StatusEffect type="Always" target="This" offset="0,60">
         <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
         <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
-      </StatusEffect>   
+      </StatusEffect> -->   
       <StatusEffect type="OnDamaged" target="This">
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
         <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
