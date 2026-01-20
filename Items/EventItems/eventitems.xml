@@ -1644,10 +1644,10 @@
     
   </Item>
 
-  <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500" spritecolor="255,200,75,255" InventoryIconColor="255,200,75,255" >
+  <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500" >
     <PreferredContainer primary="depthchargeloader" />
-    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="512,320,64,64" origin="0.5,0.5" />
-    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="629,0,279,142" depth="0.54" origin="0.5,0.5" />
+    <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="346,438,279,142" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="346,438,279,142" depth="0.54" origin="0.5,0.5" />
     <!-- <DecorativeSprite texture="Content/Map/Outposts/Art/TunnelWalls.png" sourcerect="1456,1838,30,84" depth="0.535" origin="0.5,0.5" offset="-8,0" scale="1.1">
       <IsActiveConditional ContainerIdentifier="! depthchargeloader" />  
     </DecorativeSprite>  
@@ -1658,7 +1658,8 @@
       <AnimationConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
-    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="489,90,119,95" depth="0.54" origin="0.5,0.5" />
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="347,460,119,95" depth="0.54" origin="0.5,0.5" />
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="ammoboxcontainer" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="455,473,100,72" depth="0.54" origin="0.5,0.5" />
     <Body width="140" radius="60" density="30" />
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect">
       <!-- slow down the character when holding the item -->
@@ -1701,10 +1702,6 @@
     <LightComponent range="200" PowerConsumption="0" lightcolor="255,30,0,255" pulsefrequency="3" pulseamount="0.3" AllowInGameEditing="false" IsOn="true">
       <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
-    </LightComponent>
-    <LightComponent range="100" PowerConsumption="0" lightcolor="255,30,0,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
-      <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="2.1,0.5" alpha="1.0" />
-      <IsActiveConditional ContainerIdentifier="! depthchargeloader"/>
     </LightComponent>
     <LightComponent range="100" PowerConsumption="0" lightcolor="255,30,0,0" blinkfrequency="1" AllowInGameEditing="false" IsOn="true">
       <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" sourcerect="700,55,33,30" depth="0.54" origin="0.1, 0.5" alpha="1.0" />
