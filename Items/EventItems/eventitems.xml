@@ -1738,10 +1738,21 @@
       <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
       <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
       <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 50" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="1000" volume="2" />
+      </StatusEffect>
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="1000" volume="2" frequencymultiplier="0.5" />
         <DropContainedItems />
         <Remove />
       </StatusEffect>
@@ -1792,6 +1803,147 @@
       <StatValue stattype="SwimmingSpeed" value="-0.4" />
       <StatValue stattype="WalkingSpeed" value="-0.4" />
     </Holdable>
+  </Item>
+
+
+  <!-- drill target that is sturdy but shits out a lot of minerals -->
+  <Item name="" identifier="mineraldrilltarget2" nameidentifier="mineraldrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="5000" SpriteColor="255,255,255,255">
+    <Body radius="160" density="10" bodytype="Dynamic" />
+    <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.61" sourcerect="0,344,506,338" origin="0.4,0.4" scale="0.35" offset="50,-100" />
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.707" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.708" offset="50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.709" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.710" offset="-50,0" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.711" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.712" offset="-50,-160" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <ItemContainer hideitems="false" drawinventory="false" capacity="1" maxstacksize="1" slotsperrow="1" itempos="0,0" containedspritedepth="0.65" canbeselected="false" allowdraganddrop="false" QuickUseMovesItemsInside="false" >
+      <Containable items="smallitem,mediumitem,bigitem" />
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 50" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="1000" volume="2" frequencymultiplier="0.5" />
+        <DropContainedItems />
+        <Remove />
+      </StatusEffect>
+      <!-- <StatusEffect type="Always" target="This" offset="0,60">
+        <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
+        <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
+      </StatusEffect> -->   
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="8" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+      </StatusEffect>
+      
+      <!-- spawns multiple minerals at random -->
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="titanite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="brockite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="thorianite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="amblygonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="sphalerite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="cassiterite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="pyromorphite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="ilmenite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="stannite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chalcopyrite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="lazulite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="aragonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="esperite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="galena" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="triphylite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="langbeinite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chamosite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chrysoprase" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="titanite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="brockite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="thorianite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="amblygonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="sphalerite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="cassiterite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="pyromorphite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="ilmenite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="stannite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chalcopyrite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="lazulite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="aragonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="esperite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="galena" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="triphylite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="langbeinite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chamosite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chrysoprase" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="titanite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="brockite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="thorianite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="amblygonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="sphalerite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="cassiterite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="pyromorphite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="ilmenite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="stannite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chalcopyrite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="lazulite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="aragonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" spawnitemrandomly="true" >
+        <SpawnItem identifier="esperite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="galena" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="triphylite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="langbeinite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chamosite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+        <SpawnItem identifier="chrysoprase" spawnposition="This" spread="60" aimspread="360" impulse="15" />
+      </StatusEffect>
+      
+    </ItemContainer>    
   </Item>
 
 
