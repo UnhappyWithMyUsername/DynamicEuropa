@@ -1359,6 +1359,32 @@
     <message header="missionheader0.surveyedminerals" text="missionmessage0.surveyedminerals"/>
   </MineralMission>
   
+  <!-- survey mission with large mineral deposit, made for drilling pod -->
+  <SalvageMission
+    identifier="mineraldrillsurvey"
+    tags="drillmission"
+    type="SalvageWreck"
+    difficulty="1"
+    commonness="100"
+    reward="0"
+    requireddeliveryamount="1"
+    requirewreck="false">
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <!-- one big drill target -->
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget2"
+      sonarlabel="missionsonarlabel.drilltarget"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+    </target>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="220,200,220"/>
+    <LocationType from="Survey" to="Any"/>
+  </SalvageMission>
+  
   <!-- END OF SURVEY MISSIONS -->
   <!-- END OF SURVEY MISSIONS -->
   <!-- END OF SURVEY MISSIONS -->
@@ -1871,6 +1897,7 @@
         <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
       </target>
     </SalvageMission>
+    
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
