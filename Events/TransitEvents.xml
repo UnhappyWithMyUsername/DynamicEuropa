@@ -605,6 +605,17 @@
       </EventSet>
     </EventSet>
   </EventSet>
+  
+  <!-- spawn an exosuit pirate in bandit beacons at higher difficulty if low reputation -->
+  <EventSet identifier="banditbeaconexosuit" minleveldifficulty="45" maxleveldifficulty="100" campaign="true" requiredspawnpointtag="beacon_bandit" chooserandom="false" triggereventcooldown="false" allowatstart="true" additive="true" >
+    <ScriptedEvent identifier="banditbeaconexosuit">
+      <CheckReputationAction TargetType="Faction" identifier="bandits" condition="lte -13">
+        <Success>
+          <SpawnAction NPCSetIdentifier="pirate_npcs" NPCIdentifier="pirateannihilator" team="None" SpawnLocation="beaconstation" spawnpointtag="beacon_bandit" TargetTag="extrapirate" requirespawnpointtag="true"/>
+        </Success>
+      </CheckReputationAction>
+    </ScriptedEvent>
+  </EventSet>
 
       
   <!-- UNUSED - Supposed to spawn more enemies outside the lair so they attack the submarine.
