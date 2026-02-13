@@ -76,7 +76,18 @@
       <WaitAction time="1" />
       <Goto name="keeptalking" />
     </ScriptedEvent> 
-    
+  
+
+    <ScriptedEvent identifier="blindexplosionTEST"> 
+      <TagAction criteria="itemtag:board" tag="board" />
+      <StatusEffectAction targettag="board">
+          <StatusEffect target="this">
+            <Explosion range="1500.0" force="0" debris="false" flashrange="9999" flashColor="0,0,0,255" flashduration="20.0" screencolor="0,0,0,255" screencolorrange="9999" screencolorduration="20.0" showeffects="false">
+            </Explosion>
+          </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent> 
+  
     <!-- change the missionidentifier and value to test mission "states" -->
     <ScriptedEvent identifier="missionstateeventTEST">
           <MissionStateAction missionidentifier="escortorangeboys" operation="Set" value="0" />
