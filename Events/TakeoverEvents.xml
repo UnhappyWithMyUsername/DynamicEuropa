@@ -56,6 +56,7 @@
                 <Option text="eventtext.gettakeovermission.option.accept">
                   <!-- accept takeover -->
                   <SetDataAction identifier="cotakeoveractive" operation="Set" value="1" /> 
+                  <TriggerEventAction identifier="resetactivetakeovercounter" nextround="true" />
                   <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="1" CreateLocationIfNotFound="true" />
                   <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" eventsprite="coalition" />
                   <!-- if high reputation, can hire soldiers -->
@@ -161,6 +162,7 @@
                 <Option text="eventtext.gettakeovermission.option.accept">
                   <!-- accept takeover -->
                   <SetDataAction identifier="septakeoveractive" operation="Set" value="1" /> 
+                  <TriggerEventAction identifier="resetactivetakeovercounter" nextround="true" />
                   <MissionAction missionidentifier="septakeover_coalitionoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="coalition" minlocationdistance="1" CreateLocationIfNotFound="true" />
                   <ConversationAction targettag="gtom_player" text="eventtext.gettakeovermission.option.accept.answer" eventsprite="separatists" />
                   <!-- if high reputation, can hire soldiers -->
@@ -326,6 +328,31 @@
           <GoTo name="checkforcomplete" />
         </Failure>
       </CountTargetsAction>
+    </ScriptedEvent>
+
+    <!-- Timer to reset XXXtakeoveractive after several jumps, allows you to get another takeover if you missed the first one or it is very far back in the campaign. Does both coalition and separatists in one event because realistically you will get takeovers from only 1 faction so there shouldnt be conflict -->
+    <ScriptedEvent identifier="resetactivetakeovercounter">
+      <CheckDataAction identifier="cotakeoveractive" value="gte 1">
+        <Success>
+          <SetDataAction identifier="cotakeoveractive" operation="Add" value="1" />
+        </Success>
+      </CheckDataAction>
+      <CheckDataAction identifier="cotakeoveractive" value="gte 10">
+        <Success>
+          <SetDataAction identifier="cotakeoveractive" operation="Set" value="0" />
+        </Success>
+      </CheckDataAction>
+      <CheckDataAction identifier="septakeoveractive" value="gte 1">
+        <Success>
+          <SetDataAction identifier="septakeoveractive" operation="Add" value="1" />
+        </Success>
+      </CheckDataAction>
+      <CheckDataAction identifier="septakeoveractive" value="gte 10">
+        <Success>
+          <SetDataAction identifier="septakeoveractive" operation="Set" value="0" />
+        </Success>
+      </CheckDataAction>
+      <TriggerEventAction identifier="resetactivetakeovercounter" nextround="true" />
     </ScriptedEvent>
 
     <!-- Remove Temporary Crewmembers -->
