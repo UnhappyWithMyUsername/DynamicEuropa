@@ -2102,7 +2102,14 @@
       <SetDataAction identifier="Cargopodsalvaged" operation="set" value="0" />
       <TagAction criteria="itemtag:salvageobjective" tag="salvageobjective" />
       <TagAction criteria="itemidentifier:outpostterminal" tag="outpostterminal" />
-      <TagAction criteria="itemtag:poddockingport" tag="poddockingport" />      
+      <TagAction criteria="itemtag:wreckdockingport" tag="wreckdockingport" />      
+      <TagAction criteria="itemtag:poddockingport" tag="poddockingport" />
+      <WaitAction time="2" />
+      <StatusEffectAction targettag="wreckdockingport">
+        <StatusEffect target="This" >
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
       <Label name="checkifdocked" />
       <WaitAction time="2" />
       <CheckConditionalAction targettag="poddockingport" targetitemcomponent="DockingPort" Docked="true">
