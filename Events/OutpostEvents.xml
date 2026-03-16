@@ -112,6 +112,12 @@
     <ScriptedEvent identifier="removestarteroutpostice">
       <LayerAction layer="RemoveIce" enabled="false" />
     </ScriptedEvent>
+    
+    <ScriptedEvent identifier="forcestarteroutpostchange">
+      <OnRoundEndAction>
+        <ModifyLocationAction type="StarterOutpostAFTER" />
+      </OnRoundEndAction>
+    </ScriptedEvent>
   
     <!-- spawns NPCs in the fake militaryforces subs, not a fan of this one -->
     <ScriptedEvent identifier="militaryforces_position_npcs" commonness="100">
