@@ -88,6 +88,15 @@
       </StatusEffectAction>
     </ScriptedEvent> 
   
+    <ScriptedEvent identifier="MOODEXPLOSIONTEST"> 
+      <TagAction criteria="player" tag="player" />
+      <StatusEffectAction targettag="player">
+        <StatusEffect target="NearbyCharacters" range="1000" oneshot="true" disabledeltatime="true" >             
+          <ReduceAffliction identifier="mood" strength="25" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent> 
+    
     <!-- change the missionidentifier and value to test mission "states" -->
     <ScriptedEvent identifier="missionstateeventTEST">
           <MissionStateAction missionidentifier="escortorangeboys" operation="Set" value="0" />
