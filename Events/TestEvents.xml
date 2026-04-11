@@ -333,6 +333,20 @@
     </ScriptedEvent>
     
    
+
+    <ScriptedEvent identifier="mudraptorracing_DUCK_TEST">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:petfoodgun" tag="petfoodgun" />
+      <WaitAction time="1" />
+      <StatusEffectAction targettag="petfoodgun">
+        <StatusEffect target="This" offset="30,0"> 
+          <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
+          <ParticleEmitter particle="weldspark" particleamount="20" anglemin="-20" anglemax="20" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1.5" scalemax="1.9" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
+          <SpawnItem identifier="raptorrubberduck" spawnposition="This" impulse="1.1" />
+        </StatusEffect>
+      </StatusEffectAction>
+    </ScriptedEvent>
+   
   
     <ScriptedEvent identifier="npcspawnerTEST">
         <SpawnAction NPCSetIdentifier="customnpcs" NPCIdentifier="suitcaseman" LootingIsStealing="True" TargetTag="suitcaseman" SpawnLocation="Outpost" TeamID="FriendlyNPC" AllowDuplicates="True" />
