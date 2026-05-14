@@ -223,6 +223,7 @@
         <Containable items="punch" />
       </ItemContainer>
     </Item>
+    
     <Item name="punch" identifier="punch" category="Weapon" maxstacksize="6" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,punch" Scale="0.5" impactsoundtag="impact_metal_light" hideinmenus="false" allowasextracargo="true" noninteractable="true">
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Misc/punchgun.png" sourcerect="371,70,50,53" depth="0.55" origin="0.5,0.5" />
       <Body width="50" height="50" radius="0" friction="10" density="10" />
@@ -235,7 +236,7 @@
           <sound file="Content/Sounds/Impact/SoftImpact2.ogg" range="500" />
           <sound file="Content/Sounds/Impact/SoftImpact3.ogg" range="500" />
         </Attack>
-        <StatusEffect type="OnUse" target="This" delay="0.8">
+        <StatusEffect type="OnNotContained" target="This" delay="0.8">
           <Remove />
         </StatusEffect>
         <StatusEffect type="OnImpact" target="This" delay="0.5">
@@ -247,6 +248,7 @@
         <StatusEffect type="OnUse" target="This" delay="0.5" projectilepullforce="30" setvalue="True"/>
       </Rope>
     </Item>
+    
     <Item name="Whoopee Cushion" identifier="he-whoopeecushion" Category="Hidden" Tags="smallitem,toy" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,255" requireaimtouse="true" noninteractable="false" hideinmenus="false">
       <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Misc/WhoopeeCushion.png" sourcerect="0,0,45,13" depth="0.55" origin="0.5,0.5" />
       <InventoryIcon texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/UI/InventoryIcons.png" sourcerect="80,426,85,85" origin="0.5,0.5" />
@@ -289,7 +291,7 @@
       </MotionSensor>
     </Item>
     
-    ERROR ITEM - shows a big red error if load order is messed up
+    <!-- ERROR ITEM - shows a big red error if load order is messed up -->
     <Item name="Meat Cleaver" identifier="he-cleaver" description="IF YOU SEE THIS, YOU HAVE A LOAD ORDER ERROR. Place Hungry Europans ABOVE Dynamic Europa" category="Weapon" Tags="smallitem,weapon,gunsmith,mountableweapon,sharptool,butcheritem,cleaver" scale="0.5" RequireAimToUse="True" hideinmenus="true">
       <!-- ERROR SPRITE -->
       <Sprite texture="%ModDir:2532991202%/UI/Error.png" sourcerect="0,0,156,40" depth="0.55" origin="0.5,0.5" />
