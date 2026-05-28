@@ -1975,6 +1975,40 @@
     </ItemContainer>    
   </Item>
 
+  <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">
+    <PreferredContainer secondary="weaponholder"/>
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="600,610,107,62" depth="0.6" origin="0.5,0.5" /><DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
+      <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
+    </DecorativeSprite>
+    <Body width="107" height="62" density="20" />
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,-20" handle1="-20,-14" handle2="84,-10" msg="ItemMsgPickUpSelect" />
+    <RepairTool range="150" barrelpos="50,5" combatpriority="0" targetforce="1" HitItems="false" >
+      <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
+      <ParticleEmitter particle="skyholderfx2" anglemin="-10" anglemax="10" distancemin="80" distancemax="100" velocitymin="-500" velocitymax="-1000" particlespersecond="20" copyentityangle="true" lifetimemultiplier="0.75" colormultiplier="50,255,50,150"/>
+      <StatusEffect type="OnUse" targettype="Usetarget" multiplyafflictionsbymaxvitality="true" comparison="and">
+        <!-- <Conditional group="moloch" /> -->
+        <Conditional IsDead="false" />
+        <Affliction identifier="scanninginprogress" strength="8" />
+      </StatusEffect> 
+      <StatusEffect type="OnUse" target="Contained" Condition="-0.5" >
+        <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" targettype="This" voltage="1" setvalue="true" >       
+        <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" /> 
+        <Sound file="Content/Items/Weapons/GRAVITYSHELLS_loop.ogg" type="OnUse" range="120" volume="0.5" frequencymultiplier="2" loop="true"/>
+      </StatusEffect>
+      <LightComponent LightColor="100,255,130,200" range="120" powerconsumption="10" IsOn="true" flicker="0.3" flickerspeed="1">
+        <LightTexture texture="Content/Lights/lightcone.png" origin="-0.05,0.47" size="1.0,1.0" />
+      </LightComponent>
+    </RepairTool>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="-38,18" itemrotation="90" containedspritedepth="0.61" containedstateindicatorstyle="battery">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <Containable items="mobilebattery" />
+    </ItemContainer> 
+    <StatusHUD drawhudwhenequipped="true" />
+  </Item>
+
+
 
     <!-- UNUSED. For sabotaging deconstructors -->
 <!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
