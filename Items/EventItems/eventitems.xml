@@ -1318,8 +1318,29 @@
     <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
       <!-- 1% condition because otherwise the item is "broken" and can't be swung-->
       <StatusEffect type="OnSpawn" target="this" condition="1" setvalue="true" />
-      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="34" AllowWhenBroken="true" disabledeltatime="true" >
+      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="100" AllowWhenBroken="true" disabledeltatime="true" >
         <Conditional speciesname="husk_chimera"/>
+        <Sound file="Content/Items/Medical/syringe.ogg" range="500" frequencymultiplier="1.5" />
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>
+  
+  <!-- sample vial used to stab the chimera in the mission -->
+  <Item name="" identifier="molochsamplevial" hideinmenus="true" category="Medical" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="mediccrate" Tags="smallitem,missionitem" description="" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="medcab" secondary="medcontainer"/>
+    <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="419,268,16,46" depth="0.6" origin="0.5,0.5" />
+    <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />
+    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+      <Attack targetimpulse="1">
+        <Affliction identifier="bloodloss" strength="2" />
+      </Attack>  
+      <!-- 1% condition because otherwise the item is "broken" and can't be swung-->
+      <StatusEffect type="OnSpawn" target="this" condition="1" setvalue="true" />
+      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="100" AllowWhenBroken="true" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+        <Conditional speciesname="molochwastes"/>
+        <Affliction identifier="bloodloss" strength="1" />
+        <Sound file="Content/Items/Medical/syringe.ogg" range="500" frequencymultiplier="1.5" />
       </StatusEffect>
     </MeleeWeapon>
   </Item>
@@ -1988,7 +2009,7 @@
       <StatusEffect type="OnUse" targettype="Usetarget" multiplyafflictionsbymaxvitality="true" comparison="and">
         <!-- <Conditional group="moloch" /> -->
         <Conditional IsDead="false" />
-        <Affliction identifier="scanninginprogress" strength="8" />
+        <Affliction identifier="scanninginprogress" strength="7" />
       </StatusEffect> 
       <StatusEffect type="OnUse" target="Contained" Condition="-0.5" >
         <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
