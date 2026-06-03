@@ -2422,6 +2422,26 @@
     </BeaconMission>
  
  
+
+    <!-- scan a radioactive moloch -->
+    <CustomMission    
+      identifier="scanradioactivemoloch"
+      tags="capturemission"
+      type="Scanning"
+      difficulty="3"
+      commonness="0"
+      reward="3000"
+      successmessage="missionsuccess.scanradioactivemoloch"
+      failuremessage="missionfailure.scanradioactivemoloch"
+      successstate="2" failurestate="3">
+      <Reputation identifier="location" amount="3" />
+      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,768,256,256" color="60,120,90"/>
+      <LocationType from="Anyoutpost" to="Anyoutpost"/>
+      <message header="missionheader0.scanradioactivemoloch" text="missionmessage0.scanradioactivemoloch" />
+      <TriggerEvent state="0" delay="0" eventidentifier="scanradioactivemolochmissionevent" />
+      <CompleteCheckDataAction identifier="radioactivemolochscanned" condition="eq 1"/>
+      <Metadata identifier="scanradioactivemolochnorepeat" value="1"/>
+    </CustomMission>
   
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  
   <!-- ///////////////////  UNUSED, BROKEN, OR WIP /////////////////// -->  

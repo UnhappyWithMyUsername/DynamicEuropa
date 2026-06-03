@@ -2148,6 +2148,60 @@
       <WaitAction time="5" />
     </ScriptedEvent>
 
+
+    <!-- Scanning Moloch mission -->
+    <!-- first check if moloch is scanned, then check if it's sampled -->
+    <ScriptedEvent identifier="scanradioactivemolochmissionevent">
+      <TagAction criteria="player" tag="player" />
+      <!-- <SpawnAction itemidentifier="de-missionscanner" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="molochscanner" offset="0" />
+      <SpawnAction itemidentifier="molochsamplevial" spawnlocation="Mainsub" SpawnPointType="Cargo" TargetTag="molochsamplevial" offset="0" /> -->
+      <SpawnAction speciesname="molochwastes" TargetTag="missionmoloch" amount="1" SpawnLocation="MainPath" offset="500" />
+      <!-- <TagAction criteria="speciesname:molochwastes" tag="missionmoloch" /> -->
+      <TagAction criteria="itemidentifier:molochsamplevial" tag="missionsamplevial" submarinetype="player" />
+      <SetDataAction identifier="scanradioactivemolochnorepeat" value="1" />
+      <Label name="scanningcheck" />
+      <WaitAction time="1" />
+      <!-- check if moloch is dead -->
+      <CheckConditionalAction targettag="missionmoloch" isdead="true" >      
+        <Success>
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" />
+          <Goto name="end" />
+        </Success>
+      </CheckConditionalAction>
+      <!-- check if moloch is fully scanned -->
+      <CheckConditionalAction targettag="missionmoloch" scanninginprogress="gte 100" >
+        <Failure>
+          <Goto name="scanningcheck" />    
+        </Failure>        
+        <Success>
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="1" />  
+        </Success>
+      </CheckConditionalAction>
+      <Label name="samplecheck" />
+      <WaitAction time="1" />
+      <!-- check if moloch is dead -->
+      <CheckConditionalAction targettag="missionmoloch" isdead="true" >      
+        <Success>
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" />
+          <Goto name="end" />
+        </Success>
+      </CheckConditionalAction>
+      <!-- check if vial is full -->
+      <CheckConditionalAction targettag="missionsamplevial" condition="gte 100" >
+        <Failure>
+          <Goto name="samplecheck" />
+        </Failure>        
+        <Success>
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="2" />
+        </Success>
+      </CheckConditionalAction>
+      <Label name="end" />
+    </ScriptedEvent>
+ 
+
+
+
+
  
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
