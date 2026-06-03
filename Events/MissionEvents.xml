@@ -624,9 +624,10 @@
           <!-- does not spawn the event if already done -->
         </Failure>
         <Success>          
-          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="molochresearcher" spawnlocation="Outpost" />
+          <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="molochresearcher" spawnlocation="Outpost" targetmoduletags="researchmodule" />
           <ConversationAction text="EventText.missionevent_scanradioactivemoloch.fidgetyscientist" speakertag="molochresearcher" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
             <Option text="eventtext.generic.continue" >
+              <NPCWaitAction npctag="molochresearcher" wait="true" priority="10"/>
               <ConversationAction text="EventText.missionevent_scanradioactivemoloch.crucialtask" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
                 <Option text="EventText.missionevent_scanradioactivemoloch.needfishdead" >
                   <ForceSayAction message="EventText.missionevent_scanradioactivemoloch.joveno" SayInRadio="false" TargetTag="molochresearcher" />
@@ -637,7 +638,8 @@
                         <Option text="EventText.missionevent_scanradioactivemoloch.illdoit">
                           <ConversationAction text="EventText.missionevent_scanradioactivemoloch.scanandsample" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" endconversation="true" forcesay="true" forcesayremovequotes="true" />
                           <MissionAction missionidentifier="scanradioactivemoloch" />
-                          <SpawnAction itemidentifier="chloralhydrate" amount="8" targettag="sedative" targetinventory="triggerer_player" /> 
+                          <SpawnAction itemidentifier="de-missionscanner" amount="1" targettag="sedative" targetinventory="triggerer_player" /> 
+                          <SpawnAction itemidentifier="molochsamplevial" amount="2" targettag="sedative" targetinventory="triggerer_player" /> 
                         </Option>    
                         <Option text="EventText.missionevent_scanradioactivemoloch.toorisky" >   
                           <ConversationAction text="EventText.missionevent_scanradioactivemoloch.unfortunate" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" endconversation="true" />
