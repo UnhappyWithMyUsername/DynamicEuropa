@@ -2020,12 +2020,9 @@
                 </Option>
                 <!-- insult, NPC attacks, lose reputation -->
                 <Option text="eventtext.piratesecurityofficer.toll.option.insult" endconversation="true">
-                  <ReputationAction targettype="faction" identifier="bandits" increase="-2" /> 
-                  <StatusEffectAction targettag="guard">
-                    <StatusEffect target="this">
-                      <Forcesay message="eventtext.piratesecurityofficer.toll.option.insult.answer" sayinradio="false" />
-                    </StatusEffect>
-                  </StatusEffectAction>
+                  <ForceSayAction message="eventtext.generic.insults" SayInRadio="false" TargetTag="pso_trig_player" />
+                  <ReputationAction targettype="Faction" identifier="bandits" increase="-2" />
+                  <ForceSayAction message="eventtext.piratesecurityofficer.toll.option.insult.answer" SayInRadio="false" TargetTag="guard" />
                   <GoTo name="attack" />
                 </Option>
               </ConversationAction>
@@ -2127,12 +2124,9 @@
                     </Option>
                     <!-- insult, NPC attacks, lose reputation -->
                     <Option text="eventtext.piratesecurityofficer.toll.option.insult" endconversation="true">
+                      <ForceSayAction message="eventtext.generic.insults" SayInRadio="false" TargetTag="pso_trig_player" />
                       <ReputationAction targettype="Faction" identifier="bandits" increase="-2" />
-                      <StatusEffectAction targettag="guard">
-                        <StatusEffect target="this">
-                          <Forcesay message="eventtext.piratesecurityofficer.toll.option.insult.answer" sayinradio="false" />
-                        </StatusEffect>
-                      </StatusEffectAction>
+                      <ForceSayAction message="eventtext.piratesecurityofficer.toll.option.insult.answer" SayInRadio="false" TargetTag="guard" />
                       <Label name="attack" />
                       <WaitAction time="2" />
                       <CombatAction combatmode="Offensive" npctag="guard" enemytag="pso_trig_player" isinstigator="false" guardreaction="none" witnessreaction="none" cooldown="10" />
