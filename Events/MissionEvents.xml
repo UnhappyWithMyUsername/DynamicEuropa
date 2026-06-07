@@ -667,24 +667,24 @@
           <!-- does not spawn the event if already done -->
         </Failure>
         <Success>          
-          <SpawnAction npcsetidentifier="escortnpcs1" npcidentifier="vip" targettag="stationofficial" spawnlocation="Outpost" />
-          <TriggerAction target1tag="player" target2tag="stationofficial" disableiftargetincapacitated="true" radius="500" />
+          <SpawnAction npcsetidentifier="escortnpcs1" npcidentifier="vip" targettag="stationofficial" spawnlocation="Outpost" targetmoduletags="cafeteriasmall,cafeteriamedium" />
+          <TriggerAction target1tag="player" target2tag="stationofficial" disableiftargetincapacitated="true" radius="400" />
           <ForceSayAction message="EventText.missionevent_escortrowdy.shouting1" SayInRadio="false" TargetTag="stationofficial" />
           <Label name="speakagain" />
           <WaitAction time="2" />
           <TriggerAction target1tag="player" target2tag="stationofficial" applytotarget1="triggerer_player" disableiftargetincapacitated="true" radius="200" waitforinteraction="true" />
-          <ConversationAction text="EventText.missionevent_escortrowdy.boilingpoint" speakertag="stationofficial" invokertag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
+          <ConversationAction text="EventText.missionevent_escortrowdy.boilingpoint" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
             <Option text="eventtext.generic.continue" >
               <NPCWaitAction npctag="stationofficial" wait="true" priority="10"/>
               <ConversationAction text="EventText.missionevent_escortrowdy.bunksfull" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
                 <Option text="EventText.missionevent_escortrowdy.passingsub" forcesay="true" forcesayremovequotes="true">
-                  <ForceSayAction message="EventText.missionevent_escortrowdy.joveno" SayInRadio="false" TargetTag="stationofficial" />
                   <ConversationAction text="EventText.missionevent_escortrowdy.situation" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
                     <Option text="eventtext.generic.continue">
                       <ConversationAction text="EventText.missionevent_escortrowdy.tensionsrising" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher">
                         <Option text="EventText.missionevent_escortrowdy.escortedbefore" forcesay="true" forcesayremovequotes="true">
                           <ConversationAction text="EventText.missionevent_escortrowdy.watchout" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" endconversation="true" />
                           <MissionAction missionidentifier="escortrowdy" />
+                          <SetDataAction identifier="escortrowdynorepeat" operation="set" value="1" />
                           <ForceSayAction message="EventText.missionevent_escortrowdy.shouting2" SayInRadio="false" TargetTag="stationofficial" />
                         </Option>    
                       </ConversationAction>
