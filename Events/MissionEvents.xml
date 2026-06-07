@@ -2294,12 +2294,17 @@
           <!-- tag 2 random escort NPCs, make them insult and fight eachother -->
           <TagAction criteria="humanprefabidentifier:rowdyescort" tag="rowdy1" submarinetype="Player" IgnoreIncapacitatedCharacters="true" chooserandom="true" />
           <TagAction criteria="humanprefabidentifier:rowdyescort" tag="rowdy2" submarinetype="Player" IgnoreIncapacitatedCharacters="true" ChooseRandomExcludingTag="rowdy1" chooserandom="true"/>
+          <NPCFollowAction npctag="rowdy1" targettag="rowdy2" follow="true" AbandonOnReset="true"/>
+          <NPCFollowAction npctag="rowdy2" targettag="rowdy1" follow="true" AbandonOnReset="true"/>
+          <TriggerAction target1tag="rowdy1" target2tag="rowdy2" radius="350" />
+          <WaitAction time="2" />
           <ForceSayAction message="EventText.escortrowdymissionevent.insult1" SayInRadio="false" TargetTag="rowdy1" />
           <WaitAction time="2" />
           <ForceSayAction message="EventText.escortrowdymissionevent.insult2" SayInRadio="false" TargetTag="rowdy2" />
           <WaitAction time="2" />
-          <CombatAction combatmode="Offensive" npctag="rowdy2" enemytag="rowdy1" isinstigator="true" witnessreaction="retreat" cooldown="8" AbandonOnReset="true" />
-          <WaitAction time="10" />
+          <CombatAction combatmode="Offensive" npctag="rowdy1" enemytag="rowdy2" isinstigator="true" witnessreaction="retreat" cooldown="7" AbandonOnReset="true" />
+          <CombatAction combatmode="Offensive" npctag="rowdy2" enemytag="rowdy1" isinstigator="true" witnessreaction="retreat" cooldown="7" AbandonOnReset="true" />
+          <WaitAction time="8" />
           <Goto name="rowdyloop" /> 
         </Success>
         <Failure>
