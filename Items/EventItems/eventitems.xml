@@ -1978,7 +1978,7 @@
   </Item>
   
   <!-- big volcano/lithomorph spawner -->
-  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="200.0" SpriteColor="255,255,255,255">
+  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="2000.0" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.5" depth="0.75" />
     <DecorativeSprite name="lithobody" Texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" SourceRect="9,33,422,684" origin="0.5,0.5" depth="0.7" rotation="90" scale="1" offset="0,-200"/>
@@ -2005,9 +2005,39 @@
     <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.715" offset="-50,-80" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
       <IsActiveConditional conditionpercentage="gt 0" />
     </DecorativeSprite>
-    <!-- AIrange seems hard capped -->
-    <Turret autooperate="true" maxdistance="3000" AIrange="3000" friendlytag="ancientalien" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="true" targetmonsters="false" targethumans="true" targetsubmarines="true" targetitems="false" canbeselected="false" firingoffset="0,0" characterusable="false" linkable="true" barrelpos="250,50" rotationlimits="250,290" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="0" reload="8" shotsperburst="3" delaybetweenbursts="0.3" alternatingfiringoffset="true" springstiffnesslowskill="1" springstiffnesshighskill="1" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="1" rotationspeedhighskill="1">
-      <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
+         
+    <TriggerComponent bodyoffset="0,300" width="700" height="1400" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200" staytriggereddelay="2" >
+      <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="false">
+        <Affliction identifier="burn" strength="8" />
+      </Attack>
+      <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
+        <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" />
+      </LightSource>
+      <StatusEffect type="OnActive" target="This">
+        <Sound file="Content/Sounds/Ambient/Thunder1.ogg" range="20000" position="0,700" />
+        <Sound file="Content/Sounds/Water/BlackSmoker.ogg" range="7000" position="0,700" />
+        <ParticleEmitter particle="volcanosmokefast" particlespersecond="2" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+        <ParticleEmitter particle="lavasplash" particlespersecond="10" position="-50,700" anglemin="70" anglemax="110" velocitymin="0" velocitymax="8000" />
+        <ParticleEmitter particle="lavachunk" particlespersecond="15" position="-50,700" anglemin="80" anglemax="100" velocitymin="1000" velocitymax="6000" drawontop="true" />
+        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="-50,700" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" drawontop="true" />
+      </StatusEffect>
+    </TriggerComponent> 
+    <!-- <TriggerComponent randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
+    </TriggerComponent>    -->
+    
+    <Turret autooperate="true" maxdistance="3000" AIrange="3000" friendlytag="lithomorph" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="false" targetmonsters="false" targethumans="false" targetsubmarines="false" targetitems="false" canbeselected="false" firingoffset="40,0" characterusable="false" linkable="true" barrelpos="250,50" rotationlimits="220,320" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="0" reload="1" shotsperburst="3" delaybetweenbursts="0.3" alternatingfiringoffset="true" springstiffnesslowskill="20" springstiffnesshighskill="20" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="5" rotationspeedhighskill="5" randomaimmintime="0" randomaimmaxtime="0" randomaimamount="100">    
+     
+      <StatusEffect type="Always" target="This" interval="1">
+        <Conditional IsActive="true" targetitemcomponent="TriggerComponent" />
+        <Use />
+        <SpawnItem identifier="vulcanomorphprojectile" amount="1" spawnposition="ThisInventory" />
+      </StatusEffect> 
+      
+      <!-- <RailSprite name="alienturret_rail" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="2,0,184,316" origin="0.5,0.83" />
+      <RailSpriteBroken name="alienturret_rail_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="254,0,184,316" origin="0.5,0.83" /> 
+      <BarrelSprite name="alienturret_barrel" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="188,2,66,184" origin="0.5,1.57" />
+      <BarrelSpriteBroken name="alienturret_barrel_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="442,2,66,184" origin="0.5,1.57" /> -->
+      
       <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
       <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
       <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
@@ -2034,9 +2064,9 @@
         <Remove />
       </StatusEffect>
       <StatusEffect type="Always" target="This" duration="2" interval="8" >
-        <ParticleEmitter particle="risingbubbles" position="0,200" scalemin="2" scalemax="3" anglemin="0" anglemax="360" distancemin="-300" distancemax="300" velocitymin="0" velocitymax="0" particlespersecond="6" drawontop="true"/>
+        <ParticleEmitter particle="risingbubbles" position="0,200" scalemin="2" scalemax="3" anglemin="0" anglemax="360" distancemin="-300" distancemax="300" velocitymin="0" velocitymax="0" particlespersecond="6" drawontop="true" LifeTimeMultiplier="1.5"/>
         <ParticleEmitter particle="volcanosmokefast" particlespersecond="8" position="0,800" scalemin="0.8" scalemax="1" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" drawontop="true" />
-        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="0,800" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" />
+        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="0,800" anglemin="20" anglemax="160" velocitymin="100" velocitymax="1000" distancemin="0" distancemax="100"/>
       </StatusEffect>      
       <!-- <StatusEffect type="Always" target="This" interval="8" delay="1" stackable="false">
         <SpawnItem identifier="vulcanomorphprojectile" spawnposition="This" count="3" aimspread="20" rotation="0" Offset="800,800" impulse="5"/>
@@ -2056,12 +2086,8 @@
     </Turret>
     <ItemContainer hideitems="true" drawinventory="false" capacity="3" maxstacksize="1" canbeselected="false" characterusable="false">
       <Containable items="vulcanomorphprojectile" />
-      <!-- when the turret is fired, it triggers this statuseffect and spawns new ammo -->
-      <StatusEffect type="OnUse" target="Contained">
-        <SpawnItem identifier="vulcanomorphprojectile" amount="3" spawnposition="ThisInventory" />
-      </StatusEffect>
     </ItemContainer> 
-    <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="1000" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
+    <LightComponent LightColor="255,100,30,255" Flicker="0.2" flickerspeed="0.5" range="1400" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
     </LightComponent> 
   </Item>
 

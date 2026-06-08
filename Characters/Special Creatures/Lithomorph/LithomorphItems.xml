@@ -538,22 +538,23 @@
           <Affliction identifier="burn" strength="35" />
           <Affliction identifier="stun" strength="1.5" />
         </Explosion>
-        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="3000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="3000" selectionmode="random"/>
         <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="3000" />
         <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="3000" />
         <Remove />
       </StatusEffect>
-      <StatusEffect type="OnSpawn" target="This,Contained" delay="10" stackable="false" >
+      <StatusEffect type="OnNotContained" target="This" delay="5" stackable="false" >
         <particleemitter particle="brownchunks" drawontop="true" particleamount="10" velocitymin="30" velocitymax="50" anglemin="0" anglemax="360" scalemin="0.3" scalemax="0.5" />
+        <ParticleEmitter particle="lavasplashes" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="0" scalemin="0.25" scalemax="0.3" />
         <Remove />
       </StatusEffect>
-      <StatusEffect type="OnActive" target="This">
-        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="50" scalemin="0.5" scalemax="0.7" />
-        <ParticleEmitter particle="volcanosmoke" anglemin="0" anglemax="360" particleamount="1" velocitymin="0" velocitymax="0" scalemin="0.2" scalemax="0.3" />
-        <ParticleEmitter particle="lavasplashes" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="0.15" scalemax="0.2" />
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="3" velocitymin="0" velocitymax="50" scalemin="0.5" scalemax="0.7" />
+        <ParticleEmitter particle="volcanosmoke" anglemin="0" anglemax="360" particlespersecond="1" velocitymin="0" velocitymax="0" scalemin="0.2" scalemax="0.3" />
+        <ParticleEmitter particle="lavasplashes" anglemin="0" anglemax="360" particlespersecond="8" velocitymin="0" velocitymax="0" scalemin="0.15" scalemax="0.2" />
       </StatusEffect>
     </Projectile>
-    <LightComponent lightcolor="180,60,0,255" range="45" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0.2" ison="true">
+    <LightComponent lightcolor="180,60,0,255" range="60" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0.2" ison="true">
       <LightSprite texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" sourcerect="677,855,125,73" />
     </LightComponent>
   </Item>
