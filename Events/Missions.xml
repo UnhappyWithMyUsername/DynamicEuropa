@@ -1735,7 +1735,7 @@
     commonness="50"
     reward="2000"
     spawntype="mainpath"
-    itemspawnradius="20000"
+    itemspawnradius="10"
     nestobjectamount="1"
     allowretry="true">
     <Reputation identifier="location" amount="3" />
@@ -1916,35 +1916,29 @@
     
   
   <!-- destroy a large alien turret -->
-  <SalvageMission
+  <NestMission
     identifier="killvolcaniclithomorph"
     tags="killalienthing"
-    name="missionname.killvolcaniclithomorph"
-    description="missiondescription.killvolcaniclithomorph"
-    successmessage="missionsuccess.killvolcaniclithomorph"
-    failuremessage="missionfailure.killvolcaniclithomorph"
-    type="Salvage"
+    type="Nest"
     difficulty="3"
-    commonness="50"
-    reward="2000"
+    commonness="100"
+    spawntype="mainpath"
+    itemspawnradius="10"
+    nestobjectamount="2"
+    reward="2500"
     allowretry="true">
     <Reputation identifier="location" amount="3" />
     <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
     <LocationType from="Any" to="Any" />
     <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="230,60,30"/>
-    <target
-      spawntype="mainpath"
-      itemidentifier="vulcanomorphdrilltarget"
-      sonarlabel="missionsonarlabel.killvolcaniclithomorph"
-      allowcontinuebeforeretrieved="true"
-      requireretrieval="Interact"
-      minamount="1"
-      maxamount="1"
-      hidelabelafterretrieved="false">
-    </target>
+    <Items>
+      <!-- spawn this super jank invisible item to not make the mission succeed if you only blow up the volcano, an event checks if lithomorph dies and removes the invisible item, thus succeeding the mission-->
+      <Item identifier="vulcanomorphdrilltarget" />
+      <Item identifier="invisibleitemformissionchecks" />
+    </Items>
     <TriggerEvent state="0" delay="5" eventidentifier="killvolcaniclithomorphevent" campaignonly="true"/>
-    <!-- <CompleteCheckDataAction identifier="killedvolcaniclithomorph" condition="eq 1"/> -->
-  </SalvageMission>
+    <CompleteCheckDataAction identifier="killedvolcaniclithomorph" condition="eq 1"/>
+  </NestMission>
   
 
     <!-- CULT OF HUSK RELATED missions -->

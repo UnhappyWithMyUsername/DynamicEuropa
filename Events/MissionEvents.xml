@@ -2337,43 +2337,43 @@
     <!-- kill vulcanomorph mission -->
     <!-- first check if volcano is broken, then check if lithomorph is killed -->
     <ScriptedEvent identifier="killvolcaniclithomorphevent">
-      <WaitAction time="1" />
+      <SetDataAction identifier="killedvolcaniclithomorph" value="0" />
       <TagAction criteria="itemidentifier:vulcanomorphdrilltarget" tag="volcano" />
+      <TagAction criteria="itemidentifier:invisibleitemformissionchecks" tag="removethis" />
       <SetDataAction identifier="killvolcaniclithomorphnorepeat" value="1" />
       <Label name="volcanobrokencheck" />
       <WaitAction time="1" />
-      <!-- check if moloch is dead -->
       <CheckConditionalAction targettag="volcano" condition="gte 0" >
         <Success>
           <Goto name="volcanobrokencheck" />
         </Success>
         <Failure>
-          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="1" />  
+          <!-- <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="1" />   -->
         </Failure> 
       </CheckConditionalAction>
       <WaitAction time="1" />
       <TagAction criteria="speciesname:Lithomorphvolcanic" tag="missionlithomorph" />
       <Label name="lithomorphkilledcheck" />
       <WaitAction time="1" />
-      <!-- check if moloch is dead -->
       <CheckConditionalAction targettag="missionlithomorph" isdead="true" >  
         <Failure>
           <Goto name="lithomorphkilledcheck" />
         </Failure>    
         <Success>
           <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="2" />
-          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="3" />
+          <SetDataAction identifier="killedvolcaniclithomorph" value="1" />
+          <RemoveItemAction targettag="removethis" Amount="100" />
         </Success>
       </CheckConditionalAction>
     </ScriptedEvent>
 
 
     <ScriptedEvent identifier="killvolcaniclithoSTATECHECK">
-      <WaitAction time="2" />
+      <WaitAction time="5" />
           <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="1" />
-      <WaitAction time="2" />
+      <WaitAction time="5" />
           <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="2" />
-      <WaitAction time="2" />
+      <WaitAction time="5" />
           <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="3" />
     </ScriptedEvent>
  

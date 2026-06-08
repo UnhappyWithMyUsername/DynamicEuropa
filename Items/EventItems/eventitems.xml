@@ -2089,7 +2089,11 @@
     </ItemContainer> 
     <LightComponent LightColor="255,100,30,255" Flicker="0.2" flickerspeed="0.5" range="1400" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
     </LightComponent> 
-    <AiTarget sightrange="3000.0" soundrange="3000" static="True" />
+    <LevelResource deattachduration="999" randomoffsetfromwall="80">
+      <Commonness commonness="0" abysscommonness="0" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- <AiTarget soundrange="500000" staticsound="True" sonarlabel="sonarlabel.killvolcaniclithomorph"  /> -->
   </Item>
 
   <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">
@@ -2144,6 +2148,13 @@
       </StatusEffect>
     </MeleeWeapon>
   </Item>
+
+  <!-- this is an invisible 1 pixel item you can use to prevent missions from succeeding with their hardcoded conditions, it's fucking jank and barodevs never actually gave us proper ways to force succeed missions -->
+  <Item name="" identifier="invisibleitemformissionchecks" Tags="missionitem"  hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="0,0,0,0" invulnerabletodamage="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.6" origin="0.5,0.5" />
+    <Body width="1" height="1" density="10" />
+  </Item>
+
 
     <!-- UNUSED. For sabotaging deconstructors -->
 <!--   <Item hideinmenus="true" name="sabotageitem" identifier="sabotageitem" tags="" category="Misc" Scale="0.5" AllowStealing="false">
