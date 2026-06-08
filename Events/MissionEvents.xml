@@ -699,7 +699,27 @@
           </ConversationAction>
         </Success>
       </CheckDataAction>
-    </ScriptedEvent>   
+    </ScriptedEvent>       
+
+    <!-- recover cargo pod mission -->
+    <ScriptedEvent identifier="missionevent_killvolcaniclithomorph" commonness="20" >
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securityguy" spawnlocation="Outpost" />
+      <TriggerAction target1tag="player" target2tag="securityguy" radius="300" waitforinteraction="false"/>
+      <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.justdocked" speakertag="securityguy" invokertag="triggerer_player" eventsprite="BombScare1">
+        <Option text="EventText.generic.continue" >
+          <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.nastimorph" targettag="triggerer_player" eventsprite="BombScare1">
+            <Option text="EventText.missionevent_killvolcaniclithomorph.pokeit" forcesay="true" forcesayremovequotes="true" >
+              <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.burns" targettag="triggerer_player" eventsprite="BombScare1">
+                <Option text="eventtext.generic.gotit" endconversation="true" >                
+                  <MissionAction missionidentifier="Cargopodsalvage" />
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>
     
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
