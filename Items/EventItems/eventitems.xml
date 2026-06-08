@@ -1972,9 +1972,97 @@
         <SpawnItem identifier="langbeinite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
         <SpawnItem identifier="aragonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
         <SpawnItem identifier="sphalerite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
-      </StatusEffect>
+      </StatusEffect>    
       
     </ItemContainer>    
+  </Item>
+  
+  <!-- big volcano/lithomorph spawner -->
+  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="200.0" SpriteColor="255,255,255,255">
+    <Body radius="160" density="10" bodytype="Dynamic" />
+    <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.5" depth="0.75" />
+    <DecorativeSprite name="lithobody" Texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" SourceRect="9,33,422,684" origin="0.5,0.5" depth="0.7" rotation="90" scale="1" offset="0,-200"/>
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.71" sourcerect="472,1315,445,733" origin="0.5,0.5" scale="0.35" offset="-150,0" />
+    <DecorativeSprite name="backgroundrock2" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.72" sourcerect="1032,1247,439,801" origin="0.5,0.5" scale="0.35" offset="0,60" />
+    <DecorativeSprite name="backgroundrock3" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.71" sourcerect="1548,1263,445,785" origin="0.5,0.5" scale="0.35" offset="150,30" />
+    <DecorativeSprite name="backgroundrock4" texture="Content/Map/Biomes/Hydrothermalwastes/WallEdgeChunks.png" depth="0.69" sourcerect="0,421,1016,506" origin="0.5,0.5" scale="0.5" offset="0,-265" />
+    <!-- breakable -->
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.731" offset="80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.731" offset="80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.732" offset="-80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.732" offset="-80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.715" offset="-50,-80" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.715" offset="-50,-80" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <!-- AIrange seems hard capped -->
+    <Turret autooperate="true" maxdistance="3000" AIrange="3000" friendlytag="ancientalien" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="true" targetmonsters="false" targethumans="true" targetsubmarines="true" targetitems="false" canbeselected="false" firingoffset="0,0" characterusable="false" linkable="true" barrelpos="250,50" rotationlimits="250,290" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="0" reload="8" shotsperburst="3" delaybetweenbursts="0.3" alternatingfiringoffset="true" springstiffnesslowskill="1" springstiffnesshighskill="1" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="1" rotationspeedhighskill="1">
+      <sound file="Content/Items/Alien/AlienTurret1.ogg" range="10000" type="OnUse" />
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 50" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="2500" volume="3" frequencymultiplier="0.5" />
+        <particleemitter particle="brownchunks" particleamount="15" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="360" scalemin="2.5" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="lavachunk" particleamount="15" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="360" scalemin="2.5" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="lavasplashes" particleamount="5" velocitymin="0" velocitymax="0" distancemin="0" distancemax="300" anglemin="0" anglemax="360" scalemin="2" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="volcanofire" particleamount="1" velocitymin="0" velocitymax="0" distancemin="0" distancemax="300" anglemin="90" anglemax="90" scalemin="2" scalemax="2" drawontop="true" copyentityangle="true" />
+        <SpawnCharacter speciesname="LithomorphVolcanic" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" duration="2" interval="8" >
+        <ParticleEmitter particle="risingbubbles" position="0,200" scalemin="2" scalemax="3" anglemin="0" anglemax="360" distancemin="-300" distancemax="300" velocitymin="0" velocitymax="0" particlespersecond="6" drawontop="true"/>
+        <ParticleEmitter particle="volcanosmokefast" particlespersecond="8" position="0,800" scalemin="0.8" scalemax="1" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" drawontop="true" />
+        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="0,800" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" />
+      </StatusEffect>      
+      <!-- <StatusEffect type="Always" target="This" interval="8" delay="1" stackable="false">
+        <SpawnItem identifier="vulcanomorphprojectile" spawnposition="This" count="3" aimspread="20" rotation="0" Offset="800,800" impulse="5"/>
+      </StatusEffect> -->
+      
+      <StatusEffect type="OnDamaged" target="This">
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="5" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+      </StatusEffect>
+    </Turret>
+    <ItemContainer hideitems="true" drawinventory="false" capacity="3" maxstacksize="1" canbeselected="false" characterusable="false">
+      <Containable items="vulcanomorphprojectile" />
+      <!-- when the turret is fired, it triggers this statuseffect and spawns new ammo -->
+      <StatusEffect type="OnUse" target="Contained">
+        <SpawnItem identifier="vulcanomorphprojectile" amount="3" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer> 
+    <LightComponent LightColor="150,200,255,255" Flicker="0.0" powerconsumption="0" range="1000" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
+    </LightComponent> 
   </Item>
 
   <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">
