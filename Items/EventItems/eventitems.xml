@@ -1978,7 +1978,7 @@
   </Item>
   
   <!-- big volcano/lithomorph spawner -->
-  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="2000.0" SpriteColor="255,255,255,255">
+  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="50" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.5" health="2000.0" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.5" depth="0.75" />
     <DecorativeSprite name="lithobody" Texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" SourceRect="9,33,422,684" origin="0.5,0.5" depth="0.7" rotation="90" scale="1" offset="0,-200"/>
@@ -2008,7 +2008,7 @@
          
     <TriggerComponent bodyoffset="0,300" width="700" height="1400" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200" staytriggereddelay="2" >
       <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="false">
-        <Affliction identifier="burn" strength="8" />
+        <Affliction identifier="burn" strength="3" />
       </Attack>
       <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
         <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" />
@@ -2089,6 +2089,7 @@
     </ItemContainer> 
     <LightComponent LightColor="255,100,30,255" Flicker="0.2" flickerspeed="0.5" range="1400" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
     </LightComponent> 
+    <AiTarget sightrange="3000.0" soundrange="3000" static="True" />
   </Item>
 
   <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">

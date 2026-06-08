@@ -712,7 +712,7 @@
             <Option text="EventText.missionevent_killvolcaniclithomorph.pokeit" forcesay="true" forcesayremovequotes="true" >
               <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.burns" targettag="triggerer_player" eventsprite="BombScare1">
                 <Option text="eventtext.generic.gotit" endconversation="true" >                
-                  <MissionAction missionidentifier="Cargopodsalvage" />
+                  <MissionAction missionidentifier="killvolcaniclithomorph" />
                 </Option>
               </ConversationAction>
             </Option>
@@ -2266,7 +2266,7 @@
       <!-- check if moloch is dead -->
       <CheckConditionalAction targettag="missionmoloch" isdead="true" >      
         <Success>
-          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" />
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" ForceFailure="true" />
           <Goto name="end" />
         </Success>
       </CheckConditionalAction>
@@ -2284,7 +2284,7 @@
       <!-- check if moloch is dead -->
       <CheckConditionalAction targettag="missionmoloch" isdead="true" >      
         <Success>
-          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" />
+          <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="3" ForceFailure="true" />
           <Goto name="end" />
         </Success>
       </CheckConditionalAction>
@@ -2334,7 +2334,48 @@
     </ScriptedEvent>
 
 
+    <!-- kill vulcanomorph mission -->
+    <!-- first check if volcano is broken, then check if lithomorph is killed -->
+    <ScriptedEvent identifier="killvolcaniclithomorphevent">
+      <WaitAction time="1" />
+      <TagAction criteria="itemidentifier:vulcanomorphdrilltarget" tag="volcano" />
+      <SetDataAction identifier="killvolcaniclithomorphnorepeat" value="1" />
+      <Label name="volcanobrokencheck" />
+      <WaitAction time="1" />
+      <!-- check if moloch is dead -->
+      <CheckConditionalAction targettag="volcano" condition="gte 0" >
+        <Success>
+          <Goto name="volcanobrokencheck" />
+        </Success>
+        <Failure>
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="1" />  
+        </Failure> 
+      </CheckConditionalAction>
+      <WaitAction time="1" />
+      <TagAction criteria="speciesname:Lithomorphvolcanic" tag="missionlithomorph" />
+      <Label name="lithomorphkilledcheck" />
+      <WaitAction time="1" />
+      <!-- check if moloch is dead -->
+      <CheckConditionalAction targettag="missionlithomorph" isdead="true" >  
+        <Failure>
+          <Goto name="lithomorphkilledcheck" />
+        </Failure>    
+        <Success>
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="2" />
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="3" />
+        </Success>
+      </CheckConditionalAction>
+    </ScriptedEvent>
 
+
+    <ScriptedEvent identifier="killvolcaniclithoSTATECHECK">
+      <WaitAction time="2" />
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="1" />
+      <WaitAction time="2" />
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="2" />
+      <WaitAction time="2" />
+          <MissionStateAction missionidentifier="killvolcaniclithomorph" operation="Set" value="3" />
+    </ScriptedEvent>
  
 <!--       <ScriptedEvent identifier="jailbreak_alarm">
         <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />

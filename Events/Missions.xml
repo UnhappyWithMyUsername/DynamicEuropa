@@ -1747,173 +1747,205 @@
     </Items>
   </NestMission>
 
-    <!-- Recover cargo pod
-    It's super jank: spawns a wreck with a pod attached to it, the pod is pre-tagged and uses a conditional check to verify if the pod is within 5000 units of the "submarine switching terminal" which should be present in every docking module. The mission itself requires the event to work -->
-    <SalvageMission
-      identifier="Cargopodsalvage"
-      tags="salvagepod"
-      type="SalvageWreck"
-      difficulty="2"
-      commonness="100"
-      reward="2500"
-      achievementidentifier="salvagewreckmission"
-      spawntype="wreck"
-      requirewreck="true"
-      minleveldifficulty="35"
-      PickedUpMessage="missionmessage.wrecksalvage.pickedup"
-      wrecktags="CargopodsalvageWreck"
-      sideobjective="true"
-      allowretry="false" >
-      <Reputation identifier="location" amount="3" />
-      
-      <target
-        spawntype="None"
-        existingitemtag="salvageobjective"
-        sonarlabel="missionsonarlabel.lostcargo"
-        allowcontinuebeforeretrieved="false"
-        requireretrieval="None"
-        hidelabelafterretrieved="false">
-      </target>
-      
-      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="120,200,90"/>
-      <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
-      <TriggerEvent state="0" delay="5" eventidentifier="Cargopodsalvageevent" campaignonly="true"/>
-      <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
-    </SalvageMission>  
-
-    <!-- Drill an alien structure to recover an item, using brute force or a special drill pod. The structure reacts to taking damage -->
-    <SalvageMission
-      identifier="aliendrillsalvage"
-      tags="drillmission"
-      type="SalvageWreck"
-      difficulty="3"
-      commonness="100"
-      reward="2500"
-      requireddeliveryamount="1"
-      requirewreck="false"
-      PartiallyRetrievedMessage="missionmessage.aliendrillsalvage.partiallyretrieved"
-      AllRetrievedMessage="missionmessage.aliendrillsalvage.allretrieved">
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,512,256,256" color="80,65,100"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
-      <LocationType from="AnyOutpost" to="Outpost"/>
-      <chooserandom>
-        <target
-          spawntype="mainpath"
-          itemidentifier="aliendrilltarget"
-          sonarlabel="missionsonarlabel.drilltarget"
-          allowcontinuebeforeretrieved="true"
-          requireretrieval="None"
-          minamount="1"
-          maxamount="1"
-          hidelabelafterretrieved="false">
-          <target
-            itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.aliencore" removeitem="true" />
-        </target>
-      </chooserandom>
-    </SalvageMission>
-
-    <!-- TODO: require 2 geodes instead of 1, which prevents lucking out on the first rock -->
-    <!-- Break rocks to find a Geode. There are multiple rocks in the level, only one containing a geode -->
-    <SalvageMission
-      identifier="mineraldrillsalvage"
-      tags="drillmission"
-      type="SalvageWreck"
-      difficulty="1"
-      commonness="100"
-      reward="2100"
-      requireddeliveryamount="1"
-      requirewreck="false"
-      PartiallyRetrievedMessage="missionmessage.mineraldrillsalvage.partiallyretrieved"
-      AllRetrievedMessage="missionmessage.mineraldrillsalvage.allretrieved">
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="110,90,200"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
-      <LocationType from="AnyOutpost" to="Outpost"/>
-      <!-- multiple targets, only 1 has the geode -->
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" />
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-      <target
-        spawntype="mainpath"
-        itemidentifier="mineraldrilltarget"
-        sonarlabel="missionsonarlabel.drilltarget"
-        allowcontinuebeforeretrieved="true"
-        requireretrieval="None"
-        minamount="1"
-        maxamount="1"
-        hidelabelafterretrieved="false">
-        <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
-      </target>
-    </SalvageMission>
+  <!-- Recover cargo pod
+  It's super jank: spawns a wreck with a pod attached to it, the pod is pre-tagged and uses a conditional check to verify if the pod is within 5000 units of the "submarine switching terminal" which should be present in every docking module. The mission itself requires the event to work -->
+  <SalvageMission
+    identifier="Cargopodsalvage"
+    tags="salvagepod"
+    type="SalvageWreck"
+    difficulty="2"
+    commonness="100"
+    reward="2500"
+    achievementidentifier="salvagewreckmission"
+    spawntype="wreck"
+    requirewreck="true"
+    minleveldifficulty="35"
+    PickedUpMessage="missionmessage.wrecksalvage.pickedup"
+    wrecktags="CargopodsalvageWreck"
+    sideobjective="true"
+    allowretry="false" >
+    <Reputation identifier="location" amount="3" />
     
+    <target
+      spawntype="None"
+      existingitemtag="salvageobjective"
+      sonarlabel="missionsonarlabel.lostcargo"
+      allowcontinuebeforeretrieved="false"
+      requireretrieval="None"
+      hidelabelafterretrieved="false">
+    </target>
+    
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="120,200,90"/>
+    <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="Cargopodsalvageevent" campaignonly="true"/>
+    <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
+  </SalvageMission>  
+
+  <!-- Drill an alien structure to recover an item, using brute force or a special drill pod. The structure reacts to taking damage -->
+  <SalvageMission
+    identifier="aliendrillsalvage"
+    tags="drillmission"
+    type="SalvageWreck"
+    difficulty="3"
+    commonness="100"
+    reward="2500"
+    requireddeliveryamount="1"
+    requirewreck="false"
+    PartiallyRetrievedMessage="missionmessage.aliendrillsalvage.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.aliendrillsalvage.allretrieved">
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,512,256,256" color="80,65,100"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+    <LocationType from="AnyOutpost" to="Outpost"/>
+    <chooserandom>
+      <target
+        spawntype="mainpath"
+        itemidentifier="aliendrilltarget"
+        sonarlabel="missionsonarlabel.drilltarget"
+        allowcontinuebeforeretrieved="true"
+        requireretrieval="None"
+        minamount="1"
+        maxamount="1"
+        hidelabelafterretrieved="false">
+        <target
+          itemidentifier="aliencore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.aliencore" removeitem="true" />
+      </target>
+    </chooserandom>
+  </SalvageMission>
+
+  <!-- TODO: require 2 geodes instead of 1, which prevents lucking out on the first rock -->
+  <!-- Break rocks to find a Geode. There are multiple rocks in the level, only one containing a geode -->
+  <SalvageMission
+    identifier="mineraldrillsalvage"
+    tags="drillmission"
+    type="SalvageWreck"
+    difficulty="1"
+    commonness="100"
+    reward="2100"
+    requireddeliveryamount="1"
+    requirewreck="false"
+    PartiallyRetrievedMessage="missionmessage.mineraldrillsalvage.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.mineraldrillsalvage.allretrieved">
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="110,90,200"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Reputation identifier="location" amount="2" amountforopposingfaction="-2" />
+    <LocationType from="AnyOutpost" to="Outpost"/>
+    <!-- multiple targets, only 1 has the geode -->
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" />
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="mineraldrilltarget"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="None"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+      <!-- <target itemidentifier="mineralcore" requireretrieval="RetrievedToSub" minamount="1" maxamount="1" RequireInsideOriginalContainer="false" sonarlabel="missionsonarlabel.mineralcore" removeitem="true" /> -->
+    </target>
+  </SalvageMission>
+    
+  
+  <!-- destroy a large alien turret -->
+  <SalvageMission
+    identifier="killvolcaniclithomorph"
+    tags="killalienthing"
+    name="missionname.killvolcaniclithomorph"
+    description="missiondescription.killvolcaniclithomorph"
+    successmessage="missionsuccess.killvolcaniclithomorph"
+    failuremessage="missionfailure.killvolcaniclithomorph"
+    type="Salvage"
+    difficulty="3"
+    commonness="50"
+    reward="2000"
+    allowretry="true">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <LocationType from="Any" to="Any" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,0,256,256" color="230,60,30"/>
+    <target
+      spawntype="mainpath"
+      itemidentifier="vulcanomorphdrilltarget"
+      sonarlabel="missionsonarlabel.killvolcaniclithomorph"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="Interact"
+      minamount="1"
+      maxamount="1"
+      hidelabelafterretrieved="false">
+    </target>
+    <TriggerEvent state="0" delay="5" eventidentifier="killvolcaniclithomorphevent" campaignonly="true"/>
+    <!-- <CompleteCheckDataAction identifier="killedvolcaniclithomorph" condition="eq 1"/> -->
+  </SalvageMission>
+  
 
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
