@@ -2010,7 +2010,7 @@
     </DecorativeSprite>
          
     <TriggerComponent bodyoffset="0,300" width="700" height="1400" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200" staytriggereddelay="2" >
-      <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="false">
+      <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="true">
         <Affliction identifier="burn" strength="2" />
       </Attack>
       <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
@@ -2074,17 +2074,14 @@
       <!-- <StatusEffect type="Always" target="This" interval="8" delay="1" stackable="false">
         <SpawnItem identifier="vulcanomorphprojectile" spawnposition="This" count="3" aimspread="20" rotation="0" Offset="800,800" impulse="5"/>
       </StatusEffect> -->
-      
-      <StatusEffect type="OnDamaged" target="This">
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
-      </StatusEffect>
       <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="5" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="100" velocitymax="300" scalemin="0.5" scalemax="1" drawontop="true" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
       </StatusEffect>
     </Turret>
     <ItemContainer hideitems="true" drawinventory="false" capacity="3" maxstacksize="1" canbeselected="false" characterusable="false">
