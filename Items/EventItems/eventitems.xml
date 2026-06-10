@@ -1645,7 +1645,7 @@
     </ItemComponent>    
   </Item>
 
-  <!-- TODO: add more missions that use drillingpod? -->
+  <!-- TODO: add more missions that use drillingpod -->
   <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500" >
     <PreferredContainer primary="depthchargeloader" />
     <PreferredContainer primary="wreckammoboxcontainer" spawnprobability="0.01" />
@@ -2112,6 +2112,10 @@
       <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
     </DecorativeSprite>
     <Body width="107" height="62" density="20" />
+    <Price baseprice="200" sold="true">
+      <Price storeidentifier="merchantcity" multiplier="1" minamount="2" maxamount="3" />
+      <Price storeidentifier="merchantresearch" multiplier="0.8" minamount="2" maxamount="2"/>
+    </Price>
     <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,-20" handle1="-20,-14" handle2="84,-10" msg="ItemMsgPickUpSelect" />
     <RepairTool range="150" barrelpos="50,5" combatpriority="0" targetforce="1" HitItems="true" >
       <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
