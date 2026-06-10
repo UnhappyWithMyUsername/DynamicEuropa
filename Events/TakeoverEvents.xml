@@ -542,7 +542,8 @@
       <SetDataAction identifier="takeoverinprogress" value="true" />
       <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc" />
+      <!-- use ChooseRandom but pick 100% of humans with ChooseRandomExcludingTag so that it doesnt tag hostages/prisoners from jailbreak missions. A little janky but that's just how it is  -->
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc" chooserandom="true" ChoosePercentage="100" ChooseRandomExcludingTag="hostage,prisoner"/>
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
       <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
       <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
@@ -580,7 +581,8 @@
       <SetDataAction identifier="takeoverinprogress" value="true" />
       <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" />
+      <!-- use ChooseRandom but pick 100% of humans with ChooseRandomExcludingTag so that it doesnt tag hostages/prisoners from jailbreak missions. A little janky but that's just how it is  -->
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" chooserandom="true" ChoosePercentage="100" ChooseRandomExcludingTag="hostage,prisoner"/>
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
       <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
       <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
