@@ -2120,6 +2120,9 @@
         <Conditional IsDead="false" />
         <Affliction identifier="scanninginprogress" strength="7" />
       </StatusEffect> 
+      <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-10.0">
+        <Conditional HasTag="scannable"/>
+      </StatusEffect>
       <StatusEffect type="OnUse" target="Contained" Condition="-0.5" >
         <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
       </StatusEffect>
