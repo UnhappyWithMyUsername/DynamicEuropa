@@ -2145,10 +2145,10 @@
     <StatusHUD drawhudwhenequipped="true" />
   </Item>
 
-  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="0.5" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,255">
+  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="0.5" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0">
     <PreferredContainer primary="storagecab"/>
-    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="430,257,115,117" origin="0.5,0.5" />
-    <Body radius="62" density="20" />
+    <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
+    <Body radius="62" density="10" bodytype="Static"/>
     <ItemComponent>
       <!-- spawn a decorative item that stays when this gets destroyed -->
       <StatusEffect type="OnSpawn" target="This">
@@ -2166,11 +2166,18 @@
   </Item>
   
   <!-- purely decorative item that is just a sprite for when the actual scanning item gets destroyed to validate the mission -->
-  <Item name="scan this thing" identifier="de-scanningdecoration" category="Misc" Tags="decorative" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255" hideinmenus="true">
+  <Item name="scan this thing" identifier="de-scanningdecoration" category="Misc" Tags="decorative" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255" hideinmenus="true" noninteractable="true" invulnerabletodamage="true">
+    <Body radius="62" density="20" bodytype="Static"/>
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="0,0,1,1" origin="0.5,0.5" />
-    <!-- <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
-      <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
-    </DecorativeSprite> -->
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="255,0,137,255" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="1" depth="0.61" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="401,37,111,218" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="1" depth="0.61" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="0,0,233,249" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="2" depth="0.62" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="0,255,203,257" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="2" depth="0.62" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" sourcerect="0,0,506,338" origin="0.5,0.5" scale="0.35" offset="0,-100" depth="0.63"  randomgroupid="3"/>
+    <DecorativeSprite name="backgroundrock2" texture="Content/Map/AlienWallSet2.png" sourcerect="0,344,506,338" origin="0.5,0.5" scale="0.35" offset="0,-100" depth="0.63" randomgroupid="3"/>
+    <LightComponent LightColor="50,110,150,200" range="120" IsOn="true" pulseamount="0.3" pulsefrequency="0.2">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" size="1.0,1.0" />
+    </LightComponent> 
   </Item>
 
   <!-- sample vial used to stab the chimera in the mission -->
