@@ -2107,21 +2107,25 @@
 
   <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">
     <PreferredContainer secondary="weaponholder"/>
-    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="600,610,107,62" depth="0.6" origin="0.5,0.5" /><DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="600,610,107,62" depth="0.6" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
       <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
     </DecorativeSprite>
     <Body width="107" height="62" density="20" />
     <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,-20" handle1="-20,-14" handle2="84,-10" msg="ItemMsgPickUpSelect" />
-    <RepairTool range="150" barrelpos="50,5" combatpriority="0" targetforce="1" HitItems="false" >
+    <RepairTool range="150" barrelpos="50,5" combatpriority="0" targetforce="1" HitItems="true" >
       <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
       <ParticleEmitter particle="impactfirearm" anglemin="-15" anglemax="15" distancemin="80" distancemax="100" velocitymin="-250" velocitymax="-500" particlespersecond="20" copyentityangle="true" lifetimemultiplier="2" colormultiplier="50,255,50,100"/>
+      <ParticleEmitterHitItem identifiers="de-scanningtarget" particle="shockwavesmall" particlespersecond="5" scaleemin="1" scalemax="1" lifetimemultiplier="2" colormultiplier="255,255,50,100" anglemin="0" anglemax="0" distancemin="-20" distancemax="-20"/>   
       <StatusEffect type="OnUse" targettype="Usetarget" multiplyafflictionsbymaxvitality="true" comparison="and">
         <!-- <Conditional group="moloch" /> -->
         <Conditional IsDead="false" />
         <Affliction identifier="scanninginprogress" strength="7" />
-      </StatusEffect> 
-      <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-10.0">
+      </StatusEffect>
+      <!-- overpower the scannable health regeneration -->
+      <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-1000.0">
         <Conditional HasTag="scannable"/>
+        <Sound file="Content/Sounds/UI/Deadmsg.ogg" type="OnUse" range="600" loop="true" volume="0.5" frequencymultiplier="0.3" selectionmode="random" />
       </StatusEffect>
       <StatusEffect type="OnUse" target="Contained" Condition="-0.5" >
         <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
@@ -2132,13 +2136,41 @@
       </StatusEffect>
       <LightComponent LightColor="100,255,130,200" range="120" powerconsumption="10" IsOn="true" flicker="0.3" flickerspeed="1">
         <LightTexture texture="Content/Lights/lightcone.png" origin="-0.05,0.47" size="1.0,1.0" />
-      </LightComponent>
+      </LightComponent> 
     </RepairTool>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="-38,18" itemrotation="90" containedspritedepth="0.61" containedstateindicatorstyle="battery">
       <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
       <Containable items="mobilebattery" />
     </ItemContainer> 
     <StatusHUD drawhudwhenequipped="true" />
+  </Item>
+
+  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="0.5" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,255">
+    <PreferredContainer primary="storagecab"/>
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="430,257,115,117" origin="0.5,0.5" />
+    <Body radius="62" density="20" />
+    <ItemComponent>
+      <!-- spawn a decorative item that stays when this gets destroyed -->
+      <StatusEffect type="OnSpawn" target="This">
+        <SpawnItem identifier="de-scanningdecoration" spawnposition="This" />
+      </StatusEffect>
+      <!-- give this item lots of health regeneration so only the scanner can overpower it -->
+      <StatusEffect type="Always" target="This" condition="900" >
+        <Conditional condition="gt 1" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Sounds/UI/UImsg.ogg" type="OnUse" range="600" volume="1" frequencymultiplier="0.3" selectionmode="random" />
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
+  <!-- purely decorative item that is just a sprite for when the actual scanning item gets destroyed to validate the mission -->
+  <Item name="scan this thing" identifier="de-scanningdecoration" category="Misc" Tags="decorative" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255" hideinmenus="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="0,0,1,1" origin="0.5,0.5" />
+    <!-- <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
+      <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
+    </DecorativeSprite> -->
   </Item>
 
   <!-- sample vial used to stab the chimera in the mission -->
