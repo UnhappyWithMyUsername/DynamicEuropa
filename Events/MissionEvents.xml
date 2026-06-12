@@ -723,6 +723,14 @@
       <TagAction criteria="itemidentifier:de-missionscanner" tag="ownedscanner" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="scanresearcher" spawnlocation="Outpost" />
       <TriggerAction target1tag="player" target2tag="scanresearcher" radius="300" waitforinteraction="false"/>
+      <!-- check if already completed a scanning mission -->
+      <CheckDataAction identifier="completedscanningmission" condition="gt 0">
+        <Success>
+          <ConversationAction text="Eventtext.missionevent_scanningsidemission.alreadyknowscans" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" endconversation="true"/>
+          <MissionAction missiontag="scanningsidemission" />
+          <Goto name="end" />
+        </Success>
+      </CheckDataAction>
       <ConversationAction text="Eventtext.missionevent_scanningsidemission.briefing" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
         <Option text="Eventtext.missionevent_scanningsidemission.forscience" >
           <Goto name="checkscanner" />
@@ -733,14 +741,17 @@
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
               <MissionAction missiontag="scanningsidemission" />
+              <Goto name="end" />
             </Success>
             <Failure>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
               <MissionAction missiontag="scanningsidemission" />
+              <Goto name="end" />
             </Failure>
           </CountTargetsAction>
         </Option>
       </ConversationAction>
+      <Label name="end" />
     </ScriptedEvent>
     
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
