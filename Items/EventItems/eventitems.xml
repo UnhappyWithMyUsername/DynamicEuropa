@@ -2111,9 +2111,13 @@
     <Body radius="350" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="1167,1130,748,783" origin="0.5,0.5" />
     <BrokenSprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="25" fadein="false"/>
-    <DecorativeSprite name="flesh1" texture="Content/Characters/Endworm/Endworm.png" depth="0.62" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,215" />
-    <DecorativeSprite name="flesh2" texture="Content/Characters/Endworm/Endworm.png" depth="0.63" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,84" />
-    <DecorativeSprite name="flesh3" texture="Content/Characters/Endworm/Endworm.png" depth="0.64" sourcerect="55,766,961,343" origin="0.5,0.5" scale="0.7" offset="0,-120" />
+    <DecorativeSprite name="flesh1" texture="Content/Characters/Endworm/Endworm.png" depth="0.62" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,215" ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh2" texture="Content/Characters/Endworm/Endworm.png" depth="0.63" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,84" ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh3" texture="Content/Characters/Endworm/Endworm.png" depth="0.64" sourcerect="55,766,961,343" origin="0.5,0.5" scale="0.7" offset="0,-120"  ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh4" texture="Content/Characters/Endworm/Endworm.png" depth="0.621" sourcerect="245,1124,581,170" origin="0.5,0.5" scale="0.7" offset="0,345" ScaleAnim="sine" ScaleAnimAmount="0.0,0.4" ScaleAnimSpeed="2"/>
+    <DecorativeSprite name="fleshsideL" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="-200,-50" rotation="-110" ScaleAnim="sine" ScaleAnimAmount="0,0.1" ScaleAnimSpeed="0.35" />
+    <DecorativeSprite name="fleshsideR" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="200,-50" rotation="110" ScaleAnim="sine" ScaleAnimAmount="0,0.1" ScaleAnimSpeed="0.35"/>
+    
     <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1358,735,307,210" origin="0.5,0.5" scale="1" offset="-210,330" color="200,220,200,255" />
     <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1710,649,337,163" origin="0.5,0.5" scale="1" offset="0,440" color="200,220,200,255" />
     <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1358,735,307,210" origin="0.5,0.5" scale="1" offset="200,330" color="200,220,200,255" />
@@ -2139,10 +2143,7 @@
     </DecorativeSprite>
     <DecorativeSprite name="shellpiece2R" texture="Content/Characters/Endworm/Endworm.png" depth="0.603" sourcerect="1564,84,311,242" origin="0.5,0.5" scale="0.5" offset="170,-60" rotation="-150" color="175,165,150,255">
       <IsActiveConditional conditionpercentage="gt 50" />
-    </DecorativeSprite>    
-    <DecorativeSprite name="fleshsideL" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="-200,-50" rotation="-110"/>
-    <DecorativeSprite name="fleshsideR" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="200,-50" rotation="110"/>
-    
+    </DecorativeSprite>
     <LightComponent lightcolor="150,120,50,100" range="450.0" powerconsumption="0" pulsefrequency="0.2" pulseamount="0.3" ison="true" drawbehindsubs="false" >
       <Sprite texture="Content/Characters/Endworm/Endworm.png" sourcerect="1167,1130,748,783" origin="0.5,0.5" />
       <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
@@ -2151,15 +2152,17 @@
       <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
       <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
       <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
-      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true" offset="0,200">
         <Conditional conditionpercentage="lte 50" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
-        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" volume="2" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="10" velocitymin="100" velocitymax="600" scalemin="2" scalemax="3" LifeTimeMultiplier="5" drawontop="true"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="2000" volume="2" />
       </StatusEffect>
-      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true" offset="0,0">
         <Conditional conditionpercentage="lte 25" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
-        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="1000" volume="2" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="10" velocitymin="100" velocitymax="600" scalemin="2" scalemax="3" LifeTimeMultiplier="5" drawontop="true"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="2000" volume="2" />
       </StatusEffect>
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
@@ -2169,13 +2172,13 @@
         <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="20" velocitymin="100" velocitymax="600" scalemin="4" scalemax="5" LifeTimeMultiplier="5" />
         <ParticleEmitter particle="waterblood" copyentityangle="true" anglemin="0" anglemax="0" particleamount="1" velocitymin="0" velocitymax="0" scalemin="10" scalemax="10" LifeTimeMultiplier="0.5"/>
         <ParticleEmitter particle="waterblood" copyentityangle="true" anglemin="180" anglemax="180" particleamount="1" velocitymin="0" velocitymax="0" scalemin="10" scalemax="10" LifeTimeMultiplier="1"/>
+        <ParticleEmitter particle="bubbles" copyentityangle="true" anglemin="0" anglemax="180" particleamount="5" distancemin="-150" distancemax="150" velocitymin="50" velocitymax="100" scalemin="3" scalemax="4" LifeTimeMultiplier="3"/>
         <!-- <TriggerEvent identifier="mineraldrilltarget2crackedevent" /> -->
         <Remove />
       </StatusEffect>
-      <!-- <StatusEffect type="Always" target="This" offset="0,60">
-        <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
-        <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
-      </StatusEffect> -->
+      <StatusEffect type="Always" target="This" offset="0,360" interval="5" duration="2" stackable="false">
+        <ParticleEmitter particle="risingbubbles" scalemin="1" scalemax="2" anglemin="-10" anglemax="10" distancemin="-150" distancemax="150" velocitymin="0" velocitymax="0" particlespersecond="3" />
+      </StatusEffect>
       <StatusEffect type="OnDamaged" target="This" interval="0.5" >
         <Conditional conditionpercentage="gt 25" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="300" velocitymax="1000" scalemin="1" scalemax="1.5" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
