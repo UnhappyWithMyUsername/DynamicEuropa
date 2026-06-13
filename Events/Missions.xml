@@ -1783,7 +1783,7 @@
     <CompleteCheckDataAction identifier="Cargopodsalvaged" condition="eq 1"/>
   </SalvageMission>  
 
-  <!-- Drill an alien structure to recover an item, using brute force or a special drill pod. The structure reacts to taking damage -->
+  <!-- Drill an alien structure to recover an item, using brute force or a special drill pod. The structure reacts to taking damage - drillable-->
   <SalvageMission
     identifier="aliendrillsalvage"
     tags="drillmission"
@@ -1915,7 +1915,7 @@
   </SalvageMission>
     
   
-  <!-- destroy a large alien turret -->
+  <!-- destroy a vulcanomorph burrow, then a big lithomorph emerges - drillable -->
   <NestMission
     identifier="killvolcaniclithomorph"
     tags="killalienthing"
@@ -1938,6 +1938,32 @@
     </Items>
     <TriggerEvent state="0" delay="5" eventidentifier="killvolcaniclithomorphevent" campaignonly="true"/>
     <CompleteCheckDataAction identifier="killedvolcaniclithomorph" condition="eq 1"/>
+  </NestMission>
+    
+  <!-- destroy an endworm egg - drillable -->
+  <NestMission
+    identifier="destroyendwormegg"
+    tags="killalienthing"
+    name="missionname.bigalienturret"
+    description="missiondescription.bigalienturret"
+    successmessage="missionsuccess.bigalienturret"
+    failuremessage="missionfailure.bigalienturret"
+    type="Nest"
+    difficulty="3"
+    commonness="50"
+    reward="2000"
+    spawntype="AbyssCave"
+    itemspawnradius="99999"
+    nestobjectamount="1"
+    sonarlabel="missionsonarlabel.scanningsidemission"
+    allowretry="true">
+    <Reputation identifier="location" amount="3" />
+    <Portrait texture="Content/Map/LocationPortraits/EndPortrait4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <LocationType from="Any" to="Any" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,512,256,256" color="120,20,130"/>
+    <Items>
+      <Item identifier="endwormeggdrilltarget" />
+    </Items>
   </NestMission>
   
 
