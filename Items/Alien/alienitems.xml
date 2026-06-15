@@ -61,12 +61,20 @@
   <!-- not sure where this is used, custom alien sub? -->
   <Item name="Alien Generator" identifier="aliengeneratorPA" category="Alien" Tags="alien,aliengenerator,artifactcontainer" scale="0.3">
     <Sprite texture="Content/Items/Alien/Legacy/AlienRuin_Legacy.png" depth="0.8" sourcerect="512,0,512,573" />
-    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,50" canbeselected="false" range="800.0" IsOn="true">
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,50" canbeselected="false" range="800.0" IsOn="true" >
       <Sprite texture="Content/Items/Alien/Legacy/AlienRuin_Legacy.png" sourcerect="0,486,176,176" origin="0.47, 0.3" alpha="1.0" />
+      <IsActiveConditional targetcontaineditem="true" conditionpercentage="gt 0"/>
     </LightComponent>
     <ItemContainer capacity="1" maxstacksize="1" canbeselected="true" hideitems="true" itempos="264,-321" containedspritedepth="0.01" autointeractwithcontained="true">
       <GuiFrame relativesize="0.2,0.25" anchor="Center" minsize="140,170" maxsize="280,280" style="ItemUI" />
       <StatusEffect type="Always" target="This" Charge="-10.0" interval="0.1" />
+      <StatusEffect type="OnPicked" target="This" noninteractable="true" setvalue="true" />
+      <StatusEffect type="Always" target="Contained" >
+        <RequiredItem items="faradayartifact" type="Contained" matchonempty="true" />
+        <Conditional condition="lte 0.0" />
+        <ParticleEmitter particle="ElectricShock" distancemin="0" distancemax="0" particlespersecond="3" emitinterval="2" anglemin="0" anglemax="360" scalemin="0.2" scalemax="0.4" />
+        <ParticleEmitter particle="weldspark" distancemin="10" distancemax="50" particlespersecond="15" emitinterval="2" anglemin="0" anglemax="360" scalemin="0.8" scalemax="1.2" velocitymin="100" velocitymax="200" lifetimemultiplier="2" />
+      </StatusEffect>
       <Containable items="faradayartifact">
         <StatusEffect type="OnContaining" target="This" Charge="100.0" Voltage="10" setvalue="true" duration="0.1" stackable="false" />
       </Containable>

@@ -77,8 +77,8 @@
     </Item>
   </Override>
     
-  <!-- used in piezo pirate submarine -->
-  <Item name="Piezo Crystal (Wired)" identifier="piezocrystalPA" category="Material" Tags="" canbepicked="false" description="" scale="0.5" sonarsize="30" health="100" damagedbyexplosions="false" damagedbyprojectiles="false" damagedbymeleeweapons="false" damagedbyrepairtools="false">
+  <!-- used in piezo pirate submarine, only does junction box drain to JBs not tagged as "donthit"-->
+  <Item name="Piezo Crystal (Wired)" identifier="piezocrystalPA" category="Material" Tags="" canbepicked="false" description="" scale="0.5" sonarsize="30" health="100" damagedbyexplosions="false" damagedbyprojectiles="false" damagedbymeleeweapons="false" damagedbyrepairtools="false" spritecolor="255,0,0,255">
     <Sprite texture="Content/Items/Materials/Crystal.png" depth="1.0" sourcerect="0,4,1024,1020" origin="0.5,0.6" />
     <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.2" pulseamount="0.8" ison="true" drawbehindsubs="true">
       <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
@@ -91,35 +91,13 @@
         <RemoveItem />
       </StatusEffect>
     </LightComponent>
-    <LightComponent lightcolor="178,196,207,255" range="4000.0" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="1.0" ison="true" drawbehindsubs="true">
-      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
-    </LightComponent>
-    <ElectricalDischarger duration="0.2" outdoorsonly="true" powerconsumption="0" range="3500" rangemultiplierinwalls="1">
-      <StatusEffect type="OnUse" target="This">
-        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="6000" selectionmode="random" />
-        <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="6000" />
-        <Explosion range="7000.0" camerashake="3" stun="0" force="0.0" flames="false" shockwave="false" sparks="false" underwaterbubble="false" />
-      </StatusEffect>
-      <StatusEffect type="OnUse" target="This">
-        <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="6000" selectionmode="Random" />
-        <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="6000" />
-        <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="6000" />
-      </StatusEffect>
-    </ElectricalDischarger>
     <ItemComponent>
       <!-- when the component activates, apply extra load to nearby items and deactive the component -->
-      <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="3000.0" setvalue="true" stackable="false" extraload="600">
-        <Conditional HasTas="neq donthit" />
+      <StatusEffect type="OnActive" target="NearbyItems" targettags="junctionbox" range="4000.0" setvalue="true" stackable="false" extraload="200">
+        <Conditional HasTag="neq donthit" />
       </StatusEffect>
-      <StatusEffect type="OnActive" target="This" IsActive="false" />
-      <!-- reactivate after one second -->
-      <StatusEffect type="Always" target="This" stackable="false" delay="1.0" IsActive="true" />
-      <StatusEffect type="Always" target="This" stackable="false" delay="10.0">
-        <Use />
-      </StatusEffect>
-      <StatusEffect type="Always" target="This">
-        <ParticleEmitter particle="ElectricShock" distancemin="100" distancemax="120" particlespersecond="5.0" particleamount="5" emitinterval="2.1" anglemin="0" anglemax="360" scalemin="1.0" scalemax="1.2" />
-      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="15" IsActive="true" setvalue="true"/>
+      <StatusEffect type="OnActive" target="This" delay="5" IsActive="false" stackable="false" setvalue="false"/>
     </ItemComponent>
     <ConnectionPanel canbeselected="true" hudpriority="10">
       <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
