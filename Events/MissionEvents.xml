@@ -698,11 +698,12 @@
       </CheckDataAction>
     </ScriptedEvent>       
 
-    <!-- recover cargo pod mission -->
+    <!-- dig and kill volcanic lithomorph -->
     <ScriptedEvent identifier="missionevent_killvolcaniclithomorph" commonness="20" >
       <TagAction criteria="player" tag="player" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securityguy" spawnlocation="Outpost" />
       <TriggerAction target1tag="player" target2tag="securityguy" radius="300" waitforinteraction="false"/>
+      <NPCWaitAction npctag="securityguy" wait="true" priority="10"/>
       <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.justdocked" speakertag="securityguy" invokertag="triggerer_player" eventsprite="BombScare1">
         <Option text="EventText.generic.continue" >
           <ConversationAction text="Eventtext.missionevent_killvolcaniclithomorph.nastimorph" targettag="triggerer_player" eventsprite="BombScare1">
@@ -716,10 +717,42 @@
           </ConversationAction>
         </Option>
       </ConversationAction>
-    </ScriptedEvent>
+    </ScriptedEvent>    
+
+    <!-- destroy endworm egg -->
+    <ScriptedEvent identifier="missionevent_destroyendwormegg" commonness="20" >
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="securitynpc[faction]" targettag="securityguy" spawnlocation="Outpost" />
+      <TriggerAction target1tag="player" target2tag="securityguy" radius="300" waitforinteraction="false"/>
+      <NPCWaitAction npctag="securityguy" wait="true" priority="10"/>
+      <ConversationAction text="Eventtext.missionevent_destroyendwormegg.wellarmed" speakertag="securityguy" invokertag="triggerer_player" eventsprite="BombScare1">
+        <Option text="eventtext.missionevent_destroyendwormegg.rathernot" forcesay="true" forcesayremovequotes="true" >
+          <ConversationAction text="Eventtext.missionevent_destroyendwormegg.dontworry" targettag="triggerer_player" eventsprite="BombScare1">
+            <Option text="EventText.generic.continue" >
+              <ConversationAction text="Eventtext.missionevent_destroyendwormegg.foundegg" targettag="triggerer_player" eventsprite="BombScare1">
+                <Option text="eventtext.generic.gotit" endconversation="true" >
+                  <MissionAction missionidentifier="destroyendwormegg" />
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="eventtext.missionevent_destroyendwormegg.nobigdeal" forcesay="true" forcesayremovequotes="true" >
+          <ConversationAction text="Eventtext.missionevent_destroyendwormegg.yeahsure" targettag="triggerer_player" eventsprite="BombScare1">
+            <Option text="EventText.generic.continue" >
+              <ConversationAction text="Eventtext.missionevent_destroyendwormegg.foundegg" targettag="triggerer_player" eventsprite="BombScare1">
+                <Option text="eventtext.generic.gotit" endconversation="true" >
+                  <MissionAction missionidentifier="destroyendwormegg" />
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Option>
+      </ConversationAction>
+    </ScriptedEvent>    
     
     <!-- scanning things side mission -->
-    <ScriptedEvent identifier="missionevent_scanningsidemission" commonness="20" requiredDestinationTypes="outpost,settlement,colony,city,camp,base,military,clinic,hospital,study,research,hydroponics,factory,shipyard,huskchurch">
+    <ScriptedEvent identifier="missionevent_scanningsidemission" commonness="20" >
       <TagAction criteria="itemidentifier:de-missionscanner" tag="ownedscanner" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="scanresearcher" spawnlocation="Outpost" />
       <TriggerAction target1tag="player" target2tag="scanresearcher" radius="300" waitforinteraction="false"/>

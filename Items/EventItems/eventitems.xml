@@ -2106,8 +2106,8 @@
   </Item>
 
   <!-- TODO: adjust health and resistances -->
-  <!-- drill target that is extremely sturdy but shits out a lot of minerals. -->
-  <Item name="" identifier="endwormeggdrilltarget" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.2" itemdamagemultiplier="0.1" health="10" SpriteColor="255,255,255,255">
+  <!-- Endworm egg used in mission, spawns baby endworms at 25% health -->
+  <Item name="" identifier="endwormeggdrilltarget" category="Material" Tags="drilltarget,ductblock,endwormegg" canbepicked="false" description="" scale="1" sonarsize="35" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="2000" SpriteColor="255,255,255,255">
     <Body radius="350" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="1167,1130,748,783" origin="0.5,0.5" />
     <BrokenSprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="25" fadein="false"/>
@@ -2163,6 +2163,7 @@
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
         <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="10" velocitymin="100" velocitymax="600" scalemin="2" scalemax="3" LifeTimeMultiplier="5" drawontop="true"/>
         <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="2000" volume="2" />
+        <TriggerEvent identifier="spawnbabyendworm" />
       </StatusEffect>
       <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
       <StatusEffect type="OnBroken" target="This">
@@ -2197,7 +2198,8 @@
         <Sound file="Content/Sounds/Damage/Gore4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
         <Sound file="Content/Sounds/Damage/Gore8.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
       </StatusEffect>
-    </ItemComponent >   
+    </ItemComponent >  
+    <AiTarget sightrange="50000" soundrange="50000" static="true" /> 
   </Item>
   
 
