@@ -1691,8 +1691,10 @@
         <sound file="Content/Items/Engine/Engine.ogg" range="2000.0" loop="true" frequencymultiplier="2.5" volume="1.5" dontmuffle="true" />
         <Use />
       </StatusEffect>
+      <!-- applies "beingdrilled" tag which I can use for SEs on drill targets -->
+      <StatusEffect type="OnActive" target="UseTarget" targets="drilltarget" statuseffecttags="beingdrilled" duration="01.1" stackable="false" setvalue="true" />
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-550" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-550" disabledeltatime="true" >
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
@@ -1720,7 +1722,7 @@
   </Item>
 
   <!-- big rock used in Geode mission, this one is empty -->
-  <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.1" health="250" SpriteColor="255,255,255,255">
+  <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="250" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
@@ -1815,7 +1817,7 @@
 
 
   <!-- drill target that is extremely sturdy but shits out a lot of minerals. Can only be cracked with drill? -->
-  <Item name="" identifier="mineraldrilltarget2" nameidentifier="mineraldrilltarget2" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.2" itemdamagemultiplier="0.1" health="5000" SpriteColor="255,255,255,255">
+  <Item name="" identifier="mineraldrilltarget2" nameidentifier="mineraldrilltarget2" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="5000" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
