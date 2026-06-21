@@ -270,15 +270,18 @@
     maxstrength="100"
     showiconthreshold="1000"
     showicontoothersthreshold="1000"
-    showinhealthscannerthreshold="0"     
+    showinhealthscannerthreshold="1"
     healableinmedicalclinic="false"
-    ShowBarInHealthMenu="false"
-    targets="Molochwastes"> 
+    ShowBarInHealthMenu="false"> 
     <Effect minstrength="0" maxstrength="99" strengthchange="-1" />
     <Effect minstrength="99" maxstrength="100" strengthchange="0" />
     <PeriodicEffect mininterval="1" maxinterval="1" minstrength="0" maxstrength="100">
       <StatusEffect target="Character" disabledeltatime="true">
         <Conditional isdead="true" />
+        <ReduceAffliction identifier="scanninginprogress" amount="999"/>
+      </StatusEffect>
+      <StatusEffect target="Character" disabledeltatime="true">
+        <Conditional IsHuman="true" />
         <ReduceAffliction identifier="scanninginprogress" amount="999"/>
       </StatusEffect>
     </PeriodicEffect>

@@ -2369,12 +2369,54 @@
       </OnRoundEndAction>
     </ScriptedEvent>
  
+    <!-- TODO: make enemy stunnable? make enemy slower and weaker? all so you can scan alive -->
+    <!-- Scanning thalamus mission -->
+    <!-- check if thalamus is scanned and not dead -->
+    <ScriptedEvent identifier="scanrandomfishevent">
+      <TagAction criteria="player" tag="player" />
+      <Label name="findscannablefish" />
+      <WaitAction time="0.1" />
+      <ClearTagAction tag="potentialscantarget" />
+      <StatusEffectAction targettag="player">
+        <StatusEffect target="NearbyCharacters" range="99999999">
+          <EventTarget eventidentifier="scanrandomfishevent" tag="potentialscantarget" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- pick a random character, needs to be a fish? if not loop -->
+      <CheckConditionalAction targettag="potentialscantarget" ApplyTagToTarget="pickedscantarget" logicaloperator="And">
+        <Conditional IsHuman="false" />
+        <Conditional mass="gt 15" />
+        <Conditional Isdead="false" />
+        <Conditional speciesgroup="neq abyssal" />
+        <Failure>
+          <Goto name="findscannablefish" />
+        </Failure>
+      </CheckConditionalAction>
+      <!-- mark monsters with an item to track on sonar, if not possible due to no inventory space find another target-->
+      <SpawnAction itemidentifier="monsterlocatoritem" amount="1" targettag="scanfishlocator" targetinventory="pickedscantarget" SpawnIfInventoryFull="false" /> 
+      <CheckItemAction targettag="scanfishlocator" itemidentifiers="monsterlocatoritem">
+        <Failure>
+          <GoTo name="findscannablefish" />
+        </Failure>
+      </CheckItemAction>
+      <!-- check if scanning target is scanned -->
+      <Label name="scanningcheck" />
+      <CheckConditionalAction targettag="pickedscantarget" scanninginprogress="gte 100" >
+        <Failure>
+          <Goto name="scanningcheck" />
+        </Failure>
+        <Success>
+          <ConversationAction targettag="player" text="Test Test"  eventsprite="mediator" endconversation="true"/>
+          <!-- <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="1" />   -->
+        </Success>
+      </CheckConditionalAction>
+      <!-- <Label name="end" /> -->
+    </ScriptedEvent>
 
     <!-- Scanning thalamus mission -->
     <!-- check if thalamus is scanned and not dead -->
-    <ScriptedEvent identifier="scanthalamusbrainevent">
+    <ScriptedEvent identifier="scancreaturesidemission">
       <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:thalamusbrain1" tag="missionthalamusbrain" submarinetype="wreck" />
       <SpawnAction itemidentifier="de-scanningtargethidden" spawnpointtag="missionthalamusbrain" TargetTag="scanningtargethidden"/>
       <TagAction criteria="itemidentifier:de-scanningtargethidden" tag="scanningtargethidden" submarinetype="wreck" />
       <Label name="scanningcheck" />
@@ -2397,7 +2439,6 @@
       </CheckConditionalAction>
       <Label name="end" />
     </ScriptedEvent>
-
 
     <ScriptedEvent identifier="scanthalamusbraineventSTATETEST">
           <!-- <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="1" ForceFailure="true" /> -->
