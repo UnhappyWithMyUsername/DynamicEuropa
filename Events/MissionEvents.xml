@@ -2370,6 +2370,43 @@
     </ScriptedEvent>
  
 
+    <!-- Scanning thalamus mission -->
+    <!-- check if thalamus is scanned and not dead -->
+    <ScriptedEvent identifier="scanthalamusbrainevent">
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemidentifier:thalamusbrain1" tag="missionthalamusbrain" submarinetype="wreck" />
+      <SpawnAction itemidentifier="de-scanningtargethidden" spawnpointtag="missionthalamusbrain" TargetTag="scanningtargethidden"/>
+      <TagAction criteria="itemidentifier:de-scanningtargethidden" tag="scanningtargethidden" submarinetype="wreck" />
+      <Label name="scanningcheck" />
+      <WaitAction time="1" />
+      <!-- check if thalamus is dead -->
+      <CheckConditionalAction targettag="missionthalamus" condition="0" >
+        <Success>
+          <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="3" ForceFailure="true" />
+          <Goto name="end" />
+        </Success>
+      </CheckConditionalAction>
+      <!-- check if scanning target is dead -->
+      <CheckConditionalAction targettag="scanningtargethidden" condition="0" >
+        <Failure>
+          <Goto name="scanningcheck" />
+        </Failure>
+        <Success>
+          <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="1" />
+        </Success>
+      </CheckConditionalAction>
+      <Label name="end" />
+    </ScriptedEvent>
+
+
+    <ScriptedEvent identifier="scanthalamusbraineventSTATETEST">
+          <!-- <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="1" ForceFailure="true" /> -->
+      <WaitAction time="3" />
+          <!-- <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="2" ForceFailure="true" /> -->
+      <WaitAction time="3" />
+          <MissionStateAction missionidentifier="scanthalamusbrain" operation="Set" value="2" ForceFailure="true" />
+    </ScriptedEvent>
+
     <ScriptedEvent identifier="escortrowdymissionevent">
       <Label name="rowdyloop" />
       <ClearTagAction tag="rowdy1" />

@@ -2066,6 +2066,39 @@
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
   </NestMission>
   
+  
+
+  <SalvageMission
+    identifier="scanthalamusbrain"
+    tags="scanthalamusmission"
+    type="SalvageWreck"
+    difficulty="3"
+    commonness="100"
+    reward="2800"
+    spawntype="wreck"
+    requirewreck="true"
+    requirethalamuswreck="true"
+    minleveldifficulty="30"
+    allowretry="false" >
+    <Reputation identifier="location" amount="3" />    
+    <target
+      spawntype="None"
+      existingitemtag="thalamusbrain"
+      sonarlabel="missionsonarlabel.clearthalamus1"
+      allowcontinuebeforeretrieved="false"
+      requireretrieval="RetrievedToSub"
+      hidelabelafterretrieved="false">
+    </target>    
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="120,200,90"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="scanthalamusbrainevent" campaignonly="true"/>
+    <!-- <CompleteCheckDataAction identifier="thalamusbrainscanned" condition="eq 1"/> -->
+    <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
+  </SalvageMission>  
+  
+  
+  
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
     <!-- CULT OF HUSK RELATED missions -->
@@ -2482,6 +2515,9 @@
 
 
 
+
+
+
     <!-- CUSTOM BEACON MISSIONS -->
     <!-- CUSTOM BEACON MISSIONS -->
     <!-- CUSTOM BEACON MISSIONS -->
@@ -2574,25 +2610,25 @@
  
  
 
-    <!-- scan a radioactive moloch -->
-    <CustomMission    
-      identifier="scanradioactivemoloch"
-      tags="scanningcreaturemission"
-      type="Scanning"
-      difficulty="3"
-      commonness="100"
-      reward="3000"
-      successmessage="missionsuccess.scanradioactivemoloch"
-      failuremessage="missionfailure.scanradioactivemoloch"
-      successstate="2" failurestate="3">
-      <Reputation identifier="location" amount="3" />
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,512,256,256" color="100,60,150"/>
-      <LocationType from="Anyoutpost" to="Anyoutpost"/>
-      <message header="missionheader0.scanradioactivemoloch" text="missionmessage0.scanradioactivemoloch" />
-      <TriggerEvent state="0" delay="0" eventidentifier="scanradioactivemolochmissionevent" />
-      <CompleteCheckDataAction identifier="radioactivemolochscanned" condition="eq 1"/>
-      <Metadata identifier="scanradioactivemolochnorepeat" value="1"/>
-    </CustomMission>  
+  <!-- scan a radioactive moloch -->
+  <CustomMission    
+    identifier="scanradioactivemoloch"
+    tags="scanningcreaturemission"
+    type="Scanning"
+    difficulty="3"
+    commonness="100"
+    reward="3000"
+    successmessage="missionsuccess.scanradioactivemoloch"
+    failuremessage="missionfailure.scanradioactivemoloch"
+    successstate="2" failurestate="3">
+    <Reputation identifier="location" amount="3" />
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="768,512,256,256" color="100,60,150"/>
+    <LocationType from="Anyoutpost" to="Anyoutpost"/>
+    <message header="missionheader0.scanradioactivemoloch" text="missionmessage0.scanradioactivemoloch" />
+    <TriggerEvent state="0" delay="0" eventidentifier="scanradioactivemolochmissionevent" />
+    <CompleteCheckDataAction identifier="radioactivemolochscanned" condition="eq 1"/>
+    <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
+  </CustomMission>  
   
   <!-- escort one sick patient, spreads disease to nearby crew -->
   <EscortMission

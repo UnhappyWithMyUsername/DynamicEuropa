@@ -2249,10 +2249,9 @@
     <StatusHUD drawhudwhenequipped="true" />
   </Item>
 
-  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="1" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0">
-    <PreferredContainer primary="storagecab"/>
+  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="1" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0" hideinmenus="true" >
     <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
-    <Body radius="62" density="10" bodytype="Static"/>
+    <Body radius="50" density="10" bodytype="Static"/>
     <ItemComponent>
       <!-- spawn a decorative item that stays when this gets destroyed -->
       <StatusEffect type="OnSpawn" target="This">
@@ -2265,6 +2264,22 @@
       <StatusEffect type="OnBroken" target="This">
         <Sound file="Content/Sounds/UI/UImsg.ogg" type="OnUse" range="600" volume="1" frequencymultiplier="0.3" selectionmode="random" />
         <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
+  <!-- same as above but no visuals, entirely hidden -->
+  <Item identifier="de-scanningtargethidden" nameidentifier="de-scanningtarget" descriptionidentifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" scale="1" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0" hideinmenus="true" >
+    <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
+    <Body radius="50" density="10" bodytype="Static"/>
+    <ItemComponent>
+      <!-- give this item lots of health regeneration so only the scanner can overpower it -->
+      <StatusEffect type="Always" target="This" condition="900" >
+        <Conditional condition="gt 1" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Sounds/UI/UImsg.ogg" type="OnUse" range="600" volume="1" frequencymultiplier="0.3" selectionmode="random" />
+        <!-- <Remove /> -->
       </StatusEffect>
     </ItemComponent>
   </Item>
