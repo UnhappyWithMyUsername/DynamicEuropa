@@ -2384,7 +2384,7 @@
       </StatusEffectAction>
       <!-- pick a random character, needs to be a fish? if not loop -->
       <CheckConditionalAction targettag="potentialscantarget" ApplyTagToTarget="pickedscantarget" logicaloperator="And">
-        <Conditional IsHuman="false" />
+        <Conditional Humanoid="false" />
         <Conditional mass="gt 15" />
         <Conditional Isdead="false" />
         <Conditional speciesgroup="neq abyssal" />
@@ -2399,6 +2399,8 @@
           <GoTo name="findscannablefish" />
         </Failure>
       </CheckItemAction>
+      <!-- apply the weakening affliction -->
+      <AfflictionAction affliction="weakenedforscanning" strength="100" targettag="pickedscantarget" MultiplyByMaxVitality="true"/>
       <!-- check if scanning target is scanned -->
       <Label name="scanningcheck" />
       <CheckConditionalAction targettag="pickedscantarget" scanninginprogress="gte 100" >
