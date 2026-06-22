@@ -264,6 +264,7 @@
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="Coalition" endconversation="true" />
+          <MissionStateAction missionidentifier="jailbreak_coalition" operation="Set" value="1" />
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -322,6 +323,7 @@
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="separatists" endconversation="true" />
+          <MissionStateAction missionidentifier="jailbreak_separatists" operation="Set" value="1" />
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -560,6 +562,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="sepnpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <MissionStateAction missionidentifier="jailbreak_coalition" operation="Set" value="1" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -70">
             <Success>
@@ -600,6 +603,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="conpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <MissionStateAction missionidentifier="jailbreak_separatists" operation="Set" value="1" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -70">
             <Success>
