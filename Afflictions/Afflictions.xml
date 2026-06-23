@@ -314,6 +314,12 @@
       <StatValue stattype="NaturalMeleeAttackMultiplier" minvalue="-0.65" maxvalue="-0.65" />
       <StatValue stattype="NaturalRangedAttackMultiplier" minvalue="-0.65" maxvalue="-0.65" />
       <StatusEffect target="Character" stunimmunity="false" DamageMultiplier="0" setvalue="true"/>
+      <StatusEffect target="Character" interval="5" multiplyafflictionsbymaxvitality="true" disabledeltatime="true" >
+        <Conditional healthpercentage="lt 50" />
+        <Affliction identifier="stun" amount="3" />
+        <Affliction identifier="stun" amount="2" probability="0.8" />
+        <AITrigger state="Freeze" duration="3" probability="1" mindamage="0" allowtobeoverridden="false" allowtooverride="true" />
+      </StatusEffect>
       <StatusEffect target="Character" targetlimbs="Torso" >
         <ParticleEmitter particle="aliengas" anglemin="0" anglemax="360" particlespersecond="5" velocitymin="0" velocitymax="0" scalemin="2" scalemax="3" lifetimemultiplier="0.5" distancemin="10" distancemax="40" colormultiplier="200,255,200,255" />
         <ParticleEmitter particle="impactfirearm" anglemin="0" anglemax="360" emitinterval="2" particleamount="8" velocitymin="150" velocitymax="250" scalemin="1" scalemax="1" lifetimemultiplier="3" distancemin="20" distancemax="50" colormultiplier="180,255,50,130" />
