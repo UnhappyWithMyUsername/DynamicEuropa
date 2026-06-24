@@ -2040,7 +2040,7 @@
  -->
 
   <!-- scan a thing -->
-  <NestMission
+  <!-- <NestMission
     identifier="scanningsidemissionmainpath"
     tags="scanningsidemission"
     type="Nest"
@@ -2066,8 +2066,30 @@
     </Items>
     <message header="missionheader0.scanningsidemission" text="missionmessage0.scanningsidemission"/>
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
-  </NestMission>
+  </NestMission> -->
   
+  <!-- scan a radioactive moloch -->
+  <CustomMission    
+    identifier="scanningsidemission"
+    tags="scanningcreaturemission"
+    type="Scanning"
+    difficulty="1"
+    commonness="100"
+    reward="500"
+    sideobjective="true"
+    successstate="1" failurestate="2">
+    <Reputation identifier="location" amount="3" 
+    name="missionname.scanningsidemission"
+    description="missiondescription.scanningsidemission"
+    successmessage="missionsuccess.scanningsidemission"
+    failuremessage="missionfailure.scanningsidemission"
+    sonarlabel="missionsonarlabel.scanningsidemission"/>
+    <message header="missionheader0.scanningsidemission" text="missionmessage0.scanningsidemission"/>
+    <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,256,256,256" color="140,180,200"/>
+    <LocationType from="Anyoutpost" to="Anyoutpost"/>
+    <TriggerEvent state="0" delay="0" eventidentifier="scanrandomfishevent" />
+    <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
+  </CustomMission> scanrandomfish
   
 
   <SalvageMission

@@ -753,9 +753,10 @@
     
     <!-- scanning things side mission -->
     <ScriptedEvent identifier="missionevent_scanningsidemission" commonness="20" >
+      <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemidentifier:de-missionscanner" tag="ownedscanner" submarinetype="player" ContinueIfNoTargetsFound="true" />
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="researcher" targettag="scanresearcher" spawnlocation="Outpost" />
-      <TriggerAction target1tag="player" target2tag="scanresearcher" radius="300" waitforinteraction="false"/>
+      <TriggerAction target1tag="player" target2tag="scanresearcher" radius="200" waitforinteraction="false"/>
       <!-- check if already completed a scanning mission -->
       <CheckDataAction identifier="completedscanningmission" condition="gt 0">
         <Success>
@@ -764,12 +765,24 @@
           <Goto name="end" />
         </Success>
       </CheckDataAction>
-      <ConversationAction text="Eventtext.missionevent_scanningsidemission.briefing" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
+      <ConversationAction text="Eventtext.missionevent_scanningsidemission.payfordata" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
         <Option text="Eventtext.missionevent_scanningsidemission.forscience" >
-          <Goto name="checkscanner" />
+          <!-- <Goto name="checkscanner" EndConversation="false"/> -->
+          <CountTargetsAction targettag="ownedscanner" minamount="1" >
+            <Success>
+              <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
+              <MissionAction missiontag="scanningsidemission" />
+              <Goto name="end" />
+            </Success>
+            <Failure>
+              <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
+              <MissionAction missiontag="scanningsidemission" />
+              <Goto name="end" />
+            </Failure>
+          </CountTargetsAction>
         </Option>
         <Option text="Eventtext.missionevent_scanningsidemission.formoney" >
-          <Label name="checkscanner" />
+          <!-- <Label name="checkscanner" /> -->
           <CountTargetsAction targettag="ownedscanner" minamount="1" >
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
@@ -2379,13 +2392,15 @@
       <ClearTagAction tag="potentialscantarget" />
       <StatusEffectAction targettag="player">
         <StatusEffect target="NearbyCharacters" range="99999999">
-          <EventTarget eventidentifier="scanrandomfishevent" tag="potentialscantarget" />
+          <EventTarget eventidentifier="scanrandomfishevent" tag="allscantargets" />
         </StatusEffect>
       </StatusEffectAction>
-      <!-- pick a random character, needs to be a fish? if not loop -->
+      <!-- pick a single random character needs to be a fish if not loop -->
+      <TagAction criteria="eventtag:allscantargets" tag="potentialscantarget" chooserandom="true" />
       <CheckConditionalAction targettag="potentialscantarget" ApplyTagToTarget="pickedscantarget" logicaloperator="And">
-        <Conditional Humanoid="false" />
         <Conditional mass="gt 15" />
+        <Conditional mass="lt 500" />
+        <Conditional IsHumanoid="false" />
         <Conditional Isdead="false" />
         <Conditional speciesgroup="neq abyssal" />
         <Failure>
@@ -2408,8 +2423,8 @@
           <Goto name="scanningcheck" />
         </Failure>
         <Success>
-          <ConversationAction targettag="player" text="Test Test"  eventsprite="mediator" endconversation="true"/>
-          <!-- <MissionStateAction missionidentifier="scanradioactivemoloch" operation="Set" value="1" />   -->
+          <!-- <MissionStateAction missionidentifier="scanrandomfish" operation="Set" value="1" />   -->
+          <MissionStateAction missionidentifier="scanningsidemission" operation="Set" value="1" />  
         </Success>
       </CheckConditionalAction>
       <!-- <Label name="end" /> -->
