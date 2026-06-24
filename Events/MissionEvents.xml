@@ -2416,8 +2416,14 @@
       </CheckItemAction>
       <!-- apply the weakening affliction -->
       <AfflictionAction affliction="weakenedforscanning" strength="100" targettag="pickedscantarget" MultiplyByMaxVitality="true"/>
-      <!-- check if scanning target is scanned -->
+      <!-- check if scanning target is not dead and scanned -->
       <Label name="scanningcheck" />
+      <!-- <CheckConditionalAction targettag="pickedscantarget" isdead="true" >      
+        <Success>
+          <MissionStateAction missionidentifier="scanningsidemission" operation="Set" value="2" ForceFailure="true" />
+          <Goto name="end" />
+        </Success>
+      </CheckConditionalAction> -->
       <CheckConditionalAction targettag="pickedscantarget" scanninginprogress="gte 100" >
         <Failure>
           <Goto name="scanningcheck" />
