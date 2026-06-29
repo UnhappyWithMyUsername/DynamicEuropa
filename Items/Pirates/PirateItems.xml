@@ -87,11 +87,13 @@
   <Item identifier="de-fakedirtybomb" nameidentifier="dirtybomb" descriptionidentifier="dirtybomb" category="Weapon" Tags="smallitem,explosive,separatists" allowasextracargo="true" maxstacksize="8" Scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="secarmcab" secondary="armcab"/>
     <Price baseprice="240" sold="false">
+      <Price storeidentifier="merchantarmory" multiplier="1" minavailable="4" maxavailable="8" sold="true">
+        <Reputation faction="bandits" min="5"/>
+      </Price>
       <Price storeidentifier="merchantpirate" multiplier="1.25" minavailable="0" maxavailable="2" sold="true">
-        <Reputation faction="bandits" min="10" />
+        <Reputation faction="bandits" min="5" />
       </Price>
     </Price>
-    <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="666" fabricationlimitmin="0" fabricationlimitmax="3" />
     <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="448,640,64,64" origin="0.5,0.5" />
     <Sprite texture="Content/Items/JobGear/TalentGear.png" depth="0.8" sourcerect="202,1,47,32" origin="0.5,0.5" />
     <Body width="45" height="30" density="20" />
