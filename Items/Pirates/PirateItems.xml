@@ -84,57 +84,23 @@
   </Item>
 
   <!-- make dirtybomb sellable in pirate store. should it be? -->
-  <Item name="" identifier="dirtybomb" category="Weapon" Tags="smallitem,explosive,separatists" allowasextracargo="true" maxstacksize="8" Scale="0.5" impactsoundtag="impact_soft">
+  <Item identifier="de-fakedirtybomb" nameidentifier="dirtybomb" descriptionidentifier="dirtybomb" category="Weapon" Tags="smallitem,explosive,separatists" allowasextracargo="true" maxstacksize="8" Scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="secarmcab" secondary="armcab"/>
     <Price baseprice="240" sold="false">
-      <Price storeidentifier="merchantoutpost" multiplier="1.25" minavailable="0" maxavailable="2" sold="true">
-        <Reputation faction="separatists" min="50"/>
-      </Price>
-      <Price storeidentifier="merchantcity" multiplier="1.25" minavailable="1" maxavailable="4" sold="true">
-        <Reputation faction="separatists" min="50"/>
-      </Price>
-      <Price storeidentifier="merchantmilitary" multiplier="0.9" minavailable="4" maxavailable="8" sold="true">
-        <Reputation faction="separatists" min="50"/>
-      </Price>
-      <Price storeidentifier="merchantresearch" multiplier="1.25" />
-      <Price storeidentifier="merchantmine" />
       <Price storeidentifier="merchantpirate" multiplier="1.25" minavailable="0" maxavailable="2" sold="true">
         <Reputation faction="bandits" min="10" />
       </Price>
     </Price>
     <Fabricate suitablefabricators="piratestore" requiredtime="3" requiredmoney="666" fabricationlimitmin="0" fabricationlimitmax="3" />
-    <Fabricate suitablefabricators="fabricator" requiredtime="20" requiresrecipe="true">
-      <RequiredSkill identifier="weapons" level="30" />
-      <RequiredItem identifier="uex" />
-      <RequiredItem identifier="uranium" />
-      <RequiredItem identifier="depletedfuel" />
-    </Fabricate>
     <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="448,640,64,64" origin="0.5,0.5" />
     <Sprite texture="Content/Items/JobGear/TalentGear.png" depth="0.8" sourcerect="202,1,47,32" origin="0.5,0.5" />
     <Body width="45" height="30" density="20" />
-    <Throwable characterusable="false" slots="Any,RightHand,LeftHand" canbecombined="true" removeoncombined="true" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true" />
-      <StatusEffect type="OnBroken" target="This">
-        <sound file="Content/Items/Weapons/ExplosionMedium1.ogg" range="5000" />
-        <sound file="Content/Items/Weapons/ExplosionMedium2.ogg" range="5000" />
-        <sound file="Content/Items/Weapons/ExplosionMedium3.ogg" range="5000" />
-        <ParticleEmitter particle="fixfoam" anglemax="360" velocitymin="4000" velocitymax="4000" particlespersecond="64" colormultiplier="50,150,50,255" />
-        <Explosion range="250.0" ballastfloradamage="50" structuredamage="90" itemdamage="250" force="5" severlimbsprobability="0.25" debris="true" decal="explosion" decalsize="0.25">
-          <Affliction identifier="explosiondamage" strength="50" />
-          <Affliction identifier="burn" strength="5" probability="0.2" dividebylimbcount="false"/>
-          <Affliction identifier="bleeding" strength="20" probability="0.05" dividebylimbcount="false"/>
-          <Affliction identifier="stun" strength="3" />
-        </Explosion>
-        <Explosion range="1500" force="0.0" smoke="false" sparks="false" empstrength="2.5" applyfireeffects="false" ignorecover="true">
-          <Affliction identifier="emp" strength="25" multiplybymaxvitality="true" />
-        </Explosion>
-        <SpawnItem identifier="dirtybombafteremitter" spawnposition="This" />
+    <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
+      <StatusEffect type="Always" target="This">
         <Remove />
+        <SpawnItem identifier="dirtybomb" spawnposition="SameInventory"/>
       </StatusEffect>
-      <StatusEffect type="OnBroken" target="This">
-        <sound file="Content/Items/Weapons/ExplosionDebris5.ogg" range="3500" />
-      </StatusEffect>
-    </Throwable>
+    </Pickable>
   </Item>
   
   <!-- pirate exosuit FOR NPCS. deletes itself when NPC dies, drops suit part, does not use fuel/oxygen -->
