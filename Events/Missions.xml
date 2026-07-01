@@ -2068,7 +2068,8 @@
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
   </NestMission> -->
   
-  <!-- scan a radioactive moloch -->
+  
+  <!-- unused, the scanner sucks -->
   <CustomMission    
     identifier="scanningsidemission"
     tags="scanningcreaturemission"
@@ -2089,9 +2090,9 @@
     <LocationType from="Anyoutpost" to="Anyoutpost"/>
     <TriggerEvent state="0" delay="0" eventidentifier="scanrandomfishevent" />
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
-  </CustomMission> scanrandomfish
+  </CustomMission> 
   
-
+  <!-- unused, the scanner sucks -->
   <SalvageMission
     identifier="scanthalamusbrain"
     tags="scanthalamusmission"
@@ -2119,6 +2120,45 @@
     <TriggerEvent state="0" delay="5" eventidentifier="scanthalamusbrainevent" campaignonly="true"/>
     <!-- <CompleteCheckDataAction identifier="thalamusbrainscanned" condition="eq 1"/> -->
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
+  </SalvageMission>  
+  
+  
+  
+  <SalvageMission
+    identifier="synchronizeemitters"
+    tags="synchronizeemitters"
+    type="SalvageWreck"
+    difficulty="2"
+    commonness="100"
+    reward="2800"
+    requireddeliveryamount="1"
+    PartiallyRetrievedMessage="missionmessage.synchronizeemitters.partiallyretrieved"
+    AllRetrievedMessage="missionmessage.synchronizeemitters.allretrieved">
+    <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,220,50"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Reputation identifier="location" amount="2" />
+    <LocationType from="AnyOutpost" to="Outpost"/>
+    <!-- multiple targets, only 1 has the geode -->
+    <target
+      spawntype="mainpath"
+      itemidentifier="triangulathing"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="PickedUp"
+      minamount="1" maxamount="1"
+      hidelabelafterretrieved="false">
+    </target>
+    <target
+      spawntype="mainpath"
+      itemidentifier="triangulathing"
+      sonarlabel="missionsonarlabel.drilltarget"
+      allowcontinuebeforeretrieved="true"
+      requireretrieval="PickedUp"
+      minamount="1" maxamount="1"
+      hidelabelafterretrieved="false">
+    </target>
+    <TriggerEvent state="0" delay="5" eventidentifier="synchronizeemittersevent" campaignonly="true"/>
   </SalvageMission>  
   
   
@@ -2696,12 +2736,12 @@
 
   
     <!-- test to spawn custom wreck in mission, make sure to not have vanilla spawnpoints or thalamus if you don't want to deal with random events -->
-    <SalvageMission
+    <!-- <SalvageMission
       identifier="MISSIONWRECKTEST"
       tags="salvagemissioncustom"
       type="SalvageWreck"
       difficulty="2"
-      commonness="100"
+      commonness="0"
       reward="2000"
       achievementidentifier="salvagewreckmission"
       spawntype="wreck"
@@ -2719,10 +2759,10 @@
       </chooserandom>
       <Icon texture="Content/UI/MissionIcons2.png" sourcerect="0,512,256,256" color="255,0,255"/>
       <message header="missionheader0.salvagewreck1" text="missionmessage0.salvagewreck1"/>
-    </SalvageMission>
+    </SalvageMission> -->
 
   <!-- UNUSED, take documents from briefcase, idk how to do this one -->
-  <SalvageMission
+  <!-- <SalvageMission
     identifier="retrievesecretdocuments"
     tags="UNUSED"
     type="Salvage"
@@ -2747,7 +2787,7 @@
     </target>
     <LocationType identifier="AnyOutpost" />
     <Metadata identifier="retrievesecretdocuments_norepeat" value="1" operation="Add" />
-  </SalvageMission>
+  </SalvageMission> -->
 
   <!-- UNUSED. TODO: rework, find a way to make sabotaging interesting somehow, put an item in deconstructor and it starts a fire or something -->
   <!-- <AbandonedOutpostMission
