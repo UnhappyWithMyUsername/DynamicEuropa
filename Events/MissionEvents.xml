@@ -2548,6 +2548,7 @@
     <!-- synchronize two emitter thingies -->
     <!-- check if both emitters buttons have been pressed at the same time -->
     <ScriptedEvent identifier="synchronizeemittersevent">
+      <SetDataAction identifier="transmittersactivated" value="0" />
       <TagAction criteria="itemidentifier:triangulathing" tag="triangulathings" />
       <TutorialHighlightAction state="false" targettag="triangulathings" />
       <Label name="checkrepairedtransmitter" />
@@ -2574,7 +2575,7 @@
             <StatusEffect target="This" statuseffecttags="activatedemitterfinal" duration="9999999" canbepicked="false" canbeselected="false" setvalue="true" />
           </StatusEffectAction>
           <MissionStateAction missionidentifier="synchronizeemitters" operation="Set" value="2" />
-          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
+          <SetDataAction identifier="transmittersactivated" value="1" />
         </Success>
       </CountTargetsAction>
     </ScriptedEvent>

@@ -2131,9 +2131,7 @@
     difficulty="2"
     commonness="100"
     reward="2800"
-    requireddeliveryamount="1"
-    PartiallyRetrievedMessage="missionmessage.synchronizeemitters.partiallyretrieved"
-    AllRetrievedMessage="missionmessage.synchronizeemitters.allretrieved">
+    requireddeliveryamount="1">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,256,256,256" color="220,220,50"/>
     <Portrait texture="Content/Map/LocationPortraits/Wreck1.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
     <Portrait texture="Content/Map/LocationPortraits/Wreck2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
@@ -2143,22 +2141,23 @@
     <target
       spawntype="mainpath"
       itemidentifier="triangulathing"
-      sonarlabel="missionsonarlabel.drilltarget"
+      sonarlabel="missionsonarlabel.synchronizeemitters"
       allowcontinuebeforeretrieved="true"
-      requireretrieval="PickedUp"
+      requireretrieval="None"
       minamount="1" maxamount="1"
       hidelabelafterretrieved="false">
     </target>
     <target
       spawntype="mainpath"
       itemidentifier="triangulathing"
-      sonarlabel="missionsonarlabel.drilltarget"
+      sonarlabel="missionsonarlabel.synchronizeemitters"
       allowcontinuebeforeretrieved="true"
-      requireretrieval="PickedUp"
+      requireretrieval="None"
       minamount="1" maxamount="1"
       hidelabelafterretrieved="false">
     </target>
     <TriggerEvent state="0" delay="5" eventidentifier="synchronizeemittersevent" campaignonly="true"/>
+    <CompleteCheckDataAction identifier="transmittersactivated" condition="eq 1"/>
   </SalvageMission>  
   
   
