@@ -2587,41 +2587,7 @@
           <MissionStateAction missionidentifier="synchronizeemitters" operation="Set" value="2" />
       <WaitAction time="5" />
           <MissionStateAction missionidentifier="synchronizeemitters" operation="Set" value="3" />
-    </ScriptedEvent>
-    
-    <ScriptedEvent identifier="synchronizeemittersCHECKACTIVE">
-      <TagAction criteria="player" tag="player" />
-      <TagAction criteria="itemidentifier:triangulathing" tag="triangulathing1" chooserandom="true" />
-      <Label name="checkactivatedemitters" />
-      <WaitAction time="1" />
-      <CountTargetsAction targettag="triangulathing1" minamount="1" >
-        <Conditional hasstatustag="activatedemitter" />
-        <Failure>
-          <GoTo name="checkactivatedemitters" />
-        </Failure>
-        <Success>
-          <StatusEffectAction targettag="triangulathing1">
-            <StatusEffect target="This" statuseffecttags="activatedemitterfinal" duration="9999999" canbepicked="false" canbeselected="false" setvalue="true" />
-          </StatusEffectAction>
-          <ConversationAction text="eventtext.industrialincidentevent.success" dialogtype="Mission" targettag="player" eventsprite="officeinside" />
-          <MissionStateAction missionidentifier="synchronizeemitters" operation="Set" value="2" />
-        </Success>
-      </CountTargetsAction>
-    </ScriptedEvent>
-<!--       <ScriptedEvent identifier="jailbreak_alarm">
-        <TriggerAction target1tag="prisoner" target2tag="securitynpc" applytotarget1="triggerer_prisoner" applytotarget2="triggerer_securitynpc" disableiftargetincapacitated="false" radius="200" waitforinteraction="false" />
-        <NPCFollowAction npctag="triggerer_prisoner" targettag="triggerer_securitynpc" follow="true" />
-        <WaitAction time="3" />
-        <TagAction criteria="itemtag:securityalarm" submarinetype="Outpost" tag="alarmbutton" />
-        <StatusEffectAction targettag="alarmbutton">
-          <StatusEffect State="true" target="This" />
-        </StatusEffectAction>
-        <ConversationAction text="EventText.jailbreak_alarm.c1" eventsprite="NoticeBoard" ContinueAutomatically="true" />
-        <NPCFollowAction npctag="triggerer_prisoner" targettag="triggerer_securitynpc" follow="false" />
-        <NPCChangeTeamAction npctag="securitynpc" teamid="Team2" />
-      </ScriptedEvent>
- -->  
-  
+    </ScriptedEvent>  
   
   
   
