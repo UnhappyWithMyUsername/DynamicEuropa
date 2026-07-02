@@ -668,6 +668,7 @@
           <TriggerAction target1tag="player" target2tag="stationofficial" disableiftargetincapacitated="true" radius="400" />
           <ForceSayAction message="EventText.missionevent_escortrowdy.shouting1" SayInRadio="false" TargetTag="stationofficial" />
           <Label name="speakagain" />
+          <ClearTagAction tag="triggerer_player" />
           <WaitAction time="2" />
           <TriggerAction target1tag="player" target2tag="stationofficial" applytotarget1="triggerer_player" disableiftargetincapacitated="true" radius="200" waitforinteraction="true" />
           <ConversationAction text="EventText.missionevent_escortrowdy.boilingpoint" targettag="triggerer_player" endeventifinterrupted="false" eventsprite="Researcher" >
@@ -798,6 +799,29 @@
         </Option>
       </ConversationAction>
       <Label name="end" />
+    </ScriptedEvent>
+    
+    <!-- synchronize emitters -->
+    <ScriptedEvent identifier="missionevent_synchronizeemitters" commonness="20" >
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="reactoroperator" targettag="emitterguy" spawnlocation="Outpost" />
+      <Label name="speakagain" />
+      <ClearTagAction tag="triggerer_player" />
+      <WaitAction time="2" />
+      <TriggerAction target1tag="player" target2tag="emitterguy" radius="200" waitforinteraction="false"/>
+      <ConversationAction text="Eventtext.missionevent_synchronizeemitters.gotajob" speakertag="emitterguy" invokertag="triggerer_player" eventsprite="engineer" forcesay="true">
+        <Option text="Eventtext.generic.continue" >
+          <ConversationAction text="Eventtext.missionevent_synchronizeemitters.repairtransmitters" targettag="triggerer_player" eventsprite="engineer">
+            <Option text="Eventtext.generic.gotit" forcesay="true" >
+              <ConversationAction text="Eventtext.missionevent_synchronizeemitters.goodluck" targettag="triggerer_player" eventsprite="engineer" endconversation="true" />
+              <MissionAction missiontag="synchronizeemitters" />
+            </Option>
+          </ConversationAction>
+        </Option>
+        <Option text="eventtext.generic.ignore" >
+          <Goto name="speakagain" />
+        </Option>
+      </ConversationAction>
     </ScriptedEvent>
     
   <!-- ////// EVENTS TRIGGERED BY MISSIONS OR USED AS PART OF MISSIONS THEMSELVES ////// -->
