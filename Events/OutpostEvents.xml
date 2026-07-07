@@ -3622,6 +3622,242 @@
       </CheckDataAction>      
     </ScriptedEvent>
     
+    
+    
+    
+    <ScriptedEvent identifier="shootingrangeevent">      
+      <TagAction criteria="player" tag="player" />
+      <TagAction criteria="itemtag:revolverholder" tag="revolverholder" />
+      <TagAction criteria="itemtag:shotcounter" tag="shotcounter" />      
+      <SetDataAction identifier="shootingparticipations" operation="Set" value="0" />
+      <SetDataAction identifier="shootingtargetshit" operation="set" value="0" />
+      <SetDataAction identifier="shotdummyrevoler" operation="set" value="0" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" />    
+      <Label name="playagain" />
+      <ClearTagAction tag="shooter_player" />
+      <WaitAction time="2" />
+      <TriggerAction target1tag="player" target2tag="shootingrangeNPC" applytotarget2="shooter_player" waitforinteraction="true" />
+      <!-- check how many times you've done the event already -->
+      <!-- TODO: reenable this -->
+      <CheckDataAction identifier="shootingparticipations" condition="gte 5" >
+        <Success>
+          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.outofbullets" targettag="shooter_player" eventsprite="heartofgold" endconversation="true"/>
+          <Goto name="end" />
+        </Success> 
+        <Failure>
+          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.wannaplay" speakertag="shootingrangeNPC" targettag="shooter_player" eventsprite="heartofgold" >
+            <Option forcesay="true" text="EventText.shootingrangeevent.yes" >
+              <CheckMoneyAction targettag="shooter_player" amount="200">
+                <Success>
+                  <MoneyAction targettag="shooter_player" amount="-200" />
+                  <ConversationAction targettag="shooter_player" forcesay="true" text="EventText.shootingrangeevent.takerevolver" eventsprite="mines" dialogtype="small" />
+                </Success>
+                <Failure>
+                  <GoTo name="playagain" />
+                </Failure>
+              </CheckMoneyAction>
+            </Option>
+            <Option text="EventText.generic.ignore" endconversation="true">
+              <Goto name="talkagain" />
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>      
+      <!-- reset the tallys and data -->
+      <StatusEffectAction targettag="shotcounter" >
+        <StatusEffect target="this" lightcolor="180,180.100,255" targetitemcomponent="LightComponent" setvalue="true"/>
+      </StatusEffectAction>
+      <SetDataAction identifier="shootingtargetshit" operation="set" value="0" />
+      <SetDataAction identifier="shotdummyrevoler" operation="set" value="0" />
+      <!-- spawn revolver and bullets -->
+      <StatusEffectAction targettag="revolverholder">
+        <StatusEffect target="This">
+          <DropContainedItems />
+        </StatusEffect>
+      </StatusEffectAction>
+      <SpawnAction itemidentifier="dummyrevolver" targetinventory="revolverholder" targettag="shootingrevolver" ignorebyai="true"/>
+      <SpawnAction itemidentifier="dummyrevolverround" targetinventory="shootingrevolver" targettag="shootingrevolverbullets" amount="6" ignorebyai="true"/>
+      <!-- shoot targets from the floor, loop until all bullets are expended -->
+      <Label name="spawntargetsloop" />
+      <WaitAction time="1" />
+      <CountTargetsAction targettag="shootingrevolverbullets" amount="0">
+        <Failure>
+          <ClearTagAction tag="selectedlauncher" />
+          <TagAction criteria="itemtag:shootingtargetlauncher" tag="selectedlauncher" chooserandom="true" />
+          <StatusEffectAction targettag="selectedlauncher" >
+            <StatusEffect target="this" >
+              <SpawnItem identifier="shootingtarget" spawnposition="ThisInventory" SpawnIfCantBeContained="false"/>
+            </StatusEffect>
+          </StatusEffectAction>
+          <ClearTagAction tag="selectedlauncher" />
+          <Goto name="spawntargetsloop" />
+        </Failure>
+      </CountTargetsAction>
+      <StatusEffectAction targettag="dummyrevolver">
+        <StatusEffect target="This">
+          <Remove />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- special prompts based on scores -->
+      <CheckDataAction identifier="shootingtargetshit" condition="eq 6" >
+        <Success>
+          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.crackshot" targettag="shooter_player" eventsprite="heartofgold" />
+          <Goto name="payout" />
+        </Success>
+      </CheckDataAction> 
+      <CheckDataAction identifier="shootingtargetshit" condition="eq 0" >
+        <Success>
+          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.yousuck" targettag="shooter_player" eventsprite="heartofgold" />
+          <Goto name="payout" />
+        </Success>
+      </CheckDataAction>
+      <CheckDataAction identifier="shootingtargetshit" condition="lt 4" >
+        <Success>
+          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.couldbebetter" targettag="shooter_player" eventsprite="heartofgold" />
+          <Goto name="payout" />
+        </Success>
+      </CheckDataAction>
+      <ConversationAction forcesay="true" text="EventText.shootingrangeevent.prettygood" targettag="shooter_player" eventsprite="heartofgold" endconversation="true"/>
+      <!-- deduce 1 to targets hit counter and give money -->
+      <Label name="payout" />
+      <CheckDataAction identifier="shootingtargetshit" condition="gt 0" >
+        <Success>
+          <SetDataAction identifier="shootingtargetshit" operation="add" value="-1" />
+          <MoneyAction targettag="shooter_player" amount="50" />
+          <Goto name="payout" />
+        </Success>
+      </CheckDataAction>
+      <Goto name="playagain" />
+      <Label name="end" />
+    </ScriptedEvent>
+            
+    <ScriptedEvent identifier="hitshootingtarget">
+      <SetDataAction identifier="shootingtargetshit" operation="add" value="1" />
+      <SetDataAction identifier="shootingtargetshittally" operation="set" value="1" />
+    </ScriptedEvent>
+        
+    <!-- TODO: test in real conditions -->
+    <ScriptedEvent identifier="shotdummyrevoler">
+      <SetDataAction identifier="shotdummyrevoler" operation="add" value="1" />
+      <TagAction criteria="itemtag:shottally1" tag="shottally1" />
+      <TagAction criteria="itemtag:shottally2" tag="shottally2" />
+      <TagAction criteria="itemtag:shottally3" tag="shottally3" />
+      <TagAction criteria="itemtag:shottally4" tag="shottally4" />
+      <TagAction criteria="itemtag:shottally5" tag="shottally5" />
+      <TagAction criteria="itemtag:shottally6" tag="shottally6" />
+      <WaitAction time="0.2" />
+      <!-- light up the tally lamps one by one, I tried to use a circuit but brute-forcing is simpler-->
+      <!-- one -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 1" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally1" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally1" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+      <!-- two -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 2" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally2" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally2" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+      <!-- three -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 3" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally3" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally3" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+      <!-- four -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 4" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally4" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally4" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+      <!-- five -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 5" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally5" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally5" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+      <!-- six -->
+      <CheckDataAction identifier="shotdummyrevoler" condition="eq 6" >
+        <Success>
+          <CheckDataAction identifier="shootingtargetshittally" condition="eq 1" >
+            <Success>
+              <StatusEffectAction targettag="shottally6" >
+                <StatusEffect target="this" lightcolor="0,255.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Success> 
+            <Failure>
+              <StatusEffectAction targettag="shottally6" >
+                <StatusEffect target="this" lightcolor="255,0.0,0.0,127" targetitemcomponent="LightComponent" setvalue="true"/>
+              </StatusEffectAction>
+            </Failure> 
+          </CheckDataAction>
+          <SetDataAction identifier="shootingtargetshittally" operation="set" value="0" />
+        </Success> 
+      </CheckDataAction>
+    </ScriptedEvent>
+    
+    
   </EventPrefabs>
 </Randomevents>
 </Override>

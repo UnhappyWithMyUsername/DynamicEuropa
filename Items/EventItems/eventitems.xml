@@ -2424,6 +2424,92 @@
   </Item>
 
 
+  <Item name="shootingtargetlauncher" identifier="shootingtargetlauncher" tags="shootingtargetlauncher" category="Misc" scale="0.5" hideinmenus="true" noninteractable="true">
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" depth="0.65" sourcerect="259,1,85,149" origin="0.5,0.5" />
+    <Turret canbeselected="false" linkable="true" characterusable="false" barrelpos="42,0" rotationlimits="270,270" powerconsumption="0.0" launchimpulse="0" >
+      <StatusEffect type="Always" target="This" >
+        <RequiredItems items="shootingtarget" type="Contained" />
+        <Use />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" >
+        <Sound file="Content/Items/Weapons/Shotgunshot2.ogg" range="1500" volume="3" frequencymultiplier="0.5" dontmuffle="true"/>
+        <ParticleEmitter particle="weldspark" particleamount="10" anglemin="80" anglemax="100" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1" scalemax="1.3" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
+      </StatusEffect>
+    </Turret>
+    <ItemContainer hideitems="true" capacity="1">
+      <Containable items="shootingtarget" />
+    </ItemContainer>
+  </Item>
+  
+  <!-- shooting target for shooting range -->
+  <Item name="shootingtarget" identifier="shootingtarget" Tags="shootingtarget"  hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="255,255,255,255" damagedbyprojectiles="true" invulnerabletodamage="false" impacttolerance="0" health="9999999">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.61" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.6" rotationspeed="360" >
+    </DecorativeSprite>
+    <Body radius="20" density="10" gravityscale="0.5"/>
+    <Projectile characterusable="false" hitscan="false" removeonhit="true" launchimpulse="4.5">
+      <StatusEffect type="OnImpact" target="This">
+        <Sound file="Content/Sounds/Pickitemfail.ogg" range="800" frequencymultiplier="1.5" volume="2"/>
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <TriggerEvent identifier="hitshootingtarget" />
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,255,255,255"/>
+        <Remove />
+      </StatusEffect>   
+    </Projectile>
+  </Item>
+  
+  <!-- revolver used for shooting at targets -->
+  <Item name="dummyrevolver" identifier="dummyrevolver" category="Weapon" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light" spritecolor="255,0,0,255" InventoryIconcolor="255,0,0,255" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/JobGear/TalentGear.png" sourcerect="303,364,42,67" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,256,111,56" depth="0.55" origin="0.5,0.5" />
+    <Body width="106" height="49" density="30" />
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="90,10" handle1="-45,-4" handle2="-45,-15" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon barrelpos="29,11" spread="0.1" unskilledspread="6" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="1" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
+      <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+      <Sound file="Content/Items/Weapons/Revolver1.ogg" type="OnUse" range="3000" selectionmode="Random" />
+      <Sound file="Content/Items/Weapons/Revolver2.ogg" type="OnUse" range="3000" />
+      <Sound file="Content/Items/Weapons/Revolver3.ogg" type="OnUse" range="3000" />
+      <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="150.0" force="1.5" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="6.0" />
+        <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+        <TriggerEvent identifier="shotdummyrevoler" />
+      </StatusEffect>
+      <RequiredItems items="dummyrevolverround" type="Contained" msg="ItemMsgAmmoRequired" />
+      <RequiredSkill identifier="weapons" level="40" />
+    </RangedWeapon>
+    <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+      <Containable items="dummyrevolverround" />
+    </ItemContainer>
+    <SkillRequirementHint identifier="weapons" level="40" />
+  </Item>
+  
+  <!-- bullets used for shooting at targets -->
+  <Item name="dummyrevolverround" identifier="dummyrevolverround" category="Weapon" maxstacksize="6" maxstacksizecharacterinventory="6"  Scale="0.5" tags="smallitem" noninteractable="true" SpriteColor="255,0,0,255" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,384,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="191,290,21,7" depth="0.55" origin="0.5,0.5" />
+    <Body width="29" height="10" density="30" />
+    <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+    <Projectile characterusable="false" hitscan="true" removeonhit="true">
+      <ParticleEmitter particle="tracerfirearm" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="255,0,0,175" scalemultiplier="1,0.6" />
+      <Attack structuredamage="0" targetforce="8" itemdamage="0" >
+        <Affliction identifier="stun" strength="0.3" />
+      </Attack>
+      <StatusEffect type="OnImpact" target="UseTarget">
+        <ParticleEmitter particle="impactfirearm" particleamount="1" velocitymin="0" velocitymax="0" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="Nearbyitems" range="20" targets="shootingtarget" condition="0" setvalue="true"> 
+      </StatusEffect>
+    </Projectile>
+  </Item>
 
   <!-- this is an invisible 1 pixel item you can use to prevent missions from succeeding with their hardcoded conditions, it's fucking jank and barodevs never actually gave us proper ways to force succeed missions -->
   <Item name="" identifier="invisibleitemformissionchecks" Tags="missionitem"  hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="0,0,0,0" invulnerabletodamage="true">
