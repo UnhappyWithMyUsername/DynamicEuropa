@@ -2513,7 +2513,7 @@
     <InventoryIcon texture="Content/Items/JobGear/TalentGear.png" sourcerect="303,364,42,67" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,256,111,56" depth="0.55" origin="0.5,0.5" />
     <Body width="106" height="49" density="30" />
-    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="10,-80" holdangle="270" UseHandRotationForHoldAngle="true" aimpos="90,10" handle1="-45,-4" handle2="-45,-15" msg="ItemMsgPickUpSelect" swingamount="8,15" swingspeed="2" swingwhenholding="True"/>
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="10,-80" holdangle="270" UseHandRotationForHoldAngle="true" aimpos="90,10" handle1="-45,-4" handle2="-45,-15" msg="ItemMsgPickUpSelect" swingamount="10,30" swingspeed="2" swingwhenholding="True"/>
     <RangedWeapon barrelpos="29,11" spread="0.1" unskilledspread="6" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="1" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
@@ -2527,13 +2527,12 @@
         <TriggerEvent identifier="shotdummyrevoler" />
       </StatusEffect>
       <RequiredItems items="dummyrevolverround" type="Contained" msg="ItemMsgAmmoRequired" />
-      <RequiredSkill identifier="weapons" level="40" />
+      <RequiredSkill identifier="weapons" level="100" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet">
       <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
       <Containable items="dummyrevolverround" />
       <StatusEffect type="OnBroken" target="This">
-        <TriggerEvent identifier="hitshootingtarget" />
         <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
         <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
         <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
@@ -2559,7 +2558,7 @@
       <StatusEffect type="OnImpact" target="UseTarget">
         <ParticleEmitter particle="impactfirearm" particleamount="1" velocitymin="0" velocitymax="0" />
       </StatusEffect>
-      <StatusEffect type="OnImpact" target="Nearbyitems" range="20" targets="shootingtarget" condition="0" setvalue="true"> 
+      <StatusEffect type="OnImpact" target="UseTarget" targets="shootingtarget" condition="0" setvalue="true"> 
       </StatusEffect>
     </Projectile>
   </Item>
