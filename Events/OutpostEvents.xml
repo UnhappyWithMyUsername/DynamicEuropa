@@ -76,9 +76,9 @@
           <Goto name="end" />
         </Failure> 
       </CheckDataAction>
-      <ConversationAction text="EventText.firstmission.justarrived" speakertag="outpostmanager" invokertag="firstmission_player" eventsprite="heartofgold" >
+      <ConversationAction text="EventText.firstmission.justarrived" speakertag="outpostmanager" invokertag="firstmission_player" eventsprite="gambler" >
         <Option text="EventText.firstmission.ready" >
-          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notready"  eventsprite="heartofgold" >
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notready"  eventsprite="gambler" >
             <Option text="eventtext.generic.continue">
               <Label name="restofconvo" />
               <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.anyway"  eventsprite="JacovSubra1" >
@@ -91,14 +91,14 @@
           </ConversationAction>
         </Option>
         <Option text="EventText.firstmission.thebest" >  
-          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="heartofgold" >
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="gambler" >
             <Option text="eventtext.generic.continue">
               <Goto name="restofconvo" endconversation="false"/>
             </Option>
           </ConversationAction>
         </Option>
         <Option text="EventText.firstmission.donebefore" >
-          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="heartofgold" >
+          <ConversationAction TargetTag="firstmission_player" text="EventText.firstmission.notdonebefore" eventsprite="gambler" >
             <Option text="eventtext.generic.continue">
               <Goto name="restofconvo" endconversation="false"/>
             </Option>
@@ -3625,7 +3625,7 @@
     
     
     
-    <ScriptedEvent identifier="shootingrangeevent">      
+    <ScriptedEvent identifier="shootingrangeevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:revolverholder" tag="revolverholder" />
       <TagAction criteria="itemtag:shotcounter" tag="shotcounter" />
@@ -3634,32 +3634,39 @@
       <SetDataAction identifier="shootingparticipations" operation="Set" value="0" />
       <SetDataAction identifier="shootingtargetshit" operation="set" value="0" />
       <SetDataAction identifier="shotdummyrevoler" operation="set" value="0" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="shootingrangeNPC" spawnlocation="Outpost" team="FriendlyNPC"/>
-      <NPCOperateItemAction NPCTag="shootingrangeNPC" TargetTag="shootingrangechair" ItemComponentName="Controller" Operate="true" />
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="commoner" targettag="shootingrangeNPC" SpawnPointTag="shootingrangechair" spawnlocation="Outpost" team="FriendlyNPC"/>
       <Label name="playagain" />
+      <NPCOperateItemAction NPCTag="shootingrangeNPC" TargetTag="shootingrangechair" ItemComponentName="Controller" Operate="true" />
       <ClearTagAction tag="shooter_player" />
       <WaitAction time="2" />
+      <TriggerAction target1tag="player" target2tag="shootingrangeNPC" applytotarget1="shooter_player" waitforinteraction="true" />
       <!-- check how many times you've done the event already -->
-      <CheckDataAction identifier="shootingparticipations" condition="gte 5" >
+      <CheckDataAction identifier="shootingparticipations" condition="gte 3" >
         <Success>
-          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.outofbullets" targettag="shooter_player" eventsprite="heartofgold" endconversation="true"/>
+          <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC" text="EventText.shootingrangeevent.outofbullets" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
           <Goto name="end" />
         </Success> 
         <Failure>
-          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.wannaplay" speakertag="shootingrangeNPC" targettag="shooter_player" eventsprite="heartofgold" >
-            <Option forcesay="true" text="EventText.shootingrangeevent.yes" >
+          <Label name="talkagain" />
+          <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.wannaplay" targettag="shooter_player" eventsprite="gambler" >
+            <Option forcesay="true" text="EventText.shootingrangeevent.play" >
               <CheckMoneyAction targettag="shooter_player" amount="200">
                 <Success>
                   <MoneyAction targettag="shooter_player" amount="-200" />
-                  <ConversationAction targettag="shooter_player" forcesay="true" text="EventText.shootingrangeevent.takerevolver" eventsprite="mines" dialogtype="small" />
+                  <SetDataAction identifier="shootingparticipations" operation="add" value="1" />
+                  <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  targettag="shooter_player" text="EventText.shootingrangeevent.takerevolver" eventsprite="gambler" />
                 </Success>
                 <Failure>
                   <GoTo name="playagain" />
                 </Failure>
               </CheckMoneyAction>
             </Option>
-            <Option text="EventText.generic.ignore" endconversation="true">
+            <Option forcesay="true" text="EventText.shootingrangeevent.whatisthis" >
+              <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  targettag="shooter_player" text="EventText.shootingrangeevent.explain" eventsprite="gambler" />
               <Goto name="talkagain" />
+            </Option>
+            <Option text="EventText.generic.ignore" endconversation="true">
+              <Goto name="playagain" />
             </Option>
           </ConversationAction>
         </Failure>
@@ -3678,7 +3685,7 @@
       </StatusEffectAction>
       <SpawnAction itemidentifier="dummyrevolver" targetinventory="revolverholder" targettag="shootingrevolver" ignorebyai="true"/>
       <SpawnAction itemidentifier="dummyrevolverround" targetinventory="shootingrevolver" targettag="shootingrevolverbullets" amount="6" ignorebyai="true"/>
-      <TriggerAction target1tag="player" target2tag="shootingrangebutton" waitforinteraction="true" />
+      <TriggerAction target1tag="player" target2tag="shootingrangebutton"  waitforinteraction="true" />
       <!-- shoot targets from the floor, loop until all bullets are expended -->
       <Label name="spawntargetsloop" />
       <WaitAction time="1" />
@@ -3687,15 +3694,17 @@
           <ClearTagAction tag="selectedlauncher" />
           <TagAction criteria="itemtag:shootingtargetlauncher" tag="selectedlauncher" chooserandom="true" />
           <StatusEffectAction targettag="selectedlauncher" >
-            <StatusEffect target="this" >
-              <SpawnItem identifier="shootingtarget" spawnposition="ThisInventory" SpawnIfCantBeContained="false"/>
+            <StatusEffect target="this" spawnitemrandomly="true">
+              <SpawnItem identifier="shootingtarget1" spawnposition="ThisInventory" SpawnIfCantBeContained="false"/>
+              <SpawnItem identifier="shootingtarget2" spawnposition="ThisInventory" SpawnIfCantBeContained="false"/>
+              <SpawnItem identifier="shootingtarget3" spawnposition="ThisInventory" SpawnIfCantBeContained="false"/>
             </StatusEffect>
           </StatusEffectAction>
           <ClearTagAction tag="selectedlauncher" />
           <Goto name="spawntargetsloop" />
         </Failure>
       </CountTargetsAction>
-      <StatusEffectAction targettag="dummyrevolver">
+      <StatusEffectAction targettag="shootingrevolver">
         <StatusEffect target="This">
           <Remove />
         </StatusEffect>
@@ -3703,31 +3712,36 @@
       <!-- special prompts based on scores -->
       <CheckDataAction identifier="shootingtargetshit" condition="eq 6" >
         <Success>
-          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.crackshot" targettag="shooter_player" eventsprite="heartofgold" />
+          <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.crackshot" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
+          <MoneyAction targettag="shooter_player" amount="100" />
           <Goto name="payout" />
         </Success>
       </CheckDataAction> 
       <CheckDataAction identifier="shootingtargetshit" condition="eq 0" >
         <Success>
-          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.yousuck" targettag="shooter_player" eventsprite="heartofgold" />
+          <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.yousuck" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
           <Goto name="payout" />
         </Success>
       </CheckDataAction>
       <CheckDataAction identifier="shootingtargetshit" condition="lt 4" >
         <Success>
-          <ConversationAction forcesay="true" text="EventText.shootingrangeevent.couldbebetter" targettag="shooter_player" eventsprite="heartofgold" />
+          <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.couldbebetter" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
           <Goto name="payout" />
         </Success>
       </CheckDataAction>
-      <ConversationAction forcesay="true" text="EventText.shootingrangeevent.prettygood" targettag="shooter_player" eventsprite="heartofgold" endconversation="true"/>
+      <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.prettygood" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
       <!-- deduce 1 to targets hit counter and give money -->
       <Label name="payout" />
       <CheckDataAction identifier="shootingtargetshit" condition="gt 0" >
         <Success>
           <SetDataAction identifier="shootingtargetshit" operation="add" value="-1" />
           <MoneyAction targettag="shooter_player" amount="50" />
+          <WaitAction time="0.5" />
           <Goto name="payout" />
         </Success>
+        <Failure>
+          <Goto name="playagain" />
+        </Failure>
       </CheckDataAction>
       <Goto name="playagain" />
       <Label name="end" />
