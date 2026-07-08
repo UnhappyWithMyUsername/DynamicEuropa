@@ -3707,8 +3707,9 @@
       <StatusEffectAction targettag="shootingrevolver">
         <StatusEffect target="This" condition="0" setvalue="true" />
       </StatusEffectAction>
+      <WaitAction time="1" />
       <!-- special prompts based on scores -->
-      <CheckDataAction identifier="shootingtargetshit" condition="eq 6" >
+      <CheckDataAction identifier="shootingtargetshit" condition="gte 6" >
         <Success>
           <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.crackshot" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
           <MoneyAction targettag="shooter_player" amount="100" />
