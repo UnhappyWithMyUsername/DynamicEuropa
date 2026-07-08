@@ -2532,6 +2532,15 @@
     <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet">
       <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
       <Containable items="dummyrevolverround" />
+      <StatusEffect type="OnBroken" target="This">
+        <TriggerEvent identifier="hitshootingtarget" />
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="5" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,0,0,255"/>
+        <Remove />
+      </StatusEffect> 
     </ItemContainer>
     <SkillRequirementHint identifier="weapons" level="40" />
   </Item>

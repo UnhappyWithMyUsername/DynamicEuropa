@@ -3554,7 +3554,7 @@
             </StatusEffect>
           </StatusEffectAction>
           <StatusEffectAction targettag="raptorracelever" >
-            <StatusEffect target="NearbyCharacters" range="1000" oneshot="true" disabledeltatime="true" >             
+            <StatusEffect target="NearbyCharacters" range="1000" oneshot="true" disabledeltatime="true" >
               <ReduceAffliction identifier="mood" strength="25" />
             </StatusEffect>
           </StatusEffectAction>
@@ -3705,15 +3705,19 @@
         </Failure>
       </CountTargetsAction>
       <StatusEffectAction targettag="shootingrevolver">
-        <StatusEffect target="This">
-          <Remove />
-        </StatusEffect>
+        <StatusEffect target="This" condition="0" setvalue="true" />
       </StatusEffectAction>
       <!-- special prompts based on scores -->
       <CheckDataAction identifier="shootingtargetshit" condition="eq 6" >
         <Success>
           <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.crackshot" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
           <MoneyAction targettag="shooter_player" amount="100" />
+          <GiveSkillEXPAction skill="weapons" amount="2" targettag="shooter_player" />
+          <StatusEffectAction targettag="shooter_player" >
+            <StatusEffect target="NearbyCharacters" range="500" oneshot="true" disabledeltatime="true" >
+              <ReduceAffliction identifier="mood" strength="10" />
+            </StatusEffect>
+          </StatusEffectAction>
           <Goto name="payout" />
         </Success>
       </CheckDataAction> 
@@ -3729,7 +3733,9 @@
           <Goto name="payout" />
         </Success>
       </CheckDataAction>
+      <!-- outcome if neither 6, 0 or below 4 -->
       <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  text="EventText.shootingrangeevent.prettygood" targettag="shooter_player" eventsprite="gambler" dialogtype="small" endconversation="true"/>
+      <GiveSkillEXPAction skill="weapons" amount="1" targettag="shooter_player" />
       <!-- deduce 1 to targets hit counter and give money -->
       <Label name="payout" />
       <CheckDataAction identifier="shootingtargetshit" condition="gt 0" >
