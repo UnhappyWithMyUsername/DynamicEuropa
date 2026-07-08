@@ -3628,17 +3628,18 @@
     <ScriptedEvent identifier="shootingrangeevent">      
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="itemtag:revolverholder" tag="revolverholder" />
-      <TagAction criteria="itemtag:shotcounter" tag="shotcounter" />      
+      <TagAction criteria="itemtag:shotcounter" tag="shotcounter" />
+      <TagAction criteria="itemtag:shootingrangebutton" tag="shootingrangebutton" />
+      <TagAction criteria="itemtag:shootingrangechair" tag="shootingrangechair" />
       <SetDataAction identifier="shootingparticipations" operation="Set" value="0" />
       <SetDataAction identifier="shootingtargetshit" operation="set" value="0" />
       <SetDataAction identifier="shotdummyrevoler" operation="set" value="0" />
-      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="worker1" spawnlocation="Outpost" />    
+      <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="miner" targettag="shootingrangeNPC" spawnlocation="Outpost" team="FriendlyNPC"/>
+      <NPCOperateItemAction NPCTag="shootingrangeNPC" TargetTag="shootingrangechair" ItemComponentName="Controller" Operate="true" />
       <Label name="playagain" />
       <ClearTagAction tag="shooter_player" />
       <WaitAction time="2" />
-      <TriggerAction target1tag="player" target2tag="shootingrangeNPC" applytotarget2="shooter_player" waitforinteraction="true" />
       <!-- check how many times you've done the event already -->
-      <!-- TODO: reenable this -->
       <CheckDataAction identifier="shootingparticipations" condition="gte 5" >
         <Success>
           <ConversationAction forcesay="true" text="EventText.shootingrangeevent.outofbullets" targettag="shooter_player" eventsprite="heartofgold" endconversation="true"/>
@@ -3662,7 +3663,7 @@
             </Option>
           </ConversationAction>
         </Failure>
-      </CheckDataAction>      
+      </CheckDataAction>
       <!-- reset the tallys and data -->
       <StatusEffectAction targettag="shotcounter" >
         <StatusEffect target="this" lightcolor="180,180.100,255" targetitemcomponent="LightComponent" setvalue="true"/>
@@ -3677,6 +3678,7 @@
       </StatusEffectAction>
       <SpawnAction itemidentifier="dummyrevolver" targetinventory="revolverholder" targettag="shootingrevolver" ignorebyai="true"/>
       <SpawnAction itemidentifier="dummyrevolverround" targetinventory="shootingrevolver" targettag="shootingrevolverbullets" amount="6" ignorebyai="true"/>
+      <TriggerAction target1tag="player" target2tag="shootingrangebutton" waitforinteraction="true" />
       <!-- shoot targets from the floor, loop until all bullets are expended -->
       <Label name="spawntargetsloop" />
       <WaitAction time="1" />
