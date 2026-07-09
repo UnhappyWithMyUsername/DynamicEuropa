@@ -232,6 +232,26 @@
       <ConversationAction targettag="player" text="Testing" eventsprite="brokenmachinery" endconversation="true"/>
       <ConversationAction targettag="player" text="Testing" eventsprite="malfunction" endconversation="true"/>
     </ScriptedEvent>
+    
+    
+    <ScriptedEvent identifier="eventtagTRIGGER">
+      <Label name="again" />
+      <TriggerEventAction eventtag="testeventtag" />
+      <WaitAction time="0.5" />
+      <Goto name="again" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="eventtagTEST1" tags="testeventtag" commonness="1">
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="UNO" eventsprite="MysteryWoman" continueautomatically="true" />
+    </ScriptedEvent>
+    <ScriptedEvent identifier="eventtagTEST2" tags="testeventtag" commonness="1">
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="DOS" eventsprite="MysteryMan" continueautomatically="true"/>
+    </ScriptedEvent>
+    <ScriptedEvent identifier="eventtagTEST3" tags="testeventtag" commonness="99">
+      <TagAction criteria="player" tag="player" />
+      <ConversationAction targettag="player" text="TRES" eventsprite="MysteryMan2" continueautomatically="true" />
+    </ScriptedEvent>
   
     <ScriptedEvent identifier="traitorlikeeventTEST" >
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,0,256,256" color="200,150,0,255" />
@@ -353,9 +373,11 @@
         <WaitAction time="1" />
     </ScriptedEvent> 
     
-    <!-- <ScriptedEvent identifier="laircrawlersoutsideTEST">
-      <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" />
-    </ScriptedEvent> -->
+    <ScriptedEvent identifier="laircrawlersoutsideTEST">
+      <!-- <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" /> -->
+        <!-- <WaitAction time="3" /> -->
+      <SpawnAction speciesname="tigerthresher" amount="3" SpawnLocation="Nearmainsub" offset="500" AllowInPlayerView="false"/>
+    </ScriptedEvent>
     
     <ScriptedEvent identifier="TAKEOVERdudesTEST">
       <MissionAction missionidentifier="cotakeover_separatistoutpost" locationtype="city,research,military,colony,base,blockade,hospital,factory,shipyard" requiredfaction="separatists" minlocationdistance="2" CreateLocationIfNotFound="true" />

@@ -264,6 +264,7 @@
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="Coalition" endconversation="true" />
+          <MissionStateAction missionidentifier="jailbreak_coalition" operation="Set" value="1" />
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -322,6 +323,7 @@
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="defenders" isinstigator="true" guardreaction="none" witnessreaction="none" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <ConversationAction text="eventtext.takeover.complete" dialogtype="Mission" targettag="player" eventsprite="separatists" endconversation="true" />
+          <MissionStateAction missionidentifier="jailbreak_separatists" operation="Set" value="1" />
         </Success>
         <Failure>
           <Waitaction time="1" />
@@ -542,11 +544,12 @@
       <SetDataAction identifier="takeoverinprogress" value="true" />
       <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <!-- use ChooseRandom but pick 100% of humans with ChooseRandomExcludingTag so that it doesnt tag hostages/prisoners from jailbreak missions. A little janky but that's just how it is  -->
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc" chooserandom="true" ChoosePercentage="100" ChooseRandomExcludingTag="hostage,prisoner"/>
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="sepnpc"/>
       <TagAction criteria="jobidentifier:cosoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
       <ReputationAction targettype="Faction" identifier="separatists" increase="-200" />
       <NPCChangeTeamAction npctag="sepnpc" teamtag="Team2" />
+      <NPCChangeTeamAction npctag="prisoner" teamtag="FriendlyNPC" />
+      <NPCChangeTeamAction npctag="hostage" teamtag="FriendlyNPC" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="sepnpc" CompareToTarget="sepnpc" MinPercentageRelativeToTarget="75">
         <!-- complete mission if >75% enemies dead  -->
@@ -559,6 +562,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="sepnpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <MissionStateAction missionidentifier="jailbreak_coalition" operation="Set" value="1" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="coalition" condition="lt -70">
             <Success>
@@ -581,11 +585,12 @@
       <SetDataAction identifier="takeoverinprogress" value="true" />
       <TriggerEventAction identifier="resettakeoverdata" nextround="true" />
       <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
-      <!-- use ChooseRandom but pick 100% of humans with ChooseRandomExcludingTag so that it doesnt tag hostages/prisoners from jailbreak missions. A little janky but that's just how it is  -->
-      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" chooserandom="true" ChoosePercentage="100" ChooseRandomExcludingTag="hostage,prisoner"/>
+      <TagAction criteria="speciesname:Human" submarinetype="Outpost" team="FriendlyNPC" tag="conpc" />
       <TagAction criteria="jobidentifier:sepsoldier" tag="attackers" ContinueIfNoTargetsFound="true" />
       <ReputationAction targettype="Faction" identifier="coalition" increase="-200" />
       <NPCChangeTeamAction npctag="conpc" teamtag="Team2" />
+      <NPCChangeTeamAction npctag="prisoner" teamtag="FriendlyNPC" />
+      <NPCChangeTeamAction npctag="hostage" teamtag="FriendlyNPC" />
       <Label name="checkforcomplete" />
       <CountTargetsAction targettag="conpc" CompareToTarget="conpc" MinPercentageRelativeToTarget="75">
         <!-- complete mission if >75% enemies dead  -->
@@ -598,6 +603,7 @@
           <!-- Disabled to allow keeping the crew for the outpost they're actually supposed to take over -->
           <!-- <NPCChangeTeamAction npctag="attackers" teamtag="FriendlyNPC" removefromcrew="true" /> -->
           <CombatAction combatmode="Arrest" npctag="attackers" enemytag="conpc" isinstigator="true" guardreaction="none" witnessreaction="none" />
+          <MissionStateAction missionidentifier="jailbreak_separatists" operation="Set" value="1" />
           <ConversationAction text="eventtext.takeover.success" dialogtype="Mission" targettag="player" eventsprite="firefight" />
           <CheckReputationAction targettype="faction" identifier="separatists" condition="lte -70">
             <Success>
@@ -614,6 +620,15 @@
         </Failure>
       </CountTargetsAction>
     </ScriptedEvent>
+
+
+
+    <ScriptedEvent identifier="MANAGERTEAMSWITCHTEST">
+      <TagAction criteria="humanprefabidentifier:outpostmanagerseparatists" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="humanprefabidentifier:outpostmanagercoalition" tag="killmanager" ContinueIfNoTargetsFound="true" />
+      <NPCChangeTeamAction npctag="killmanager" teamtag="Team2" />
+    </ScriptedEvent>
+
 
     <!-- ////////// OUTPOST DESTRUCTION \\\\\\\\\\ -->
     <!-- Turns a station into an abandoned station -->

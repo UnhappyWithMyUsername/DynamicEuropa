@@ -87,8 +87,8 @@
       <!-- SHOP EVENTS -->
       <!-- SHOP EVENTS -->
       
-      <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,construction,hydroponics" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
-        <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" />
+      <EventSet identifier="outpostevents.dynamiceuropa.nostores" minleveldifficulty="0" maxleveldifficulty="100" locationtype="outpost,clinic,study,camp,construction,hydroponics" allowatstart="true" chooserandom="false" eventcount="3" onceperoutpost="false">
+        <!-- <ScriptedEvent identifier="reactoroperatorsale" commonness="100" probability="1.0" /> -->
         <!-- <ScriptedEvent identifier="quartermaster" commonness="100" probability="1.0" /> -->
       </EventSet>      
       
@@ -157,6 +157,20 @@
         </EventSet>
         <EventSet identifier="outpostevent.dynamiceuropa.mineraldrillsalvage" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
           <ScriptedEvent identifier="missionevent_mineraldrillsalvage" commonness="200" probability="0.10" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.escortrowdy" leveltype="outpost" locationtype="outpost,settlement,camp,base,blockade,study,clinic,hydroponics,factory" allowatstart="true" minleveldifficulty="30" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_escortrowdy" commonness="200" probability="0.25" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.drillbigenemything" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="25" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_killvolcaniclithomorph" commonness="50" probability="0.10" />
+          <ScriptedEvent identifier="missionevent_destroyendwormegg" commonness="50" probability="0.10" />
+        </EventSet>
+        <EventSet identifier="outpostevent.dynamiceuropa.drillbigenemything" leveltype="outpost" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,study,research,clinic,hospital,hydroponics,factory,shipyard" allowatstart="true" minleveldifficulty="15" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_synchronizeemitters" commonness="50" probability="0.25" />
+        </EventSet>
+        <!-- TODO: trigger this with job board instead? idk -->
+        <EventSet identifier="outpostevent.dynamiceuropa.scanningsidemission" leveltype="outpost" locationtype="settlement,colony,city,hydroponics,study,research,huskchurch" allowatstart="true" minleveldifficulty="20" maxleveldifficulty="80" chooserandom="false" ignorecooldown="true">
+          <ScriptedEvent identifier="missionevent_scanningsidemission" commonness="50" probability="0.20" />
         </EventSet>
       </EventSet>
 
@@ -544,6 +558,7 @@
       <EventSet identifier="outpostevent.research.missionevents.medium" minleveldifficulty="15" maxleveldifficulty="80" locationtype="study,research" allowatstart="true" chooserandom="true" eventcount="1" exhaustible="true">
         <ScriptedEvent identifier="missionevent_destroybigalienturret" commonness="200" probability="0.35" />
         <ScriptedEvent identifier="missionevent_aliendrillsalvage" commonness="200" probability="0.35" />
+        <ScriptedEvent identifier="missionevent_scanradioactivemoloch" commonness="200" probability="0.35" />
       </EventSet>
       
       <!-- Events specific to industrial outposts -->
@@ -555,7 +570,7 @@
         <ScriptedEvent identifier="malfunctioningdefensebot" commonness="100" probability="0.25" />
       </EventSet>
 
-      <!-- Events specific to habitation outposts -->
+      <!-- Events specific to civilian outposts -->
       <EventSet identifier="outpostevent.habitation.jobboard" minleveldifficulty="0" maxleveldifficulty="80" locationtype="outpost,settlement,colony,city" allowatstart="true" chooserandom="true" exhaustible="true">
         <!-- requires probability of 1 to allow properly configuring the event via the configurator item -->
         <ScriptedEvent identifier="jobboardhabitation" commonness="200" probability="1.0" />
@@ -700,6 +715,11 @@
       <!-- race track -->
       <EventSet identifier="outpostevent.city.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="city" allowatstart="true" exhaustible="false" ignorecooldown="true">
         <ScriptedEvent identifier="mudraptorracing" commonness="100" probability="1" />
+      </EventSet> 
+      <!-- shooting range -->
+      <!-- TODO: change this when we move shootingrange to optional modules -->
+      <EventSet identifier="outpostevent.city.always" minleveldifficulty="0" maxleveldifficulty="100" locationtype="city,military" allowatstart="true" exhaustible="false" ignorecooldown="true">
+        <ScriptedEvent identifier="shootingrangeevent" commonness="100" probability="1" />
       </EventSet> 
 
       <!-- RUIN LORE EVENTS, made them occur in civilian + research outposts  -->
@@ -1144,10 +1164,11 @@
         <ScriptedEvent identifier="scrapdealer3" commonness="100" probability="0.25" />
         <!-- <ScriptedEvent identifier="factionseparatist" commonness="100" probability="0.1" triggercooldown="false" /> -->
       </EventSet>
-      <EventSet identifier="DEtransitevents.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true">
+      <EventSet identifier="DEtransitevents.malfunctions" minleveldifficulty="15" maxleveldifficulty="80" allowatstart="true" ignorecooldown="true" chooserandom="true" minintensity="0.0" maxintensity="0.50" minmissiontime="180">
         <ScriptedEvent identifier="troubledengine" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="reactormalfunction" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="oxygenfluidleak" commonness="100" probability="0.02" triggercooldown="false" />
+        <ScriptedEvent identifier="junctionmalfunction" commonness="100" probability="0.02" triggercooldown="false" />
         <ScriptedEvent identifier="beaconcommsjam" commonness="100" probability="0.02" triggercooldown="false" />
       </EventSet>
       <EventSet identifier="DEtransitevents.commsrelay.wrecks" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" ignorecooldown="true" chooserandom="true">

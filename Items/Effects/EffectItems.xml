@@ -104,6 +104,8 @@
         </StatusEffect>
       </ItemComponent>
     </Item>
+    
+    
     <!-- EFFECT ITEMS -->
     <Item name="" identifier="effect_none" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
       <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
@@ -115,6 +117,7 @@
         </StatusEffect>
       </Holdable>
     </Item>
+    
     <Item name="" identifier="effect_delete" Category="Hidden" Tags="effect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
       <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
       <Body radius="1" density="10" />
@@ -128,6 +131,7 @@
         </StatusEffect>
       </Holdable>
     </Item>
+    
     <Item name="" identifier="effect_unlock" Category="Hidden" Tags="effect,unlock" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
       <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
       <Body radius="1" density="10" />
@@ -139,6 +143,46 @@
           <Remove />
         </StatusEffect>
       </Holdable>
+    </Item>    
+
+    <Item name="" identifier="effect_zapper" Category="Hidden" Tags="effect,badeffect" maxstacksize="1" cargocontaineridentifier="metalcrate" scale="0.5" spritecolor="255,255,255,0" noninteractable="true" hideinmenus="true">
+      <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="0,0,1,1" />
+      <Body radius="1" density="10" />
+      <Holdable handle1="0,0" slots="Any" msg="ItemMsgPickUpSelect">
+      </Holdable>
+      <ElectricalDischarger duration="0.25" Reload="60" range="350" rangemultiplierinwalls="1" minvoltage="0.0" onlyoutside="false" >
+        <Attack targetimpulse="50">
+          <Affliction identifier="stun" strength="2" />
+          <Affliction identifier="burn" strength="10" />
+          <Affliction identifier="burn" strength="5" probability="0.5" />
+          <Affliction identifier="electricshock" strength="70"/>
+        </Attack>
+        <StatusEffect type="Always" target="This">
+          <ParticleEmitter particle="faradayfx" anglemin="0" anglemax="360" distancemin="10" distancemax="50" scalemin="1" scalemax="1" particlespersecond="10" colormultiplier="255,255,255,180"/>
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" delay="6" stackable="false">
+          <Use />
+          <ParticleEmitter particle="risingbubbles" anglemin="0" anglemax="360" particleamount="15" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2" />
+        </StatusEffect>
+        <StatusEffect type="OnSpawn" target="This" oneshot="true">
+          <sound file="Content/Items/PowerOnLight1.ogg" range="800" frequencymultiplier="0.5" volume="2" selectionmode="random"/>
+          <sound file="Content/Items/PowerOnLight2.ogg" range="800" frequencymultiplier="0.5" volume="2" selectionmode="random"/>
+          <sound file="Content/Items/PowerOnLight3.ogg" range="800" frequencymultiplier="0.5" volume="2" selectionmode="random"/>
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" >
+          <sound file="Content/Items/Alien/Aliencoil1.ogg" range="800" frequencymultiplier="1.5" volume="2" selectionmode="random"/>
+          <sound file="Content/Items/Alien/Aliencoil2.ogg" range="800" frequencymultiplier="1.5" volume="2" selectionmode="random"/>
+          <sound file="Content/Items/Alien/Aliencoil3.ogg" range="800" frequencymultiplier="1.5" volume="2" selectionmode="random"/>
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This">
+          <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="1500" selectionmode="random" />
+          <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="1500" />
+          <sound file="Content/Items/Weapons/ElectricalDischarger.ogg" range="1500" />
+          <Explosion range="800.0" empstrength="0.15" stun="0" force="3.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+          <Remove />
+        </StatusEffect>
+      </ElectricalDischarger>
     </Item>
+    
   </Override>
 </Items>

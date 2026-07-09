@@ -30,6 +30,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
+  
   <Item name="TentacleNoDamage" identifier="lithomorphtentaclenodamage" category="Weapon" maxstacksize="1" scale="0.5" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,harpoonammo" Scale="0.5" impactsoundtag="impact_metal_light" noninteractable="true" hideinmenus="true" health="5" damagedbymeleeweapons="false" spritecolor="220,220,220,255">
     <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="0,0,15,15" depth="0.57" origin="0.5,0.5" />
     <Body radius="15" density="10" />
@@ -59,6 +60,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
+  
   <Item name="Tentacle test gun" identifier="lithomorphgun" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light" hideinmenus="true">
     <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,203,181,39" depth="0.55" origin="0.5,0.5" />
     <Body width="180" height="30" density="25" />
@@ -78,6 +80,7 @@
       </ItemContainer>
       <RequiredSkill identifier="weapons" level="30" />
     </RangedWeapon>
+    
   </Item>
   <Item name="" nameidentifier="cassiterite" identifier="lithomorphspawnercassiterite" category="Material" Tags="smallitem,ore,lithomorphspawner" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
     <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
@@ -125,6 +128,7 @@
     </MotionSensor>
     <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
   </Item>
+  
   <Item name="" nameidentifier="chamosite" identifier="lithomorphspawnerchamosite" category="Material" Tags="smallitem,ore,lithomorphspawner" maxstacksize="1" canbepicked="true" description="" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" health="10" noninteractable="true" damagedbyprojectiles="true" damagedbyexplosions="true" hideinmenus="true">
     <LightComponent lightcolor="113,204,164,225" range="100" powerconsumption="0" flicker="0.0" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0" ison="true" drawbehindsubs="true">
       <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
@@ -521,6 +525,67 @@
       </StatusEffect>
     </MotionSensor>
     <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="5.0" canbepicked="False" allowingameediting="False" attachable="true" reattachable="false" />
+  </Item> 
+  
+
+  <!-- vulcanomorph fireball -->
+  <Item name="vulcanomorphprojectile" identifier="vulcanomorphprojectile" category="Misc" tags="ignorebyai" Scale="0.5" health="10" sonarsize="10" hideinmenus="true" spritecolor="255,255,255,255" noninteractable="true" explosiondamagemultiplier="0.1">
+    <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" sourcerect="677,855,125,73" depth="0.55" />
+    <Body width="70" radius="25" density="12" />
+    <Projectile characterusable="false" launchimpulse="12" sticktocharacters="false" sticktoitems="false" sticktodoors="false" sticktostructures="true" friendlyfire="false" damagedoors="true">
+      <StatusEffect type="OnImpact" target="This" Condition="-100.0" disabledeltatime="true">
+        <Explosion range="250.0" ballastfloradamage="50" structuredamage="50" levelwalldamage="50" itemdamage="250" force="5" severlimbsprobability="0.25">
+          <Affliction identifier="burn" strength="35" />
+          <Affliction identifier="stun" strength="1.5" />
+        </Explosion>
+        <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" range="3000" selectionmode="random"/>
+        <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" range="3000" />
+        <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" range="3000" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnNotContained" target="This" delay="5" stackable="false" >
+        <particleemitter particle="brownchunks" drawontop="true" particleamount="10" velocitymin="30" velocitymax="50" anglemin="0" anglemax="360" scalemin="0.3" scalemax="0.5" />
+        <ParticleEmitter particle="lavasplashes" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="0" scalemin="0.25" scalemax="0.3" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="bubbles" anglemin="0" anglemax="360" particlespersecond="3" velocitymin="0" velocitymax="50" scalemin="0.5" scalemax="0.7" />
+        <ParticleEmitter particle="lavasplashes" anglemin="0" anglemax="360" particlespersecond="8" velocitymin="0" velocitymax="0" scalemin="0.15" scalemax="0.2" />
+      </StatusEffect>
+    </Projectile>
+    <LightComponent lightcolor="180,60,0,255" range="100" powerconsumption="0" flicker="0.2" flickerspeed="0.5" pulsefrequency="0.4" pulseamount="0.2" ison="true">
+      <LightSprite texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" sourcerect="677,855,125,73" />
+    </LightComponent>
+  </Item>
+    
+  <Item name="TentacleNoDamageBIG" identifier="lithomorphtentaclenodamagebig" category="Weapon" maxstacksize="1" scale="1" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="mediumitem,harpoonammo" Scale="0.5" impactsoundtag="impact_metal_light" noninteractable="true" hideinmenus="true" health="5" damagedbymeleeweapons="false" spritecolor="220,220,220,255">
+    <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="0,0,15,15" depth="0.57" origin="0.5,0.5" />
+    <Body radius="15" density="10" />
+    <Rope sourcepullforce="0" targetpullforce="50" projectilepullforce="1" maxlength="500" snaponcollision="false" spritewidth="40" tile="true" origin="0.05,0.5" targetminmass="0" lerpforces="true" snapanimduration="0.5" breakfrommiddle="false" SnapWhenNotAimed="False">
+      <Sprite texture="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphSpritesheet.png" sourcerect="500,448,500,162" depth="0.57" origin="0.5,0.5" />
+      <!--       <EndSprite texture="Content/Map/Thalamus/thalamus.png" sourcerect="672,288,32,64" depth="0.56" origin="0.5,0.5" /> -->
+      <StatusEffect type="Always" target="This" delay="1" checkconditionalalways="true">
+        <Conditional Snapped="true" />
+        <Conditional condition="0" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="3" checkconditionalalways="true">
+        <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Snapped="true" delay="10" />
+      <StatusEffect type="OnBroken" target="This" Snapped="true">
+        <ParticleEmitter particle="bloodsplashwater" anglemin="-180" anglemax="-180" particleamount="3" velocitymin="50" velocitymax="100" scalemin="0.5" scalemax="1.0" />
+      </StatusEffect>
+    </Rope>
+    <Projectile characterusable="false" launchimpulse="9" sticktowalls="false" sticktocharacters="true" sticktoitems="false" sticktostructures="false" sticktodoors="false" sticktodeflective="false" maxtargetstohit="1">
+      <Attack severlimbsprobability="0">
+        <Affliction identifier="stun" strength="1" />
+      </Attack>
+      <StatusEffect type="OnActive" target="UseTarget,This" checkconditionalalways="true">
+        <Conditional Snapped="false" />
+        <Affliction identifier="slow" strength="10" />
+      </StatusEffect>
+    </Projectile>
   </Item>
   
 <!-- 
@@ -529,6 +594,9 @@
     <overridecommonness commonness="0" leveltype="ridgesoutpost" />
     <overridecommonness commonness="0" leveltype="greatseaoutpost" />
     <overridecommonness commonness="0" leveltype="wastesoutpost" /> -->
+  
+  
+  
   
   
   

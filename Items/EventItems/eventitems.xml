@@ -1318,11 +1318,13 @@
     <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
       <!-- 1% condition because otherwise the item is "broken" and can't be swung-->
       <StatusEffect type="OnSpawn" target="this" condition="1" setvalue="true" />
-      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="34" AllowWhenBroken="true" disabledeltatime="true" >
+      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="100" AllowWhenBroken="true" disabledeltatime="true" >
         <Conditional speciesname="husk_chimera"/>
+        <Sound file="Content/Items/Medical/syringe.ogg" range="500" frequencymultiplier="1.5" />
       </StatusEffect>
     </MeleeWeapon>
   </Item>
+  
   
   <!-- UNUSED, BUGGED. INTERACT DONT WORK https://github.com/FakeFishGames/Barotrauma/discussions/14489 -->
   <Item identifier="hiddenalienpylon" name="hiddenalienpylon" description="" texturescale="0.5,0.5" scale="2" sonarsize="10" category="Alien" Tags="alien,hiddenalienpylon" damagedbyexplosions="false" damagedbyprojectiles="true" damagedbyrepairtools="false" damagedbymeleeweapons="false" health="100" hideinmenus="true">
@@ -1643,9 +1645,10 @@
     </ItemComponent>    
   </Item>
 
-  <!-- TODO: add more missions that use drillingpod? -->
+  <!-- TODO: add more missions that use drillingpod -->
   <Item name="" identifier="drillingpod" tags="drillingpod,depthchargeammo" showcontentsintooltip="true" category="Weapon" sonarsize="5" scale="0.5" impactsoundtag="impact_metal_heavy" cargocontaineridentifier="" AllowDeselectWhenIdling="false" health="500" >
     <PreferredContainer primary="depthchargeloader" />
+    <PreferredContainer primary="wreckammoboxcontainer" spawnprobability="0.01" />
     <!-- <InventoryIcon texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="346,438,279,142" origin="0.5,0.5" /> -->
     <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="346,438,279,142" depth="0.54" origin="0.5,0.5" />
     <!-- <DecorativeSprite texture="Content/Map/Outposts/Art/TunnelWalls.png" sourcerect="1456,1838,30,84" depth="0.535" origin="0.5,0.5" offset="-8,0" scale="1.1">
@@ -1659,8 +1662,15 @@
       <IsActiveConditional targetitemcomponent="Projectile" IsStuckToTarget="true" />
     </DecorativeSprite>
     <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="depthchargeammosource" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="347,460,119,95" depth="0.54" origin="0.5,0.5" />
-    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="ammoboxcontainer" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="455,473,100,72" depth="0.54" origin="0.5,0.5" />
+    <ContainedSprite name="Boarding Pod Contained" allowedcontainertags="ammoboxcontainer,wreckammoboxcontainer" texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="455,473,100,72" depth="0.54" origin="0.5,0.5" />
     <Body width="140" radius="60" density="30" />
+    <Price baseprice="250" sold="true">
+      <Price storeidentifier="merchantoutpost" multiplier="1" minamount="0" maxamount="1" />
+      <Price storeidentifier="merchantcity" multiplier="1" minamount="2" maxamount="5" />
+      <Price storeidentifier="merchantresearch" multiplier="0.8" minamount="2" maxamount="2"/>
+      <Price storeidentifier="merchantmilitary" multiplier="1" minamount="0" maxamount="1"/>
+      <Price storeidentifier="merchantmine" multiplier="0.8" minamount="2" maxamount="2"/>
+    </Price>
     <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect">
       <!-- slow down the character when holding the item -->
       <StatValue stattype="MovementSpeed" value="-0.4" />
@@ -1681,8 +1691,10 @@
         <sound file="Content/Items/Engine/Engine.ogg" range="2000.0" loop="true" frequencymultiplier="2.5" volume="1.5" dontmuffle="true" />
         <Use />
       </StatusEffect>
+      <!-- applies "beingdrilled" tag which I can use for SEs on drill targets -->
+      <StatusEffect type="OnActive" target="UseTarget" targets="drilltarget" statuseffecttags="beingdrilled" duration="0.1" stackable="false" setvalue="true" />
       <!-- damage to drillingtarget if stuck -->
-      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-550" disabledeltatime="true">
+      <StatusEffect type="OnActive" target="UseTarget,This" targets="drilltarget" interval="3" condition="-550" disabledeltatime="true" >
         <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particlespersecond="20" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
       </StatusEffect>
       <!-- damage to drillingpod if stuck -->
@@ -1709,8 +1721,8 @@
     </LightComponent>
   </Item>
 
-
-  <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="2000" SpriteColor="255,255,255,255">
+  <!-- big rock used in Geode mission, this one is empty -->
+  <Item name="" identifier="mineraldrilltarget" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="250" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
@@ -1752,24 +1764,22 @@
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
-        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="1500" volume="2" frequencymultiplier="0.5" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="3000" volume="2" frequencymultiplier="0.5" />
         <DropContainedItems />
         <Remove />
       </StatusEffect>
       <!-- <StatusEffect type="Always" target="This" offset="0,60">
         <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
         <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
-      </StatusEffect> -->   
-      <StatusEffect type="OnDamaged" target="This">
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
-      </StatusEffect>
+      </StatusEffect> -->
       <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="8" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="100" velocitymax="300" scalemin="0.5" scalemax="1" drawontop="true" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
       </StatusEffect>
     </ItemContainer>    
   </Item>
@@ -1806,8 +1816,8 @@
   </Item>
 
 
-  <!-- drill target that is sturdy but shits out a lot of minerals -->
-  <Item name="" identifier="mineraldrilltarget2" nameidentifier="mineraldrilltarget2" category="Material" Tags="drilltarget" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="1.25" health="5000" SpriteColor="255,255,255,255">
+  <!-- drill target that is extremely sturdy but shits out a lot of minerals. Can only be cracked with drill? -->
+  <Item name="" identifier="mineraldrilltarget2" nameidentifier="mineraldrilltarget2" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="30" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="5000" SpriteColor="255,255,255,255">
     <Body radius="160" density="10" bodytype="Dynamic" />
     <Sprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" depth="0.75" sourcerect="4,516,504,504" origin="0.5,0.5" />
     <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" depth="0.6" sourcerect="0,0,506,338" origin="0.4,0.4" scale="0.35" offset="-50,-100" />
@@ -1861,7 +1871,7 @@
       <StatusEffect type="OnBroken" target="This">
         <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
         <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
-        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="1500" volume="2" frequencymultiplier="0.5" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="3000" volume="2" frequencymultiplier="0.5" />
         <TriggerEvent identifier="mineraldrilltarget2crackedevent" />
         <DropContainedItems />
         <Remove />
@@ -1869,17 +1879,15 @@
       <!-- <StatusEffect type="Always" target="This" offset="0,60">
         <ParticleEmitter particle="risingbubbles" scalemin="0.3" scalemax="0.5" anglemin="0" anglemax="360" distancemin="0" distancemax="0" velocitymin="100" velocitymax="200" particlespersecond="5" />
         <ParticleEmitter particle="bubbles" scalemin="0.5" scalemax="1" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particlespersecond="2" />
-      </StatusEffect> -->   
-      <StatusEffect type="OnDamaged" target="This">
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" />
-        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" />
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="5" velocitymin="100" velocitymax="300" scalemin="0.25" scalemax="0.5" />
-      </StatusEffect>
+      </StatusEffect> -->
       <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
-        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="8" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="100" velocitymax="300" scalemin="0.5" scalemax="1" drawontop="true" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
       </StatusEffect>
       
       <!-- spawns multiple minerals at random -->
@@ -1970,10 +1978,598 @@
         <SpawnItem identifier="langbeinite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
         <SpawnItem identifier="aragonite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
         <SpawnItem identifier="sphalerite" spawnposition="This" spread="60" aimspread="360" impulse="15" />
-      </StatusEffect>
-      
-    </ItemContainer>    
+      </StatusEffect>         
+    </ItemContainer>        
+    <LevelResource deattachduration="Infinity">
+      <Commonness commonness="0" />
+      <Commonness commonness="0.00" cavecommonness="0.0" abysscommonness="0" leveltype="coldcaverns" />
+      <Commonness commonness="0.01" cavecommonness="0.0" abysscommonness="0" leveltype="europanridge" />
+      <Commonness commonness="0.01" cavecommonness="0.0" abysscommonness="0" leveltype="theaphoticplateau" />
+      <Commonness commonness="0.01" cavecommonness="0.0" abysscommonness="0" leveltype="thegreatsea" />
+      <Commonness commonness="0.01" cavecommonness="0.0" abysscommonness="0" leveltype="hydrothermalwastes" />
+      <RequiredItem items="nonexistentitem" type="Equipped" />
+    </LevelResource>
   </Item>
+  
+  <!-- big volcano/lithomorph spawner -->
+  <Item name="" identifier="vulcanomorphdrilltarget" category="Material" Tags="drilltarget,ductblock" canbepicked="false" description="" scale="1.5" sonarsize="50" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="2000.0" SpriteColor="255,255,255,255">
+    <Body radius="160" density="10" bodytype="Dynamic" />
+    <Sprite texture="Content/Map/Biomes/Common/old/seafloor.png" sourcerect="503,375,475,801" origin="0.5,0.5" depth="0.75" />
+    <DecorativeSprite name="lithobody" Texture="%ModDir:2532991202%/Characters/Special Creatures/LithomorphVolcanic/LithomorphVolcanicSpritesheet.png" SourceRect="9,33,422,684" origin="0.5,0.5" depth="0.7" rotation="90" scale="1" offset="0,-200"/>
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.71" sourcerect="472,1315,445,733" origin="0.5,0.5" scale="0.35" offset="-150,0" />
+    <DecorativeSprite name="backgroundrock2" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.72" sourcerect="1032,1247,439,801" origin="0.5,0.5" scale="0.35" offset="0,60" />
+    <DecorativeSprite name="backgroundrock3" texture="Content/Map/Biomes/Common/Old/seafloor.png" depth="0.71" sourcerect="1548,1263,445,785" origin="0.5,0.5" scale="0.35" offset="150,30" />
+    <DecorativeSprite name="backgroundrock4" texture="Content/Map/Biomes/Hydrothermalwastes/WallEdgeChunks.png" depth="0.69" sourcerect="0,421,1016,506" origin="0.5,0.5" scale="0.5" offset="0,-265" />
+    <!-- breakable -->
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,0,512,512" depth="0.731" offset="80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,0,512,512" depth="0.731" offset="80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.732" offset="-80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.732" offset="-80,40" randomrotation="-20,20" randomscale="0.35,0.55" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" >
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512"  depth="0.715" offset="-50,-80" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+    <DecorativeSprite texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="512,512,512,512" depth="0.715" offset="-50,-80" randomrotation="-20,20" randomscale="0.55,0.70" randomoffset="30,30" origin="0.5,0.5" randomgroupid="3" >
+      <IsActiveConditional conditionpercentage="gt 0" />
+    </DecorativeSprite>
+         
+    <TriggerComponent bodyoffset="0,300" width="700" height="1400" camerashake="3" triggeredby="Submarine, Character" force="0,5.0" forcemode="Acceleration" forcefalloff="false" forcevelocitylimit="200" staytriggereddelay="2" >
+      <Attack structuredamage="10" damagerange="500" emitstructuredamageparticles="true">
+        <Affliction identifier="burn" strength="2" />
+      </Attack>
+      <LightSource range="4000" color="255,0,0,255" flicker="0.5" pulseamount="0.3" pulsefrequency="0.5">
+        <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" />
+      </LightSource>
+      <StatusEffect type="OnActive" target="This">
+        <Sound file="Content/Sounds/Ambient/Thunder1.ogg" range="20000" position="0,700" />
+        <Sound file="Content/Sounds/Water/BlackSmoker.ogg" range="7000" position="0,700" />
+        <ParticleEmitter particle="volcanosmokefast" particlespersecond="2" position="-50,700" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" />
+        <ParticleEmitter particle="lavasplash" particlespersecond="10" position="-50,700" anglemin="70" anglemax="110" velocitymin="0" velocitymax="8000" />
+        <ParticleEmitter particle="lavachunk" particlespersecond="15" position="-50,700" anglemin="80" anglemax="100" velocitymin="1000" velocitymax="6000" drawontop="true" />
+        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="-50,700" anglemin="50" anglemax="130" velocitymin="100" velocitymax="1000" drawontop="true" />
+      </StatusEffect>
+    </TriggerComponent> 
+    <!-- <TriggerComponent randomtriggerinterval="10" randomtriggerprobability="0.5" staytriggereddelay="5" networksyncing="true">
+    </TriggerComponent>    -->
+    
+    <Turret autooperate="true" maxdistance="3000" AIrange="3000" friendlytag="lithomorph" AllowAutoOperateWithWiring="false" randommovement="true" aimdelay="false" targetcharacters="false" targetmonsters="false" targethumans="false" targetsubmarines="false" targetitems="false" canbeselected="false" firingoffset="40,0" characterusable="false" linkable="true" barrelpos="250,50" rotationlimits="220,320" powerconsumption="0" showchargeindicator="true" showprojectileindicator="true" recoildistance="0" reload="1" shotsperburst="3" delaybetweenbursts="0.3" alternatingfiringoffset="true" springstiffnesslowskill="20" springstiffnesshighskill="20" springdampinglowskill="0.5" springdampinghighskill="0.5" rotationspeedlowskill="5" rotationspeedhighskill="5" randomaimmintime="0" randomaimmaxtime="0" randomaimamount="100">    
+     
+      <StatusEffect type="Always" target="This" interval="1">
+        <Conditional IsActive="true" targetitemcomponent="TriggerComponent" />
+        <Use />
+        <SpawnItem identifier="vulcanomorphprojectile" amount="1" spawnposition="ThisInventory" />
+      </StatusEffect> 
+      
+      <!-- <RailSprite name="alienturret_rail" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="2,0,184,316" origin="0.5,0.83" />
+      <RailSpriteBroken name="alienturret_rail_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.71" sourcerect="254,0,184,316" origin="0.5,0.83" /> 
+      <BarrelSprite name="alienturret_barrel" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="188,2,66,184" origin="0.5,1.57" />
+      <BarrelSpriteBroken name="alienturret_barrel_broken" texture="Content/Items/Alien/AlienTurret.png" depth="0.72" sourcerect="442,2,66,184" origin="0.5,1.57" /> -->
+      
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 50" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true">
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="1000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="350.0" structuredamage="50" force="10.0" debris="true" decalsize="1.0" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="50" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="2500" volume="3" frequencymultiplier="0.5" />
+        <particleemitter particle="brownchunks" particleamount="15" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="360" scalemin="2.5" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="lavachunk" particleamount="15" velocitymin="500" velocitymax="1000" distancemin="0" distancemax="100" anglemin="0" anglemax="360" scalemin="2.5" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="lavasplashes" particleamount="5" velocitymin="0" velocitymax="0" distancemin="0" distancemax="300" anglemin="0" anglemax="360" scalemin="2" scalemax="3" drawontop="true" copyentityangle="true" />
+        <particleemitter particle="volcanofire" particleamount="1" velocitymin="0" velocitymax="0" distancemin="0" distancemax="300" anglemin="90" anglemax="90" scalemin="2" scalemax="2" drawontop="true" copyentityangle="true" />
+        <SpawnCharacter speciesname="LithomorphVolcanic" MaximumAmount="1" AfflictionOnSpawn="dontshoot" AfflictionStrength="2" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" duration="2" interval="8" >
+        <ParticleEmitter particle="risingbubbles" position="0,200" scalemin="2" scalemax="3" anglemin="0" anglemax="360" distancemin="-300" distancemax="300" velocitymin="0" velocitymax="0" particlespersecond="6" drawontop="true" LifeTimeMultiplier="1.5"/>
+        <ParticleEmitter particle="volcanosmokefast" particlespersecond="8" position="0,800" scalemin="0.8" scalemax="1" anglemin="60" anglemax="120" velocitymin="100" velocitymax="600" drawontop="true" />
+        <ParticleEmitter particle="volcanofire" particlespersecond="5" emitinterval="2" particleamount="10" position="0,800" anglemin="20" anglemax="160" velocitymin="100" velocitymax="1000" distancemin="200" distancemax="300"/>
+      </StatusEffect>      
+      <!-- <StatusEffect type="Always" target="This" interval="8" delay="1" stackable="false">
+        <SpawnItem identifier="vulcanomorphprojectile" spawnposition="This" count="3" aimspread="20" rotation="0" Offset="800,800" impulse="5"/>
+      </StatusEffect> -->
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" > 
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="200" velocitymax="800" scalemin="0.5" scalemax="1" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="100" velocitymax="300" scalemin="0.5" scalemax="1" drawontop="true" />
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact3.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Items/Alien/DAMAGE_guardianPodImpact5.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+      </StatusEffect>
+    </Turret>
+    <ItemContainer hideitems="true" drawinventory="false" capacity="3" maxstacksize="1" canbeselected="false" characterusable="false">
+      <Containable items="vulcanomorphprojectile" />
+    </ItemContainer> 
+    <LightComponent LightColor="255,100,30,255" Flicker="0.2" flickerspeed="0.5" range="1400" directional="false" IsOn="true" pulsefrequency="1.0" pulseamount="0.2" drawbehindsubs="true">
+    </LightComponent> 
+    <LevelResource deattachduration="999" randomoffsetfromwall="80">
+      <Commonness commonness="0" abysscommonness="0" />
+      <RequiredItem items="cuttingequipment" type="Equipped" />
+    </LevelResource>
+    <!-- <AiTarget soundrange="500000" staticsound="True" sonarlabel="sonarlabel.killvolcaniclithomorph"  /> -->
+  </Item>
+
+  <!-- TODO: adjust health and resistances -->
+  <!-- Endworm egg used in mission, spawns baby endworms at 25% health -->
+  <Item name="" identifier="endwormeggdrilltarget" category="Material" Tags="drilltarget,ductblock,endwormegg" canbepicked="false" description="" scale="1" sonarsize="35" damagedbyexplosions="true" damagedbymonsters="true" damagedbyprojectiles="true" damagedbymeleeweapons="true" damagedbyrepairtools="true" explosiondamagemultiplier="0.1" itemdamagemultiplier="0.2" health="2000" SpriteColor="255,255,255,255">
+    <Body radius="350" density="10" bodytype="Dynamic" />
+    <Sprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="1167,1130,748,783" origin="0.5,0.5" />
+    <BrokenSprite texture="Content/Characters/Endworm/Endworm.png" depth="0.7" sourcerect="0,0,1,1" origin="0.5,0.5" maxcondition="25" fadein="false"/>
+    <DecorativeSprite name="flesh1" texture="Content/Characters/Endworm/Endworm.png" depth="0.62" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,215" ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh2" texture="Content/Characters/Endworm/Endworm.png" depth="0.63" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="0,84" ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh3" texture="Content/Characters/Endworm/Endworm.png" depth="0.64" sourcerect="55,766,961,343" origin="0.5,0.5" scale="0.7" offset="0,-120"  ScaleAnim="sine" ScaleAnimAmount="0.02,0.0" ScaleAnimSpeed="0.35"/>
+    <DecorativeSprite name="flesh4" texture="Content/Characters/Endworm/Endworm.png" depth="0.621" sourcerect="245,1124,581,170" origin="0.5,0.5" scale="0.7" offset="0,345" ScaleAnim="sine" ScaleAnimAmount="0.0,0.4" ScaleAnimSpeed="2"/>
+    <DecorativeSprite name="fleshsideL" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="-200,-50" rotation="-110" ScaleAnim="sine" ScaleAnimAmount="0,0.1" ScaleAnimSpeed="0.35" />
+    <DecorativeSprite name="fleshsideR" texture="Content/Characters/Endworm/Endworm.png" depth="0.72" sourcerect="55,1124,961,556" origin="0.5,0.5" scale="0.7" offset="200,-50" rotation="110" ScaleAnim="sine" ScaleAnimAmount="0,0.1" ScaleAnimSpeed="0.35"/>
+    
+    <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1358,735,307,210" origin="0.5,0.5" scale="1" offset="-210,330" color="200,220,200,255" />
+    <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1710,649,337,163" origin="0.5,0.5" scale="1" offset="0,440" color="200,220,200,255" />
+    <DecorativeSprite name="plantdecal" texture="Content/Items/Shipwrecks/MiscWrecked.png" depth="0.65" sourcerect="1358,735,307,210" origin="0.5,0.5" scale="1" offset="200,330" color="200,220,200,255" />
+    <DecorativeSprite name="rockbase" texture="Content/Map/Biomes/rockcave/WallEdgeChunks.png" sourcerect="0,512,512,512" origin="0.5,0.5" depth="0.71" scale="1.3" offset="0,-90" />
+    
+    <DecorativeSprite name="shellforeground" texture="Content/Characters/Endworm/Endworm.png" depth="0.61" sourcerect="1167,1130,748,783" origin="0.5,0.5" scale="1" offset="0,0" color="255,255,255,150" >
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>    
+    <DecorativeSprite name="shellpiececenter1" texture="Content/Characters/Endworm/Endworm.png" depth="0.6" sourcerect="584,1692,442,339" origin="0.5,0.5" scale="1.2" offset="0,200" rotation="0" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite name="shellpiece1L" texture="Content/Characters/Endworm/Endworm.png" depth="0.601" sourcerect="1230,84,311,242" origin="0.5,0.5" scale="0.6" offset="-225,90" rotation="150" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite name="shellpiece1R" texture="Content/Characters/Endworm/Endworm.png" depth="0.601" sourcerect="1564,84,311,242" origin="0.5,0.5" scale="0.6" offset="225,90" rotation="-150" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite name="shellpiececenter2" texture="Content/Characters/Endworm/Endworm.png" depth="0.602" sourcerect="584,1692,442,339" origin="0.5,0.5" scale="0.7" offset="0,-15" rotation="0" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 25" />
+    </DecorativeSprite>
+    <DecorativeSprite name="shellpiece2L" texture="Content/Characters/Endworm/Endworm.png" depth="0.603" sourcerect="1230,84,311,242" origin="0.5,0.5" scale="0.5" offset="-170,-60" rotation="150" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <DecorativeSprite name="shellpiece2R" texture="Content/Characters/Endworm/Endworm.png" depth="0.603" sourcerect="1564,84,311,242" origin="0.5,0.5" scale="0.5" offset="170,-60" rotation="-150" color="175,165,150,255">
+      <IsActiveConditional conditionpercentage="gt 50" />
+    </DecorativeSprite>
+    <LightComponent lightcolor="150,120,50,100" range="450.0" powerconsumption="0" pulsefrequency="0.2" pulseamount="0.3" ison="true" drawbehindsubs="false" >
+      <Sprite texture="Content/Characters/Endworm/Endworm.png" sourcerect="1167,1130,748,783" origin="0.5,0.5" />
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.5" />
+    </LightComponent>    
+    <ItemComponent >
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" setvalue="true" />
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true" offset="0,200">
+        <Conditional conditionpercentage="lte 50" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="10" velocitymin="100" velocitymax="600" scalemin="2" scalemax="3" LifeTimeMultiplier="5" drawontop="true"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak1.ogg" range="2000" volume="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" interval="1" oneshot="true" offset="0,0">
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="10" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="5" colormultiplier="180,255,235" drawontop="true" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="10" velocitymin="100" velocitymax="600" scalemin="2" scalemax="3" LifeTimeMultiplier="5" drawontop="true"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak2.ogg" dontmuffle="true" range="2000" volume="2" />
+        <TriggerEvent identifier="spawnbabyendworm" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="Nearbyitems" range="500" targets="drillingpod" condition="0" setvalue="true" />
+      <StatusEffect type="OnBroken" target="This">
+        <Explosion range="350.0" structuredamage="0" force="10.0" debris="true" decalsize="1.0" underwaterbubble="false" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="0" distancemax="100" particleamount="20" velocitymin="200" velocitymax="800" scalemin="1.2" scalemax="2" LifeTimeMultiplier="10" colormultiplier="180,255,235"/>
+        <Sound file="Content/Sounds/Damage/ArmorBreak4.ogg" range="3000" volume="2" frequencymultiplier="0.5" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="20" velocitymin="100" velocitymax="600" scalemin="4" scalemax="5" LifeTimeMultiplier="5" />
+        <ParticleEmitter particle="waterblood" copyentityangle="true" anglemin="0" anglemax="0" particleamount="1" velocitymin="0" velocitymax="0" scalemin="10" scalemax="10" LifeTimeMultiplier="0.5"/>
+        <ParticleEmitter particle="waterblood" copyentityangle="true" anglemin="180" anglemax="180" particleamount="1" velocitymin="0" velocitymax="0" scalemin="10" scalemax="10" LifeTimeMultiplier="1"/>
+        <ParticleEmitter particle="bubbles" copyentityangle="true" anglemin="0" anglemax="180" particleamount="5" distancemin="-150" distancemax="150" velocitymin="50" velocitymax="100" scalemin="3" scalemax="4" LifeTimeMultiplier="3"/>
+        <!-- <TriggerEvent identifier="mineraldrilltarget2crackedevent" /> -->
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" offset="0,360" interval="5" duration="2" stackable="false">
+        <ParticleEmitter particle="risingbubbles" scalemin="1" scalemax="2" anglemin="-10" anglemax="10" distancemin="-150" distancemax="150" velocitymin="0" velocitymax="0" particlespersecond="3" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" >
+        <Conditional conditionpercentage="gt 25" />
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="300" velocitymax="1000" scalemin="1" scalemax="1.5" LifeTimeMultiplier="5" colormultiplier="180,255,235"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="200" velocitymax="500" scalemin="1" scalemax="1.5" drawontop="true" />
+        <Sound file="Content/Sounds/Damage/HitArmor1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.8"/>
+        <Sound file="Content/Sounds/Damage/HitArmor2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.8"/>
+        <Sound file="Content/Sounds/Damage/HitArmor3.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.8"/>
+        <Sound file="Content/Sounds/Damage/HitArmor4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.8"/>
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" interval="0.5" >
+        <Conditional conditionpercentage="lte 25" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="30" distancemax="120" particleamount="2" velocitymin="200" velocitymax="800" scalemin="1" scalemax="1.5" LifeTimeMultiplier="5" />
+        <ParticleEmitter particle="heavygib" copyentityangle="true" anglemin="0" anglemax="360" distancemin="50" distancemax="120" particleamount="2" velocitymin="100" velocitymax="300" scalemin="1" scalemax="1.5" LifeTimeMultiplier="5"  drawontop="true" />
+        <Sound file="Content/Sounds/Damage/Gore1.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Sounds/Damage/Gore2.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Sounds/Damage/Gore4.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+        <Sound file="Content/Sounds/Damage/Gore8.ogg" range="3000" selectionmode="Random" frequencymultiplier="0.7"/>
+      </StatusEffect>
+    </ItemComponent >  
+    <AiTarget sightrange="50000" soundrange="50000" static="true" /> 
+  </Item>
+  
+
+  <Item name="missionscanner" identifier="de-missionscanner" nameidentifier="de-missionscanner" category="Weapon" Tags="missionscanner,mediumitem" canbepicked="false" description="" scale="0.5" health="100" SpriteColor="255,255,255,255">
+    <PreferredContainer secondary="weaponholder"/>
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="600,610,107,62" depth="0.6" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="668,584,26,26" offset="29,13" depth="0.61" rotationspeed="360" >
+      <AnimationConditional Voltage="gt 0.1" targetitemcomponent="LightComponent"/>
+    </DecorativeSprite>
+    <Body width="107" height="62" density="20" />
+    <Price baseprice="200" sold="true">
+      <Price storeidentifier="merchantcity" multiplier="1" minamount="2" maxamount="3" />
+      <Price storeidentifier="merchantresearch" multiplier="0.8" minamount="2" maxamount="2"/>
+    </Price>
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,-20" handle1="-20,-14" handle2="84,-10" msg="ItemMsgPickUpSelect" />
+    <RepairTool range="150" barrelpos="50,5" combatpriority="0" targetforce="1" HitItems="true" >
+      <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
+      <ParticleEmitter particle="impactfirearm" anglemin="-15" anglemax="15" distancemin="80" distancemax="100" velocitymin="-250" velocitymax="-500" particlespersecond="20" copyentityangle="true" lifetimemultiplier="2" colormultiplier="50,255,50,100"/>
+      <ParticleEmitterHitItem identifiers="de-scanningtarget" particle="shockwavesmall" particlespersecond="5" scaleemin="1" scalemax="1" lifetimemultiplier="2" colormultiplier="255,255,50,100" anglemin="0" anglemax="0" distancemin="-20" distancemax="-20"/>
+      <ParticleEmitterHitCharacter particle="hologramsphere" particlespersecond="8" scaleemin="1" scalemax="1" lifetimemultiplier="0.05" colormultiplier="100,255,100,255" anglemin="0" anglemax="360" distancemin="0" distancemax="20"/>
+      <StatusEffect type="OnUse" targettype="Usetarget" multiplyafflictionsbymaxvitality="true" comparison="and">
+        <!-- <Conditional group="moloch" /> -->
+        <Conditional IsDead="false" />
+        <Affliction identifier="scanninginprogress" strength="7" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" targettype="Usetarget" multiplyafflictionsbymaxvitality="false" comparison="and">
+        <!-- <Conditional group="moloch" /> -->
+        <Conditional IsDead="false" />
+        <Affliction identifier="scanninginprogress" strength="5" />
+      </StatusEffect>
+      <!-- overpower the scannable health regeneration -->
+      <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-1000.0">
+        <Conditional HasTag="scannable"/>
+        <Sound file="Content/Sounds/UI/Deadmsg.ogg" type="OnUse" range="600" loop="true" volume="0.5" frequencymultiplier="0.3" selectionmode="random" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="Contained" Condition="-0.5" >
+        <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" targettype="This" voltage="1" setvalue="true" >       
+        <RequiredItem items="mobilebattery" type="Contained" msg="ItemMsgBatteryCellRequired" /> 
+        <Sound file="Content/Items/Weapons/GRAVITYSHELLS_loop.ogg" type="OnUse" range="120" volume="0.5" frequencymultiplier="2" loop="true"/>
+      </StatusEffect>
+      <LightComponent LightColor="100,255,130,200" range="120" powerconsumption="10" IsOn="true" flicker="0.3" flickerspeed="1">
+        <LightTexture texture="Content/Lights/lightcone.png" origin="-0.05,0.47" size="1.0,1.0" />
+      </LightComponent> 
+    </RepairTool>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="-38,18" itemrotation="90" containedspritedepth="0.61" containedstateindicatorstyle="battery">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <Containable items="mobilebattery" />
+    </ItemContainer> 
+    <StatusHUD drawhudwhenequipped="true" />
+  </Item>
+
+  <Item name="scan this thing" identifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" description="" scale="1" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0" hideinmenus="true" >
+    <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
+    <Body radius="50" density="10" bodytype="Static"/>
+    <ItemComponent>
+      <!-- spawn a decorative item that stays when this gets destroyed -->
+      <StatusEffect type="OnSpawn" target="This">
+        <SpawnItem identifier="de-scanningdecoration" spawnposition="This" />
+      </StatusEffect>
+      <!-- give this item lots of health regeneration so only the scanner can overpower it -->
+      <StatusEffect type="Always" target="This" condition="900" >
+        <Conditional condition="gt 1" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Sounds/UI/UImsg.ogg" type="OnUse" range="600" volume="1" frequencymultiplier="0.3" selectionmode="random" />
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
+  <!-- same as above but no visuals, entirely hidden -->
+  <Item identifier="de-scanningtargethidden" nameidentifier="de-scanningtarget" descriptionidentifier="de-scanningtarget" category="Misc" Tags="scannable,mediumitem" canbepicked="false" scale="1" health="1000" damagedbyrepairtools="true" SpriteColor="255,255,255,0" hideinmenus="true" >
+    <Sprite texture="Content/UI/Focusindicator.png" sourcerect="228,124,105,89" depth="0.85" origin="0.5,0.5" />
+    <Body radius="50" density="10" bodytype="Static"/>
+    <ItemComponent>
+      <!-- give this item lots of health regeneration so only the scanner can overpower it -->
+      <StatusEffect type="Always" target="This" condition="900" >
+        <Conditional condition="gt 1" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Sounds/UI/UImsg.ogg" type="OnUse" range="600" volume="1" frequencymultiplier="0.3" selectionmode="random" />
+        <!-- <Remove /> -->
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  
+  <!-- purely decorative item that is just a sprite for when the actual scanning item gets destroyed to validate the mission -->
+  <Item name="scan decor" identifier="de-scanningdecoration" category="Misc" Tags="decorative" canbepicked="false" description="" scale="1" health="100" SpriteColor="255,255,255,255" hideinmenus="true" noninteractable="true" invulnerabletodamage="true">
+    <Body radius="62" density="20" bodytype="Static"/>
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" depth="0.54" sourcerect="0,0,1,1" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="255,0,137,255" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="1" depth="0.61" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="401,37,111,218" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="1" depth="0.61" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="0,0,233,249" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="2" depth="0.62" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/Eventitems/scannableplants.png" sourcerect="0,255,203,257" offset="0,-20" randomrotation="-20,20" randomscale="0.8,1.2" randomoffset="20,0" origin="0.5,0.5" randomgroupid="2" depth="0.62" />
+    <DecorativeSprite name="backgroundrock1" texture="Content/Map/AlienWallSet2.png" sourcerect="0,0,506,338" origin="0.5,0.5" scale="0.35" offset="0,-100" depth="0.63"  randomgroupid="3"/>
+    <DecorativeSprite name="backgroundrock2" texture="Content/Map/AlienWallSet2.png" sourcerect="0,344,506,338" origin="0.5,0.5" scale="0.35" offset="0,-100" depth="0.63" randomgroupid="3"/>
+    <LightComponent LightColor="50,110,150,200" range="120" IsOn="true" pulseamount="0.3" pulsefrequency="0.2">
+      <LightTexture texture="Content/Lights/pointlight_rays.png" origin="0.5,0.6" size="1.0,1.0" />
+    </LightComponent> 
+  </Item>
+
+  <!-- sample vial used to stab the chimera in the mission -->
+  <Item name="" identifier="molochsamplevial" hideinmenus="true" category="Medical" maxstacksize="1" maxstacksizecharacterinventory="1" cargocontaineridentifier="mediccrate" Tags="smallitem,missionitem" description="" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="medcab" secondary="medcontainer"/>
+    <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="419,268,16,46" depth="0.6" origin="0.5,0.5" />
+    <Body width="25" height="65" density="10.2" waterdragcoefficient="1" />
+    <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+      <Attack targetimpulse="1">
+        <Affliction identifier="bloodloss" strength="2" />
+      </Attack>  
+      <!-- 1% condition because otherwise the item is "broken" and can't be swung-->
+      <StatusEffect type="OnSpawn" target="this" condition="1" setvalue="true" />
+      <StatusEffect type="OnSuccess" target="UseTarget,This" condition="100" AllowWhenBroken="true" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+        <Conditional speciesname="molochwastes"/>
+        <Affliction identifier="bloodloss" strength="1" />
+        <Sound file="Content/Items/Medical/syringe.ogg" range="500" frequencymultiplier="1.5" />
+      </StatusEffect>
+    </MeleeWeapon>
+  </Item>
+
+
+
+  <Item name="triangulathing" identifier="triangulathing" tags="triangulathing,provocative" category="Electrical,Machine" description="" scale="0.5" damagedbyexplosions="true" explosiondamagemultiplier="0.2" GrabWhenSelected="true">
+    <Sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="264,1,110,176" depth="0.8" canflipx="false" origin="0.5,0.5" />
+    <BrokenSprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="376,1,110,176" depth="0.8" maxcondition="80" fadein="true" />
+    <BrokenSprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="488,1,110,176" depth="0.8" maxcondition="0" />    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="1064,27,240,371" depth="0.54" origin="0.5,0.5" offset="0,-25" />
+    <Body Width="240" Height="371" density="10" bodytype="Static"/>
+    <Repairable selectkey="Action" header="electricalrepairsheader" deteriorationspeed="0" mindeteriorationdelay="0" maxdeteriorationdelay="0" mindeteriorationcondition="0" RepairThreshold="100" fixDurationHighSkill="30" fixDurationLowSkill="45" msg="ItemMsgRepairScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,280" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+      <RequiredSkill identifier="electrical" level="100" />
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <StatusEffect type="OnSpawn" target="This" condition="0" setvalue="true" />
+      <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+        <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+        <Explosion range="100.0" force="1.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+        <Affliction identifier="stun" strength="0.5" />
+        <Affliction identifier="stun" strength="2" probability="0.5" />
+        <Affliction identifier="electricshock" strength="60"/>
+        <Affliction identifier="burn" strength="3" />
+        <ParticleEmitter particle="ElectricShock" DistanceMin="10" DistanceMax="25" ParticleAmount="5" ScaleMin="0.2" ScaleMax="0.3" />
+      </StatusEffect>
+      <ParticleEmitter particle="damagebubbles" particlespersecond="2" scalemin="0.5" scalemax="1.5" anglemax="360" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
+      <ParticleEmitter particle="MistSmoke" particlespersecond="60" anglemin="0" anglemax="360" distancemin="0" distancemax="30" velocitymin="0" velocitymax="20" mincondition="0.0" maxcondition="50.0" />
+      <ParticleEmitter particle="spark" particleamount="5" emitinterval="2" particlespersecond="5" anglemax="360" distancemax="30" velocitymin="100" velocitymax="500" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+      <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+    </Repairable>
+    <!-- need to detect humans to activate effects -->
+    <MotionSensor range="200" detectoffset="0,-50" updateinterval="0.1" target="Human" minimumvelocity="0" ignoredead="true" detectownmotion="false" canbeselected="false" canbepicked="false" allowingameediting="false">
+      <!-- make body static after spawning, it seems to unlock the item from the floor and allows drilling. I have no fucking idea what barodevs did to make the drilling collision fail, it might be part of the mission type setting the bodies to static from the getgo to stop them from sliding, which is quite frankly just as retarded as hardcoding item highlighting -->
+      <StatusEffect type="OnSpawn" target="This" delay="1" targetitemcomponent="Body" bodytype="Dynamic" setvalue="true" />
+      <StatusEffect type="OnSpawn" target="This" delay="2" targetitemcomponent="Body" bodytype="Static" rotation="0" setvalue="true" />
+      <!-- spawn random negative effects during repairs to make it spicy -->
+      <StatusEffect type="OnUse" target="This" interval="3" conditionalcomparison="And" spawnitemrandomly="true" comparison="and">
+        <RequiredItem items="effect" type="Contained" requireempty="true" />
+        <Conditional conditionpercentage="gt 30" />
+        <Conditional conditionpercentage="lt 100" />
+        <SpawnItem identifier="effect_none" spawnposition="ThisInventory" spawnifinventoryfull="false" />
+        <SpawnItem identifier="effect_none" spawnposition="ThisInventory" spawnifinventoryfull="false" />
+        <SpawnItem identifier="effect_none" spawnposition="ThisInventory" spawnifinventoryfull="false" />
+        <SpawnItem identifier="effect_zapper" spawnposition="ThisInventory" spawnifinventoryfull="false" />
+      </StatusEffect>
+    </MotionSensor>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" drawinventory="false" canbeselected="false" allowdraganddrop="false" ShowConditionInContainedStateIndicator="false" ShowContainedStateIndicator="false">
+      <Containable items="effect" />
+      <StatusEffect type="OnContaining" target="This" disabledeltatime="true" >
+        <Conditional HasTag="effect" targetcontaineditem="true" />
+      </StatusEffect>
+    </ItemContainer>
+    <!-- enable UI when fully repaired, press button for 3 seconds of syncing -->
+    <CustomInterface canbepicked="false" canbeselected="false">
+      <GuiFrame relativesize="0.15,0.15" anchor="Center" style="ConnectionPanel" />
+      <StatusEffect type="Always" target="This" interval="5" canbepicked="true" canbeselected="true" condition="100" invulnerabletodamage="true" setvalue="true" comparison="and">
+        <Conditional conditionpercentage="gte 100" />
+        <Conditional hasstatustag="neq activatedemitterfinal" />
+      </StatusEffect>
+      <!-- effects when active - the event applies activatedemitterfinal when mission is complete so the transmitter remains uninteractable and does its effects forever -->
+      <StatusEffect type="Always" target="This" >
+        <Conditional hasstatustag="activatedemitter" />
+        <Conditional hasstatustag="activatedemitterfinal" />
+        <ParticleEmitter particle="shockwave" anglemin="0" anglemax="360" particleamount="4" emitinterval="0.75" scalemin="0.5" scalemax="2" />
+        <sound file="Content/Items/WarningBeepSlow.ogg" range="1500" loop="true" frequencymultiplier="0.8"/>
+      </StatusEffect>
+      <Button text="Activate">
+        <StatusEffect type="OnUse" target="This" statuseffecttags="activatedemitter" duration="3" canbepicked="false" canbeselected="false" setvalue="true" />
+      </Button>
+    </CustomInterface>
+    <!-- regular light -->
+    <LightComponent range="120.0" lightcolor="150,255,180,80" alphablend="true" powerconsumption="1" IsOn="true" castshadows="false" allowingameediting="false">
+      <sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="264,186,110,176" depth="0.1" origin="0.5,0.5" alpha="1.0" />
+      <IsActiveConditional HasTag="neq badeffectinside" />
+      <StatusEffect type="Always" target="This" voltage="1" interval="1" duration="1" stackable="false" setvalue="true" >
+        <Conditional conditionpercentage="gt 10" />
+      </StatusEffect>
+    </LightComponent>
+    <!-- blinking warning light if bad effect has been spawned inside -->
+    <LightComponent range="120.0" lightcolor="255,0,0,255" powerconsumption="1" IsOn="false" castshadows="false" allowingameediting="false" blinkfrequency="1.5">
+      <sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="376,186,110,176" depth="0.1" origin="0.5,0.5" alpha="1.0" />
+      <IsActiveConditional HasTag="badeffect" targetcontaineditem="true" />
+      <StatusEffect type="OnActive" targettype="This" statuseffecttags="badeffectinside" duration="0.1" stackable="false" setvalue="true" />
+    </LightComponent>
+    <!-- temporary blinking light when activated -->
+    <LightComponent LightColor="255,255,0,100" range="12" lightoffset="-32,39" powerconsumption="1" blinkfrequency="2" IsOn="true" canbeselected="false" allowingameediting="false" >
+      <LightTexture texture="Content/Lights/pointlight_bounce.png" origin="0.5,0.5" />
+      <sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="228,3,23,24" origin="0.5,0.5" />
+      <IsActiveConditional hasstatustag="activatedemitter" />
+      <StatusEffect type="OnActive" targettype="This" SoundRange="7000" setvalue="true" />
+    </LightComponent>
+    <!-- final blinking light when syncd -->
+    <LightComponent LightColor="0,255,0,100" range="12" lightoffset="-32,39" powerconsumption="1" blinkfrequency="2" IsOn="true" canbeselected="false" allowingameediting="false" >
+      <LightTexture texture="Content/Lights/pointlight_bounce.png" origin="0.5,0.5" />
+      <sprite texture="Content/Items/Electricity/signalcomp.png" sourcerect="228,3,23,24" origin="0.5,0.5" />
+      <IsActiveConditional hasstatustag="activatedemitterfinal" />
+      <StatusEffect type="OnActive" targettype="This" SoundRange="7000" setvalue="true" />
+    </LightComponent>
+    <!-- figure out AI when activated -->
+    <AiTarget soundrange="7000.0" SoundRangeOnSonarMultiplier="7.0" sight="500" staticsight="true" />
+  </Item>
+
+
+  <Item name="shootingtargetlauncher" identifier="shootingtargetlauncher" tags="shootingtargetlauncher" category="Misc" scale="0.5" hideinmenus="true" noninteractable="true">
+    <Sprite texture="Content/Items/Weapons/TurretsAndDepthCharges.png" depth="0.65" sourcerect="259,1,85,149" origin="0.5,0.5" />
+    <Turret canbeselected="false" linkable="true" characterusable="false" barrelpos="42,0" rotationlimits="270,270" powerconsumption="0.0" launchimpulse="0" >
+      <StatusEffect type="Always" target="This" >
+        <RequiredItems items="shootingtarget" type="Contained" />
+        <Use />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" offset="0,30">
+        <Sound file="Content/Items/Weapons/HarpoonGun1.ogg" range="1500" volume="3" frequencymultiplier="0.5" chooserandom="true"/>
+        <Sound file="Content/Items/Weapons/HarpoonGun2.ogg" range="1500" volume="3" frequencymultiplier="0.5" chooserandom="true"/>
+        <Sound file="Content/Items/Weapons/HarpoonGun3.ogg" range="1500" volume="3" frequencymultiplier="0.5" chooserandom="true"/>
+        <ParticleEmitter particle="weldspark" particleamount="10" anglemin="80" anglemax="100" velocitymin="250" velocitymax="500" distancemin="0" distancemax="30" scalemin="1" scalemax="1.3" colormultiplier="255,200,225,180" lifetimemultiplier="2" />
+      </StatusEffect>
+    </Turret>
+    <ItemContainer hideitems="true" capacity="1">
+      <Containable items="shootingtarget" />
+    </ItemContainer>
+  </Item>
+  
+  <!-- shooting target for shooting range; randomized gravity and impulses -->
+  <Item nameidentifier="shootingtarget" identifier="shootingtarget1" Tags="shootingtarget" hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="255,255,255,255" damagedbyprojectiles="true" invulnerabletodamage="false" impacttolerance="0" health="9999999" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.61" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.6" rotationspeed="360" >
+    </DecorativeSprite>
+    <Body radius="20" density="10" gravityscale="0.5"/>
+    <Projectile characterusable="false" hitscan="false" removeonhit="true" launchimpulse="4.5">
+      <StatusEffect type="OnImpact" target="This">
+        <Sound file="Content/Sounds/Pickitemfail.ogg" range="800" frequencymultiplier="1.5" volume="2"/>
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <TriggerEvent identifier="hitshootingtarget" />
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,255,255,255"/>
+        <Remove />
+      </StatusEffect>   
+    </Projectile>
+  </Item>
+  <Item nameidentifier="shootingtarget" identifier="shootingtarget2" Tags="shootingtarget" hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="255,255,255,255" damagedbyprojectiles="true" invulnerabletodamage="false" impacttolerance="0" health="9999999" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.61" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.6" rotationspeed="360" >
+    </DecorativeSprite>
+    <Body radius="20" density="10" gravityscale="0.75"/>
+    <Projectile characterusable="false" hitscan="false" removeonhit="true" launchimpulse="5.5">
+      <StatusEffect type="OnImpact" target="This">
+        <Sound file="Content/Sounds/Pickitemfail.ogg" range="800" frequencymultiplier="1.5" volume="2"/>
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <TriggerEvent identifier="hitshootingtarget" />
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,255,255,255"/>
+        <Remove />
+      </StatusEffect>   
+    </Projectile>
+  </Item>
+  <Item nameidentifier="shootingtarget" identifier="shootingtarget3" Tags="shootingtarget" hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="255,255,255,255" damagedbyprojectiles="true" invulnerabletodamage="false" impacttolerance="0" health="9999999" >
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.61" origin="0.5,0.5" />
+    <DecorativeSprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="138,545,40,40" depth="0.6" rotationspeed="360" >
+    </DecorativeSprite>
+    <Body radius="20" density="10" gravityscale="1"/>
+    <Projectile characterusable="false" hitscan="false" removeonhit="true" launchimpulse="6.5">
+      <StatusEffect type="OnImpact" target="This">
+        <Sound file="Content/Sounds/Pickitemfail.ogg" range="800" frequencymultiplier="1.5" volume="2"/>
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This">
+        <TriggerEvent identifier="hitshootingtarget" />
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,255,255,255"/>
+        <Remove />
+      </StatusEffect>   
+    </Projectile>
+  </Item>
+  
+  <!-- revolver used for shooting at targets -->
+  <Item name="dummyrevolver" identifier="dummyrevolver" category="Weapon" tags="smallitem,weapon,gun,pistolitem,provocativetohumanai,gunsmith,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light" spritecolor="255,0,0,255" InventoryIconcolor="255,0,0,255" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/JobGear/TalentGear.png" sourcerect="303,364,42,67" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,256,111,56" depth="0.55" origin="0.5,0.5" />
+    <Body width="106" height="49" density="30" />
+    <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="10,-80" holdangle="270" UseHandRotationForHoldAngle="true" aimpos="90,10" handle1="-45,-4" handle2="-45,-15" msg="ItemMsgPickUpSelect" swingamount="10,30" swingspeed="2" swingwhenholding="True"/>
+    <RangedWeapon barrelpos="29,11" spread="0.1" unskilledspread="6" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="1" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
+      <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+      <Sound file="Content/Items/Weapons/Revolver1.ogg" type="OnUse" range="3000" selectionmode="Random" />
+      <Sound file="Content/Items/Weapons/Revolver2.ogg" type="OnUse" range="3000" />
+      <Sound file="Content/Items/Weapons/Revolver3.ogg" type="OnUse" range="3000" />
+      <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" />
+      <StatusEffect type="OnUse" target="This">
+        <Explosion range="150.0" force="1.5" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="6.0" />
+        <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+        <TriggerEvent identifier="shotdummyrevoler" />
+      </StatusEffect>
+      <RequiredItems items="dummyrevolverround" type="Contained" msg="ItemMsgAmmoRequired" />
+      <RequiredSkill identifier="weapons" level="100" />
+    </RangedWeapon>
+    <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+      <Containable items="dummyrevolverround" />
+      <StatusEffect type="OnBroken" target="This">
+        <Sound file="Content/Sounds/Damage/Hitarmor1.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor2.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor3.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <Sound file="Content/Sounds/Damage/Hitarmor4.ogg" range="800" frequencymultiplier="1.5" selectionmode="random"/>
+        <ParticleEmitter particle="brownchunks" copyentityangle="true" anglemin="0" anglemax="360" particleamount="5" velocitymin="50" velocitymax="200" scalemin="0.25" scalemax="0.5" LifeTimeMultiplier="3" colormultiplier="255,0,0,255"/>
+        <Remove />
+      </StatusEffect> 
+    </ItemContainer>
+    <SkillRequirementHint identifier="weapons" level="40" />
+  </Item>
+  
+  <!-- bullets used for shooting at targets -->
+  <Item name="dummyrevolverround" identifier="dummyrevolverround" category="Weapon" maxstacksize="6" maxstacksizecharacterinventory="6"  Scale="0.5" tags="smallitem" noninteractable="true" SpriteColor="255,0,0,255" hideinmenus="true">
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,384,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="191,290,21,7" depth="0.55" origin="0.5,0.5" />
+    <Body width="29" height="10" density="30" />
+    <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+    <Projectile characterusable="false" hitscan="true" removeonhit="true">
+      <ParticleEmitter particle="tracerfirearm" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="255,0,0,175" scalemultiplier="1,0.6" />
+      <Attack structuredamage="0" targetforce="8" itemdamage="0" >
+        <Affliction identifier="stun" strength="0.3" />
+      </Attack>
+      <StatusEffect type="OnImpact" target="UseTarget">
+        <ParticleEmitter particle="impactfirearm" particleamount="1" velocitymin="0" velocitymax="0" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="UseTarget" targets="shootingtarget" condition="0" setvalue="true"> 
+      </StatusEffect>
+    </Projectile>
+  </Item>
+
+  <!-- this is an invisible 1 pixel item you can use to prevent missions from succeeding with their hardcoded conditions, it's fucking jank and barodevs never actually gave us proper ways to force succeed missions -->
+  <Item name="" identifier="invisibleitemformissionchecks" Tags="missionitem"  hideinmenus="true" category="Misc" description="" useinhealthinterface="false" scale="0.5" noninteractable="true" spritecolor="0,0,0,0" invulnerabletodamage="true">
+    <Sprite texture="%ModDir:2532991202%/Items/DE-ItemsAtlas.png" sourcerect="0,0,1,1" depth="0.6" origin="0.5,0.5" />
+    <Body width="1" height="1" density="10" />
+  </Item>
+
+
 
 
     <!-- UNUSED. For sabotaging deconstructors -->

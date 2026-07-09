@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character SpeciesName="Lithomorphvolcanic" Tags="" Group="Lithomorph" Humanoid="false" HasInfo="False" CanInteract="True" CanClimb="True" ForceSlowClimbing="False" Husk="False" HuskedSpecies="" NonHuskedSpecies="" UseHuskAppendage="False" NeedsAir="False" NeedsWater="True" UseHumanAI="False" IsMachine="False" CanSpeak="False" ShowHealthBar="True" UseBossHealthBar="True" Noise="600" Visibility="600" BloodDecal="" BleedParticleAir="" BleedParticleWater="" BleedParticleMultiplier="1" CanEat="False" EatingSpeed="15" UsePathFinding="True" PathFinderPriority="0.5" HideInSonar="True" HideInThermalGoggles="True" SonarDisruption="0" DistantSonarRange="0" DisableDistance="15000" SoundInterval="10" DrawLast="False" AITurretPriority="1" AISlowTurretPriority="1" DespawnContainer="" MusicType="monster" MusicCommonness="1" MusicRangeMultiplier="1" UnlockKillAchievementForWholeCrew="False">
+  <ragdolls folder="%ModDir%/Characters/Special Creatures/Lithomorphvolcanic/Ragdolls/" />
+  <animations folder="%ModDir%/Characters/Special Creatures/Lithomorphvolcanic/Animations/" />
+  <damageemitter Particle="shockwavesmall" AngleMin="0" AngleMax="0" ScaleMin="0.5" ScaleMax="0.5" VelocityMin="0" VelocityMax="0" EmitInterval="0" ParticlesPerSecond="0" ParticleAmount="1" HighQualityCollisionDetection="False" CopyEntityAngle="False" />
+  <gibemitter particleburstamount="1" Particle="leucogib" AngleMin="0" AngleMax="360" ScaleMin="1" ScaleMax="2" VelocityMin="-20" VelocityMax="20" EmitInterval="0.2" ParticlesPerSecond="0" ParticleAmount="0" HighQualityCollisionDetection="False" CopyEntityAngle="False" />
+  <health Vitality="800" DoesBleed="False" CrushDepth="Infinity" UseHealthWindow="False" BleedingReduction="0" BurnReduction="0.2" ConstantHealthRegeneration="0" HealthRegenerationWhenEating="0" StunImmunity="True" PoisonImmunity="False" PoisonVulnerability="3" EmpVulnerability="0" ApplyMovementPenalties="True" DieFromBeheading="True" AllowSeveringLegs="False" ApplyAfflictionColors="False" Immunities="">
+    <Limb name="Head">
+      <VitalityMultiplier type="damage" multiplier="2" />
+    </Limb>
+    <Limb name="LeftHand">
+      <VitalityMultiplier identifier="gunshotwound" multiplier="0.1" />
+      <VitalityMultiplier identifier="lacerations" multiplier="0.1" />
+      <VitalityMultiplier identifier="stun" multiplier="0" />
+      <VitalityMultiplier type="burn" multiplier="0" />
+    </Limb>
+    <Limb name="RightHand">
+      <VitalityMultiplier identifier="gunshotwound" multiplier="0.1" />
+      <VitalityMultiplier identifier="lacerations" multiplier="0.1" />
+      <VitalityMultiplier identifier="stun" multiplier="0" />
+      <VitalityMultiplier type="burn" multiplier="0" />
+    </Limb>
+  </health>
+  <StatusEffect type="Always" target="This" interval="0.1" duration="0.2">
+    <Conditional isDead="eq false" />
+    <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphLoop.ogg" Range="2000" Volume="1.0" Frequencymultiplier="0.8" Loop="True" />
+  </StatusEffect>
+  <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphIdle1.ogg" State="Idle" Range="2000" Volume="0.75" Frequencymultiplier="0.8" Tags="" />
+  <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphIdle2.ogg" State="Idle" Range="2000" Volume="0.75" Frequencymultiplier="0.8" Tags="" />
+  <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphDamage1.ogg" State="Damage" Range="2000" Volume="1" Frequencymultiplier="0.8" Tags="" />
+  <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphDamage2.ogg" State="Damage" Range="2000" Volume="1" Frequencymultiplier="0.8" Tags="" />
+  <sound File="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphDamage3.ogg" State="Damage" Range="2000" Volume="1" Frequencymultiplier="0.8" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/attack1.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch1.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch4.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch5.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <sound File="Content/Characters/Legacywatcher/watch6.ogg" State="Attack" Range="2000" Volume="1" Tags="" />
+  <ai CombatStrength="120" Sight="2" Hearing="2" MaxPerceptionDistance="-1" AggressionHurt="100" AggressionGreed="0" FleeHealthThreshold="0" AttackWhenProvoked="True" AvoidGunfire="False" DamageThreshold="0" AvoidTime="3" MinFleeTime="20" AggressiveBoarding="False" EnforceAggressiveBehaviorForMissions="True" TargetOuterWalls="True" RandomAttack="True" CanOpenDoors="False" UsePathFindingToGetInside="False" KeepDoorsClosed="False" AvoidAbyss="True" StayInAbyss="False" PatrolFlooded="False" PatrolDry="False" StartAggression="0" MaxAggression="100" AggressionCumulation="0" WallTargetingMethod="Target" PlayDeadProbability="0">
+    <target Tag="human" State="Aggressive" Priority="100" ReactDistance="1200" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreTargetInside="False" IgnoreTargetOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" PerceptionDistanceMultiplier="1" MaxPerceptionDistance="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+    <target Tag="weaker" State="Aggressive" Priority="100" ReactDistance="1200" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreTargetInside="False" IgnoreTargetOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" PerceptionDistanceMultiplier="1" MaxPerceptionDistance="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+    <target Tag="stronger" State="Aggressive" Priority="100" ReactDistance="1200" AttackDistance="0" Timer="0" IgnoreContained="False" IgnoreInside="False" IgnoreOutside="False" IgnoreTargetInside="False" IgnoreTargetOutside="False" IgnoreIfNotInSameSub="False" IgnoreIncapacitated="False" Threshold="0" ThresholdMin="-1" ThresholdMax="-1" PerceptionDistanceMultiplier="1" MaxPerceptionDistance="-1" Offset="0,0" AttackPattern="Straight" PrioritizeSubCenter="False" SweepDistance="0" SweepStrength="10" SweepSpeed="1" CircleStartDistance="5000" IgnoreTargetSize="False" CircleRotationSpeed="1" DynamicCircleRotationSpeed="False" CircleRandomRotationFactor="0" CircleStrikeDistanceMultiplier="5" CircleMaxRandomOffset="0" />
+    <target tag="room" state="Attack" priority="100" reactdistance="3000" AttackPattern="Straight" />
+    <target tag="wall" state="Attack" priority="100" reactdistance="3000" AttackPattern="Straight"/>
+  </ai>
+  <inventory accessiblebyowner="True" Slots="Any, Any, Any, Any, Any, Any" AccessibleWhenAlive="False" Commonness="1">
+    <Item Identifier="sulphuriteshard" />
+    <Item Identifier="sulphuriteshard" />
+    <Item Identifier="incendium" />
+    <Item Identifier="monsterlocatoritem" />
+  </inventory>
+  <StatusEffect type="OnDeath" target="This" targetlimb="Torso" duration="0.1">
+    <ParticleEmitter particle="gib" anglemin="-30" anglemax="30" particleamount="3" velocitymin="200" velocitymax="300" scalemin="0.5" scalemax="1.0" copyentityangle="true" colormultiplier="200,200,200,255" />
+    <ParticleEmitter particle="heavygib" anglemin="-30" anglemax="30" particleamount="3" velocitymin="200" velocitymax="400" scalemin="0.5" scalemax="1.0" copyentityangle="true" colormultiplier="200,200,200,255" />
+    <sound file="%ModDir:2532991202%/Characters/Special Creatures/Lithomorph/LithomorphDeath1.ogg" range="3000" volume="1" Frequencymultiplier="0.8" />
+  </StatusEffect>
+</Character>

@@ -235,6 +235,7 @@
     <!-- "Troubled Engine" 
     Engine randomly starts malfunctioning and taking damage until you roll a mechanic skill check -->
     <ScriptedEvent identifier="troubledengine" >
+      <WaitAction time="60" />
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -316,6 +317,7 @@
     <!-- Reactor Malfunction 
     The reactor malfunctions and switches to manual mode for 2 minutes  -->
     <ScriptedEvent identifier="reactormalfunction" >
+      <WaitAction time="60" />
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -370,6 +372,7 @@
     <!-- Oxygen generator leak 
     Oxygen generator malfunctions and the vents leak a toxic, flammable gas. You can wait it out or purge it. -->
     <ScriptedEvent identifier="oxygenfluidleak" >
+      <WaitAction time="60" />
       <Label name="delay" />
       <WaitAction time="30" />
       <RNGAction chance="0.2">
@@ -552,6 +555,209 @@
         </Failure>
       </CheckConditionalAction>
     </ScriptedEvent>
+    
+    
+
+    <!-- "Junction Malfunction" 
+    Malfunctioning JB causing periodic EMP waves until you spot it and repair it -->
+    <ScriptedEvent identifier="junctionmalfunction" >
+      <WaitAction time="60" />
+      <Label name="delay" />
+      <WaitAction time="30" />
+      <RNGAction chance="0.2">
+        <Success>
+          <GoTo name="start" />
+        </Success>
+        <Failure>
+          <GoTo name="delay" />
+        </Failure>
+      </RNGAction>
+      <Label name="start" />
+      <TagAction criteria="itemtag:junctionbox" tag="malfunctioningJBox" submarinetype="player" chooserandom="true" />
+      <TagAction criteria="itemidentifier:statusmonitor" tag="monitor" submarinetype="player" />
+      <TagAction criteria="player" tag="player" />
+      <TriggerAction target1tag="monitor" target2tag="player" applytotarget1="activemonitor" radius="2200" waitforinteraction="false" />
+      <!-- initial EMP -->
+      <StatusEffectAction targettag="malfunctioningJBox">
+        <StatusEffect target="This" condition="-5" stackable="false" >
+          <Explosion range="3000" force="0" empstrength="0.05" showeffects="false" camerashake="2" >
+            <Affliction identifier="emp" strength="10" multiplybymaxvitality="true" />
+          </Explosion>      
+          <ParticleEmitter particle="weldspark" particleamount="10" velocitymin="100" velocitymax="300" anglemin="-90" anglemax="90" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap4.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap5.ogg" range="500" loop="false" selectionmode="random" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <!-- monitor effects -->
+      <StatusEffectAction targettag="activemonitor" >
+        <StatusEffect target="this" duration="20" noninteractable="false" >
+          <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" volume="0.5" loop="true" />
+          <ParticleEmitter particle="impactfirearm" particlespersecond="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="0.5" scalemax="0.5" distancemin="0" distancemax="0" colormultiplier="255,0,0,255" lifetimemultiplier="2" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TriggerAction target1tag="activemonitor" target2tag="player" applytotarget2="monitorchecker" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="monitorchecker" text="eventtext.junctionmalfunction.monitor" dialogtype="Small" eventsprite="malfunction" endconversation="true" />
+      <Label name="staynearJB" />
+      <ClearTagAction tag="jb_player" />
+      <!-- need to see the JB, multiple checks every 5 seconds to increase the delay between pulses to 20 seconds total if not seen by player -->
+      <CheckVisibilityAction EntityTag="player" TargetTag="malfunctioningJBox" maxdistance="200" CheckFacing="true">
+        <Success>
+          <Goto name="foundJB" />
+        </Success>
+      </CheckVisibilityAction>
+      <WaitAction time="5" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="malfunctioningJBox" maxdistance="200" CheckFacing="true">
+        <Success>
+          <Goto name="foundJB" />
+        </Success>
+      </CheckVisibilityAction>
+      <WaitAction time="5" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="malfunctioningJBox" maxdistance="200" CheckFacing="true">
+        <Success>
+          <Goto name="foundJB" />
+        </Success>
+      </CheckVisibilityAction>
+      <WaitAction time="5" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="malfunctioningJBox" maxdistance="200" CheckFacing="true">
+        <Success>
+          <Goto name="foundJB" />
+        </Success>
+      </CheckVisibilityAction>
+      <StatusEffectAction targettag="malfunctioningJBox">
+        <StatusEffect target="This" condition="-5" stackable="false" >
+          <Explosion range="1200" force="0" empstrength="0.05" showeffects="false" camerashake="2" >
+            <Affliction identifier="emp" strength="10" multiplybymaxvitality="true" />
+          </Explosion>
+          <ParticleEmitter particle="weldspark" particleamount="10" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap4.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap5.ogg" range="500" loop="false" selectionmode="random" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <Goto name="staynearJB" MaxTimes="10"/>
+      <!-- If the EMP triggered Max times, end the event -->
+      <Goto name="fixeditself" />
+      <!-- Need to be staring at JB for 5 seconds total to enable fixing -->
+      <Label name="foundJB" />
+      <ClearTagAction tag="jb_player" />
+      <WaitAction time="5" />
+      <CheckVisibilityAction EntityTag="player" TargetTag="malfunctioningJBox" maxdistance="200" CheckFacing="true">
+        <Failure>
+          <Goto name="staynearJB" />
+        </Failure>
+        <Success>
+          <StatusEffectAction targettag="malfunctioningJBox">
+            <StatusEffect target="This" condition="-5" stackable="false" >
+              <Explosion range="1200" force="0" empstrength="0.05" showeffects="false" camerashake="2" >
+                <Affliction identifier="emp" strength="10" multiplybymaxvitality="true" />
+              </Explosion>
+              <ParticleEmitter particle="weldspark" particleamount="10" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+              <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" selectionmode="random" />
+              <Sound file="Content/Items/Electricity/zap4.ogg" range="500" loop="false" selectionmode="random" />
+              <Sound file="Content/Items/Electricity/zap5.ogg" range="500" loop="false" selectionmode="random" />
+            </StatusEffect>
+          </StatusEffectAction>
+        </Success>
+      </CheckVisibilityAction>
+      <TriggerAction target1tag="malfunctioningJBox" target2tag="player" applytotarget2="jb_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="jb_player" text="eventtext.junctionmalfunction.faultyjunction" eventsprite="officeinside" ContinueAutomatically="false">
+        <Option text="eventtext.junctionmalfunction.pullwire">
+          <!-- if success, cancel out the engine decay, if failure either try again or drop a scrap and wait -->
+          <SkillCheckAction requiredskill="Electrical" requiredlevel="60" targettag="jb_player">
+            <Success>
+              <StatusEffectAction targettag="malfunctioningJBox">
+                <StatusEffect target="This" duration="3" >
+                  <ParticleEmitter particle="weldspark" particlespersecond="5" velocitymin="100" velocitymax="300" anglemin="240" anglemax="300" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+                  <Sound file="Content/Items/Button/Switch2.ogg" range="500" frequencymultiplier="0.5" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <SpawnAction itemidentifier="orangewire" spawnpointtag="malfunctioningJBox" />
+              <ConversationAction targettag="jb_player" text="eventtext.junctionmalfunction.wiresuccess" eventsprite="officeinside" endconversation="true" />
+              <GiveSkillEXPAction skill="Electrical" amount="2" targettag="triggerer_player" />
+              <GoTo name="end" />
+            </Success>
+            <Failure>
+              <!-- electrocute -->
+              <StatusEffectAction targettag="malfunctioningJBox">
+                <StatusEffect target="This" >
+                  <ParticleEmitter particle="weldspark" particleamount="15" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+                </StatusEffect>
+              </StatusEffectAction>
+              <StatusEffectAction targettag="jb_player">
+                <StatusEffect target="This" duration="6" targetlimbs="LeftHand,RightHand" >
+                  <Affliction identifier="burn" strength="2" />
+                  <Affliction identifier="electricshock" strength="9999" />
+                  <ParticleEmitter particle="fleshsmoke" particlespersecond="5" velocitymin="0" velocitymax="0" anglemin="0" anglemax="0" scalemin="2" scalemax="3" Spread="10" distancemin="-40" distancemax="40" colormultiplier="255,255,255,255" lifetimemultiplier="2"/>
+                  <Sound file="Content/Items/Weapons/TaserHit1.ogg" range="500" volume="2" frequencymultiplier="0.8" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <GoTo name="staynearJB" /> 
+            </Failure>
+          </SkillCheckAction>
+        </Option>
+        <Option text="eventtext.junctionmalfunction.percussive">
+          <SkillCheckAction requiredskill="Weapons" requiredlevel="80" targettag="jb_player">
+            <Success>
+              <StatusEffectAction targettag="malfunctioningJBox">
+                <StatusEffect target="This" >
+                  <ParticleEmitter particle="shockwavesmall" particleamount="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" scalemin="1" scalemax="1"/>
+                  <ParticleEmitter particle="weldspark" particleamount="20" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="2"/>
+                  <Sound file="Content/Sounds/Impact/MetalImpactHeavy3.ogg" range="500" volume="1.5" frequencymultiplier="0.8" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <ConversationAction targettag="jb_player" text="eventtext.junctionmalfunction.percussivesuccess" eventsprite="officeinside" endconversation="true" />
+              <GiveSkillEXPAction skill="Electrical" amount="2" targettag="triggerer_player" />
+              <GoTo name="end" />
+            </Success>
+            <Failure>
+              <!-- explosion -->
+              <StatusEffectAction targettag="malfunctioningJBox">
+                <StatusEffect target="This" statuseffecttags="JBnotrepaired" setvalue="true" />
+                <StatusEffect target="This" condition="-5" stackable="false" >
+                  <Explosion range="300" empstrength="0.3" force="30" showeffects="false" camerashake="2" >
+                    <Affliction identifier="stun" strength="5" />
+                    <Affliction identifier="electricshock" strength="120" />
+                    <Affliction identifier="burn" strength="5" />
+                    <Affliction identifier="emp" strength="30" multiplybymaxvitality="true" />
+                  </Explosion>
+                  <ParticleEmitter particle="faradayfx" particleamount="1" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" scalemin="1" scalemax="1"/>
+                  <ParticleEmitter particle="weldspark" particleamount="30" velocitymin="300" velocitymax="500" anglemin="0" anglemax="360" scalemin="1.5" scalemax="2" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="5"/>
+                  <Sound file="Content/Items/Electricity/zap3.ogg" range="800" loop="false" />
+                </StatusEffect>
+              </StatusEffectAction>
+              <GoTo name="staynearJB" /> 
+            </Failure>
+          </SkillCheckAction>
+        </Option>
+        <Option text="eventtext.junctionmalfunction.leaveit" endconversation="true">
+          <GoTo name="foundJB" />
+        </Option>
+      </ConversationAction>      
+      <!-- keep pulsing JB during dialog with ContinueAutomatically so it doesnt freeze the effect, doesnt seem to work -->
+      <!-- <Label name="jbdialogpulsesloop" />
+      <WaitAction time="5" />
+      <StatusEffectAction targettag="malfunctioningJBox">
+        <StatusEffect target="This" condition="-5" stackable="false" >
+          <Explosion range="1200" force="0" empstrength="0.05" showeffects="false" camerashake="2" >
+            <Affliction identifier="emp" strength="10" multiplybymaxvitality="true" />
+          </Explosion>
+          <ParticleEmitter particle="weldspark" particleamount="10" velocitymin="100" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.5" scalemax="1" Spread="50" distancemin="0" distancemax="100" colormultiplier="255,255,255,255" highqualitycollisiondetection="true" lifetimemultiplier="3"/>
+          <Sound file="Content/Items/Electricity/zap3.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap4.ogg" range="500" loop="false" selectionmode="random" />
+          <Sound file="Content/Items/Electricity/zap5.ogg" range="500" loop="false" selectionmode="random" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <Goto name="jbdialogpulsesloop" /> -->
+      <Label name="fixeditself" />
+      <ClearTagAction tag="jb_player" />
+      <TriggerAction target1tag="malfunctioningJBox" target2tag="player" applytotarget2="jb_player" radius="300" waitforinteraction="true" />
+      <ConversationAction targettag="jb_player" text="eventtext.junctionmalfunction.backtonormal" eventsprite="officeinside" endconversation="true" />
+      <Label name="end" />
+    </ScriptedEvent>
+    
+    
+    
     
     <!-- UNUSED prototype would spawn a mission when getting in range of the "patrol spawner" item -->
     <!-- <ScriptedEvent identifier="militarypatrol">
