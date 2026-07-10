@@ -2574,6 +2574,9 @@
     <ScriptedEvent identifier="synchronizeemittersevent">
       <SetDataAction identifier="transmittersactivated" value="0" />
       <TagAction criteria="itemidentifier:triangulathing" tag="triangulathings" />
+      <StatusEffectAction targettag="triangulathings">
+        <StatusEffect target="This" condition="0" setvalue="true" />
+      </StatusEffectAction>
       <TutorialHighlightAction state="false" targettag="triangulathings" />
       <Label name="checkrepairedtransmitter" />
       <CheckConditionalAction targettag="triangulathings" condition="gte 100">
