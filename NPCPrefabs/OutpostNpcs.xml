@@ -249,7 +249,14 @@
       </ItemSet>
     </npc> 
     
-    
+  </npcset>
+  
+  <!-- <////////// IMPORTANT: this NPCset only exists to prevent errors from mod-patches that override DE npcsets; since the whole NPCset is overriden, every time a new NPC is added to older DE NPCsets, it will throw errors when using these other mods. So I just created this set to add NPCs without fear of errors appearing
+  IF YOU ARE A MODDER READING THIS, DO NOT OVERRIDE THIS FUCKING SET OR I WILL CRUCIFY YOU
+  Blame barodevs https://github.com/FakeFishGames/Barotrauma/discussions/16032 //////////// -->
+  <!-- TODO: delete this NPCset if barodevs fix the NPCset override issue -->
+  <npcset identifier="DE_donotoverrideNPCs">  
+  
     <!-- merchant NPC that sells only basic proxy items (fuel rods, welding tool, extinguisher...) -->
     <npc identifier="merchantbasics" job="watchman" spawnpointtags="shop" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -261,7 +268,6 @@
         </Item>
       </ItemSet>
     </npc>
-    
   </npcset>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -1948,6 +1954,7 @@
       </ItemSet>
     </npc>
            
+    <npc identifier="merchanthusk"  moduleflags="adminmodule" job="assistant" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule,adminchurch" campaigninteractiontype="Store" spawnpointtags="merchanthusk,husk">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true" />
         <Item identifier="cultistrobeshoodless" equip="true"/>
@@ -1956,6 +1963,7 @@
           <Item identifier="revolverround" amount="6"/>
         </Item>        
       </ItemSet>
+    </npc>
 
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
