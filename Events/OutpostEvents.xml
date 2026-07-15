@@ -3654,9 +3654,10 @@
                 <Success>
                   <MoneyAction targettag="shooter_player" amount="-200" />
                   <SetDataAction identifier="shootingparticipations" operation="add" value="1" />
-                  <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC"  targettag="shooter_player" text="EventText.shootingrangeevent.takerevolver" eventsprite="gambler" />
+                  <ConversationAction forcesay="true" WaitForInteraction="false" SpeakerTag="shootingrangeNPC" targettag="shooter_player" text="EventText.shootingrangeevent.takerevolver" eventsprite="gambler" />
                 </Success>
                 <Failure>
+                  <ConversationAction forcesay="true" SpeakerTag="shootingrangeNPC" targettag="shooter_player" text="EventText.shootingrangeevent.nomoney" eventsprite="gambler"  endconversation="true"/>
                   <GoTo name="playagain" />
                 </Failure>
               </CheckMoneyAction>
