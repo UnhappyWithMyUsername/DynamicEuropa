@@ -2102,7 +2102,27 @@
     <ScriptedEvent identifier="beaconfloodedrescueevent">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hull" tag="beaconhull" submarinetype="BeaconStation" />
-      <TagAction criteria="itemtag:sonarmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconmonitor" tag="beaconmonitor" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconpipe1" tag="beaconpipe1" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconpipe2" tag="beaconpipe2" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconweldedhatch" tag="beaconweldedhatch" submarinetype="BeaconStation" />
+      <TagAction criteria="itemtag:beaconbrokendoor" tag="beaconbrokendoor" submarinetype="BeaconStation" />  
+      <!-- set up various states of items inside beacon, so beacon remains functional if it ever spawns outside of mission -->
+      <StatusEffectAction targettag="beaconmonitor">
+        <StatusEffect target="this" NonPlayerTeamInteractable="True" condition="0" setvalue="true" oneshot="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="beaconpipe1">
+        <StatusEffect target="this" condition="100" setvalue="true" oneshot="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="beaconpipe2">
+        <StatusEffect target="this" condition="100" setvalue="true" oneshot="true" />
+      </StatusEffectAction>
+      <StatusEffectAction targettag="beaconweldedhatch">
+        <StatusEffect target="this" IsStuck="false" Stuck="0" condition="0" setvalue="true" oneshot="true" />
+      </StatusEffectAction>    
+      <StatusEffectAction targettag="beaconbrokendoor">
+        <StatusEffect target="this" condition="100" isopen="false" setvalue="true" oneshot="true" />
+      </StatusEffectAction>   
       <SpawnAction npcsetidentifier="outpostnpcs1" npcidentifier="watchman" targettag="beaconoperator" spawnpointtag="beaconoperator" spawnlocation="BeaconStation" teamid="FriendlyNPC"/>
       <Label name="foundoperatorcheck" />
       <WaitAction time="1" />
