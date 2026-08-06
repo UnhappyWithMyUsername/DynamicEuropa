@@ -762,22 +762,23 @@
       <CheckDataAction identifier="completedscanningmission" condition="gt 0">
         <Success>
           <ConversationAction text="Eventtext.missionevent_scanningsidemission.alreadyknowscans" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" endconversation="true"/>
-          <MissionAction missiontag="scanningsidemission" />
+            <MissionAction missionidentifier="scanrandomfishmission" />
           <Goto name="end" />
         </Success>
       </CheckDataAction>
       <ConversationAction text="Eventtext.missionevent_scanningsidemission.payfordata" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
         <Option text="Eventtext.missionevent_scanningsidemission.forscience" >
+          <!--  TODO: delete this dupe event garbage once fix happens https://github.com/FakeFishGames/Barotrauma/discussions/17648 wouldn't it be funny if I wanted to use a simple Goto to not repeat code as intended but it nukes the text even though it shouldnt, so I just copy paste instead and manually fuck up? -->
           <!-- <Goto name="checkscanner" EndConversation="false"/> -->
           <CountTargetsAction targettag="ownedscanner" minamount="1" >
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missiontag="scanningsidemission" />
+              <MissionAction missionidentifier="scanrandomfishmission" />
               <Goto name="end" />
             </Success>
             <Failure>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missiontag="scanningsidemission" />
+              <MissionAction missionidentifier="scanrandomfishmission" />
               <Goto name="end" />
             </Failure>
           </CountTargetsAction>
@@ -787,12 +788,12 @@
           <CountTargetsAction targettag="ownedscanner" minamount="1" >
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missiontag="scanningsidemission" />
+              <MissionAction missionidentifier="scanrandomfishmission" />
               <Goto name="end" />
             </Success>
             <Failure>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missiontag="scanningsidemission" />
+              <MissionAction missionidentifier="scanrandomfishmission" />
               <Goto name="end" />
             </Failure>
           </CountTargetsAction>
@@ -2462,19 +2463,12 @@
       <AfflictionAction affliction="weakenedforscanning" strength="100" targettag="pickedscantarget" MultiplyByMaxVitality="true"/>
       <!-- check if scanning target is not dead and scanned -->
       <Label name="scanningcheck" />
-      <!-- <CheckConditionalAction targettag="pickedscantarget" isdead="true" >      
-        <Success>
-          <MissionStateAction missionidentifier="scanningsidemission" operation="Set" value="2" ForceFailure="true" />
-          <Goto name="end" />
-        </Success>
-      </CheckConditionalAction> -->
       <CheckConditionalAction targettag="pickedscantarget" scanninginprogress="gte 100" >
         <Failure>
           <Goto name="scanningcheck" />
         </Failure>
         <Success>
-          <!-- <MissionStateAction missionidentifier="scanrandomfish" operation="Set" value="1" />   -->
-          <MissionStateAction missionidentifier="scanningsidemission" operation="Set" value="1" />  
+          <MissionStateAction missionidentifier="scanrandomfishmission" operation="Set" value="1" />  
         </Success>
       </CheckConditionalAction>
       <!-- <Label name="end" /> -->
