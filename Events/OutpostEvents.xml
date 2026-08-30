@@ -3433,6 +3433,7 @@
                     </StatusEffect>
                   </StatusEffectAction>
                   <MoneyAction targettag="cashout_player" amount="200" />
+                  <WaitAction time="1" />
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
@@ -3469,6 +3470,7 @@
                     </StatusEffect>
                   </StatusEffectAction>
                   <MoneyAction targettag="cashout_player" amount="200" />
+                  <WaitAction time="1" />
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
@@ -3503,6 +3505,7 @@
                     </StatusEffect>
                   </StatusEffectAction>
                   <MoneyAction targettag="cashout_player" amount="200" />
+                  <WaitAction time="1" />
                   <Goto name="cashout_repeat" />
                 </Success> 
                 <Failure>
@@ -3519,8 +3522,8 @@
               <ClearTagAction tag="pickedticket" />
               <ConversationAction targettag="cashout_player" text="EventText.mudraptorracing.cashout.noticket" eventsprite="brokenterminal" dialogtype="small" />
               <GoTo name="cashout" />
-            </Failure>          
-          </CheckItemAction>           
+            </Failure>
+          </CheckItemAction>
         </Option>
         <Option text="eventtext.generic.ignore" endconversation="true">
           <Goto name="cashout" />
