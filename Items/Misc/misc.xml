@@ -1003,8 +1003,14 @@
       <Price storeidentifier="merchantbasics" minavailable="4" maxavailable="6" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand,LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="weldingfueltank" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="weldingfueltank" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1018,8 +1024,14 @@
       <Price storeidentifier="merchantbasics" minavailable="3" maxavailable="5" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand,LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="oxygentank" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="oxygentank" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1033,8 +1045,14 @@
       <Price storeidentifier="merchantbasics" minavailable="4" maxavailable="6" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand,LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="fuelrod" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="fuelrod" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1048,8 +1066,14 @@
       <Price storeidentifier="merchantbasics" minavailable="2"  maxavailable="4" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand,LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="batterycell" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="batterycell" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1083,8 +1107,14 @@
       <Price storeidentifier="merchantbasics" minavailable="1" maxavailable="2" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand+LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="plasmacutter" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="plasmacutter" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1098,8 +1128,14 @@
       <Price storeidentifier="merchantbasics" minavailable="2" maxavailable="3" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand+LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="weldingtool" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="weldingtool" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
@@ -1113,8 +1149,14 @@
       <Price storeidentifier="merchantbasics" minavailable="2" maxavailable="3" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="Any,RightHand+LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="extinguisher" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="extinguisher" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
