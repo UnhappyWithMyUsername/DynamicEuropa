@@ -1055,15 +1055,21 @@
     </Holdable>
   </Item>  
 
-  <Item identifier="coilgunammoboxproxy" nameidentifier="coilgunammobox" descriptionidentifier="coilgunammobox" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="1" Tags="smallitem" scale="0.5" hideinmenus="true">
+  <Item identifier="coilgunammoboxproxy" nameidentifier="coilgunammobox" descriptionidentifier="coilgunammobox" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="1" Tags="ammobox" scale="0.5" allowasextracargo="true" hideinmenus="true">
     <Sprite texture="Content/Items/Containers/containers.png" depth="0.54" sourcerect="800,788,95,78" origin="0.5,0.5" />
     <Body width="20" height="65" density="9.7" />
     <Price baseprice="120" displaynonempty="true">
       <Price storeidentifier="merchantbasics" minavailable="2"  maxavailable="4" multiplier="1.2" />
     </Price>
     <Holdable canbecombined="true" slots="RightHand+LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect">
-      <StatusEffect type="Always" target="This" >
+      <!-- I had to split it into two because SameInventory only works if the item actually spawns inside the supply crate when you have to option to deliver to submarine -->
+      <StatusEffect type="OnContained" target="This" >
         <SpawnItem identifier="coilgunammobox" spawnposition="SameInventory" />
+        <Remove />
+      </StatusEffect>
+      <!-- failsafe effect if the boxes spawn on the sub cargo -->
+      <StatusEffect type="OnNotContained" target="This" delay="1">
+        <SpawnItem identifier="coilgunammobox" spawnposition="This" />
         <Remove />
       </StatusEffect> 
     </Holdable>
