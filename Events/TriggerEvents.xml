@@ -11,9 +11,27 @@
       <TagAction criteria="itemtag:mudraptoregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:crawleregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
       <TagAction criteria="itemidentifier:tigerthresheregg" tag="egg" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
+      <TagAction criteria="player" tag="player" ContinueIfNoTargetsFound="true" />
+      <!-- absolutely vile workaround for targetting all living characters; tagaction doesn't allow easily tagging "characters" in general -->
+      <StatusEffectAction targettag="player">
+        <StatusEffect target="This,NearbyCharacters" range="99999999">
+          <EventTarget eventidentifier="nuclearbombexplosion" tag="alivecharacter" />
+        </StatusEffect>
+      </StatusEffectAction>
+      <TagAction criteria="eventtag:alivecharacter" submarinetype="Outpost" tag="killthis" />
+      <!-- apply a ton of radiation to kill things -->
+      <StatusEffectAction targettag="killthis">
+        <StatusEffect target="This" targetlimbs="Torso,Head,LeftLeg,RightLeg,LeftArm,RightArm,Tail" disabledeltatime="true">
+          <Affliction identifier="stun" strength="4" />
+          <Affliction identifier="burn" strength="8" MultiplyByMaxVitality="true"/>
+          <Affliction identifier="blunttrauma" strength="4" MultiplyByMaxVitality="true"/>
+          <Affliction identifier="radiationsickness" strength="200" penetration="0.5" MultiplyByMaxVitality="true"/>
+        </StatusEffect>
+      </StatusEffectAction>
       <StatusEffectAction targettag="egg">
         <StatusEffect target="This" condition="0.0" setvalue="true" />
       </StatusEffectAction>
+      <WaitAction time="10" />
     </ScriptedEvent>
     
     <ScriptedEvent identifier="defectivebotteamswap" commonness="0">
