@@ -119,7 +119,13 @@
           <Remove />
         </StatusEffect>
       </Holdable>
-      <Growable growthspeed="0.076" pickingtime="3" maximumvines="18" maxhealth="375" hardiness="0.15" floodtolerance="0.2" seedrate="0" productrate="0.0056" flowerquantity="4" baseflowerscale="0.60" vinescale="0.25" vinetint="55,152,27,255" flowertint="139,56,87,255">
+      <Growable growthspeed="0.076" pickingtime="3" maximumvines="18" maxhealth="375" 
+      TooDryThreshold="0.4" OverwaterThreshold="0.8"
+      DrynessDamage="0.15" OverwaterDamage="0.062"
+      UnderfertilizedThreshold="0.2" OverfertilizedThreshold="0.8"
+      UnderfertilizedDamage="0.1" OverfertilizedDamage="0.1"
+      NotEnoughLightThreshold="15" NotEnoughLightDamage="0.05"
+      floodtolerance="0.2" seedrate="0" productrate="0.0056" flowerquantity="4" baseflowerscale="0.60" vinescale="0.25" vinetint="55,152,27,255" flowertint="139,56,87,255">
         <ProducedItem identifier="banana" probability="1.0" />
         <VineSprites vineatlas="Content/Items/Gardening/branches.png" decayatlas="Content/Items/Gardening/branches_overlay.png">
           <LeafSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="0,256,256,256" />
