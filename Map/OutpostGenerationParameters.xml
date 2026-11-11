@@ -294,19 +294,30 @@
     <!-- TODO: just use vanilla modules since we barely changed the normal ones? -->
     <OutpostConfig identifier="city" 
       replaceinradiation="" 
-      totalmodulecount="15" 
+      totalmodulecount="16" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false" 
       minhallwaylength="0" 
-      allowedlocationtypes="City">
-      <modulecount flag="DockingCity" count="1"/>
+      allowedlocationtypes="City">            
+      <!-- <modulecount flag="DockingCity" count="1"/>
       <modulecount flag="DE_EngineeringModuleCity" count="1"/>
       <modulecount flag="DE_AdminModuleCity" count="1"/>
       <modulecount flag="DE_MedicalModuleCity" count="1"/>
       <modulecount flag="DE_ResearchModuleCity" count="1"/>
       <modulecount flag="DE_CrewModuleCity" count="1"/>
       <modulecount flag="DE_SecurityModuleCity" count="1"/>
-      <modulecount flag="DE_ArmoryModuleCity" count="1"/>
+      <modulecount flag="DE_ArmoryModuleCity" count="1"/> -->      
+      <modulecount flag="Airlock" count="1"/>
+      <modulecount flag="EngineeringModule" count="1"/>
+      <modulecount flag="AdminModule" count="1"/>
+      <modulecount flag="MedicalModule" count="1" order="1" />
+      <modulecount flag="ResearchModule" count="1" order="1" />
+      <modulecount flag="ResidentialModuleMain" count="1" order="2" />
+      <modulecount flag="SecurityModule" count="1" order="2" />
+      <modulecount flag="ArmoryModule" count="1" order="2" />
+      <modulecount flag="FarmingModule" count="1" order="2" />
+      <modulecount flag="StorageModule" order="3" count="1"/>      
+      
       <modulecount flag="DE_ClownModuleCity" count="1" order="1" requiredfaction="clowns"/>
       <modulecount flag="Racetrack" probability="1.0" count="1" order="2" MinDifficulty="0"/>
       <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
