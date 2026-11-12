@@ -1551,22 +1551,24 @@
             <Success>
               <CheckDataAction identifier="waveinprogress" condition="neq 1">
                 <Success>
-                  <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+                  <SpawnAction speciesname="crawler" amount="1" SpawnLocation="OutsideOutpost" offset="3000" AllowInPlayerView="False" />
+                  <SpawnAction speciesname="crawler_hatchling" amount="2" SpawnLocation="OutsideOutpost" offset="3000" AllowInPlayerView="False" />
                   <SetDataAction identifier="waveinprogress" operation="Set" value="1" />
                   <SetDataAction identifier="spawnwaves" operation="Add" value="1" />
                   <WaitAction time="60" />
-                  <Goto name="loop" />     
+                  <Goto name="preloop" />
                 </Success>          
                 <Failure>
                   <WaitAction time="20" />              
-                  <SetDataAction identifier="waveinprogress" operation="Set" value="0" />       
-                  <Goto name="loop" />
+                  <SetDataAction identifier="waveinprogress" operation="Set" value="0" />
+                  <Goto name="preloop" />
                 </Failure>
               </CheckDataAction>
             </Success>
             <Failure>
               <WaitAction time="5" />
-              <Goto name="loop" />
+              <Label name="preloop" />
+              <Goto name="loop" MaxTimes="3"/>
             </Failure>
           </RNGAction>
         </Success>          
