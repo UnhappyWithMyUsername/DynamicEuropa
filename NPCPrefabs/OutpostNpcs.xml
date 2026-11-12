@@ -1332,6 +1332,43 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE Merchants of the unique named cities.
+          Note that they intentionally have no name or title localization variables, so they fall back to those of 'merchantcity'. -->
+    <npc identifier="merchantuusiturcu" job="watchman" spawnpointtags="shop" healthmultiplier="1.1" campaigninteractiontype="Store" behavior="StayInHull"
+         storeidentifier="merchantuusiturcu;merchantcity">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="crewchiefclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench"/>
+        <Item identifier="screwdriver"/>
+        <Item identifier="revolver">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    <npc identifier="merchantnewiapetus" job="watchman" spawnpointtags="shop" healthmultiplier="1.1" campaigninteractiontype="Store" behavior="StayInHull"
+         storeidentifier="merchantnewiapetus;merchantcity">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="crewchiefclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench"/>
+        <Item identifier="screwdriver"/>
+        <Item identifier="revolver">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+
     <!-- uses spawn point tag -->
     <npc identifier="merchantmine" job="watchman" spawnpointtags="shop_mine" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -1937,6 +1974,22 @@
       </ItemSet>
     </npc>
 
+    <npc identifier="outpostmanagerclown" job="outpostmanager" tags="outpostmanager" faction="clowns" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="headset" equip="false" />
+        <Item identifier="clownmaskunique" equip="true"/>
+        <Item identifier="clownsuitunique" equip="true"/>
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="banana" equip="false" amount="3" />
+        <Item identifier="deusizine" equip="false" />
+        <Item identifier="cymbals" equip="false" />
+        <Item identifier="handcannon" equip="false">
+          <Item identifier="handcannonround" amount="6"/>
+        </Item>
+      </ItemSet>      
+    </npc>
+
     <!-- REMOVERRIDE? -->
     <npc identifier="merchantclown" commonness="0" faction="clowns" moduleflags="clownmodule" job="assistant" behavior="Passive" preferredoutpostmoduletypes="clownmodule" campaigninteractiontype="Store" spawnpointtags="clown">
       <ItemSet commonness="1">
@@ -1962,6 +2015,18 @@
       </ItemSet>
     </npc>
     
+    <npc identifier="outpostmanagerhusks" job="outpostmanager" tags="outpostmanager" faction="huskcult" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="zealotrobes" equip="true"/>
+        <Item identifier="divingknifeunique" equip="false"/>
+        <Item identifier="handcannon" equip="false">
+          <Item identifier="handcannonround" amount="6"/>
+        </Item>
+      </ItemSet>
+    </npc>
+
     <!-- I have no idea why this one is different from the vanilla eccelsiast, but I'd rather not touch it -->
     <npc identifier="huskcultecclesiast" tags="huskcultist,huskresearcher" commonness="0" moduleflags="researchmodule" job="assistant" behavior="StayInHull" healthmultiplier="1.0" spawnpointtags="research">
       <ItemSet commonness="1">
