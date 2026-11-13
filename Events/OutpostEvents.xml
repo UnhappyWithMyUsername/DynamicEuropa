@@ -553,7 +553,7 @@
     
     <!-- randomizes ore nodes in dry caves -->
     <ScriptedEvent identifier="unlockorenodes" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
       <!-- 2/3 nodes are deleted -->   
       <StatusEffectAction targettag="deleteorenode">
@@ -565,7 +565,7 @@
     
     <!-- randomizes ore nodes in lairs -->
     <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" ChoosePercentage="80"/>
       <!-- 4/5 nodes are deleted -->   
       <StatusEffectAction targettag="deleteorenode">
@@ -577,7 +577,7 @@
     
     <!-- randomizes plant nodes in dry caves -->
     <ScriptedEvent identifier="unlockplantnodes" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
       <!-- 3/4 nodes are deleted -->
       <StatusEffectAction targettag="plantnode">
