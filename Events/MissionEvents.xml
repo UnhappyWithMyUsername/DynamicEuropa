@@ -768,23 +768,10 @@
       </CheckDataAction>
       <ConversationAction text="Eventtext.missionevent_scanningsidemission.payfordata" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
         <Option text="Eventtext.missionevent_scanningsidemission.forscience" >
-          <!--  TODO: delete this dupe event garbage once fix happens https://github.com/FakeFishGames/Barotrauma/discussions/17648 wouldn't it be funny if I wanted to use a simple Goto to not repeat code as intended but it nukes the text even though it shouldnt, so I just copy paste instead and manually fuck up? -->
-          <!-- <Goto name="checkscanner" EndConversation="false"/> -->
-          <CountTargetsAction targettag="ownedscanner" minamount="1" >
-            <Success>
-              <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missionidentifier="scanrandomfishmission" />
-              <Goto name="end" />
-            </Success>
-            <Failure>
-              <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missionidentifier="scanrandomfishmission" />
-              <Goto name="end" />
-            </Failure>
-          </CountTargetsAction>
+          <Goto name="checkscanner" />
         </Option>
         <Option text="Eventtext.missionevent_scanningsidemission.formoney" >
-          <!-- <Label name="checkscanner" /> -->
+          <Label name="checkscanner" />
           <CountTargetsAction targettag="ownedscanner" minamount="1" >
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
