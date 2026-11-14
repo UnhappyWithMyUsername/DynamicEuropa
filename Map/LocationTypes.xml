@@ -12,24 +12,46 @@
   MissionDestinationPreferability
   /// This can be used to increase/decrease the preference of choosing a path leading to this location type. Used as a multiplier for the weights of the paths (e.g. 10 would mean the path is x10 more likely to be selected).
   
+  -->
+  
+  <!--
   ChangeTo:
-    requiredlocations                       = The change can only happen if there's at least one of the given types of locations near this one.
-    requiredproximity                       = How close the location needs to be to one of the RequiredLocations for the change to occur (defaults to 1).
-    probability                             = Base probability per turn for the location to change if near one of the RequiredLocations.
-    requiredproximityforprobabilityincrease = How close the location needs to be to one of the RequiredLocations for the probability to increase.
-    proximityprobabilityincrease            = How much the probability increases per turn if within RequiredProximityForProbabilityIncrease steps of RequiredLocations.
     
-    disallowedadjacentlocations             = The change can't happen if there's one or more of the given types of locations near this one
-    disallowedproximity                     = How close the location needs to be to one of the DisallowedAdjacentLocations for the change to be disabled (defaults to 1).
+    DisallowedAdjacentLocations             = The change can't happen if there's one or more of the given types of locations near this one
+    DisallowedProximity                     = How close the location needs to be to one of the DisallowedAdjacentLocations for the change to be disabled (defaults to 1).
     
-    requirediscovered                       = Does this location need to be discovered before the change can occur (defaults to true).
+    Probability                             = Base probability for the location change to trigger per world step. Can be further modified by the Modifiers (see below).
+        
+    RequireDiscovered                       = Does this location need to be discovered before the change can occur (defaults to false).
     
-    requireddurationrange                   = If a type change is triggered, a value is randomly chosen within this range and the change is delayed for that many turns.
-    requiredduration                        = Can be used in place of the previous attribute if you want to use a fixed delay. 
+    RequiredDurationRange                   = If a type change is triggered, a value is randomly chosen within this range and the change is delayed for that many world steps.
+                                              NOTE: The maximum is exclusive (not included), ie. a range of "1,2" means just 1 being the only possible result.
+    RequiredDuration                        = Can be used in place of the previous attribute if you want to use a fixed delay.
     
-    locationtypechangecooldown              = The location can't change it's type for this many turns after this location type changes occurs.
+    CooldownAfterChange                     = The location can't change it's type for this many world steps after this location type changes occurs.
     
-  Store:
+      Modifier:
+        RequiredLocations                       = The modifier only takes effect if there's at least one of the given types of locations near this one.
+        RequiredProximity                       = How close the location needs to be to one of the RequiredLocations for the modifier to take effect.
+        ProbabilityModifier                     = How much the base probability changes when the conditions of this modifier are met. Can either be added to or multiplied by the base probability of the location type change.
+                                                  Defaults to 0 if the Function is Add, and 1 if it's Multiply (both meaning no change to the base probability).
+        RequiredProximityForProbabilityIncrease = How close the location needs to be to one of the RequiredLocations for the modifier to take effect.
+        Function                                = Add/Multiply. How does the ProbabilityModifier affect the base probability of the location type change? Defaults to adding to the base probability.
+        ProximityProbabilityIncrease            = How much the probability increases per world step if within RequiredProximityForProbabilityIncrease steps of RequiredLocations.
+        RequireBeaconStation                    = Does there need to be a beacon station within RequiredProximity?
+        RequireHuntingGrounds                   = Does there need to be hunting grounds within RequiredProximity?
+        MinPopulation                           = Minimum population in this location for the modifier to take effect. A percentage of the initial population, between 0-1. Defaults to 0.
+        MaxPopulation                           = Maximum population in this location for the modifier to take effect. A percentage of the initial population, between 0-1. Defaults to 1.
+      
+      NOTE: Modifiers are applied to the probability _in the order in which they're defined_, which matters when mixing Add and Multiply.
+            Importantly, a Modifier that multiplies the probability by 0 only prevents the change entirely if it's the last one in the list.
+      
+      All of the attributes of a Modifier, aside from ProximityProbabilityIncrease and RequiredProximityForProbabilityIncrease (and Function and ProbabilityModifier)
+      can also be used in the base ChangeTo element, which makes them act as hard requirements for the location type change to occur at all.
+        
+  -->
+ 
+  <!-- Store:
     dailyspecialscount        = The number of daily specials for merchants at this location type. Defaults to 1.
     requestedgoodscount       = The number of requested goods for merchants at this location type. Defaults to 1.
     maxreputationmodifier     = The maximum effect reputation can have on store prices. Defaults to 0.1.
@@ -40,8 +62,18 @@
     initialbalance            = Initial balance of the store. Defaults to 5000.
     pricemodifierrange        = The range of randomized price modifier. Randomized for each store individually. Defaults to 5. Note: value is direct percentage, i.e. 5 = 5%. 
   -->
-
     
+  <!-- biome identifiers:
+  coldcaverns,
+  europanridge,
+  theaphoticplateau,
+  thegreatsea,
+  hydrothermalwastes,
+  endzone
+ -->
+ 
+  <!-- TODO: add MinPopulation MaxPopulation in all changeto for DLC compatibility -->
+ 
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
     
