@@ -246,6 +246,76 @@
       <message header="missionheader0.abandonedoutposthumans" text="missionmessage0.abandonedoutposthumans"/>
     </AbandonedOutpostMission>
 
+    <!-- Eliminating a hostile non-faction-specific pirate submarine. -->
+    <!-- set commonness to 0 so we use our own version of this mission. TODO: use the vanilla one instead?  -->
+    <SubmarineEncounterMission
+      type="Pirate"
+      identifier="pirate2"
+      SubmarineSpecificIdCards="true"
+      faction=""
+      EnableLayers="pirates"
+      tags="combatpiratevessel,piratesub"
+      difficulty="4"
+      commonness="0"
+      reward="4000"
+      addedmissiondifficultyperplayer="8">
+      <Reputation identifier="location" amount="5" />
+      <Reputation identifier="bandits" amount="-2" />
+      <SubmarineWallModifier HealthMultiplier="1.0">
+        <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+        <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+        <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+        <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+        <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+        <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+      </SubmarineWallModifier>
+      <Characters>
+        <Character typeidentifier="piratecaptain" minamount="1" maxamount="1"/>
+        <Character typeidentifier="piratesecurity" minamount="2" maxamount="5" />
+        <Character typeidentifier="piratemechanic" minamount="1" maxamount="1" />
+        <Character typeidentifier="pirateengineer" minamount="1" maxamount="1" />
+        <Character typeidentifier="piratemedic" minamount="1" maxamount="1" />
+      </Characters>
+      <CharacterTypes>
+        <CharacterType typeidentifier="piratecaptain">
+          <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+          <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+        </CharacterType>
+        <CharacterType typeidentifier="piratesecurity">
+          <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+          <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+          <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+        </CharacterType>
+        <CharacterType typeidentifier="pirateannihilator">
+          <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
+        </CharacterType>
+        <CharacterType typeidentifier="piratemechanic">
+          <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+        </CharacterType>
+        <CharacterType typeidentifier="pirateengineer">
+          <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+        </CharacterType>
+      </CharacterTypes>
+      <Items>
+        <Item identifier="coilgunammobox" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="railgunshell" infinite="true" requireitemonsub="railgun" />
+        <Item identifier="pulselaserammobox" infinite="true" requireitemonsub="pulselaser" />
+        <Item identifier="flakcannonammobox" infinite="true" requireitemonsub="flakcannon" />
+        <Item identifier="chaingunammobox" infinite="true" requireitemonsub="chaingun" />
+        <Item identifier="fuelrod" infinite="true" />
+      </Items>
+      <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
+      <message header="missionheader0.pirate1" text="missionmessage0.pirate1"/>
+      <message header="missionheader1.pirate1" text="missionmessage1.pirate1"/>
+      <LocationType from="AnyOutpost" to="Any" />
+    </SubmarineEncounterMission>
+
   </Override>
   <!--END OF OVERRIDES-->
   <!--END OF OVERRIDES-->
@@ -606,11 +676,11 @@
   <!-- PIRATE MISSIONS -->  
   <!-- TODO: change the wall health on submarines back to normal if devs ever add hull upgrades for the poor pirates -->
   
-  <!-- pirate ambush -->
+  <!-- pirate ambush (low rep) -->
   <PirateMission     
     type="Pirate"
     identifier="pirateattack1"
-    tags="pirateattack"
+    tags="pirateattack,piratesub"
     showinmenus="false"
     showstartmessage="false"
     sideobjective="true"
@@ -627,11 +697,11 @@
       <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
       <Override MinDifficulty="75" HealthMultiplier="2.0"/>
     </SubmarineWallModifier>
-    <SubmarineTypes>
+    <!-- <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" />
-    </SubmarineTypes>
+    </SubmarineTypes> -->
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
       <Character typeidentifier="piratesecurity" minamount="2" maxamount="3" />
@@ -668,9 +738,21 @@
   </PirateMission>
   
   <!-- pirate eradication -->
+  <!-- I overrode the vanilla pirate mission commonness to use this one using the same mission tag instead, see overrides at the top -->
   <!-- TODO: change pirate missions - some pirate subs are so big it causes perfomrance issues.
              pirates should be manning barsuk sized subs at most, with sturdier hulls. It's better to have a crew of 5 in a small sub instead of a crew of 10 in a large sub. The larger sub is just more performance heavy, has more loot and is easier to hit.  -->
-  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="3">
+    <PirateMission
+    type="Pirate"
+    identifier="pirate_heavy"
+    SubmarineSpecificIdCards="true"
+    faction=""
+    EnableLayers="pirates"
+    tags="piratemission,combatpiratevessel,piratesub"
+    difficulty="4"
+    commonness="100"
+    reward="3500"
+    achievementidentifier="piratemission"
+    addedmissiondifficultyperplayer="3">
     <Reputation identifier="location" amount="5" />
 		<Reputation identifier="bandits" amount="-2" />
     <SubmarineWallModifier HealthMultiplier="1.0">
@@ -681,20 +763,21 @@
       <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
       <Override MinDifficulty="75" HealthMultiplier="2.0"/>
     </SubmarineWallModifier>
-    <SubmarineTypes>
+    <!-- Do not define pirates, the sub is picked from any sub that has the "piratesub" tag, same as mission tag. This includes vanilla subs -->
+    <!-- <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="2000" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="2250" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="2500" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="3000" />
-      <!-- <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" /> -->
-      <!-- <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="4500" /> -->
-    </SubmarineTypes>
+    </SubmarineTypes> -->    
+    <!-- I'm disabling medic because pirates just can't heal properly, it's just free loot -->
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
       <Character typeidentifier="piratesecurity" minamount="2" maxamount="3" />
-      <Character typeidentifier="pirateannihilator" minamount="0" maxamount="1" />
-      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateannihilator" minamount="1" maxamount="1" multiplayeronly="true"/>
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="2" />
       <Character typeidentifier="pirateengineer" minamount="1" maxamount="2" />
+      <!-- <Character typeidentifier="piratemedic" minamount="1" maxamount="1" /> -->
     </Characters>
     <CharacterTypes>
       <CharacterType typeidentifier="piratecaptain">
@@ -708,6 +791,7 @@
         <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
       </CharacterType>
       <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="30" />
         <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
       </CharacterType>
       <CharacterType typeidentifier="piratemechanic">
@@ -718,7 +802,21 @@
         <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
         <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
       </CharacterType>
+      <!-- <CharacterType typeidentifier="piratemedic">
+        <Character identifier="piratemedic" from="combatmissionpiratenpcs" preferreddifficulty="40"/>
+      </CharacterType> -->
     </CharacterTypes>
+    <!-- do we actually want infinite ammo? -->
+    <!-- <Items>
+      <Item identifier="coilgunammobox" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="railgunshell" infinite="true" requireitemonsub="railgun" />
+      <Item identifier="pulselaserammobox" infinite="true" requireitemonsub="pulselaser" />
+      <Item identifier="flakcannonammobox" infinite="true" requireitemonsub="flakcannon" />
+      <Item identifier="chaingunammobox" infinite="true" requireitemonsub="chaingun" />
+      <Item identifier="fuelrod" infinite="true" />
+    </Items> -->
     <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
