@@ -2313,7 +2313,15 @@
             <Success>
               <MoneyAction amount="-500" />
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="banditcaptain" />
-              <MissionAction missiontag="coalitionciv" />
+              <!-- I have to use RNGaction and missionidentifer because missiontag crashes the game -->
+              <RNGAction chance="0.9" >
+                <Success>
+                  <MissionAction missionidentifier="coalition_cargo2" minlocationdistance="2" locationtype="none,outpost,settlement,colony,city,camp,base,military,blockade,factory,shipyard,clinic,hospital,study,research,huskchurch" UnlockInLevelLeadingToLocation="true" />
+                </Success>
+                <Failure>
+                  <MissionAction missionidentifier="coalition_cargotrap" minlocationdistance="2" locationtype="none,outpost,settlement,colony,city,camp,base,military,blockade,factory,shipyard,clinic,hospital,study,research,huskchurch" UnlockInLevelLeadingToLocation="true" />
+                </Failure>              
+              </RNGAction>
             </Success>
             <Failure>
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="banditcaptain" />
