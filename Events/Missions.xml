@@ -1046,7 +1046,7 @@
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
   </PirateMission>
   -->
-  
+    
   <!-- TODO: adapt these missions to the new neutral submarine format, including AI and handling the event -->
   <PirateMission type="Pirate" identifier="coalition_cargo2" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="50" reward="0" addedmissiondifficultyperplayer="3">
 		<Reputation identifier="bandits" amount="3" />
@@ -3308,5 +3308,110 @@
   <TriggerEvent state="0" delay="0" eventidentifier="rescuestrandeddiversevent" />
   <CompleteCheckDataAction identifier="rescueddivers" condition="eq 1"/>
   </GotoMission> -->
+
+
+
+
+
+
+
+
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+
+
+
+
+
+
+
+
+  <!-- 
+  Mission settings list I gathered from looking at the code so I don't have to search every time. 
+  Definitely not complete
+  
+  
+  GENERAL MISSION SETTINGS
+  
+  WinCondition=""
+  -CrewEliminated
+  -AnyoneFromCrewSurvived
+  -Never
+  -Always
+  -SubmarineIncapacitated (Submarine flooded, >20% enemy crew, no crew inside sub/outpost, submarine sunk in abyss)
+  -SubmarineNotIncapacitated (opposite of above)
+  -OutpostDestroyed (most of NPCs dead or reactor blown up)
+  
+  successstate="0"
+  failurestate="1"  
+  
+  showinmenus="false" 
+  ShowInMenusAfterReachingState="1" (mission only appears after reaching this "state")
+  showprogressbar="true"
+  showprogressinnumbers="true"
+  maxprogressstate="40"
+  progressbarlabel="text"   
+  ProgressBarColor="255,255,255"
+  
+  Allowretry="true"
+  
+  BlockLocationTypeChanges="true" (for outpost missions)
+  RequireDestinationReached="true"
+  
+  
+  SUBMARINEENCOUNTERMISSION SETTINGS  
+    type="Encounter"
+    team="FriendlyNPC"
+    ShowArrivalTime="false"
+    MapNotificationOnUnlock="text"
+    faction="coalition"
+    EnableLayers="Coalition"
+    EncounterType="Wreck"
+    WinCondition="CrewEliminated"
+    FailureCondition="Never"
+    requirewreck="true"
+    ShowStartMessage="false"
+    ShowEndMessage="OnlyWhenCompleted"
+    ShowCompletionState="false"
+    ShowOnMap="true"
+    TimeLimitWorldSteps="4"
+    CompleteWhenTimeLimitReached="false" (succeeds if time elapsed)
+    ContinuePathCondition="OnlyWhenCompleted" (repeats mission on reaching destination, for long-distance transport idk how it works)
+    DisallowMissionsOfSameType="true"     (if you don't want a second sub mission to spawn)
+    addedMissionDifficultyPerPlayer="3"
+    Denyboarding="true
+    ShouldSubmarineStartHidden="true" (Makes the submarine start hidden until an event uses UnhideSubmarineEncounterAction)
+      
+    SonarBehavior
+    -Hide         
+    -Approximate  
+    -Accurate     
+    
+    BoardingState
+    -None
+    -FirstWarningGiven
+    -SecondWarningGiven
+    -TurnHostile
+   -->
+  
+  
+  
+
+
+
+
+
+
+
+
+
 
 </Missions>
