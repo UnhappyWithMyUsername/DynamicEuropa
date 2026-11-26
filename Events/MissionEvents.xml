@@ -768,23 +768,10 @@
       </CheckDataAction>
       <ConversationAction text="Eventtext.missionevent_scanningsidemission.payfordata" speakertag="scanresearcher" invokertag="triggerer_player" eventsprite="Researcher" >
         <Option text="Eventtext.missionevent_scanningsidemission.forscience" >
-          <!--  TODO: delete this dupe event garbage once fix happens https://github.com/FakeFishGames/Barotrauma/discussions/17648 wouldn't it be funny if I wanted to use a simple Goto to not repeat code as intended but it nukes the text even though it shouldnt, so I just copy paste instead and manually fuck up? -->
-          <!-- <Goto name="checkscanner" EndConversation="false"/> -->
-          <CountTargetsAction targettag="ownedscanner" minamount="1" >
-            <Success>
-              <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missionidentifier="scanrandomfishmission" />
-              <Goto name="end" />
-            </Success>
-            <Failure>
-              <ConversationAction text="Eventtext.missionevent_scanningsidemission.noscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
-              <MissionAction missionidentifier="scanrandomfishmission" />
-              <Goto name="end" />
-            </Failure>
-          </CountTargetsAction>
+          <Goto name="checkscanner" />
         </Option>
         <Option text="Eventtext.missionevent_scanningsidemission.formoney" >
-          <!-- <Label name="checkscanner" /> -->
+          <Label name="checkscanner" />
           <CountTargetsAction targettag="ownedscanner" minamount="1" >
             <Success>
               <ConversationAction text="Eventtext.missionevent_scanningsidemission.yesscanner" targettag="triggerer_player" eventsprite="instructor" endconversation="true" />
@@ -1551,22 +1538,24 @@
             <Success>
               <CheckDataAction identifier="waveinprogress" condition="neq 1">
                 <Success>
-                  <SpawnAction speciesname="crawler" amount="3" SpawnLocation="nearmainsub" offset="500" />
+                  <SpawnAction speciesname="crawler" amount="1" SpawnLocation="OutsideOutpost" offset="3000" AllowInPlayerView="False" />
+                  <SpawnAction speciesname="crawler_hatchling" amount="2" SpawnLocation="OutsideOutpost" offset="3000" AllowInPlayerView="False" />
                   <SetDataAction identifier="waveinprogress" operation="Set" value="1" />
                   <SetDataAction identifier="spawnwaves" operation="Add" value="1" />
                   <WaitAction time="60" />
-                  <Goto name="loop" />     
+                  <Goto name="preloop" />
                 </Success>          
                 <Failure>
                   <WaitAction time="20" />              
-                  <SetDataAction identifier="waveinprogress" operation="Set" value="0" />       
-                  <Goto name="loop" />
+                  <SetDataAction identifier="waveinprogress" operation="Set" value="0" />
+                  <Goto name="preloop" />
                 </Failure>
               </CheckDataAction>
             </Success>
             <Failure>
               <WaitAction time="5" />
-              <Goto name="loop" />
+              <Label name="preloop" />
+              <Goto name="loop" MaxTimes="3"/>
             </Failure>
           </RNGAction>
         </Success>          
@@ -2428,8 +2417,8 @@
     </ScriptedEvent>
  
     <!-- TODO: make enemy stunnable? make enemy slower and weaker? all so you can scan alive -->
-    <!-- Scanning thalamus mission -->
-    <!-- check if thalamus is scanned and not dead -->
+    <!-- Scanning random fish mission -->
+    <!-- check if random fish is scanned and not dead -->
     <ScriptedEvent identifier="scanrandomfishevent">
       <TagAction criteria="player" tag="player" />
       <Label name="findscannablefish" />

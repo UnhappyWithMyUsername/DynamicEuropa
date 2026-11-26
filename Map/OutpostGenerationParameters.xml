@@ -8,7 +8,9 @@
       allowedlocationtypes="!!!DONT_EVER_DELETE_THIS_CONFIG!!!" 
       replaceinradiation="" 
       totalmodulecount="5" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       spawncrewinsideoutpost="true">
       <!-- I want to add bars to alternative outpostconfigs later on for the bartender npc. Note: Need to split bars from existing crew quarter modules to not end up with multiple bars on a single outpost -->
       <modulecount flag="BarSmall" count="1" />
@@ -73,7 +75,17 @@
       <modulecount flag="Shipyard" count="1" />
       <modulecount flag="HuskChurch" count="1" />
       <modulecount flag="SinkingCircus" count="1" />
-      <modulecount flag="PirateOutpost" count="1" /> -->
+      <modulecount flag="PirateOutpost" count="1" />
+      
+      I'm using vanilla turret modules here 
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleBottom" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleLarge" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      -->
+      
+      <!-- Leave EntranceTag="" empty and add GenerateFullOutpostInsteadOfEntrance="true" if you want the docking module to generate instead of checkpoint. Yes, it is called "fulloutpost", no it doesnt generate the FULL outpost, only the docking module -->
 
     </OutpostConfig>
 
@@ -88,10 +100,11 @@
       identifier="StarterOutpost"
       allowedlocationtypes="StarterOutpost" 
       totalmodulecount="2" 
+      EntranceTag="OutpostEntrance" 
       minhallwaylength="0"
+      AlwaysGenerateHallways="false"
       spawncrewinsideoutpost="true"
-      appendtoreachtotalmodulecount="false"
-      alwaysgeneratehallways="false">
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="StarterOutpost_Docking" count="1" order="0" />
       <modulecount flag="StarterOutpost_Main" count="1" order="1" />
       <npcs>
@@ -123,10 +136,11 @@
       identifier="StarterOutpostAFTER"
       allowedlocationtypes="StarterOutpostAFTER" 
       totalmodulecount="2" 
+      EntranceTag="OutpostEntrance" 
       minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       spawncrewinsideoutpost="true"
-      appendtoreachtotalmodulecount="false"
-      alwaysgeneratehallways="false">
+      appendtoreachtotalmodulecount="false">
       <modulecount flag="StarterOutpost_Docking_AFTER" count="1" order="0" />
       <modulecount flag="StarterOutpost_Main_AFTER" count="1" order="1" />
       <npcs>
@@ -158,7 +172,9 @@
     <OutpostConfig identifier="outpost" 
       replaceinradiation="" 
       totalmodulecount="4" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Outpost" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -186,8 +202,10 @@
     
     <OutpostConfig identifier="settlement" 
       replaceinradiation="" 
-      totalmodulecount="7" 
-      minhallwaylength="400" 
+      totalmodulecount="8" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Settlement" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -197,7 +215,9 @@
       <modulecount flag="CafeteriaSmall" count="1" />
       <modulecount flag="DE_EngineeringModule" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
-      <modulecount flag="UpgradeModule" probability="0.35" count="1" order="2" MinDifficulty="10"/>
+      <modulecount flag="UpgradeModule" probability="0.35" count="1" order="2" MinDifficulty="10"/>      
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -229,8 +249,10 @@
     
     <OutpostConfig identifier="colony" 
       replaceinradiation="" 
-      totalmodulecount="7" 
-      minhallwaylength="400" 
+      totalmodulecount="9" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Colony" 
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
@@ -240,7 +262,10 @@
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="DE_EngineeringModule" count="1" />
       <modulecount flag="DE_SecurityModule" count="1" />
-      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />      
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -277,26 +302,42 @@
       </npcs>
     </OutpostConfig>
     
-
     <OutpostConfig identifier="city" 
       replaceinradiation="" 
-      totalmodulecount="11" 
+      totalmodulecount="17" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false" 
-      minhallwaylength="0" 
-      allowedlocationtypes="City">
-      <modulecount flag="DockingCity" count="1"/>
+      EntranceTag="OutpostEntrance" 
+      minhallwaylength="200"
+      AlwaysGenerateHallways="false" 
+      allowedlocationtypes="City">            
+      <!-- <modulecount flag="DockingCity" count="1"/>
       <modulecount flag="DE_EngineeringModuleCity" count="1"/>
       <modulecount flag="DE_AdminModuleCity" count="1"/>
       <modulecount flag="DE_MedicalModuleCity" count="1"/>
       <modulecount flag="DE_ResearchModuleCity" count="1"/>
       <modulecount flag="DE_CrewModuleCity" count="1"/>
       <modulecount flag="DE_SecurityModuleCity" count="1"/>
-      <modulecount flag="DE_ArmoryModuleCity" count="1"/>
-      <modulecount flag="DE_ClownModuleCity" count="1" order="1" requiredfaction="clowns"/>
-      <modulecount flag="Racetrack" probability="1.0" count="1" order="2" MinDifficulty="0"/>
-      <!-- TODO: change this with "optionalmodule" later when we have enough optional modules, also change module file tags/locations -->
-      <modulecount flag="DE_Shootingrange" count="1" order="2" />
+      <modulecount flag="DE_ArmoryModuleCity" count="1"/> -->
+      <!-- using vanilla modules here, no need to make new ones for DE -->
+      <modulecount flag="Airlock" count="1"/>
+      <modulecount flag="EngineeringModule" count="1"/>
+      <modulecount flag="AdminModule" count="1"/>
+      <modulecount flag="MedicalModule" count="1" order="1" />
+      <modulecount flag="ResearchModule" count="1" order="1" />
+      <modulecount flag="ResidentialModuleMain" count="1" order="2" />
+      <modulecount flag="SecurityModule" count="1" order="2" />
+      <modulecount flag="ArmoryModule" count="1" order="2" />
+      <modulecount flag="FarmingModule" count="1" order="2" />
+      <modulecount flag="StorageModule" order="3" count="1"/>      
+      
+      <modulecount flag="DE_ClownModuleCity" count="1" order="3" requiredfaction="clowns"/>
+      <modulecount flag="Racetrack" count="1" order="2" MinDifficulty="0" />
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleBottom" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleLarge" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/>      
+      <modulecount flag="DE_Shootingrange" count="1" order="3" /> <!-- TODO: optional module? -->
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -358,7 +399,9 @@
     <OutpostConfig identifier="clinic" 
       replaceinradiation="" 
       totalmodulecount="5" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Clinic" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -388,8 +431,10 @@
     
     <OutpostConfig identifier="hospital" 
       replaceinradiation="" 
-      totalmodulecount="7" 
-      minhallwaylength="400" 
+      totalmodulecount="8" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Hospital" 
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
@@ -400,6 +445,8 @@
       <modulecount flag="CafeteriaSmall" count="1" />
       <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -434,7 +481,9 @@
     <OutpostConfig identifier="study" 
       replaceinradiation="" 
       totalmodulecount="5" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Study" 
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
@@ -463,8 +512,10 @@
         
     <OutpostConfig identifier="researchoutpost" 
       replaceinradiation="" 
-      totalmodulecount="5" 
-      minhallwaylength="400" 
+      totalmodulecount="6" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="research" 
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
@@ -473,6 +524,8 @@
       <modulecount flag="DE_AdminModule" count="1" />
       <modulecount flag="DE_ResearchModule" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -503,8 +556,10 @@
     <!-- MILITARY OUTPOSTS -->
     <OutpostConfig identifier="camp" 
       replaceinradiation="" 
-      totalmodulecount="5" 
-      minhallwaylength="400" 
+      totalmodulecount="6" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Camp" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -513,6 +568,8 @@
       <modulecount flag="DE_SecCrewModule" count="1" />
       <modulecount flag="DE_AdminModule" count="1" />
       <modulecount flag="UpgradeModule" probability="0.35" count="1" order="2" MinDifficulty="10"/>
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -542,8 +599,10 @@
     
     <OutpostConfig identifier="base" 
       replaceinradiation="" 
-      totalmodulecount="5" 
-      minhallwaylength="400" 
+      totalmodulecount="7" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Base" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -551,7 +610,10 @@
       <modulecount flag="DE_EngineeringModule" count="1" />
       <modulecount flag="DE_AdminModule" count="1" />
       <modulecount flag="DE_SecCrewModule" count="1" />
-      <modulecount flag="DE_SecurityModule" count="1" />
+      <modulecount flag="DE_SecurityModule" count="1" />      
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -587,8 +649,10 @@
     
     <OutpostConfig identifier="militaryoutpost" 
       replaceinradiation="" 
-      totalmodulecount="9" 
-      minhallwaylength="400" 
+      totalmodulecount="12" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Military" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -598,8 +662,10 @@
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="DE_AdminModule" count="1" />
       <modulecount flag="DE_SecurityModule" count="1" />
-      <modulecount flag="DE_ArmoryModule" count="1" />
-      <!-- TODO: change this with "optionalmodule" later when we have enough optional modules, also change module file tags/locations -->
+      <modulecount flag="DE_ArmoryModule" count="1" />      
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/>
+      <modulecount flag="TurretModuleLarge" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/>      
       <modulecount flag="DE_Shootingrange" count="1" order="2" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
@@ -654,17 +720,21 @@
     
     <OutpostConfig identifier="Blockade" 
       replaceinradiation="" 
-      totalmodulecount="6" 
-      minhallwaylength="400" 
+      totalmodulecount="7" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Blockade" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
       <modulecount flag="DockingBlockade" count="1" />
-      <modulecount flag="ControlRoomBlockade" count="1" />
+      <modulecount flag="ControlRoomBlockade" count="1" OutpostSideToAttachTo="Right" />
       <modulecount flag="DE_EngineeringModuleNoFab" count="1" />
       <modulecount flag="DE_AdminModule" count="1" />
       <modulecount flag="DE_SecurityModule" count="1" />
-      <modulecount flag="DE_MedicalModule" count="1" />
+      <modulecount flag="DE_MedicalModule" count="1" />      
+      <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -702,7 +772,9 @@
     <OutpostConfig identifier="militaryforces" 
       replaceinradiation="underattack" 
       totalmodulecount="1" 
-      minhallwaylength="0" 
+      EntranceTag="OutpostEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true" 
       allowedlocationtypes="MilitaryForces" 
       spawncrewinsideoutpost="false" 
       removeunusedgaps="false"
@@ -742,7 +814,10 @@
     <OutpostConfig identifier="survey" 
       replaceinradiation="" 
       totalmodulecount="1" 
-      minhallwaylength="0" 
+      EntranceTag=""
+      GenerateFullOutpostInsteadOfEntrance="true"
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true" 
       allowedlocationtypes="Survey" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -752,7 +827,9 @@
     <OutpostConfig identifier="miningoutpost" 
       replaceinradiation="" 
       totalmodulecount="10" 
-      minhallwaylength="0" 
+      EntranceTag="OutpostEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true" 
       allowedlocationtypes="Mine" 
       spawncrewinsideoutpost="false" 
       appendtoreachtotalmodulecount="false">
@@ -774,7 +851,9 @@
     <OutpostConfig identifier="construction" 
       replaceinradiation="" 
       totalmodulecount="1" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Construction" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -796,8 +875,10 @@
     
     <OutpostConfig identifier="factory" 
       replaceinradiation="" 
-      totalmodulecount="7" 
-      minhallwaylength="400" 
+      totalmodulecount="8" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Factory" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -808,6 +889,8 @@
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionFactory" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -849,8 +932,10 @@
 
     <OutpostConfig identifier="shipyard" 
       replaceinradiation="" 
-      totalmodulecount="7" 
-      minhallwaylength="400" 
+      totalmodulecount="8" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Shipyard" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -861,6 +946,8 @@
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionShipyard" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
+      <modulecount flag="TurretModule" order="4" count="1" RequireDownwardsVisibility="true"/>
+      
       <npcs>
         <!-- Coalition -->
         <npc from="outpostnpcs1" identifier="outpostmanagercoalition" faction="coalition" />
@@ -901,8 +988,10 @@
     <!-- FOOD OUTPOSTS -->
     <OutpostConfig identifier="hydroponics" 
       replaceinradiation="" 
-      totalmodulecount="8" 
-      minhallwaylength="400" 
+      totalmodulecount="9" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="Hydroponics" 
       spawncrewinsideoutpost="false"
       appendtoreachtotalmodulecount="false">
@@ -913,6 +1002,7 @@
       <modulecount flag="DE_CrewModule" count="1" />
       <modulecount flag="CafeteriaMedium" count="1" />
       <modulecount flag="ProductionHydroponics" count="1" />
+      <modulecount flag="DE_FarmingModule" count="1" />
       <modulecount flag="DE_ClownModule" count="1" order="1" requiredfaction="clowns" />
       <npcs>
         <!-- Coalition -->
@@ -931,10 +1021,11 @@
         <!-- Generic -->
         <npc from="outpostnpcs1" identifier="reactoroperator" />
         <npc from="outpostnpcs1" identifier="researcher" />
-        <npc from="outpostnpcs1" identifier="researcher" />
         <npc from="outpostnpcs1" identifier="commoner" />
         <npc from="outpostnpcs1" identifier="commoner" />
         <npc from="outpostnpcs1" identifier="commoner" />
+        <npc from="outpostnpcs1" identifier="farmer" spawnpriority="1"/>
+        <npc from="outpostnpcs1" identifier="farmer" spawnpriority="1"/>
         <!-- Services -->
         <npc from="outpostnpcs1" identifier="hrmanager" />
         <npc from="he-outpostnpcs" identifier="merchantbutcher" />
@@ -946,7 +1037,9 @@
     <OutpostConfig identifier="pirateoutpost" 
       replaceinradiation="" 
       totalmodulecount="7" 
-      minhallwaylength="400" 
+      EntranceTag="OutpostEntrance"
+      minhallwaylength="400"
+      AlwaysGenerateHallways="false" 
       allowedlocationtypes="PirateOutpost" 
       spawncrewinsideoutpost="false" 
       alwaysdestructible="true" 
@@ -957,6 +1050,13 @@
       <modulecount flag="AdminPirate" count="1" />
       <modulecount flag="CrewPirate" count="2" />
       <modulecount flag="MedicalPirate" count="1" />
+      
+      <!-- TODO: test turret modules on pirate outpost -->
+      <!-- <modulecount flag="TurretModuleLeft" order="4" count="1" OutpostSideToAttachTo="Left" RequireDownwardsVisibility="true"/> -->
+      <!-- <modulecount flag="TurretModuleRight" order="4" count="1" OutpostSideToAttachTo="Right" RequireDownwardsVisibility="true"/> -->
+      <!-- <modulecount flag="TurretModuleBottom" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/> -->
+      <!-- <modulecount flag="TurretModuleLarge" order="4" count="1" OutpostSideToAttachTo="Bottom" RequireDownwardsVisibility="true"/> -->
+      
       <npcs>
         <npc from="outpostnpcspirate" identifier="repairnpcpirate" />
         <npc from="outpostnpcspirate" identifier="reactoroperatorpirate" />
@@ -994,7 +1094,9 @@
       replaceinradiation=""
       totalmodulecount="5"
       appendtoreachtotalmodulecount="false"
+      EntranceTag="OutpostEntrance"
       minhallwaylength="400"
+      AlwaysGenerateHallways="false"
       allowedlocationtypes="HuskChurch"
       spawncrewinsideoutpost="false">
       <modulecount flag="DockingChurch" count="1"/>
@@ -1030,7 +1132,9 @@
       replaceinradiation="none"
       totalmodulecount="3"
       appendtoreachtotalmodulecount="false"
+      EntranceTag="OutpostEntrance" 
       minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       allowedlocationtypes="SinkingCircus"
       spawncrewinsideoutpost="false">
       <modulecount flag="DockingCircus" count="1"/>
@@ -1054,7 +1158,10 @@
       <!-- unused for now -->    
       <OutpostConfig
       identifier="AbandonedIrradiated"
-      totalmodulecount="6" minhallwaylength="0"
+      totalmodulecount="6"
+      EntranceTag="OutpostEntranceBroken" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
       alwaysrewireable="true"
@@ -1069,7 +1176,10 @@
     
     <OutpostConfig
       identifier="abandonedoutpostregular"
-      totalmodulecount="6" minhallwaylength="0"
+      totalmodulecount="6"
+      EntranceTag="OutpostEntranceBroken" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       allowedlocationtypes="Abandoned"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
@@ -1087,7 +1197,10 @@
     
     <OutpostConfig
       identifier="abandonedoutpostlarge"
-      totalmodulecount="8" minhallwaylength="0"
+      totalmodulecount="8"
+      EntranceTag="OutpostEntranceBroken" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       allowedlocationtypes="Abandoned"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
@@ -1105,7 +1218,10 @@
     
     <OutpostConfig
       identifier="abandonedoutposthuge"
-      totalmodulecount="10" minhallwaylength="0"
+      totalmodulecount="10"
+      EntranceTag="OutpostEntranceBroken" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="true"
       allowedlocationtypes="Abandoned"
       spawncrewinsideoutpost="false"
       alwaysdestructible="true"
@@ -1123,8 +1239,10 @@
 
     <!-- LAIRS -->
     <OutpostConfig identifier="SmallLair" 
-      totalmodulecount="4" 
-      minhallwaylength="0" 
+      totalmodulecount="8" 
+      EntranceTag="LairEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="False" 
       allowedlocationtypes="Lair" 
       allowstealing="true" 
       spawncrewinsideoutpost="false" 
@@ -1134,14 +1252,20 @@
       drawbehindsubs="false"
       PreferredDifficulty="25">
       <modulecount flag="DockingLairRock" count="1" /> 
-      <modulecount flag="CaveLairRockSmall" count="2" />
-      <modulecount flag="CaveLairRockLarge" count="1" />
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Left" order="1"/>
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Right" order="1"/>
+      <modulecount flag="CaveLairRockLarge" count="1" order="2"/>
+      <modulecount flag="EntranceLairRockBottom" count="2" OutpostSideToAttachTo="Bottom" />
+      <modulecount flag="EntranceLairRockLeft" count="1" OutpostSideToAttachTo="Left" />
+      <modulecount flag="EntranceLairRockRight" count="1" OutpostSideToAttachTo="Right" />
       <npcs></npcs>
     </OutpostConfig>
     
     <OutpostConfig identifier="MediumLair" 
-      totalmodulecount="6" 
-      minhallwaylength="0" 
+      totalmodulecount="10" 
+      EntranceTag="LairEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="False" 
       allowedlocationtypes="Lair,LairMudraptor,LairThresher" 
       allowstealing="true" 
       spawncrewinsideoutpost="false" 
@@ -1151,15 +1275,22 @@
       drawbehindsubs="false"
       PreferredDifficulty="50">
       <modulecount flag="DockingLairRock" count="1" /> 
-      <modulecount flag="CaveLairRockSmall" count="3" />
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Left" order="1"/>
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Right" order="1"/>
+      <modulecount flag="CaveLairRockSmall" count="1" />
       <modulecount flag="CaveLairRockMedium" count="1" />
-      <modulecount flag="CaveLairRockLarge" count="1" />
+      <modulecount flag="CaveLairRockLarge" count="1" order="2"/>
+      <modulecount flag="EntranceLairRockBottom" count="2" OutpostSideToAttachTo="Bottom" />
+      <modulecount flag="EntranceLairRockLeft" count="1" OutpostSideToAttachTo="Left" />
+      <modulecount flag="EntranceLairRockRight" count="1" OutpostSideToAttachTo="Right" />
       <npcs></npcs>
     </OutpostConfig>
     
     <OutpostConfig identifier="LargeLair" 
-      totalmodulecount="8" 
-      minhallwaylength="0" 
+      totalmodulecount="12" 
+      EntranceTag="LairEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="False" 
       allowedlocationtypes="Lair,LairMudraptor,LairThresher" 
       allowstealing="true" 
       spawncrewinsideoutpost="false" 
@@ -1168,16 +1299,23 @@
       minwaterpercentage="100" maxwaterpercentage="100"
       drawbehindsubs="false"
       PreferredDifficulty="75">
-      <modulecount flag="DockingLairRock" count="1" /> 
-      <modulecount flag="CaveLairRockSmall" count="4" />
-      <modulecount flag="CaveLairRockMedium" count="2" />
-      <modulecount flag="CaveLairRockLarge" count="1" />
+      <modulecount flag="DockingLairRock" count="1" />
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Left" order="1"/>
+      <modulecount flag="CaveLairRockSmall" count="1" OutpostSideToAttachTo="Right" order="1"/>
+      <modulecount flag="CaveLairRockSmall" count="2" />
+      <modulecount flag="CaveLairRockMedium" count="2" order="2"/>
+      <modulecount flag="CaveLairRockLarge" count="1" order="3" />
+      <modulecount flag="EntranceLairRockBottom" count="2" OutpostSideToAttachTo="Bottom" />
+      <modulecount flag="EntranceLairRockLeft" count="1" OutpostSideToAttachTo="Left" />
+      <modulecount flag="EntranceLairRockRight" count="1" OutpostSideToAttachTo="Right" />
       <npcs></npcs>
     </OutpostConfig>
     
     <OutpostConfig identifier="HuskgroundsDE" 
-      totalmodulecount="7" 
-      minhallwaylength="0" 
+      totalmodulecount="11" 
+      EntranceTag="LairEntrance" 
+      minhallwaylength="0"
+      AlwaysGenerateHallways="False" 
       allowedlocationtypes="HuskgroundsDE" 
       allowstealing="true" 
       spawncrewinsideoutpost="false" 
@@ -1185,10 +1323,12 @@
       appendtoreachtotalmodulecount="false"
       minwaterpercentage="100" maxwaterpercentage="100">
       <modulecount flag="DockingLairRock" count="1" />
-      <!-- <modulecount flag="EntranceLairRock" count="2" /> -->
       <modulecount flag="CaveLairRockSmall" count="2" />
       <modulecount flag="CaveLairRockMedium" count="1" />
       <modulecount flag="CaveLairRockLarge" count="1" />
+      <modulecount flag="EntranceLairRockBottom" count="2" OutpostSideToAttachTo="Bottom" />
+      <modulecount flag="EntranceLairRockLeft" count="1" OutpostSideToAttachTo="Left" />
+      <modulecount flag="EntranceLairRockRight" count="1" OutpostSideToAttachTo="Right" />
       <npcs></npcs>
     </OutpostConfig>
 

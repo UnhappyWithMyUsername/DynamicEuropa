@@ -246,72 +246,82 @@
       <message header="missionheader0.abandonedoutposthumans" text="missionmessage0.abandonedoutposthumans"/>
     </AbandonedOutpostMission>
 
-    <!-- Variants of abyssals that avoid abyss and roam main path -->
-    <MonsterMission
-      identifier="huntinggrounds1"
-      textidentifier="huntinggrounds"
-      tags="huntinggrounds,hard"
-      type="Monster"
-      sideobjective="true"
+    <!-- Eliminating a hostile non-faction-specific pirate submarine. -->
+    <!-- set commonness to 0 so we use our own version of this mission. TODO: use the vanilla one instead?  -->
+    <SubmarineEncounterMission
+      type="Pirate"
+      identifier="pirate2"
+      SubmarineSpecificIdCards="true"
+      faction=""
+      EnableLayers="pirates"
+      tags="combatpiratevessel,piratesub"
       difficulty="4"
       commonness="0"
-      reward="6500"
-      sonarlabel="target"
-      spawntype="MainPath"
-      maxsonarmarkerdistance="20000"
-      successmessage=""
-      monsterfile="Endworm_Hunting">
-      <Reputation identifier="location" amount="2" />
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,768,256,256" color="214,50,48"/>
-      <message header="missionheader0.huntinggrounds1" text="missionmessage0.huntinggrounds1"/>
-    </MonsterMission>
-
-    <MonsterMission
-      identifier="huntinggrounds2"
-      textidentifier="huntinggrounds"
-      tags="huntinggrounds"
-      type="Monster"
-      sideobjective="true"
-      difficulty="4"
-      commonness="0"
-      reward="6500"
-      sonarlabel="target"
-      spawntype="MainPath"
-      maxsonarmarkerdistance="20000"
-      successmessage=""
-      monsterfile="Charybdis_Hunting">
-      <Reputation identifier="location" amount="2" />
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,768,256,256" color="214,50,48"/>
-      <message header="missionheader0.huntinggrounds1" text="missionmessage0.huntinggrounds1"/>
-    </MonsterMission>
-
-    <MonsterMission
-      identifier="huntinggrounds3"
-      textidentifier="huntinggrounds"
-      tags="huntinggrounds,easy"
-      type="Monster"
-      sideobjective="true"
-      difficulty="4"
-      commonness="0"
-      reward="6500"
-      sonarlabel="target"
-      spawntype="MainPath"
-      maxsonarmarkerdistance="20000"
-      successmessage=""
-      monsterfile="Latcher_Hunting">
-      <Reputation identifier="location" amount="2" />
-      <Icon texture="Content/UI/MissionIcons2.png" sourcerect="256,768,256,256" color="214,50,48"/>
-      <message header="missionheader0.huntinggrounds1" text="missionmessage0.huntinggrounds1"/>
-    </MonsterMission>
+      reward="4000"
+      addedmissiondifficultyperplayer="3">
+      <Reputation identifier="location" amount="5" />
+      <Reputation identifier="bandits" amount="-2" />
+      <SubmarineWallModifier HealthMultiplier="1.0">
+        <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+        <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+        <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+        <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+        <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+        <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+      </SubmarineWallModifier>
+      <Characters>
+        <Character typeidentifier="piratecaptain" minamount="1" maxamount="1"/>
+        <Character typeidentifier="piratesecurity" minamount="2" maxamount="5" />
+        <Character typeidentifier="piratemechanic" minamount="1" maxamount="1" />
+        <Character typeidentifier="pirateengineer" minamount="1" maxamount="1" />
+        <Character typeidentifier="piratemedic" minamount="1" maxamount="1" />
+      </Characters>
+      <CharacterTypes>
+        <CharacterType typeidentifier="piratecaptain">
+          <Character identifier="piratecaptain" from="pirate_npcs" preferreddifficulty="50" iscommander="true" />
+          <Character identifier="piratecaptainlord" from="pirate_npcs" preferreddifficulty="90" iscommander="true" />
+        </CharacterType>
+        <CharacterType typeidentifier="piratesecurity">
+          <Character identifier="piratesecurityrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="60" />
+          <Character identifier="piratesecuritybrute" from="pirate_npcs" preferreddifficulty="70" />
+          <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
+        </CharacterType>
+        <CharacterType typeidentifier="pirateannihilator">
+          <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
+        </CharacterType>
+        <CharacterType typeidentifier="piratemechanic">
+          <Character identifier="piratemechanicrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="piratemechanicveteran" from="pirate_npcs" preferreddifficulty="70" />
+        </CharacterType>
+        <CharacterType typeidentifier="pirateengineer">
+          <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
+          <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
+        </CharacterType>
+      </CharacterTypes>
+      <Items>
+        <Item identifier="coilgunammobox" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+        <Item identifier="railgunshell" infinite="true" requireitemonsub="railgun" />
+        <Item identifier="pulselaserammobox" infinite="true" requireitemonsub="pulselaser" />
+        <Item identifier="flakcannonammobox" infinite="true" requireitemonsub="flakcannon" />
+        <Item identifier="chaingunammobox" infinite="true" requireitemonsub="chaingun" />
+        <Item identifier="fuelrod" infinite="true" />
+      </Items>
+      <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
+      <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
+      <message header="missionheader0.pirate1" text="missionmessage0.pirate1"/>
+      <message header="missionheader1.pirate1" text="missionmessage1.pirate1"/>
+      <LocationType from="AnyOutpost" to="Any" />
+    </SubmarineEncounterMission>
 
   </Override>
   <!--END OF OVERRIDES-->
   <!--END OF OVERRIDES-->
   <!--END OF OVERRIDES-->
   
-    <!-- Lairs -->
-    <!-- KNOWN BUG: enemies spawned inside a lair via mission wont attack the sub, I assume the sub being docked makes it part of the outpost
-         TODO: fix this (!!), but how? lairs are so janky smh    -->
+  <!-- Lairs -->
   <CrawlerLairMission identifier="crawlerlair1" textidentifier="destroylair" tags="destroylair,crawlerlair" type="OutpostDestroy" reward="2000" difficulty="3" commonness="100" allowretry="true" sonarlabel="Nest" unhideentitysubcategories="abandonedmonster" requireCorrectLocationType="true" minleveldifficulty="0" maxleveldifficulty="30">
     <Icon texture="Content/UI/MissionIcons.png" sourcerect="256,256,256,256" color="210,70,30" />
     <LocationType identifier="Lair" />
@@ -663,14 +673,12 @@
   </MonsterMission>
   
   
-  <!-- PIRATE MISSIONS -->  
-  <!-- TODO: change the wall health on submarines back to normal if devs ever add hull upgrades for the poor pirates -->
-  
-  <!-- pirate ambush -->
-  <PirateMission     
+  <!-- PIRATE MISSIONS -->    
+  <!-- pirate ambush (low rep) -->
+  <SubmarineEncounterMission     
     type="Pirate"
     identifier="pirateattack1"
-    tags="pirateattack"
+    tags="pirateattack,piratesub"
     showinmenus="false"
     showstartmessage="false"
     sideobjective="true"
@@ -679,11 +687,19 @@
     reward="0"
     addedmissiondifficultyperplayer="3">
 		<Reputation identifier="bandits" amount="-2" />
-    <SubmarineTypes>
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
+    <!-- <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" />
-    </SubmarineTypes>
+    </SubmarineTypes> -->
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
       <Character typeidentifier="piratesecurity" minamount="2" maxamount="3" />
@@ -717,28 +733,48 @@
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
-  </PirateMission>
+  </SubmarineEncounterMission>
   
   <!-- pirate eradication -->
-  <!-- TODO: change pirate missions - some pirate subs are so big it causes perfomrance issues.
-             pirates should be manning barsuk sized subs at most, with sturdier hulls. It's better to have a crew of 5 in a small sub instead of a crew of 10 in a large sub. The larger sub is just more performance heavy, has more loot and is easier to hit.  -->
-  <PirateMission type="Pirate" identifier="pirate_heavy" tags="piratemission,heavypirate" difficulty="4" commonness="100" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="3">
+  <!-- I overrode the vanilla pirate mission commonness to use this one using the same mission tag instead, see overrides at the top -->
+  <!-- TODO: Do not use big pirate subs. Pirates should be manning barsuk sized subs at most, with sturdier hulls. It's better to have a crew of 5 in a small sub instead of a crew of 10 in a large sub. The larger sub is just more performance heavy, has more loot and is easier to hit, while not necessarily having better firepower.  -->
+  <SubmarineEncounterMission
+    type="Pirate"
+    identifier="pirate_heavy"
+    SubmarineSpecificIdCards="true"
+    faction=""
+    EnableLayers="pirates"
+    tags="piratemission,combatpiratevessel,piratesub"
+    difficulty="4"
+    commonness="100"
+    reward="3500"
+    achievementidentifier="piratemission"
+    addedmissiondifficultyperplayer="3">
     <Reputation identifier="location" amount="5" />
 		<Reputation identifier="bandits" amount="-2" />
-    <SubmarineTypes>
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
+    <!-- Do not define pirates, the sub is picked from any sub that has the "piratesub" tag, same as mission tag. This includes vanilla subs -->
+    <!-- <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="2000" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="2250" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/GunGatorPirate.sub" preferreddifficulty="35" alternatereward="2500" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42CPirate.sub" preferreddifficulty="50" alternatereward="3000" />
-      <!-- <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/BerthaPirate.sub" preferreddifficulty="40" alternatereward="4000" /> -->
-      <!-- <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Winterhalter [PIRATE].sub" preferreddifficulty="40" alternatereward="4500" /> -->
-    </SubmarineTypes>
+    </SubmarineTypes> -->    
+    <!-- I'm disabling medic because pirates just can't heal properly, it's just free loot -->
     <Characters>
       <Character typeidentifier="piratecaptain" minamount="1" maxamount="1" />
       <Character typeidentifier="piratesecurity" minamount="2" maxamount="3" />
-      <Character typeidentifier="pirateannihilator" minamount="0" maxamount="1" />
-      <Character typeidentifier="piratemechanic" minamount="2" maxamount="3" />
+      <Character typeidentifier="pirateannihilator" minamount="1" maxamount="1" multiplayeronly="true"/>
+      <Character typeidentifier="piratemechanic" minamount="2" maxamount="2" />
       <Character typeidentifier="pirateengineer" minamount="1" maxamount="2" />
+      <!-- <Character typeidentifier="piratemedic" minamount="1" maxamount="1" /> -->
     </Characters>
     <CharacterTypes>
       <CharacterType typeidentifier="piratecaptain">
@@ -752,6 +788,7 @@
         <Character identifier="piratesecurityelite" from="pirate_npcs" preferreddifficulty="100" />
       </CharacterType>
       <CharacterType typeidentifier="pirateannihilator">
+        <Character identifier="piratesecuritygunner" from="pirate_npcs" preferreddifficulty="30" />
         <Character identifier="pirateannihilator" from="pirate_npcs" preferreddifficulty="60" />
       </CharacterType>
       <CharacterType typeidentifier="piratemechanic">
@@ -762,20 +799,42 @@
         <Character identifier="pirateengineerrecruit" from="pirate_npcs" preferreddifficulty="40" />
         <Character identifier="pirateengineerveteran" from="pirate_npcs" preferreddifficulty="70" />
       </CharacterType>
+      <!-- <CharacterType typeidentifier="piratemedic">
+        <Character identifier="piratemedic" from="combatmissionpiratenpcs" preferreddifficulty="40"/>
+      </CharacterType> -->
     </CharacterTypes>
+    <!-- do we actually want infinite ammo? -->
+    <!-- <Items>
+      <Item identifier="coilgunammobox" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="coilgunammoboxpiercing" infinite="true" requireitemonsub="coilgun" />
+      <Item identifier="railgunshell" infinite="true" requireitemonsub="railgun" />
+      <Item identifier="pulselaserammobox" infinite="true" requireitemonsub="pulselaser" />
+      <Item identifier="flakcannonammobox" infinite="true" requireitemonsub="flakcannon" />
+      <Item identifier="chaingunammobox" infinite="true" requireitemonsub="chaingun" />
+      <Item identifier="fuelrod" infinite="true" />
+    </Items> -->
     <TriggerEvent state="0" delay="0" eventidentifier="piratemissionbroadcast" campaignonly="true" />
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="0,768,256,256" color="109,108,206" />
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
-  </PirateMission>
+  </SubmarineEncounterMission>
   
-  <PirateMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+  <SubmarineEncounterMission type="Pirate" identifier="pirate_party" tags="piratemission,partypirate" difficulty="4" commonness="20" reward="3500" achievementidentifier="piratemission" addedmissiondifficultyperplayer="3">
     <Reputation identifier="Location" amount="3" />
     <Reputation identifier="bandits" amount="-2" />
     <Reputation identifier="clowns" amount="-2" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="5000" />
-      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="5000" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPartyPirate.sub" preferreddifficulty="20" alternatereward="3500" />
+      <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/Warden Raving Vessel 1.sub" preferreddifficulty="40" alternatereward="3500" />
     </SubmarineTypes>
     <Characters>
       <Character typeidentifier="partypiratecaptain" minamount="1" maxamount="1" />
@@ -811,13 +870,21 @@
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,768,256,256" color="255,255,255" />
     <message header="missionheader0.pirate_party" text="missionmessage0.pirate_party" />
     <message header="missionheader1.pirate_party" text="missionmessage1.pirate_party" />
-  </PirateMission>
+  </SubmarineEncounterMission>
   
   <!--STRANGE VESSEL MISSIONS-->
-  <PirateMission type="Pirate" identifier="pirate_piezo" tags="piratemission,strangepirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="8">
+  <SubmarineEncounterMission type="Pirate" identifier="pirate_piezo" tags="piratemission,strangepirate" difficulty="4" commonness="20" reward="5000" achievementidentifier="piratemission" addedmissiondifficultyperplayer="3">
     <Reputation identifier="coalition" amount="10" />
     <Reputation identifier="separatists" amount="10" />
 		<Reputation identifier="bandits" amount="-2" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-42PiezoPirate.sub" preferreddifficulty="50" alternatereward="5000" />
     </SubmarineTypes>
@@ -855,16 +922,24 @@
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="512,768,256,256" color="255,255,255" />
     <message header="missionheader0.pirate_piezo" text="missionmessage0.pirate_piezo" />
     <message header="missionheader1.pirate_piezo" text="missionmessage1.pirate_piezo" />
-  </PirateMission>
+  </SubmarineEncounterMission>
   
   
   
   <!-- COALITION CIVILIANS MISSIONS WIP -->
   <!-- Event not working as intended
   
-  <PirateMission type="Pirate" identifier="coalitionciv_civiliantransit1" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
+  <SubmarineEncounterMission type="Pirate" identifier="coalitionciv_civiliantransit1" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="3">
     <Reputation identifier="coalition" amount="-5" />
 		<Reputation identifier="bandits" amount="5" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
@@ -909,11 +984,19 @@
 	<message header="missionheader0.coalitionciv_civiliantransport1" text="missionmessage0.coalitionciv_civiliantransport1" />
 	<message header="missionheader1.coalitionciv_civiliantransport1" text="missionmessage1.coalitionciv_civiliantransport1" />
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
-  </PirateMission>
+  </SubmarineEncounterMission>
   
-  <PirateMission type="Pirate" identifier="coalitionciv_civiliantransit2" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
+  <SubmarineEncounterMission type="Pirate" identifier="coalitionciv_civiliantransit2" tags="coalitionciv,coalitiontransit,lootingtransit" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="3">
     <Reputation identifier="coalition" amount="-10" />
 		<Reputation identifier="bandits" amount="5" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/U-41SPirate.sub" preferreddifficulty="20" alternatereward="0" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Pirates/LuotiPirate.sub" preferreddifficulty="30" alternatereward="0" />
@@ -958,12 +1041,38 @@
     <message header="missionheader0.pirate_heavy" text="missionmessage0.pirate_heavy" />
     <message header="missionheader1.pirate_heavy" text="missionmessage1.pirate_heavy" />
 	<TriggerEvent state="0" delay="5" eventidentifier="cocivtransport" campaignonly="true"/>
-  </PirateMission>
+  </SubmarineEncounterMission>
   -->
-  
-  <PirateMission type="Pirate" identifier="coalition_cargo2" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="20" reward="0" addedmissiondifficultyperplayer="8">
-    <Reputation identifier="coalition" amount="-15" />
-		<Reputation identifier="bandits" amount="5" />
+    
+    
+    
+    
+  <!-- TODO: adapt these missions to the new neutral submarine format. No longer use the event. Add items in the mission itself instead of filling crates in sub editor. Make the subs neutral since they can appear between 2 enemy faction outposts? -->
+  <SubmarineEncounterMission type="Encounter" identifier="coalition_cargo2" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="50" reward="0" addedmissiondifficultyperplayer="3" sideobjective="true"   
+    team="FriendlyNPC"
+    faction="coalition"
+    EnableLayers="Coalition"
+    EncounterType="Transport"
+    WinCondition="CrewEliminated"
+    FailureCondition="AnyoneFromCrewSurvived"
+    ShowOnMap="true"
+    TimeLimitWorldSteps="4"
+    ShowArrivalTime="True"
+    DisallowMissionsOfSameType="true"
+    CompleteWhenTimeLimitReached="false"
+    addedMissionDifficultyPerPlayer="3"
+    Denyboarding="true"
+    ShouldSubmarineStartHidden="false">
+		<Reputation identifier="bandits" amount="3" />
+    <Reputation identifier="coalition" amount="-5" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/U-42Coalition.sub" preferreddifficulty="20" alternatereward="0" />
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/Starwalker [COALITION].sub" preferreddifficulty="20" alternatereward="0" />
@@ -994,12 +1103,22 @@
         <Character identifier="coalitionengineerveteran" from="combatmissioncoalitionnpcs" preferreddifficulty="70" />
       </CharacterType>
     </CharacterTypes>
-    <TriggerEvent state="0" delay="0" eventidentifier="cocargobroadcast" campaignonly="true" />
+    <!-- <TriggerEvent state="0" delay="0" eventidentifier="cocargobroadcast" campaignonly="true" /> -->
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
-  </PirateMission>
+    <MapIcon texture="Content/Map/MapAtlas.png" sourcerect="57,900,49,95" scale="0.3" rotate="true"/>
+  </SubmarineEncounterMission>
   
-  <PirateMission type="Pirate" identifier="coalition_cargotrap" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="10" reward="0" addedmissiondifficultyperplayer="8">
+  <SubmarineEncounterMission type="Pirate" identifier="coalition_cargotrap" tags="coalitionciv,coalitioncargo,lootingcargo" difficulty="4" commonness="10" reward="0" addedmissiondifficultyperplayer="3">
+    <Reputation identifier="bandits" amount="3" />
     <Reputation identifier="coalition" amount="-15" />
+    <SubmarineWallModifier HealthMultiplier="1.0">
+      <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+      <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+      <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+      <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+      <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+      <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+    </SubmarineWallModifier>
     <SubmarineTypes>
       <Submarine path="%ModDir:2532991202%/EnemySubmarines/Coalition/Warden Coalition.sub" preferreddifficulty="20" alternatereward="0" />
     </SubmarineTypes>
@@ -1030,7 +1149,7 @@
       </CharacterType>
     </CharacterTypes>
     <Icon texture="%ModDir:2532991202%/UI/MissionIcons.png" sourcerect="256,0,256,256" color="255,255,255" />
-  </PirateMission>
+  </SubmarineEncounterMission>
   
   <OutpostDestroyMission name="Pirate Haven" identifier="destroypirateoutpost" tags="pirateoutpostmission" type="OutpostDestroy" requireCorrectLocationType="true" reward="0" difficulty="4" commonness="100" allowretry="true" minleveldifficulty="0" maxleveldifficulty="100">
     <Reputation identifier="coalition" amount="5" />
@@ -1814,7 +1933,6 @@
     </chooserandom>
   </SalvageMission>
 
-  <!-- TODO: require 2 geodes instead of 1, which prevents lucking out on the first rock -->
   <!-- Break rocks to find a Geode. There are multiple rocks in the level, only one containing a geode -->
   <SalvageMission
     identifier="mineraldrillsalvage"
@@ -2287,8 +2405,9 @@
       <message header="missionheader0.slimecollection" text="missionmessage0.slimecollection"/>
     </MineralMission>  
        
+    <!-- TODO: create a random mission event with low husk rep instead trigger instead -->
     <!-- escort mission but with a husk fanatic armed with unique knife, can only be obtained if you have low husk reputation -->
-    <EscortMission
+    <!-- <EscortMission
       identifier="escorthuskterrorist"
       tags="escortterrorists,escortterroristshusk,escortcommonerscoalition,escortcommonersseparatists,escort"
       type="Escort"
@@ -2312,9 +2431,9 @@
         <Item identifier="cultistrobes" equip="true" />
         <Item identifier="huskeggsterrorist" equip="true" />
         <Item identifier="huskfigurine" />
-        <!-- <Item identifier="syringegun" mindifficulty="20">
+        <Item identifier="syringegun" mindifficulty="20">
           <Item identifier="sulphuricacidsyringe" amount="4" />
-        </Item> -->
+        </Item>
         <Item identifier="divingknifeunique" equip="true" mindifficulty="30"/>
       </TerroristItems>
       <Reputation identifier="location" amount="3" />
@@ -2322,7 +2441,7 @@
       <LocationType from="AnyOutpost" to="AnyOutpost" />
       <message header="missionheader0.escorthuskterrorist" text="missionmessage0.escorthuskterrorist"/>
       <message header="missionheader1.escorthuskterrorist" text="missionmessage1.escorthuskterrorist"/>
-    </EscortMission>  
+    </EscortMission>   -->
     
 
     <OutpostMission
@@ -2374,7 +2493,7 @@
     </AbandonedOutpostMission>
 
     <!-- husk cult ambush -->
-    <PirateMission
+    <SubmarineEncounterMission
       type="Pirate"
       identifier="huskcultattack1"
       tags="huskcultattack"
@@ -2385,8 +2504,16 @@
       difficulty="4"
       commonness="0"
       reward="0"
-      addedmissiondifficultyperplayer="8">
+      addedmissiondifficultyperplayer="3">
       <Reputation identifier="huskcult" amount="-5"/>
+      <SubmarineWallModifier HealthMultiplier="1.0">
+        <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+        <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+        <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+        <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+        <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+        <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+      </SubmarineWallModifier>
       <SubmarineTypes>
         <Submarine path="%ModDir:2532991202%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="40" alternatereward="3200"/>
       </SubmarineTypes>
@@ -2443,20 +2570,28 @@
       <Icon texture="Content/UI/MissionIcons.png" sourcerect="0,768,256,256" color="243,146,55"/>
       <message header="missionheader0.huskcultattack1" text="missionmessage0.huskcultattack1"/>
       <LocationType from="AnyOutpost" to="AnyOutpost" />
-    </PirateMission>   
+    </SubmarineEncounterMission>   
 
     <!-- husk cult interception (mission) -->
-    <PirateMission
+    <SubmarineEncounterMission
       type="Pirate"
       identifier="huskcultinterception" 
       achievementidentifier="combatmissionseparatistsvscoalition"
       difficulty="4"
       commonness="0"
       reward="0"
-      addedmissiondifficultyperplayer="8">
+      addedmissiondifficultyperplayer="3">
       <Reputation identifier="separatists" amount="10" />
       <Reputation identifier="coalition" amount="-5" />
       <Reputation identifier="huskcult" amount="-15" />
+      <SubmarineWallModifier HealthMultiplier="1.0">
+        <Override MaxDifficulty="15" HealthMultiplier="1.0"/>
+        <Override MinDifficulty="15" MaxDifficulty="30" HealthMultiplier="1.2"/>
+        <Override MinDifficulty="30" MaxDifficulty="45" HealthMultiplier="1.4"/>
+        <Override MinDifficulty="45" MaxDifficulty="60" HealthMultiplier="1.6"/>
+        <Override MinDifficulty="60" MaxDifficulty="75" HealthMultiplier="1.8"/>
+        <Override MinDifficulty="75" HealthMultiplier="2.0"/>
+      </SubmarineWallModifier>
       <SubmarineTypes>
         <Submarine path="%ModDir:2532991202%/EnemySubmarines/Husk/Huskedsub.sub" faction="huskcult" preferreddifficulty="10" alternatereward="3200"/>
       </SubmarineTypes>
@@ -2513,7 +2648,7 @@
       <message header="missionheader0.huskcultinterception" text="missionmessage0.huskcultinterception"/>
       <LocationType from="AnyOutpost" to="AnyOutpost" />
       <Metadata identifier="huskinterceptionmissionnorepeat" value="1"/>
-    </PirateMission> 
+    </SubmarineEncounterMission> 
 
     <!-- capture a mutated crawler -->
     <GotoMission    
@@ -2688,7 +2823,7 @@
     <LocationType from="Anyoutpost" to="Anyoutpost"/>
     <message header="missionheader0.scanradioactivemoloch" text="missionmessage0.scanradioactivemoloch" />
     <TriggerEvent state="0" delay="0" eventidentifier="scanradioactivemolochmissionevent" />
-    <CompleteCheckDataAction identifier="radioactivemolochscanned" condition="eq 1"/>
+    <!-- <CompleteCheckDataAction identifier="radioactivemolochscanned" condition="eq 1"/> -->
     <Metadata identifier="completedscanningmission" operation="Add" value="1"/>
   </CustomMission>  
   
@@ -3188,5 +3323,110 @@
   <TriggerEvent state="0" delay="0" eventidentifier="rescuestrandeddiversevent" />
   <CompleteCheckDataAction identifier="rescueddivers" condition="eq 1"/>
   </GotoMission> -->
+
+
+
+
+
+
+
+
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+  <!-- ____________________________________________________________________________ -->
+
+
+
+
+
+
+
+
+  <!-- 
+  Mission settings list I gathered from looking at the code so I don't have to search every time. 
+  Definitely not complete
+  
+  
+  GENERAL MISSION SETTINGS
+  
+  WinCondition=""
+  -CrewEliminated
+  -AnyoneFromCrewSurvived
+  -Never
+  -Always
+  -SubmarineIncapacitated (Submarine flooded, >20% enemy crew, no crew inside sub/outpost, submarine sunk in abyss)
+  -SubmarineNotIncapacitated (opposite of above)
+  -OutpostDestroyed (most of NPCs dead or reactor blown up)
+  
+  successstate="0"
+  failurestate="1"  
+  
+  showinmenus="false" 
+  ShowInMenusAfterReachingState="1" (mission only appears after reaching this "state")
+  showprogressbar="true"
+  showprogressinnumbers="true"
+  maxprogressstate="40"
+  progressbarlabel="text"   
+  ProgressBarColor="255,255,255"
+  
+  Allowretry="true"
+  
+  BlockLocationTypeChanges="true" (for outpost missions)
+  RequireDestinationReached="true"
+  
+  
+  SUBMARINEENCOUNTERMISSION SETTINGS  
+    type="Encounter"
+    team="FriendlyNPC"
+    ShowArrivalTime="false"
+    MapNotificationOnUnlock="text"
+    faction="coalition"
+    EnableLayers="Coalition"
+    EncounterType="Wreck"
+    WinCondition="CrewEliminated"
+    FailureCondition="Never"
+    requirewreck="true"
+    ShowStartMessage="false"
+    ShowEndMessage="OnlyWhenCompleted"
+    ShowCompletionState="false"
+    ShowOnMap="true"
+    TimeLimitWorldSteps="4"
+    CompleteWhenTimeLimitReached="false" (succeeds if time elapsed)
+    ContinuePathCondition="OnlyWhenCompleted" (repeats mission on reaching destination, for long-distance transport idk how it works)
+    DisallowMissionsOfSameType="true"     (if you don't want a second sub mission to spawn)
+    addedMissionDifficultyPerPlayer="3"
+    Denyboarding="true
+    ShouldSubmarineStartHidden="true" (Makes the submarine start hidden until an event uses UnhideSubmarineEncounterAction)
+      
+    SonarBehavior
+    -Hide         
+    -Approximate  
+    -Accurate     
+    
+    BoardingState
+    -None
+    -FirstWarningGiven
+    -SecondWarningGiven
+    -TurnHostile
+   -->
+  
+  
+  
+
+
+
+
+
+
+
+
+
 
 </Missions>

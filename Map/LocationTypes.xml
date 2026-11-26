@@ -1,24 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <locationtypes>
   <!--
+  
+  AlwaysRefuseAutoDocking
+  AutoDockingRefuseText
+  RefuseAutoDockingOnFirstVisit
+  
+  InsufficientPopulationThreshold  
+  /// 0.25 What percentage of the default population must be alive before killed characters stop being replaced and the outpost starts a countdown to being abandoned?
+  
+  MissionDestinationPreferability
+  /// This can be used to increase/decrease the preference of choosing a path leading to this location type. Used as a multiplier for the weights of the paths (e.g. 10 would mean the path is x10 more likely to be selected).      
+      
+  AllowClaimingWhenPopulationLow="false"
+  /// Home & Harbor DLC only. If set to false, the location cannot be claimed using the prompt that pops up when it's population is very low or when it's fully abandoned. It can however be still be claimed with e.g. SetOutpostOwnerShipAction or console commands.
+  -->
+  
+  <!--
   ChangeTo:
-    requiredlocations                       = The change can only happen if there's at least one of the given types of locations near this one.
-    requiredproximity                       = How close the location needs to be to one of the RequiredLocations for the change to occur (defaults to 1).
-    probability                             = Base probability per turn for the location to change if near one of the RequiredLocations.
-    requiredproximityforprobabilityincrease = How close the location needs to be to one of the RequiredLocations for the probability to increase.
-    proximityprobabilityincrease            = How much the probability increases per turn if within RequiredProximityForProbabilityIncrease steps of RequiredLocations.
     
-    disallowedadjacentlocations             = The change can't happen if there's one or more of the given types of locations near this one
-    disallowedproximity                     = How close the location needs to be to one of the DisallowedAdjacentLocations for the change to be disabled (defaults to 1).
+    DisallowedAdjacentLocations             = The change can't happen if there's one or more of the given types of locations near this one
+    DisallowedProximity                     = How close the location needs to be to one of the DisallowedAdjacentLocations for the change to be disabled (defaults to 1).
     
-    requirediscovered                       = Does this location need to be discovered before the change can occur (defaults to true).
+    Probability                             = Base probability for the location change to trigger per world step. Can be further modified by the Modifiers (see below).
+        
+    RequireDiscovered                       = Does this location need to be discovered before the change can occur (defaults to false).
     
-    requireddurationrange                   = If a type change is triggered, a value is randomly chosen within this range and the change is delayed for that many turns.
-    requiredduration                        = Can be used in place of the previous attribute if you want to use a fixed delay. 
+    RequiredDurationRange                   = If a type change is triggered, a value is randomly chosen within this range and the change is delayed for that many world steps.
+                                              NOTE: The maximum is exclusive (not included), ie. a range of "1,2" means just 1 being the only possible result.
+    RequiredDuration                        = Can be used in place of the previous attribute if you want to use a fixed delay.
     
-    locationtypechangecooldown              = The location can't change it's type for this many turns after this location type changes occurs.
+    CooldownAfterChange                     = The location can't change it's type for this many world steps after this location type changes occurs.
     
-  Store:
+      Modifier:
+        RequiredLocations                       = The modifier only takes effect if there's at least one of the given types of locations near this one.
+        RequiredProximity                       = How close the location needs to be to one of the RequiredLocations for the modifier to take effect.
+        ProbabilityModifier                     = How much the base probability changes when the conditions of this modifier are met. Can either be added to or multiplied by the base probability of the location type change.
+                                                  Defaults to 0 if the Function is Add, and 1 if it's Multiply (both meaning no change to the base probability).
+        RequiredProximityForProbabilityIncrease = How close the location needs to be to one of the RequiredLocations for the modifier to take effect.
+        Function                                = Add/Multiply. How does the ProbabilityModifier affect the base probability of the location type change? Defaults to adding to the base probability.
+        ProximityProbabilityIncrease            = How much the probability increases per world step if within RequiredProximityForProbabilityIncrease steps of RequiredLocations.
+        RequireBeaconStation                    = Does there need to be a beacon station within RequiredProximity?
+        RequireHuntingGrounds                   = Does there need to be hunting grounds within RequiredProximity?
+        MinPopulation                           = Minimum population in this location for the modifier to take effect. A percentage of the initial population, between 0-1. Defaults to 0.
+        MaxPopulation                           = Maximum population in this location for the modifier to take effect. A percentage of the initial population, between 0-1. Defaults to 1.
+      
+      NOTE: Modifiers are applied to the probability _in the order in which they're defined_, which matters when mixing Add and Multiply.
+            Importantly, a Modifier that multiplies the probability by 0 only prevents the change entirely if it's the last one in the list.
+      
+      All of the attributes of a Modifier, aside from ProximityProbabilityIncrease and RequiredProximityForProbabilityIncrease (and Function and ProbabilityModifier)
+      can also be used in the base ChangeTo element, which makes them act as hard requirements for the location type change to occur at all.
+        
+  -->
+ 
+  <!-- Store:
     dailyspecialscount        = The number of daily specials for merchants at this location type. Defaults to 1.
     requestedgoodscount       = The number of requested goods for merchants at this location type. Defaults to 1.
     maxreputationmodifier     = The maximum effect reputation can have on store prices. Defaults to 0.1.
@@ -29,8 +64,18 @@
     initialbalance            = Initial balance of the store. Defaults to 5000.
     pricemodifierrange        = The range of randomized price modifier. Randomized for each store individually. Defaults to 5. Note: value is direct percentage, i.e. 5 = 5%. 
   -->
-
     
+  <!-- biome identifiers:
+  coldcaverns,
+  europanridge,
+  theaphoticplateau,
+  thegreatsea,
+  hydrothermalwastes,
+  endzone
+ -->
+ 
+  <!-- TODO: add MinPopulation MaxPopulation in all changeto for DLC compatibility -->
+ 
   <Override>
     <!-- GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC ////////// GENERIC -->
     
@@ -315,7 +360,7 @@
       <AreaSettings zone="6" commonness="0" />    
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,0,128,128" color="162,213,220,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="5" />
+      <Hireable identifier="assistant" commonness="3" />
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="medicaldoctor" commonness="1" />
@@ -354,7 +399,7 @@
       <AreaSettings zone="6" commonness="0" />
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,128,128,128" color="162,213,220,255" />
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="3" />
+      <Hireable identifier="assistant" commonness="2" />
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="medicaldoctor" commonness="1" />
@@ -617,8 +662,8 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="768,0,128,128" color="180,83,255,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <ChangeTo type="Research" probability="0.1" disallowedadjacentlocations="Research" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.study.changeto.lab">
         <Requirement function="Add" requiredlocations="City" probability="0.5" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
         <Requirement function="Add" requiredlocations="Colony" probability="0.35" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
@@ -652,8 +697,8 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="768,128,128,128" color="180,83,255,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <Hireable identifier="medicaldoctor" commonness="1" />
       <Hireable identifier="assistant" commonness="2" />
       <!-- mod compatibility hireables: -->
@@ -677,7 +722,6 @@
     </Research>
   
     <!-- FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD ////////// FOOD -->
-    <!-- TODO: make hydroponics more interesting, not much to do there without Hungry Europans -->
     <Hydroponics identifier="Hydroponics" replaceinradiation="" namefile="Content/Map/locationNames.txt" Biomegate="Deny" beaconstationchance="0.00">
       <AreaSettings zone="1" commonness="0.3" />
       <AreaSettings zone="2" commonness="0.5" />
@@ -687,9 +731,9 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,0,128,128" color="233,149,99,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
-      <Hireable identifier="assistant" commonness="2" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Hireable identifier="assistant" commonness="1" />
       <Hireable identifier="he-chef" commonness="1" />
       <!-- mod compatibility hireables: -->
       <Hireable identifier="janitor" commonness="1" />
@@ -712,7 +756,7 @@
     </Hydroponics>
     
     <!-- MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING ////////// MINING -->
-    <Survey identifier="Survey" replaceinradiation="None" namefile="Content/Map/locationNames.txt" Biomegate="Deny" beaconstationchance="0.00" IsAnyOutpost="false" Faction="none">
+    <Survey identifier="Survey" replaceinradiation="None" namefile="Content/Map/locationNames.txt" Biomegate="Deny" beaconstationchance="0.00" IsAnyOutpost="false" Faction="none" AllowClaimingWhenPopulationLow="False">
       <AreaSettings zone="1" commonness="0.1" />
       <AreaSettings zone="2" commonness="0.1" />
       <AreaSettings zone="3" commonness="0.1" />
@@ -721,9 +765,9 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,0,128,128" color="143,465,239,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining3.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining4.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <ChangeTo type="Mine" disallowedadjacentlocations="Mine" disallowedproximity="4" locationtypechangecooldown="2" messagetag="locationchange.survey.changeto.extraction">
         <Requirement function="Add" requiredlocations="City" probability="0.75" requiredproximity="1" />
         <Requirement function="Add" requiredlocations="Colony" probability="0.5" requiredproximity="1" />
@@ -750,9 +794,9 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="640,256,128,128" color="143,465,239,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining3.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining4.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampMining1.png" premultiplyalpha="false" />
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher" probability="1" requireddurationrange="1,2" requiredproximity="1" requirediscovered="false" />
       </ChangeTo>
@@ -781,8 +825,8 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="256,0,128,128" color="255,83,121,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <ChangeTo type="Hospital" probability="0.1" disallowedadjacentlocations="Hospital" disallowedproximity="3" locationtypechangecooldown="2" messagetag="locationchange.clinic.changeto.hospital">
         <Requirement function="Add" requiredlocations="City" probability="0.5" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
         <Requirement function="Add" requiredlocations="Colony" probability="0.35" requiredproximity="2" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.15" />
@@ -816,10 +860,10 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="256,128,128,128" color="255,83,121,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <Hireable identifier="assistant" commonness="1" />
-      <Hireable identifier="medicaldoctor" commonness="1" />
+      <Hireable identifier="medicaldoctor" commonness="2" />
       <!-- mod compatibility hireables: -->
       <Hireable identifier="chiefmedicaldoctor" commonness="1" />
       <ChangeTo type="Abandoned" disallowedproximity="1" locationtypechangecooldown="2" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
@@ -850,9 +894,9 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="512,256,128,128" color="255,237,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
-      <Hireable identifier="mechanic" commonness="1" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Hireable identifier="mechanic" commonness="2" />
       <Hireable identifier="assistant" commonness="1" />
       <!-- mod compatibility hireables: -->
       <Hireable identifier="quartermaster" commonness="1" />
@@ -886,8 +930,8 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="512,128,128,128" color="255,237,105,255" />
       <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility2.png" premultiplyalpha="false" />
-      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility3.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
+      <Portrait texture="Content/Map/LocationPortraits/WorkCampResearchFacility1.png" premultiplyalpha="false" />
       <Hireable identifier="engineer" commonness="1" />
       <Hireable identifier="mechanic" commonness="1" />
       <Hireable identifier="assistant" commonness="1" />
@@ -923,8 +967,6 @@
       <AreaSettings zone="6" commonness="0" /> 
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="246,640,128,128" color="58,165,121,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <!-- TODO: remove this hireable if devs fix this https://github.com/FakeFishGames/Barotrauma/discussions/13864 -->
-      <Hireable identifier="assistant" commonness="0" />
       <!-- mod compatibility hireables: -->
       <Hireable identifier="acolyte" commonness="1" />
       <ChangeTo type="Abandoned" disallowedproximity="1" messagetag="locationchange.outpost.changeto.abandoned" requirediscovered="false">
@@ -951,8 +993,6 @@
       <AreaSettings zone="6" commonness="0" />       
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,640,128,128" color="230,20,20,255"/>
       <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <!-- TODO: remove this hireable if devs fix this https://github.com/FakeFishGames/Barotrauma/discussions/13864 -->
-      <Hireable identifier="assistant" commonness="0" />
       <!-- mod compatibility hireables: -->
       <Hireable identifier="harlequin" commonness="1" />
       <ChangeTo type="None" messagetag="locationchange.circus.changeto.none" requireddurationrange="1,2" probability="1" />      
@@ -969,16 +1009,14 @@
     
     <!-- PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES ////////// PIRATES -->
     <PirateOutpost identifier="PirateOutpost" nameidentifiers="pirateoutpost" faction="bandits" replaceinradiation="" missiontags="pirateoutpostmission" IsAnyOutpost="false" Biomegate="Deny">
-      <AreaSettings zone="1" commonness="0" mincount="0" maxcount="1"/>
+      <AreaSettings zone="1" commonness="0" />
       <AreaSettings zone="2" commonness="0.10" mincount="1" maxcount="1"/>
       <AreaSettings zone="3" commonness="0.10" mincount="0" maxcount="1" />
       <AreaSettings zone="4" commonness="0.10" mincount="0" maxcount="1" />
       <AreaSettings zone="5" commonness="0" />
       <AreaSettings zone="6" commonness="0" />
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="128,640,128,128" color="255,148,96,255" />
-      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost4.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
-      <!-- TODO: remove this hireable if devs fix https://github.com/FakeFishGames/Barotrauma/discussions/13864 -->
-      <Hireable identifier="assistant" commonness="0"/>
+      <Portrait texture="Content/Map/LocationPortraits/HabitationOutpost2.png" premultiplyalpha="false"/>
       <ChangeTo type="Abandoned" locationtypechangecooldown="2" messagetag="locationchange.none.changeto.lair" disallowedproximity="1" disallowedadjacentlocations="Military,Blockade">
         <!-- May be infested if within 1 steps of a lair. -->
         <Requirement requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" requireddurationrange="3,7" probability="0.25" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
@@ -1007,7 +1045,7 @@
 
     <!-- LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS ////////// LAIRS -->
     
-    <Lair namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="destroylair" hasoutpost="true" IsAnyOutpost="false" Biomegate="Deny" >
+    <Lair namefile="Content/Map/locationNames.txt" identifier="Lair" outpostteam="None" missiontags="destroylair" hasoutpost="true" IsAnyOutpost="false" Biomegate="Deny" AllowClaimingWhenPopulationLow="False">
       <AreaSettings zone="1" commonness="0" />
       <AreaSettings zone="2" commonness="0" mincount="1" maxcount="1" />
       <AreaSettings zone="3" commonness="0" mincount="1" maxcount="1" />
@@ -1028,7 +1066,7 @@
       <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="384,768,128,128" color="80,155,80,255" />
       <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
       <!-- different changeto speeds based on type of military outpost -->
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
+      <!-- <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Military" requireddurationrange="1,2" probability="1" requiredproximity="1" />
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
@@ -1036,13 +1074,13 @@
       </ChangeTo>
       <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
         <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.35" requiredproximity="1" />
-      </ChangeTo>
+      </ChangeTo> -->
       <ChangeTo type="None" probability="1" messagetag="locationchange.lair.changeto.none">
         <Requirement function="Multiply" requiredlocations="Lair,LairMudraptor,LairThresher,HuskgroundsDE" probability="0" requiredproximity="1" />
       </ChangeTo>
     </OuterLair>
     
-    <HuskgroundsDE namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" Biomegate="Deny" IsAnyOutpost="false">
+    <HuskgroundsDE namefile="Content/Map/locationNames.txt" identifier="HuskgroundsDE" outpostteam="None" missiontags="husklair" Biomegate="Deny" IsAnyOutpost="false" AllowClaimingWhenPopulationLow="False">
       <AreaSettings zone="1" commonness="0" />
       <AreaSettings zone="2" commonness="0.03" />
       <AreaSettings zone="3" commonness="0.05" mincount="1" maxcount="2"/>
@@ -1084,42 +1122,82 @@
     </EndLocation>
 
 
-    <!--\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/\/ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY \/-->
-    
-    <!-- TODO: change generic lairs to use "LairSpecies" instead, so we can make outerlair that spawns creatures of the same species. Make sure to set disallowedadjacentlocations between lairs so that too many lairs don't spawn in a biome -->
-    <LairMudraptor commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="LairMudraptor" outpostteam="None" nomissiontags="mudraptorlair">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <!-- force this old lair to change to the new lair -->
-      <ChangeTo type="Lair" probability="1" requiredduration="1" messagetag="locationchange.none.changeto.lair" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-    </LairMudraptor>
+  <!-- Keeping these unique locations disabled for now until I figure out what to do with them. Currently they cause the game to be massively coalition favored with the Iapetus quest -->
 
-    <LairThresher commonnessperzone="1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0" namefile="Content/Map/locationNames.txt" identifier="LairThresher" outpostteam="None" nomissiontags="thresherlair">
-      <Symbol texture="%ModDir:2532991202%/Map/MapAtlasDE.png" sourcerect="0,896,128,128" color="215,74,107,255" />
-      <Portrait texture="Content/Map/LocationPortraits/NaturalFormations.png" premultiplyalpha="false" />
-      <!-- force this old lair to change to the new lair -->
-      <ChangeTo type="Lair" probability="1" requiredduration="1" messagetag="locationchange.none.changeto.lair" />
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Military" requiredduration="1" probability="1" requiredproximity="2" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Blockade,Base" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-      <ChangeTo type="UnderAttack" messagetag="locationchange.lair.changeto.none">
-        <Requirement requiredlocations="Camp" requireddurationrange="1,3" probability="0.5" requiredproximity="1" requiredproximityforprobabilityincrease="1" proximityprobabilityincrease="0.1" />
-      </ChangeTo>
-    </LairThresher>
-    
-    <!--/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\/\ DISABLED | KEEP FOR BACKWARDS COMPATIBILITY /\-->
-    
+  <!-- <Uusi-Turcu
+    name="Uusi-Turcu"
+    identifier="uusi-turcu"
+    forceoutpostgenerationparams="uusiturcu"
+    ForceLocationName="locationname.uusi-turcu"
+    ForceLocationTypeName="city"
+    allowinrandomlevels="false"
+    DisallowLocationTypeChanges="true"
+    BackgroundMusicLocationType="city"
+    EventLocationType="city"
+    SubmarineTierLocationType="city"
+    faction="coalition"> 
+
+    <AreaSettings zone="1" count="1" desiredPosition="0.7" />
+    <Symbol texture="Content/Map/MapAtlas.png" sourcerect="523,911,98,89" color="62,177,182,255"/>
+    <RadiationSymbol texture="Content/Map/MapAtlas.png" sourcerect="896,512,128,128" color="245,105,105"/>
+    <Portrait texture="Content/Map/LocationPortraits/Colony.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Colony2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+
+    <Hireable identifier="assistant" commonness="10" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="engineer" commonness="3" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="mechanic" commonness="3" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="medicaldoctor" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="securityofficer" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="captain" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+
+    <Store
+      maxreputationmodifier="0.1"
+      minreputationmodifier="1.0"
+      sellpricemodifier="0.3"
+      dailyspecialpricemodifier="0.5"
+      requestgoodpricemodifier="2"
+      initialbalance="5000"
+      pricemodifierrange="5" />
+  </Uusi-Turcu>
+  
+  <NewIapetus
+    name="New Iapetus"
+    identifier="newiapetus"
+    forceoutpostgenerationparams="newiapetus"
+    ForceLocationName="locationname.newiapetus"
+    ForceLocationTypeName="city"
+    allowinrandomlevels="false"
+    DisallowLocationTypeChanges="true"
+    BackgroundMusicLocationType="city"
+    EventLocationType="city"
+    SubmarineTierLocationType="city"
+    faction="coalition"> 
+
+    <AreaSettings zone="2" count="1" desiredPosition="0.5" />
+    <Symbol texture="Content/Map/MapAtlas.png" sourcerect="523,911,98,89" color="62,177,182,255"/>
+    <RadiationSymbol texture="Content/Map/MapAtlas.png" sourcerect="896,512,128,128" color="245,105,105"/>
+    <Portrait texture="Content/Map/LocationPortraits/Colony.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+    <Portrait texture="Content/Map/LocationPortraits/Colony2.png" sourcerect="0,0,2160,1080" premultiplyalpha="false"/>
+
+    <Hireable identifier="assistant" commonness="10" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="engineer" commonness="3" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="mechanic" commonness="3" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="medicaldoctor" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="securityofficer" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+    <Hireable identifier="captain" commonness="1" AlwaysAvailableIfMissingFromCrew="true"/>
+
+    <Store
+      maxreputationmodifier="0.1"
+      minreputationmodifier="1.0"
+      sellpricemodifier="0.3"
+      dailyspecialpricemodifier="0.5"
+      requestgoodpricemodifier="2"
+      initialbalance="5000"
+      pricemodifierrange="5" />
+  </NewIapetus> -->
+  
+
+
+
   </Override>
 </locationtypes>

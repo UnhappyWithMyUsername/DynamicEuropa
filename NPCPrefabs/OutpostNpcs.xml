@@ -878,7 +878,7 @@
   <!--                     Vanilla Outpost NPCs Overrides                        -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   
-
+  <!-- TODO: DO NOT OVERRIDE THIS SET, INSTEAD UPDATE SPAWNPOINTS TAGS IN MODULES WITH THE ONES USED IN VANILLA. Most of this override almost only exists to make NPCs spawn in the right spot in modules -->
   <!-- TODO: MAKE SURE NPCs ARE UP TO DATE WITH VANILLA. We change nothing about most NPCs, but cannot partially override NPCs in the set, so I would have to make our overriden NPCs be part of a different "override" set and reference the new set identifier and that would break EVERYTHING. I'll leave REMOVERRIDE as a sign that we dont change these particular NPCs  -->  
   <npcset identifier="outpostnpcs1">
   
@@ -1332,6 +1332,43 @@
       </ItemSet>
     </npc>
 
+    <!-- REMOVERRIDE Merchants of the unique named cities.
+          Note that they intentionally have no name or title localization variables, so they fall back to those of 'merchantcity'. -->
+    <npc identifier="merchantuusiturcu" job="watchman" spawnpointtags="shop" healthmultiplier="1.1" campaigninteractiontype="Store" behavior="StayInHull"
+         storeidentifier="merchantuusiturcu;merchantcity">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="crewchiefclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench"/>
+        <Item identifier="screwdriver"/>
+        <Item identifier="revolver">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    <npc identifier="merchantnewiapetus" job="watchman" spawnpointtags="shop" healthmultiplier="1.1" campaigninteractiontype="Store" behavior="StayInHull"
+         storeidentifier="merchantnewiapetus;merchantcity">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="baseballcap" equip="true"/>
+        <Item identifier="crewchiefclothes" equip="true"/>
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="wrench"/>
+        <Item identifier="screwdriver"/>
+        <Item identifier="revolver">
+          <Item identifier="revolverround" amount="6"/>
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+
     <!-- uses spawn point tag -->
     <npc identifier="merchantmine" job="watchman" spawnpointtags="shop_mine" healthmultiplier="1" campaigninteractiontype="Store" behavior="StayInHull">
       <ItemSet commonness="1">
@@ -1439,7 +1476,7 @@
       </ItemSet>
     </npc>    
     
-    <!-- REMOVERRIDE? uses pressure stabilizer -->
+    <!-- REMOVERRIDE? no longer uses pressure stabilizer -->
     <npc identifier="securitynpccoalition" job="outpostsecurityofficer" tags="securitynpc" spawnpointtags="security" healthmultiplier="1.2" behavior="Patrol">
       <ItemSet>
         <Item identifier="securitypatrolclothes" equip="true" />
@@ -1527,7 +1564,7 @@
       </ItemSet>
     </npc>
 
-    <!-- REMOVERRIDE? uses pressure stabilizer -->
+    <!-- REMOVERRIDE? no longer uses pressure stabilizer -->
     <npc identifier="securitynpcseparatists" job="outpostsecurityofficer" tags="securitynpc" spawnpointtags="security" healthmultiplier="1.2" behavior="Patrol">
       <ItemSet>
         <Item identifier="securityseparatistsuniform1" equip="true" />
@@ -1829,6 +1866,24 @@
     </npc>
 
     <!-- REMOVERRIDE? -->
+    <npc identifier="farmer" commonness="0" job="farmer" tags="farmernpc" spawnpointtags="farmerspawn" behavior="StayInHull" moduleflags="farmingmodule" preferredoutpostmoduletypes="farmingmodule,crewmodule">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="plantergoggles" equip="true"/>
+        <Item identifier="commonerclothes4" equip="true"/>
+        <Item identifier="seedbag" equip="false">
+          <Item identifier="tobaccovineseed" amount="2" />
+          <Item identifier="raptorbaneseed" amount="2" />
+          <Item identifier="saltvineseed" amount="2" />
+        </Item>
+        <Item identifier="divingmask">
+          <Item identifier="oxygentank" />
+        </Item>
+      </ItemSet>
+    </npc>
+    
+    <!-- REMOVERRIDE? -->
     <npc identifier="miner" commonness="0" moduleflags="none" job="mechanic" behavior="Passive" healthmultiplier="0.75" preferredoutpostmoduletypes="crewmodule">
       <ItemSet commonness="1">
         <Item identifier="idcard" equip="true"/>
@@ -1919,6 +1974,22 @@
       </ItemSet>
     </npc>
 
+    <npc identifier="outpostmanagerclown" job="outpostmanager" tags="outpostmanager" faction="clowns" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
+      <ItemSet commonness="1">
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="headset" equip="false" />
+        <Item identifier="clownmaskunique" equip="true"/>
+        <Item identifier="clownsuitunique" equip="true"/>
+        <Item identifier="headset" equip="true" showpreview="false"/>
+        <Item identifier="banana" equip="false" amount="3" />
+        <Item identifier="deusizine" equip="false" />
+        <Item identifier="cymbals" equip="false" />
+        <Item identifier="handcannon" equip="false">
+          <Item identifier="handcannonround" amount="6"/>
+        </Item>
+      </ItemSet>      
+    </npc>
+
     <!-- REMOVERRIDE? -->
     <npc identifier="merchantclown" commonness="0" faction="clowns" moduleflags="clownmodule" job="assistant" behavior="Passive" preferredoutpostmoduletypes="clownmodule" campaigninteractiontype="Store" spawnpointtags="clown">
       <ItemSet commonness="1">
@@ -1944,6 +2015,18 @@
       </ItemSet>
     </npc>
     
+    <npc identifier="outpostmanagerhusks" job="outpostmanager" tags="outpostmanager" faction="huskcult" spawnpointtags="admin" behavior="StayInHull" preferredoutpostmoduletypes="admin,adminmodule">
+      <ItemSet commonness="1">
+        <Item identifier="headset" equip="false" />
+        <Item identifier="idcard" equip="true"/>
+        <Item identifier="zealotrobes" equip="true"/>
+        <Item identifier="divingknifeunique" equip="false"/>
+        <Item identifier="handcannon" equip="false">
+          <Item identifier="handcannonround" amount="6"/>
+        </Item>
+      </ItemSet>
+    </npc>
+
     <!-- I have no idea why this one is different from the vanilla eccelsiast, but I'd rather not touch it -->
     <npc identifier="huskcultecclesiast" tags="huskcultist,huskresearcher" commonness="0" moduleflags="researchmodule" job="assistant" behavior="StayInHull" healthmultiplier="1.0" spawnpointtags="research">
       <ItemSet commonness="1">

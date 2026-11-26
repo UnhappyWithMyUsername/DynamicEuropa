@@ -553,7 +553,7 @@
     
     <!-- randomizes ore nodes in dry caves -->
     <ScriptedEvent identifier="unlockorenodes" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="66"/>
       <!-- 2/3 nodes are deleted -->   
       <StatusEffectAction targettag="deleteorenode">
@@ -565,7 +565,7 @@
     
     <!-- randomizes ore nodes in lairs -->
     <ScriptedEvent identifier="unlockorenodeslair" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:mineralspawner" tag="deleteorenode" submarinetype="Outpost" ChoosePercentage="80"/>
       <!-- 4/5 nodes are deleted -->   
       <StatusEffectAction targettag="deleteorenode">
@@ -577,7 +577,7 @@
     
     <!-- randomizes plant nodes in dry caves -->
     <ScriptedEvent identifier="unlockplantnodes" commonness="100">
-      <WaitAction time="2" />
+      <WaitAction time="15" />
       <TagAction criteria="itemidentifier:plantcluster" tag="plantnode" submarinetype="Outpost" chooserandom="true" ChoosePercentage="75"/>
       <!-- 3/4 nodes are deleted -->
       <StatusEffectAction targettag="plantnode">
@@ -2145,7 +2145,6 @@
     </ScriptedEvent>
     
     <!-- triggers alarm if it detects a player in the pirate outpost without negociating with the toll NPC -->
-    <!-- TODO: simplify hull tagging? -->
     <ScriptedEvent identifier="piratehavenalarm">
       <TagAction criteria="player" tag="player" />
       <TagAction criteria="hullname:armory" tag="piratehull" submarinetype="Outpost" ContinueIfNoTargetsFound="true" />
@@ -2310,11 +2309,19 @@
       <TriggerAction target1tag="outpostmanagerpirate" target2tag="player" applytotarget2="pmi_trig_player" radius="200" waitforinteraction="true" />
       <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.interact" eventsprite="banditcaptain">
         <Option text="eventtext.piratemissioninformant.option.buy">
-          <CheckMoneyAction Amount="1000">
+          <CheckMoneyAction Amount="500">
             <Success>
-              <MoneyAction amount="-1000" />
+              <MoneyAction amount="-500" />
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.success" eventsprite="banditcaptain" />
-              <MissionAction missiontag="coalitionciv" />
+              <!-- I have to use RNGaction and missionidentifer because missiontag crashes the game -->
+              <RNGAction chance="0.9" >
+                <Success>
+                  <MissionAction missionidentifier="coalition_cargo2" minlocationdistance="2" locationtype="none,outpost,settlement,colony,city,camp,base,military,blockade,factory,shipyard,clinic,hospital,study,research,huskchurch" UnlockInLevelLeadingToLocation="true" />
+                </Success>
+                <Failure>
+                  <MissionAction missionidentifier="coalition_cargotrap" minlocationdistance="2" locationtype="none,outpost,settlement,colony,city,camp,base,military,blockade,factory,shipyard,clinic,hospital,study,research,huskchurch" UnlockInLevelLeadingToLocation="true" />
+                </Failure>              
+              </RNGAction>
             </Success>
             <Failure>
               <ConversationAction targettag="pmi_trig_player" text="eventtext.piratemissioninformant.option.buy.failure" eventsprite="banditcaptain" />
@@ -3729,7 +3736,6 @@
       <SetDataAction identifier="shootingtargetshittally" operation="set" value="1" />
     </ScriptedEvent>
         
-    <!-- TODO: test in real conditions -->
     <ScriptedEvent identifier="shotdummyrevoler">
       <SetDataAction identifier="shotdummyrevoler" operation="add" value="1" />
       <TagAction criteria="itemtag:shottally1" tag="shottally1" />

@@ -86,7 +86,6 @@
 
   <!-- Contraband Rum -->
   <Item hideinmenus="true" name="Mariner's Moonshine" identifier="contrabandrum" category="Medical,Misc" maxstacksize="8" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate"  description="A special brand of rum, made with a concotion of sea mushrooms, psilotoad juices and matured in a rusty bathtub." Tags="smallitem,drinkitem,alcoholitem,bottle" useinhealthinterface="false" scale="0.5" impactsoundtag="impact_metal_light" impacttolerance="5.5" isshootable="true" requireaimtouse="true" spritecolor="255,255,120,255" >
-    <PreferredContainer primary="crate" />
     <Price baseprice="150" sold="false">
     </Price>
     <Sprite texture="%ModDir:2532991202%/Integrations/Hungry Europans/Content/Items/Food/DrinksAndIngredients.png" sourcerect="0,0,27,66" depth="0.6" origin="0.5,0.5" />
@@ -190,7 +189,7 @@
         <TriggerEvent identifier="nuclearbombexplosion" />
       </StatusEffect>
       <StatusEffect type="OnBroken" target="This" delay="0.2" sonardisruption="1.0" disabledeltatime="true" stackable="false">
-        <Explosion range="5000" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" ignorecover="true" DistanceFalloff="false">
+        <Explosion range="1800" ballastfloradamage="10000" structuredamage="5000" itemdamage="5000" force="50.0" severlimbsprobability="1.0" ignorecover="true" DistanceFalloff="false">
           <Affliction identifier="explosiondamage" strength="1000" />
           <Affliction identifier="radiationsickness" strength="1000" />
           <Affliction identifier="burn" strength="800" />
@@ -203,7 +202,7 @@
         <Remove />
       </StatusEffect>
     </LightComponent>
-    <Holdable slots="RightHand,LeftHand" canbeselected="true" selectkey="Select" canbepicked="true" pickkey="Use" attachable="true" pickingtime="5" holdpos="0,-30" handle1="0,-30" aimable="true" aimpos="0,0" aimangle="0" msg="ItemMsgDetach" />
+    <Holdable slots="RightHand,LeftHand" canbeselected="true" selectkey="Select" canbepicked="true" pickkey="Use" attachable="true" AttachedByDefault="false" pickingtime="5" holdpos="0,-30" handle1="0,-30" aimable="true" aimpos="0,0" aimangle="0" msg="ItemMsgDetach" />
     <CustomInterface canbeselected="true" selectkey="Select" msg="ItemMsgInteractSelect" drawhudwhenequipped="false">
       <GuiFrame relativesize="0.12,0.12" style="ItemUI" anchor="Center" />
       <Button text="Arm">

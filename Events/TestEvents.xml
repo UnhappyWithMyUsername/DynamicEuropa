@@ -193,6 +193,11 @@
       <MissionAction missionidentifier="industrialincident" locationtype="factory,shipyard" />
     </ScriptedEvent>  
     
+    <!-- this is how you spawn a distant submarine mission -->
+    <ScriptedEvent identifier="missionevent_robashipTEST" >
+      <MissionAction missionidentifier="coalition_cargo2" minlocationdistance="2" locationtype="outpost,settlement,colony,city,camp,base,military,blockade,factory,shipyard,clinic,hospital,study,research,huskchurch" UnlockInLevelLeadingToLocation="true" />
+    </ScriptedEvent>  
+    
     <ScriptedEvent identifier="missionevent_retrievesecretdocumentsTEST" requiredDestinationTypes="colony,city,base,military">
       <MissionAction missionidentifier="retrievesecretdocuments" locationtype="colony,city,base,military" />
     </ScriptedEvent>   
@@ -374,9 +379,7 @@
     </ScriptedEvent> 
     
     <ScriptedEvent identifier="laircrawlersoutsideTEST">
-      <!-- <SpawnAction speciesname="crawler" amount="3" SpawnLocation="MainPath" offset="500" /> -->
-        <!-- <WaitAction time="3" /> -->
-      <SpawnAction speciesname="tigerthresher" amount="3" SpawnLocation="Nearmainsub" offset="500" AllowInPlayerView="false"/>
+      <SpawnAction speciesname="DE-Lairtigerthresher" amount="3" SpawnLocation="OutsideOutpost" offset="3000" AllowInPlayerView="False"/>
     </ScriptedEvent>
     
     <ScriptedEvent identifier="TAKEOVERdudesTEST">
