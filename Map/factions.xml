@@ -9,6 +9,7 @@
   - clowns and husks are no longer enemies (made it harder to ever complete husk related content)
   -->
 
+  <!-- TODO: reduce chance of subs naturally spawning and instead use bandit faction for a piracy playstyle? -->
   <!-- TODO: uncomment Faction Hireables this if devs ever fix faction hireables bypassing classes https://github.com/FakeFishGames/Barotrauma/discussions/14805 -->
 
   <Faction identifier="coalition" initialreputation="5" minreputation="-100" maxreputation="100" reputationrecoverythreshold="-50" reputationrecoveryperworldstep="1" menuorder="0" controlledoutpostpercentage="60" startoutpost="true" opposingfaction="separatists">
@@ -24,9 +25,9 @@
     <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireablecoalitionmechanicveteran" minreputation="80" />
     <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireablecoalitionmedicveteran" minreputation="80" /> -->
     <AutomaticMission leveltype="LocationConnection" missiontag="coalitionattack" minreputation="-100" maxreputation="-50" MaxDistanceFromFactionOutpost="3" DisallowBetweenOtherFactionOutposts="true" minprobability="0.15" maxprobability="0.01"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="coalitiontransportencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="coalitioncaveencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="coalitionwreckencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="coalitiontransportencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="coalitioncaveencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="coalitionwreckencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
   </Faction>
   
   <Faction identifier="separatists" initialreputation="0" minreputation="-100" maxreputation="100" reputationrecoverythreshold="-50" reputationrecoveryperworldstep="1" menuorder="1" controlledoutpostpercentage="40" opposingfaction="coalition">
@@ -42,9 +43,9 @@
     <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireableseparatistmechanicveteran" minreputation="80" />
     <Hireable npcsetidentifier="outpostnpcs1" npcidentifier="hireableseparatistmedicveteran" minreputation="80" /> -->
     <AutomaticMission leveltype="LocationConnection" missiontag="separatistattack" minreputation="-100" maxreputation="-50" MaxDistanceFromFactionOutpost="3" DisallowBetweenOtherFactionOutposts="true" minprobability="0.15" maxprobability="0.01"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="separatisttransportencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="separatistcaveencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
-    <AutomaticMission leveltype="LocationConnection" missiontag="separatistwreckencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.02"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="separatisttransportencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="separatistcaveencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
+    <AutomaticMission leveltype="LocationConnection" missiontag="separatistwreckencounter" minreputation="-100" maxreputation="100" MaxDistanceFromFactionOutpost="2" MaxDistanceFromCurrentLocation="2" DisallowBetweenOtherFactionOutposts="true" probability="0.05"/>
   </Faction>
   
   <Faction identifier="huskcult" initialreputation="-5" minreputation="-100" maxreputation="100" reputationrecoverythreshold="-50" reputationrecoveryperworldstep="1" menuorder="2" opposingfaction="">
